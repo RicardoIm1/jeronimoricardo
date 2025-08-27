@@ -1,270 +1,283 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerónimo Ricardo</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Currículum Vitae - Jerónimo Ricardo Ramírez Torres</title>
+    <style>
+        /* Estilos generales y reset */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: #333;
+            background-color: #ffffff;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Contenedor principal - Tamaño Carta Vertical */
+        .page {
+            width: 210mm; /* Ancho A4 */
+            height: 297mm; /* Alto A4 */
+            margin: 0 auto;
+            padding: 0;
+            background: white;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Encabezado azul marino */
+        .header {
+            background-color: #003366; /* Azul marino */
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .header h2 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 13px;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Contenido principal */
+        .content {
+            padding: 25px 30px;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #003366; /* Azul marino */
+            font-size: 18px;
+            border-bottom: 2px solid #cccccc; /* Gris claro */
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        /* Experiencia y Educación */
+        .experience-item, .education-item {
+            margin-bottom: 15px;
+        }
+        
+        .job-title, .degree {
+            font-weight: 600;
+            color: #003366; /* Azul marino */
+            font-size: 15px;
+        }
+        
+        .company, .school {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .date {
+            color: #666; /* Gris */
+            font-style: italic;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+        
+        ul li {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        ul li::before {
+            content: "•";
+            color: #003366; /* Azul marino */
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Logros */
+        .achievements-list li {
+            margin-bottom: 8px;
+        }
+        
+        /* Certificaciones */
+        .certifications-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .certification-item {
+            background-color: #f5f5f5; /* Gris muy claro */
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            border-left: 3px solid #003366; /* Azul marino */
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #eee;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-     <div class="container">
-         <div class="left_Side">
-            <div class="profileText">
-                <div class="imgBx">
-                    <img src="img.png">
-                </div>
-                <h2>Jerónimo Ricardo Ramírez Torres<br><span>Consultor BI</span></h2>
-            </div>
-            <a target="_self" class="fcc-btn" href="agenda.html">Agenda aqui</a>  
-            <div class="contactInfo">
-                <h3 class="title">Contacto</h3>
-                <ul>
-                    <li>
-                        <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-                        <span class="text">322 235 4331</span>
-                    </li>
-                    <!-- <li>
-                        <span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-                        <a href="mailto:jeronimoricardo1@icloud.com"target=_blank><span class="text"><span class="text">icloud.com</span></a>
-                    </li>
-                    <li>
-                        <span class="icon"><i class="fa fa-globe" aria-hidden="true"></i></span>
-                        <a href="http://datamas.000webhostapp.com" target=_blank><span class="text">Data+</span></a>
-                    </li>
-                    <li>
-                        <span class="icon"><i class="fa fa-linkedin" aria-hidden="true"></i></span>
-                        <a href="http://www.linkedin.com/in/jeronimo-ricardo-ramirez-torres-337369228" target=_blank><span class="text">LinkedIn.com</span></a>
-                    </li> -->
-                    <li>
-                        <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                        <span class="text">Pto. Vallarta, JAL. México</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="contactInfo education"> 
-                <h3 class="title">Educación</h3>
-                <ul>
-                    <li>
-                        <h5>2006 - 2006</h5>
-                        <h4>Asesor en Estrategias de Inversión</h4>
-                        <h4>Bolsa Mexicana de Valores</h4>
-                    </li>
-                    <li>
-                        <h5>2001 - 2005</h5>
-                        <h4>Lic. en Administración Financiera y Sistemas. <br>Cédula profesional 12643754</h4>
-                        <h4>Universidad de Guadalajara</h4>
-                    </li>
-                    <li>
-                        <h5>1998 - 2000</h5>
-                        <h4>Lic. en Ingeniería en Computación</h4>
-                        <h4>Universidad de Guadalajara</h4>
-                    </li>
-                </ul>
-            </div>
-            <div class="contactInfo habs"> 
-                <h3 class="title">Competencias esenciales</h3>
-                <ul>
-                    <li>
-                        <span class="text">Agilidad en la Toma de Decisiones</span>
-                        <span class="percent">
-                            <div style="width: 100%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Delegar en forma efectiva</span>
-                        <span class="percent">
-                            <div style="width: 100%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Gestión de Recursos Humanos y Materiales</span>
-                        <span class="percent">
-                            <div style="width: 98%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Planificación Estratégica</span>
-                        <span class="percent">
-                            <div style="width: 95%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Trabajo en equipo</span>
-                        <span class="percent">
-                            <div style="width: 100%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Experto en Informes Financieros</span>
-                        <span class="percent">
-                            <div style="width: 95%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Asesoría en Inversiones</span>
-                        <span class="percent">
-                            <div style="width: 100%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Gestión de Presupuestos</span>
-                        <span class="percent">
-                            <div style="width: 97%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Análisis de Riesgos</span>
-                        <span class="percent">
-                            <div style="width: 100%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Formación al compañero</span>
-                        <span class="percent">
-                            <div style="width: 98%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Gestión Bancaria</span>
-                        <span class="percent">
-                            <div style="width: 95%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Experto en desarrollo de negocios</span>
-                        <span class="percent">
-                            <div style="width: 85%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Gestión del tiempo</span>
-                        <span class="percent">
-                            <div style="width: 100%;"></div></span>
-                    </li>
-                    <li>
-                        <span class="text">Inglés</span>
-                        <span class="percent">
-                            <div style="width: 65%;"></div></span>
-                    </li>
-                </ul>
+    <div class="page">
+        <!-- Encabezado con franja azul -->
+        <div class="header">
+            <h1>Jerónimo Ricardo Ramírez Torres</h1>
+            <h2>Candidato a Docente Universitario en Estadística, Administración y Sistemas</h2>
+            <div class="contact-info">
+                <div>📍 Puerto Vallarta, Jalisco, México</div>
+                <div>📞 322 235 43 31</div>
+                <div>📧 jeronimoricardoramireztorres@gmail.com</div>
             </div>
         </div>
-            <div class="right_Side">
-                <div class="about">
-                    <h2 class="title2">Acerca de mí</h2>
-                    <p> Desarrollo interfaces de usuario conectadas a bases de datos para la gestión administrativa con tecnicas de inteligencia de negocios.
-                    <br><br>Soy un adminstrador del dinero dedicado a la transformación digital para MiPyMEs. Me apasiona la data de las operaciones y la función que desempeña al generar valor y por eso tengo más de 10 años asesorando a particulares en la realización de auditoría financiera, proponiendo soluciones para cada situación utilizando tecnologías de la información que permiten agilizar y automatizar el proceso administrativo y con ello transparentar la toma de decisiones que influye directamente al aumento de la rentabilidad de sus negocios.</p>
-                </div>
-                <div class="about">
-                    <h2 class="title2">Experiencia</h2>
-                    <div class="box">
-                        <div class="year_company">
-                            <h5>2018 - Presente</h5>
-                            <h5>Región Sanitaria VIII Puerto Vallarta</h5>
-                        </div>
-                        <div class="text">
-                            <h4>Apoyo Administrativo en Salud</h4>
-                            <p> Desde el año 2000 desempeño analisis e interpretación de estados financieros, así que confiando en mi experiencia, decidí implementar para el almacén regional un sistema informático por ahora basado en Google Sheets para el <b>control automatizado del abasto</b> a 47 centros de salud. <br><br>Así mismo, por petición de la encargada del control de Cartillas Nacionales de Salud desarrollo regional un sistema de <b>control de inventarios</b> con la misma tecnología, mismo alcance y funcionalidad, ambos actualmente en producción satisfactoriamente.</p>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="year_company">
-                            <h5>2011 - 2018</h5>
-                            <h5>Hospital Regional Puerto Vallarta</h5>
-                        </div>
-                        <div class="text">
-                            <h4>Encargado de Recursos Financieros</h4>
-                            <p>Realicé un sistema para el <b>control financiero</b> del gasto directo que mantuve en producción satisfactoriamente durante el tiempo que duró mi gestión, demostrando ser confiable, robusto y escalable. Aún despues que dejé el cargo debido a una promoción laboral, este siguió siendo utilizado entregando excelente rendimiento por su facilidad de uso.</p>
-                            <br>Dicho software basado en MS Access permite el <b>Manejo de Cartera de Proveedores</b>, Creación de <b>Presupuestos Anuales</b>, Registro de <b>Pagos</b> y elaboración de <b>pólizas</b> diversas además de <b>Comprobaciones</b> del gasto entre otras más.
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="year_company">
-                            <h5>2015 - Presente</h5>
-                            <h5>Data+</h5>
-                        </div>
-                        <div class="text">
-                            <h4>Consultor para MiPyMEs</h4>
-                            <p> Cada día se ha incrementado mi confianza a la hora de evaluar e implementar <b>controles administrativos</b> y los <b>informes</b> que de estos resultan. Mis cargos en el servicio público me han permitido participar simultáneamente en el desarrollo de varios proyectos para particulares basados en tecnologías de la información para sistematizar y automatizar procesos administrativos, del ramo médico.<br><br>En algunas localidades me Mascota y su cabecera, entre 2009 y 2011 desarrollé para varias granjas ecoturísticas sendas <b>páginas web</b> y sus <b>modelos de negocio</b> desde las <b>bases de datos</b> hasta su <b>diseño gráfico publicitario</b>; siempre con excelentes recomendaciones ya que brindo servicios de <b>hosting</b>, <b>Mailing</b>,<b>diseño web responsivo</b>, además, personalización de administradores de contenido como <b>Joomla!</b>, <b>WordPress</b>, <b>Moodle</b>, pasando por configurar y dar seguimiento a <b>Google AdSense</b> y <b>Google Analytics</b> hasta la elaboración deinformes de los alcances de sus <b>campañas publicitarias</b> en internet.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about skills">
-                    <h2 class="title2">Habilidades Profesionales</h2>
-                    <div class="box">
-                        <h4>Google Sheets</h4>
-                        <div class="percent">
-                            <div style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>Google Script</h4>
-                        <div class="percent">
-                            <div style="width: 70%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>Data Studio</h4>
-                        <div class="percent">                            
-                            <div style="width: 95%;"></div>
-                    </div>
-                    </div>
-                    <div class="box">
-                        <h4>Tableu</h4>
-                        <div class="percent">
-                            <div style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>MySql</h4>
-                        <div class="percent">
-                            <div style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>HTML</h4>
-                        <div class="percent">
-                            <div style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>CSS</h4>
-                        <div class="percent">
-                            <div style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>JavaScript</h4>
-                        <div class="percent">
-                            <div style="width: 65%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>Python</h4>
-                        <div class="percent">
-                            <div style="width: 70%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>Illustrator</h4>
-                        <div class="percent">
-                            <div style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>Photoshop</h4>
-                        <div class="percent">
-                            <div style="width: 80%;"></div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <h4>Corel Draw</h4>
-                        <div class="percent">
-                            <div style="width: 70%;"></div>
-                        </div>
-                    </div>
-                    
+        
+        <!-- Contenido principal -->
+        <div class="content">
+            <!-- Perfil Profesional -->
+            <div class="section">
+                <h2 class="section-title">🎯 Perfil Profesional</h2>
+                <p>Profesional con más de 10 años de experiencia en análisis estadístico, gestión documental y transformación digital en el sector salud. Actualmente se desempeña como Jefe de Estadísticas y Archivo Clínico en el Hospital Regional Puerto Vallarta, liderando procesos de captura, análisis y resguardo de información clínica. Especializado en el manejo de datos sensibles, visualización estadística y optimización de procesos administrativos. Posee formación en administración financiera, sistemas informáticos y ciencia de datos, con habilidades para enseñar, diseñar contenidos educativos y liderar proyectos académicos. Comprometido con la calidad educativa, la innovación tecnológica y el desarrollo de competencias en estudiantes universitarios.</p>
+            </div>
+            
+            <!-- Formación Académica -->
+            <div class="section">
+                <h2 class="section-title">🎓 Formación Académica</h2>
+                <div class="education-item">
+                    <div class="degree">Licenciatura en Administración Financiera y Sistemas</div>
+                    <div class="school">Universidad de Guadalajara | 2001–2005</div>
+                    <div class="date">Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)</div>
                 </div>
                 
-                <div class="about interest">
-                    <h2 class="title2">Me gusta</h2>
+                <h3 style="margin-top: 15px; color: #003366;">Certificaciones Relevantes</h3>
+                <div class="certifications-list">
+                    <span class="certification-item">Business Analytics (Campus BBVA, Coursera)</span>
+                    <span class="certification-item">Ciencia de Datos con MySQL, RStudio y Looker Studio (Udemy)</span>
+                    <span class="certification-item">Programación con JavaScript y Python</span>
+                    <span class="certification-item">Gobernanza TI y Evaluación de Procesos</span>
+                    <span class="certification-item">Diseño UX/UI con Figma</span>
+                    <span class="certification-item">Seguridad del Paciente y Protección de Datos Personales</span>
+                    <span class="certification-item">Clasificación Internacional de Enfermedades (CIE-11)</span>
+                </div>
+            </div>
+            
+            <!-- Experiencia Docente -->
+            <div class="section">
+                <h2 class="section-title">👨‍🏫 Experiencia Docente</h2>
+                <div class="experience-item">
+                    <div class="job-title">Docente en Universidad de las Américas, A.C.</div>
+                    <div class="date">2016–2018</div>
                     <ul>
-                        <li><i class= "fa fa-book" aria-hidden="true"></i>Libros</li>
-                        <li><i class= "fa fa-music" aria-hidden="true"></i>Música</li>
-                        <li><i class= "fa fa-cutlery" aria-hidden="true"></i>Asados</li>
-                        <li><i class= "fa fa-gamepad" aria-hidden="true"></i>Videjuegos</li>
+                        <li>Impartición de asignaturas en administración financiera y sistemas.</li>
+                        <li>Diseño de contenidos educativos y evaluación de estudiantes.</li>
+                        <li>Coordinación de proyectos académicos interdisciplinarios.</li>
                     </ul>
                 </div>
+            </div>
+            
+            <!-- Experiencia Profesional -->
+            <div class="section">
+                <h2 class="section-title">💼 Experiencia Profesional Relevante</h2>
+                <div class="experience-item">
+                    <div class="job-title">Jefe de Estadísticas y Archivo Clínico – Hospital Regional Puerto Vallarta</div>
+                    <div class="date">2018–Presente</div>
+                    <ul>
+                        <li>Coordinación de procesos de captura, análisis y resguardo de información clínica.</li>
+                        <li>Supervisión de personal administrativo en áreas de estadística y archivo.</li>
+                        <li>Implementación de sistemas de gestión documental y visualización de datos.</li>
+                        <li>Capacitación en normativas de protección de datos y seguridad del paciente.</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-title">Jefe de Recursos Financieros – Hospital Regional Puerto Vallarta</div>
+                    <div class="date">2011–2018</div>
+                    <ul>
+                        <li>Gestión de archivos contables y estadísticos.</li>
+                        <li>Implementación de sistemas de bases de datos.</li>
+                        <li>Capacitación en manejo de información sensible.</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-title">Desarrollador de Sistema de Gestión Documental – OPD Servicios de Salud Jalisco</div>
+                    <ul>
+                        <li>Registro de Derecho de Autor por sistema de gasto directo en unidades de salud.</li>
+                        <li>Diseño de soluciones tecnológicas para optimización de procesos clínicos.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Logros -->
+            <div class="section">
+                <h2 class="section-title">🏆 Logros Académicos y Profesionales</h2>
+                <ul class="achievements-list">
+                    <li>Registro de sistema documental ante INDAUTOR (2016)</li>
+                    <li>Reconocimiento CENEVAL por desempeño sobresaliente (2017)</li>
+                    <li>Desarrollo de sistema para control de Cartillas Nacionales de Salud (2021)</li>
+                </ul>
+            </div>
+            
+            <!-- Documentación -->
+            <div class="section">
+                <h2 class="section-title">📄 Documentación y Disponibilidad</h2>
+                <ul>
+                    <li>Constancias y certificados disponibles para verificación.</li>
+                    <li>Disponibilidad inmediata para entrevistas y clases presenciales o virtuales.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
-</html display:none>
+</html>
