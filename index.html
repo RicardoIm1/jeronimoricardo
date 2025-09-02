@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>CV — Jerónimo Ricardo Ramírez Torres</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#0b2a4a;
+      --navy-2:#0e3a6a;
+      --gray-1:#5f6b7a;
+      --gray-2:#8b96a3;
+      --light:#f5f7fb;
+      --white:#ffffff;
+      --ink:#1b2430;
+      --accent:#00b7ff; /* detalle sutil para líneas/íconos */
+    }
+
+    /* Layout base (pantalla) */
+    html, body {
+      background: #e9edf3;
+      margin: 0;
+      padding: 0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      background: #0b2a4a0d;
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid #d7dfea;
+    }
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 6px 18px rgba(11,42,74,.25);
+    }
+    .btn-primary:hover { transform: translateY(-1px); background: var(--navy-2); }
+    .btn-ghost { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+    .btn-ghost:hover { background: var(--navy); color: var(--white); }
+
+    .page-wrap {
+      display: grid;
+      place-items: start center;
+      padding: 24px;
+    }
+    .page {
+      width: 8.5in;
+      height: 11in; /* Carta vertical */
+      background: var(--white);
+      box-shadow: 0 16px 40px rgba(16, 39, 86, .18);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Encabezado impactante */
+    .header {
+      background: linear-gradient(135deg, var(--navy) 0%, #0b3260 70%);
+      color: var(--white);
+      padding: 28px 36px 22px 36px;
+      position: relative;
+      isolation: isolate;
+    }
+    /* Detalle decorativo */
+    .header::after{
+      content:"";
+      position:absolute;
+      inset:auto -80px 0 auto;
+      width: 280px;
+      height: 140px;
+      background: radial-gradient(110px 70px at 70% 60%, rgba(255,255,255,.18), rgba(255,255,255,0) 70%);
+      transform: translateY(30%);
+      opacity:.75;
+      pointer-events:none;
+      z-index:0;
+    }
+    .header-top{
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 22px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .name-block .name {
+      font-size: 28px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: .2px;
+      margin: 0 0 6px 0;
+    }
+    .name-block .role {
+      font-size: 14.5px;
+      font-weight: 600;
+      opacity: .95;
+      margin: 0;
+    }
+    .contact {
+      display: grid;
+      gap: 6px;
+      justify-items: end;
+      font-size: 12.8px;
+    }
+    .c-row {
+      display: flex; gap: 10px; align-items: center;
+    }
+    .c-row svg { width: 14px; height: 14px; color: #e8eef7; flex: 0 0 auto; }
+    .c-row a { color: #e8eef7; text-decoration: none; border-bottom: 1px solid transparent; }
+    .c-row a:hover { border-color: #e8eef7; }
+
+    .header-tags{
+      margin-top: 14px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      position: relative; z-index:1;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: 999px;
+      padding: 6px 10px;
+      letter-spacing: .3px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* Cuerpo */
+    .content {
+      padding: 20px 32px 28px 32px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 22px;
+    }
+
+    .section {
+      margin-bottom: 14px;
+      break-inside: avoid;
+    }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800;
+      font-size: 12.8px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin: 0 0 8px 0;
+    }
+    .section-title .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0,183,255,.18);
+    }
+
+    .para {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0;
+    }
+    .muted { color: var(--gray-1); }
+
+    .edu-item {
+      display: grid;
+      gap: 2px;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+    }
+    .edu-item .degree { font-weight: 700; color: var(--ink); }
+    .edu-item .inst { color: var(--gray-1); }
+    .edu-item .note { color: var(--gray-2); font-size: 12px; }
+
+    .list {
+      margin: 0; padding-left: 16px; color: var(--ink);
+    }
+    .list li { margin: 3px 0; font-size: 12.5px; }
+    .list.tight li { margin: 2px 0; }
+
+    .role {
+      margin-bottom: 10px;
+    }
+    .role .r-head {
+      display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+    }
+    .role .title {
+      font-weight: 700; color: var(--ink); font-size: 12.8px;
+    }
+    .role .time {
+      font-weight: 600; color: var(--gray-1); font-size: 12px;
+    }
+    .divider {
+      height: 1px; background: linear-gradient(90deg, #dfe6f1, transparent);
+      margin: 10px 0 8px 0;
+    }
+
+    /* Pie sutil */
+    .footer-note {
+      display:flex; align-items:center; justify-content: space-between;
+      font-size: 11px; color: var(--gray-2);
+      padding: 6px 32px 14px 32px;
+    }
+
+    /* Ajustes tipográficos finos */
+    .lead { font-weight: 600; color: var(--ink); }
+    em { font-style: normal; font-weight: 700; color: var(--navy); }
+
+    /* Impresión */
+    @page {
+      size: Letter;
+      margin: 0;
+    }
+    @media print {
+      body { background: transparent; }
+      .toolbar { display: none !important; }
+      .page { box-shadow: none; border-radius: 0; }
+      a[href]:after { content: ""; } /* limpia URLs visibles */
+    }
+
+    /* Responsivo (para que se vea bien si lo abres en móvil) */
+    @media (max-width: 960px) {
+      .page { width: 100%; height: auto; }
+      .content { grid-template-columns: 1fr; gap: 14px; }
+      .header-top { grid-template-columns: 1fr; gap: 10px; }
+      .contact { justify-items: start; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra con acciones -->
+  <div class="toolbar">
+    <button class="btn btn-primary" onclick="window.print()">
+      📄 Descargar PDF
+    </button>
+    <button class="btn btn-ghost" onclick="toggleCompact()">
+      ✨ Compactar/Expandir
+    </button>
+  </div>
+
+  <!-- Página tamaño carta -->
+  <div class="page-wrap">
+    <section class="page">
+      <!-- Encabezado -->
+      <header class="header">
+        <div class="header-top">
+          <div class="name-block">
+            <h1 class="name">Jerónimo Ricardo Ramírez Torres</h1>
+            <p class="role">Candidato a Docente Universitario — Estadística, Administración y Sistemas</p>
+          </div>
+          <div class="contact" aria-label="Datos de contacto">
+            <div class="c-row">
+              <!-- Ubicación -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.7 2 6 4.7 6 8c0 4.6 6 12 6 12s6-7.4 6-12c0-3.3-2.7-6-6-6zm0 8.2c-1.2 0-2.2-1-2.2-2.2S10.8 5.8 12 5.8s2.2 1 2.2 2.2S13.2 10.2 12 10.2z"/></svg>
+              <span>Puerto Vallarta, Jalisco, México</span>
+            </div>
+            <div class="c-row">
+              <!-- Teléfono -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.5 2.9 3.7 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3c0-.6.4-1 1-1h2.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>
+              <span>322 235 43 31</span>
+            </div>
+            <div class="c-row">
+              <!-- Email -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+              <a href="mailto:jeronimoricardoramireztorres@gmail.com">jeronimoricardoramireztorres@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="header-tags" aria-label="Etiquetas">
+          <span class="tag">Análisis Estadístico</span>
+          <span class="tag">Gestión Documental</span>
+          <span class="tag">Transformación Digital</span>
+          <span class="tag">Protección de Datos</span>
+          <span class="tag">Docencia</span>
+        </div>
+      </header>
+
+      <!-- Contenido -->
+      <main class="content">
+        <!-- Columna izquierda -->
+        <div>
+          <!-- Perfil -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Perfil Profesional</h3>
+            <p class="para">
+              Profesional con más de <strong>10 años</strong> de experiencia en <em>análisis estadístico</em>, <em>gestión documental</em> y <em>transformación digital</em> en el sector salud. Actualmente Jefe de Estadísticas y Archivo Clínico en el <strong>Hospital Regional Puerto Vallarta</strong>, liderando procesos de captura, análisis y resguardo de información clínica. Especializado en manejo de datos sensibles, visualización estadística y optimización de procesos administrativos. Formación en administración financiera, sistemas informáticos y ciencia de datos, con habilidades para enseñar, diseñar contenidos educativos y liderar proyectos académicos. Comprometido con la calidad educativa, la innovación tecnológica y el desarrollo de competencias en estudiantes universitarios.
+            </p>
+          </section>
+
+          <!-- Formación -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Formación Académica</h3>
+            <div class="edu-item">
+              <div class="degree">Licenciatura en Administración Financiera y Sistemas</div>
+              <div class="inst">Universidad de Guadalajara | 2001–2005</div>
+              <div class="note">Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)</div>
+            </div>
+          </section>
+
+          <!-- Certificaciones -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Certificaciones Relevantes</h3>
+            <ul class="list tight">
+              <li>Business Analytics (Campus BBVA, Coursera)</li>
+              <li>Ciencia de Datos con MySQL, RStudio y Looker Studio (Udemy)</li>
+              <li>Programación con JavaScript y Python</li>
+              <li>Gobernanza TI y Evaluación de Procesos</li>
+              <li>Diseño UX/UI con Figma</li>
+              <li>Seguridad del Paciente y Protección de Datos Personales</li>
+              <li>Clasificación Internacional de Enfermedades (CIE-11)</li>
+            </ul>
+          </section>
+
+          <!-- Docencia -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Experiencia Docente</h3>
+            <div class="role">
+              <div class="r-head">
+                <div class="title">Docente — Universidad de las Américas, A.C.</div>
+                <div class="time">2016–2018</div>
+              </div>
+              <ul class="list tight">
+                <li>Impartición de asignaturas en administración financiera y sistemas.</li>
+                <li>Diseño de contenidos educativos y evaluación de estudiantes.</li>
+                <li>Coordinación de proyectos académicos interdisciplinarios.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <!-- Columna derecha -->
+        <div>
+          <!-- Experiencia Profesional -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Experiencia Profesional Relevante</h3>
+
+            <div class="role">
+              <div class="r-head">
+                <div class="title">Jefe de Estadísticas y Archivo Clínico — Hospital Regional Puerto Vallarta</div>
+                <div class="time">2018–Presente</div>
+              </div>
+              <div class="divider"></div>
+              <ul class="list tight">
+                <li>Coordinación de procesos de captura, análisis y resguardo de información clínica.</li>
+                <li>Supervisión de personal administrativo en áreas de estadística y archivo.</li>
+                <li>Implementación de sistemas de gestión documental y visualización de datos.</li>
+                <li>Capacitación en normativas de protección de datos y seguridad del paciente.</li>
+              </ul>
+            </div>
+
+            <div class="role">
+              <div class="r-head">
+                <div class="title">Jefe de Recursos Financieros — Hospital Regional Puerto Vallarta</div>
+                <div class="time">2011–2018</div>
+              </div>
+              <div class="divider"></div>
+              <ul class="list tight">
+                <li>Gestión de archivos contables y estadísticos.</li>
+                <li>Implementación de sistemas de bases de datos.</li>
+                <li>Capacitación en manejo de información sensible.</li>
+              </ul>
+            </div>
+
+            <div class="role">
+              <div class="r-head">
+                <div class="title">Desarrollador de Sistema de Gestión Documental — OPD Servicios de Salud Jalisco</div>
+                <div class="time">—</div>
+              </div>
+              <div class="divider"></div>
+              <ul class="list tight">
+                <li>Registro de Derecho de Autor por sistema de gasto directo en unidades de salud.</li>
+                <li>Diseño de soluciones tecnológicas para optimización de procesos clínicos.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Logros -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Logros Académicos y Profesionales</h3>
+            <ul class="list tight">
+              <li>Registro de sistema documental ante INDAUTOR (2016)</li>
+              <li>Reconocimiento CENEVAL por desempeño sobresaliente (2017)</li>
+              <li>Desarrollo de sistema para control de Cartillas Nacionales de Salud (2021)</li>
+            </ul>
+          </section>
+
+          <!-- Disponibilidad -->
+          <section class="section">
+            <h3 class="section-title"><span class="dot"></span> Documentación y Disponibilidad</h3>
+            <ul class="list tight">
+              <li>Constancias y certificados disponibles para verificación.</li>
+              <li>Disponibilidad inmediata para entrevistas y clases presenciales o virtuales.</li>
+            </ul>
+          </section>
+        </div>
+      </main>
+
+      <div class="footer-note">
+        <span>CV — Jerónimo Ricardo Ramírez Torres</span>
+        <span class="muted">Actualizado: <span id="today"></span></span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Fecha automática en español
+    const el = document.getElementById('today');
+    try {
+      const d = new Date();
+      const fmt = new Intl.DateTimeFormat('es-MX', { day:'2-digit', month:'long', year:'numeric' });
+      el.textContent = fmt.format(d);
+    } catch(e) { el.textContent = ''; }
+
+    // Modo compacto (por si quieres apretar todo a una página al imprimir)
+    function toggleCompact(){
+      document.body.classList.toggle('compact');
+    }
+    // Ajustes compactos
+    const style = document.createElement('style');
+    style.textContent = `
+      body.compact .page { transform-origin: top center; }
+      body.compact .content { gap: 16px; padding: 16px 26px 22px 26px; }
+      body.compact .header { padding: 22px 28px 16px 28px; }
+      body.compact .name-block .name { font-size: 26px; }
+      body.compact .para, body.compact .list li, body.compact .edu-item, body.compact .role .title { font-size: 12px; }
+      @media print {
+        body.compact .page { transform: none; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
