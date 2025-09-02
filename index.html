@@ -419,7 +419,25 @@
     </section>
   </div>
 
+  <!-- Botón flotante para ver video -->
+  <div id="video-btn" style="position:fixed;bottom:24px;right:24px;z-index:100;cursor:pointer;background:#0b2a4a;border-radius:50%;box-shadow:0 2px 8px #0002;width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+  </div>
+  <!-- Modal de video -->
+  <div id="video-modal" style="display:none;position:fixed;z-index:200;inset:0;background:rgba(0,0,0,.55);align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:12px;max-width:360px;width:92vw;padding:0;box-shadow:0 8px 32px #0004;position:relative;">
+      <button onclick="closeVideo()" style="position:absolute;top:6px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;color:#0b2a4a;">×</button>
+      <iframe width="360" height="360" style="width:100%;aspect-ratio:9/16;border-radius:12px;border:none;" src="https://www.youtube.com/embed/qABg2P7-9hc" title="YouTube video" allowfullscreen></iframe>
+    </div>
+  </div>
   <script>
+    document.getElementById('video-btn').onclick = function(){
+      document.getElementById('video-modal').style.display = 'flex';
+    };
+    function closeVideo(){
+      document.getElementById('video-modal').style.display = 'none';
+    }
+
     // Fecha automática en español
     const el = document.getElementById('today');
     try {
@@ -448,6 +466,3 @@
   </script>
 </body>
 </html>
-
-
-
