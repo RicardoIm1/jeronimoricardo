@@ -431,12 +431,25 @@
     </div>
   </div>
   <script>
-    document.getElementById('video-btn').onclick = function(){
-      document.getElementById('video-modal').style.display = 'flex';
+    const videoModal = document.getElementById('video-modal');
+    const videoBtn = document.getElementById('video-btn');
+    const video = videoModal.querySelector('video');
+
+    videoBtn.onclick = function(){
+      videoModal.style.display = 'flex';
+      video.currentTime = 0;
+      video.play();
     };
+
     function closeVideo(){
-      document.getElementById('video-modal').style.display = 'none';
+      videoModal.style.display = 'none';
+      video.pause();
     }
+
+    // Cerrar modal al hacer clic fuera del video
+    videoModal.onclick = function(e){
+      if(e.target === videoModal) closeVideo();
+    };
 
     // Fecha automática en español
     const el = document.getElementById('today');
