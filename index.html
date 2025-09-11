@@ -200,13 +200,28 @@
       margin-bottom: 10px;
     }
     .role .r-head {
-      display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      background: linear-gradient(90deg, #e9edf3 60%, #d7e6f7 100%);
+      padding: 7px 12px 7px 10px;
+      border-radius: 7px;
+      margin-bottom: 4px;
+      box-shadow: 0 1px 4px #b3c6e033;
+      border-left: 4px solid var(--accent);
     }
     .role .title {
-      font-weight: 700; color: var(--ink); font-size: 12.8px;
+      font-weight: 800;
+      color: var(--navy-2);
+      font-size: 13.5px;
+      letter-spacing: .2px;
     }
     .role .time {
-      font-weight: 600; color: var(--gray-1); font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-1);
+      font-size: 12.2px;
+      opacity: .85;
     }
     .divider {
       height: 1px; background: linear-gradient(90deg, #dfe6f1, transparent);
@@ -230,10 +245,94 @@
       margin: 0;
     }
     @media print {
-      body { background: transparent; }
-      .toolbar { display: none !important; }
-      .page { box-shadow: none; border-radius: 0; }
-      a[href]:after { content: ""; } /* limpia URLs visibles */
+      html, body {
+        background: #fff !important; /* Fondo blanco puro para impresión */
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+        height: 100%;
+      }
+      .toolbar, #video-btn, #video-modal {
+        display: none !important;
+      }
+      .page-wrap {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .page {
+        width: auto !important;
+        min-height: 0 !important;
+        box-shadow: none !important;
+        border-radius: 15px 0px !important; /* Esquinas redondeadas */
+        background: #fff !important;
+        margin: 18mm 12mm 14mm 12mm !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        page-break-after: avoid;
+      }
+      .header {
+        background: linear-gradient(135deg, #0b2a4a 0%, #0b3260 100%) !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        border-bottom: 6px solid var(--accent);
+        box-shadow: none !important;
+        padding: 18px 28px 14px 28px !important;
+        margin-bottom: 10px !important;
+        border-radius: 15px 15px 0 0 !important;
+      }
+      .header .name-block .name,
+      .header .name-block .role,
+      .header .contact,
+      .header-tags .tag {
+        color: #fff !important;
+      }
+      .header-tags .tag {
+        border-color: #fff !important;
+        background: #00b7ff22 !important;
+      }
+      .content {
+        display: grid !important;
+        grid-template-columns: 1.1fr 1.2fr !important;
+        gap: 16px !important;
+        padding: 10px 18px 10px 18px !important; /* padding interno en ambas columnas */
+        margin-bottom: 8px !important;
+      }
+      .section {
+        margin-bottom: 10px !important;
+      }
+      .section-title {
+        color: var(--navy-2) !important;
+        font-size: 12.5px !important;
+        letter-spacing: .7px !important;
+        margin-bottom: 4px !important;
+      }
+      .para, .list li, .edu-item, .role .title {
+        font-size: 11.2px !important;
+      }
+      .footer-note {
+        color: var(--gray-2) !important;
+        border-top: 1px solid #d7e6f7;
+        margin-top: 14px !important;
+        padding: 8px 18px 8px 18px !important;
+        font-size: 10px !important;
+      }
+      .role .r-head {
+        background: #e9edf3 !important;
+        border-left: 3px solid var(--accent) !important;
+        box-shadow: none !important;
+        padding: 4px 8px 4px 8px !important;
+        margin-bottom: 4px !important;
+        margin-top: 2px !important;
+      }
+      .divider {
+        margin: 6px 0 5px 0 !important;
+      }
+      /* Evita saltos de página dentro de secciones importantes */
+      .section, .role, .edu-item {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
     }
 
     /* Responsivo (para que se vea bien si lo abres en móvil) */
@@ -301,7 +400,7 @@
           <section class="section">
             <h3 class="section-title"><span class="dot"></span> Perfil Profesional</h3>
             <p class="para">
-              Profesional con más de <strong>10 años</strong> de experiencia en <em>análisis estadístico</em>, <em>gestión documental</em> y <em>transformación digital</em> en el sector salud. Actualmente Jefe de Estadísticas y Archivo Clínico en el <strong>Hospital Regional Puerto Vallarta</strong>, liderando procesos de captura, análisis y resguardo de información clínica. Especializado en manejo de datos sensibles, visualización estadística y optimización de procesos administrativos. Formación en administración financiera, sistemas informáticos y ciencia de datos, con habilidades para enseñar, diseñar contenidos educativos y liderar proyectos académicos. Comprometido con la calidad educativa, la innovación tecnológica y el desarrollo de competencias en estudiantes universitarios.
+              Profesional con más de <strong>15 años</strong> de experiencia en <em>análisis estadístico</em>, <em>gestión documental</em> y <em>transformación digital</em> en el sector salud. Actualmente Jefe de Estadísticas y Archivo Clínico en el <strong>Hospital Regional Puerto Vallarta</strong>, liderando procesos de captura, análisis y resguardo de información clínica. Especializado en manejo de datos sensibles, visualización estadística y optimización de procesos administrativos. Formación en administración financiera, sistemas informáticos y ciencia de datos, con habilidades para enseñar, diseñar contenidos educativos y liderar proyectos académicos. Comprometido con la calidad educativa, la innovación tecnológica y el desarrollo de competencias en estudiantes universitarios.
             </p>
           </section>
 
@@ -319,6 +418,8 @@
           <section class="section">
             <h3 class="section-title"><span class="dot"></span> Certificaciones Relevantes</h3>
             <ul class="list tight">
+              <li>Asesor en Estrategias de Inversión (BMV)</li>
+              <li>Analista de Proyectos Business Inteligence</li>
               <li>Business Analytics (Campus BBVA, Coursera)</li>
               <li>Ciencia de Datos con MySQL, RStudio y Looker Studio (Udemy)</li>
               <li>Programación con JavaScript y Python</li>
@@ -406,7 +507,7 @@
             <h3 class="section-title"><span class="dot"></span> Documentación y Disponibilidad</h3>
             <ul class="list tight">
               <li>Constancias y certificados disponibles para verificación.</li>
-              <li>Disponibilidad inmediata para entrevistas y clases presenciales o virtuales.</li>
+              <li>Disponibilidad inmediata para integrarse como docente universitario en áreas de extadística, administración y sistemas, aportando experiencia profesional, habilidades técnicas y compromiso con al formación integral de los estudiantes.</li>
             </ul>
           </section>
         </div>
@@ -490,3 +591,4 @@
   </script>
 </body>
 </html>
+
