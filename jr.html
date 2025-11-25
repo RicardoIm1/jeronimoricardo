@@ -1,382 +1,583 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <title>Jerónimo R. Ramírez — Portafolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Tipografías elegantes: Playfair Display para título, Montserrat para cuerpo -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0f14;            /* fondo general (dark cinematic) */
-      --card:#071021;          /* paneles */
-      --muted:#9aa6b2;         /* texto secundario */
-      --accent:#00b7ff;        /* azul brillante (financiero) */
-      --gold:#d4af37;          /* acento premium */
-      --glass: rgba(255,255,255,0.04);
-      --glass-2: rgba(255,255,255,0.02);
+    :root {
+      --bg: #0b0f14;
+      /* fondo general (dark cinematic) */
+      --card: #071021;
+      /* paneles */
+      --muted: #9aa6b2;
+      /* texto secundario */
+      --accent: #00b7ff;
+      /* azul brillante (financiero) */
+      --gold: #d4af37;
+      /* acento premium */
+      --glass: rgba(255, 255, 255, 0.04);
+      --glass-2: rgba(255, 255, 255, 0.02);
       --white: #ffffff;
-      --shadow: 0 10px 30px rgba(4,10,20,0.6);
+      --shadow: 0 10px 30px rgba(4, 10, 20, 0.6);
       --max-width: 1200px;
       --page-padding: 28px;
     }
 
     /* Reset ligero */
-    * { box-sizing: border-box; }
-    html,body{ height:100%; margin:0; font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial; background: radial-gradient(1200px 400px at 10% 10%, rgba(0,183,255,0.03), transparent), var(--bg); color:var(--white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    a{ color:var(--accent); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.03), transparent), var(--bg);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
 
     /* Contenedor principal */
-    .wrap{
+    .wrap {
       max-width: calc(var(--max-width));
       margin: 36px auto;
       padding: var(--page-padding);
-      position:relative;
+      position: relative;
     }
 
     /* Top bar: acciones */
-    .toolbar{
-      display:flex;
-      gap:10px;
-      justify-content:flex-end;
-      align-items:center;
-      margin-bottom:18px;
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 18px;
     }
-    .btn{
-      appearance:none;
-      border:0;
-      cursor:pointer;
-      padding:10px 14px;
-      border-radius:10px;
-      font-weight:700;
-      letter-spacing:.3px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      color:var(--white);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-      transition:transform .12s ease;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
+
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      color: var(--white);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transition: transform .12s ease;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
     }
-    .btn:active{ transform:translateY(1px); }
-    .btn-outline{
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.06);
-      color:var(--muted);
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
     }
 
     /* Tarjeta principal (hero cinematográfico) */
-    .hero{
+    .hero {
       background:
-        radial-gradient(600px 200px at 90% 0%, rgba(13,43,80,0.18), transparent),
-        linear-gradient(160deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:16px;
-      padding:28px;
-      display:grid;
+        radial-gradient(600px 200px at 90% 0%, rgba(13, 43, 80, 0.18), transparent),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border-radius: 16px;
+      padding: 28px;
+      display: grid;
       grid-template-columns: 1fr 420px;
-      gap:28px;
+      gap: 28px;
       box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.03);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     /* Decorative canvas / svg behind content for math/finance motifs */
-    .hero .canvas-wrap{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      mix-blend-mode:screen;
-      opacity:.9;
+    .hero .canvas-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+      opacity: .9;
     }
 
     /* Left: copy */
-    .hero-left{
-      position:relative;
-      z-index:1;
-      padding:8px 6px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
+    .hero-left {
+      position: relative;
+      z-index: 1;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
-    .kicker{
-      display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.9px;
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .9px;
     }
-    .name{
-      font-family:"Playfair Display", serif;
-      font-size:44px;
-      line-height:1;
-      margin:0;
-      font-weight:700;
-      color:var(--white);
-      text-shadow: 0 8px 26px rgba(0,0,0,0.6);
-      letter-spacing:.4px;
+
+    .name {
+      font-family: "Playfair Display", serif;
+      font-size: 44px;
+      line-height: 1;
+      margin: 0;
+      font-weight: 700;
+      color: var(--white);
+      text-shadow: 0 8px 26px rgba(0, 0, 0, 0.6);
+      letter-spacing: .4px;
     }
-    .subtitle{
-      font-size:16px;
-      font-weight:600;
-      color:var(--muted);
-      margin:0;
+
+    .subtitle {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--muted);
+      margin: 0;
     }
-    .lead{
-      font-size:15px;
-      line-height:1.6;
-      color:rgba(255,255,255,0.92);
-      margin:4px 0 0 0;
-      max-width:720px;
+
+    .lead {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 4px 0 0 0;
+      max-width: 720px;
     }
 
     /* Stats line (mathematical / financial highlights) */
-    .stats{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:4px;
+    .stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
     }
-    .stat{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:10px;
-      padding:12px 14px;
-      min-width:120px;
-      box-shadow: 0 6px 18px rgba(2,8,16,0.45);
-      border:1px solid rgba(255,255,255,0.03);
+
+    .stat {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border-radius: 10px;
+      padding: 12px 14px;
+      min-width: 120px;
+      box-shadow: 0 6px 18px rgba(2, 8, 16, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
-    .stat .s-num{ font-weight:800; font-size:18px; color:var(--white); display:block; }
-    .stat .s-label{ font-size:12px; color:var(--muted); margin-top:4px; }
+
+    .stat .s-num {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+      display: block;
+    }
+
+    .stat .s-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
 
     /* Right: portrait / actions */
-    .hero-right{
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      align-items:center;
-      justify-content:center;
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Portrait frame (use gradient placeholder; user can replace with real photo) */
-    .portrait{
-      width:320px;
-      height:420px;
-      border-radius:14px;
-      overflow:hidden;
+    .portrait {
+      width: 320px;
+      height: 420px;
+      border-radius: 14px;
+      overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-      position:relative;
-    }
-    .portrait .photo{
-      width:100%;
-      height:100%;
-      background:
-        radial-gradient(400px 200px at 10% 10%, rgba(0,183,255,0.06), transparent),
-        linear-gradient(160deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:rgba(255,255,255,0.12);
-      font-weight:700;
-      font-size:22px;
-      text-align:center;
-      padding:22px;
-    }
-    .portrait .frame-deco{
-      position:absolute;
-      left:-40px;
-      top:-30px;
-      width:120px;
-      height:120px;
-      background: conic-gradient(from 20deg, rgba(212,175,55,0.15), rgba(0,183,255,0.06));
-      transform: rotate(18deg);
-      filter: blur(30px);
-      pointer-events:none;
-      opacity:.9;
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      position: relative;
     }
 
-    .cta-row{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      margin-top:6px;
-      width:100%;
-      justify-content:center;
+    .portrait .photo {
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(400px 200px at 10% 10%, rgba(0, 183, 255, 0.06), transparent),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.12);
+      font-weight: 700;
+      font-size: 22px;
+      text-align: center;
+      padding: 22px;
     }
-    .cta{
-      padding:12px 16px;
-      border-radius:12px;
-      font-weight:700;
+
+    .portrait .frame-deco {
+      position: absolute;
+      left: -40px;
+      top: -30px;
+      width: 120px;
+      height: 120px;
+      background: conic-gradient(from 20deg, rgba(212, 175, 55, 0.15), rgba(0, 183, 255, 0.06));
+      transform: rotate(18deg);
+      filter: blur(30px);
+      pointer-events: none;
+      opacity: .9;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 6px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .cta {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 700;
       background: linear-gradient(90deg, var(--accent), #6be1ff);
-      color:#042033;
-      box-shadow: 0 10px 30px rgba(0,183,255,0.12);
+      color: #042033;
+      box-shadow: 0 10px 30px rgba(0, 183, 255, 0.12);
       border: none;
-      cursor:pointer;
+      cursor: pointer;
     }
-    .cta.secondary{
-      background:transparent;
-      color:var(--white);
-      border:1px solid rgba(255,255,255,0.06);
+
+    .cta.secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     /* Main content sections below hero */
-    .sections{
-      display:grid;
+    .sections {
+      display: grid;
       grid-template-columns: 1fr 360px;
-      gap:22px;
-      margin-top:22px;
-      position:relative;
-      z-index:1;
+      gap: 22px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
     }
 
     /* Left column: narrative + timeline */
-    .main-col{
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border-radius:12px;
-      padding:20px;
-      border:1px solid rgba(255,255,255,0.03);
+    .main-col {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
-    .section{
-      margin-bottom:18px;
+
+    .section {
+      margin-bottom: 18px;
     }
-    .section h3{
-      margin:0;
-      font-size:13px;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-      color:var(--muted);
-      display:flex;
-      align-items:center;
-      gap:10px;
+
+    .section h3 {
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .section h3 .dot{
-      width:10px; height:10px; border-radius:50%;
+
+    .section h3 .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
       background: linear-gradient(90deg, var(--accent), #6be1ff);
-      box-shadow:0 0 18px rgba(0,183,255,0.12);
+      box-shadow: 0 0 18px rgba(0, 183, 255, 0.12);
     }
-    .about{
-      margin-top:10px;
-      color:rgba(255,255,255,0.95);
-      line-height:1.6;
-      font-size:15px;
+
+    .about {
+      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.6;
+      font-size: 15px;
     }
 
     /* Timeline / roles */
-    .timeline{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      margin-top:12px;
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
     }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border-radius:10px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-      transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s;
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transition: transform .18s cubic-bezier(.2, .9, .3, 1), box-shadow .18s;
     }
-    .card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
-    .card .title{ font-weight:800; color:var(--white); font-size:15px; }
-    .card .meta{ font-size:13px; color:var(--muted); margin-top:6px; }
-    .card ul{ margin:8px 0 0 16px; color:var(--muted); font-size:14px; }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .card .title {
+      font-weight: 800;
+      color: var(--white);
+      font-size: 15px;
+    }
+
+    .card .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .card ul {
+      margin: 8px 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
     /* Right column: quick contacts, tags, achievements */
-    .side-col{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      align-self:start;
+    .side-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-self: start;
     }
-    .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border-radius:12px;
-      padding:14px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
     }
-    .contact-list{ display:flex; flex-direction:column; gap:8px; }
-    .contact-list .row{ display:flex; gap:10px; align-items:center; color:var(--muted); font-weight:600; font-size:14px; }
-    .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-    .tag{
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      background:linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.006));
-      border:1px solid rgba(255,255,255,0.03);
-      color:var(--muted);
-      font-weight:700;
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .achievements ul{ margin:8px 0 0 16px; color:var(--muted); }
+
+    .contact-list .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.006));
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .achievements ul {
+      margin: 8px 0 0 16px;
+      color: var(--muted);
+    }
 
     /* Footer mini */
-    .site-footer{
-      margin-top:22px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      color:var(--muted);
-      font-size:13px;
+    .site-footer {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     /* Responsive */
-    @media (max-width:1100px){
-      .hero{ grid-template-columns: 1fr 320px; }
-      .portrait{ width:280px; height:360px; }
-      .sections{ grid-template-columns: 1fr; }
-      .hero-right{ order:-1; }
+    @media (max-width:1100px) {
+      .hero {
+        grid-template-columns: 1fr 320px;
+      }
+
+      .portrait {
+        width: 280px;
+        height: 360px;
+      }
+
+      .sections {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        order: -1;
+      }
     }
-    @media (max-width:720px){
-      .wrap{ margin:16px; padding:16px; }
-      .name{ font-size:32px; }
-      .subtitle{ font-size:14px; }
-      .hero{ grid-template-columns: 1fr; align-items:center; padding:18px; gap:18px; }
-      .portrait{ width:200px; height:260px; }
-      .stats{ justify-content:flex-start; }
-      .hero-right{ align-items:center; }
+
+    @media (max-width:720px) {
+      .wrap {
+        margin: 16px;
+        padding: 16px;
+      }
+
+      .name {
+        font-size: 32px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        align-items: center;
+        padding: 18px;
+        gap: 18px;
+      }
+
+      .portrait {
+        width: 200px;
+        height: 260px;
+      }
+
+      .stats {
+        justify-content: flex-start;
+      }
+
+      .hero-right {
+        align-items: center;
+      }
     }
 
     /* PRINT */
-    @media print{
-      :root{ color-scheme:light; }
-      html,body{ background:#fff; color:#000; }
-      .toolbar, .site-footer { display:none !important; }
-      .wrap{ margin:0; padding:0; max-width:800px; }
-      .hero, .sections, .panel, .card { box-shadow:none; border: none; background:transparent; }
-      .portrait{ display:none; }
+    @media print {
+      :root {
+        color-scheme: light;
+      }
+
+      html,
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .toolbar,
+      .site-footer {
+        display: none !important;
+      }
+
+      .wrap {
+        margin: 0;
+        padding: 0;
+        max-width: 800px;
+      }
+
+      .hero,
+      .sections,
+      .panel,
+      .card {
+        box-shadow: none;
+        border: none;
+        background: transparent;
+      }
+
+      .portrait {
+        display: none;
+      }
     }
 
     /* Small helper animations */
-    .fade-in{ opacity:0; transform: translateY(6px); animation:fadeIn .8s cubic-bezier(.2,.9,.3,1) forwards; }
-    .stagger-1{ animation-delay:.06s; }
-    .stagger-2{ animation-delay:.12s; }
-    .stagger-3{ animation-delay:.18s; }
-    .stagger-4{ animation-delay:.24s; }
-    @keyframes fadeIn{ to{ opacity:1; transform:none; } }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(6px);
+      animation: fadeIn .8s cubic-bezier(.2, .9, .3, 1) forwards;
+    }
+
+    .stagger-1 {
+      animation-delay: .06s;
+    }
+
+    .stagger-2 {
+      animation-delay: .12s;
+    }
+
+    .stagger-3 {
+      animation-delay: .18s;
+    }
+
+    .stagger-4 {
+      animation-delay: .24s;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     /* Decorative numeric matrix (small) */
-    .matrix{
-      position:absolute;
-      right:18%;
-      top:6%;
+    .matrix {
+      position: absolute;
+      right: 18%;
+      top: 6%;
       font-family: "Courier New", Courier, monospace;
-      font-size:11px;
-      color: rgba(0,183,255,0.06);
+      font-size: 11px;
+      color: rgba(0, 183, 255, 0.06);
       letter-spacing: 2px;
-      white-space:pre;
+      white-space: pre;
       transform: rotate(-8deg);
-      user-select:none;
-      pointer-events:none;
+      user-select: none;
+      pointer-events: none;
     }
 
     /* Accessibility focus */
-    .btn:focus, a:focus { outline:2px dashed var(--accent); outline-offset:4px; }
+    .btn:focus,
+    a:focus {
+      outline: 2px dashed var(--accent);
+      outline-offset: 4px;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap" role="main" aria-label="Portafolio de Jerónimo Ricardo Ramírez">
     <!-- Toolbar -->
@@ -391,13 +592,20 @@
       <!-- decorative SVG / canvas for math curves & particles -->
       <div class="canvas-wrap" aria-hidden="true">
         <!-- Parametric curve + particle field -->
-        <svg id="decorSVG" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0; z-index:0;">
+        <svg id="decorSVG" width="100%" height="100%" preserveAspectRatio="none"
+          style="position:absolute; inset:0; z-index:0;">
           <defs>
-            <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00b7ff" stop-opacity="0.20"/><stop offset="1" stop-color="#d4af37" stop-opacity="0.08"/></linearGradient>
-            <filter id="f1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18" result="b"/></filter>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#00b7ff" stop-opacity="0.20" />
+              <stop offset="1" stop-color="#d4af37" stop-opacity="0.08" />
+            </linearGradient>
+            <filter id="f1" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="18" result="b" />
+            </filter>
           </defs>
           <!-- animated curve (math / finance feel) -->
-          <path id="curvePath" d="" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round" filter="url(#f1)" opacity="0.95"></path>
+          <path id="curvePath" d="" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"
+            filter="url(#f1)" opacity="0.95"></path>
           <!-- grid of tiny dots -->
           <g id="dots"></g>
         </svg>
@@ -405,11 +613,15 @@
 
       <!-- Left column -->
       <div class="hero-left" style="min-height:320px;">
-        <div class="kicker fade-in stagger-1"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#6be1ff);box-shadow:0 0 14px rgba(0,183,255,0.12)"></span> Currículum — Marca personal</div>
+        <div class="kicker fade-in stagger-1"><span
+            style="display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#6be1ff);box-shadow:0 0 14px rgba(0,183,255,0.12)"></span>
+          Currículum — Marca personal</div>
         <h1 class="name fade-in stagger-2">Jerónimo Ricardo Ramírez Torres</h1>
         <p class="subtitle fade-in stagger-3">Docente Universitario — Estadísticas • Finanzas • Sistemas</p>
         <p class="lead fade-in stagger-4">
-          Profesional con más de <strong>20 años</strong> de experiencia en análisis estadístico, gestión documental y transformación digital en el sector salud. Mi trabajo combina la precisión matemática con sensibilidad estética: visualizaciones limpias, procesos robustos y una enseñanza que construye pensamiento crítico.
+          Profesional con más de <strong>20 años</strong> de experiencia en análisis estadístico, gestión documental y
+          transformación digital en el sector salud. Mi trabajo combina la precisión matemática con sensibilidad
+          estética: visualizaciones limpias, procesos robustos y una enseñanza que construye pensamiento crítico.
         </p>
 
         <div class="stats" aria-hidden="false">
@@ -435,7 +647,8 @@
 
       <!-- Right column (portrait) -->
       <aside class="hero-right" aria-label="Fotografía y acciones">
-        <div class="portrait fade-in stagger-2" role="img" aria-label="Retrato de Jerónimo — sustituir por fotografía real">
+        <div class="portrait fade-in stagger-2" role="img"
+          aria-label="Retrato de Jerónimo — sustituir por fotografía real">
           <div class="frame-deco" aria-hidden="true"></div>
           <div class="photo" id="photoPlaceholder">
             <img src="mi_foto.jpg" alt="Foto de Jerónimo" style="width:100%; height:100%; object-fit:cover;">
@@ -443,12 +656,13 @@
         </div>
 
         <div style="width:100%;text-align:center;">
-          <button class="btn btn-outline" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar contacto</button>
+          <button class="btn btn-outline" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar
+            contacto</button>
         </div>
       </aside>
 
       <!-- small numeric/ASCII matrix decorative -->
-      <div class="matrix" aria-hidden="true">Σ  π  λ  ρ  ϕ  τ  ½  %  ≈  λ</div>
+      <div class="matrix" aria-hidden="true">Σ π λ ρ ϕ τ ½ % ≈ λ</div>
     </header>
 
     <!-- Main sections -->
@@ -458,7 +672,10 @@
         <section class="section" id="perfil" aria-labelledby="perfilTitle">
           <h3 id="perfilTitle"><span class="dot"></span> Perfil Profesional</h3>
           <p class="about">
-            Lidero procesos de captura, análisis y resguardo de información clínica con un enfoque en protección de datos y seguridad del paciente. Combino administración financiera, sistemas informáticos y ciencia de datos para diseñar soluciones que optimizan procesos administrativos y mejoran la toma de decisiones basadas en evidencia.
+            Lidero procesos de captura, análisis y resguardo de información clínica con un enfoque en protección de
+            datos y seguridad del paciente. Combino administración financiera, sistemas informáticos y ciencia de datos
+            para diseñar soluciones que optimizan procesos administrativos y mejoran la toma de decisiones basadas en
+            evidencia.
           </p>
         </section>
 
@@ -520,16 +737,24 @@
       <!-- Right: sidebar -->
       <aside class="side-col" aria-label="Información adicional">
         <div class="panel contact-panel" aria-labelledby="contactTitle">
-          <h4 id="contactTitle" style="margin:0 0 8px 0; color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:.6px;">Contacto</h4>
+          <h4 id="contactTitle"
+            style="margin:0 0 8px 0; color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:.6px;">
+            Contacto</h4>
           <div class="contact-list">
-            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Ubicación</strong><span>Puerto Vallarta, Jalisco, México</span></div>
-            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Tel</strong><span>322 235 43 31</span></div>
-            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Email</strong><a href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a></div>
+            <div class="row"><strong
+                style="width:100px;color:var(--muted);font-weight:700">Ubicación</strong><span>Puerto Vallarta, Jalisco,
+                México</span></div>
+            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Tel</strong><span>322 235 43
+                31</span></div>
+            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Email</strong><a
+                href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a></div>
           </div>
         </div>
 
         <div class="panel" aria-labelledby="skillsTitle">
-          <h4 id="skillsTitle" style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">Etiquetas</h4>
+          <h4 id="skillsTitle"
+            style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
+            Etiquetas</h4>
           <div class="tags" role="list">
             <div class="tag">Análisis Estadístico</div>
             <div class="tag">Gestión Documental</div>
@@ -542,7 +767,9 @@
         </div>
 
         <div class="panel achievements" aria-labelledby="achTitle">
-          <h4 id="achTitle" style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">Logros</h4>
+          <h4 id="achTitle"
+            style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
+            Logros</h4>
           <ul>
             <li>Registro de sistema para gestión documental ante INDAUTOR (2016)</li>
             <li>Reconocimiento CENEVAL — Desempeño Sobresaliente (2017)</li>
@@ -551,8 +778,11 @@
         </div>
 
         <div class="panel" aria-labelledby="docsTitle">
-          <h4 id="docsTitle" style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">Disponibilidad</h4>
-          <p style="margin:0;color:var(--muted);font-size:14px;">Constancias y certificados disponibles. Abierto a posiciones docentes y consultorías en estadística, administración y sistemas.</p>
+          <h4 id="docsTitle"
+            style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
+            Disponibilidad</h4>
+          <p style="margin:0;color:var(--muted);font-size:14px;">Constancias y certificados disponibles. Abierto a
+            posiciones docentes y consultorías en estadística, administración y sistemas.</p>
         </div>
       </aside>
     </div>
@@ -565,77 +795,147 @@
   </div>
 
   <!-- Modales / hidden elements -->
-  <div id="contactModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:9999;">
-    <div style="background:var(--card);border-radius:12px;padding:18px;max-width:520px;width:92%;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03);color:var(--muted);">
-      <button style="float:right;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer" aria-label="Cerrar" onclick="closeContact()">×</button>
+  <div id="contactModal"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:9999;">
+    <div
+      style="background:var(--card);border-radius:12px;padding:18px;max-width:520px;width:92%;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03);color:var(--muted);">
+      <button style="float:right;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer"
+        aria-label="Cerrar" onclick="closeContact()">×</button>
       <h3 style="margin-top:4px;color:var(--white)">Contacto</h3>
-      <p style="color:var(--muted)">Para contactar: <a href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a> • Tel: 322 235 43 31</p>
-      <p style="color:var(--muted)">¿Quieres que convierta este CV en un sitio web público tipo portfolio de élite? Responde con <strong>“Sí, publícalo”</strong> y preparo la versión lista para publicar.</p>
+      <p style="color:var(--muted)">Para contactar: <a
+          href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a> • Tel: 322 235 43 31</p>
+      <p style="color:var(--muted)">¿Quieres que convierta este CV en un sitio web público tipo portfolio de élite?
+        Responde con <strong>“Sí, publícalo”</strong> y preparo la versión lista para publicar.</p>
     </div>
   </div>
   <!-- Botón flotante para ver video -->
-  <div id="video-btn" style="position:fixed;bottom:24px;right:24px;z-index:100;cursor:pointer;background:#0b2a4a;border-radius:50%;box-shadow:0 2px 8px #0002;width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+  <div id="video-btn"
+    style="position:fixed;bottom:24px;right:24px;z-index:100;cursor:pointer;background:#0b2a4a;border-radius:50%;box-shadow:0 2px 8px #0002;width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+      <path d="M8 5v14l11-7z" />
+    </svg>
   </div>
   <!-- Modal de video -->
-  <div id="video-modal" style="display:none;position:fixed;z-index:200;inset:0;background:rgba(0,0,0,.55);align-items:center;justify-content:center;">
-    <div id="video-container" style="background:#fff;border-radius:12px;max-width:360px;width:92vw;padding:0;box-shadow:0 8px 32px #0004;position:relative;">
-      <button id="close-btn" style="position:absolute;top:6px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;color:#0b2a4a;">×</button>
-      <video src="WhatsApp Video 2025-09-02 at 08.20.36.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:9/16;border-radius:12px;display:block;"></video>
+  <div id="video-modal"
+    style="display:none;position:fixed;z-index:200;inset:0;background:rgba(0,0,0,.55);align-items:center;justify-content:center;">
+    <div id="video-container"
+      style="background:#fff;border-radius:12px;max-width:360px;width:92vw;padding:0;box-shadow:0 8px 32px #0004;position:relative;">
+      <button id="close-btn"
+        style="position:absolute;top:6px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;color:#0b2a4a;">×</button>
+      <video src="WhatsApp Video 2025-09-02 at 08.20.36.mp4" autoplay loop muted playsinline
+        style="width:100%;aspect-ratio:9/16;border-radius:12px;display:block;"></video>
     </div>
   </div>
   <script>
+    const videoModal = document.getElementById('video-modal');
+    const videoBtn = document.getElementById('video-btn');
+    const video = videoModal.querySelector('video');
+    const closeBtn = document.getElementById('close-btn');
+    const videoContainer = document.getElementById('video-container');
+
+    videoBtn.onclick = function () {
+      videoModal.style.display = 'flex';
+      video.currentTime = 0;
+      video.play();
+    };
+
+    closeBtn.onclick = function (event) {
+      event.stopPropagation();
+      closeVideo();
+    };
+
+    videoContainer.onclick = function (event) {
+      event.stopPropagation();
+    };
+
+    function closeVideo() {
+      videoModal.style.display = 'none';
+      video.pause();
+    }
+
+    // Cerrar modal al hacer clic fuera del video
+    videoModal.onclick = function (e) {
+      if (e.target === videoModal) closeVideo();
+    };
+
+    // Fecha automática en español
+    const el = document.getElementById('today');
+    try {
+      const d = new Date();
+      const fmt = new Intl.DateTimeFormat('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
+      el.textContent = fmt.format(d);
+    } catch (e) { el.textContent = ''; }
+
+    // Modo compacto (por si quieres apretar todo a una página al imprimir)
+    function toggleCompact() {
+      document.body.classList.toggle('compact');
+    }
+    // Ajustes compactos
+    const style = document.createElement('style');
+    style.textContent = `
+      body.compact .page { transform-origin: top center; }
+      body.compact .content { gap: 16px; padding: 16px 26px 22px 26px; }
+      body.compact .header { padding: 22px 28px 16px 28px; }
+      body.compact .name-block .name { font-size: 26px; }
+      body.compact .para, body.compact .list li, body.compact .edu-item, body.compact .role .title { font-size: 12px; }
+      @media print {
+        body.compact .page { transform: none; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+  <script>
     // Fecha automática en español, formato completo
-    (function setDate(){
+    (function setDate() {
       const el = document.getElementById('today');
       try {
         const d = new Date();
-        const fmt = new Intl.DateTimeFormat('es-MX', { day:'2-digit', month:'long', year:'numeric' });
+        const fmt = new Intl.DateTimeFormat('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
         el.textContent = fmt.format(d);
-      } catch(e){ el.textContent = ''; }
+      } catch (e) { el.textContent = ''; }
     })();
 
     // Compact toggle (reduce paddings / font sizes slightly)
-    function toggleCompact(){
+    function toggleCompact() {
       document.documentElement.classList.toggle('compact-mode');
       document.body.classList.toggle('compact-mode');
       const compact = document.body.classList.contains('compact-mode');
       document.querySelectorAll('.card').forEach(c => c.style.transform = compact ? 'scale(.995)' : '');
-      if(compact){
-        document.documentElement.style.setProperty('--page-padding','12px');
+      if (compact) {
+        document.documentElement.style.setProperty('--page-padding', '12px');
       } else {
-        document.documentElement.style.setProperty('--page-padding','28px');
+        document.documentElement.style.setProperty('--page-padding', '28px');
       }
     }
 
     // Theme toggle (dark <-> warm gold)
     let _theme = 'dark';
-    function toggleTheme(){
-      if(_theme === 'dark'){
+    function toggleTheme() {
+      if (_theme === 'dark') {
         // warm/gold variant
-        document.documentElement.style.setProperty('--bg','#071218');
-        document.documentElement.style.setProperty('--card','#071218');
-        document.documentElement.style.setProperty('--accent','#d4af37');
-        document.documentElement.style.setProperty('--gold','#00b7ff'); // swap intentionally for dynamic feel
+        document.documentElement.style.setProperty('--bg', '#071218');
+        document.documentElement.style.setProperty('--card', '#071218');
+        document.documentElement.style.setProperty('--accent', '#d4af37');
+        document.documentElement.style.setProperty('--gold', '#00b7ff'); // swap intentionally for dynamic feel
         _theme = 'gold';
         document.getElementById('themeBtn').textContent = '✨ Oro';
       } else {
         // back to default cool
-        document.documentElement.style.setProperty('--bg','#0b0f14');
-        document.documentElement.style.setProperty('--card','#071021');
-        document.documentElement.style.setProperty('--accent','#00b7ff');
-        document.documentElement.style.setProperty('--gold','#d4af37');
+        document.documentElement.style.setProperty('--bg', '#0b0f14');
+        document.documentElement.style.setProperty('--card', '#071021');
+        document.documentElement.style.setProperty('--accent', '#00b7ff');
+        document.documentElement.style.setProperty('--gold', '#d4af37');
         _theme = 'dark';
         document.getElementById('themeBtn').textContent = '🎭 Tema';
       }
     }
 
     // Contact modal
-    function openContact(){ document.getElementById('contactModal').style.display = 'flex'; }
-    function closeContact(){ document.getElementById('contactModal').style.display = 'none'; }
+    function openContact() { document.getElementById('contactModal').style.display = 'flex'; }
+    function closeContact() { document.getElementById('contactModal').style.display = 'none'; }
 
     // vCard download (basic)
-    function downloadVCard(){
+    function downloadVCard() {
       const vcard = [
         'BEGIN:VCARD',
         'VERSION:3.0',
@@ -659,53 +959,53 @@
     }
 
     // Smooth scroll to section
-    function scrollToSection(id){
+    function scrollToSection(id) {
       const el = document.getElementById(id);
-      if(!el) return;
-      el.scrollIntoView({ behavior:'smooth', block:'start' });
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // Decorative math/finance curve + dots generator
-    (function decorate(){
+    (function decorate() {
       const svg = document.getElementById('decorSVG');
       const path = document.getElementById('curvePath');
       const dotsG = document.getElementById('dots');
 
-      function resize(){
+      function resize() {
         const w = svg.clientWidth;
         const h = svg.clientHeight;
         // generate a smooth parametric curve (sum of sine waves) across width
         const points = [];
         const step = Math.max(8, Math.round(w / 120));
-        for(let x = 0; x <= w; x += step){
+        for (let x = 0; x <= w; x += step) {
           const t = x / w * Math.PI * 2;
           // combine sinusoids to look "statistical"
-          const y = h*0.45 + Math.sin(t*0.9)* (h*0.06) + Math.sin(t*2.7)* (h*0.035) + Math.cos(t*1.6)* (h*0.025);
-          points.push({x:Math.round(x), y:Math.round(y)});
+          const y = h * 0.45 + Math.sin(t * 0.9) * (h * 0.06) + Math.sin(t * 2.7) * (h * 0.035) + Math.cos(t * 1.6) * (h * 0.025);
+          points.push({ x: Math.round(x), y: Math.round(y) });
         }
         // make path d
         let d = '';
-        for(let i=0;i<points.length;i++){
+        for (let i = 0; i < points.length; i++) {
           const p = points[i];
-          if(i===0) d += `M ${p.x} ${p.y} `;
+          if (i === 0) d += `M ${p.x} ${p.y} `;
           else {
-            const prev = points[i-1];
-            const cx = (prev.x + p.x)/2;
-            d += `Q ${prev.x} ${prev.y} ${cx} ${(prev.y + p.y)/2} `;
+            const prev = points[i - 1];
+            const cx = (prev.x + p.x) / 2;
+            d += `Q ${prev.x} ${prev.y} ${cx} ${(prev.y + p.y) / 2} `;
           }
         }
         path.setAttribute('d', d);
 
         // dots field: random but deterministic-ish based on size
         dotsG.innerHTML = '';
-        const cols = Math.max(12, Math.round(w/80));
-        const rows = Math.max(6, Math.round(h/80));
-        for(let i=0;i<cols;i++){
-          for(let j=0;j<rows;j++){
-            const cx = (i/cols)*w + (Math.sin(i*j + (w+h)/200)*6);
-            const cy = (j/rows)*h + (Math.cos(i*j + (w+h)/300)*6);
-            const r = 0.9 + Math.abs(Math.sin(i*0.3+j*0.7))*1.2;
-            const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        const cols = Math.max(12, Math.round(w / 80));
+        const rows = Math.max(6, Math.round(h / 80));
+        for (let i = 0; i < cols; i++) {
+          for (let j = 0; j < rows; j++) {
+            const cx = (i / cols) * w + (Math.sin(i * j + (w + h) / 200) * 6);
+            const cy = (j / rows) * h + (Math.cos(i * j + (w + h) / 300) * 6);
+            const r = 0.9 + Math.abs(Math.sin(i * 0.3 + j * 0.7)) * 1.2;
+            const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             c.setAttribute('cx', cx);
             c.setAttribute('cy', cy);
             c.setAttribute('r', r);
@@ -717,7 +1017,7 @@
 
       // animate path stroke-dashoffset to create flow
       let offset = 0;
-      function animate(){
+      function animate() {
         offset = (offset + 0.6) % 1000;
         path.style.strokeDasharray = '600';
         path.style.strokeDashoffset = String(-offset);
@@ -730,18 +1030,18 @@
     })();
 
     // Small accessible enhancement: allow Enter key on portrait to upload / replace photo placeholder
-    (function portraitReplace(){
+    (function portraitReplace() {
       const ph = document.getElementById('photoPlaceholder');
-      ph.setAttribute('tabindex','0');
-      ph.setAttribute('role','button');
-      ph.setAttribute('aria-label','Reemplazar fotografía (no subida real, placeholder)');
-      ph.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); }});
-      ph.addEventListener('click', ()=>{ alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); });
+      ph.setAttribute('tabindex', '0');
+      ph.setAttribute('role', 'button');
+      ph.setAttribute('aria-label', 'Reemplazar fotografía (no subida real, placeholder)');
+      ph.addEventListener('keydown', (e) => { if (e.key === 'Enter') { alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); } });
+      ph.addEventListener('click', () => { alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); });
     })();
 
     // Small UX: when printing, reduce heavy decorations
-    window.matchMedia('print').addListener(function(m){
-      if(m.matches){
+    window.matchMedia('print').addListener(function (m) {
+      if (m.matches) {
         document.querySelectorAll('.canvas-wrap, .matrix, .portrait .frame-deco').forEach(n => n.style.display = 'none');
       }
     });
@@ -749,4 +1049,5 @@
     // Optionally: copy/paste content -> if the user wants to publish, replace placeholders with real photo, links, etc.
   </script>
 </body>
+
 </html>
