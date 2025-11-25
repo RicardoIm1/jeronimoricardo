@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <title>Jerónimo R. Ramírez — Portafolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portafolio profesional de Jerónimo Ricardo Ramírez Torres - Docente Universitario especializado en Estadísticas, Finanzas y Sistemas">
+  
   <!-- Tipografías elegantes: Playfair Display para título, Montserrat para cuerpo -->
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
@@ -12,15 +14,10 @@
   <style>
     :root {
       --bg: #0b0f14;
-      /* fondo general (dark cinematic) */
       --card: #071021;
-      /* paneles */
       --muted: #9aa6b2;
-      /* texto secundario */
       --accent: #00b7ff;
-      /* azul brillante (financiero) */
       --gold: #d4af37;
-      /* acento premium */
       --glass: rgba(255, 255, 255, 0.04);
       --glass-2: rgba(255, 255, 255, 0.02);
       --white: #ffffff;
@@ -32,20 +29,23 @@
     /* Reset ligero */
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html,
     body {
       height: 100%;
-      margin: 0;
       font-family: "Montserrat", system-ui;
-      background: #0b0f14;
-      /* base */
-      color: #fff;
+      background: var(--bg);
+      color: var(--white);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
     }
 
-    /* Fondo super glass (bruma azul muy ligera) */
+    /* Fondo mejorado con gradientes más sutiles */
     body::before {
       content: "";
       position: fixed;
@@ -53,36 +53,27 @@
       background:
         radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.05), transparent),
         radial-gradient(900px 500px at 90% 40%, rgba(0, 183, 255, 0.04), transparent),
+        radial-gradient(800px 300px at 50% 80%, rgba(212, 175, 55, 0.03), transparent),
         linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
       backdrop-filter: blur(6px);
       pointer-events: none;
       z-index: -2;
     }
 
-
-    /*     html,
-    body {
-      height: 100%;
-      margin: 0;
-      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background: radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.03), transparent), var(--bg);
-      color: var(--white);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    } */
-
     a {
       color: var(--accent);
       text-decoration: none;
+      transition: all 0.3s ease;
     }
 
     a:hover {
       text-decoration: underline;
+      text-shadow: 0 0 8px rgba(0, 183, 255, 0.4);
     }
 
     /* Contenedor principal */
     .wrap {
-      max-width: calc(var(--max-width));
+      max-width: var(--max-width);
       margin: 36px auto;
       padding: var(--page-padding);
       position: relative;
@@ -95,6 +86,7 @@
       justify-content: flex-end;
       align-items: center;
       margin-bottom: 18px;
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -108,10 +100,16 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
       color: var(--white);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      transition: transform .12s ease;
+      transition: all 0.3s ease;
       display: inline-flex;
       gap: 8px;
       align-items: center;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
     }
 
     .btn:active {
@@ -173,7 +171,7 @@
     .name {
       font-family: "Playfair Display", serif;
       font-size: 44px;
-      line-height: 1;
+      line-height: 1.1;
       margin: 0;
       font-weight: 700;
       color: var(--white);
@@ -211,6 +209,12 @@
       min-width: 120px;
       box-shadow: 0 6px 18px rgba(2, 8, 16, 0.45);
       border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: all 0.3s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(2, 8, 16, 0.6);
     }
 
     .stat .s-num {
@@ -250,6 +254,12 @@
       border: 1px solid rgba(255, 255, 255, 0.04);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .portrait:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
     }
 
     .portrait .photo {
@@ -266,6 +276,18 @@
       font-size: 22px;
       text-align: center;
       padding: 22px;
+      overflow: hidden;
+    }
+
+    .portrait .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .portrait:hover .photo img {
+      transform: scale(1.05);
     }
 
     .portrait .frame-deco {
@@ -287,7 +309,8 @@
       align-items: center;
       margin-top: 6px;
       width: 100%;
-      justify-content: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
     }
 
     .cta {
@@ -299,12 +322,23 @@
       box-shadow: 0 10px 30px rgba(0, 183, 255, 0.12);
       border: none;
       cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 183, 255, 0.2);
     }
 
     .cta.secondary {
       background: transparent;
       color: var(--white);
       border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .cta.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
     }
 
     /* Main content sections below hero */
@@ -395,6 +429,10 @@
       font-size: 14px;
     }
 
+    .card li {
+      margin-bottom: 4px;
+    }
+
     /* Right column: quick contacts, tags, achievements */
     .side-col {
       display: flex;
@@ -409,6 +447,12 @@
       padding: 14px;
       border: 1px solid rgba(255, 255, 255, 0.03);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transition: all 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     .contact-list {
@@ -441,11 +485,22 @@
       border: 1px solid rgba(255, 255, 255, 0.03);
       color: var(--muted);
       font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      background: linear-gradient(90deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
+      color: var(--white);
+      transform: translateY(-2px);
     }
 
     .achievements ul {
       margin: 8px 0 0 16px;
       color: var(--muted);
+    }
+
+    .achievements li {
+      margin-bottom: 4px;
     }
 
     /* Footer mini */
@@ -456,6 +511,8 @@
       align-items: center;
       color: var(--muted);
       font-size: 13px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     /* Responsive */
@@ -510,6 +567,15 @@
 
       .hero-right {
         align-items: center;
+      }
+
+      .toolbar {
+        justify-content: center;
+      }
+
+      .site-footer {
+        flex-direction: column;
+        text-align: center;
       }
     }
 
@@ -597,7 +663,8 @@
 
     /* Accessibility focus */
     .btn:focus,
-    a:focus {
+    a:focus,
+    .cta:focus {
       outline: 2px dashed var(--accent);
       outline-offset: 4px;
     }
@@ -609,72 +676,122 @@
       height: 100vh;
       z-index: -1;
       opacity: 0.18;
-      /* sutilísimo */
     }
-  </style>
-  <style>
-    /* MATRIX AZUL — FONDO CINEMÁTICO ULTRA LIGERO */
-    #matrix-blue {
+
+    /* Modal styles */
+    .modal {
+      display: none;
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      max-width: 520px;
+      width: 92%;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: var(--white);
+    }
+
+    .modal h3 {
+      margin-top: 4px;
+      color: var(--white);
+    }
+
+    /* Video button and modal */
+    #video-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      cursor: pointer;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 183, 255, 0.3);
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    #video-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 183, 255, 0.5);
+    }
+
+    #video-modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+
+    #video-container {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 360px;
+      width: 92vw;
+      padding: 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    #close-btn {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #0b2a4a;
+      z-index: 201;
+    }
+
+    #video-container video {
       width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.22;
-      /* sutil y elegante */
-      pointer-events: none;
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      display: block;
     }
   </style>
-
 </head>
-<canvas id="matrix-bg"></canvas>
-
-<script>
-  /* MATRIX DIGITAL — VERSIÓN AZUL, LIGERA Y ELEGANTE */
-  const canvas = document.getElementById("matrix-blue");
-  const ctx = canvas.getContext("2d");
-
-  function resizeMatrix() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  resizeMatrix();
-  window.addEventListener("resize", resizeMatrix);
-
-  const letters = "01+-/*=<>πΣΩλ∂ƒ∞";
-  const fontSize = 14;
-  const columns = Math.floor(canvas.width / fontSize);
-
-  const rainDrops = Array.from({ length: columns }, () => 1);
-
-  function draw() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#00b7ff";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < rainDrops.length; i++) {
-      const char = letters[Math.floor(Math.random() * letters.length)];
-      ctx.fillText(char, i * fontSize, rainDrops[i] * fontSize);
-
-      // reseteo aleatorio para efecto matemático caótico
-      if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        rainDrops[i] = 0;
-      }
-
-      rainDrops[i]++;
-    }
-
-    requestAnimationFrame(draw);
-  }
-
-  draw();
-</script>
 
 <body>
+  <!-- Matrix background canvas -->
+  <canvas id="matrix-bg"></canvas>
+
   <div class="wrap" role="main" aria-label="Portafolio de Jerónimo Ricardo Ramírez">
     <!-- Toolbar -->
     <div class="toolbar" role="toolbar" aria-label="Acciones">
@@ -748,7 +865,7 @@
           <div class="frame-deco" aria-hidden="true"></div>
           <div class="photo" id="photoPlaceholder">
             <img src="https://i.pinimg.com/736x/41/5b/77/415b776041f5fd0f89f174d02d19fdc7.jpg" alt="Foto de Jerónimo"
-              style="width:100%; height:100%; object-fit:cover;">
+              loading="lazy">
           </div>
         </div>
 
@@ -891,39 +1008,69 @@
     </div>
   </div>
 
-  <!-- Modales / hidden elements -->
-  <div id="contactModal"
-    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:9999;">
-    <div
-      style="background:var(--card);border-radius:12px;padding:18px;max-width:520px;width:92%;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03);color:var(--muted);">
-      <button style="float:right;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer"
-        aria-label="Cerrar" onclick="closeContact()">×</button>
-      <h3 style="margin-top:4px;color:var(--white)">Contacto</h3>
-      <p style="color:var(--muted)">Para contactar: <a
-          href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a> • Tel: 322 235 43 31</p>
-      <p style="color:var(--muted)">¿Quieres que convierta este CV en un sitio web público tipo portfolio de élite?
-        Responde con <strong>“Sí, publícalo”</strong> y preparo la versión lista para publicar.</p>
+  <!-- Modales -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar" onclick="closeContact()">×</button>
+      <h3>Contacto</h3>
+      <p>Para contactar: <a href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a> • Tel: 322 235 43 31</p>
+      <p>¿Quieres que convierta este CV en un sitio web público tipo portfolio de élite? Responde con <strong>“Sí, publícalo”</strong> y preparo la versión lista para publicar.</p>
     </div>
   </div>
+
   <!-- Botón flotante para ver video -->
-  <div id="video-btn"
-    style="position:fixed;bottom:24px;right:24px;z-index:100;cursor:pointer;background:#0b2a4a;border-radius:50%;box-shadow:0 2px 8px #0002;width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
+  <div id="video-btn" aria-label="Ver video de presentación">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
       <path d="M8 5v14l11-7z" />
     </svg>
   </div>
+
   <!-- Modal de video -->
-  <div id="video-modal"
-    style="display:none;position:fixed;z-index:200;inset:0;background:rgba(0,0,0,.55);align-items:center;justify-content:center;">
-    <div id="video-container"
-      style="background:#fff;border-radius:12px;max-width:360px;width:92vw;padding:0;box-shadow:0 8px 32px #0004;position:relative;">
-      <button id="close-btn"
-        style="position:absolute;top:6px;right:10px;background:none;border:none;font-size:22px;cursor:pointer;color:#0b2a4a;">×</button>
+  <div id="video-modal" class="modal">
+    <div id="video-container">
+      <button id="close-btn" aria-label="Cerrar video">×</button>
       <video src="WhatsApp Video 2025-09-02 at 08.20.36.mp4" autoplay loop muted playsinline
         style="width:100%;aspect-ratio:9/16;border-radius:12px;display:block;"></video>
     </div>
   </div>
+
   <script>
+    // Matrix background effect
+    const c = document.getElementById('matrix-bg');
+    const ctx = c.getContext('2d');
+
+    function initMatrix() {
+      c.width = window.innerWidth;
+      c.height = window.innerHeight;
+
+      const chars = "01∑πλµψΩβγδε";
+      const fontSize = 16;
+      const columns = Math.floor(c.width / fontSize);
+
+      const drops = Array(columns).fill(1);
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.07)";
+        ctx.fillRect(0, 0, c.width, c.height);
+
+        ctx.fillStyle = "#00b7ff"; 
+        ctx.font = fontSize + "px monospace";
+
+        drops.forEach((y, i) => {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(text, i * fontSize, y * fontSize);
+
+          if (y * fontSize > c.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        });
+      }
+
+      setInterval(drawMatrix, 45);
+    }
+
+    // Video modal functionality
     const videoModal = document.getElementById('video-modal');
     const videoBtn = document.getElementById('video-btn');
     const video = videoModal.querySelector('video');
@@ -956,33 +1103,6 @@
     };
 
     // Fecha automática en español
-    const el = document.getElementById('today');
-    try {
-      const d = new Date();
-      const fmt = new Intl.DateTimeFormat('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
-      el.textContent = fmt.format(d);
-    } catch (e) { el.textContent = ''; }
-
-    // Modo compacto (por si quieres apretar todo a una página al imprimir)
-    function toggleCompact() {
-      document.body.classList.toggle('compact');
-    }
-    // Ajustes compactos
-    const style = document.createElement('style');
-    style.textContent = `
-      body.compact .page { transform-origin: top center; }
-      body.compact .content { gap: 16px; padding: 16px 26px 22px 26px; }
-      body.compact .header { padding: 22px 28px 16px 28px; }
-      body.compact .name-block .name { font-size: 26px; }
-      body.compact .para, body.compact .list li, body.compact .edu-item, body.compact .role .title { font-size: 12px; }
-      @media print {
-        body.compact .page { transform: none; }
-      }
-    `;
-    document.head.appendChild(style);
-  </script>
-  <script>
-    // Fecha automática en español, formato completo
     (function setDate() {
       const el = document.getElementById('today');
       try {
@@ -1028,8 +1148,13 @@
     }
 
     // Contact modal
-    function openContact() { document.getElementById('contactModal').style.display = 'flex'; }
-    function closeContact() { document.getElementById('contactModal').style.display = 'none'; }
+    function openContact() { 
+      document.getElementById('contactModal').style.display = 'flex'; 
+    }
+    
+    function closeContact() { 
+      document.getElementById('contactModal').style.display = 'none'; 
+    }
 
     // vCard download (basic)
     function downloadVCard() {
@@ -1043,7 +1168,7 @@
         'ADR;TYPE=WORK:;;Puerto Vallarta;Jalisco;México',
         'NOTE:Docente Universitario — Estadísticas, Finanzas y Sistemas',
         'END:VCARD'
-      ].join('\\r\\n');
+      ].join('\r\n');
       const blob = new Blob([vcard], { type: 'text/vcard' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -1143,47 +1268,9 @@
       }
     });
 
-    // Optionally: copy/paste content -> if the user wants to publish, replace placeholders with real photo, links, etc.
+    // Initialize matrix background and resize handling
+    window.addEventListener('load', initMatrix);
+    window.addEventListener('resize', initMatrix);
   </script>
-  <script>
-  const c = document.getElementById('matrix-bg');
-  const ctx = c.getContext('2d');
-
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
-
-  const chars = "01∑πλµψΩβγδε";
-  const fontSize = 16;
-  const columns = Math.floor(c.width / fontSize);
-
-  const drops = Array(columns).fill(1);
-
-  function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.07)";
-    ctx.fillRect(0, 0, c.width, c.height);
-
-    ctx.fillStyle = "#00b7ff"; 
-    ctx.font = fontSize + "px monospace";
-
-    drops.forEach((y, i) => {
-      const text = chars[Math.floor(Math.random() * chars.length)];
-      ctx.fillText(text, i * fontSize, y * fontSize);
-
-      if (y * fontSize > c.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-      drops[i]++;
-    });
-  }
-
-  setInterval(drawMatrix, 45);
-
-  window.addEventListener('resize', () => {
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
-  });
-</script>
-
 </body>
-
 </html>
