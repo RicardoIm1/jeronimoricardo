@@ -38,12 +38,38 @@
     body {
       height: 100%;
       margin: 0;
+      font-family: "Montserrat", system-ui;
+      background: #0b0f14;
+      /* base */
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Fondo super glass (bruma azul muy ligera) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.05), transparent),
+        radial-gradient(900px 500px at 90% 40%, rgba(0, 183, 255, 0.04), transparent),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      backdrop-filter: blur(6px);
+      pointer-events: none;
+      z-index: -2;
+    }
+
+
+    /*     html,
+    body {
+      height: 100%;
+      margin: 0;
       font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       background: radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.03), transparent), var(--bg);
       color: var(--white);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    }
+    } */
 
     a {
       color: var(--accent);
@@ -575,6 +601,16 @@
       outline: 2px dashed var(--accent);
       outline-offset: 4px;
     }
+
+    #matrix-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      opacity: 0.18;
+      /* sutilísimo */
+    }
   </style>
   <style>
     /* MATRIX AZUL — FONDO CINEMÁTICO ULTRA LIGERO */
@@ -592,7 +628,7 @@
   </style>
 
 </head>
-<canvas id="matrix-blue"></canvas>
+<canvas id="matrix-bg"></canvas>
 
 <script>
   /* MATRIX DIGITAL — VERSIÓN AZUL, LIGERA Y ELEGANTE */
@@ -1109,6 +1145,45 @@
 
     // Optionally: copy/paste content -> if the user wants to publish, replace placeholders with real photo, links, etc.
   </script>
+  <script>
+  const c = document.getElementById('matrix-bg');
+  const ctx = c.getContext('2d');
+
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+
+  const chars = "01∑πλµψΩβγδε";
+  const fontSize = 16;
+  const columns = Math.floor(c.width / fontSize);
+
+  const drops = Array(columns).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.07)";
+    ctx.fillRect(0, 0, c.width, c.height);
+
+    ctx.fillStyle = "#00b7ff"; 
+    ctx.font = fontSize + "px monospace";
+
+    drops.forEach((y, i) => {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, y * fontSize);
+
+      if (y * fontSize > c.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    });
+  }
+
+  setInterval(drawMatrix, 45);
+
+  window.addEventListener('resize', () => {
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+  });
+</script>
+
 </body>
 
 </html>
