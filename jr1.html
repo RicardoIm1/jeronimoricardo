@@ -800,20 +800,274 @@
       border-radius: 12px;
       display: block;
     }
+
+    /* NUEVAS MEJORAS CINEMÁTICAS */
+    
+    /* Efecto de partículas matemáticas */
+    .math-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Efecto de gradiente animado en el fondo */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #0b0f14, #071021, #0a1420, #0b0f14);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      z-index: -2;
+    }
+    
+    /* Efecto de brillo en elementos interactivos */
+    .glow-on-hover {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .glow-on-hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    .glow-on-hover:hover::before {
+      left: 100%;
+    }
+    
+    /* Animación de entrada mejorada para tarjetas */
+    @keyframes slideUpFade {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .card-animated {
+      animation: slideUpFade 0.6s ease-out forwards;
+    }
+    
+    /* Efecto de parallax sutil */
+    .parallax-element {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    
+    /* Efecto de texto brillante */
+    .glowing-text {
+      text-shadow: 0 0 10px rgba(0, 183, 255, 0.7);
+      animation: textGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes textGlow {
+      from {
+        text-shadow: 0 0 10px rgba(0, 183, 255, 0.7);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(0, 183, 255, 0.9), 0 0 30px rgba(0, 183, 255, 0.6);
+      }
+    }
+    
+    /* Efecto de borde animado para tarjetas */
+    .card-border-animated {
+      position: relative;
+    }
+    
+    .card-border-animated::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 10px;
+      padding: 2px;
+      background: linear-gradient(45deg, var(--accent), var(--gold), var(--accent));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .card-border-animated:hover::before {
+      opacity: 1;
+    }
+    
+    /* Efecto de partículas en hover para botones */
+    .particle-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .particle-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    
+    .particle-btn:hover::after {
+      animation: particle-effect 0.6s ease-out forwards;
+    }
+    
+    @keyframes particle-effect {
+      0% {
+        opacity: 1;
+        transform: scale(0, 0) translate(-50%);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1, 1) translate(-50%);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2, 2) translate(-50%);
+      }
+    }
+    
+    /* Animación de números para estadísticas */
+    .counting {
+      animation: countUp 2s ease-out forwards;
+    }
+    
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Efecto de scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Efecto de brillo en el cursor */
+    .cursor-glow {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 183, 255, 0.8) 0%, rgba(0, 183, 255, 0) 70%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+    }
+    
+    /* Efecto de sonido visual (ondas) */
+    .sound-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      animation: soundWave 2s infinite;
+    }
+    
+    @keyframes soundWave {
+      0% {
+        transform: scaleX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scaleX(1);
+        opacity: 0;
+      }
+    }
+    
+    /* Efecto de neón para títulos */
+    .neon-text {
+      color: #fff;
+      text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px var(--accent),
+        0 0 20px var(--accent),
+        0 0 25px var(--accent);
+      animation: neonFlicker 1.5s infinite alternate;
+    }
+    
+    @keyframes neonFlicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 
+          0 0 5px #fff,
+          0 0 10px #fff,
+          0 0 15px var(--accent),
+          0 0 20px var(--accent),
+          0 0 25px var(--accent);
+      }
+      20%, 24%, 55% {
+        text-shadow: none;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Fondo con gradiente animado -->
+  <div class="gradient-bg"></div>
+  
+  <!-- Efecto de partículas matemáticas -->
+  <canvas class="math-particles" id="mathParticles"></canvas>
+  
+  <!-- Efecto de brillo en el cursor -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <!-- Matrix background canvas -->
   <canvas id="matrix-bg" aria-hidden="true"></canvas>
 
   <div class="wrap" role="main" aria-label="Portafolio de Jerónimo Ricardo Ramírez">
     <!-- Toolbar -->
     <div class="toolbar" role="toolbar" aria-label="Acciones">
-      <button class="btn" onclick="window.print()" title="Descargar / Imprimir CV">📄 Descargar PDF</button>
-      <button class="btn btn-outline" onclick="toggleCompact()" title="Compactar/Expandir diseño">✨ Compactar</button>
-      <button class="btn btn-outline" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🎭 Tema</button>
-      <button id="matrix-toggle" title="Alternar intensidad Matrix" onclick="toggleMatrixIntensity()">Matrix: Alta</button>
+      <button class="btn particle-btn" onclick="window.print()" title="Descargar / Imprimir CV">📄 Descargar PDF</button>
+      <button class="btn btn-outline particle-btn" onclick="toggleCompact()" title="Compactar/Expandir diseño">✨ Compactar</button>
+      <button class="btn btn-outline particle-btn" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🎭 Tema</button>
+      <button id="matrix-toggle" class="particle-btn" title="Alternar intensidad Matrix" onclick="toggleMatrixIntensity()">Matrix: Alta</button>
     </div>
 
     <!-- Hero -->
@@ -845,8 +1099,8 @@
         <div class="kicker fade-in stagger-1"><span
             style="display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#6be1ff);box-shadow:0 0 14px rgba(0,183,255,0.12)"></span>
           Currículum — Marca personal</div>
-        <h1 class="name fade-in stagger-2">Jerónimo Ricardo Ramírez Torres</h1>
-        <p class="subtitle fade-in stagger-3">Docente Universitario — Estadísticas • Finanzas • Sistemas</p>
+        <h1 class="name fade-in stagger-2 neon-text">Jerónimo Ricardo Ramírez Torres</h1>
+        <p class="subtitle fade-in stagger-3 glowing-text">Docente Universitario — Estadísticas • Finanzas • Sistemas</p>
         <p class="lead fade-in stagger-4">
           Profesional con más de <strong>20 años</strong> de experiencia en análisis estadístico, gestión documental y
           transformación digital en el sector salud. Mi trabajo combina la precisión matemática con sensibilidad
@@ -854,29 +1108,29 @@
         </p>
 
         <div class="stats" aria-hidden="false">
-          <div class="stat fade-in stagger-1" title="Años de experiencia">
-            <span class="s-num">20+</span>
+          <div class="stat fade-in stagger-1 card-border-animated" title="Años de experiencia">
+            <span class="s-num counting">20+</span>
             <span class="s-label">Años de experiencia</span>
           </div>
-          <div class="stat fade-in stagger-2" title="Áreas de trabajo">
-            <span class="s-num">Salud & Academia</span>
+          <div class="stat fade-in stagger-2 card-border-animated" title="Áreas de trabajo">
+            <span class="s-num counting">Salud & Academia</span>
             <span class="s-label">Sectores principales</span>
           </div>
-          <div class="stat fade-in stagger-3" title="Habilidades destacadas">
-            <span class="s-num">R • SQL • Python</span>
+          <div class="stat fade-in stagger-3 card-border-animated" title="Habilidades destacadas">
+            <span class="s-num counting">R • SQL • Python</span>
             <span class="s-label">Herramientas y lenguajes</span>
           </div>
         </div>
 
         <div class="cta-row" style="margin-top:6px;">
-          <button class="cta" onclick="openContact()">Contacto</button>
-          <button class="cta secondary" onclick="scrollToSection('experiencia')">Ver experiencia</button>
+          <button class="cta particle-btn glow-on-hover" onclick="openContact()">Contacto</button>
+          <button class="cta secondary particle-btn glow-on-hover" onclick="scrollToSection('experiencia')">Ver experiencia</button>
         </div>
       </div>
 
       <!-- Right column (portrait) -->
       <aside class="hero-right" aria-label="Fotografía y acciones">
-        <div class="portrait fade-in stagger-2" role="img"
+        <div class="portrait fade-in stagger-2 card-border-animated" role="img"
           aria-label="Retrato de Jerónimo — sustituir por fotografía real">
           <div class="frame-deco" aria-hidden="true"></div>
           <div class="photo" id="photoPlaceholder">
@@ -886,7 +1140,7 @@
         </div>
 
         <div style="width:100%;text-align:center;">
-          <button class="btn btn-outline" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar
+          <button class="btn btn-outline particle-btn" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar
             contacto</button>
         </div>
       </aside>
@@ -899,7 +1153,7 @@
     <div class="sections">
       <!-- Left: narrative & timeline -->
       <div class="main-col">
-        <section class="section" id="perfil" aria-labelledby="perfilTitle">
+        <section class="section reveal" id="perfil" aria-labelledby="perfilTitle">
           <h3 id="perfilTitle"><span class="dot"></span> Perfil Profesional</h3>
           <p class="about">
             Lidero procesos de captura, análisis y resguardo de información clínica con un enfoque en protección de
@@ -909,11 +1163,11 @@
           </p>
         </section>
 
-        <section class="section" id="experiencia" aria-labelledby="expTitle">
+        <section class="section reveal" id="experiencia" aria-labelledby="expTitle">
           <h3 id="expTitle"><span class="dot"></span> Experiencia relevante</h3>
 
           <div class="timeline">
-            <article class="card" role="article" aria-label="Jefe de Estadísticas y Archivo Clinico — 2025–Presente">
+            <article class="card card-animated card-border-animated" role="article" aria-label="Jefe de Estadísticas y Archivo Clinico — 2025–Presente">
               <div class="title">Jefe de Estadísticas y Archivo Clínico — Hospital Regional Puerto Vallarta</div>
               <div class="meta">2025 – Presente</div>
               <ul>
@@ -923,7 +1177,7 @@
               </ul>
             </article>
 
-            <article class="card" role="article" aria-label="Jefe de Recursos Financieros — 2011–2018">
+            <article class="card card-animated card-border-animated" role="article" aria-label="Jefe de Recursos Financieros — 2011–2018">
               <div class="title">Jefe de Recursos Financieros — Hospital Regional Puerto Vallarta</div>
               <div class="meta">2011 – 2018</div>
               <ul>
@@ -932,7 +1186,7 @@
               </ul>
             </article>
 
-            <article class="card" role="article" aria-label="Desarrollador de Sistema de Gestion Documental">
+            <article class="card card-animated card-border-animated" role="article" aria-label="Desarrollador de Sistema de Gestion Documental">
               <div class="title">Desarrollador — OPD Servicios de Salud Jalisco</div>
               <div class="meta">Proyecto: Sistema de Gestión Documental</div>
               <ul>
@@ -943,17 +1197,17 @@
           </div>
         </section>
 
-        <section class="section" id="docencia" aria-labelledby="docTitle">
+        <section class="section reveal" id="docencia" aria-labelledby="docTitle">
           <h3 id="docTitle"><span class="dot"></span> Experiencia docente</h3>
           <div class="timeline" style="gap:8px;">
-            <article class="card">
+            <article class="card card-animated card-border-animated">
               <div class="title">Docente — Universidad Regional de los Altos</div>
               <div class="meta">2025 – Presente</div>
               <ul>
                 <li>Matemáticas para la administración y Computación — diseño curricular y clases presenciales.</li>
               </ul>
             </article>
-            <article class="card">
+            <article class="card card-animated card-border-animated">
               <div class="title">Docente — Colegio de Ciencias, Arte y Cultura, A.C.</div>
               <div class="meta">2017 – 2018</div>
               <ul>
@@ -966,7 +1220,7 @@
 
       <!-- Right: sidebar -->
       <aside class="side-col" aria-label="Información adicional">
-        <div class="panel contact-panel" aria-labelledby="contactTitle">
+        <div class="panel contact-panel reveal" aria-labelledby="contactTitle">
           <h4 id="contactTitle"
             style="margin:0 0 8px 0; color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:.6px;">
             Contacto</h4>
@@ -981,7 +1235,7 @@
           </div>
         </div>
 
-        <div class="panel" aria-labelledby="skillsTitle">
+        <div class="panel reveal" aria-labelledby="skillsTitle">
           <h4 id="skillsTitle"
             style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
             Etiquetas</h4>
@@ -996,7 +1250,7 @@
           </div>
         </div>
 
-        <div class="panel achievements" aria-labelledby="achTitle">
+        <div class="panel achievements reveal" aria-labelledby="achTitle">
           <h4 id="achTitle"
             style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
             Logros</h4>
@@ -1007,7 +1261,7 @@
           </ul>
         </div>
 
-        <div class="panel" aria-labelledby="docsTitle">
+        <div class="panel reveal" aria-labelledby="docsTitle">
           <h4 id="docsTitle"
             style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
             Disponibilidad</h4>
@@ -1039,6 +1293,7 @@
     <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
       <path d="M8 5v14l11-7z" />
     </svg>
+    <div class="sound-wave"></div>
   </div>
 
   <!-- Modal de video -->
@@ -1247,7 +1502,132 @@
       else setRunning(true);
     });
 
-    /* ---------- resto del script: funcionalidad del sitio (sin cambios importantes) ---------- */
+    /* ---------- NUEVAS FUNCIONALIDADES CINEMÁTICAS ---------- */
+
+    // Efecto de partículas matemáticas
+    function initMathParticles() {
+      const canvas = document.getElementById('mathParticles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      
+      function createParticles() {
+        particles = [];
+        const particleCount = Math.min(50, Math.floor(window.innerWidth / 20));
+        
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            color: `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, 255, ${Math.random() * 0.5 + 0.2})`
+          });
+        }
+      }
+      
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(particle => {
+          particle.x += particle.speedX;
+          particle.y += particle.speedY;
+          
+          if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+          if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+          
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fillStyle = particle.color;
+          ctx.fill();
+        });
+        
+        requestAnimationFrame(animateParticles);
+      }
+      
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        createParticles();
+      });
+      
+      resizeCanvas();
+      createParticles();
+      animateParticles();
+    }
+
+    // Efecto de brillo en el cursor
+    function initCursorGlow() {
+      const cursor = document.getElementById('cursorGlow');
+      
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      
+      document.addEventListener('mousedown', () => {
+        cursor.style.width = '30px';
+        cursor.style.height = '30px';
+      });
+      
+      document.addEventListener('mouseup', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+      });
+    }
+
+    // Efecto de scroll reveal
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      function checkReveal() {
+        reveals.forEach(element => {
+          const windowHeight = window.innerHeight;
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < windowHeight - elementVisible) {
+            element.classList.add('active');
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', checkReveal);
+      checkReveal(); // Check on load
+    }
+
+    // Animación de números para estadísticas
+    function initNumberAnimation() {
+      const counters = document.querySelectorAll('.counting');
+      const speed = 200;
+      
+      counters.forEach(counter => {
+        const target = +counter.innerText.replace('+', '');
+        let count = 0;
+        
+        if (isNaN(target)) return;
+        
+        const updateCount = () => {
+          const increment = target / speed;
+          
+          if (count < target) {
+            count += increment;
+            counter.innerText = Math.ceil(count) + (counter.innerText.includes('+') ? '+' : '');
+            setTimeout(updateCount, 1);
+          } else {
+            counter.innerText = target + (counter.innerText.includes('+') ? '+' : '');
+          }
+        };
+        
+        updateCount();
+      });
+    }
+
+    /* ---------- resto del script: funcionalidad del sitio ---------- */
 
     // Video modal functionality
     const videoModal = document.getElementById('video-modal');
@@ -1366,7 +1746,7 @@
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // Decorative math/finance curve + dots generator (mantengo tu versión)
+    // Decorative math/finance curve + dots generator
     (function decorate() {
       const svg = document.getElementById('decorSVG');
       const path = document.getElementById('curvePath');
@@ -1448,6 +1828,14 @@
       } else {
         setRunning(true);
       }
+    });
+
+    // Inicializar nuevas funcionalidades cinematográficas
+    window.addEventListener('load', () => {
+      initMathParticles();
+      initCursorGlow();
+      initScrollReveal();
+      initNumberAnimation();
     });
   </script>
 </body>
