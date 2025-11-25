@@ -40,18 +40,53 @@
       line-height: 1.6;
     }
 
-    /* Fondo mejorado */
+    /* Fondo mejorado con efecto cinematográfico */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.05), transparent),
-        radial-gradient(900px 500px at 90% 40%, rgba(0, 183, 255, 0.04), transparent),
-        radial-gradient(800px 300px at 50% 80%, rgba(212, 175, 55, 0.03), transparent);
-      backdrop-filter: blur(6px);
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(0, 183, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 40%, rgba(0, 183, 255, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(11, 15, 20, 0.9) 0%, rgba(7, 16, 33, 0.9) 100%);
       pointer-events: none;
       z-index: -2;
+    }
+
+    /* Efecto de partículas en el fondo */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(0, 183, 255, 0.3);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     a {
@@ -91,7 +126,7 @@
       border-radius: 10px;
       font-weight: 700;
       letter-spacing: .3px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
       color: var(--white);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
       transition: all 0.3s ease;
@@ -99,11 +134,14 @@
       gap: 8px;
       align-items: center;
       font-family: inherit;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      background: linear-gradient(135deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
     }
 
     .btn:active {
@@ -112,24 +150,44 @@
 
     .btn-outline {
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--muted);
     }
 
     /* Tarjeta principal (hero) */
     .hero {
-      background:
-        radial-gradient(600px 200px at 90% 0%, rgba(13, 43, 80, 0.18), transparent),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: 
+        radial-gradient(ellipse at 80% 10%, rgba(13, 43, 80, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
       border-radius: 16px;
       padding: 28px;
       display: grid;
       grid-template-columns: 1fr 420px;
       gap: 28px;
-      box-shadow: var(--shadow);
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Efecto de brillo en los bordes */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0, 183, 255, 0.3), rgba(212, 175, 55, 0.1), rgba(0, 183, 255, 0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
 
     /* Left: copy */
@@ -152,6 +210,28 @@
       letter-spacing: .9px;
     }
 
+    .kicker-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, var(--accent), #6be1ff);
+      box-shadow: 0 0 14px rgba(0, 183, 255, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 183, 255, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 6px rgba(0, 183, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 183, 255, 0);
+      }
+    }
+
     .name {
       font-family: "Playfair Display", serif;
       font-size: 44px;
@@ -161,6 +241,10 @@
       color: var(--white);
       text-shadow: 0 8px 26px rgba(0, 0, 0, 0.6);
       letter-spacing: .4px;
+      background: linear-gradient(135deg, #ffffff 0%, #a0d2ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .subtitle {
@@ -187,18 +271,20 @@
     }
 
     .stat {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
       border-radius: 10px;
       padding: 12px 14px;
       min-width: 120px;
       box-shadow: 0 6px 18px rgba(2, 8, 16, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
 
     .stat:hover {
       transform: translateY(-4px);
       box-shadow: 0 10px 25px rgba(2, 8, 16, 0.6);
+      background: linear-gradient(135deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
     }
 
     .stat .s-num {
@@ -231,14 +317,14 @@
       height: 420px;
       border-radius: 14px;
       overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       position: relative;
       transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
     }
 
     .portrait:hover {
@@ -246,12 +332,26 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
     }
 
+    .portrait::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 14px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0, 183, 255, 0.3), rgba(212, 175, 55, 0.1), rgba(0, 183, 255, 0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
     .portrait .photo {
       width: 100%;
       height: 100%;
-      background:
-        radial-gradient(400px 200px at 10% 10%, rgba(0, 183, 255, 0.06), transparent),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      background: radial-gradient(ellipse at 30% 30%, rgba(0, 183, 255, 0.1) 0%, transparent 50%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -303,22 +403,40 @@
       font-weight: 700;
       background: linear-gradient(90deg, var(--accent), #6be1ff);
       color: #042033;
-      box-shadow: 0 10px 30px rgba(0, 183, 255, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 183, 255, 0.2);
       border: none;
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
 
     .cta:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 35px rgba(0, 183, 255, 0.2);
+      box-shadow: 0 12px 35px rgba(0, 183, 255, 0.3);
+    }
+
+    .cta:hover::before {
+      left: 100%;
     }
 
     .cta.secondary {
       background: transparent;
       color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
     }
 
     .cta.secondary:hover {
@@ -337,10 +455,12 @@
 
     /* Left column: narrative + timeline */
     .main-col {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
       border-radius: 12px;
       padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     .section {
@@ -363,7 +483,7 @@
       height: 10px;
       border-radius: 50%;
       background: linear-gradient(90deg, var(--accent), #6be1ff);
-      box-shadow: 0 0 18px rgba(0, 183, 255, 0.12);
+      box-shadow: 0 0 18px rgba(0, 183, 255, 0.3);
     }
 
     .about {
@@ -382,12 +502,13 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
       border-radius: 10px;
       padding: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
       transition: transform .18s cubic-bezier(.2, .9, .3, 1), box-shadow .18s;
+      backdrop-filter: blur(10px);
     }
 
     .card:hover {
@@ -426,12 +547,13 @@
     }
 
     .panel {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.005));
       border-radius: 12px;
       padding: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
       transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
 
     .panel:hover {
@@ -465,15 +587,15 @@
       font-size: 12px;
       padding: 8px 10px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.006));
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.05);
       color: var(--muted);
       font-weight: 700;
       transition: all 0.3s ease;
     }
 
     .tag:hover {
-      background: linear-gradient(90deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
+      background: linear-gradient(135deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
       color: var(--white);
       transform: translateY(-2px);
     }
@@ -638,19 +760,6 @@
       outline-offset: 4px;
     }
 
-    /* MATRIX canvas full-bleed (behind everything) */
-    #matrix-bg {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      opacity: 0.22;
-      pointer-events: none;
-      transition: opacity .35s ease;
-      will-change: transform;
-    }
-
     /* intensity button small */
     #matrix-toggle {
       font-size: 13px;
@@ -770,201 +879,7 @@
       display: block;
     }
 
-    /* NUEVAS MEJORAS CINEMÁTICAS */
-    
-    /* Efecto de brillo en elementos interactivos */
-    .glow-on-hover {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .glow-on-hover::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transition: left 0.5s;
-    }
-    
-    .glow-on-hover:hover::before {
-      left: 100%;
-    }
-    
-    /* Animación de entrada mejorada para tarjetas */
-    @keyframes slideUpFade {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .card-animated {
-      animation: slideUpFade 0.6s ease-out forwards;
-    }
-    
-    /* Efecto de borde animado para tarjetas */
-    .card-border-animated {
-      position: relative;
-    }
-    
-    .card-border-animated::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 10px;
-      padding: 2px;
-      background: linear-gradient(45deg, var(--accent), var(--gold), var(--accent));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .card-border-animated:hover::before {
-      opacity: 1;
-    }
-    
-    /* Efecto de partículas en hover para botones */
-    .particle-btn {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .particle-btn::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 5px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.5);
-      opacity: 0;
-      border-radius: 100%;
-      transform: scale(0, 0) translate(-50%);
-      transform-origin: 50% 50%;
-    }
-    
-    .particle-btn:hover::after {
-      animation: particle-effect 0.6s ease-out forwards;
-    }
-    
-    @keyframes particle-effect {
-      0% {
-        opacity: 1;
-        transform: scale(0, 0) translate(-50%);
-      }
-      20% {
-        opacity: 1;
-        transform: scale(1, 1) translate(-50%);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(2, 2) translate(-50%);
-      }
-    }
-    
-    /* Animación de números para estadísticas */
-    .counting {
-      animation: countUp 2s ease-out forwards;
-    }
-    
-    @keyframes countUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    /* Efecto de scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-    
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Efecto de brillo en el cursor */
-    .cursor-glow {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 183, 255, 0.8) 0%, rgba(0, 183, 255, 0) 70%);
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s;
-    }
-    
-    /* Efecto de sonido visual (ondas) */
-    .sound-wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      animation: soundWave 2s infinite;
-    }
-    
-    @keyframes soundWave {
-      0% {
-        transform: scaleX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: scaleX(1);
-        opacity: 0;
-      }
-    }
-    
-    /* Efecto de neón para títulos */
-    .neon-text {
-      color: #fff;
-      text-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px var(--accent),
-        0 0 20px var(--accent),
-        0 0 25px var(--accent);
-      animation: neonFlicker 1.5s infinite alternate;
-    }
-    
-    @keyframes neonFlicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        text-shadow: 
-          0 0 5px #fff,
-          0 0 10px #fff,
-          0 0 15px var(--accent),
-          0 0 20px var(--accent),
-          0 0 25px var(--accent);
-      }
-      20%, 24%, 55% {
-        text-shadow: none;
-      }
-    }
-    
-    /* Grid de símbolos matemáticos para Matrix */
+    /* Grid de símbolos matemáticos mejorado */
     .math-grid {
       position: fixed;
       top: 0;
@@ -972,14 +887,14 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.15;
+      opacity: 0.1;
       pointer-events: none;
       font-family: "Courier New", monospace;
-      font-size: 14px;
+      font-size: 16px;
       color: rgba(255, 255, 255, 0.3);
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-      grid-auto-rows: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      grid-auto-rows: 50px;
       overflow: hidden;
     }
     
@@ -987,7 +902,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: symbolFloat 20s linear infinite;
+      animation: symbolFloat 15s linear infinite;
       animation-delay: calc(var(--delay) * 1s);
     }
     
@@ -1007,6 +922,18 @@
         opacity: 0;
       }
     }
+
+    /* Efecto de scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 
@@ -1014,25 +941,25 @@
   <!-- Grid de símbolos matemáticos -->
   <div class="math-grid" id="mathGrid"></div>
 
-  <!-- Matrix background canvas -->
-  <canvas id="matrix-bg" aria-hidden="true"></canvas>
+  <!-- Partículas flotantes -->
+  <div class="particles-container" id="particlesContainer"></div>
 
   <div class="wrap" role="main" aria-label="Portafolio de Jerónimo Ricardo Ramírez">
     <!-- Toolbar -->
     <div class="toolbar" role="toolbar" aria-label="Acciones">
-      <button class="btn particle-btn" onclick="window.print()" title="Descargar / Imprimir CV">📄 Descargar PDF</button>
-      <button class="btn btn-outline particle-btn" onclick="toggleCompact()" title="Compactar/Expandir diseño">✨ Compactar</button>
-      <button class="btn btn-outline particle-btn" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🎭 Tema</button>
-      <button id="matrix-toggle" class="particle-btn" title="Alternar intensidad Matrix" onclick="toggleMatrixIntensity()">Matrix: Alta</button>
+      <button class="btn" onclick="window.print()" title="Descargar / Imprimir CV">📄 Descargar PDF</button>
+      <button class="btn btn-outline" onclick="toggleCompact()" title="Compactar/Expandir diseño">✨ Compactar</button>
+      <button class="btn btn-outline" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🎭 Tema</button>
     </div>
 
     <!-- Hero -->
     <header class="hero" aria-label="Encabezado principal">
       <!-- Left column -->
       <div class="hero-left" style="min-height:320px;">
-        <div class="kicker fade-in stagger-1"><span
-            style="display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#6be1ff);box-shadow:0 0 14px rgba(0,183,255,0.12)"></span>
-          Currículum — Marca personal</div>
+        <div class="kicker fade-in stagger-1">
+          <span class="kicker-dot"></span>
+          Currículum — Marca personal
+        </div>
         <h1 class="name fade-in stagger-2">Jerónimo Ricardo Ramírez Torres</h1>
         <p class="subtitle fade-in stagger-3">Docente Universitario — Estadísticas • Finanzas • Sistemas</p>
         <p class="lead fade-in stagger-4">
@@ -1042,29 +969,29 @@
         </p>
 
         <div class="stats" aria-hidden="false">
-          <div class="stat fade-in stagger-1 card-border-animated" title="Años de experiencia">
+          <div class="stat fade-in stagger-1" title="Años de experiencia">
             <span class="s-num counting">20+</span>
             <span class="s-label">Años de experiencia</span>
           </div>
-          <div class="stat fade-in stagger-2 card-border-animated" title="Áreas de trabajo">
+          <div class="stat fade-in stagger-2" title="Áreas de trabajo">
             <span class="s-num counting">Salud & Academia</span>
             <span class="s-label">Sectores principales</span>
           </div>
-          <div class="stat fade-in stagger-3 card-border-animated" title="Habilidades destacadas">
+          <div class="stat fade-in stagger-3" title="Habilidades destacadas">
             <span class="s-num counting">R • SQL • Python</span>
             <span class="s-label">Herramientas y lenguajes</span>
           </div>
         </div>
 
         <div class="cta-row" style="margin-top:6px;">
-          <button class="cta particle-btn glow-on-hover" onclick="openContact()">Contacto</button>
-          <button class="cta secondary particle-btn glow-on-hover" onclick="scrollToSection('experiencia')">Ver experiencia</button>
+          <button class="cta" onclick="openContact()">Contacto</button>
+          <button class="cta secondary" onclick="scrollToSection('experiencia')">Ver experiencia</button>
         </div>
       </div>
 
       <!-- Right column (portrait) -->
       <aside class="hero-right" aria-label="Fotografía y acciones">
-        <div class="portrait fade-in stagger-2 card-border-animated" role="img"
+        <div class="portrait fade-in stagger-2" role="img"
           aria-label="Retrato de Jerónimo — sustituir por fotografía real">
           <div class="frame-deco" aria-hidden="true"></div>
           <div class="photo" id="photoPlaceholder">
@@ -1074,7 +1001,7 @@
         </div>
 
         <div style="width:100%;text-align:center;">
-          <button class="btn btn-outline particle-btn" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar
+          <button class="btn btn-outline" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar
             contacto</button>
         </div>
       </aside>
@@ -1098,7 +1025,7 @@
           <h3 id="expTitle"><span class="dot"></span> Experiencia relevante</h3>
 
           <div class="timeline">
-            <article class="card card-animated card-border-animated" role="article" aria-label="Jefe de Estadísticas y Archivo Clinico — 2025–Presente">
+            <article class="card card-animated" role="article" aria-label="Jefe de Estadísticas y Archivo Clinico — 2025–Presente">
               <div class="title">Jefe de Estadísticas y Archivo Clínico — Hospital Regional Puerto Vallarta</div>
               <div class="meta">2025 – Presente</div>
               <ul>
@@ -1108,7 +1035,7 @@
               </ul>
             </article>
 
-            <article class="card card-animated card-border-animated" role="article" aria-label="Jefe de Recursos Financieros — 2011–2018">
+            <article class="card card-animated" role="article" aria-label="Jefe de Recursos Financieros — 2011–2018">
               <div class="title">Jefe de Recursos Financieros — Hospital Regional Puerto Vallarta</div>
               <div class="meta">2011 – 2018</div>
               <ul>
@@ -1117,7 +1044,7 @@
               </ul>
             </article>
 
-            <article class="card card-animated card-border-animated" role="article" aria-label="Desarrollador de Sistema de Gestion Documental">
+            <article class="card card-animated" role="article" aria-label="Desarrollador de Sistema de Gestion Documental">
               <div class="title">Desarrollador — OPD Servicios de Salud Jalisco</div>
               <div class="meta">Proyecto: Sistema de Gestión Documental</div>
               <ul>
@@ -1131,14 +1058,14 @@
         <section class="section reveal" id="docencia" aria-labelledby="docTitle">
           <h3 id="docTitle"><span class="dot"></span> Experiencia docente</h3>
           <div class="timeline" style="gap:8px;">
-            <article class="card card-animated card-border-animated">
+            <article class="card card-animated">
               <div class="title">Docente — Universidad Regional de los Altos</div>
               <div class="meta">2025 – Presente</div>
               <ul>
                 <li>Matemáticas para la administración y Computación — diseño curricular y clases presenciales.</li>
               </ul>
             </article>
-            <article class="card card-animated card-border-animated">
+            <article class="card card-animated">
               <div class="title">Docente — Colegio de Ciencias, Arte y Cultura, A.C.</div>
               <div class="meta">2017 – 2018</div>
               <ul>
@@ -1224,7 +1151,6 @@
     <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
       <path d="M8 5v14l11-7z" />
     </svg>
-    <div class="sound-wave"></div>
   </div>
 
   <!-- Modal de video -->
@@ -1237,212 +1163,14 @@
   </div>
 
   <script>
-    /* ---------- MATRIX AZUL: ligero, matemático, cinematográfico ---------- */
-
-    const canvas = document.getElementById('matrix-bg');
-    const ctx = canvas.getContext('2d', { alpha: true });
-
-    // configuración elegante y controlable
-    const config = {
-      baseFontSize: 18,            // tamaño base (se adapta por ancho)
-      density: 0.9,                // densidad de columnas (0.2..1.5)
-      fadeAlpha: 0.08,             // opacidad de la franja de fade (menor = más rastro)
-      glow: true,                  // efecto glow en el texto
-      maxFPS: 45,                  // tope de frames por segundo
-      intensity: 'high',           // 'high' o 'low' (botón lo alterna)
-      chars: "01∑πλµψΩβγδε⊗⋆•·"   // conjunto de caracteres
-    };
-
-    // estado
-    let columns = [];
-    let colsCount = 0;
-    let lastTime = performance.now();
-    let running = true;
-    let rafId = null;
-
-    // adapta tamaño y recalcula columnas
-    function resizeCanvas() {
-      const dpr = Math.max(1, window.devicePixelRatio || 1);
-      canvas.width = Math.floor(window.innerWidth * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // adapt font size modestamente según ancho
-      const w = window.innerWidth;
-      const fontSize = Math.max(12, Math.min(22, Math.round(config.baseFontSize * (w / 1400))));
-      ctx.font = `${fontSize}px "Courier New", Courier, monospace`;
-      ctx.textBaseline = 'top';
-
-      const colWidth = fontSize * 0.62; // monospace approx width
-      colsCount = Math.max(8, Math.floor((window.innerWidth * config.density) / colWidth));
-
-      // create columns with randomized starting y
-      columns = new Array(colsCount).fill(0).map((_, i) => {
-        return {
-          x: i * colWidth,
-          y: Math.random() * -canvas.height * 0.6,
-          speed: (0.6 + Math.random() * 1.6) * (config.intensity === 'high' ? 1.0 : 0.5),
-          step: Math.floor(4 + Math.random() * 12) // how many frames a char stays
-        };
-      });
-
-      // precompute gradient used per column for subtle variety
-      // not heavy: single linear gradient across canvas
-      matrixGradient = ctx.createLinearGradient(0, 0, window.innerWidth, window.innerHeight);
-      matrixGradient.addColorStop(0, 'rgba(0,183,255,0.65)');
-      matrixGradient.addColorStop(0.5, 'rgba(0,123,200,0.55)');
-      matrixGradient.addColorStop(1, 'rgba(50,170,255,0.45)');
-    }
-
-    // performance: only repaint if enough time has passed
-    function loop(now) {
-      const elapsed = now - lastTime;
-      const minFrame = 1000 / config.maxFPS;
-      if (elapsed < minFrame) {
-        rafId = requestAnimationFrame(loop);
-        return;
-      }
-      lastTime = now;
-
-      // pequeña capa semitransparente para el efecto de estela (trailing)
-      ctx.fillStyle = `rgba(2,6,12,${config.fadeAlpha})`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // text style
-      if (config.glow) {
-        ctx.shadowColor = 'rgba(0,180,255,0.25)';
-        ctx.shadowBlur = 8;
-      } else {
-        ctx.shadowBlur = 0;
-      }
-
-      // seleccionar color (usamos gradiente global y una ligera variación por columna)
-      ctx.fillStyle = matrixGradient;
-
-      // para cada columna: dibujar char y avanzar
-      for (let i = 0; i < columns.length; i++) {
-        const col = columns[i];
-
-        // escoger caracter - combinación pseudo-matemática
-        const c = config.chars.charAt(Math.floor(Math.abs(Math.sin((col.y + i) * 0.012)) * config.chars.length)) || '0';
-
-        const fontSizePx = parseInt(ctx.font, 10);
-        // dibujar sombra de cabeza (carácter brillante)
-        ctx.fillStyle = 'rgba(180,235,255,0.95)';
-        ctx.fillText(c, col.x, col.y);
-
-        // y un segundo carácter ligeramente abajo con menor alpha para sensación de movimiento
-        ctx.fillStyle = 'rgba(100,180,220,0.55)';
-        ctx.fillText(c, col.x, col.y + fontSizePx * 0.65);
-
-        // avanzar
-        col.y += fontSizePx * 0.32 * col.speed;
-
-        // reinicia con probabilidad cuando sale de pantalla
-        if (col.y > window.innerHeight + 50 && Math.random() > 0.97) {
-          col.y = Math.random() * -window.innerHeight * 0.6;
-          col.speed = (0.6 + Math.random() * 1.6) * (config.intensity === 'high' ? 1.0 : 0.5);
-        }
-      }
-
-      // request next frame if running
-      if (running) rafId = requestAnimationFrame(loop);
-    }
-
-    // pausa/activa animación (util para reducir CPU o durante captura)
-    function setRunning(v) {
-      running = !!v;
-      if (running) {
-        lastTime = performance.now();
-        if (!rafId) rafId = requestAnimationFrame(loop);
-        canvas.style.opacity = '0.22';
-      } else {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;
-        canvas.style.opacity = '0.06';
-      }
-    }
-
-    // alterna intensidad para modo "phi nerd" o "economía de batería"
-    function toggleMatrixIntensity() {
-      const btn = document.getElementById('matrix-toggle');
-      if (config.intensity === 'high') {
-        config.intensity = 'low';
-        config.fadeAlpha = 0.12;
-        config.maxFPS = 25;
-        btn.textContent = 'Matrix: Baja';
-        btn.style.color = 'var(--muted)';
-      } else {
-        config.intensity = 'high';
-        config.fadeAlpha = 0.08;
-        config.maxFPS = 45;
-        btn.textContent = 'Matrix: Alta';
-        btn.style.color = '#00b7ff';
-      }
-      // recalcular columnas (velocidad se adapta)
-      resizeCanvas();
-    }
-
-    // pausa cuando pestaña invisible (ahorra CPU)
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) setRunning(false);
-      else setRunning(true);
-    });
-
-    // reducir efecto en pantallas pequeñas para rendimiento
-    function adaptToDevice() {
-      if (window.innerWidth < 800) {
-        config.baseFontSize = 12;
-        config.density = 0.6;
-        config.maxFPS = 28;
-      } else {
-        config.baseFontSize = 18;
-        config.density = 0.9;
-        config.maxFPS = 45;
-      }
-    }
-
-    // init
-    let matrixGradient = null;
-    function initMatrix() {
-      adaptToDevice();
-      resizeCanvas();
-      setRunning(true);
-    }
-
-    // reinicia en resize con debounce ligero
-    let resizeTimer = null;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        adaptToDevice();
-        resizeCanvas();
-      }, 180);
-    });
-
-    // iniciar en load
-    window.addEventListener('load', () => {
-      initMatrix();
-    });
-
-    // detener si se hace print (evita frames al imprimir)
-    window.matchMedia('print').addListener((m) => {
-      if (m.matches) setRunning(false);
-      else setRunning(true);
-    });
-
-    /* ---------- NUEVAS FUNCIONALIDADES CINEMÁTICAS ---------- */
-
     // Grid de símbolos matemáticos
     function initMathGrid() {
       const mathGrid = document.getElementById('mathGrid');
       const symbols = ['∑', 'π', 'λ', 'µ', 'ψ', 'Ω', 'β', 'γ', 'δ', 'ε', '⊗', '⋆', '•', '·', '∫', '∂', '∇', '∞', '∝', '√', '∏', '∩', '∪', '∈', '∉'];
       
       // Calcular cuántos símbolos necesitamos
-      const cellWidth = 40;
-      const cellHeight = 40;
+      const cellWidth = 50;
+      const cellHeight = 50;
       const cols = Math.ceil(window.innerWidth / cellWidth);
       const rows = Math.ceil(window.innerHeight / cellHeight);
       const totalCells = cols * rows;
@@ -1455,8 +1183,33 @@
         const symbol = document.createElement('div');
         symbol.className = 'math-symbol';
         symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        symbol.style.setProperty('--delay', Math.random() * 20);
+        symbol.style.setProperty('--delay', Math.random() * 15);
         mathGrid.appendChild(symbol);
+      }
+    }
+
+    // Partículas flotantes
+    function initParticles() {
+      const container = document.getElementById('particlesContainer');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Tamaño y posición aleatorios
+        const size = Math.random() * 4 + 1;
+        const left = Math.random() * 100;
+        const animationDuration = Math.random() * 20 + 10;
+        const animationDelay = Math.random() * 20;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDuration = `${animationDuration}s`;
+        particle.style.animationDelay = `${animationDelay}s`;
+        
+        container.appendChild(particle);
       }
     }
 
@@ -1483,31 +1236,16 @@
     // Animación de números para estadísticas
     function initNumberAnimation() {
       const counters = document.querySelectorAll('.counting');
-      const speed = 200;
       
       counters.forEach(counter => {
-        const target = +counter.innerText.replace('+', '');
-        let count = 0;
-        
-        if (isNaN(target)) return;
-        
-        const updateCount = () => {
-          const increment = target / speed;
-          
-          if (count < target) {
-            count += increment;
-            counter.innerText = Math.ceil(count) + (counter.innerText.includes('+') ? '+' : '');
-            setTimeout(updateCount, 1);
-          } else {
-            counter.innerText = target + (counter.innerText.includes('+') ? '+' : '');
-          }
-        };
-        
-        updateCount();
+        const target = counter.innerText;
+        // Solo animar si es un número
+        if (target.includes('+') || !isNaN(parseInt(target))) {
+          counter.style.opacity = '1';
+          counter.style.transform = 'translateY(0)';
+        }
       });
     }
-
-    /* ---------- resto del script: funcionalidad del sitio ---------- */
 
     // Video modal functionality
     const videoModal = document.getElementById('video-modal');
@@ -1572,7 +1310,7 @@
         document.documentElement.style.setProperty('--bg', '#071218');
         document.documentElement.style.setProperty('--card', '#071218');
         document.documentElement.style.setProperty('--accent', '#d4af37');
-        document.documentElement.style.setProperty('--gold', '#00b7ff'); // swap intentionally for dynamic feel
+        document.documentElement.style.setProperty('--gold', '#00b7ff');
         _theme = 'gold';
         document.getElementById('themeBtn').textContent = '✨ Oro';
       } else {
@@ -1636,19 +1374,10 @@
       ph.addEventListener('click', () => { alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); });
     })();
 
-    // Small UX: when printing, reduce heavy decorations
-    window.matchMedia('print').addListener(function (m) {
-      if (m.matches) {
-        document.querySelectorAll('.canvas-wrap, .matrix, .portrait .frame-deco').forEach(n => n.style.display = 'none');
-        setRunning(false);
-      } else {
-        setRunning(true);
-      }
-    });
-
-    // Inicializar nuevas funcionalidades cinematográficas
+    // Inicializar funcionalidades
     window.addEventListener('load', () => {
       initMathGrid();
+      initParticles();
       initScrollReveal();
       initNumberAnimation();
     });
