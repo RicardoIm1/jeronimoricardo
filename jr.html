@@ -576,7 +576,67 @@
       outline-offset: 4px;
     }
   </style>
+  <style>
+    /* MATRIX AZUL — FONDO CINEMÁTICO ULTRA LIGERO */
+    #matrix-blue {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.22;
+      /* sutil y elegante */
+      pointer-events: none;
+    }
+  </style>
+
 </head>
+<canvas id="matrix-blue"></canvas>
+
+<script>
+  /* MATRIX DIGITAL — VERSIÓN AZUL, LIGERA Y ELEGANTE */
+  const canvas = document.getElementById("matrix-blue");
+  const ctx = canvas.getContext("2d");
+
+  function resizeMatrix() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  resizeMatrix();
+  window.addEventListener("resize", resizeMatrix);
+
+  const letters = "01+-/*=<>πΣΩλ∂ƒ∞";
+  const fontSize = 14;
+  const columns = Math.floor(canvas.width / fontSize);
+
+  const rainDrops = Array.from({ length: columns }, () => 1);
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00b7ff";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < rainDrops.length; i++) {
+      const char = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(char, i * fontSize, rainDrops[i] * fontSize);
+
+      // reseteo aleatorio para efecto matemático caótico
+      if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        rainDrops[i] = 0;
+      }
+
+      rainDrops[i]++;
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
 
 <body>
   <div class="wrap" role="main" aria-label="Portafolio de Jerónimo Ricardo Ramírez">
@@ -651,7 +711,8 @@
           aria-label="Retrato de Jerónimo — sustituir por fotografía real">
           <div class="frame-deco" aria-hidden="true"></div>
           <div class="photo" id="photoPlaceholder">
-            <img src="https://i.pinimg.com/736x/41/5b/77/415b776041f5fd0f89f174d02d19fdc7.jpg" alt="Foto de Jerónimo" style="width:100%; height:100%; object-fit:cover;">
+            <img src="https://i.pinimg.com/736x/41/5b/77/415b776041f5fd0f89f174d02d19fdc7.jpg" alt="Foto de Jerónimo"
+              style="width:100%; height:100%; object-fit:cover;">
           </div>
         </div>
 
