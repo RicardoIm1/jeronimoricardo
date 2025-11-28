@@ -1,239 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<title>JERÓNIMO RICARDO RAMÍREZ TORRES — CV IMAX METRO</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<title>IMAX Blue Metro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Fuentes -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-  /* ----------------- BASE / THEME IMAX BLUE ----------------- */
-  :root{
-    --bg-dark:#03071a;
-    --glass: rgba(255,255,255,0.04);
-    --accent:#0db4ff;
-    --muted: #9fbfe6;
-    --card-bg: rgba(2,10,20,0.6);
-    --card-border: rgba(13,180,255,0.14);
-    --glass-2: rgba(255,255,255,0.03);
-    --tile-gap: 14px;
-  }
-  html,body{height:100%;margin:0;font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg-dark);color:#e8f4ff;overflow-x:hidden;}
-  /* cinematic background image + glow */
-  body::before{
-    content:"";
-    position:fixed;inset:0;z-index:-4;
-    background: url("https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b1f5c3b0d5c3f2f0a5f0e4b4d1c9a6a") center/cover no-repeat;
-    opacity:.18;filter:blur(6px) saturate(120%);
-  }
-  body::after{
-    content:"";position:fixed;inset:0;z-index:-3;
-    background:
-      radial-gradient(800px 500px at 10% 20%, rgba(2,120,255,0.12), transparent 20%),
-      radial-gradient(900px 600px at 90% 80%, rgba(0,90,200,0.14), transparent 20%);
-    mix-blend-mode: screen;filter: blur(40px);
-  }
+/* ----------------- BASE / THEME IMAX BLUE ----------------- */
+:root{
+  --bg-dark:#03071a;
+  --glass: rgba(255,255,255,0.04);
+  --accent:#0db4ff;
+  --muted: #9fbfe6;
+  --card-bg: rgba(2,10,20,0.6);
+  --card-border: rgba(13,180,255,0.14);
+  --glass-2: rgba(255,255,255,0.03);
+  --tile-gap: 14px;
+}
 
-  /* --------------- MATRIX CANVAS --------------- */
-  canvas#matrix{position:fixed;inset:0;width:100vw;height:100vh;z-index:-2;opacity:.24;}
+html,body{
+  height:100%; margin:0;
+  font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg-dark); color:#e8f4ff;
+  overflow-x:hidden;
+}
 
-  /* --------------- CONTAINER / GRID MOSAICO --------------- */
-  .wrap{width:95%;max-width:1500px;margin:48px auto;padding-bottom:80px;}
+/* cinematic background */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-4;
+  background:url("https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=2000&auto=format&fit=crop") center/cover;
+  opacity:.18; filter:blur(6px) saturate(120%);
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:-3;
+  background:
+    radial-gradient(800px 500px at 10% 20%, rgba(2,120,255,0.12), transparent 20%),
+    radial-gradient(900px 600px at 90% 80%, rgba(0,90,200,0.14), transparent 20%);
+  mix-blend-mode: screen; filter: blur(40px);
+}
 
-  /* sizes */
-  .tile{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(3,20,40,0.6);overflow:hidden;position:relative;backdrop-filter: blur(6px);transition:transform .35s ease, box-shadow .35s ease;cursor:default;}
-  .tile:hover{transform: translateY(-6px) scale(1.01);box-shadow:0 20px 60px rgba(2,120,255,0.18);}
+/* --------------- MATRIX CANVAS --------------- */
+canvas#matrix{
+  position:fixed; inset:0; z-index:-2; width:100vw; height:100vh; opacity:.22;
+}
 
-/* Tile sizes for mosaic */
-  .tile.small{grid-column: span 1; grid-row: span 1; min-height:110px;}
-  .tile.medium{grid-column: span 2; grid-row: span 1; min-height:130px;}
-  .tile.wide{grid-column: span 3; grid-row: span 1; min-height:140px;}
-  .tile.tall{grid-column: span 1; grid-row: span 2; min-height:260px;}
-  .tile.big{grid-column: span 3; grid-row: span 2; min-height:300px;}
+/* --------------- METRO WRAP --------------- */
+.wrap{
+  width:95%; max-width:1500px;
+  margin:60px auto; padding-bottom:80px;
+}
 
-/* Title typographic */
-  .tile h3{margin:0 0 6px 0;font-family:"Playfair Display",serif;color:#fff;text-shadow:0 0 10px rgba(13,180,255,0.12);}
-  .tile p{margin:0;color:var(--muted);font-size:0.96rem;line-height:1.5rem;}
-
-/* icons row */
-  .icons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
-  .logo{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);font-weight:700;color:#dff3ff;font-size:12px;}
-
-/* accent bar */
-  .accent-bar{position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--accent),#006bbd);border-radius:8px 0 0 8px;}
-
-/* hover reveal area - shows the LONG original text */
-  .reveal {
-    position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.72), rgba(3,10,25,0.88));padding:18px;opacity:0;transform:translateY(6px);transition:opacity .28s ease, transform .28s ease;overflow:auto;
-  }
-  .tile:hover .reveal{opacity:1;transform:translateY(0);z-index:5;border-radius:8px;}
-
-  /* small decorative divider */
-  .divider{height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin:10px 0;border-radius:2px;}
-
-/* live tile inner faces */
-  .tile-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 900ms cubic-bezier(.2,.9,.3,1);}
-  .tile-face{position:absolute;inset:0;padding:14px;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:flex-start;}
-  .tile-face.back{transform:rotateY(180deg);}
-
-/* flip control class */
-  .flip .tile-inner{transform:rotateY(180deg);}
-
-/* slide animation (vertical cycling) */
-  .slide .tile-inner{animation:slideY var(--slide-duration,8s) linear infinite;}
-  @keyframes slideY{0%{transform:translateY(0)}30%{transform:translateY(-100%)}60%{transform:translateY(-200%)}100%{transform:translateY(0)}}
-
-/* fade cross dissolve */
-  .fade .tile-inner{animation:fadeCycle var(--fade-duration,9s) linear infinite;}
-  @keyframes fadeCycle{0%{opacity:1}45%{opacity:0}55%{opacity:1}100%{opacity:1}}
-
-/* breathe */
-  .tile-breathe{animation:breathe 6s ease-in-out infinite;}
-  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-
-/* responsive adjustments */
-  @media (max-width:1200px){
-    .grid{grid-template-columns: repeat(4, 1fr);grid-auto-rows: 110px;}
-    .tile.big{grid-column: span 4;}
-    .tile.wide{grid-column: span 2;}
-  }
-  @media (max-width:800px){
-    .grid{grid-template-columns: repeat(2, 1fr);grid-auto-rows: 120px;margin-top:120px;}
-    .wrap{padding-bottom:120px;}
-    .tile{min-height:120px;}
-  }
-
-  /* footer / small info */
-  footer{width:95%;max-width:1500px;margin:22px auto;color:#9fbfe6;font-size:0.9rem;text-align:right}
-  .muted{color:#9fbfe6;font-size:0.92rem}
-  /* scrollbars for reveal box */
-  .reveal::-webkit-scrollbar{height:8px;width:8px}
-  .reveal::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),#006bbd);border-radius:8px}
-  /* NUEVO SISTEMA DE MOSAICO MASONRY REAL */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+/* --------------- MASONRY METRO GRID --------------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
   grid-auto-flow: dense;
-  grid-auto-rows: 10px; /* base unit */
-  gap: var(--tile-gap);
-  align-items: start;
+  grid-auto-rows:12px; /* unidad */
+  gap:var(--tile-gap);
+  align-items:start;
 }
 
-/* NUEVOS MODOS DE TAMAÑO — más libres */
-.tile.small {
-  grid-row-end: span 14;  /* 14 × 10px = 140px */
+/* --------------- TILE / CARD --------------- */
+.tile{
+  position:relative;
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:8px;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.45);
+  overflow:hidden;
+  backdrop-filter:blur(5px);
+  cursor:pointer;
+  transition:box-shadow .3s ease;
 }
 
-.tile.medium {
-  grid-row-end: span 20;
+/* Metro hover: NO escala, NO respiración */
+.tile:hover{
+  box-shadow:0 12px 40px rgba(2,120,255,0.24);
 }
 
-.tile.wide {
-  grid-row-end: span 24;
+.tile h3{
+  margin:0 0 6px;
+  font-family:"Playfair Display",serif;
+  color:#fff;
+  font-size:1.25rem;
+  text-shadow:0 0 10px rgba(13,180,255,0.12);
+}
+.tile p{
+  margin:0;
+  color:var(--muted);
+  font-size:0.95rem;
+  line-height:1.4rem;
 }
 
-.tile.tall {
-  grid-row-end: span 32;
+/* Tamaños Metro auténticos */
+.tile.small{ grid-row-end:span 16; }
+.tile.medium{ grid-row-end:span 22; }
+.tile.wide{ grid-row-end:span 30; }
+.tile.tall{ grid-row-end:span 38; }
+.tile.big{ grid-row-end:span 46; }
+
+/* --------------- HOVER REVEAL (contenido original largo) --------------- */
+.reveal{
+  position:absolute; inset:0; padding:18px;
+  background:rgba(0,0,0,0.78);
+  opacity:0; overflow:auto;
+  transition:opacity .25s ease;
+}
+.tile:hover .reveal{
+  opacity:1;
 }
 
-.tile.big {
-  grid-row-end: span 38;
+/* scrollbars */
+.reveal::-webkit-scrollbar{ width:8px; }
+.reveal::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,var(--accent),#006bbd);
+  border-radius:8px;
 }
 
-/* QUE NO EXPLOTE EN CELULAR */
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    grid-auto-rows: 12px;
+/* --------------- ICONOS --------------- */
+.icons{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
+.logo{
+  width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:6px;
+  background:var(--glass-2);
+  border:1px solid rgba(255,255,255,0.06);
+  color:#dff3ff; font-size:12px;
+}
+
+/* --------------- LIVE TILE ANIMACIONES --------------- */
+
+/* Flip (Metro original) */
+.tile.flip .tile-inner{
+  width:100%; height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 900ms cubic-bezier(.2,.9,.3,1);
+}
+.tile.flip:hover .tile-inner{
+  transform:rotateY(180deg);
+}
+.tile-face{position:absolute; inset:0; backface-visibility:hidden; padding:16px;}
+.tile-face.back{ transform:rotateY(180deg); }
+
+/* Slide vertical (News tile) */
+.tile.slide .tile-inner{
+  animation:slideY 9s linear infinite;
+}
+@keyframes slideY{
+  0%{transform:translateY(0)}
+  33%{transform:translateY(-100%)}
+  66%{transform:translateY(-200%)}
+  100%{transform:translateY(0)}
+}
+
+/* Fade cross-dissolve (Fotos) */
+.tile.fade .tile-inner{
+  animation:fadeMetro 7s ease-in-out infinite;
+}
+@keyframes fadeMetro{
+  0%,45%{opacity:1}
+  50%{opacity:0}
+  55%,100%{opacity:1}
+}
+
+/* --------------- RESPONSIVE --------------- */
+@media(max-width:600px){
+  .grid{
+    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+    grid-auto-rows:14px;
   }
 }
-
 </style>
 </head>
+
 <body>
 
-<!-- MATRIX CANVAS -->
 <canvas id="matrix"></canvas>
 
-<!-- MAIN CONTENT WRAP -->
 <div class="wrap">
+  <div class="grid">
 
-  <!-- Grid mosaic -->
-  <div class="grid" id="grid">
+    <!-- EJEMPLO DE TILE SIMPLE (tu contenido va dentro) -->
+    <div class="tile medium">
+      <h3>Mi Información</h3>
+      <p>Programador autodidacta, analista clínico, amante de Moringa y la montaña.</p>
 
-    <!-- TITLE TILE -->
-    <div class="tile wide tile-breathe" style="background:linear-gradient(180deg, rgba(2,14,30,0.78), rgba(1,6,18,0.6));">
-      <div class="accent-bar"></div>
-      <h3>JERÓNIMO RICARDO RAMÍREZ TORRES</h3>
-      <p style="font-weight:700;color:#cfeeff;margin-top:6px">Apoyo Administrativo en Salud A-3</p>
-      <div class="divider"></div>
-      <p class="muted">Experiencia en gestión documental, análisis de datos clínicos y liderazgo en procesos de archivo.</p>
-      <div style="margin-top:12px" class="icons">
-        <!-- logos inline SVG / simple badges -->
-        <div class="logo" title="Python">Py</div>
-        <div class="logo" title="JavaScript">JS</div>
-        <div class="logo" title="MySQL">My</div>
-        <div class="logo" title="RStudio">R</div>
-        <div class="logo" title="Looker">LK</div>
-        <div class="logo" title="WordPress">WP</div>
-        <div class="logo" title="React">Re</div>
+      <div class="icons">
+        <div class="logo">JS</div>
+        <div class="logo">BQ</div>
+        <div class="logo">GS</div>
+        <div class="logo">HTML</div>
       </div>
-      <!-- REVEAL: full original info accessible by hover (or tap on mobile shows basic) -->
-      <div class="reveal" aria-hidden="true">
-        <!-- full original information placed here (the long content the user provided) -->
-        <h4 style="margin-top:0">Perfil Profesional — Texto completo</h4>
-        <p>
-          Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos estadísticos y de archivo clínico. Posee experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración. Su formación incluye administración y gestión de archivos. Está respaldado por formación en derechos humanos, trabajo en equipo y manejo de estrés en entornos complejos. Certificado en áreas como Big Data, Gobernanza TI y evaluación de procesos, con habilidades para liderar equipos, implementar sistemas de archivo eficientes y generar reportes estadísticos confiables para la toma de decisiones en el ámbito clínico.
-        </p>
-        <p>
-          Formación en Business Analytics, Marketing Digital, y gestión de datos, con experiencia en el análisis de información clínica y estadísticas de salud. Certificado en acciones esenciales para la seguridad del paciente. Habilidades en herramientas digitales, trabajo remoto y optimización de procesos, orientado a la mejora continua y al cumplimiento normativo en archivos clínicos.
-        </p>
-        <p>
-          Amplia experiencia en gestión de datos, estadísticas y archivo clínico, respaldado por una sólida formación en protección de datos personales, ética en servicios públicos, y manejo de información sensible. Capacitado en herramientas tecnológicas modernas y comprometido con la integridad y eficiencia en el manejo de registros médicos.
-        </p>
-        <p>
-          Formación especializada en estadísticas de salud, clasificación de enfermedades (CIE-11), y manejo de archivos clínicos. Experiencia en capacitación en seguridad del paciente, higiene de manos, y herramientas tecnológicas para la gestión de datos. Comprometido con la calidad, la innovación y el cumplimiento de estándares en el ámbito de la salud.
-        </p>
-        <p>
-          Especializado en ciencia de datos, gestión de información clínica y análisis estadístico, con formación en herramientas como MySQL, RStudio, Looker Studio y WordPress. Experiencia en el manejo de bases de datos, visualización de datos y desarrollo de soluciones tecnológicas para la optimización de procesos clínicos y estadísticos.
-        </p>
+
+      <div class="reveal">
+        Aquí va TODO tu texto largo original, intacto, sin borrar nada.  
+        Este cuadro aparece solo con hover.
       </div>
     </div>
 
-    <!-- OBJECTIVE TILE (live flip) -->
-    <div class="tile big tile-live fade tile-breathe" id="objectiveTile">
-      <div class="accent-bar"></div>
+    <!-- EJEMPLO FLIP -->
+    <div class="tile flip small">
       <div class="tile-inner">
-        <div class="tile-face front">
-          <h3>Objetivo</h3>
-          <p>Aplicar sus conocimientos para optimizar los procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia y calidad en el servicio de salud.</p>
-          <p style="margin-top:10px; color:var(--muted)">Formación en matemáticas financieras y estrategias de inversión; mentalidad analítica y habilidades interpersonales.</p>
+        <div class="tile-face">
+          <h3>Flip</h3>
+          <p>Touch style</p>
         </div>
-
         <div class="tile-face back">
-          <h3>Meta profesional</h3>
-          <p>Postularse como Jefe de Estadísticas y Archivo Clínico para contribuir con expertise en gestión de datos, mejora de procesos y cumplimiento de estándares de calidad.</p>
+          <p>Contenido oculto estilo Live Tile Flip.</p>
         </div>
       </div>
     </div>
 
-    <!-- FORMACION tile (slide content) -->
-    <div class="tile medium tile-live slide" style="--slide-duration:11s;">
-      <div class="accent-bar"></div>
+    <!-- EJEMPLO SLIDE -->
+    <div class="tile slide tall">
       <div class="tile-inner">
-        <div class="tile-face front">
-          <h3>Formación Académica</h3>
-          <p><strong>Licenciatura en Administración Financiera y Sistemas</strong><br>Universidad de Guadalajara | 2001 - 2005</p>
-          <p><strong>Testimonio de Desempeño Sobresaliente</strong><br>CENEVAL, 2017</p>
-        </div>
-        <div class="tile-face">
-          <h3>Bachillerato</h3>
-          <p>Escuela Preparatoria Regional de Ameca | 1994 - 1997</p>
-        </div>
-        <div class="tile-face">
-          <h3>Otros</h3>
-          <p>Formación adicional en Business Analytics, Marketing Digital y gestión de datos.</p>
-        </div>
+        <div class="tile-face"><h3>Slide 1</h3></div>
+        <div class="tile-face"><h3>Slide 2</h3></div>
+        <div class="tile-face"><h3>Slide 3</h3></div>
       </div>
     </div>
 
-    <!-- CERTIF
+    <!-- EJEMPLO FOTO FADE -->
+    <div class="tile fade medium">
+      <div class="tile-inner">
+        <img src="https://picsum.photos/400/400?1" style="width:100%;border-radius:6px;">
+        <img src="https://picsum.photos/400/400?2" style="width:100%;border-radius:6px;position:absolute;top:0;">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
