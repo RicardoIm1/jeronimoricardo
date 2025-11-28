@@ -10,7 +10,7 @@
     body {
       margin: 0;
       padding: 40px;
-      background: #020817;
+      background: linear-gradient(135deg, #020817 0%, #0f172a 100%);
       font-family: "Segoe UI", sans-serif;
       color: #e2e8f0;
     }
@@ -21,32 +21,71 @@
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       grid-auto-rows: 160px;
       grid-auto-flow: dense;
-      gap: 18px;
-      max-width: 1200px;
+      gap: 20px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
     /* --- TILE BASE --- */
     .tile {
-      background: rgba(0, 102, 204, 0.08);
-      border: 1px solid rgba(0, 102, 204, 0.25);
-      border-radius: 12px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: 0.2s ease-out;
+      transition: 0.3s ease-out;
       backdrop-filter: blur(6px);
       overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .tile:hover {
-      background: rgba(0, 122, 255, 0.16);
-      transform: translateY(-4px);
-      box-shadow: 0 0 25px rgba(0, 122, 255, 0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 
-    /* --- TILE SIZES EXACT LIKE WINDOWS PHONE --- */
+    /* --- COLOR SCHEME --- */
+    .tile-blue {
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.15) 0%, rgba(0, 150, 255, 0.2) 100%);
+    }
+
+    .tile-blue:hover {
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.25) 0%, rgba(0, 180, 255, 0.3) 100%);
+    }
+
+    .tile-green {
+      background: linear-gradient(135deg, rgba(0, 168, 107, 0.15) 0%, rgba(0, 200, 120, 0.2) 100%);
+    }
+
+    .tile-green:hover {
+      background: linear-gradient(135deg, rgba(0, 200, 120, 0.25) 0%, rgba(0, 230, 140, 0.3) 100%);
+    }
+
+    .tile-purple {
+      background: linear-gradient(135deg, rgba(120, 0, 200, 0.15) 0%, rgba(160, 0, 255, 0.2) 100%);
+    }
+
+    .tile-purple:hover {
+      background: linear-gradient(135deg, rgba(160, 0, 255, 0.25) 0%, rgba(190, 50, 255, 0.3) 100%);
+    }
+
+    .tile-orange {
+      background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, rgba(255, 165, 0, 0.2) 100%);
+    }
+
+    .tile-orange:hover {
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.25) 0%, rgba(255, 190, 0, 0.3) 100%);
+    }
+
+    .tile-red {
+      background: linear-gradient(135deg, rgba(220, 40, 40, 0.15) 0%, rgba(255, 80, 80, 0.2) 100%);
+    }
+
+    .tile-red:hover {
+      background: linear-gradient(135deg, rgba(255, 80, 80, 0.25) 0%, rgba(255, 120, 120, 0.3) 100%);
+    }
+
+    /* --- TILE SIZES --- */
     .small {
       grid-row: span 1;
       grid-column: span 1;
@@ -80,89 +119,92 @@
     /* --- TAGS DE TECNOLOGÍAS --- */
     .tags {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
+      margin-top: 10px;
     }
 
     .tag {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 4px 10px;
-      font-size: 0.7rem;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    /* Imagen */
-    .tile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     /* Texto específico */
     .tile h2, .tile h3 {
-      margin: 0 0 8px 0;
-      font-size: 1.2rem;
+      margin: 0 0 12px 0;
+      font-size: 1.3rem;
+    }
+
+    .tile h2 {
+      font-size: 1.5rem;
     }
 
     .tile p {
-      margin: 0;
-      font-size: 0.85rem;
-      line-height: 1.4;
+      margin: 0 0 10px 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
 
     .tile ul {
       margin: 0;
-      padding-left: 16px;
+      padding-left: 18px;
       font-size: 0.85rem;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     .tile li {
-      margin-bottom: 4px;
-    }
-
-    .scrollable {
-      overflow-y: auto;
-      max-height: 100%;
-    }
-
-    .scrollable::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .scrollable::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 2px;
-    }
-
-    .scrollable::-webkit-scrollbar-thumb {
-      background: rgba(0, 122, 255, 0.5);
-      border-radius: 2px;
+      margin-bottom: 6px;
     }
 
     .tile-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+      margin-bottom: 12px;
     }
 
     .tile-title {
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     .tile-subtitle {
       margin: 0;
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .section-title {
       font-size: 1rem;
-      margin: 0 0 8px 0;
+      margin: 15px 0 8px 0;
       color: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 4px;
+    }
+
+    .icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .compact-list {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .compact-list li {
+      margin-bottom: 4px;
     }
   </style>
 </head>
@@ -171,75 +213,33 @@
 
   <div class="metro-grid">
 
-    <!-- PERFIL PROFESIONAL -->
-    <div class="tile x-large">
-      <div class="scrollable">
-        <h2>Jerónimo Ricardo Ramírez Torres</h2>
-        <p class="tile-subtitle">Apoyo Administrativo en Salud A-3</p>
-        <p>Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos estadísticos y de archivo clínico.</p>
-        <p>Experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración. Certificado en áreas como Big Data, Gobernanza TI y evaluación de procesos, con habilidades para liderar equipos, implementar sistemas de archivo eficientes y generar reportes estadísticos confiables.</p>
-        <div class="tags">
-          <span class="tag">Gestión Documental</span>
-          <span class="tag">Análisis de Datos</span>
-          <span class="tag">Archivo Clínico</span>
-          <span class="tag">Estadísticas</span>
-        </div>
+    <!-- NOMBRE Y PUESTO -->
+    <div class="tile x-large tile-blue">
+      <h2>Jerónimo Ricardo Ramírez Torres</h2>
+      <p class="tile-subtitle">Apoyo Administrativo en Salud A-3</p>
+      <p>Profesional especializado en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración.</p>
+      <div class="tags">
+        <span class="tag">Gestión Documental</span>
+        <span class="tag">Análisis de Datos</span>
+        <span class="tag">Archivo Clínico</span>
+        <span class="tag">Estadísticas</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Python</span>
+        <span class="tag">MySQL</span>
       </div>
     </div>
 
-    <!-- OBJETIVO -->
-    <div class="tile medium">
-      <h3>Objetivo</h3>
+    <!-- OBJETIVO PROFESIONAL -->
+    <div class="tile medium tile-green">
+      <div class="icon">🎯</div>
+      <h3>Objetivo Profesional</h3>
       <p>Aplicar conocimientos para optimizar procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia y calidad en el servicio de salud.</p>
       <p>Postularse como Jefe de Estadísticas y Archivo Clínico para contribuir con expertise en gestión de datos, mejora de procesos y cumplimiento de estándares de calidad.</p>
     </div>
 
-    <!-- HABILIDADES TÉCNICAS -->
-    <div class="tile large">
-      <div class="scrollable">
-        <h3>Habilidades Técnicas</h3>
-        <p class="section-title">Análisis de Datos y Estadístico</p>
-        <p>Capacidad para procesar y analizar información cuantitativa y cualitativa. Análisis de datos clínicos y estadísticas de salud.</p>
-        
-        <p class="section-title">Gestión de Archivos Clínicos</p>
-        <p>Organización y mantenimiento de registros clínicos y administrativos. Gestión documental y sistemas de registros electrónicos.</p>
-        
-        <p class="section-title">Herramientas Tecnológicas</p>
-        <div class="tags">
-          <span class="tag">JavaScript</span>
-          <span class="tag">Python</span>
-          <span class="tag">MySQL</span>
-          <span class="tag">RStudio</span>
-          <span class="tag">Looker Studio</span>
-          <span class="tag">WordPress</span>
-          <span class="tag">Bootstrap</span>
-          <span class="tag">React</span>
-          <span class="tag">Figma</span>
-          <span class="tag">HTML/CSS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- EXPERIENCIA PROFESIONAL -->
-    <div class="tile wide">
-      <div class="scrollable">
-        <h3>Experiencia Profesional</h3>
-        <p><strong>Jefe de Recursos Financieros</strong> - Hospital Regional Puerto Vallarta (2011-2018)</p>
-        <ul>
-          <li>Gestión y organización de archivos contables electrónicos y físicos</li>
-          <li>Análisis de datos para informes administrativos</li>
-          <li>Implementación de protocolos de protección de datos personales</li>
-          <li>Capacitación al personal en manejo de información sensible</li>
-        </ul>
-        <p><strong>Desarrollo de Sistema de Gestión Documental</strong> - OPD Servicios de Salud Jalisco</p>
-        <ul>
-          <li>Registro de Derecho de Autor (2016) por creación de base de datos</li>
-        </ul>
-      </div>
-    </div>
-
     <!-- FORMACIÓN ACADÉMICA -->
-    <div class="tile medium">
+    <div class="tile medium tile-purple">
+      <div class="icon">🎓</div>
       <h3>Formación Académica</h3>
       <p><strong>Licenciatura en Administración Financiera y Sistemas</strong></p>
       <p>Universidad de Guadalajara | 2001 - 2005</p>
@@ -248,30 +248,100 @@
       <p>Escuela Preparatoria Regional de Ameca | 1994 - 1997</p>
     </div>
 
-    <!-- CERTIFICACIONES DESTACADAS -->
-    <div class="tile tall">
-      <div class="scrollable">
-        <h3>Certificaciones Destacadas</h3>
-        <ul>
-          <li>Técnico en Business Analytics (Capacítate para el Empleo, 2022)</li>
-          <li>Business Analytics Avanzado (Campus BBVA, 2023)</li>
-          <li>Principios Básicos de Big Data (Fundación Telefónica, 2022)</li>
-          <li>Programación con JavaScript (Fundación Telefónica, 2022)</li>
-          <li>Gobernanza TI (Capacítate para el Empleo, 2022)</li>
-          <li>Analista de Proyectos BI (Capacítate para el Empleo, 2022)</li>
-          <li>Evaluador de Procesos (Capacítate para el Empleo, 2022)</li>
-          <li>Asistente Web (Capacítate para el Empleo, 2022)</li>
-          <li>React: De cero a experto (Udemy, 2023)</li>
-          <li>UI/UX Design Hybrid (Udemy, 2024)</li>
-          <li>Bootstrap 5 (Udemy, 2024)</li>
-          <li>CIE-11 - Mortalidad (SSJ, 2024)</li>
-          <li>CIE-11 - Morbilidad (SSJ, 2024)</li>
-        </ul>
+    <!-- EXPERIENCIA PROFESIONAL -->
+    <div class="tile large tile-blue">
+      <div class="icon">💼</div>
+      <h3>Experiencia Profesional</h3>
+      <p><strong>Jefe de Recursos Financieros</strong> - Hospital Regional Puerto Vallarta (2011-2018)</p>
+      <ul>
+        <li>Gestión y organización de archivos contables electrónicos y físicos</li>
+        <li>Análisis de datos para informes administrativos</li>
+        <li>Implementación de protocolos de protección de datos personales</li>
+        <li>Capacitación al personal en manejo de información sensible</li>
+      </ul>
+      <p><strong>Desarrollo de Sistema de Gestión Documental</strong> - OPD Servicios de Salud Jalisco</p>
+      <ul>
+        <li>Registro de Derecho de Autor (2016) por creación de base de datos para el gasto directo de unidades de salud</li>
+      </ul>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS -->
+    <div class="tile large tile-green">
+      <div class="icon">🛠️</div>
+      <h3>Habilidades Técnicas</h3>
+      <div class="two-column">
+        <div>
+          <p class="section-title">Análisis de Datos</p>
+          <ul class="compact-list">
+            <li>MySQL, RStudio, Looker Studio</li>
+            <li>Python, Business Analytics</li>
+            <li>Excel, Dashboards</li>
+            <li>Estadísticas de salud</li>
+            <li>CIE-11 (Mortalidad/Morbilidad)</li>
+          </ul>
+        </div>
+        <div>
+          <p class="section-title">Desarrollo Web</p>
+          <ul class="compact-list">
+            <li>JavaScript, React</li>
+            <li>HTML, CSS, Bootstrap</li>
+            <li>WordPress</li>
+            <li>UI/UX Design (Figma)</li>
+          </ul>
+        </div>
       </div>
+      <p class="section-title">Gestión Documental</p>
+      <ul class="compact-list">
+        <li>Archivo clínico y documentación</li>
+        <li>Gestión de bases de datos</li>
+        <li>Protección de datos personales</li>
+        <li>Normativas de confidencialidad</li>
+      </ul>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS -->
+    <div class="tile tall tile-purple">
+      <div class="icon">📜</div>
+      <h3>Certificaciones Tecnológicas</h3>
+      <ul>
+        <li>Técnico en Business Analytics (2022)</li>
+        <li>Business Analytics Avanzado (2023)</li>
+        <li>Principios Básicos de Big Data (2022)</li>
+        <li>Programación con JavaScript (2022)</li>
+        <li>Gobernanza TI (2022)</li>
+        <li>Analista de Proyectos BI (2022)</li>
+        <li>Evaluador de Procesos (2022)</li>
+        <li>Asistente Web (2022)</li>
+        <li>React: De cero a experto (2023)</li>
+        <li>UI/UX Design Hybrid (2024)</li>
+        <li>Bootstrap 5 (2024)</li>
+        <li>JavaScript Moderno (2023)</li>
+        <li>Marketing Digital (2022)</li>
+      </ul>
+    </div>
+
+    <!-- CERTIFICACIONES SALUD -->
+    <div class="tile tall tile-orange">
+      <div class="icon">🏥</div>
+      <h3>Certificaciones en Salud</h3>
+      <ul>
+        <li>CIE-11 - Mortalidad (SSJ, 2024)</li>
+        <li>CIE-11 - Morbilidad (SSJ, 2024)</li>
+        <li>Acciones Esenciales Seguridad del Paciente (2023/2024)</li>
+        <li>Protección de Datos Personales (2023)</li>
+        <li>Ética e Integridad en el Servicio Público (2023)</li>
+        <li>Manejo de RPBI (2023)</li>
+        <li>Higiene de Manos (2023/2024)</li>
+        <li>Interculturalidad y Género en DDHH (2023)</li>
+        <li>Derechos Humanos, Género y Salud (2018)</li>
+        <li>Trato Digno (2019)</li>
+        <li>Capacitación SARS-CoV-2 (2020)</li>
+      </ul>
     </div>
 
     <!-- HABILIDADES BLANDAS -->
-    <div class="tile small">
+    <div class="tile medium tile-red">
+      <div class="icon">🌟</div>
       <h3>Habilidades Blandas</h3>
       <div class="tags">
         <span class="tag">Liderazgo</span>
@@ -280,11 +350,42 @@
         <span class="tag">Adaptabilidad</span>
         <span class="tag">Ética Profesional</span>
         <span class="tag">Atención al Detalle</span>
+        <span class="tag">Resolución de Conflictos</span>
+        <span class="tag">Manejo de Estrés</span>
+        <span class="tag">Motivación</span>
+      </div>
+    </div>
+
+    <!-- CURSOS COMPLEMENTARIOS -->
+    <div class="tile wide tile-blue">
+      <div class="icon">📚</div>
+      <h3>Cursos Complementarios</h3>
+      <div class="two-column">
+        <div>
+          <ul class="compact-list">
+            <li>Matemáticas Aplicadas a las Finanzas (2004)</li>
+            <li>Asesor en Estrategias de Inversión (2006)</li>
+            <li>Nómina Integral (2004)</li>
+            <li>Relaciones Humanas y Trabajo en Equipo (2014)</li>
+            <li>Calidad en el Servicio (2005)</li>
+            <li>Motivación para el Trabajo (2003)</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="compact-list">
+            <li>Inglés Básico (2015)</li>
+            <li>Administrador de Proyectos para AVA (2022)</li>
+            <li>Jornadas de Capacitación en Informática (2018)</li>
+            <li>Taller de Estrategias para el Manejo de Estrés (2021)</li>
+            <li>Jornadas de Actualización Administrativa (2020/2022)</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <!-- LOGROS DESTACADOS -->
-    <div class="tile medium">
+    <div class="tile medium tile-green">
+      <div class="icon">🏆</div>
       <h3>Logros Destacados</h3>
       <ul>
         <li>Diseño y registro de sistema de gestión documental para el sector salud</li>
@@ -294,12 +395,34 @@
       </ul>
     </div>
 
+    <!-- PROYECTOS TECNOLÓGICOS -->
+    <div class="tile medium tile-purple">
+      <div class="icon">💻</div>
+      <h3>Proyectos Tecnológicos</h3>
+      <p><strong>Ciencia de Datos con MySQL, RStudio y Looker Studio</strong> (2024)</p>
+      <p><strong>Build a Free Website with WordPress</strong> - Coursera (2024)</p>
+      <p><strong>Optimización de Modelos con Python</strong> (2022)</p>
+      <p><strong>Desarrollo de Tiendas Virtuales con WordPress</strong> (2023)</p>
+    </div>
+
     <!-- INFORMACIÓN ADICIONAL -->
-    <div class="tile small">
+    <div class="tile small tile-orange">
+      <div class="icon">ℹ️</div>
       <h3>Información Adicional</h3>
       <p><strong>Disponibilidad:</strong> Inmediata</p>
       <p><strong>Idiomas:</strong> Español (Nativo), Inglés (Básico)</p>
+    </div>
+
+    <!-- CONTACTO -->
+    <div class="tile small tile-red">
+      <div class="icon">📞</div>
+      <h3>Contacto</h3>
       <p>Documentación respaldatoria disponible para verificación</p>
+      <div class="tags">
+        <span class="tag">Constancias</span>
+        <span class="tag">Certificados</span>
+        <span class="tag">Registro INDautor</span>
+      </div>
     </div>
 
   </div>
