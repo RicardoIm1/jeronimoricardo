@@ -1,362 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<title>CV — Jerónimo Ricardo Ramírez Torres</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Currículum – Jerónimo R. Ramírez Torres</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<!-- Tipografías -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* -------------------------------------------------------
-   ESTILO “IMAX BLUE / AVATAR POSTER”
-   ------------------------------------------------------- */
+/* ===================== */
+/* ====== ESTILOS ====== */
+/* ===================== */
 
-/* Fondo cinematográfico */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: "Montserrat", sans-serif;
-  background: radial-gradient(circle at 50% 20%, #0c3c66 0%, #082540 40%, #031524 100%);
-  color: #e0e8f0;
-  overflow-x: hidden;
-  position: relative;
+    margin: 0;
+    padding: 0;
+    background: #020b1a;
+    color: #e4e9f0;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
 }
 
-/* Imagen volumétrica estilo poster Avatar */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80");
-  background-size: cover;
-  background-position: center;
-  opacity: .28;
-  z-index: -3;
-  filter: blur(4px) brightness(.8);
+/* ---------- Animación tipo Matrix Azul ----------- */
+
+.matrix {
+    pointer-events: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.15;
 }
 
-/* Capa de niebla azul */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 40% 20%, rgba(0,130,255,.15), transparent 70%),
-              radial-gradient(circle at 70% 80%, rgba(0,150,255,.22), transparent 75%);
-  z-index: -2;
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
-/* Partículas */
-.particles {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-}
-.particle {
-  position: absolute;
-  width: 6px; height: 6px;
-  background: rgba(0,180,255,.5);
-  border-radius: 50%;
-  animation: float 10s linear infinite;
-}
-@keyframes float {
-  0%   { transform: translateY(0) scale(1); opacity: .8; }
-  100% { transform: translateY(-200vh) scale(.1); opacity: 0; }
+/* ---------- Contenedor IMAX ---------- */
+
+.contenedor {
+    position: relative;
+    z-index: 2;
+    max-width: 1150px;
+    margin: auto;
+    padding: 50px 30px;
 }
 
-/* -------------------------------------------------------
-   Modo claro automático
-   ------------------------------------------------------- */
-@media (prefers-color-scheme: light) {
-  body {
-    background: linear-gradient(145deg, #d7e6f7, #b7c9e2);
-    color: #1b2430;
-  }
-  body::before { opacity: .12; filter: blur(2px) brightness(.9); }
-  body::after { opacity: .2; }
+/* ---------- Títulos ---------- */
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #7ab8ff;
 }
 
-/* -------------------------------------------------------
-   CONTENEDOR GLASS POSTER
-   ------------------------------------------------------- */
-
-.page-wrap {
-  display: grid;
-  place-items: center;
-  padding: 40px;
+h2 {
+    margin-top: 50px;
+    color: #5ea2ff;
+    font-size: 1.8rem;
+    border-left: 4px solid #5ea2ff;
+    padding-left: 12px;
 }
 
-.page {
-  width: 8.5in;
-  min-height: 11in;
-  backdrop-filter: blur(18px) saturate(170%);
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-  background: rgba(255,255,255,.06);
-  border-radius: 18px;
-  padding: 0;
-  box-shadow: 0 0 40px rgba(0, 150, 255, .25);
-  border: 1px solid rgba(255,255,255,.12);
-  overflow: hidden;
+h3 {
+    margin-top: 25px;
+    color: #9dbeff;
 }
 
-/* -------------------------------------------------------
-   TODO TU ESTILO ORIGINAL, RESTAURADO
-   ------------------------------------------------------- */
+/* ---------- Secciones ---------- */
 
-:root{
-  --navy:#0b2a4a;
-  --navy-2:#0e3a6a;
-  --gray-1:#5f6b7a;
-  --gray-2:#8b96a3;
-  --light:#f5f7fb;
-  --white:#ffffff;
-  --ink:#1b2430;
-  --accent:#00b7ff;
+section {
+    margin-top: 40px;
+    line-height: 1.7;
+    font-size: 1rem;
+    text-align: justify;
 }
 
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 12px;
-  background: rgba(255,255,255,.05);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,.15);
+ul {
+    margin-top: 15px;
+    padding-left: 20px;
 }
 
-.btn {
-  appearance: none;
-  border: 0;
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+li {
+    margin-bottom: 8px;
 }
 
-.btn-primary {
-  background: var(--navy);
-  color: var(--white);
-  box-shadow: 0 6px 18px rgba(11,42,74,.25);
-}
-.btn-primary:hover { transform: translateY(-1px); background: var(--navy-2); }
+/* ---------- Tarjetas ---------- */
 
-.btn-ghost { 
-  background: transparent; 
-  color: var(--white); 
-  border: 2px solid var(--white);
-}
-.btn-ghost:hover { background: var(--white); color: var(--navy); }
-
-.header {
-  background: linear-gradient(135deg, #0b2a4a 0%, #0b3260 80%);
-  color: var(--white);
-  padding: 28px 36px 22px 36px;
-  position: relative;
+.card {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid #3e7fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
 }
 
-/* Detalle decorativo */
-.header::after{
-  content:"";
-  position:absolute;
-  inset:auto -80px 0 auto;
-  width: 280px;
-  height: 140px;
-  background: radial-gradient(110px 70px at 70% 60%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%);
-  transform: translateY(30%);
-  opacity:.75;
-  pointer-events:none;
-}
+/* ---------- Layout Responsivo ---------- */
 
-.header-top{ display: grid; grid-template-columns: 1.5fr 1fr; gap:22px; }
-
-.name-block .name {
-  font-size: 28px;
-  line-height: 1.15;
-  font-weight: 800;
-  margin: 0 0 6px 0;
-}
-
-.name-block .role { font-size: 14.5px; font-weight: 600; margin: 0; }
-
-.contact { font-size: 12.8px; display: grid; gap: 6px; justify-items: end; }
-.c-row { display:flex; gap:10px; align-items:center; }
-.c-row svg { width:14px; height:14px; color:#e8eef7; }
-
-.header-tags{
-  margin-top:14px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.tag {
-  font-size:11px; font-weight:700;
-  color:var(--white);
-  border:1px solid rgba(255,255,255,.32);
-  border-radius:999px;
-  padding:6px 10px;
-}
-
-/* Cuerpo */
-.content {
-  padding: 20px 32px 28px 32px;
-  display: grid;
-  grid-template-columns: 1.1fr 1.2fr;
-  gap: 22px;
-}
-
-.section-title {
-  display:flex; align-items:center; gap:10px;
-  font-weight:800; font-size:12.8px;
-  letter-spacing:.6px; text-transform:uppercase;
-  color:var(--white);
-}
-
-.section-title .dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 3px rgba(0,183,255,.18);
-}
-
-.para, .list li { font-size:12.5px; color:#e6edf8; }
-.edu-item .degree { color:#fff; }
-.edu-item .inst, .edu-item .note { color:#cbd6e2; }
-
-.role .r-head {
-  background: rgba(255,255,255,.08);
-  padding:7px 12px;
-  border-radius:7px;
-  border-left:4px solid var(--accent);
-}
-
-.role .title { font-weight:800; color:#d2e9ff; }
-.role .time { color:#8fb0c8; }
-
-.footer-note {
-  display:flex; justify-content:right;
-  font-size:10px; color:#fff;
-  padding:12px 18px;
-  background: rgba(255,255,255,.05);
-  backdrop-filter: blur(4px);
-}
-
-/* PRINT (tu bloque original respetado) */
-@page { size: Letter; margin: 0; }
-@media print {
-  body::before, body::after, .particles { display:none !important; }
-  body { background:#fff !important; }
-  .page { box-shadow:none !important; }
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .contenedor { padding: 25px 20px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Partículas generadas -->
-<div class="particles">
-  <script>
-    for(let i=0;i<45;i++){
-      const p=document.createElement("div");
-      p.className="particle";
-      p.style.left=Math.random()*100+"vw";
-      p.style.bottom=-(Math.random()*100)+"vh";
-      p.style.animationDelay=(Math.random()*10)+"s";
-      p.style.opacity=Math.random()*0.9;
-      document.currentScript.parentElement.appendChild(p);
+<!-- ======= Fondo Matrix Azul ======= -->
+<div class="matrix">
+    <canvas id="matrix"></canvas>
+</div>
+
+<!-- ======= CONTENIDO ======= -->
+<div class="contenedor">
+
+    <h1>Jerónimo Ricardo Ramírez Torres</h1>
+    <p><strong>Apoyo Administrativo en Salud A-3</strong></p>
+
+    <!-- Perfil Profesional -->
+    <h2>Perfil Profesional</h2>
+    <section>
+        Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos estadísticos y de archivo clínico. Posee experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración.
+        <br><br>
+        Su formación incluye administración y gestión de archivos. Está respaldado por formación en derechos humanos, trabajo en equipo y manejo de estrés en entornos complejos. Certificado en áreas como Big Data, Gobernanza TI y evaluación de procesos, con habilidades para liderar equipos, implementar sistemas de archivo eficientes y generar reportes estadísticos confiables para la toma de decisiones en el ámbito clínico.
+        <br><br>
+        Especializado en ciencia de datos, gestión de información clínica y análisis estadístico, con experiencia en herramientas modernas como MySQL, RStudio, Looker Studio, WordPress y tecnologías web. Comprometido con la calidad, la innovación y el cumplimiento normativo.
+    </section>
+
+    <!-- Objetivo -->
+    <h2>Objetivo Profesional</h2>
+    <section>
+        Aplicar sus conocimientos para optimizar los procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia y calidad en el servicio de salud. Su formación en matemáticas financieras y análisis de datos le permiten abordar desafíos técnicos con rigor. Su experiencia en gestión documental, seguridad del paciente y protección de datos garantiza precisión, confidencialidad y accesibilidad de la información.
+        <br><br>
+        Postularse como <strong>Jefe de Estadísticas y Archivo Clínico</strong> para fortalecer la gestión de datos, mejora continua y confiabilidad de la información institucional.
+    </section>
+
+    <!-- Formación Académica -->
+    <h2>Formación Académica</h2>
+
+    <section>
+        <div class="card">
+            <strong>Licenciatura en Administración Financiera y Sistemas</strong><br>
+            Universidad de Guadalajara | 2001 - 2005<br>
+            Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)
+        </div>
+
+        <div class="card">
+            <strong>Bachillerato General</strong><br>
+            Escuela Preparatoria Regional de Ameca | 1994 - 1997
+        </div>
+    </section>
+
+    <!-- Cursos y Certificaciones -->
+    <h2>Cursos y Certificaciones Relevantes</h2>
+    <section>
+        <ul>
+            <li>Matemáticas Aplicadas a las Finanzas – UDG (2004)</li>
+            <li>Asesor en Estrategias de Inversión – BMV (2006)</li>
+            <li>Nómina Integral – Integral Consulting (2004)</li>
+            <li>Relaciones Humanas y Trabajo en Equipo – Gobierno de Jalisco (2014)</li>
+            <li>Calidad en el Servicio – SSJ (2005)</li>
+            <li>Inglés Básico – CECATI 63 (2015)</li>
+            <li>Administrador de Proyectos para Ambientes Virtuales (2022)</li>
+            <li>Archivo Clínico y Documentación</li>
+            <li>CIE-11 Módulos I y II (2024)</li>
+            <li>Big Data – Fundación Telefónica (2022)</li>
+            <li>JavaScript – Fundación Telefónica (2022)</li>
+            <li>Business Analytics (Avanzado) – BBVA / Coursera (2023)</li>
+            <li>Python aplicado a Modelos de Machine Learning – Social Data (2022)</li>
+            <li>Fundamentals of Digital Marketing – Google (2024)</li>
+            <li>React, UX/UI, WordPress, Figma, MySQL, Looker Studio</li>
+        </ul>
+    </section>
+
+    <!-- Experiencia -->
+    <h2>Experiencia Profesional</h2>
+    <section>
+        <div class="card">
+            <h3>Jefe de Recursos Financieros</h3>
+            Hospital Regional Puerto Vallarta (2011–2018)<br><br>
+            – Gestión de archivos contables<br>
+            – Análisis de datos administrativos<br>
+            – Implementación de protocolos de protección de datos<br>
+            – Sistemas de bases de datos para Recursos Financieros<br>
+            – Informes para toma de decisiones<br>
+        </div>
+
+        <div class="card">
+            <h3>Desarrollo de Sistema de Gestión Documental</h3>
+            OPD Servicios de Salud Jalisco<br><br>
+            Registro de Derecho de Autor (2016) por base de datos para gasto directo.
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <h2>Habilidades</h2>
+    <section>
+        <ul>
+            <li><strong>Análisis de datos clínicos, estadística y visualización</strong> (Excel, MySQL, Python, Looker Studio).</li>
+            <li><strong>Gestión de archivos clínicos</strong>, normativas, NOM-004, protección de datos personales.</li>
+            <li><strong>Desarrollo web</strong>: HTML, CSS, JS, WordPress, React, Bootstrap.</li>
+            <li><strong>Gobernanza TI</strong>, seguridad de la información, RPBI, AESP.</li>
+            <li><strong>Trabajo en equipo, liderazgo, trato digno, ética e integridad profesional.</strong></li>
+        </ul>
+    </section>
+
+    <!-- Logros -->
+    <h2>Logros Destacados</h2>
+    <section>
+        <ul>
+            <li>Diseño y registro de un sistema de gestión documental para sector salud.</li>
+            <li>Reconocimiento CENEVAL por desempeño sobresaliente (2017).</li>
+            <li>Registro de base de datos financiero (INDautor, 2016).</li>
+            <li>Desarrollo del sistema de Cartillas Nacionales de Salud (2021).</li>
+        </ul>
+    </section>
+
+    <h2>Información Adicional</h2>
+    <section>
+        Disponibilidad inmediata.<br>
+        Documentación respaldatoria y verificable.<br>
+        Idiomas: Español nativo, inglés básico.
+    </section>
+
+</div>
+
+<!-- ============================ -->
+<!--   SCRIPT: MATRIX BLUE        -->
+<!-- ============================ -->
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+
+const drops = [];
+for (let x = 0; x < columns; x++) drops[x] = 1;
+
+function draw() {
+    ctx.fillStyle = "rgba(0, 10, 25, 0.08)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#4da3ff";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
     }
-  </script>
-</div>
+}
 
-<!-- Tu contenido original, INTACTO -->
-<div class="page-wrap">
-  <div class="page">
+setInterval(draw, 40);
 
-    <!-- COPIÉ TODO TU DOCUMENTO EXACTO -->
-    <!-- Encabezado y secciones, iguales, sin borrar nada -->
-
-    <div class="toolbar">
-      <button class="btn btn-primary">Descargar PDF</button>
-      <button class="btn btn-ghost">Ver Portafolio</button>
-    </div>
-
-    <!-- ----------- TU HEADER ORIGINAL ------------- -->
-    <div class="header">
-      <div class="header-top">
-        <div class="name-block">
-          <p class="name">Jerónimo Ricardo Ramírez Torres</p>
-          <p class="role">Analista de Datos Clínicos</p>
-        </div>
-        <div class="contact">
-          <div class="c-row"><span>📧</span> jeronimo@example.com</div>
-          <div class="c-row"><span>📱</span> +52 322 000 0000</div>
-          <div class="c-row"><span>📍</span> Puerto Vallarta, Jalisco</div>
-        </div>
-      </div>
-
-      <div class="header-tags">
-        <span class="tag">Data Science</span>
-        <span class="tag">BigQuery</span>
-        <span class="tag">Apps Script</span>
-        <span class="tag">Salud Pública</span>
-        <span class="tag">Proyectos Clínicos</span>
-      </div>
-    </div>
-
-    <!-- ----------- TU CONTENIDO COMPLETO ------------ -->
-    <div class="content">
-
-      <!-- Columna izquierda -->
-      <div>
-        <div class="section">
-          <h3 class="section-title"><span class="dot"></span> Perfil</h3>
-          <p class="para">
-            Profesional orientado a datos, desarrollo y mejora de sistemas en salud...
-          </p>
-        </div>
-
-        <div class="section">
-          <h3 class="section-title"><span class="dot"></span> Educación</h3>
-          <div class="edu-item">
-            <div class="degree">Licenciatura en Finanzas</div>
-            <div class="inst">Universidad de X</div>
-            <div class="note">2010–2014</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Columna derecha -->
-      <div>
-        <div class="section">
-          <h3 class="section-title"><span class="dot"></span> Experiencia</h3>
-
-          <div class="role">
-            <div class="r-head">
-              <span class="title">Analista Clínico</span>
-              <span class="time">2023–presente</span>
-            </div>
-            <ul class="list tight">
-              <li>Automatización de reportes estratégicos.</li>
-              <li>Gestión de BigQuery y Apps Script.</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer-note">
-      Documento confidencial — Uso profesional
-    </div>
-
-  </div>
-</div>
+window.onresize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+};
+</script>
 
 </body>
 </html>
