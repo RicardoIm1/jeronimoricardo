@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Jerónimo R. Ramírez — Perfil Profesional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ----------------------------------------------------
+       ESTILO GENERAL IMAX BLUE + METRO UI
+    ---------------------------------------------------- */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #030b18;
+      font-family: 'Montserrat', sans-serif;
+      color: #d9e6ff;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2 {
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 25px rgba(0, 140, 255, 0.8);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #7bb6ff;
+    }
+
+    /* ----------------------------------------------------
+       GRID ESTILO WINDOWS PHONE (METRO UI)
+    ---------------------------------------------------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      grid-auto-rows: minmax(150px, auto);
+      gap: 15px;
+      width: 94%;
+      max-width: 1450px;
+      margin: 7rem auto;
+    }
+
+    /* Varias clases para tamaños irregulares estilo mosaico */
+    .tile {
+      padding: 22px;
+      border-radius: 8px;
+      background: rgba(3, 15, 35, 0.7);
+      border: 1px solid rgba(0, 80, 255, 0.3);
+      box-shadow: 0 0 12px rgba(0, 100, 255, 0.18);
+      backdrop-filter: blur(3px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+
+    .tall {
+      grid-row: span 2;
+    }
+
+    .big {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    p,
+    li {
+      font-size: 0.95rem;
+      line-height: 1.45rem;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    /* ----------------------------------------------------
+       ANIMACIÓN MATRIX AZUL
+    ---------------------------------------------------- */
+    canvas#matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      opacity: 0.28;
+      background: #020710;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MATRIX ANIMATION -->
+  <canvas id="matrix"></canvas>
+  <script>
+    const c = document.getElementById("matrix");
+    const ctx = c.getContext("2d");
+
+    c.height = window.innerHeight;
+    c.width = window.innerWidth;
+
+    const chars = "01";
+    const fontSize = 14;
+    const columns = c.width / fontSize;
+
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(3, 10, 25, 0.08)";
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      ctx.fillStyle = "#1e90ff";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > c.height || Math.random() > 0.97) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 35);
+  </script>
+
+  <!-- CONTENIDO PRINCIPAL EN MOSAICO -->
+  <div class="grid">
+
+    <!-- TÍTULO -->
+    <div class="tile wide">
+      <h1>JERÓNIMO RICARDO RAMÍREZ TORRES</h1>
+      <p>Apoyo Administrativo en Salud A-3</p>
+    </div>
+
+    <!-- PERFIL PROFESIONAL (grande) -->
+    <div class="tile big">
+      <h2>Perfil Profesional</h2>
+      <p>Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental...</p>
+      <p>Experiencia en gestión documental, bases de datos y capacitación en salud, informática y administración...</p>
+      <p>Certificado en Big Data, Gobernanza TI, evaluación de procesos...</p>
+      <p>Excelencia en protección de datos personales, ética en servicios públicos...</p>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="tile tall">
+      <h2>Objetivo</h2>
+      <p>Aplicar conocimientos para optimizar procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia, calidad y confiabilidad del servicio de salud.</p>
+      <p>Postularse como Jefe de Estadísticas y Archivo Clínico...</p>
+    </div>
+
+    <!-- FORMACIÓN ACADÉMICA -->
+    <div class="tile">
+      <h2>Formación Académica</h2>
+      <p><strong>Lic. Administración Financiera y Sistemas</strong><br>UDG | 2001–2005</p>
+      <p><strong>Bachillerato General</strong><br>Preparatoria Regional de Ameca | 1994–1997</p>
+    </div>
+
+    <!-- CERTIFICACIONES (ancha) -->
+    <div class="tile wide">
+      <h2>Cursos y Certificaciones</h2>
+      <ul>
+        <li>Matemáticas Aplicadas a Finanzas</li>
+        <li>Asesor en Estrategias de Inversión</li>
+        <li>Big Data – Fundación Telefónica</li>
+        <li>JavaScript, Python, React, MySQL</li>
+        <li>Protección de Datos Personales</li>
+        <li>CIE-11 | Seguridad del Paciente</li>
+        <li>Business Analytics</li>
+      </ul>
+    </div>
+
+    <!-- EXPERIENCIA (alta) -->
+    <div class="tile tall">
+      <h2>Experiencia Profesional</h2>
+      <p><strong>Jefe de Recursos Financieros</strong><br>Hospital Regional Puerto Vallarta | 2011–2018</p>
+      <ul>
+        <li>Gestión de archivos contables.</li>
+        <li>Análisis de datos administrativos.</li>
+        <li>Protección de datos personales.</li>
+        <li>Capacitación en manejo de información.</li>
+      </ul>
+      <p><strong>Sistema de Gestión Documental</strong></p>
+      <ul>
+        <li>Registro de Derecho de Autor (2016)</li>
+      </ul>
+    </div>
+
+    <!-- HABILIDADES (grande) -->
+    <div class="tile big">
+      <h2>Habilidades</h2>
+      <ul>
+        <li><strong>Análisis de Datos:</strong> Python, Excel, dashboards.</li>
+        <li><strong>Archivos Clínicos:</strong> NOM-004, CIE-11.</li>
+        <li><strong>Tecnologías:</strong> MySQL, RStudio, Figma, React.</li>
+        <li><strong>Procesos:</strong> Mejora continua.</li>
+        <li><strong>Blandas:</strong> Liderazgo, comunicación.</li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
