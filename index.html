@@ -1,1454 +1,695 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Jerónimo Ricardo Ramírez — Portafolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portafolio profesional de Jerónimo Ricardo Ramírez Torres - Docente Universitario especializado en Estadísticas, Finanzas y Sistemas">
-  
-  <!-- Tipografías elegantes: Playfair Display para título, Montserrat para cuerpo -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
-    rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerónimo Ricardo Ramírez Torres | IMAX Blue Metro</title>
+
   <style>
-    :root {
-      --bg: #0b0f14;
-      --card: #071021;
-      --muted: #9aa6b2;
-      --accent: #00b7ff;
-      --gold: #d4af37;
-      --glass: rgba(255, 255, 255, 0.04);
-      --glass-2: rgba(255, 255, 255, 0.02);
-      --white: #ffffff;
-      --shadow: 0 10px 30px rgba(4, 10, 20, 0.6);
-      --max-width: 1200px;
-      --page-padding: 28px;
-    }
-
-    /* Reset ligero */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
     body {
-      height: 100%;
-      font-family: "Montserrat", system-ui;
-      background: var(--bg);
-      color: var(--white);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.6;
-    }
-
-    /* Fondo mejorado con gradientes más sutiles */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(1200px 400px at 10% 10%, rgba(0, 183, 255, 0.05), transparent),
-        radial-gradient(900px 500px at 90% 40%, rgba(0, 183, 255, 0.04), transparent),
-        radial-gradient(800px 300px at 50% 80%, rgba(212, 175, 55, 0.03), transparent),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      backdrop-filter: blur(6px);
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      text-shadow: 0 0 8px rgba(0, 183, 255, 0.4);
-    }
-
-    /* Contenedor principal */
-    .wrap {
-      max-width: var(--max-width);
-      margin: 36px auto;
-      padding: var(--page-padding);
-      position: relative;
-    }
-
-    /* Top bar: acciones */
-    .toolbar {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 700;
-      letter-spacing: .3px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-      color: var(--white);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      transition: all 0.3s ease;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      font-family: inherit;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--muted);
-    }
-
-    /* Tarjeta principal (hero cinematográfico) */
-    .hero {
-      background:
-        radial-gradient(600px 200px at 90% 0%, rgba(13, 43, 80, 0.18), transparent),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      border-radius: 16px;
-      padding: 28px;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 28px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-    }
-
-    /* Decorative canvas / svg behind content for math/finance motifs */
-    .hero .canvas-wrap {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      mix-blend-mode: screen;
-      opacity: .9;
-    }
-
-    /* Left: copy */
-    .hero-left {
-      position: relative;
-      z-index: 1;
-      padding: 8px 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .kicker {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .9px;
-    }
-
-    .name {
-      font-family: "Playfair Display", serif;
-      font-size: 44px;
-      line-height: 1.1;
       margin: 0;
-      font-weight: 700;
-      color: var(--white);
-      text-shadow: 0 8px 26px rgba(0, 0, 0, 0.6);
-      letter-spacing: .4px;
+      padding: 40px;
+      background: linear-gradient(135deg, #020817 0%, #0f172a 100%);
+      font-family: "Segoe UI", sans-serif;
+      color: #e2e8f0;
     }
 
-    .subtitle {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .lead {
-      font-size: 15px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.92);
-      margin: 4px 0 0 0;
-      max-width: 720px;
-    }
-
-    /* Stats line (mathematical / financial highlights) */
-    .stats {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .stat {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      border-radius: 10px;
-      padding: 12px 14px;
-      min-width: 120px;
-      box-shadow: 0 6px 18px rgba(2, 8, 16, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      transition: all 0.3s ease;
-    }
-
-    .stat:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(2, 8, 16, 0.6);
-    }
-
-    .stat .s-num {
-      font-weight: 800;
-      font-size: 18px;
-      color: var(--white);
-      display: block;
-    }
-
-    .stat .s-label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    /* Right: portrait / actions */
-    .hero-right {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Portrait frame (use gradient placeholder; user can replace with real photo) */
-    .portrait {
-      width: 320px;
-      height: 420px;
-      border-radius: 14px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    /* --- METRO GRID AUTHENTIC --- */
+    .metro-grid {
       display: grid;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      position: relative;
-      transition: all 0.4s ease;
-    }
-
-    .portrait:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-    }
-
-    .portrait .photo {
-      width: 100%;
-      height: 100%;
-      background:
-        radial-gradient(400px 200px at 10% 10%, rgba(0, 183, 255, 0.06), transparent),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.12);
-      font-weight: 700;
-      font-size: 22px;
-      text-align: center;
-      padding: 22px;
-      overflow: hidden;
-    }
-
-    .portrait .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .portrait:hover .photo img {
-      transform: scale(1.05);
-    }
-
-    .portrait .frame-deco {
-      position: absolute;
-      left: -40px;
-      top: -30px;
-      width: 120px;
-      height: 120px;
-      background: conic-gradient(from 20deg, rgba(212, 175, 55, 0.15), rgba(0, 183, 255, 0.06));
-      transform: rotate(18deg);
-      filter: blur(30px);
-      pointer-events: none;
-      opacity: .9;
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 6px;
-      width: 100%;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .cta {
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--accent), #6be1ff);
-      color: #042033;
-      box-shadow: 0 10px 30px rgba(0, 183, 255, 0.12);
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: inherit;
-    }
-
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 35px rgba(0, 183, 255, 0.2);
-    }
-
-    .cta.secondary {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .cta.secondary:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    /* Main content sections below hero */
-    .sections {
-      display: grid;
-      grid-template-columns: 1fr 360px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-auto-rows: 180px;
+      grid-auto-flow: dense;
       gap: 22px;
-      margin-top: 22px;
-      position: relative;
-      z-index: 1;
+      max-width: 1600px;
+      margin: 0 auto;
     }
 
-    /* Left column: narrative + timeline */
-    .main-col {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-    }
-
-    .section {
-      margin-bottom: 18px;
-    }
-
-    .section h3 {
-      margin: 0;
-      font-size: 13px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section h3 .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(90deg, var(--accent), #6be1ff);
-      box-shadow: 0 0 18px rgba(0, 183, 255, 0.12);
-    }
-
-    .about {
-      margin-top: 10px;
-      color: rgba(255, 255, 255, 0.95);
-      line-height: 1.6;
-      font-size: 15px;
-    }
-
-    /* Timeline / roles */
-    .timeline {
+    /* --- TILE BASE --- */
+    .tile {
+      border-radius: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      transition: 0.3s ease-out;
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .tile:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* --- COLOR SCHEME --- */
+    .tile-blue {
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.15) 0%, rgba(0, 150, 255, 0.2) 100%);
+    }
+
+    .tile-blue:hover {
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.25) 0%, rgba(0, 180, 255, 0.3) 100%);
+    }
+
+    .tile-green {
+      background: linear-gradient(135deg, rgba(0, 168, 107, 0.15) 0%, rgba(0, 200, 120, 0.2) 100%);
+    }
+
+    .tile-green:hover {
+      background: linear-gradient(135deg, rgba(0, 200, 120, 0.25) 0%, rgba(0, 230, 140, 0.3) 100%);
+    }
+
+    .tile-purple {
+      background: linear-gradient(135deg, rgba(120, 0, 200, 0.15) 0%, rgba(160, 0, 255, 0.2) 100%);
+    }
+
+    .tile-purple:hover {
+      background: linear-gradient(135deg, rgba(160, 0, 255, 0.25) 0%, rgba(190, 50, 255, 0.3) 100%);
+    }
+
+    .tile-orange {
+      background: linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, rgba(255, 165, 0, 0.2) 100%);
+    }
+
+    .tile-orange:hover {
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.25) 0%, rgba(255, 190, 0, 0.3) 100%);
+    }
+
+    .tile-red {
+      background: linear-gradient(135deg, rgba(220, 40, 40, 0.15) 0%, rgba(255, 80, 80, 0.2) 100%);
+    }
+
+    .tile-red:hover {
+      background: linear-gradient(135deg, rgba(255, 80, 80, 0.25) 0%, rgba(255, 120, 120, 0.3) 100%);
+    }
+
+    .tile-teal {
+      background: linear-gradient(135deg, rgba(0, 168, 150, 0.15) 0%, rgba(0, 200, 180, 0.2) 100%);
+    }
+
+    .tile-teal:hover {
+      background: linear-gradient(135deg, rgba(0, 200, 180, 0.25) 0%, rgba(0, 230, 210, 0.3) 100%);
+    }
+
+    .tile-pink {
+      background: linear-gradient(135deg, rgba(200, 0, 100, 0.15) 0%, rgba(255, 0, 130, 0.2) 100%);
+    }
+
+    .tile-pink:hover {
+      background: linear-gradient(135deg, rgba(255, 0, 130, 0.25) 0%, rgba(255, 50, 160, 0.3) 100%);
+    }
+
+    /* --- TILE SIZES --- */
+    .small {
+      grid-row: span 1;
+      grid-column: span 1;
+    }
+
+    .medium {
+      grid-row: span 1;
+      grid-column: span 2;
+    }
+
+    .wide {
+      grid-row: span 1;
+      grid-column: span 3;
+    }
+
+    .large {
+      grid-row: span 2;
+      grid-column: span 2;
+    }
+
+    .tall {
+      grid-row: span 3;
+      grid-column: span 1;
+    }
+
+    .x-large {
+      grid-row: span 2;
+      grid-column: span 3;
+    }
+
+    .xx-large {
+      grid-row: span 3;
+      grid-column: span 3;
+    }
+
+    /* --- TAGS DE TECNOLOGÍAS --- */
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
       margin-top: 12px;
     }
 
-    .card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
-      border-radius: 10px;
-      padding: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      transition: transform .18s cubic-bezier(.2, .9, .3, 1), box-shadow .18s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-    }
-
-    .card .title {
-      font-weight: 800;
-      color: var(--white);
-      font-size: 15px;
-    }
-
-    .card .meta {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .card ul {
-      margin: 8px 0 0 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .card li {
-      margin-bottom: 4px;
-    }
-
-    /* Right column: quick contacts, tags, achievements */
-    .side-col {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-self: start;
-    }
-
-    .panel {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.005));
-      border-radius: 12px;
-      padding: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      transition: all 0.3s ease;
-    }
-
-    .panel:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-
-    .contact-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .contact-list .row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
     .tag {
-      font-size: 12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.006));
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      color: var(--muted);
-      font-weight: 700;
-      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .tag:hover {
-      background: linear-gradient(90deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
-      color: var(--white);
-      transform: translateY(-2px);
+    /* Texto específico */
+    .tile h2, .tile h3 {
+      margin: 0 0 15px 0;
+      font-size: 1.0rem;
     }
 
-    .achievements ul {
-      margin: 8px 0 0 16px;
-      color: var(--muted);
+    .tile h2 {
+      font-size: 1.5rem;
     }
 
-    .achievements li {
-      margin-bottom: 4px;
+    .tile p {
+      margin: 0 0 12px 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
 
-    /* Footer mini */
-    .site-footer {
-      margin-top: 22px;
+    .tile ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .tile li {
+      margin-bottom: 8px;
+    }
+
+    .tile-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      color: var(--muted);
-      font-size: 13px;
-      flex-wrap: wrap;
-      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 15px;
     }
 
-    /* Responsive */
-    @media (max-width:1100px) {
-      .hero {
-        grid-template-columns: 1fr 320px;
-      }
-
-      .portrait {
-        width: 280px;
-        height: 360px;
-      }
-
-      .sections {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-right {
-        order: -1;
-      }
+    .tile-title {
+      margin: 0;
+      font-size: 1.3rem;
     }
 
-    @media (max-width:720px) {
-      .wrap {
-        margin: 16px;
-        padding: 16px;
-      }
-
-      .name {
-        font-size: 32px;
-      }
-
-      .subtitle {
-        font-size: 14px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        align-items: center;
-        padding: 18px;
-        gap: 18px;
-      }
-
-      .portrait {
-        width: 200px;
-        height: 260px;
-      }
-
-      .stats {
-        justify-content: flex-start;
-      }
-
-      .hero-right {
-        align-items: center;
-      }
-
-      .toolbar {
-        justify-content: center;
-      }
-
-      .site-footer {
-        flex-direction: column;
-        text-align: center;
-      }
+    .tile-subtitle {
+      margin: 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
     }
 
-    /* PRINT */
-    @media print {
-      :root {
-        color-scheme: light;
-      }
-
-      html,
-      body {
-        background: #fff;
-        color: #000;
-      }
-
-      .toolbar,
-      .site-footer {
-        display: none !important;
-      }
-
-      .wrap {
-        margin: 0;
-        padding: 0;
-        max-width: 800px;
-      }
-
-      .hero,
-      .sections,
-      .panel,
-      .card {
-        box-shadow: none;
-        border: none;
-        background: transparent;
-      }
-
-      .portrait {
-        display: none;
-      }
+    .section-title {
+      font-size: 1rem;
+      margin: 18px 0 10px 0;
+      color: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 6px;
     }
 
-    /* Small helper animations */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(6px);
-      animation: fadeIn .8s cubic-bezier(.2, .9, .3, 1) forwards;
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
-    .stagger-1 {
-      animation-delay: .06s;
+    .compact-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.8rem;
+      line-height: 1.4;
     }
 
-    .stagger-2 {
-      animation-delay: .12s;
+    .compact-list li {
+      margin-bottom: 6px;
     }
 
-    .stagger-3 {
-      animation-delay: .18s;
+    .scrollable {
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 8px;
     }
 
-    .stagger-4 {
-      animation-delay: .24s;
+    .scrollable::-webkit-scrollbar {
+      width: 6px;
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: none;
-      }
+    .scrollable::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
     }
 
-    /* Decorative numeric matrix (small) */
-    .matrix {
-      position: absolute;
-      right: 18%;
-      top: 6%;
-      font-family: "Courier New", Courier, monospace;
-      font-size: 11px;
-      color: rgba(0, 183, 255, 0.06);
-      letter-spacing: 2px;
-      white-space: pre;
-      transform: rotate(-8deg);
-      user-select: none;
-      pointer-events: none;
+    .scrollable::-webkit-scrollbar-thumb {
+      background: rgba(0, 122, 255, 0.5);
+      border-radius: 3px;
     }
 
-    /* Accessibility focus */
-    .btn:focus,
-    a:focus,
-    .cta:focus {
-      outline: 2px dashed var(--accent);
-      outline-offset: 4px;
-    }
-
-    /* MATRIX canvas full-bleed (behind everything) */
-    #matrix-bg {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      opacity: 0.22;
-      pointer-events: none;
-      transition: opacity .35s ease;
-      will-change: transform;
-    }
-
-    /* intensity button small */
-    #matrix-toggle {
-      font-size: 13px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 0;
-      cursor: pointer;
-      background: rgba(255,255,255,0.02);
-      color: var(--muted);
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      backdrop-filter: blur(4px);
-    }
-
-    .modal-content {
-      background: var(--card);
-      border-radius: 12px;
-      padding: 18px;
-      max-width: 520px;
-      width: 92%;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      color: var(--muted);
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 20px;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    .modal-close:hover {
-      color: var(--white);
-    }
-
-    .modal h3 {
-      margin-top: 4px;
-      color: var(--white);
-    }
-
-    /* Video button and modal */
-    #video-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 100;
-      cursor: pointer;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 4px 15px rgba(0, 183, 255, 0.3);
-      width: 46px;
-      height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    #video-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(0, 183, 255, 0.5);
-    }
-
-    #video-modal {
-      display: none;
-      position: fixed;
-      z-index: 200;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(8px);
-    }
-
-    #video-container {
-      background: #fff;
-      border-radius: 12px;
-      max-width: 360px;
-      width: 92vw;
-      padding: 0;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      position: relative;
-    }
-
-    #close-btn {
-      position: absolute;
-      top: 6px;
-      right: 10px;
-      background: none;
-      border: none;
-      font-size: 22px;
-      cursor: pointer;
-      color: #0b2a4a;
-      z-index: 201;
-    }
-
-    #video-container video {
-      width: 100%;
-      aspect-ratio: 9/16;
-      border-radius: 12px;
-      display: block;
+    .year-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      margin-left: 8px;
     }
   </style>
 </head>
 
 <body>
-  <!-- Matrix background canvas -->
-  <canvas id="matrix-bg" aria-hidden="true"></canvas>
 
-  <div class="wrap" role="main" aria-label="Portafolio de Jerónimo Ricardo Ramírez">
-    <!-- Toolbar -->
-    <div class="toolbar" role="toolbar" aria-label="Acciones">
-      <button class="btn" onclick="window.print()" title="Descargar / Imprimir CV">📄 Descargar PDF</button>
-      <button class="btn btn-outline" onclick="toggleCompact()" title="Compactar/Expandir diseño">✨ Compactar</button>
-      <button class="btn btn-outline" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🎭 Tema</button>
-      <button id="matrix-toggle" title="Alternar intensidad Matrix" onclick="toggleMatrixIntensity()">Matrix: Alta</button>
-    </div>
+  <div class="metro-grid">
 
-    <!-- Hero -->
-    <header class="hero" aria-label="Encabezado principal">
-      <!-- decorative SVG / canvas for math curves & particles -->
-      <div class="canvas-wrap" aria-hidden="true">
-        <!-- Parametric curve + particle field -->
-        <svg id="decorSVG" width="100%" height="100%" preserveAspectRatio="none"
-          style="position:absolute; inset:0; z-index:0;">
-          <defs>
-            <linearGradient id="g1" x1="0" x2="1">
-              <stop offset="0" stop-color="#00b7ff" stop-opacity="0.20" />
-              <stop offset="1" stop-color="#d4af37" stop-opacity="0.08" />
-            </linearGradient>
-            <filter id="f1" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="18" result="b" />
-            </filter>
-          </defs>
-          <!-- animated curve (math / finance feel) -->
-          <path id="curvePath" d="" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"
-            filter="url(#f1)" opacity="0.95"></path>
-          <!-- grid of tiny dots -->
-          <g id="dots"></g>
-        </svg>
-      </div>
-
-      <!-- Left column -->
-      <div class="hero-left" style="min-height:320px;">
-        <div class="kicker fade-in stagger-1"><span
-            style="display:inline-block;width:8px;height:8px;border-radius:50%;background:linear-gradient(90deg,var(--accent),#6be1ff);box-shadow:0 0 14px rgba(0,183,255,0.12)"></span>
-          Currículum — Marca personal</div>
-        <h1 class="name fade-in stagger-2">Jerónimo Ricardo Ramírez Torres</h1>
-        <p class="subtitle fade-in stagger-3">Docente Universitario — Estadísticas • Finanzas • Sistemas</p>
-        <p class="lead fade-in stagger-4">
-          Profesional con más de <strong>20 años</strong> de experiencia en análisis estadístico, gestión documental y
-          transformación digital en el sector salud. Mi trabajo combina la precisión matemática con sensibilidad
-          estética: visualizaciones limpias, procesos robustos y una enseñanza que construye pensamiento crítico.
-        </p>
-
-        <div class="stats" aria-hidden="false">
-          <div class="stat fade-in stagger-1" title="Años de experiencia">
-            <span class="s-num">20+</span>
-            <span class="s-label">Años de experiencia</span>
-          </div>
-          <div class="stat fade-in stagger-2" title="Áreas de trabajo">
-            <span class="s-num">Salud & Academia</span>
-            <span class="s-label">Sectores principales</span>
-          </div>
-          <div class="stat fade-in stagger-3" title="Habilidades destacadas">
-            <span class="s-num">R • SQL • Python</span>
-            <span class="s-label">Herramientas y lenguajes</span>
-          </div>
-        </div>
-
-        <div class="cta-row" style="margin-top:6px;">
-          <button class="cta" onclick="openContact()">Contacto</button>
-          <button class="cta secondary" onclick="scrollToSection('experiencia')">Ver experiencia</button>
+    <!-- NOMBRE Y PUESTO -->
+    <div class="tile x-large tile-blue">
+      <div class="scrollable">
+        <h2>Jerónimo Ricardo Ramírez Torres</h2>
+        <p class="tile-subtitle">Apoyo Administrativo en Salud A-3</p>
+        <p>Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos estadísticos y de archivo clínico.</p>
+        <p>Posee experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración. Su formación incluye administración y gestión de archivos. Está respaldado por formación en derechos humanos, trabajo en equipo y manejo de estrés en entornos complejos.</p>
+        <p>Certificado en áreas como Big Data, Gobernanza TI y evaluación de procesos, con habilidades para liderar equipos, implementar sistemas de archivo eficientes y generar reportes estadísticos confiables para la toma de decisiones en el ámbito clínico.</p>
+        <div class="tags">
+          <span class="tag">Gestión Documental</span>
+          <span class="tag">Análisis de Datos</span>
+          <span class="tag">Archivo Clínico</span>
+          <span class="tag">Estadísticas</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Business Analytics</span>
         </div>
       </div>
+    </div>
 
-      <!-- Right column (portrait) -->
-      <aside class="hero-right" aria-label="Fotografía y acciones">
-        <div class="portrait fade-in stagger-2" role="img"
-          aria-label="Retrato de Jerónimo — sustituir por fotografía real">
-          <div class="frame-deco" aria-hidden="true"></div>
-          <div class="photo" id="photoPlaceholder">
-            <img src="https://i.pinimg.com/736x/41/5b/77/415b776041f5fd0f89f174d02d19fdc7.jpg" alt="Foto de Jerónimo"
-              loading="lazy">
-          </div>
-        </div>
-
-        <div style="width:100%;text-align:center;">
-          <button class="btn btn-outline" onclick="downloadVCard()" title="Descargar vCard">📥 Descargar
-            contacto</button>
-        </div>
-      </aside>
-
-      <!-- small numeric/ASCII matrix decorative -->
-      <div class="matrix" aria-hidden="true">Σ π λ ρ ϕ τ ½ % ≈ λ</div>
-    </header>
-
-    <!-- Main sections -->
-    <div class="sections">
-      <!-- Left: narrative & timeline -->
-      <div class="main-col">
-        <section class="section" id="perfil" aria-labelledby="perfilTitle">
-          <h3 id="perfilTitle"><span class="dot"></span> Perfil Profesional</h3>
-          <p class="about">
-            Lidero procesos de captura, análisis y resguardo de información clínica con un enfoque en protección de
-            datos y seguridad del paciente. Combino administración financiera, sistemas informáticos y ciencia de datos
-            para diseñar soluciones que optimizan procesos administrativos y mejoran la toma de decisiones basadas en
-            evidencia.
-          </p>
-        </section>
-
-        <section class="section" id="experiencia" aria-labelledby="expTitle">
-          <h3 id="expTitle"><span class="dot"></span> Experiencia relevante</h3>
-
-          <div class="timeline">
-            <article class="card" role="article" aria-label="Jefe de Estadísticas y Archivo Clinico — 2025–Presente">
-              <div class="title">Jefe de Estadísticas y Archivo Clínico — Hospital Regional Puerto Vallarta</div>
-              <div class="meta">2025 – Presente</div>
-              <ul>
-                <li>Coordinación de captura, análisis y resguardo de información clínica.</li>
-                <li>Implementación de sistemas de gestión documental y visualización de datos.</li>
-                <li>Capacitación en normativas de protección de datos y seguridad del paciente.</li>
-              </ul>
-            </article>
-
-            <article class="card" role="article" aria-label="Jefe de Recursos Financieros — 2011–2018">
-              <div class="title">Jefe de Recursos Financieros — Hospital Regional Puerto Vallarta</div>
-              <div class="meta">2011 – 2018</div>
-              <ul>
-                <li>Gestión financiera y archivos contables; diseño de bases de datos para control financiero.</li>
-                <li>Capacitación en manejo de información sensible y procedimientos administrativos.</li>
-              </ul>
-            </article>
-
-            <article class="card" role="article" aria-label="Desarrollador de Sistema de Gestion Documental">
-              <div class="title">Desarrollador — OPD Servicios de Salud Jalisco</div>
-              <div class="meta">Proyecto: Sistema de Gestión Documental</div>
-              <ul>
-                <li>Registro de Derecho de Autor por sistema de gasto directo en unidades de salud.</li>
-                <li>Diseño de soluciones tecnológicas para optimizar procesos clínicos y administrativos.</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="docencia" aria-labelledby="docTitle">
-          <h3 id="docTitle"><span class="dot"></span> Experiencia docente</h3>
-          <div class="timeline" style="gap:8px;">
-            <article class="card">
-              <div class="title">Docente — Universidad Regional de los Altos</div>
-              <div class="meta">2025 – Presente</div>
-              <ul>
-                <li>Matemáticas para la administración y Computación — diseño curricular y clases presenciales.</li>
-              </ul>
-            </article>
-            <article class="card">
-              <div class="title">Docente — Colegio de Ciencias, Arte y Cultura, A.C.</div>
-              <div class="meta">2017 – 2018</div>
-              <ul>
-                <li>Asignaturas de Computación Administrativa.</li>
-              </ul>
-            </article>
-          </div>
-        </section>
+    <!-- OBJETIVO PROFESIONAL -->
+    <div class="tile large tile-green">
+      <div class="scrollable">
+        <h3>Objetivo Profesional</h3>
+        <p>Aplicar sus conocimientos optimizar los procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia y calidad en el servicio de salud.</p>
+        <p>Su formación en matemáticas financieras y estrategias de inversión le permite abordar desafíos técnicos con rigor analítico, mientras que sus habilidades interpersonales facilitan la colaboración en entornos multidisciplinarios.</p>
+        <p>Aplicar sus conocimientos en tecnología, y gestión de información para optimizar los sistemas de estadísticas y archivo clínico, garantizando precisión, confidencialidad y accesibilidad de los datos en beneficio de la institución y los pacientes.</p>
+        <p>Postularse como Jefe de Estadísticas y Archivo Clínico para contribuir con su expertise en la gestión de datos, mejora de procesos y cumplimiento de estándares de calidad, asegurando la eficiencia y confiabilidad de la información en el ámbito de la salud.</p>
       </div>
-
-      <!-- Right: sidebar -->
-      <aside class="side-col" aria-label="Información adicional">
-        <div class="panel contact-panel" aria-labelledby="contactTitle">
-          <h4 id="contactTitle"
-            style="margin:0 0 8px 0; color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:.6px;">
-            Contacto</h4>
-          <div class="contact-list">
-            <div class="row"><strong
-                style="width:100px;color:var(--muted);font-weight:700">Ubicación</strong><span>Puerto Vallarta, Jalisco,
-                México</span></div>
-            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Tel</strong><span>322 235 43
-                31</span></div>
-            <div class="row"><strong style="width:100px;color:var(--muted);font-weight:700">Email</strong><a
-                href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a></div>
-          </div>
-        </div>
-
-        <div class="panel" aria-labelledby="skillsTitle">
-          <h4 id="skillsTitle"
-            style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
-            Etiquetas</h4>
-          <div class="tags" role="list">
-            <div class="tag">Análisis Estadístico</div>
-            <div class="tag">Gestión Documental</div>
-            <div class="tag">Transformación Digital</div>
-            <div class="tag">Protección de Datos</div>
-            <div class="tag">Docencia</div>
-            <div class="tag">Visualización</div>
-            <div class="tag">Ciencia de Datos</div>
-          </div>
-        </div>
-
-        <div class="panel achievements" aria-labelledby="achTitle">
-          <h4 id="achTitle"
-            style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
-            Logros</h4>
-          <ul>
-            <li>Registro de sistema para gestión documental ante INDAUTOR (2016)</li>
-            <li>Reconocimiento CENEVAL — Desempeño Sobresaliente (2017)</li>
-            <li>Desarrollo de sistema para control de Cartillas Nacionales de Salud (2021)</li>
-          </ul>
-        </div>
-
-        <div class="panel" aria-labelledby="docsTitle">
-          <h4 id="docsTitle"
-            style="margin:0 0 8px 0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.6px;">
-            Disponibilidad</h4>
-          <p style="margin:0;color:var(--muted);font-size:14px;">Constancias y certificados disponibles. Abierto a
-            posiciones docentes y consultorías en estadística, administración y sistemas.</p>
-        </div>
-      </aside>
     </div>
 
-    <!-- Footer -->
-    <div class="site-footer" role="contentinfo">
-      <div>Actualizado: <span id="today"></span></div>
-      <div style="color:var(--muted)">Diseño: Cinemático • Matemático • Financiero</div>
+    <!-- FORMACIÓN ACADÉMICA -->
+    <div class="tile medium tile-purple">
+      <div class="scrollable">
+        <h3>Formación Académica</h3>
+        <p><strong>Licenciatura en Administración Financiera y Sistemas</strong></p>
+        <p>Universidad de Guadalajara | 2001 - 2005</p>
+        <p>Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)</p>
+        <p><strong>Bachillerato General</strong></p>
+        <p>Escuela Preparatoria Regional de Ameca | 1994 - 1997</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Modales -->
-  <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Cerrar" onclick="closeContact()">×</button>
-      <h3>Contacto</h3>
-      <p>Para contactar: <a href="mailto:jeronimoricardo1@gmail.com">jeronimoricardo1@gmail.com</a> • Tel: 322 235 43 31</p>
-      <p>¿Quieres que convierta este CV en un sitio web público tipo portfolio de élite? Responde con <strong>“Sí, publícalo”</strong> y preparo la versión lista para publicar.</p>
+    <!-- EXPERIENCIA PROFESIONAL 1 -->
+    <div class="tile large tile-blue">
+      <div class="scrollable">
+        <h3>Experiencia Profesional</h3>
+        <p><strong>Jefe de Recursos Financieros</strong> - Hospital Regional Puerto Vallarta | 2011-2018</p>
+        <ul>
+          <li>Gestión y organización de archivos contables electrónicos y físicos</li>
+          <li>Análisis de datos para informes administrativos</li>
+          <li>Implementación de protocolos de protección de datos personales</li>
+          <li>Capacitación al personal en manejo de información sensible y normativas vigentes</li>
+          <li>Gestión y análisis de datos estadísticos</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <!-- Botón flotante para ver video -->
-  <div id="video-btn" aria-label="Ver video de presentación">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  </div>
-
-  <!-- Modal de video -->
-  <div id="video-modal" class="modal">
-    <div id="video-container">
-      <button id="close-btn" aria-label="Cerrar video">×</button>
-      <video src="WhatsApp Video 2025-09-02 at 08.20.36.mp4" autoplay loop muted playsinline
-        style="width:100%;aspect-ratio:9/16;border-radius:12px;display:block;"></video>
+    <!-- EXPERIENCIA PROFESIONAL 2 -->
+    <div class="tile medium tile-blue">
+      <div class="scrollable">
+        <h3>Experiencia Profesional</h3>
+        <p><strong>Jefe de Recursos Financieros</strong> (Continuación)</p>
+        <ul>
+          <li>Implementación de sistemas de bases de datos para Recursos Financieros</li>
+          <li>Generación de informes para la toma de decisiones</li>
+          <li>Optimización de procesos de almacenamiento y recuperación de información financiera</li>
+        </ul>
+        <p><strong>Desarrollo de Sistema de Gestión Documental</strong></p>
+        <p>OPD Servicios de Salud Jalisco</p>
+        <p>Registro de Derecho de Autor (2016) por la creación de una base de datos para el gasto directo de unidades de salud.</p>
+      </div>
     </div>
+
+    <!-- HABILIDADES TÉCNICAS 1 -->
+    <div class="tile medium tile-green">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Análisis de Datos y Estadístico</p>
+        <ul>
+          <li>Capacidad para procesar y analizar información cuantitativa y cualitativa</li>
+          <li>Análisis de datos clínicos y estadísticas de salud</li>
+          <li>Análisis estadístico y reportes clínicos</li>
+          <li>Interpretación y presentación de información clínica</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 2 -->
+    <div class="tile medium tile-green">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Análisis de Datos (Continuación)</p>
+        <ul>
+          <li>Análisis de datos con herramientas avanzadas (Python, Business Analytics)</li>
+          <li>Análisis de datos con herramientas como Excel, Looker Studio</li>
+          <li>Análisis de Datos: MySQL, RStudio, Looker Studio</li>
+          <li>Visualización de Datos: Dashboards interactivos, reportes automatizados</li>
+          <li>Dominio de la Clasificación Internacional de Enfermedades (CIE-11) para morbilidad y mortalidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 3 -->
+    <div class="tile medium tile-teal">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Gestión de Archivos Clínicos</p>
+        <ul>
+          <li>Organización y mantenimiento de registros clínicos y administrativos</li>
+          <li>Gestión de Archivos: Organización, digitalización y cumplimiento normativo</li>
+          <li>Gestión documental</li>
+          <li>Gestión de bases de datos y sistemas documentales</li>
+          <li>Gestión de datos clínicos (organización, clasificación, análisis)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 4 -->
+    <div class="tile medium tile-teal">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Gestión de Archivos (Continuación)</p>
+        <ul>
+          <li>Sistemas de registros electrónicos y normativas de confidencialidad</li>
+          <li>Conocimiento en protección de datos (Ley Federal de Protección de Datos Personales)</li>
+          <li>Manejo de información sensible</li>
+        </ul>
+        <p class="section-title">Cumplimiento Normativo</p>
+        <ul>
+          <li>Conocimiento en normativas de seguridad del paciente</li>
+          <li>Acciones Esenciales para la Seguridad del Paciente (AESP)</li>
+          <li>Conocimiento en protección de datos personales</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 5 -->
+    <div class="tile large tile-purple">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Herramientas Tecnológicas</p>
+        <ul>
+          <li>Dominio de sistemas de bases de datos, hojas de cálculo (Excel) y software estadístico</li>
+          <li>Uso de herramientas virtuales para administración de proyectos</li>
+          <li>Conocimiento en Big Data, sistemas BI, bases de datos</li>
+          <li>Programación (JavaScript para automatización de procesos, Python)</li>
+          <li>Looker Studio, MySQL, WordPress (creación y gestión de sitios informativos)</li>
+          <li>Bootstrap, React, UI/UX Design con Figma, HTML, CSS</li>
+          <li>Herramientas digitales</li>
+        </ul>
+        <p class="section-title">Gestión y Optimización</p>
+        <ul>
+          <li>Enfoque en mejora continua y procesos eficientes</li>
+          <li>Optimización de procesos estadísticos y de archivo clínico</li>
+          <li>Evaluación de procesos</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES BLANDAS -->
+    <div class="tile medium tile-orange">
+      <div class="scrollable">
+        <h3>Habilidades Interpersonales</h3>
+        <ul>
+          <li>Trabajo en equipo</li>
+          <li>Liderazgo y coordinación de equipos multidisciplinarios</li>
+          <li>Comunicación efectiva</li>
+          <li>Resolución de conflictos</li>
+          <li>Motivación para el trabajo</li>
+          <li>Adaptabilidad en entornos complejos o de contingencia</li>
+          <li>Ética profesional</li>
+          <li>Integridad y confidencialidad</li>
+          <li>Trato Digno</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- OTRAS HABILIDADES -->
+    <div class="tile small tile-orange">
+      <div class="scrollable">
+        <h3>Otras Habilidades</h3>
+        <ul class="compact-list">
+          <li>Atención al detalle</li>
+          <li>Capacidad analítica</li>
+          <li>Manejo de estrés</li>
+          <li>Trabajo remoto</li>
+          <li>Marketing digital</li>
+          <li>Networking</li>
+          <li>Innovación</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS 1 -->
+    <div class="tile tall tile-purple">
+      <div class="scrollable">
+        <h3>Certificaciones Tecnológicas</h3>
+        <ul>
+          <li>Principios Básicos de Big Data <span class="year-badge">2022</span></li>
+          <li>Programación con JavaScript <span class="year-badge">2022</span></li>
+          <li>Gobernanza TI <span class="year-badge">2022</span></li>
+          <li>Analista de Proyectos BI <span class="year-badge">2022</span></li>
+          <li>Evaluador de Procesos <span class="year-badge">2022</span></li>
+          <li>Asistente Web <span class="year-badge">2022</span></li>
+          <li>Desarrollador de Contenido Digital <span class="year-badge">2022</span></li>
+          <li>Gestor de Imagen Web <span class="year-badge">2022</span></li>
+          <li>Técnico en Business Analytics <span class="year-badge">2022</span></li>
+          <li>Business Analytics (Curso Avanzado) <span class="year-badge">2023</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS 2 -->
+    <div class="tile tall tile-blue">
+      <div class="scrollable">
+        <h3>Certificaciones Tecnológicas</h3>
+        <ul>
+          <li>Optimización de Modelos de Aprendizaje Automático en Banca con Python <span class="year-badge">2022</span></li>
+          <li>Marketing Digital <span class="year-badge">2022</span></li>
+          <li>Networking y Marketing Personal <span class="year-badge">2022</span></li>
+          <li>Trabajo Remoto <span class="year-badge">2022</span></li>
+          <li>JavaScript Moderno <span class="year-badge">2023</span></li>
+          <li>Diseño UX/UI con Figma <span class="year-badge">2023</span></li>
+          <li>Desarrollo de Tiendas Virtuales con WordPress <span class="year-badge">2023</span></li>
+          <li>Bootstrap 5: El Curso Completo, Práctico y Desde Cero <span class="year-badge">2024</span></li>
+          <li>UI/UX Design Hybrid: From Figma to HTML, CSS, and JavaScript <span class="year-badge">2024</span></li>
+          <li>React: De cero a experto (Hooks y MERN) <span class="year-badge">2023</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS 3 -->
+    <div class="tile medium tile-teal">
+      <div class="scrollable">
+        <h3>Certificaciones Tecnológicas</h3>
+        <ul>
+          <li>Registro de Marca. ¡Hazlo tú mismo! <span class="year-badge">2024</span></li>
+          <li>Ciencia de Datos con MySQL, RStudio y Looker Studio: Casos Reales <span class="year-badge">2024</span></li>
+          <li>Build a Free Website with WordPress <span class="year-badge">2024</span></li>
+          <li>Fundamentals of Digital Marketing <span class="year-badge">2024</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES SALUD 1 -->
+    <div class="tile tall tile-green">
+      <div class="scrollable">
+        <h3>Certificaciones en Salud</h3>
+        <ul>
+          <li>Acciones Esenciales para la Seguridad del Paciente <span class="year-badge">2023</span></li>
+          <li>Actualización de Acciones Esenciales para la Seguridad del Paciente (AESP) <span class="year-badge">2024</span></li>
+          <li>Protección de Datos Personales <span class="year-badge">2023</span></li>
+          <li>Ética e Integridad en el Servicio Público <span class="year-badge">2023</span></li>
+          <li>Manejo de Residuos Peligrosos Biológico-Infecciosos (RPBI) <span class="year-badge">2023</span></li>
+          <li>Guía para la Expedición del Certificado Electrónico de Nacimiento <span class="year-badge">2023</span></li>
+          <li>Interculturalidad y Género en Derechos Humanos <span class="year-badge">2023</span></li>
+          <li>Higiene de Manos <span class="year-badge">2023</span></li>
+          <li>Curso de Higiene de Manos <span class="year-badge">2024</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES SALUD 2 -->
+    <div class="tile tall tile-orange">
+      <div class="scrollable">
+        <h3>Certificaciones en Salud</h3>
+        <ul>
+          <li>1er. Curso Básico de la Clasificación Internacional de Enfermedades (CIE-11) - Módulo II: Morbilidad <span class="year-badge">2024</span></li>
+          <li>1er. Curso Básico de la Clasificación Internacional de Enfermedades (CIE-11) - Módulo I: Mortalidad <span class="year-badge">2024</span></li>
+          <li>Archivo Clínico y Documentación</li>
+          <li>Programa de Capacitación en Infección por SARS-CoV-2 <span class="year-badge">2020</span></li>
+          <li>Derechos Humanos, Género y Salud <span class="year-badge">2018</span></li>
+          <li>Trato Digno a través del Trabajo en Equipo <span class="year-badge">2019</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CURSOS COMPLEMENTARIOS 1 -->
+    <div class="tile medium tile-red">
+      <div class="scrollable">
+        <h3>Cursos Complementarios</h3>
+        <ul>
+          <li>Matemáticas Aplicadas a las Finanzas <span class="year-badge">2004</span></li>
+          <li>Asesor en Estrategias de Inversión <span class="year-badge">2006</span></li>
+          <li>Nómina Integral <span class="year-badge">2004</span></li>
+          <li>Relaciones Humanas y Trabajo en Equipo <span class="year-badge">2014</span></li>
+          <li>Calidad en el Servicio <span class="year-badge">2005</span></li>
+          <li>Motivación para el Trabajo <span class="year-badge">2003</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CURSOS COMPLEMENTARIOS 2 -->
+    <div class="tile medium tile-pink">
+      <div class="scrollable">
+        <h3>Cursos Complementarios</h3>
+        <ul>
+          <li>Inglés Básico <span class="year-badge">2015</span></li>
+          <li>Certificado como Administrador de Proyectos para Ambientes Virtuales de Aprendizaje <span class="year-badge">2022</span></li>
+          <li>Jornadas de Capacitación en Informática <span class="year-badge">2018</span></li>
+          <li>Taller de Estrategias para el Manejo de Estrés <span class="year-badge">2021</span></li>
+          <li>Jornadas de Actualización Administrativas III <span class="year-badge">2020</span></li>
+          <li>Jornadas de Actualización Administrativa <span class="year-badge">2022</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- LOGROS DESTACADOS -->
+    <div class="tile large tile-teal">
+      <div class="scrollable">
+        <h3>Logros Destacados</h3>
+        <ul>
+          <li>Diseño y registro de un sistema de gestión documental para el sector salud, optimizando procesos de administración financiera</li>
+          <li>Reconocimiento por desempeño sobresaliente en evaluación CENEVAL (2017)</li>
+          <li>Registro de Derecho de Autor (2016) por la creación de una base de datos para el gasto directo de unidades de salud</li>
+          <li>Proyectos Destacados: Desarrollo de Sistema para control de Cartillas Nacionales de Salud en la Región Sanitaria VIII (2021)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- INFORMACIÓN ADICIONAL -->
+    <div class="tile small tile-blue">
+      <div class="scrollable">
+        <h3>Información Adicional</h3>
+        <p><strong>Disponibilidad:</strong> Inmediata</p>
+        <p><strong>Idiomas:</strong> Español: Nativo. Inglés: Básico.</p>
+      </div>
+    </div>
+
+    <!-- DOCUMENTACIÓN -->
+    <div class="tile small tile-green">
+      <div class="scrollable">
+        <h3>Documentación</h3>
+        <p>Documentación respaldatoria disponible para verificación: Constancias y certificados emitidos por la Universidad de Guadalajara, Udemy, Secretaría de Salud Jalisco, CENEVAL, Coursera y Capacítate para el Empleo.</p>
+        <p>Registro de Derecho de Autor (INDautor, 2016).</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 1 -->
+    <div class="tile medium tile-purple">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Formación en Business Analytics, Marketing Digital, y gestión de datos, con experiencia en el análisis de información clínica y estadísticas de salud.</p>
+        <p>Certificado en acciones esenciales para la seguridad del paciente. Habilidades en herramientas digitales, trabajo remoto y optimización de procesos, orientado a la mejora continua y al cumplimiento normativo en archivos clínicos.</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 2 -->
+    <div class="tile medium tile-orange">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Amplia experiencia en gestión de datos, estadísticas y archivo clínico, respaldado por una sólida formación en protección de datos personales, ética en servicios públicos, y manejo de información sensible.</p>
+        <p>Capacitado en herramientas tecnológicas modernas y comprometido con la integridad y eficiencia en el manejo de registros médicos.</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 3 -->
+    <div class="tile medium tile-red">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Formación especializada en estadísticas de salud, clasificación de enfermedades (CIE-11), y manejo de archivos clínicos.</p>
+        <p>Experiencia en capacitación en seguridad del paciente, higiene de manos, y herramientas tecnológicas para la gestión de datos. Comprometido con la calidad, la innovación y el cumplimiento de estándares en el ámbito de la salud.</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 4 -->
+    <div class="tile medium tile-pink">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Especializado en ciencia de datos, gestión de información clínica y análisis estadístico, con formación en herramientas como MySQL, RStudio, Looker Studio y WordPress.</p>
+        <p>Experiencia en el manejo de bases de datos, visualización de datos y desarrollo de soluciones tecnológicas para la optimización de procesos clínicos y estadísticos.</p>
+      </div>
+    </div>
+
+    <!-- TAGS HABILIDADES 1 -->
+    <div class="tile small tile-teal">
+      <div class="scrollable">
+        <h3>Habilidades Clave</h3>
+        <div class="tags">
+          <span class="tag">Análisis Datos</span>
+          <span class="tag">Estadísticas</span>
+          <span class="tag">Archivo Clínico</span>
+          <span class="tag">Gestión Documental</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">RStudio</span>
+          <span class="tag">Looker Studio</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGS HABILIDADES 2 -->
+    <div class="tile small tile-blue">
+      <div class="scrollable">
+        <h3>Habilidades Clave</h3>
+        <div class="tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">React</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Figma</span>
+          <span class="tag">WordPress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGS HABILIDADES 3 -->
+    <div class="tile small tile-green">
+      <div class="scrollable">
+        <h3>Habilidades Clave</h3>
+        <div class="tags">
+          <span class="tag">Business Analytics</span>
+          <span class="tag">Big Data</span>
+          <span class="tag">Gobernanza TI</span>
+          <span class="tag">CIE-11</span>
+          <span class="tag">Seguridad Paciente</span>
+          <span class="tag">Protección Datos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES URL -->
+    <div class="tile small tile-purple">
+      <div class="scrollable">
+        <h3>Certificados URL</h3>
+        <p><strong>Ciencia de Datos:</strong><br>ude.my/UC-a@afied1-af86-4751-93d5-d8147a94a0e</p>
+        <p><strong>WordPress:</strong><br>coursera.org/verify/WRAXIOST4IPU</p>
+      </div>
+    </div>
+
   </div>
 
-  <script>
-    /* ---------- MATRIX AZUL: ligero, matemático, cinematográfico ---------- */
-
-    const canvas = document.getElementById('matrix-bg');
-    const ctx = canvas.getContext('2d', { alpha: true });
-
-    // configuración elegante y controlable
-    const config = {
-      baseFontSize: 18,            // tamaño base (se adapta por ancho)
-      density: 0.9,                // densidad de columnas (0.2..1.5)
-      fadeAlpha: 0.08,             // opacidad de la franja de fade (menor = más rastro)
-      glow: true,                  // efecto glow en el texto
-      maxFPS: 45,                  // tope de frames por segundo
-      intensity: 'high',           // 'high' o 'low' (botón lo alterna)
-      chars: "01∑πλµψΩβγδε⊗⋆•·"   // conjunto de caracteres
-    };
-
-    // estado
-    let columns = [];
-    let colsCount = 0;
-    let lastTime = performance.now();
-    let running = true;
-    let rafId = null;
-
-    // adapta tamaño y recalcula columnas
-    function resizeCanvas() {
-      const dpr = Math.max(1, window.devicePixelRatio || 1);
-      canvas.width = Math.floor(window.innerWidth * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // adapt font size modestamente según ancho
-      const w = window.innerWidth;
-      const fontSize = Math.max(12, Math.min(22, Math.round(config.baseFontSize * (w / 1400))));
-      ctx.font = `${fontSize}px "Courier New", Courier, monospace`;
-      ctx.textBaseline = 'top';
-
-      const colWidth = fontSize * 0.62; // monospace approx width
-      colsCount = Math.max(8, Math.floor((window.innerWidth * config.density) / colWidth));
-
-      // create columns with randomized starting y
-      columns = new Array(colsCount).fill(0).map((_, i) => {
-        return {
-          x: i * colWidth,
-          y: Math.random() * -canvas.height * 0.6,
-          speed: (0.6 + Math.random() * 1.6) * (config.intensity === 'high' ? 1.0 : 0.5),
-          step: Math.floor(4 + Math.random() * 12) // how many frames a char stays
-        };
-      });
-
-      // precompute gradient used per column for subtle variety
-      // not heavy: single linear gradient across canvas
-      matrixGradient = ctx.createLinearGradient(0, 0, window.innerWidth, window.innerHeight);
-      matrixGradient.addColorStop(0, 'rgba(0,183,255,0.65)');
-      matrixGradient.addColorStop(0.5, 'rgba(0,123,200,0.55)');
-      matrixGradient.addColorStop(1, 'rgba(50,170,255,0.45)');
-    }
-
-    // performance: only repaint if enough time has passed
-    function loop(now) {
-      const elapsed = now - lastTime;
-      const minFrame = 1000 / config.maxFPS;
-      if (elapsed < minFrame) {
-        rafId = requestAnimationFrame(loop);
-        return;
-      }
-      lastTime = now;
-
-      // pequeña capa semitransparente para el efecto de estela (trailing)
-      ctx.fillStyle = `rgba(2,6,12,${config.fadeAlpha})`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // text style
-      if (config.glow) {
-        ctx.shadowColor = 'rgba(0,180,255,0.25)';
-        ctx.shadowBlur = 8;
-      } else {
-        ctx.shadowBlur = 0;
-      }
-
-      // seleccionar color (usamos gradiente global y una ligera variación por columna)
-      ctx.fillStyle = matrixGradient;
-
-      // para cada columna: dibujar char y avanzar
-      for (let i = 0; i < columns.length; i++) {
-        const col = columns[i];
-
-        // escoger caracter - combinación pseudo-matemática
-        const c = config.chars.charAt(Math.floor(Math.abs(Math.sin((col.y + i) * 0.012)) * config.chars.length)) || '0';
-
-        const fontSizePx = parseInt(ctx.font, 10);
-        // dibujar sombra de cabeza (carácter brillante)
-        ctx.fillStyle = 'rgba(180,235,255,0.95)';
-        ctx.fillText(c, col.x, col.y);
-
-        // y un segundo carácter ligeramente abajo con menor alpha para sensación de movimiento
-        ctx.fillStyle = 'rgba(100,180,220,0.55)';
-        ctx.fillText(c, col.x, col.y + fontSizePx * 0.65);
-
-        // avanzar
-        col.y += fontSizePx * 0.32 * col.speed;
-
-        // reinicia con probabilidad cuando sale de pantalla
-        if (col.y > window.innerHeight + 50 && Math.random() > 0.97) {
-          col.y = Math.random() * -window.innerHeight * 0.6;
-          col.speed = (0.6 + Math.random() * 1.6) * (config.intensity === 'high' ? 1.0 : 0.5);
-        }
-      }
-
-      // request next frame if running
-      if (running) rafId = requestAnimationFrame(loop);
-    }
-
-    // pausa/activa animación (util para reducir CPU o durante captura)
-    function setRunning(v) {
-      running = !!v;
-      if (running) {
-        lastTime = performance.now();
-        if (!rafId) rafId = requestAnimationFrame(loop);
-        canvas.style.opacity = '0.22';
-      } else {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;
-        canvas.style.opacity = '0.06';
-      }
-    }
-
-    // alterna intensidad para modo "phi nerd" o "economía de batería"
-    function toggleMatrixIntensity() {
-      const btn = document.getElementById('matrix-toggle');
-      if (config.intensity === 'high') {
-        config.intensity = 'low';
-        config.fadeAlpha = 0.12;
-        config.maxFPS = 25;
-        btn.textContent = 'Matrix: Baja';
-        btn.style.color = 'var(--muted)';
-      } else {
-        config.intensity = 'high';
-        config.fadeAlpha = 0.08;
-        config.maxFPS = 45;
-        btn.textContent = 'Matrix: Alta';
-        btn.style.color = '#00b7ff';
-      }
-      // recalcular columnas (velocidad se adapta)
-      resizeCanvas();
-    }
-
-    // pausa cuando pestaña invisible (ahorra CPU)
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) setRunning(false);
-      else setRunning(true);
-    });
-
-    // reducir efecto en pantallas pequeñas para rendimiento
-    function adaptToDevice() {
-      if (window.innerWidth < 800) {
-        config.baseFontSize = 12;
-        config.density = 0.6;
-        config.maxFPS = 28;
-      } else {
-        config.baseFontSize = 18;
-        config.density = 0.9;
-        config.maxFPS = 45;
-      }
-    }
-
-    // init
-    let matrixGradient = null;
-    function initMatrix() {
-      adaptToDevice();
-      resizeCanvas();
-      setRunning(true);
-    }
-
-    // reinicia en resize con debounce ligero
-    let resizeTimer = null;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        adaptToDevice();
-        resizeCanvas();
-      }, 180);
-    });
-
-    // iniciar en load
-    window.addEventListener('load', () => {
-      initMatrix();
-    });
-
-    // detener si se hace print (evita frames al imprimir)
-    window.matchMedia('print').addListener((m) => {
-      if (m.matches) setRunning(false);
-      else setRunning(true);
-    });
-
-    /* ---------- resto del script: funcionalidad del sitio (sin cambios importantes) ---------- */
-
-    // Video modal functionality
-    const videoModal = document.getElementById('video-modal');
-    const videoBtn = document.getElementById('video-btn');
-    const video = videoModal.querySelector('video');
-    const closeBtn = document.getElementById('close-btn');
-    const videoContainer = document.getElementById('video-container');
-
-    videoBtn.onclick = function () {
-      videoModal.style.display = 'flex';
-      video.currentTime = 0;
-      video.play();
-    };
-
-    closeBtn.onclick = function (event) {
-      event.stopPropagation();
-      closeVideo();
-    };
-
-    videoContainer.onclick = function (event) {
-      event.stopPropagation();
-    };
-
-    function closeVideo() {
-      videoModal.style.display = 'none';
-      video.pause();
-    }
-
-    // Cerrar modal al hacer clic fuera del video
-    videoModal.onclick = function (e) {
-      if (e.target === videoModal) closeVideo();
-    };
-
-    // Fecha automática en español
-    (function setDate() {
-      const el = document.getElementById('today');
-      try {
-        const d = new Date();
-        const fmt = new Intl.DateTimeFormat('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
-        el.textContent = fmt.format(d);
-      } catch (e) { el.textContent = ''; }
-    })();
-
-    // Compact toggle (reduce paddings / font sizes ligeramente)
-    function toggleCompact() {
-      document.documentElement.classList.toggle('compact-mode');
-      document.body.classList.toggle('compact-mode');
-      const compact = document.body.classList.contains('compact-mode');
-      document.querySelectorAll('.card').forEach(c => c.style.transform = compact ? 'scale(.995)' : '');
-      if (compact) {
-        document.documentElement.style.setProperty('--page-padding', '12px');
-      } else {
-        document.documentElement.style.setProperty('--page-padding', '28px');
-      }
-    }
-
-    // Theme toggle (dark <-> warm gold)
-    let _theme = 'dark';
-    function toggleTheme() {
-      if (_theme === 'dark') {
-        // warm/gold variant
-        document.documentElement.style.setProperty('--bg', '#071218');
-        document.documentElement.style.setProperty('--card', '#071218');
-        document.documentElement.style.setProperty('--accent', '#d4af37');
-        document.documentElement.style.setProperty('--gold', '#00b7ff'); // swap intentionally for dynamic feel
-        _theme = 'gold';
-        document.getElementById('themeBtn').textContent = '✨ Oro';
-      } else {
-        // back to default cool
-        document.documentElement.style.setProperty('--bg', '#0b0f14');
-        document.documentElement.style.setProperty('--card', '#071021');
-        document.documentElement.style.setProperty('--accent', '#00b7ff');
-        document.documentElement.style.setProperty('--gold', '#d4af37');
-        _theme = 'dark';
-        document.getElementById('themeBtn').textContent = '🎭 Tema';
-      }
-    }
-
-    // Contact modal
-    function openContact() { 
-      document.getElementById('contactModal').style.display = 'flex'; 
-    }
-    
-    function closeContact() { 
-      document.getElementById('contactModal').style.display = 'none'; 
-    }
-
-    // vCard download (basic)
-    function downloadVCard() {
-      const vcard = [
-        'BEGIN:VCARD',
-        'VERSION:3.0',
-        'FN:Jerónimo Ricardo Ramírez Torres',
-        'ORG:Hospital Regional Puerto Vallarta',
-        'TEL;TYPE=WORK,VOICE:+52-322-235-4331',
-        'EMAIL;TYPE=PREF,INTERNET:jeronimoricardo1@gmail.com',
-        'ADR;TYPE=WORK:;;Puerto Vallarta;Jalisco;México',
-        'NOTE:Docente Universitario — Estadísticas, Finanzas y Sistemas',
-        'END:VCARD'
-      ].join('\r\n');
-      const blob = new Blob([vcard], { type: 'text/vcard' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Jeronimo_Ramirez.vcf';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    // Smooth scroll to section
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // Decorative math/finance curve + dots generator (mantengo tu versión)
-    (function decorate() {
-      const svg = document.getElementById('decorSVG');
-      const path = document.getElementById('curvePath');
-      const dotsG = document.getElementById('dots');
-
-      function resize() {
-        const w = svg.clientWidth;
-        const h = svg.clientHeight;
-        // generate a smooth parametric curve (sum of sine waves) across width
-        const points = [];
-        const step = Math.max(8, Math.round(w / 120));
-        for (let x = 0; x <= w; x += step) {
-          const t = x / w * Math.PI * 2;
-          // combine sinusoids to look "statistical"
-          const y = h * 0.45 + Math.sin(t * 0.9) * (h * 0.06) + Math.sin(t * 2.7) * (h * 0.035) + Math.cos(t * 1.6) * (h * 0.025);
-          points.push({ x: Math.round(x), y: Math.round(y) });
-        }
-        // make path d
-        let d = '';
-        for (let i = 0; i < points.length; i++) {
-          const p = points[i];
-          if (i === 0) d += `M ${p.x} ${p.y} `;
-          else {
-            const prev = points[i - 1];
-            const cx = (prev.x + p.x) / 2;
-            d += `Q ${prev.x} ${prev.y} ${cx} ${(prev.y + p.y) / 2} `;
-          }
-        }
-        path.setAttribute('d', d);
-
-        // dots field: random but deterministic-ish based on size
-        dotsG.innerHTML = '';
-        const cols = Math.max(12, Math.round(w / 80));
-        const rows = Math.max(6, Math.round(h / 80));
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
-            const cx = (i / cols) * w + (Math.sin(i * j + (w + h) / 200) * 6);
-            const cy = (j / rows) * h + (Math.cos(i * j + (w + h) / 300) * 6);
-            const r = 0.9 + Math.abs(Math.sin(i * 0.3 + j * 0.7)) * 1.2;
-            const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            c.setAttribute('cx', cx);
-            c.setAttribute('cy', cy);
-            c.setAttribute('r', r);
-            c.setAttribute('fill', 'rgba(0,183,255,0.03)');
-            dotsG.appendChild(c);
-          }
-        }
-      }
-
-      // animate path stroke-dashoffset to create flow
-      let offset = 0;
-      function animate() {
-        offset = (offset + 0.6) % 1000;
-        path.style.strokeDasharray = '600';
-        path.style.strokeDashoffset = String(-offset);
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('resize', () => { resize(); });
-      resize();
-      animate();
-    })();
-
-    // Small accessible enhancement: allow Enter key on portrait to upload / replace photo placeholder
-    (function portraitReplace() {
-      const ph = document.getElementById('photoPlaceholder');
-      ph.setAttribute('tabindex', '0');
-      ph.setAttribute('role', 'button');
-      ph.setAttribute('aria-label', 'Reemplazar fotografía (no subida real, placeholder)');
-      ph.addEventListener('keydown', (e) => { if (e.key === 'Enter') { alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); } });
-      ph.addEventListener('click', () => { alert('Aquí podrías reemplazar la fotografía; pega una URL o arrastra una imagen en tu implementación final.'); });
-    })();
-
-    // Small UX: when printing, reduce heavy decorations
-    window.matchMedia('print').addListener(function (m) {
-      if (m.matches) {
-        document.querySelectorAll('.canvas-wrap, .matrix, .portrait .frame-deco').forEach(n => n.style.display = 'none');
-        setRunning(false);
-      } else {
-        setRunning(true);
-      }
-    });
-  </script>
 </body>
 </html>
