@@ -1,241 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="utf-8">
-<title>IMAX Blue Metro</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMAX Blue Metro</title>
 
-<!-- Fuentes -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #020817;
+      font-family: "Segoe UI", sans-serif;
+      color: #e2e8f0;
+    }
 
-<style>
-/* ----------------- BASE / THEME IMAX BLUE ----------------- */
-:root{
-  --bg-dark:#03071a;
-  --glass: rgba(255,255,255,0.04);
-  --accent:#0db4ff;
-  --muted: #9fbfe6;
-  --card-bg: rgba(2,10,20,0.6);
-  --card-border: rgba(13,180,255,0.14);
-  --glass-2: rgba(255,255,255,0.03);
-  --tile-gap: 14px;
-}
+    /* --- METRO GRID AUTHENTIC --- */
+    .metro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-auto-rows: 160px;
+      grid-auto-flow: dense;
+      gap: 18px;
+      max-width: 1200px;
+    }
 
-html,body{
-  height:100%; margin:0;
-  font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  background:var(--bg-dark); color:#e8f4ff;
-  overflow-x:hidden;
-}
+    /* --- TILE BASE --- */
+    .tile {
+      background: rgba(0, 102, 204, 0.08);
+      border: 1px solid rgba(0, 102, 204, 0.25);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.2s ease-out;
+      backdrop-filter: blur(6px);
+    }
 
-/* cinematic background */
-body::before{
-  content:"";
-  position:fixed; inset:0; z-index:-4;
-  background:url("https://images.unsplash.com/photo-1503264116251-35a269479413?q=80&w=2000&auto=format&fit=crop") center/cover;
-  opacity:.18; filter:blur(6px) saturate(120%);
-}
-body::after{
-  content:""; position:fixed; inset:0; z-index:-3;
-  background:
-    radial-gradient(800px 500px at 10% 20%, rgba(2,120,255,0.12), transparent 20%),
-    radial-gradient(900px 600px at 90% 80%, rgba(0,90,200,0.14), transparent 20%);
-  mix-blend-mode: screen; filter: blur(40px);
-}
+    .tile:hover {
+      background: rgba(0, 122, 255, 0.16);
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(0, 122, 255, 0.25);
+    }
 
-/* --------------- MATRIX CANVAS --------------- */
-canvas#matrix{
-  position:fixed; inset:0; z-index:-2; width:100vw; height:100vh; opacity:.22;
-}
+    /* --- TILE SIZES EXACT LIKE WINDOWS PHONE --- */
+    .small {
+      grid-row: span 1;
+      grid-column: span 1;
+    }
 
-/* --------------- METRO WRAP --------------- */
-.wrap{
-  width:95%; max-width:1500px;
-  margin:60px auto; padding-bottom:80px;
-}
+    .medium {
+      grid-row: span 1;
+      grid-column: span 2;
+    }
 
-/* --------------- MASONRY METRO GRID --------------- */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  grid-auto-flow: dense;
-  grid-auto-rows:12px; /* unidad */
-  gap:var(--tile-gap);
-  align-items:start;
-}
+    .wide {
+      grid-row: span 1;
+      grid-column: span 3;
+    }
 
-/* --------------- TILE / CARD --------------- */
-.tile{
-  position:relative;
-  background:var(--card-bg);
-  border:1px solid var(--card-border);
-  border-radius:8px;
-  padding:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.45);
-  overflow:hidden;
-  backdrop-filter:blur(5px);
-  cursor:pointer;
-  transition:box-shadow .3s ease;
-}
+    .large {
+      grid-row: span 2;
+      grid-column: span 2;
+    }
 
-/* Metro hover: NO escala, NO respiración */
-.tile:hover{
-  box-shadow:0 12px 40px rgba(2,120,255,0.24);
-}
+    .tall {
+      grid-row: span 3;
+      grid-column: span 1;
+    }
 
-.tile h3{
-  margin:0 0 6px;
-  font-family:"Playfair Display",serif;
-  color:#fff;
-  font-size:1.25rem;
-  text-shadow:0 0 10px rgba(13,180,255,0.12);
-}
-.tile p{
-  margin:0;
-  color:var(--muted);
-  font-size:0.95rem;
-  line-height:1.4rem;
-}
+    /* --- TAGS DE TECNOLOGÍAS --- */
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
 
-/* Tamaños Metro auténticos */
-.tile.small{ grid-row-end:span 16; }
-.tile.medium{ grid-row-end:span 22; }
-.tile.wide{ grid-row-end:span 30; }
-.tile.tall{ grid-row-end:span 38; }
-.tile.big{ grid-row-end:span 46; }
+    .tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
 
-/* --------------- HOVER REVEAL (contenido original largo) --------------- */
-.reveal{
-  position:absolute; inset:0; padding:18px;
-  background:rgba(0,0,0,0.78);
-  opacity:0; overflow:auto;
-  transition:opacity .25s ease;
-}
-.tile:hover .reveal{
-  opacity:1;
-}
-
-/* scrollbars */
-.reveal::-webkit-scrollbar{ width:8px; }
-.reveal::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,var(--accent),#006bbd);
-  border-radius:8px;
-}
-
-/* --------------- ICONOS --------------- */
-.icons{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
-.logo{
-  width:36px; height:36px;
-  display:flex; align-items:center; justify-content:center;
-  border-radius:6px;
-  background:var(--glass-2);
-  border:1px solid rgba(255,255,255,0.06);
-  color:#dff3ff; font-size:12px;
-}
-
-/* --------------- LIVE TILE ANIMACIONES --------------- */
-
-/* Flip (Metro original) */
-.tile.flip .tile-inner{
-  width:100%; height:100%;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform 900ms cubic-bezier(.2,.9,.3,1);
-}
-.tile.flip:hover .tile-inner{
-  transform:rotateY(180deg);
-}
-.tile-face{position:absolute; inset:0; backface-visibility:hidden; padding:16px;}
-.tile-face.back{ transform:rotateY(180deg); }
-
-/* Slide vertical (News tile) */
-.tile.slide .tile-inner{
-  animation:slideY 9s linear infinite;
-}
-@keyframes slideY{
-  0%{transform:translateY(0)}
-  33%{transform:translateY(-100%)}
-  66%{transform:translateY(-200%)}
-  100%{transform:translateY(0)}
-}
-
-/* Fade cross-dissolve (Fotos) */
-.tile.fade .tile-inner{
-  animation:fadeMetro 7s ease-in-out infinite;
-}
-@keyframes fadeMetro{
-  0%,45%{opacity:1}
-  50%{opacity:0}
-  55%,100%{opacity:1}
-}
-
-/* --------------- RESPONSIVE --------------- */
-@media(max-width:600px){
-  .grid{
-    grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-    grid-auto-rows:14px;
-  }
-}
-</style>
+    /* Imagen */
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
-<canvas id="matrix"></canvas>
+  <div class="metro-grid">
 
-<div class="wrap">
-  <div class="grid">
-
-    <!-- EJEMPLO DE TILE SIMPLE (tu contenido va dentro) -->
+    <!-- MI INFORMACIÓN (mantengo tu texto original intacto) -->
     <div class="tile medium">
-      <h3>Mi Información</h3>
-      <p>Programador autodidacta, analista clínico, amante de Moringa y la montaña.</p>
-
-      <div class="icons">
-        <div class="logo">JS</div>
-        <div class="logo">BQ</div>
-        <div class="logo">GS</div>
-        <div class="logo">HTML</div>
-      </div>
-
-      <div class="reveal">
-        Aquí va TODO tu texto largo original, intacto, sin borrar nada.  
-        Este cuadro aparece solo con hover.
+      <h2 style="margin:0;">Mi Información</h2>
+      <p style="margin-top:8px;">
+        Programador autodidacta, analista clínico, amante de Moringa y la montaña.
+      </p>
+      <div class="tags">
+        <span class="tag">JS</span>
+        <span class="tag">BQ</span>
+        <span class="tag">GS</span>
+        <span class="tag">HTML</span>
       </div>
     </div>
 
-    <!-- EJEMPLO FLIP -->
-    <div class="tile flip small">
-      <div class="tile-inner">
-        <div class="tile-face">
-          <h3>Flip</h3>
-          <p>Touch style</p>
-        </div>
-        <div class="tile-face back">
-          <p>Contenido oculto estilo Live Tile Flip.</p>
-        </div>
-      </div>
+    <!-- CAJA VACÍA PARA METRO EFECTO -->
+    <div class="tile small"></div>
+    <div class="tile small"></div>
+
+    <!-- IMAGEN -->
+    <div class="tile large">
+      <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=85&w=800" alt="">
     </div>
 
-    <!-- EJEMPLO SLIDE -->
-    <div class="tile slide tall">
-      <div class="tile-inner">
-        <div class="tile-face"><h3>Slide 1</h3></div>
-        <div class="tile-face"><h3>Slide 2</h3></div>
-        <div class="tile-face"><h3>Slide 3</h3></div>
-      </div>
-    </div>
-
-    <!-- EJEMPLO FOTO FADE -->
-    <div class="tile fade medium">
-      <div class="tile-inner">
-        <img src="https://picsum.photos/400/400?1" style="width:100%;border-radius:6px;">
-        <img src="https://picsum.photos/400/400?2" style="width:100%;border-radius:6px;position:absolute;top:0;">
-      </div>
-    </div>
+    <!-- OTROS TILES DEMO – puedes cambiarlos -->
+    <div class="tile small"></div>
+    <div class="tile medium"></div>
+    <div class="tile tall"></div>
+    <div class="tile wide"></div>
 
   </div>
-</div>
 
 </body>
 </html>
