@@ -18,18 +18,18 @@
     /* --- METRO GRID AUTHENTIC --- */
     .metro-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      grid-auto-rows: 160px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-auto-rows: 180px;
       grid-auto-flow: dense;
-      gap: 20px;
-      max-width: 1400px;
+      gap: 22px;
+      max-width: 1600px;
       margin: 0 auto;
     }
 
     /* --- TILE BASE --- */
     .tile {
-      border-radius: 14px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       transition: 0.3s ease-out;
@@ -85,6 +85,22 @@
       background: linear-gradient(135deg, rgba(255, 80, 80, 0.25) 0%, rgba(255, 120, 120, 0.3) 100%);
     }
 
+    .tile-teal {
+      background: linear-gradient(135deg, rgba(0, 168, 150, 0.15) 0%, rgba(0, 200, 180, 0.2) 100%);
+    }
+
+    .tile-teal:hover {
+      background: linear-gradient(135deg, rgba(0, 200, 180, 0.25) 0%, rgba(0, 230, 210, 0.3) 100%);
+    }
+
+    .tile-pink {
+      background: linear-gradient(135deg, rgba(200, 0, 100, 0.15) 0%, rgba(255, 0, 130, 0.2) 100%);
+    }
+
+    .tile-pink:hover {
+      background: linear-gradient(135deg, rgba(255, 0, 130, 0.25) 0%, rgba(255, 50, 160, 0.3) 100%);
+    }
+
     /* --- TILE SIZES --- */
     .small {
       grid-row: span 1;
@@ -116,12 +132,17 @@
       grid-column: span 3;
     }
 
+    .xx-large {
+      grid-row: span 3;
+      grid-column: span 3;
+    }
+
     /* --- TAGS DE TECNOLOGÍAS --- */
     .tags {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .tag {
@@ -134,7 +155,7 @@
 
     /* Texto específico */
     .tile h2, .tile h3 {
-      margin: 0 0 12px 0;
+      margin: 0 0 15px 0;
       font-size: 1.3rem;
     }
 
@@ -143,27 +164,27 @@
     }
 
     .tile p {
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
       font-size: 0.9rem;
       line-height: 1.5;
     }
 
     .tile ul {
       margin: 0;
-      padding-left: 18px;
+      padding-left: 20px;
       font-size: 0.85rem;
       line-height: 1.5;
     }
 
     .tile li {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .tile-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .tile-title {
@@ -179,32 +200,55 @@
 
     .section-title {
       font-size: 1rem;
-      margin: 15px 0 8px 0;
+      margin: 18px 0 10px 0;
       color: rgba(255, 255, 255, 0.9);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      padding-bottom: 4px;
-    }
-
-    .icon {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+      padding-bottom: 6px;
     }
 
     .two-column {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
+      gap: 18px;
     }
 
     .compact-list {
       margin: 0;
-      padding-left: 16px;
+      padding-left: 18px;
       font-size: 0.8rem;
       line-height: 1.4;
     }
 
     .compact-list li {
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+    }
+
+    .scrollable {
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 8px;
+    }
+
+    .scrollable::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .scrollable::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+
+    .scrollable::-webkit-scrollbar-thumb {
+      background: rgba(0, 122, 255, 0.5);
+      border-radius: 3px;
+    }
+
+    .year-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      margin-left: 8px;
     }
   </style>
 </head>
@@ -215,213 +259,433 @@
 
     <!-- NOMBRE Y PUESTO -->
     <div class="tile x-large tile-blue">
-      <h2>Jerónimo Ricardo Ramírez Torres</h2>
-      <p class="tile-subtitle">Apoyo Administrativo en Salud A-3</p>
-      <p>Profesional especializado en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración.</p>
-      <div class="tags">
-        <span class="tag">Gestión Documental</span>
-        <span class="tag">Análisis de Datos</span>
-        <span class="tag">Archivo Clínico</span>
-        <span class="tag">Estadísticas</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Python</span>
-        <span class="tag">MySQL</span>
+      <div class="scrollable">
+        <h2>Jerónimo Ricardo Ramírez Torres</h2>
+        <p class="tile-subtitle">Apoyo Administrativo en Salud A-3</p>
+        <p>Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos estadísticos y de archivo clínico.</p>
+        <p>Posee experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración. Su formación incluye administración y gestión de archivos. Está respaldado por formación en derechos humanos, trabajo en equipo y manejo de estrés en entornos complejos.</p>
+        <p>Certificado en áreas como Big Data, Gobernanza TI y evaluación de procesos, con habilidades para liderar equipos, implementar sistemas de archivo eficientes y generar reportes estadísticos confiables para la toma de decisiones en el ámbito clínico.</p>
+        <div class="tags">
+          <span class="tag">Gestión Documental</span>
+          <span class="tag">Análisis de Datos</span>
+          <span class="tag">Archivo Clínico</span>
+          <span class="tag">Estadísticas</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Business Analytics</span>
+        </div>
       </div>
     </div>
 
     <!-- OBJETIVO PROFESIONAL -->
-    <div class="tile medium tile-green">
-      <div class="icon">🎯</div>
-      <h3>Objetivo Profesional</h3>
-      <p>Aplicar conocimientos para optimizar procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia y calidad en el servicio de salud.</p>
-      <p>Postularse como Jefe de Estadísticas y Archivo Clínico para contribuir con expertise en gestión de datos, mejora de procesos y cumplimiento de estándares de calidad.</p>
+    <div class="tile large tile-green">
+      <div class="scrollable">
+        <h3>Objetivo Profesional</h3>
+        <p>Aplicar sus conocimientos optimizar los procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia y calidad en el servicio de salud.</p>
+        <p>Su formación en matemáticas financieras y estrategias de inversión le permite abordar desafíos técnicos con rigor analítico, mientras que sus habilidades interpersonales facilitan la colaboración en entornos multidisciplinarios.</p>
+        <p>Aplicar sus conocimientos en tecnología, y gestión de información para optimizar los sistemas de estadísticas y archivo clínico, garantizando precisión, confidencialidad y accesibilidad de los datos en beneficio de la institución y los pacientes.</p>
+        <p>Postularse como Jefe de Estadísticas y Archivo Clínico para contribuir con su expertise en la gestión de datos, mejora de procesos y cumplimiento de estándares de calidad, asegurando la eficiencia y confiabilidad de la información en el ámbito de la salud.</p>
+      </div>
     </div>
 
     <!-- FORMACIÓN ACADÉMICA -->
     <div class="tile medium tile-purple">
-      <div class="icon">🎓</div>
-      <h3>Formación Académica</h3>
-      <p><strong>Licenciatura en Administración Financiera y Sistemas</strong></p>
-      <p>Universidad de Guadalajara | 2001 - 2005</p>
-      <p>Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)</p>
-      <p><strong>Bachillerato General</strong></p>
-      <p>Escuela Preparatoria Regional de Ameca | 1994 - 1997</p>
-    </div>
-
-    <!-- EXPERIENCIA PROFESIONAL -->
-    <div class="tile large tile-blue">
-      <div class="icon">💼</div>
-      <h3>Experiencia Profesional</h3>
-      <p><strong>Jefe de Recursos Financieros</strong> - Hospital Regional Puerto Vallarta (2011-2018)</p>
-      <ul>
-        <li>Gestión y organización de archivos contables electrónicos y físicos</li>
-        <li>Análisis de datos para informes administrativos</li>
-        <li>Implementación de protocolos de protección de datos personales</li>
-        <li>Capacitación al personal en manejo de información sensible</li>
-      </ul>
-      <p><strong>Desarrollo de Sistema de Gestión Documental</strong> - OPD Servicios de Salud Jalisco</p>
-      <ul>
-        <li>Registro de Derecho de Autor (2016) por creación de base de datos para el gasto directo de unidades de salud</li>
-      </ul>
-    </div>
-
-    <!-- HABILIDADES TÉCNICAS -->
-    <div class="tile large tile-green">
-      <div class="icon">🛠️</div>
-      <h3>Habilidades Técnicas</h3>
-      <div class="two-column">
-        <div>
-          <p class="section-title">Análisis de Datos</p>
-          <ul class="compact-list">
-            <li>MySQL, RStudio, Looker Studio</li>
-            <li>Python, Business Analytics</li>
-            <li>Excel, Dashboards</li>
-            <li>Estadísticas de salud</li>
-            <li>CIE-11 (Mortalidad/Morbilidad)</li>
-          </ul>
-        </div>
-        <div>
-          <p class="section-title">Desarrollo Web</p>
-          <ul class="compact-list">
-            <li>JavaScript, React</li>
-            <li>HTML, CSS, Bootstrap</li>
-            <li>WordPress</li>
-            <li>UI/UX Design (Figma)</li>
-          </ul>
-        </div>
+      <div class="scrollable">
+        <h3>Formación Académica</h3>
+        <p><strong>Licenciatura en Administración Financiera y Sistemas</strong></p>
+        <p>Universidad de Guadalajara | 2001 - 2005</p>
+        <p>Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)</p>
+        <p><strong>Bachillerato General</strong></p>
+        <p>Escuela Preparatoria Regional de Ameca | 1994 - 1997</p>
       </div>
-      <p class="section-title">Gestión Documental</p>
-      <ul class="compact-list">
-        <li>Archivo clínico y documentación</li>
-        <li>Gestión de bases de datos</li>
-        <li>Protección de datos personales</li>
-        <li>Normativas de confidencialidad</li>
-      </ul>
     </div>
 
-    <!-- CERTIFICACIONES TECNOLÓGICAS -->
-    <div class="tile tall tile-purple">
-      <div class="icon">📜</div>
-      <h3>Certificaciones Tecnológicas</h3>
-      <ul>
-        <li>Técnico en Business Analytics (2022)</li>
-        <li>Business Analytics Avanzado (2023)</li>
-        <li>Principios Básicos de Big Data (2022)</li>
-        <li>Programación con JavaScript (2022)</li>
-        <li>Gobernanza TI (2022)</li>
-        <li>Analista de Proyectos BI (2022)</li>
-        <li>Evaluador de Procesos (2022)</li>
-        <li>Asistente Web (2022)</li>
-        <li>React: De cero a experto (2023)</li>
-        <li>UI/UX Design Hybrid (2024)</li>
-        <li>Bootstrap 5 (2024)</li>
-        <li>JavaScript Moderno (2023)</li>
-        <li>Marketing Digital (2022)</li>
-      </ul>
+    <!-- EXPERIENCIA PROFESIONAL 1 -->
+    <div class="tile large tile-blue">
+      <div class="scrollable">
+        <h3>Experiencia Profesional</h3>
+        <p><strong>Jefe de Recursos Financieros</strong> - Hospital Regional Puerto Vallarta | 2011-2018</p>
+        <ul>
+          <li>Gestión y organización de archivos contables electrónicos y físicos</li>
+          <li>Análisis de datos para informes administrativos</li>
+          <li>Implementación de protocolos de protección de datos personales</li>
+          <li>Capacitación al personal en manejo de información sensible y normativas vigentes</li>
+          <li>Gestión y análisis de datos estadísticos</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- CERTIFICACIONES SALUD -->
-    <div class="tile tall tile-orange">
-      <div class="icon">🏥</div>
-      <h3>Certificaciones en Salud</h3>
-      <ul>
-        <li>CIE-11 - Mortalidad (SSJ, 2024)</li>
-        <li>CIE-11 - Morbilidad (SSJ, 2024)</li>
-        <li>Acciones Esenciales Seguridad del Paciente (2023/2024)</li>
-        <li>Protección de Datos Personales (2023)</li>
-        <li>Ética e Integridad en el Servicio Público (2023)</li>
-        <li>Manejo de RPBI (2023)</li>
-        <li>Higiene de Manos (2023/2024)</li>
-        <li>Interculturalidad y Género en DDHH (2023)</li>
-        <li>Derechos Humanos, Género y Salud (2018)</li>
-        <li>Trato Digno (2019)</li>
-        <li>Capacitación SARS-CoV-2 (2020)</li>
-      </ul>
+    <!-- EXPERIENCIA PROFESIONAL 2 -->
+    <div class="tile medium tile-blue">
+      <div class="scrollable">
+        <h3>Experiencia Profesional</h3>
+        <p><strong>Jefe de Recursos Financieros</strong> (Continuación)</p>
+        <ul>
+          <li>Implementación de sistemas de bases de datos para Recursos Financieros</li>
+          <li>Generación de informes para la toma de decisiones</li>
+          <li>Optimización de procesos de almacenamiento y recuperación de información financiera</li>
+        </ul>
+        <p><strong>Desarrollo de Sistema de Gestión Documental</strong></p>
+        <p>OPD Servicios de Salud Jalisco</p>
+        <p>Registro de Derecho de Autor (2016) por la creación de una base de datos para el gasto directo de unidades de salud.</p>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 1 -->
+    <div class="tile medium tile-green">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Análisis de Datos y Estadístico</p>
+        <ul>
+          <li>Capacidad para procesar y analizar información cuantitativa y cualitativa</li>
+          <li>Análisis de datos clínicos y estadísticas de salud</li>
+          <li>Análisis estadístico y reportes clínicos</li>
+          <li>Interpretación y presentación de información clínica</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 2 -->
+    <div class="tile medium tile-green">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Análisis de Datos (Continuación)</p>
+        <ul>
+          <li>Análisis de datos con herramientas avanzadas (Python, Business Analytics)</li>
+          <li>Análisis de datos con herramientas como Excel, Looker Studio</li>
+          <li>Análisis de Datos: MySQL, RStudio, Looker Studio</li>
+          <li>Visualización de Datos: Dashboards interactivos, reportes automatizados</li>
+          <li>Dominio de la Clasificación Internacional de Enfermedades (CIE-11) para morbilidad y mortalidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 3 -->
+    <div class="tile medium tile-teal">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Gestión de Archivos Clínicos</p>
+        <ul>
+          <li>Organización y mantenimiento de registros clínicos y administrativos</li>
+          <li>Gestión de Archivos: Organización, digitalización y cumplimiento normativo</li>
+          <li>Gestión documental</li>
+          <li>Gestión de bases de datos y sistemas documentales</li>
+          <li>Gestión de datos clínicos (organización, clasificación, análisis)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 4 -->
+    <div class="tile medium tile-teal">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Gestión de Archivos (Continuación)</p>
+        <ul>
+          <li>Sistemas de registros electrónicos y normativas de confidencialidad</li>
+          <li>Conocimiento en protección de datos (Ley Federal de Protección de Datos Personales)</li>
+          <li>Manejo de información sensible</li>
+        </ul>
+        <p class="section-title">Cumplimiento Normativo</p>
+        <ul>
+          <li>Conocimiento en normativas de seguridad del paciente</li>
+          <li>Acciones Esenciales para la Seguridad del Paciente (AESP)</li>
+          <li>Conocimiento en protección de datos personales</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HABILIDADES TÉCNICAS 5 -->
+    <div class="tile large tile-purple">
+      <div class="scrollable">
+        <h3>Habilidades Técnicas</h3>
+        <p class="section-title">Herramientas Tecnológicas</p>
+        <ul>
+          <li>Dominio de sistemas de bases de datos, hojas de cálculo (Excel) y software estadístico</li>
+          <li>Uso de herramientas virtuales para administración de proyectos</li>
+          <li>Conocimiento en Big Data, sistemas BI, bases de datos</li>
+          <li>Programación (JavaScript para automatización de procesos, Python)</li>
+          <li>Looker Studio, MySQL, WordPress (creación y gestión de sitios informativos)</li>
+          <li>Bootstrap, React, UI/UX Design con Figma, HTML, CSS</li>
+          <li>Herramientas digitales</li>
+        </ul>
+        <p class="section-title">Gestión y Optimización</p>
+        <ul>
+          <li>Enfoque en mejora continua y procesos eficientes</li>
+          <li>Optimización de procesos estadísticos y de archivo clínico</li>
+          <li>Evaluación de procesos</li>
+        </ul>
+      </div>
     </div>
 
     <!-- HABILIDADES BLANDAS -->
-    <div class="tile medium tile-red">
-      <div class="icon">🌟</div>
-      <h3>Habilidades Blandas</h3>
-      <div class="tags">
-        <span class="tag">Liderazgo</span>
-        <span class="tag">Trabajo en Equipo</span>
-        <span class="tag">Comunicación</span>
-        <span class="tag">Adaptabilidad</span>
-        <span class="tag">Ética Profesional</span>
-        <span class="tag">Atención al Detalle</span>
-        <span class="tag">Resolución de Conflictos</span>
-        <span class="tag">Manejo de Estrés</span>
-        <span class="tag">Motivación</span>
+    <div class="tile medium tile-orange">
+      <div class="scrollable">
+        <h3>Habilidades Interpersonales</h3>
+        <ul>
+          <li>Trabajo en equipo</li>
+          <li>Liderazgo y coordinación de equipos multidisciplinarios</li>
+          <li>Comunicación efectiva</li>
+          <li>Resolución de conflictos</li>
+          <li>Motivación para el trabajo</li>
+          <li>Adaptabilidad en entornos complejos o de contingencia</li>
+          <li>Ética profesional</li>
+          <li>Integridad y confidencialidad</li>
+          <li>Trato Digno</li>
+        </ul>
       </div>
     </div>
 
-    <!-- CURSOS COMPLEMENTARIOS -->
-    <div class="tile wide tile-blue">
-      <div class="icon">📚</div>
-      <h3>Cursos Complementarios</h3>
-      <div class="two-column">
-        <div>
-          <ul class="compact-list">
-            <li>Matemáticas Aplicadas a las Finanzas (2004)</li>
-            <li>Asesor en Estrategias de Inversión (2006)</li>
-            <li>Nómina Integral (2004)</li>
-            <li>Relaciones Humanas y Trabajo en Equipo (2014)</li>
-            <li>Calidad en el Servicio (2005)</li>
-            <li>Motivación para el Trabajo (2003)</li>
-          </ul>
-        </div>
-        <div>
-          <ul class="compact-list">
-            <li>Inglés Básico (2015)</li>
-            <li>Administrador de Proyectos para AVA (2022)</li>
-            <li>Jornadas de Capacitación en Informática (2018)</li>
-            <li>Taller de Estrategias para el Manejo de Estrés (2021)</li>
-            <li>Jornadas de Actualización Administrativa (2020/2022)</li>
-          </ul>
-        </div>
+    <!-- OTRAS HABILIDADES -->
+    <div class="tile small tile-orange">
+      <div class="scrollable">
+        <h3>Otras Habilidades</h3>
+        <ul class="compact-list">
+          <li>Atención al detalle</li>
+          <li>Capacidad analítica</li>
+          <li>Manejo de estrés</li>
+          <li>Trabajo remoto</li>
+          <li>Marketing digital</li>
+          <li>Networking</li>
+          <li>Innovación</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS 1 -->
+    <div class="tile tall tile-purple">
+      <div class="scrollable">
+        <h3>Certificaciones Tecnológicas</h3>
+        <ul>
+          <li>Principios Básicos de Big Data <span class="year-badge">2022</span></li>
+          <li>Programación con JavaScript <span class="year-badge">2022</span></li>
+          <li>Gobernanza TI <span class="year-badge">2022</span></li>
+          <li>Analista de Proyectos BI <span class="year-badge">2022</span></li>
+          <li>Evaluador de Procesos <span class="year-badge">2022</span></li>
+          <li>Asistente Web <span class="year-badge">2022</span></li>
+          <li>Desarrollador de Contenido Digital <span class="year-badge">2022</span></li>
+          <li>Gestor de Imagen Web <span class="year-badge">2022</span></li>
+          <li>Técnico en Business Analytics <span class="year-badge">2022</span></li>
+          <li>Business Analytics (Curso Avanzado) <span class="year-badge">2023</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS 2 -->
+    <div class="tile tall tile-blue">
+      <div class="scrollable">
+        <h3>Certificaciones Tecnológicas</h3>
+        <ul>
+          <li>Optimización de Modelos de Aprendizaje Automático en Banca con Python <span class="year-badge">2022</span></li>
+          <li>Marketing Digital <span class="year-badge">2022</span></li>
+          <li>Networking y Marketing Personal <span class="year-badge">2022</span></li>
+          <li>Trabajo Remoto <span class="year-badge">2022</span></li>
+          <li>JavaScript Moderno <span class="year-badge">2023</span></li>
+          <li>Diseño UX/UI con Figma <span class="year-badge">2023</span></li>
+          <li>Desarrollo de Tiendas Virtuales con WordPress <span class="year-badge">2023</span></li>
+          <li>Bootstrap 5: El Curso Completo, Práctico y Desde Cero <span class="year-badge">2024</span></li>
+          <li>UI/UX Design Hybrid: From Figma to HTML, CSS, and JavaScript <span class="year-badge">2024</span></li>
+          <li>React: De cero a experto (Hooks y MERN) <span class="year-badge">2023</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES TECNOLÓGICAS 3 -->
+    <div class="tile medium tile-teal">
+      <div class="scrollable">
+        <h3>Certificaciones Tecnológicas</h3>
+        <ul>
+          <li>Registro de Marca. ¡Hazlo tú mismo! <span class="year-badge">2024</span></li>
+          <li>Ciencia de Datos con MySQL, RStudio y Looker Studio: Casos Reales <span class="year-badge">2024</span></li>
+          <li>Build a Free Website with WordPress <span class="year-badge">2024</span></li>
+          <li>Fundamentals of Digital Marketing <span class="year-badge">2024</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES SALUD 1 -->
+    <div class="tile tall tile-green">
+      <div class="scrollable">
+        <h3>Certificaciones en Salud</h3>
+        <ul>
+          <li>Acciones Esenciales para la Seguridad del Paciente <span class="year-badge">2023</span></li>
+          <li>Actualización de Acciones Esenciales para la Seguridad del Paciente (AESP) <span class="year-badge">2024</span></li>
+          <li>Protección de Datos Personales <span class="year-badge">2023</span></li>
+          <li>Ética e Integridad en el Servicio Público <span class="year-badge">2023</span></li>
+          <li>Manejo de Residuos Peligrosos Biológico-Infecciosos (RPBI) <span class="year-badge">2023</span></li>
+          <li>Guía para la Expedición del Certificado Electrónico de Nacimiento <span class="year-badge">2023</span></li>
+          <li>Interculturalidad y Género en Derechos Humanos <span class="year-badge">2023</span></li>
+          <li>Higiene de Manos <span class="year-badge">2023</span></li>
+          <li>Curso de Higiene de Manos <span class="year-badge">2024</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES SALUD 2 -->
+    <div class="tile tall tile-orange">
+      <div class="scrollable">
+        <h3>Certificaciones en Salud</h3>
+        <ul>
+          <li>1er. Curso Básico de la Clasificación Internacional de Enfermedades (CIE-11) - Módulo II: Morbilidad <span class="year-badge">2024</span></li>
+          <li>1er. Curso Básico de la Clasificación Internacional de Enfermedades (CIE-11) - Módulo I: Mortalidad <span class="year-badge">2024</span></li>
+          <li>Archivo Clínico y Documentación</li>
+          <li>Programa de Capacitación en Infección por SARS-CoV-2 <span class="year-badge">2020</span></li>
+          <li>Derechos Humanos, Género y Salud <span class="year-badge">2018</span></li>
+          <li>Trato Digno a través del Trabajo en Equipo <span class="year-badge">2019</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CURSOS COMPLEMENTARIOS 1 -->
+    <div class="tile medium tile-red">
+      <div class="scrollable">
+        <h3>Cursos Complementarios</h3>
+        <ul>
+          <li>Matemáticas Aplicadas a las Finanzas <span class="year-badge">2004</span></li>
+          <li>Asesor en Estrategias de Inversión <span class="year-badge">2006</span></li>
+          <li>Nómina Integral <span class="year-badge">2004</span></li>
+          <li>Relaciones Humanas y Trabajo en Equipo <span class="year-badge">2014</span></li>
+          <li>Calidad en el Servicio <span class="year-badge">2005</span></li>
+          <li>Motivación para el Trabajo <span class="year-badge">2003</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CURSOS COMPLEMENTARIOS 2 -->
+    <div class="tile medium tile-pink">
+      <div class="scrollable">
+        <h3>Cursos Complementarios</h3>
+        <ul>
+          <li>Inglés Básico <span class="year-badge">2015</span></li>
+          <li>Certificado como Administrador de Proyectos para Ambientes Virtuales de Aprendizaje <span class="year-badge">2022</span></li>
+          <li>Jornadas de Capacitación en Informática <span class="year-badge">2018</span></li>
+          <li>Taller de Estrategias para el Manejo de Estrés <span class="year-badge">2021</span></li>
+          <li>Jornadas de Actualización Administrativas III <span class="year-badge">2020</span></li>
+          <li>Jornadas de Actualización Administrativa <span class="year-badge">2022</span></li>
+        </ul>
       </div>
     </div>
 
     <!-- LOGROS DESTACADOS -->
-    <div class="tile medium tile-green">
-      <div class="icon">🏆</div>
-      <h3>Logros Destacados</h3>
-      <ul>
-        <li>Diseño y registro de sistema de gestión documental para el sector salud</li>
-        <li>Reconocimiento por desempeño sobresaliente en evaluación CENEVAL (2017)</li>
-        <li>Registro de Derecho de Autor (2016) por base de datos para gasto directo</li>
-        <li>Desarrollo de Sistema para control de Cartillas Nacionales de Salud (2021)</li>
-      </ul>
-    </div>
-
-    <!-- PROYECTOS TECNOLÓGICOS -->
-    <div class="tile medium tile-purple">
-      <div class="icon">💻</div>
-      <h3>Proyectos Tecnológicos</h3>
-      <p><strong>Ciencia de Datos con MySQL, RStudio y Looker Studio</strong> (2024)</p>
-      <p><strong>Build a Free Website with WordPress</strong> - Coursera (2024)</p>
-      <p><strong>Optimización de Modelos con Python</strong> (2022)</p>
-      <p><strong>Desarrollo de Tiendas Virtuales con WordPress</strong> (2023)</p>
+    <div class="tile large tile-teal">
+      <div class="scrollable">
+        <h3>Logros Destacados</h3>
+        <ul>
+          <li>Diseño y registro de un sistema de gestión documental para el sector salud, optimizando procesos de administración financiera</li>
+          <li>Reconocimiento por desempeño sobresaliente en evaluación CENEVAL (2017)</li>
+          <li>Registro de Derecho de Autor (2016) por la creación de una base de datos para el gasto directo de unidades de salud</li>
+          <li>Proyectos Destacados: Desarrollo de Sistema para control de Cartillas Nacionales de Salud en la Región Sanitaria VIII (2021)</li>
+        </ul>
+      </div>
     </div>
 
     <!-- INFORMACIÓN ADICIONAL -->
-    <div class="tile small tile-orange">
-      <div class="icon">ℹ️</div>
-      <h3>Información Adicional</h3>
-      <p><strong>Disponibilidad:</strong> Inmediata</p>
-      <p><strong>Idiomas:</strong> Español (Nativo), Inglés (Básico)</p>
+    <div class="tile small tile-blue">
+      <div class="scrollable">
+        <h3>Información Adicional</h3>
+        <p><strong>Disponibilidad:</strong> Inmediata</p>
+        <p><strong>Idiomas:</strong> Español: Nativo. Inglés: Básico.</p>
+      </div>
     </div>
 
-    <!-- CONTACTO -->
-    <div class="tile small tile-red">
-      <div class="icon">📞</div>
-      <h3>Contacto</h3>
-      <p>Documentación respaldatoria disponible para verificación</p>
-      <div class="tags">
-        <span class="tag">Constancias</span>
-        <span class="tag">Certificados</span>
-        <span class="tag">Registro INDautor</span>
+    <!-- DOCUMENTACIÓN -->
+    <div class="tile small tile-green">
+      <div class="scrollable">
+        <h3>Documentación</h3>
+        <p>Documentación respaldatoria disponible para verificación: Constancias y certificados emitidos por la Universidad de Guadalajara, Udemy, Secretaría de Salud Jalisco, CENEVAL, Coursera y Capacítate para el Empleo.</p>
+        <p>Registro de Derecho de Autor (INDautor, 2016).</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 1 -->
+    <div class="tile medium tile-purple">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Formación en Business Analytics, Marketing Digital, y gestión de datos, con experiencia en el análisis de información clínica y estadísticas de salud.</p>
+        <p>Certificado en acciones esenciales para la seguridad del paciente. Habilidades en herramientas digitales, trabajo remoto y optimización de procesos, orientado a la mejora continua y al cumplimiento normativo en archivos clínicos.</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 2 -->
+    <div class="tile medium tile-orange">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Amplia experiencia en gestión de datos, estadísticas y archivo clínico, respaldado por una sólida formación en protección de datos personales, ética en servicios públicos, y manejo de información sensible.</p>
+        <p>Capacitado en herramientas tecnológicas modernas y comprometido con la integridad y eficiencia en el manejo de registros médicos.</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 3 -->
+    <div class="tile medium tile-red">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Formación especializada en estadísticas de salud, clasificación de enfermedades (CIE-11), y manejo de archivos clínicos.</p>
+        <p>Experiencia en capacitación en seguridad del paciente, higiene de manos, y herramientas tecnológicas para la gestión de datos. Comprometido con la calidad, la innovación y el cumplimiento de estándares en el ámbito de la salud.</p>
+      </div>
+    </div>
+
+    <!-- PERFIL COMPLEMENTO 4 -->
+    <div class="tile medium tile-pink">
+      <div class="scrollable">
+        <h3>Perfil Profesional</h3>
+        <p>Especializado en ciencia de datos, gestión de información clínica y análisis estadístico, con formación en herramientas como MySQL, RStudio, Looker Studio y WordPress.</p>
+        <p>Experiencia en el manejo de bases de datos, visualización de datos y desarrollo de soluciones tecnológicas para la optimización de procesos clínicos y estadísticos.</p>
+      </div>
+    </div>
+
+    <!-- TAGS HABILIDADES 1 -->
+    <div class="tile small tile-teal">
+      <div class="scrollable">
+        <h3>Habilidades Clave</h3>
+        <div class="tags">
+          <span class="tag">Análisis Datos</span>
+          <span class="tag">Estadísticas</span>
+          <span class="tag">Archivo Clínico</span>
+          <span class="tag">Gestión Documental</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">RStudio</span>
+          <span class="tag">Looker Studio</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGS HABILIDADES 2 -->
+    <div class="tile small tile-blue">
+      <div class="scrollable">
+        <h3>Habilidades Clave</h3>
+        <div class="tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Python</span>
+          <span class="tag">React</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Figma</span>
+          <span class="tag">WordPress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAGS HABILIDADES 3 -->
+    <div class="tile small tile-green">
+      <div class="scrollable">
+        <h3>Habilidades Clave</h3>
+        <div class="tags">
+          <span class="tag">Business Analytics</span>
+          <span class="tag">Big Data</span>
+          <span class="tag">Gobernanza TI</span>
+          <span class="tag">CIE-11</span>
+          <span class="tag">Seguridad Paciente</span>
+          <span class="tag">Protección Datos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICACIONES URL -->
+    <div class="tile small tile-purple">
+      <div class="scrollable">
+        <h3>Certificados URL</h3>
+        <p><strong>Ciencia de Datos:</strong><br>ude.my/UC-a@afied1-af86-4751-93d5-d8147a94a0e</p>
+        <p><strong>WordPress:</strong><br>coursera.org/verify/WRAXIOST4IPU</p>
       </div>
     </div>
 
