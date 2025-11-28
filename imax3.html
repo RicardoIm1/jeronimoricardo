@@ -39,14 +39,6 @@
   /* --------------- CONTAINER / GRID MOSAICO --------------- */
   .wrap{width:95%;max-width:1500px;margin:48px auto;padding-bottom:80px;}
 
-/* grid similar a Lumia: responsive, multiple columns */
-  .grid{
-    display:grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 120px;
-    gap: var(--tile-gap);
-  }
-
   /* sizes */
   .tile{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:18px;box-shadow:0 8px 30px rgba(3,20,40,0.6);overflow:hidden;position:relative;backdrop-filter: blur(6px);transition:transform .35s ease, box-shadow .35s ease;cursor:default;}
   .tile:hover{transform: translateY(-6px) scale(1.01);box-shadow:0 20px 60px rgba(2,120,255,0.18);}
@@ -116,6 +108,45 @@
   /* scrollbars for reveal box */
   .reveal::-webkit-scrollbar{height:8px;width:8px}
   .reveal::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),#006bbd);border-radius:8px}
+  /* NUEVO SISTEMA DE MOSAICO MASONRY REAL */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-auto-flow: dense;
+  grid-auto-rows: 10px; /* base unit */
+  gap: var(--tile-gap);
+  align-items: start;
+}
+
+/* NUEVOS MODOS DE TAMAÑO — más libres */
+.tile.small {
+  grid-row-end: span 14;  /* 14 × 10px = 140px */
+}
+
+.tile.medium {
+  grid-row-end: span 20;
+}
+
+.tile.wide {
+  grid-row-end: span 24;
+}
+
+.tile.tall {
+  grid-row-end: span 32;
+}
+
+.tile.big {
+  grid-row-end: span 38;
+}
+
+/* QUE NO EXPLOTE EN CELULAR */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-auto-rows: 12px;
+  }
+}
+
 </style>
 </head>
 <body>
