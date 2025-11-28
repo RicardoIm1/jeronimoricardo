@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Jerónimo R. Ramírez — Perfil Profesional</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Tipografías elegantes -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ----------- ESTILO GENERAL: IMAX BLUE ---------------- */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #030b18;
+      color: #d9e6ff;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 25px rgba(0, 140, 255, 0.8);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 40px;
+      border-left: 5px solid #0d6efd;
+      padding-left: 10px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1050px;
+      margin: 0 auto;
+      padding-top: 70px;
+    }
+
+    p,
+    li {
+      font-size: 1rem;
+      line-height: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    /* ----------- BLOQUES / CARDS ---------------- */
+    .card {
+      background: rgba(3, 15, 35, 0.65);
+      border: 1px solid rgba(0, 80, 255, 0.4);
+      padding: 25px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 100, 255, 0.15);
+      backdrop-filter: blur(3px);
+    }
+
+    .sub {
+      font-weight: bold;
+      color: #7bb6ff;
+      margin-bottom: 4px;
+      margin-top: 15px;
+    }
+
+    /* ----------- ANIMACIÓN MATRIX AZUL ---------------- */
+    canvas#matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      opacity: 0.28;
+      background: #020710;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANIMACIÓN MATRIX AZUL -->
+  <canvas id="matrix"></canvas>
+  <script>
+    const c = document.getElementById("matrix");
+    const ctx = c.getContext("2d");
+
+    c.height = window.innerHeight;
+    c.width = window.innerWidth;
+
+    const chars = "01";  
+    const fontSize = 14;
+    const columns = c.width / fontSize;
+
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(3, 10, 25, 0.08)";
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      ctx.fillStyle = "#1e90ff";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > c.height || Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 35);
+  </script>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="container">
+
+    <h1>JERÓNIMO RICARDO RAMÍREZ TORRES</h1>
+    <h3>Apoyo Administrativo en Salud A-3</h3>
+
+    <!-- PERFIL PROFESIONAL -->
+    <h2>Perfil Profesional</h2>
+    <div class="card">
+      <p>Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos estadísticos y de archivo clínico. Posee experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud, informática y administración.</p>
+
+      <p>Respaldo en derechos humanos, trabajo en equipo y manejo de estrés en entornos complejos. Certificado en Big Data, Gobernanza TI, evaluación de procesos, e implementación de sistemas de archivo eficientes. Capacidad para generar reportes estadísticos confiables que impulsan la toma de decisiones clínicas-administrativas.</p>
+
+      <p>Formación en Business Analytics, Marketing Digital, y gestión de datos. Experiencia en análisis de información clínica y estadísticas de salud. Certificado en Acciones Esenciales para la Seguridad del Paciente.</p>
+
+      <p>Excelencia en protección de datos personales, ética en servicios públicos, manejo de información sensible y cumplimiento normativo en archivos clínicos. Amplia formación en estadísticas de salud, CIE-11, seguridad del paciente, higiene de manos y tecnologías digitales aplicadas a la gestión documental.</p>
+
+      <p>Especializado en ciencia de datos, MySQL, RStudio, Looker Studio, WordPress, visualización de datos, y soluciones tecnológicas para optimización de procesos clínicos y estadísticos.</p>
+    </div>
+
+    <!-- OBJETIVO -->
+    <h2>Objetivo</h2>
+    <div class="card">
+      <p>Aplicar conocimientos para optimizar los procesos de estadísticas y archivo clínico, contribuyendo a la eficiencia, calidad y confiabilidad del servicio de salud. Sólida formación en matemáticas financieras y estrategias de inversión, con rigor analítico y capacidad para abordar desafíos técnicos en datos clínicos y administrativos.</p>
+
+      <p>Postularse como Jefe de Estadísticas y Archivo Clínico, aportando experiencia en análisis de datos, organización documental, mejora de procesos y cumplimiento normativo institucional.</p>
+    </div>
+
+    <!-- FORMACIÓN ACADÉMICA -->
+    <h2>Formación Académica</h2>
+    <div class="card">
+      <p class="sub">Licenciatura en Administración Financiera y Sistemas</p>
+      Universidad de Guadalajara | 2001 - 2005<br>
+      Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)
+
+      <p class="sub">Bachillerato General</p>
+      Escuela Preparatoria Regional de Ameca | 1994 - 1997
+    </div>
+
+    <!-- CURSOS Y CERTIFICACIONES -->
+    <h2>Cursos y Certificaciones Relevantes</h2>
+    <div class="card">
+      <ul>
+        <li>Matemáticas Aplicadas a las Finanzas – UDG</li>
+        <li>Asesor en Estrategias de Inversión – BMV</li>
+        <li>Relaciones Humanas y Trabajo en Equipo – Gobierno de Jalisco</li>
+        <li>Principios Básicos de Big Data – Fundación Telefónica</li>
+        <li>JavaScript, Python, React, UX/UI, WordPress, MySQL, Figma, Looker Studio</li>
+        <li>Acciones Esenciales para la Seguridad del Paciente</li>
+        <li>Protección de Datos Personales – SSJ</li>
+        <li>CIE-11 Módulos I y II (Mortalidad y Morbilidad) – SSJ</li>
+        <li>Marketing Digital, Business Analytics, Gobernanza TI, BI Projects</li>
+        <li>Ciencia de Datos con MySQL, RStudio y Looker Studio</li>
+        <li>Higiene de Manos, Seguridad del Paciente, RPBI</li>
+        <li>Interculturalidad y Género en Derechos Humanos</li>
+      </ul>
+    </div>
+
+    <!-- EXPERIENCIA PROFESIONAL -->
+    <h2>Experiencia Profesional</h2>
+    <div class="card">
+      <p class="sub">Jefe de Recursos Financieros</p>
+      Hospital Regional Puerto Vallarta | 2011 - 2018
+      <ul>
+        <li>Gestión y organización de archivos contables físicos y electrónicos.</li>
+        <li>Análisis de datos para informes administrativos y estadísticos.</li>
+        <li>Implementación de protocolos de protección de datos personales.</li>
+        <li>Capacitación de personal en manejo de información sensible.</li>
+        <li>Optimización de procesos para recuperación de información financiera.</li>
+      </ul>
+
+      <p class="sub">Desarrollo de Sistema de Gestión Documental</p>
+      OPD Servicios de Salud Jalisco  
+      <ul>
+        <li>Registro de Derecho de Autor (2016) por base de datos para gasto directo.</li>
+      </ul>
+    </div>
+
+    <!-- HABILIDADES -->
+    <h2>Habilidades</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Análisis de Datos y Estadísticos:</strong> Python, Business Analytics, Excel, dashboards.</li>
+        <li><strong>Gestión de Archivos Clínicos:</strong> CIE-11, NOM-004, confidencialidad de datos.</li>
+        <li><strong>Tecnologías:</strong> MySQL, RStudio, Looker, Figma, WordPress, React, JS, UI/UX.</li>
+        <li><strong>Procesos:</strong> Mejora continua, optimización documental, evaluación de procesos.</li>
+        <li><strong>Blandas:</strong> Liderazgo, trabajo en equipo, comunicación estratégica.</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+
+</html>
