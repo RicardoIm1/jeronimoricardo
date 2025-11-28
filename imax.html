@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>CV — Jerónimo Ricardo Ramírez Torres</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ----------------------------------------------------
+   PALETA "IMAX BLUE" + Glassmorphism
+---------------------------------------------------- */
+:root{
+  --imax-blue: #1da9ff;
+  --imax-blue-deep: #0a4d7a;
+  --imax-blue-glow: #66d0ff;
+  --bg-dark: #03121f;
+  --white: #ffffff;
+  --glass: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.18);
+  --text: #e7f7ff;
+}
+
+/* ----------------------------------------------------
+   RESET & LAYOUT
+---------------------------------------------------- */
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  width:100%;
+  font-family:"Montserrat", sans-serif;
+  background: var(--bg-dark);
+  overflow:hidden;
+  color:var(--text);
+}
+
+/* ----------------------------------------------------
+   ANIMACIÓN ATMOSFÉRICA — HALO IMAX
+---------------------------------------------------- */
+.halo{
+  position:absolute;
+  inset:0;
+  background:
+     radial-gradient(circle at 50% -20%, var(--imax-blue-glow), transparent 60%),
+     radial-gradient(900px 900px at 50% 120%, rgba(0,119,255,0.6), transparent 70%);
+  filter: blur(80px);
+  opacity:0.4;
+  animation: haloMove 16s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes haloMove{
+  0%{ transform:translate(0px,0px) scale(1); opacity:0.35; }
+  100%{ transform:translate(0px,-40px) scale(1.1); opacity:0.5; }
+}
+
+/* ----------------------------------------------------
+   CONTENEDOR TIPO "CARTELERA IMAX"
+---------------------------------------------------- */
+.poster{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:min(900px,90%);
+  backdrop-filter:blur(22px) saturate(180%);
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:22px;
+  padding:40px 50px;
+  box-shadow:
+     0 0 50px rgba(0,140,255,0.35),
+     0 0 200px rgba(0,140,255,0.28),
+     inset 0 0 40px rgba(255,255,255,0.04);
+  text-align:center;
+}
+
+/* LÍNEA LUMINOSA */
+.poster::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:22px;
+  padding:2px;
+  background:linear-gradient(135deg,rgba(0,153,255,0.9),rgba(0,153,255,0.1));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+/* ----------------------------------------------------
+   TIPOGRAFÍA PROTAGONISTA
+---------------------------------------------------- */
+.name{
+  font-size:38px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  margin-bottom:4px;
+  text-shadow:0 0 12px rgba(98,215,255,0.8);
+}
+
+.role{
+  font-size:18px;
+  font-weight:600;
+  opacity:0.9;
+  margin-bottom:24px;
+  color:var(--imax-blue);
+}
+
+/* División */
+.divider{
+  width:160px;
+  height:3px;
+  margin:25px auto;
+  background:linear-gradient(90deg, transparent, var(--imax-blue), transparent);
+  filter:drop-shadow(0 0 6px var(--imax-blue));
+}
+
+/* ----------------------------------------------------
+   CONTENIDO INTERNO
+---------------------------------------------------- */
+.section-title{
+  font-size:17px;
+  font-weight:800;
+  margin-top:18px;
+  margin-bottom:10px;
+  color:var(--imax-blue-glow);
+  text-shadow:0 0 6px var(--imax-blue-glow);
+  letter-spacing:1px;
+}
+
+.text{
+  font-size:14px;
+  opacity:0.85;
+  line-height:1.55;
+  margin:0 auto;
+  max-width:600px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HALO ANIMADO -->
+<div class="halo"></div>
+
+<!-- CARTELERA IMAX -->
+<div class="poster">
+  <div class="name">Jerónimo Ricardo Ramírez Torres</div>
+  <div class="role">Analista Clínico • Programador • Data & IA</div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-title">Perfil</div>
+    <p class="text">
+      Profesional multidisciplinario con experiencia en análisis de datos clínicos, 
+      desarrollo de herramientas digitales y proyectos de inteligencia artificial. 
+      Mirada crítica, mente curiosa y vocación por construir soluciones limpias, eficientes y elegantes.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Contact</div>
+    <p class="text">
+      ✉ jeronimo@example.com <br>
+      📍 Puerto Vallarta, Jalisco <br>
+      ☎ +52 322 XXX XXXX
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Especialidades</div>
+    <p class="text">
+      Sistemas clínicos, programación web, ciencia de datos, dashboards, automatización, 
+      procesos hospitalarios, análisis financiero y modelos predictivos.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
