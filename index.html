@@ -31,6 +31,44 @@
       color: #1a202c;
     }
 
+    /* Header estilo Apple */
+    header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 22px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      height: 40px;
+      width: auto;
+      margin-top: 5px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--apple-black);
+    }
+
+
     /* --- METRO GRID AUTHENTIC --- */
     .metro-grid {
       display: grid;
@@ -273,7 +311,13 @@
 </head>
 
 <body>
-
+  <header>
+    <div class="header-content">
+      <a href="">
+        <img src="https://drive.google.com/file/d/1eOUdHiBzcH0XUHzFLNG3_L9XFzTF1T2a/view?usp=sharing" alt="Logotipo rick" class="header-logo"> </a>
+      <div class="header-title">Mi Curriculum Vitae</div>
+    </div>
+  </header>
   <div class="metro-grid">
 
     <!-- NOMBRE Y PUESTO -->
