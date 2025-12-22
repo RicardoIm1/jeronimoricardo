@@ -36,7 +36,13 @@ body {
 }
 
 .mifirma {
-  font-family: "Allura", cursive;
+  /* font-family: "Allura", cursive; */
+  font-family: "Sacramento", cursive;
+  /* font-family: "Dancing Script", cursive;
+  font-family: "Playfair Display", cursive;
+  font-family: "Lora", cursive;
+  font-family: "Lato", cursive;
+  font-family: "Raleway", cursive; */
   font-size: 44px;
   line-height: 1;
   font-weight: 400;
