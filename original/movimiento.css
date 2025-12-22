@@ -26,42 +26,47 @@
 .reveal.d11 { animation-delay: 1.1s; }
 
 /* ===== HEADER TETRIS ===== */
-
 header {
   position: relative;
+  background: #0C3058;
+  color: white;
   overflow: hidden;
-  background-color: #e9edf3;
+  transition: background 0.6s ease, color 0.6s ease;
 }
 
-header::before {
-  content: "";
+/* TEXTO CUANDO QUEDA DESNUDO */
+header.uncovered {
+  background: transparent;
+  color: var(--navy);
+}
+
+/* CAPA DE PIEZAS */
+.tetris-layer {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 20%,
-    #0C3058 20%,
-    #0C3058 40%,
-    transparent 40%,
-    transparent 60%,
-    #0C3058 60%,
-    #0C3058 80%,
-    #0C3058 80%,
-    #0C3058 100%
-  );
-  transform: translateY(-100%);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-auto-rows: 20px;
   pointer-events: none;
   z-index: 0;
 }
 
-/* SOLO cuando se activa */
-header.tetris::before {
-  animation: tetris-drop 0.9s steps(4) forwards;
+/* PIEZAS */
+.tetris-block {
+  background: #0C3058;
+  animation: fall 1s cubic-bezier(.22,.61,.36,1) forwards;
 }
 
-@keyframes tetris-drop {
+/* CAÍDA */
+@keyframes fall {
   to {
-    transform: translateY(0);
+    transform: translateY(140%);
+    opacity: 0;
   }
+}
+
+/* TEXTO SIEMPRE ARRIBA */
+header > *:not(.tetris-layer) {
+  position: relative;
+  z-index: 2;
 }

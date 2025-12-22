@@ -78,6 +78,8 @@
           <span class="tag">Protección de Datos</span>
           <span class="tag">Docencia</span>
         </div>
+        <div class="tetris-layer" aria-hidden="true"></div>
+
       </header>
 
       <!-- Contenido -->
@@ -300,34 +302,43 @@
     `;
     document.head.appendChild(style);
   </script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector("header");
-    let executed = false;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const header = document.querySelector("header");
+      const layer = header.querySelector(".tetris-layer");
+      let done = false;
 
-    const observer = new IntersectionObserver(
-      entries => {
+      const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !executed) {
-            executed = true;
+          if (entry.isIntersecting && !done) {
+            done = true;
 
-            setTimeout(() => {
-              header.classList.add("tetris");
-            }, 5000);
-
+            setTimeout(() => startTetris(), 5000);
             observer.disconnect();
           }
         });
-      },
-      {
-        threshold: 0.5
+      }, { threshold: 0.6 });
+
+      observer.observe(header);
+
+      function startTetris() {
+        const rows = 6;
+        const cols = 10;
+
+        for (let i = 0; i < rows * cols; i++) {
+          const block = document.createElement("div");
+          block.className = "tetris-block";
+          block.style.animationDelay = `${Math.random() * 0.6}s`;
+          layer.appendChild(block);
+        }
+
+        // quitar fondo y cambiar texto
+        setTimeout(() => {
+          header.classList.add("uncovered");
+        }, 300);
       }
-    );
-
-    observer.observe(header);
-  });
-</script>
-
+    });
+  </script>
 
 </body>
 
