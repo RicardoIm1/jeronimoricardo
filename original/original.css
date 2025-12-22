@@ -295,12 +295,11 @@ body {
 
 .edu-item .inst {
   color: var(--gray-1);
-  font-size: 1.2rem;
+  font-size: 12px;
 }
 
 .edu-item .note {
-  color: var(--gray-1);
-  font-size: 1.2rem;
+  color: var(--gray-2);
 }
 
 .list {
