@@ -7,6 +7,11 @@
   --white: #ffffff;
   --ink: #1b2430;
   --accent: #00b7ff;
+  --firma-color1: #0a4fb3;
+  --firma-color2: #0f6b5c;
+  --firma-color3: #7b1e2b;
+
+
 }
 
 /* Base */
@@ -50,7 +55,7 @@ body {
   letter-spacing: 0.03em;
   transform: rotate(-1.3deg) translateY(2px);
 
-  color: #f10ade;
+  color: var(--firma-color1);
 
   /* Simulación de presión irregular */
   text-shadow:
