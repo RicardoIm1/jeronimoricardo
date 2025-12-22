@@ -209,6 +209,7 @@ body {
   gap: 16px !important;
   /* gap: 22px; */
   border: #00b7ff;
+  margin: 5px;
 }
 
 .section {
