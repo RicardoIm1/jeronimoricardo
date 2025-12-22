@@ -96,6 +96,11 @@ body {
   transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
 }
 
+.btn:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
 .btn-primary {
   background: var(--navy);
   color: var(--white);
@@ -368,6 +373,7 @@ em {
 }
 
 @media print {
+
   html,
   body {
     background: #fff !important;
