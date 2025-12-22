@@ -1,164 +1,167 @@
 /* ===============================
-   PRINT.CSS — CV ACADÉMICO GANADOR
+   PRINT.CSS — CV PREMIUM 1 HOJA
    =============================== */
 
+/* ---- Configuración de página ---- */
 @page {
   size: Letter;
-  margin: 8mm 12mm 12mm 12mm;
+  margin: 7mm 11mm 11mm 11mm;
 }
 
+/* ---- Reset general para impresión ---- */
 @media print {
-  .page {
+
+  html,
+  body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Ocultar elementos de pantalla */
+  .toolbar,
+  #video-btn,
+  #video-modal {
+    display: none !important;
+  }
+
+  /* Contenedor principal */
+  .page-wrap {
+    padding: 0 !important;
     margin: 0 !important;
   }
 
-  .header {
-    padding: 8px 26px 12px 26px !important;
+  .page {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border-radius: 14px 14px 0 0 !important;
+    overflow: visible !important;
+    page-break-after: avoid;
   }
-}
 
+  /* ---- Encabezado ---- */
+  .header {
+    background: linear-gradient(135deg, #0b2a4a 0%, #0b3260 100%) !important;
+    color: #ffffff !important;
+    padding: 8px 22px 10px 22px !important;
+    margin-bottom: 6px !important;
+    border-bottom: 4px solid var(--accent) !important;
+    box-shadow: none !important;
+    border-radius: 14px 14px 0 0 !important;
+  }
 
-html, body {
-  background: #fff !important;
-  color: #111 !important;
-  font-size: 11.2pt;
-  line-height: 1.45;
-  margin: 0 !important;
-  padding: 0 !important;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
-}
+  .name-block .name {
+    font-size: 25px !important;
+    line-height: 1.12 !important;
+  }
 
-/* Oculta todo lo que no pertenece al papel */
-.toolbar,
-#video-btn,
-#video-modal {
-  display: none !important;
-}
+  .name-block .role {
+    font-size: 13px !important;
+  }
 
-/* Página */
-.page {
-  box-shadow: none !important;
-  background: #fff !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important;
-}
+  .header .contact,
+  .header .contact a,
+  .header-tags .tag {
+    color: #ffffff !important;
+  }
 
-/* Header: autoridad, no espectáculo */
-.header {
-  background: #0b2a4a !important;
-  color: #fff !important;
-  /* padding: 14px 22px 12px !important; */
-  border-bottom: 4px solid #00b7ff;
-}
+  .header-tags {
+    margin-top: 8px !important;
+    gap: 6px !important;
+  }
 
-.name-block .name {
-  font-size: 18pt !important;
-  letter-spacing: .2px;
-}
+  .header-tags .tag {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+    border-color: #ffffff !important;
+    background: #00b7ff22 !important;
+  }
 
-.name-block .role {
-  font-size: 11.5pt !important;
-  font-weight: 600;
-}
+  /* ---- Cuerpo ---- */
+  .content {
+    display: grid !important;
+    grid-template-columns: 1.1fr 1.2fr !important;
+    gap: 14px !important;
+    padding: 8px 16px 8px 16px !important;
+    margin-bottom: 4px !important;
+  }
 
-/* Tags: discretos, no protagonistas */
-.header-tags .tag {
-  font-size: 9.2pt !important;
-  padding: 3px 8px !important;
-  border: 1px solid #fff !important;
-  background: transparent !important;
-}
+  /* ---- Texto general ---- */
+  .para,
+  .list li,
+  .edu-item {
+    font-size: 11.1px !important;
+    line-height: 1.45 !important;
+  }
 
-/* Contenido */
-.content {
-  display: grid !important;
-  grid-template-columns: 1.05fr 1.25fr !important;
-  gap: 14px !important;
-  padding: 10px 0 0 !important;
-}
+  /* ---- Secciones ---- */
+  .section {
+    margin-bottom: 8px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
 
-/* Secciones */
-.section {
-  margin-bottom: 9px !important;
-  break-inside: avoid !important;
-}
+  .section-title {
+    font-size: 12.2px !important;
+    letter-spacing: .6px !important;
+    margin-bottom: 3px !important;
+    color: var(--navy-2) !important;
+  }
 
-.section-title {
-  font-size: 10.2pt !important;
-  letter-spacing: .9px !important;
-  margin-bottom: 4px !important;
-  color: #0e3a6a !important;
-}
+  /* ---- Formación ---- */
+  .edu-item {
+    margin-bottom: 6px !important;
+  }
 
-.section-title .dot {
-  width: 6px !important;
-  height: 6px !important;
-  box-shadow: none !important;
-}
+  /* ---- Experiencia / Roles ---- */
+  .role {
+    margin-bottom: 7px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
 
-/* Texto */
-.para,
-.list li,
-.edu-item {
-  font-size: 10.4pt !important;
-  line-height: 1.42 !important;
-}
+  .role .r-head {
+    background: #e9edf3 !important;
+    padding: 4px 8px !important;
+    margin-bottom: 3px !important;
+    border-left: 3px solid var(--accent) !important;
+    box-shadow: none !important;
+  }
 
-/* Roles */
-.role {
-  margin-bottom: 7px !important;
-  break-inside: avoid !important;
-}
+  .role .title {
+    font-size: 12.4px !important;
+  }
 
-.role .r-head {
-  background: #f1f4f8 !important;
-  border-left: 3px solid #00b7ff !important;
-  padding: 4px 6px !important;
-  box-shadow: none !important;
-}
+  .role .time {
+    font-size: 11px !important;
+  }
 
-.role .title {
-  font-size: 10.6pt !important;
-  font-weight: 700;
-}
+  .divider {
+    margin: 4px 0 3px 0 !important;
+  }
 
-.role .time {
-  font-size: 9.6pt !important;
-  color: #444 !important;
-}
+  /* ---- Listas ---- */
+  .list li {
+    margin: 1px 0 !important;
+  }
 
-/* Listas */
-.list {
-  padding-left: 14px !important;
-}
+  .list.tight li {
+    margin: 0.5px 0 !important;
+  }
 
-.list li {
-  margin: 2px 0 !important;
-}
+  /* ---- Pie de página ---- */
+  .footer-note {
+    margin-top: -4px !important;
+    padding: 4px 14px !important;
+    font-size: 9.5px !important;
+    background: #0b2a4a0d !important;
+    color: #5f6b7a !important;
+  }
 
-/* Divisores: mínimos */
-.divider {
-  height: 1px;
-  background: #ddd !important;
-  margin: 6px 0 !important;
-}
-
-/* Educación */
-.edu-item .degree {
-  font-weight: 700;
-}
-
-/* Reglas anti-errores de impresión */
-h1, h2, h3,
-.section-title,
-.role .r-head {
-  page-break-after: avoid !important;
-}
-
-.section,
-.role,
-.edu-item {
-  page-break-inside: avoid !important;
 }
