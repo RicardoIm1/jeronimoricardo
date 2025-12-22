@@ -260,7 +260,7 @@ body {
   font-size: 12.8px;
   letter-spacing: .6px;
   text-transform: uppercase;
-  color: var(--navy);
+  color: var(--light);
   margin: 0 0 8px;
 }
 
@@ -268,7 +268,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--navy);
   box-shadow: 0 0 0 3px rgba(0, 183, 255, .18);
 }
 
