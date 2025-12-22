@@ -55,24 +55,36 @@ body {
   text-shadow:
     0.4px 0.3px 0 rgba(0, 0, 0, 0.22),
     0.8px 0.6px 0 rgba(0, 0, 0, 0.12),
-   -0.3px -0.2px 0 rgba(0, 0, 0, 0.08);
+    -0.3px -0.2px 0 rgba(0, 0, 0, 0.08);
 
   opacity: 0.95;
 }
+
 .mifirma span {
   display: inline-block;
 }
 
 .mifirma .f1 {
   text-shadow:
-    0.6px 0.4px 0 rgba(0,0,0,0.25),
-    1px 0.8px 0 rgba(0,0,0,0.12);
+    0.6px 0.4px 0 rgba(0, 0, 0, 0.25),
+    1px 0.8px 0 rgba(0, 0, 0, 0.12);
 }
 
 .mifirma .f2 {
   text-shadow:
-    0.3px 0.2px 0 rgba(0,0,0,0.18);
+    0.3px 0.2px 0 rgba(0, 0, 0, 0.18);
   transform: translateY(1px);
+}
+
+.btn-icon {
+  padding: 12px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon svg {
+  display: block;
 }
 
 .btn {
