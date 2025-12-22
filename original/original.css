@@ -367,7 +367,6 @@ em {
 }
 
 @media print {
-
   html,
   body {
     background: #fff !important;
@@ -406,7 +405,7 @@ em {
   .list li,
   .edu-item,
   .role .title {
-    font-size: 11.2px !important;
+    font-size: 12.2px !important;
   }
 
   .role .r-head {
