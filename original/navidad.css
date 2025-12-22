@@ -30,22 +30,22 @@
   pointer-events: none;
 
   background-image:
-    radial-gradient(rgba(255,255,255,.9) 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,.4) 1px, transparent 1px);
+    radial-gradient(rgba(255,255,255,.95) 2.4px, transparent 2.6px),
+    radial-gradient(rgba(255,255,255,.7) 2px, transparent 2.2px),
+    radial-gradient(rgba(255,255,255,.5) 1.6px, transparent 1.8px);
 
   background-size:
-    110px 110px,
-    160px 160px,
-    220px 220px;
+    180px 180px,
+    260px 260px,
+    340px 340px;
 
   background-position:
-    0 -120px,
-    40px -180px,
-    80px -260px;
+    0 -200px,
+    60px -260px,
+    120px -320px;
 
-  animation: snow-fall 36s linear infinite;
-  opacity: .28;
+  animation: snow-fall 42s linear infinite;
+  opacity: .32;
 }
 
 /* -------------------------------
@@ -57,28 +57,28 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 48px;
+  height: 64px;
   pointer-events: none;
 
   background:
     radial-gradient(
-      ellipse at 18% 100%,
-      rgba(255,255,255,.7),
-      transparent 72%
+      ellipse at 16% 100%,
+      rgba(255,255,255,.85),
+      transparent 70%
     ),
     radial-gradient(
       ellipse at 50% 100%,
-      rgba(255,255,255,.8),
-      transparent 78%
+      rgba(255,255,255,.95),
+      transparent 75%
     ),
     radial-gradient(
-      ellipse at 82% 100%,
-      rgba(255,255,255,.65),
-      transparent 72%
+      ellipse at 84% 100%,
+      rgba(255,255,255,.8),
+      transparent 70%
     );
 
-  filter: blur(6px);
-  opacity: .55;
+  filter: blur(4px);
+  opacity: .7;
 }
 
 /* -------------------------------
@@ -98,15 +98,15 @@
 @keyframes snow-fall {
   from {
     background-position:
-      0 -140px,
-      40px -200px,
-      80px -280px;
+      0 -220px,
+      60px -300px,
+      120px -360px;
   }
   to {
     background-position:
-      0 140px,
-      40px 200px,
-      80px 280px;
+      0 220px,
+      60px 300px,
+      120px 360px;
   }
 }
 
