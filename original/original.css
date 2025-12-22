@@ -50,7 +50,7 @@ body {
   letter-spacing: 0.03em;
   transform: rotate(-1.3deg) translateY(2px);
 
-  color: var(--firma-color3);
+  color: var(--firma-color1);
 
   /* Simulación de presión irregular */
   text-shadow:
