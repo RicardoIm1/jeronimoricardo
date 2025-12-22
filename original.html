@@ -38,8 +38,11 @@
   <div class="page-wrap">
     <section class="page">
       <!-- Encabezado -->
-      <header class="header reveal d1">
-        <div class="header-top">
+      <header id="hero" class="header reveal d1">
+        <div class="tetris-layer"></div>
+
+        <!-- <div class="hero-content reveal header-top"> -->
+        <div class="hero-content reveal d2">
           <div class="name-block">
             <h1 class="name">Jerónimo Ricardo Ramírez Torres</h1>
             <p class="role">Docente Universitario — Estadísticas, Finanzas y Sistemas</p>
@@ -78,7 +81,6 @@
           <span class="tag">Protección de Datos</span>
           <span class="tag">Docencia</span>
         </div>
-        <div class="tetris-layer" aria-hidden="true"></div>
       </header>
 
       <!-- Contenido -->
@@ -221,6 +223,8 @@
 
       <div class="footer-note">
         <span class="muted">Actualizado: <span id="today"></span></span>
+        <audio id="tetrisSound" src="soft-click.mp3" preload="auto"></audio>
+        <button onclick="location.reload()">Repetir animación</button>
       </div>
     </section>
   </div>
@@ -302,83 +306,38 @@
     document.head.appendChild(style);
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const header = document.getElementById('hero');
+    const layer = header.querySelector('.tetris-layer');
 
-      const header = document.querySelector("header");
-      const layer = header.querySelector(".tetris-layer");
-      let executed = false;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          setTimeout(startTetris, 5000);
+        }
+      });
+    }, { threshold: 0.6 });
 
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !executed) {
-            executed = true;
-            setTimeout(startTetris, 5000);
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.6 });
+    observer.observe(header);
 
-      observer.observe(header);
+    function startTetris() {
+      const cols = Math.floor(header.offsetWidth / 32);
+      const rows = Math.floor(header.offsetHeight / 32);
 
-      const GRID = 20;
-      let stackHeight = 0;
+      const total = cols * rows;
 
-      const SHAPES = {
-        L: [[1, 0], [1, 0], [1, 1]],
-        T: [[1, 1, 1], [0, 1, 0]],
-        S: [[0, 1, 1], [1, 1, 0]]
-      };
-
-      function startTetris() {
-        header.classList.add("uncovered");
-
-        let count = 0;
-        const interval = setInterval(() => {
-          if (count++ > 8) return clearInterval(interval);
-          dropPiece();
-        }, 180);
+      for (let i = 0; i < total; i++) {
+        const block = document.createElement('div');
+        block.className = 'tetris-block';
+        block.style.animationDelay = `${Math.random() * 0.8}s`;
+        layer.appendChild(block);
       }
 
-      function dropPiece() {
-        const keys = Object.keys(SHAPES);
-        const shape = SHAPES[keys[Math.floor(Math.random() * keys.length)]];
-        const piece = document.createElement("div");
-        piece.className = "tetris-piece";
-
-        const size = GRID;
-        piece.style.width = `${shape[0].length * size}px`;
-        piece.style.height = `${shape.length * size}px`;
-
-        shape.forEach(row =>
-          row.forEach(cell => {
-            const block = document.createElement("span");
-            block.style.width = `${size}px`;
-            block.style.height = `${size}px`;
-            block.style.opacity = cell ? 1 : 0;
-            piece.appendChild(block);
-          })
-        );
-
-        const x = Math.random() * (header.clientWidth - piece.offsetWidth);
-        piece.style.left = `${x}px`;
-        piece.style.top = `-${piece.offsetHeight}px`;
-
-        layer.appendChild(piece);
-
-        const fallTo = header.clientHeight - piece.offsetHeight - stackHeight;
-        stackHeight += size;
-
-        piece.animate(
-          [{ transform: "translateY(0)" }, { transform: `translateY(${fallTo}px)` }],
-          {
-            duration: 800,
-            easing: "cubic-bezier(.22,.61,.36,1)",
-            fill: "forwards"
-          }
-        );
-      }
-    });
+      setTimeout(() => {
+        header.classList.add('clean');
+        layer.remove();
+      }, 1400);
+    }
   </script>
 
 
