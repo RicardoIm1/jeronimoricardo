@@ -48,12 +48,12 @@
 
   /* ---- Encabezado ---- */
   .header {
-    background: linear-gradient(135deg, #0b2a4a 0%, #0b3260 100%) !important;
+    background: #000 !important;
     color: #ffffff !important;
     padding: 8px 22px 9px 22px !important;
     margin-bottom: 4px !important; /* ↓ */
     border-bottom: 4px solid var(--accent) !important;
-    border-radius: 14px 14px 0 0 !important;
+    border-radius: 14px !important;
   }
 
   .name-block .name {
