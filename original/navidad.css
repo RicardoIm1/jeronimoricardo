@@ -8,13 +8,14 @@
       circle at top left,
       rgba(255,255,255,.12),
       transparent 40%
-    )/* ,
+    ),
     linear-gradient(
       135deg,
-      #702a01 0%,     rojo terciopelo
-      #124b38 35%,    verde pino
-      #5f0722 100%    vino profundo
-    ) */;
+      /*#702a01 0%,     rojo terciopelo */
+      var(--navy) 0%,
+      #124b38 35%,   /* verde pino */
+      #5f0722 100%   /* vino profundo */
+    );
 
   box-shadow:
     inset 0 -12px 24px rgba(255,255,255,.08);
