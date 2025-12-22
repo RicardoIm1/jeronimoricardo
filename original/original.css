@@ -80,7 +80,8 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background-color: #DEE3EB;;
+  background-color: #DEE3EB;
+  cursor:pointer;
 }
 
 .btn-icon:hover{
