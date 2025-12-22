@@ -41,24 +41,18 @@ body {
   line-height: 1;
   font-weight: 400;
 
-  letter-spacing: 0.04em;
-  transform: rotate(-1.4deg) translateY(2px);
+  letter-spacing: 0.03em;
+  transform: rotate(-1.3deg) translateY(2px);
 
   color: #0b2a4a;
-  opacity: 0.95;
 
+  /* Simulación de presión irregular */
   text-shadow:
-    0.5px 0.5px 0 rgba(0, 0, 0, 0.18);
-}
+    0.4px 0.3px 0 rgba(0, 0, 0, 0.22),
+    0.8px 0.6px 0 rgba(0, 0, 0, 0.12),
+   -0.3px -0.2px 0 rgba(0, 0, 0, 0.08);
 
-.mifirma::after {
-  content: "";
-  display: block;
-  width: 140px;
-  height: 1px;
-  margin-top: 2px;
-  background: linear-gradient(90deg, transparent, #0b2a4a, transparent);
-  opacity: 0.6;
+  opacity: 0.95;
 }
 
 .btn {
