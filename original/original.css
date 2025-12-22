@@ -79,11 +79,12 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 .btn-icon:hover{
   background-color: var(--navy-2);
+  color: #fff;
 }
 
 .btn-icon svg {
