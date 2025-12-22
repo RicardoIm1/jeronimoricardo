@@ -328,13 +328,11 @@ body {
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-/*   background: linear-gradient(90deg, #e9edf3 60%, #d7e6f7 100%); */
   background: linear-gradient(90deg, #E9EDF3 60%, #123F73 100%);
 color: white;
   padding: 7px 12px 7px 10px;
   border-radius: 7px;
   margin-bottom: 4px;
-  /* border-left: 4px solid var(--accent); */
   border-left: 4px solid var(--navy);
 }
 
@@ -347,7 +345,6 @@ color: white;
 .role .time {
   font-weight: 700;
   font-size: 12.2px;
-  /* color: var(--gray-1); */
   color: white;
   opacity: .85;
 }
