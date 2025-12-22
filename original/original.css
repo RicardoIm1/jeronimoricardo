@@ -87,7 +87,6 @@ body {
 
 .btn {
   appearance: none;
-  border: 1 solid (--navy);
   border-radius: 10px;
   padding: 12px 16px;
   font-weight: 700;
