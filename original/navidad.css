@@ -1,68 +1,58 @@
-/* ===============================
-   🎄 Toque Navideño Elegante
-   CV Jerónimo Ricardo Ramírez
-   =============================== */
-
-:root {
-  --xmas-green: #0f3d2e;      /* Verde pino sobrio */
-  --xmas-gold: #c8a951;       /* Dorado tenue */
-  --xmas-warm: rgba(200,169,81,.12);
-}
-
-/* -------------------------------
-   Encabezado con luz invernal
--------------------------------- */
 .header {
   position: relative;
   background:
     linear-gradient(
-      180deg,
-      rgba(15,61,46,.08),
-      transparent 55%
+      135deg,
+      #0f3d2e 0%,
+      #124b38 35%,
+      #0b2a4a 100%
     );
+  color: #fff;
 }
 
-/* Estrella discreta (guiño navideño) */
+.header .name,
+.header .role,
+.header .contact,
+.header a {
+  color: #fff;
+}
+
 .header::after {
-  content: "✦";
-  position: absolute;
-  top: 18px;
-  right: 22px;
-  font-size: 14px;
-  color: var(--xmas-gold);
-  opacity: .6;
-}
-
-/* -------------------------------
-   Tags con espíritu festivo
--------------------------------- */
-.tag {
-  border: 1px solid rgba(15,61,46,.25);
+  content: "";
+  display: block;
+  height: 3px;
+  margin-top: 18px;
   background:
     linear-gradient(
-      135deg,
-      rgba(15,61,46,.08),
-      rgba(200,169,81,.10)
+      90deg,
+      transparent,
+      #c8a951,
+      transparent
     );
+  opacity: .85;
 }
 
-.tag::before {
-  content: "•";
-  color: var(--xmas-gold);
-  margin-right: 6px;
+.tag {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
+  backdrop-filter: blur(6px);
 }
 
-/* -------------------------------
-   Indicadores de sección
--------------------------------- */
-.section-title .dot {
-  background: var(--xmas-green);
-  box-shadow: 0 0 0 3px var(--xmas-warm);
+.section-title {
+  position: relative;
 }
 
-/* -------------------------------
-   Nieve intelectual (solo pantalla)
--------------------------------- */
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 42px;
+  height: 2px;
+  background: #c8a951;
+}
+
 @media screen {
   body::before {
     content: "";
@@ -70,19 +60,18 @@
     inset: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(#ffffff88 1px, transparent 1px);
-    background-size: 120px 120px;
-    animation: snow 40s linear infinite;
-    opacity: .15;
+      radial-gradient(#ffffffcc 1px, transparent 1px);
+    background-size: 160px 160px;
+    animation: snow 60s linear infinite;
+    opacity: .08;
   }
 
   @keyframes snow {
-    from { background-position: 0 0; }
-    to   { background-position: 0 120px; }
+    from { background-position: 0 -160px; }
+    to   { background-position: 0 160px; }
   }
 }
 
-/* Nunca se imprime la nieve */
 @media print {
   body::before { display: none; }
 }
