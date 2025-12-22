@@ -327,7 +327,9 @@ body {
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
-  background: linear-gradient(90deg, #e9edf3 60%, #d7e6f7 100%);
+/*   background: linear-gradient(90deg, #e9edf3 60%, #d7e6f7 100%); */
+  background: linear-gradient(90deg, #0C3058 60%, #123F73 100%);
+color: white;
   padding: 7px 12px 7px 10px;
   border-radius: 7px;
   margin-bottom: 4px;
