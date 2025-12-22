@@ -12,7 +12,7 @@
     linear-gradient(
       135deg,
       /*#702a01 0%,     rojo terciopelo */
-      var(--navy) 0%,
+      var(--navy) 20%,
       #124b38 35%,   /* verde pino */
       #5f0722 100%   /* vino profundo */
     );
