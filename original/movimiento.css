@@ -59,3 +59,9 @@ header::before {
 header.tetris::before {
   animation: tetris-drop 0.9s steps(4) forwards;
 }
+
+@keyframes tetris-drop {
+  to {
+    transform: translateY(0);
+  }
+}
