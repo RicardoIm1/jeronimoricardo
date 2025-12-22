@@ -110,7 +110,8 @@ body {
 .btn-ghost {
   background: transparent;
   color: var(--navy);
-  border: 2px solid var(--navy);
+  border: 1px solid var(--navy);
+  border-radius: 4px;
 }
 
 .btn-ghost:hover {
