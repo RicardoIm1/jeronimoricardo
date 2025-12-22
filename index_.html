@@ -307,6 +307,9 @@
         <img src="logo.png" alt="Logotipo rick" class="header-logo"> </a>
       <div class="header-title">Mi Curriculum Vitae</div>
     </div>
+    <button class="btn btn-primary" onclick="abrirCVImpresion()">
+      🖨️ Imprimir CV
+    </button>
   </header>
   <div class="metro-grid">
 
@@ -779,6 +782,21 @@
     </div>
 
   </div>
+
+  <script>
+    function abrirCVImpresion() {
+      const win = window.open(
+        'cv-print.html',
+        '_blank',
+        'width=900,height=1200'
+      );
+
+      win.onload = () => {
+        win.focus();
+        win.print();
+      };
+    }
+  </script>
 
 </body>
 
