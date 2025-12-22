@@ -35,42 +35,22 @@ body {
   border-bottom: 1px solid #d7dfea;
 }
 
+.toolbar {
+  position: relative;
+  overflow: visible;
+  /* CLAVE */
+}
+
 .mifirma {
-  font-family: "Allura", cursive;
-  font-size: 44px;
-  line-height: 1;
-  font-weight: 400;
-
-  letter-spacing: 0.03em;
-  transform: rotate(-1.3deg) translateY(2px);
-
-  color: #f10ade;
-
-  /* Simulación de presión irregular */
-  text-shadow:
-    0.4px 0.3px 0 rgba(0, 0, 0, 0.22),
-    0.8px 0.6px 0 rgba(0, 0, 0, 0.12),
-    -0.3px -0.2px 0 rgba(0, 0, 0, 0.08);
-
-  opacity: 0.95;
+  position: relative;
 }
 
-.mifirma span {
-  display: inline-block;
+.mifirma .dropcap {
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  /* sale del toolbar */
 }
-
-.mifirma .f1 {
-  text-shadow:
-    0.6px 0.4px 0 rgba(0, 0, 0, 0.25),
-    1px 0.8px 0 rgba(0, 0, 0, 0.12);
-}
-
-.mifirma .f2 {
-  text-shadow:
-    0.3px 0.2px 0 rgba(0, 0, 0, 0.18);
-  transform: translateY(1px);
-}
-
 
 .btn {
   appearance: none;
