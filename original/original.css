@@ -208,8 +208,6 @@ body {
   grid-template-columns: 1.1fr 1.2fr !important;
   gap: 16px !important;
   /* gap: 22px; */
-  border-radius: 14px;
-  background-color: #eeeff0;
   border: #00b7ff;
 }
 
