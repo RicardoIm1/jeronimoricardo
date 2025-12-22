@@ -87,7 +87,6 @@ body {
 
 .btn {
   appearance: none;
-  background: var(--navy);
   border-radius: 10px;
   padding: 12px 16px;
   font-weight: 700;
@@ -97,8 +96,8 @@ body {
 }
 
 .btn:hover {
+  background: var(--navy);
   color: var(--white);
-  background: var(--navy2);
 }
 
 .btn-primary {
