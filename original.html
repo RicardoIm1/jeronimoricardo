@@ -79,7 +79,6 @@
           <span class="tag">Docencia</span>
         </div>
         <div class="tetris-layer" aria-hidden="true"></div>
-
       </header>
 
       <!-- Contenido -->
@@ -304,16 +303,17 @@
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
       const header = document.querySelector("header");
       const layer = header.querySelector(".tetris-layer");
-      let done = false;
+      let executed = false;
 
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && !done) {
-            done = true;
-
-            setTimeout(() => startTetris(), 5000);
+          if (entry.isIntersecting && !executed) {
+            executed = true;
+            setTimeout(startTetris, 5000);
             observer.disconnect();
           }
         });
@@ -321,24 +321,66 @@
 
       observer.observe(header);
 
+      const GRID = 20;
+      let stackHeight = 0;
+
+      const SHAPES = {
+        L: [[1, 0], [1, 0], [1, 1]],
+        T: [[1, 1, 1], [0, 1, 0]],
+        S: [[0, 1, 1], [1, 1, 0]]
+      };
+
       function startTetris() {
-        const rows = 6;
-        const cols = 10;
+        header.classList.add("uncovered");
 
-        for (let i = 0; i < rows * cols; i++) {
-          const block = document.createElement("div");
-          block.className = "tetris-block";
-          block.style.animationDelay = `${Math.random() * 0.6}s`;
-          layer.appendChild(block);
-        }
+        let count = 0;
+        const interval = setInterval(() => {
+          if (count++ > 8) return clearInterval(interval);
+          dropPiece();
+        }, 180);
+      }
 
-        // quitar fondo y cambiar texto
-        setTimeout(() => {
-          header.classList.add("uncovered");
-        }, 300);
+      function dropPiece() {
+        const keys = Object.keys(SHAPES);
+        const shape = SHAPES[keys[Math.floor(Math.random() * keys.length)]];
+        const piece = document.createElement("div");
+        piece.className = "tetris-piece";
+
+        const size = GRID;
+        piece.style.width = `${shape[0].length * size}px`;
+        piece.style.height = `${shape.length * size}px`;
+
+        shape.forEach(row =>
+          row.forEach(cell => {
+            const block = document.createElement("span");
+            block.style.width = `${size}px`;
+            block.style.height = `${size}px`;
+            block.style.opacity = cell ? 1 : 0;
+            piece.appendChild(block);
+          })
+        );
+
+        const x = Math.random() * (header.clientWidth - piece.offsetWidth);
+        piece.style.left = `${x}px`;
+        piece.style.top = `-${piece.offsetHeight}px`;
+
+        layer.appendChild(piece);
+
+        const fallTo = header.clientHeight - piece.offsetHeight - stackHeight;
+        stackHeight += size;
+
+        piece.animate(
+          [{ transform: "translateY(0)" }, { transform: `translateY(${fallTo}px)` }],
+          {
+            duration: 800,
+            easing: "cubic-bezier(.22,.61,.36,1)",
+            fill: "forwards"
+          }
+        );
       }
     });
   </script>
+
 
 </body>
 
