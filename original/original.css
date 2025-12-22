@@ -342,7 +342,8 @@ body {
 .role .time {
   font-weight: 700;
   font-size: 12.2px;
-  color: var(--gray-1);
+  /* color: var(--gray-1); */
+  color: var(--navy);
   opacity: .85;
 }
 
@@ -461,5 +462,6 @@ em {
 
   .role .time {
     font-size: 11px;
+    color: #fff;
   }
 }
