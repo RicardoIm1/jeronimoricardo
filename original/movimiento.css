@@ -51,19 +51,11 @@ header::before {
     #0C3058 100%
   );
   transform: translateY(-100%);
-  animation: tetris-drop 0.9s steps(4) forwards;
-  animation-delay: 5s;
   pointer-events: none;
   z-index: 0;
 }
 
-header > * {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes tetris-drop {
-  to {
-    transform: translateY(0);
-  }
+/* SOLO cuando se activa */
+header.tetris::before {
+  animation: tetris-drop 0.9s steps(4) forwards;
 }
