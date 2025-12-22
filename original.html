@@ -300,6 +300,33 @@
     `;
     document.head.appendChild(style);
   </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("header");
+    let executed = false;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !executed) {
+            executed = true;
+
+            setTimeout(() => {
+              header.classList.add("tetris");
+            }, 5000);
+
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.5
+      }
+    );
+
+    observer.observe(header);
+  });
+</script>
 
 
 </body>
