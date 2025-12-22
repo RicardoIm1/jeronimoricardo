@@ -38,11 +38,8 @@
   <div class="page-wrap">
     <section class="page">
       <!-- Encabezado -->
-      <header id="hero" class="header reveal d1">
-        <div class="tetris-layer"></div>
-
-        <!-- <div class="hero-content reveal header-top"> -->
-        <div class="hero-content reveal d2">
+      <header class="header reveal d1">
+        <div class="header-top">
           <div class="name-block">
             <h1 class="name">Jerónimo Ricardo Ramírez Torres</h1>
             <p class="role">Docente Universitario — Estadísticas, Finanzas y Sistemas</p>
@@ -81,6 +78,7 @@
           <span class="tag">Protección de Datos</span>
           <span class="tag">Docencia</span>
         </div>
+        <div class="tetris-layer" aria-hidden="true"></div>
       </header>
 
       <!-- Contenido -->
@@ -223,8 +221,6 @@
 
       <div class="footer-note">
         <span class="muted">Actualizado: <span id="today"></span></span>
-        <audio id="tetrisSound" src="soft-click.mp3" preload="auto"></audio>
-        <button onclick="location.reload()">Repetir animación</button>
       </div>
     </section>
   </div>
@@ -305,41 +301,6 @@
     `;
     document.head.appendChild(style);
   </script>
-  <script>
-    const header = document.getElementById('hero');
-    const layer = header.querySelector('.tetris-layer');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          observer.disconnect();
-          setTimeout(startTetris, 5000);
-        }
-      });
-    }, { threshold: 0.6 });
-
-    observer.observe(header);
-
-    function startTetris() {
-      const cols = Math.floor(header.offsetWidth / 32);
-      const rows = Math.floor(header.offsetHeight / 32);
-
-      const total = cols * rows;
-
-      for (let i = 0; i < total; i++) {
-        const block = document.createElement('div');
-        block.className = 'tetris-block';
-        block.style.animationDelay = `${Math.random() * 0.8}s`;
-        layer.appendChild(block);
-      }
-
-      setTimeout(() => {
-        header.classList.add('clean');
-        layer.remove();
-      }, 1400);
-    }
-  </script>
-
 
 </body>
 
