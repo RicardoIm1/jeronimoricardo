@@ -82,6 +82,10 @@ body {
   border-radius: 4px;
 }
 
+.btn-icon:hover{
+  background-color: var(--navy-2);
+}
+
 .btn-icon svg {
   display: block;
 }
