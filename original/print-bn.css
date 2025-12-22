@@ -39,8 +39,8 @@
   /* ========= ENCABEZADO ========= */
 
   .header {
-    background: #000 !important;
-    color: #fff !important;
+    color: #000 !important;
+    background: #fff !important;
     padding: 8px 22px 9px 22px !important;
     margin-bottom: 4px !important;
     border-bottom: 3px solid #000 !important;
@@ -64,8 +64,8 @@
 
   .header-tags .tag {
     background: transparent !important;
-    color: #fff !important;
-    border: 1px solid #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
     font-size: 9.8px !important;
     padding: 3px 7px !important;
     letter-spacing: 0.04em !important;
