@@ -1,11 +1,12 @@
 /* ===============================
    PRINT.CSS — CV PREMIUM 1 HOJA
+   (AJUSTE FINO DE ESPACIO INFERIOR)
    =============================== */
 
 /* ---- Configuración de página ---- */
 @page {
   size: Letter;
-  margin: 7mm 11mm 11mm 11mm;
+  margin: 7mm 11mm 6mm 11mm; /* ↓ margen inferior reducido */
 }
 
 /* ---- Reset general para impresión ---- */
@@ -17,12 +18,12 @@
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-    height: 100%;
+    height: auto !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* Ocultar elementos de pantalla */
+  /* Ocultar elementos no imprimibles */
   .toolbar,
   #video-btn,
   #video-modal {
@@ -31,8 +32,8 @@
 
   /* Contenedor principal */
   .page-wrap {
-    padding: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
   }
 
   .page {
@@ -41,7 +42,7 @@
     background: #fff !important;
     box-shadow: none !important;
     border-radius: 14px 14px 0 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     page-break-after: avoid;
   }
 
@@ -49,47 +50,38 @@
   .header {
     background: linear-gradient(135deg, #0b2a4a 0%, #0b3260 100%) !important;
     color: #ffffff !important;
-    padding: 8px 22px 10px 22px !important;
-    margin-bottom: 6px !important;
+    padding: 8px 22px 9px 22px !important;
+    margin-bottom: 4px !important; /* ↓ */
     border-bottom: 4px solid var(--accent) !important;
-    box-shadow: none !important;
     border-radius: 14px 14px 0 0 !important;
   }
 
   .name-block .name {
-    font-size: 25px !important;
-    line-height: 1.12 !important;
+    font-size: 24.5px !important;
+    line-height: 1.1 !important;
   }
 
   .name-block .role {
-    font-size: 13px !important;
-  }
-
-  .header .contact,
-  .header .contact a,
-  .header-tags .tag {
-    color: #ffffff !important;
+    font-size: 12.8px !important;
   }
 
   .header-tags {
-    margin-top: 8px !important;
+    margin-top: 6px !important;
     gap: 6px !important;
   }
 
   .header-tags .tag {
     font-size: 10px !important;
-    padding: 4px 8px !important;
-    border-color: #ffffff !important;
-    background: #00b7ff22 !important;
+    padding: 3.5px 8px !important;
   }
 
   /* ---- Cuerpo ---- */
   .content {
     display: grid !important;
     grid-template-columns: 1.1fr 1.2fr !important;
-    gap: 14px !important;
-    padding: 8px 16px 8px 16px !important;
-    margin-bottom: 4px !important;
+    gap: 13px !important; /* ↓ */
+    padding: 6px 16px 4px 16px !important; /* ↓ padding inferior */
+    margin-bottom: 0 !important;
   }
 
   /* ---- Texto general ---- */
@@ -97,71 +89,62 @@
   .list li,
   .edu-item {
     font-size: 11.1px !important;
-    line-height: 1.45 !important;
+    line-height: 1.42 !important; /* ↓ ligeramente */
   }
 
   /* ---- Secciones ---- */
   .section {
-    margin-bottom: 8px !important;
+    margin-bottom: 6px !important; /* ↓ clave */
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
+  .section:last-child {
+    margin-bottom: 0 !important; /* 👈 elimina colchón final */
+  }
+
   .section-title {
-    font-size: 12.2px !important;
-    letter-spacing: .6px !important;
-    margin-bottom: 3px !important;
-    color: var(--navy-2) !important;
+    font-size: 12.1px !important;
+    margin-bottom: 2px !important;
+    letter-spacing: .5px !important;
   }
 
   /* ---- Formación ---- */
   .edu-item {
-    margin-bottom: 6px !important;
+    margin-bottom: 4px !important;
   }
 
-  /* ---- Experiencia / Roles ---- */
+  /* ---- Experiencia ---- */
   .role {
-    margin-bottom: 7px !important;
+    margin-bottom: 6px !important;
     break-inside: avoid !important;
-    page-break-inside: avoid !important;
+  }
+
+  .role:last-child {
+    margin-bottom: 0 !important;
   }
 
   .role .r-head {
-    background: #e9edf3 !important;
     padding: 4px 8px !important;
-    margin-bottom: 3px !important;
+    margin-bottom: 2px !important;
     border-left: 3px solid var(--accent) !important;
-    box-shadow: none !important;
-  }
-
-  .role .title {
-    font-size: 12.4px !important;
-  }
-
-  .role .time {
-    font-size: 11px !important;
   }
 
   .divider {
-    margin: 4px 0 3px 0 !important;
+    margin: 3px 0 2px 0 !important;
   }
 
   /* ---- Listas ---- */
   .list li {
-    margin: 1px 0 !important;
-  }
-
-  .list.tight li {
     margin: 0.5px 0 !important;
   }
 
   /* ---- Pie de página ---- */
   .footer-note {
-    margin-top: -4px !important;
-    padding: 4px 14px !important;
-    font-size: 9.5px !important;
-    background: #0b2a4a0d !important;
-    color: #5f6b7a !important;
+    margin-top: 0 !important;
+    padding: 3px 14px 2px 14px !important; /* ↓ */
+    font-size: 9.2px !important;
+    line-height: 1.25 !important;
   }
 
 }
