@@ -257,7 +257,7 @@ body {
   align-items: center;
   gap: 10px;
   font-weight: 800;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   letter-spacing: .6px;
   text-transform: uppercase;
   color: var(--navy);
@@ -424,8 +424,7 @@ em {
   .list li,
   .edu-item,
   .role .title {
-    /* font-size: 12.2px !important; */
-    font-size: 14.2px !important;
+  font-size: 14.2px !important;
   }
 
   .role .r-head {
