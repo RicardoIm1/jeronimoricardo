@@ -7,32 +7,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap"
     rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="original/original.css">
   <link rel="stylesheet" href="original/print.css" media="print">
   <link rel="stylesheet" href="original/print-bn.css" media="print">
 </head>
 <style>
   .mifirma {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  font-style: italic;
+    font-family: "Allura", cursive;
+    font-size: 34px;
+    line-height: 1;
+    font-weight: 400;
 
-  transform: rotate(-1.2deg);
-  opacity: 0.92;
+    letter-spacing: 0.04em;
+    transform: rotate(-1.4deg) translateY(2px);
 
-  color: #0b2a4a;
-  text-shadow: 0.4px 0.4px 0 rgba(0,0,0,0.15);
-}
+    color: #0b2a4a;
+    opacity: 0.95;
 
+    text-shadow:
+      0.5px 0.5px 0 rgba(0, 0, 0, 0.18);
+  }
+
+  .mifirma::after {
+    content: "";
+    display: block;
+    width: 140px;
+    height: 1px;
+    margin-top: 2px;
+    background: linear-gradient(90deg, transparent, #0b2a4a, transparent);
+    opacity: 0.6;
+  }
 </style>
+
 <body>
   <!-- Barra con acciones -->
   <div class="toolbar">
     <div class="mifirma">
       Jerónimo Ricardo
-    </div>    
+    </div>
     <button class="btn btn-primary" onclick="window.print()">
       📄 Descargar PDF
     </button>
