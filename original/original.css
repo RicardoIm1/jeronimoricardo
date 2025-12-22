@@ -304,15 +304,22 @@ body {
 }
 
 .list {
-  margin: 0;
-  padding-left: 16px;
+  list-style: none;
+  padding-left: 1.8rem;
 }
 
-.list li {
-  margin: 3px 0;
-  font-size: 12.5px;
-  color: red;
+.list li::before {
+  content: "▸";
+  color: var(--navy);
+  margin-right: 0.6rem;
 }
+
+/* .list li {
+  margin: 3px 0;
+  font-size: 1.4rem;
+  color: var(--navy);
+
+} */
 
 .list.tight li {
   margin: 2px 0;
