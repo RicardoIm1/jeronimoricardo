@@ -343,8 +343,8 @@ body {
 .role .time {
   font-weight: 700;
   font-size: 12.2px;
-  /* color: var(--gray-1); */
-  color: var(--navy);
+  color: var(--gray-1);
+  background-color: var(--navy);
   opacity: .85;
 }
 
