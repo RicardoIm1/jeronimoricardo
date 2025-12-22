@@ -1,0 +1,153 @@
+/* ===============================
+   PRINT.CSS — CV ACADÉMICO GANADOR
+   =============================== */
+
+@page {
+  size: Letter;
+  margin: 18mm 14mm 16mm 14mm;
+}
+
+html, body {
+  background: #fff !important;
+  color: #111 !important;
+  font-size: 11.2pt;
+  line-height: 1.45;
+  margin: 0 !important;
+  padding: 0 !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Oculta todo lo que no pertenece al papel */
+.toolbar,
+#video-btn,
+#video-modal {
+  display: none !important;
+}
+
+/* Página */
+.page {
+  box-shadow: none !important;
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* Header: autoridad, no espectáculo */
+.header {
+  background: #0b2a4a !important;
+  color: #fff !important;
+  padding: 14px 22px 12px !important;
+  border-bottom: 4px solid #00b7ff;
+}
+
+.name-block .name {
+  font-size: 18pt !important;
+  letter-spacing: .2px;
+}
+
+.name-block .role {
+  font-size: 11.5pt !important;
+  font-weight: 600;
+}
+
+/* Tags: discretos, no protagonistas */
+.header-tags .tag {
+  font-size: 9.2pt !important;
+  padding: 3px 8px !important;
+  border: 1px solid #fff !important;
+  background: transparent !important;
+}
+
+/* Contenido */
+.content {
+  display: grid !important;
+  grid-template-columns: 1.05fr 1.25fr !important;
+  gap: 14px !important;
+  padding: 10px 0 0 !important;
+}
+
+/* Secciones */
+.section {
+  margin-bottom: 9px !important;
+  break-inside: avoid !important;
+}
+
+.section-title {
+  font-size: 10.2pt !important;
+  letter-spacing: .9px !important;
+  margin-bottom: 4px !important;
+  color: #0e3a6a !important;
+}
+
+.section-title .dot {
+  width: 6px !important;
+  height: 6px !important;
+  box-shadow: none !important;
+}
+
+/* Texto */
+.para,
+.list li,
+.edu-item {
+  font-size: 10.4pt !important;
+  line-height: 1.42 !important;
+}
+
+/* Roles */
+.role {
+  margin-bottom: 7px !important;
+  break-inside: avoid !important;
+}
+
+.role .r-head {
+  background: #f1f4f8 !important;
+  border-left: 3px solid #00b7ff !important;
+  padding: 4px 6px !important;
+  box-shadow: none !important;
+}
+
+.role .title {
+  font-size: 10.6pt !important;
+  font-weight: 700;
+}
+
+.role .time {
+  font-size: 9.6pt !important;
+  color: #444 !important;
+}
+
+/* Listas */
+.list {
+  padding-left: 14px !important;
+}
+
+.list li {
+  margin: 2px 0 !important;
+}
+
+/* Divisores: mínimos */
+.divider {
+  height: 1px;
+  background: #ddd !important;
+  margin: 6px 0 !important;
+}
+
+/* Educación */
+.edu-item .degree {
+  font-weight: 700;
+}
+
+/* Reglas anti-errores de impresión */
+h1, h2, h3,
+.section-title,
+.role .r-head {
+  page-break-after: avoid !important;
+}
+
+.section,
+.role,
+.edu-item {
+  page-break-inside: avoid !important;
+}
