@@ -82,6 +82,7 @@ body {
   border-radius: 10px;
   background-color: #DEE3EB;
   cursor:pointer;
+  border: 1px solid #0b2a4a;
 }
 
 .btn-icon:hover{
