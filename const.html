@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Constancias Certificadas</title>
+    <title>Galería de Constancias</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -17,148 +25,66 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
         
         header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
+            padding: 40px 20px;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
         }
         
         h1 {
-            color: #2c3e50;
-            font-size: 2.5rem;
+            color: var(--primary);
+            font-size: 2.8rem;
             margin-bottom: 10px;
         }
         
         .subtitle {
             color: #7f8c8d;
-            font-size: 1.1rem;
-        }
-        
-        /* Galería de constancias */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .certificate-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .certificate-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        
-        .certificate-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 3px solid #3498db;
-        }
-        
-        .certificate-info {
-            padding: 20px;
-        }
-        
-        .certificate-title {
             font-size: 1.2rem;
-            font-weight: 600;
-            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
             margin-bottom: 10px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
         
-        .certificate-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
+        .stat-label {
             color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-        
-        .certificate-category {
-            display: inline-block;
-            padding: 4px 12px;
-            background: #e8f4fc;
-            color: #3498db;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        /* Modal para vista completa */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-content {
-            position: relative;
-            background: white;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-        }
-        
-        .modal-image {
-            width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 5px;
-        }
-        
-        .modal-info {
-            padding: 20px 0;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            color: #333;
-            cursor: pointer;
-            background: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-size: 1rem;
         }
         
         /* Filtros */
@@ -171,87 +97,292 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            justify-content: center;
         }
         
         .filter-btn {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: #f8f9fa;
             border: 2px solid #e9ecef;
-            border-radius: 25px;
+            border-radius: 30px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
+            color: #495057;
             transition: all 0.3s;
+            font-size: 1rem;
         }
         
         .filter-btn.active {
-            background: #3498db;
+            background: var(--secondary);
             color: white;
-            border-color: #3498db;
+            border-color: var(--secondary);
         }
         
-        .filter-btn:hover {
+        .filter-btn:hover:not(.active) {
             background: #e9ecef;
+            transform: translateY(-2px);
         }
         
-        /* Estadísticas */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
+        /* Galería - MODO CARRUSEL */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 50px;
             background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-track {
+            display: flex;
+            gap: 25px;
+            transition: transform 0.5s ease;
+            padding: 10px;
+        }
+        
+        .certificate-card {
+            flex: 0 0 350px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e9ecef;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .certificate-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--secondary);
+        }
+        
+        .certificate-info {
             padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #3498db;
-            margin-bottom: 5px;
+        .certificate-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.4;
+            height: 65px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
         
-        .stat-label {
-            color: #7f8c8d;
+        .certificate-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
             font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .certificate-category {
+            display: inline-block;
+            padding: 6px 15px;
+            background: #e8f4fc;
+            color: var(--secondary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* Controles del carrusel */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .carousel-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .carousel-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            margin: 5vh auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .modal-image {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+        }
+        
+        .modal-info {
+            padding: 25px;
+            background: white;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .modal-meta {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+            color: #6c757d;
+            font-size: 1rem;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(90deg);
         }
         
         /* Loading */
         .loading {
             text-align: center;
-            padding: 40px;
-            font-size: 1.2rem;
-            color: #7f8c8d;
+            padding: 60px;
         }
         
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Grid alternativo */
+        .grid-view .gallery-track {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            transform: none !important;
+        }
+        
+        .grid-view .certificate-card {
+            flex: 1 1 auto;
+        }
+        
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .view-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .view-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            .gallery-track {
+                gap: 15px;
+            }
+            
+            .certificate-card {
+                flex: 0 0 300px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .modal-content {
-                margin: 20px auto;
-                padding: 15px;
+                max-width: 95%;
+                margin: 2vh auto;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -269,67 +400,140 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f6f3;
+            color: #1abc9c;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-certificate"></i> Constancias Certificadas</h1>
-            <p class="subtitle">Sistema de verificación de documentos - Respaldado por Google Drive</p>
+            <h1><i class="fas fa-certificate"></i> Constancias Verificadas</h1>
+            <p class="subtitle">Documentos certificados respaldados por Google Drive</p>
+            <div class="verification-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Sistema de verificación autenticado</span>
+            </div>
         </header>
         
         <!-- Estadísticas -->
-        <div class="stats" id="stats">
+        <div class="stats">
             <div class="stat-card">
-                <div class="stat-number" id="total-constancias">0</div>
-                <div class="stat-label">Total de Constancias</div>
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">Constancias Totales</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="categorias-count">0</div>
-                <div class="stat-label">Categorías</div>
+                <div class="stat-number" id="docenciaCount">0</div>
+                <div class="stat-label">Constancias de Docencia</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="actualizado">Hoy</div>
-                <div class="stat-label">Actualizado</div>
+                <div class="stat-number" id="categoriesCount">0</div>
+                <div class="stat-label">Categorías Diferentes</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-number" id="updatedDate">Hoy</div>
+                <div class="stat-label">Última Actualización</div>
+            </div>
+        </div>
+        
+        <!-- Controles de vista -->
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="carousel">
+                <i class="fas fa-images"></i> Carrusel
+            </button>
+            <button class="view-btn" data-view="grid">
+                <i class="fas fa-th-large"></i> Cuadrícula
+            </button>
         </div>
         
         <!-- Filtros -->
         <div class="filters">
-            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn active" data-filter="all">Todas las Constancias</button>
             <button class="filter-btn" data-filter="Docencia">Docencia</button>
             <button class="filter-btn" data-filter="Gestión Documental">Gestión</button>
             <button class="filter-btn" data-filter="Análisis Estadístico">Análisis</button>
             <button class="filter-btn" data-filter="constancias">Solo Constancias</button>
+            <button class="filter-btn" data-filter="recientes">Más Recientes</button>
         </div>
         
-        <!-- Galería -->
+        <!-- Loading -->
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Cargando constancias desde Google Drive...</p>
+            <h3>Cargando constancias verificadas...</h3>
+            <p>Conectando con Google Drive para mostrar los documentos</p>
         </div>
         
-        <div class="gallery" id="gallery"></div>
+        <!-- Galería/Carrusel -->
+        <div class="gallery-container" id="galleryContainer">
+            <div class="gallery-track" id="galleryTrack"></div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span id="carouselInfo" style="align-self: center; font-weight: 600; color: var(--dark);">
+                    Página 1 de 1
+                </span>
+                <button class="carousel-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
         
         <!-- Modal -->
-        <div class="modal" id="imageModal">
+        <div class="modal-overlay" id="modalOverlay">
+            <button class="close-modal" id="closeModal">&times;</button>
             <div class="modal-content">
-                <span class="close-modal" id="closeModal">&times;</span>
                 <img class="modal-image" id="modalImage" src="" alt="Constancia completa">
                 <div class="modal-info">
-                    <h3 id="modalTitle"></h3>
-                    <div class="certificate-meta">
-                        <span><i class="far fa-folder"></i> <span id="modalFolder"></span></span>
-                        <span><i class="far fa-calendar"></i> <span id="modalDate"></span></span>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-meta">
+                        <span><i class="far fa-folder"></i> <strong id="modalFolder"></strong></span>
+                        <span><i class="far fa-calendar"></i> <strong id="modalDate"></strong></span>
+                        <span><i class="fas fa-tag"></i> <strong id="modalCategory"></strong></span>
                     </div>
-                    <p id="modalDescription"></p>
-                    <a id="modalLink" href="#" target="_blank" class="filter-btn" style="text-decoration: none; display: inline-block; margin-top: 15px;">
-                        <i class="fas fa-external-link-alt"></i> Ver en Google Drive
-                    </a>
+                    <p id="modalDescription" style="margin-bottom: 25px; font-size: 1.1rem; color: #555;"></p>
+                    <div style="display: flex; gap: 15px;">
+                        <a id="modalLink" href="#" target="_blank" class="filter-btn" 
+                           style="text-decoration: none; background: var(--secondary); color: white; padding: 12px 25px;">
+                            <i class="fas fa-external-link-alt"></i> Ver en Google Drive
+                        </a>
+                        <button id="shareBtn" class="filter-btn" style="padding: 12px 25px;">
+                            <i class="fas fa-share"></i> Compartir
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <footer>
+            <p><strong>Sistema de Visualización de Constancias</strong></p>
+            <p>Los documentos mostrados son verificados y almacenados en Google Drive</p>
+            <p style="margin-top: 15px; font-size: 0.8rem;">
+                <i class="fas fa-sync-alt"></i> Actualización automática desde Google Sheets
+            </p>
+        </footer>
     </div>
 
     <script>
@@ -338,57 +542,105 @@
         
         // Variables globales
         let allCertificates = [];
+        let filteredCertificates = [];
         let currentFilter = 'all';
+        let currentView = 'carousel';
+        let currentPage = 0;
+        const itemsPerPage = 3;
         
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            loadCertificates();
+            loadCertificatesWithJSONP();
             setupEventListeners();
         });
         
-        // Cargar constancias desde Google Sheets
-        async function loadCertificates() {
-            try {
-                const response = await fetch(`${APPS_SCRIPT_URL}?action=getCertificates`);
-                const data = await response.json();
-                
+        // ============================================
+        // CARGAR DATOS CON JSONP (SIN CORS)
+        // ============================================
+        function loadCertificatesWithJSONP() {
+            // Crear callback global
+            window.handleCertificatesData = function(data) {
                 if (data.success) {
                     allCertificates = data.certificates;
-                    displayCertificates(allCertificates);
-                    updateStats(data.certificates);
+                    filteredCertificates = [...allCertificates];
+                    
+                    // Procesar URLs de imágenes
+                    allCertificates.forEach(cert => {
+                        if (cert.fileId) {
+                            cert.thumbnailUrl = `https://drive.google.com/thumbnail?id=${cert.fileId}&sz=w400`;
+                            cert.fullImageUrl = `https://drive.google.com/thumbnail?id=${cert.fileId}&sz=w1200`;
+                        }
+                    });
+                    
+                    updateStatistics();
+                    displayCertificates();
                     document.getElementById('loading').style.display = 'none';
                 } else {
-                    showError('Error al cargar las constancias: ' + data.message);
+                    showError('Error: ' + data.message);
                 }
-            } catch (error) {
-                showError('Error de conexión: ' + error.message);
-                // Datos de ejemplo para pruebas
-                loadSampleData();
-            }
+            };
+            
+            // Crear script tag para JSONP
+            const script = document.createElement('script');
+            script.src = `${APPS_SCRIPT_URL}?callback=handleCertificatesData&action=getCertificates`;
+            document.body.appendChild(script);
+            
+            // Eliminar script después de cargar
+            script.onload = function() {
+                this.remove();
+            };
+            
+            // Timeout por si falla
+            setTimeout(() => {
+                if (document.getElementById('loading').style.display !== 'none') {
+                    loadFallbackData();
+                }
+            }, 8000);
         }
         
-        // Mostrar constancias en la galería
-        function displayCertificates(certificates) {
-            const gallery = document.getElementById('gallery');
+        // ============================================
+        // MOSTRAR CONSTANCIAS
+        // ============================================
+        function displayCertificates() {
+            const galleryTrack = document.getElementById('galleryTrack');
             
-            if (certificates.length === 0) {
-                gallery.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #7f8c8d;">
-                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 20px;"></i>
-                        <h3>No hay constancias para mostrar</h3>
-                        <p>No se encontraron documentos con los filtros aplicados.</p>
+            if (filteredCertificates.length === 0) {
+                galleryTrack.innerHTML = `
+                    <div style="text-align: center; padding: 60px; grid-column: 1/-1; color: #6c757d;">
+                        <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 20px; color: #bdc3c7;"></i>
+                        <h3 style="margin-bottom: 15px;">No se encontraron constancias</h3>
+                        <p>No hay documentos que coincidan con el filtro "${currentFilter}"</p>
                     </div>
                 `;
+                updateCarouselControls();
                 return;
             }
             
-            gallery.innerHTML = certificates.map(cert => `
-                <div class="certificate-card" data-id="${cert.id}" data-category="${cert.clasificacion}">
-                    <img src="${cert.thumbnailUrl || 'https://via.placeholder.com/300x200?text=Sin+miniatura'}" 
+            if (currentView === 'carousel') {
+                displayCarouselView();
+            } else {
+                displayGridView();
+            }
+            
+            updateCarouselControls();
+            attachCardEvents();
+        }
+        
+        function displayCarouselView() {
+            const galleryTrack = document.getElementById('galleryTrack');
+            galleryTrack.className = 'gallery-track';
+            
+            const startIndex = currentPage * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredCertificates.length);
+            const pageCertificates = filteredCertificates.slice(startIndex, endIndex);
+            
+            galleryTrack.innerHTML = pageCertificates.map(cert => `
+                <div class="certificate-card" data-id="${cert.id}">
+                    <img src="${cert.thumbnailUrl || 'https://via.placeholder.com/350x250/3498db/ffffff?text=Constancia'}" 
                          alt="${cert.nombre}" 
                          class="certificate-image"
                          loading="lazy"
-                         onerror="this.src='https://via.placeholder.com/300x200?text=Error+imagen'">
+                         onerror="this.src='https://via.placeholder.com/350x250/95a5a6/ffffff?text=Imagen+no+disponible'">
                     
                     <div class="certificate-info">
                         <h3 class="certificate-title">${cert.nombre}</h3>
@@ -398,111 +650,246 @@
                             <span><i class="far fa-folder"></i> ${cert.carpeta}</span>
                         </div>
                         
-                        ${cert.titulo ? `<p style="margin-bottom: 10px; color: #555;">${cert.titulo}</p>` : ''}
+                        ${cert.titulo ? `<p style="color: #555; margin-bottom: 10px; font-style: italic;">"${cert.titulo}"</p>` : ''}
                         
-                        <span class="certificate-category">${cert.clasificacion}</span>
+                        <span class="certificate-category">
+                            <i class="fas fa-tag"></i> ${cert.clasificacion}
+                        </span>
+                        
+                        <div style="margin-top: 15px; text-align: center;">
+                            <button class="filter-btn" onclick="openCertificate(${cert.id})" 
+                                    style="padding: 8px 20px; font-size: 0.9rem; width: 100%;">
+                                <i class="fas fa-expand"></i> Ver Constancia Completa
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('');
             
-            // Agregar eventos a las tarjetas
-            document.querySelectorAll('.certificate-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const certId = this.getAttribute('data-id');
-                    const certificate = certificates.find(c => c.id == certId);
-                    if (certificate) {
-                        openModal(certificate);
-                    }
-                });
-            });
+            // Actualizar posición del carrusel
+            galleryTrack.style.transform = `translateX(0px)`;
         }
         
-        // Abrir modal con vista completa
-        function openModal(certificate) {
-            document.getElementById('modalImage').src = certificate.imageUrl || certificate.thumbnailUrl;
+        function displayGridView() {
+            const galleryTrack = document.getElementById('galleryTrack');
+            galleryTrack.className = 'gallery-track grid-view';
+            
+            galleryTrack.innerHTML = filteredCertificates.map(cert => `
+                <div class="certificate-card" data-id="${cert.id}">
+                    <img src="${cert.thumbnailUrl || 'https://via.placeholder.com/300x200/3498db/ffffff?text=Constancia'}" 
+                         alt="${cert.nombre}" 
+                         class="certificate-image"
+                         loading="lazy">
+                    
+                    <div class="certificate-info">
+                        <h3 class="certificate-title">${cert.nombre}</h3>
+                        
+                        <div class="certificate-meta">
+                            <span><i class="far fa-calendar"></i> ${cert.fecha}</span>
+                            <span><i class="far fa-folder"></i> ${cert.carpeta}</span>
+                        </div>
+                        
+                        <span class="certificate-category">
+                            <i class="fas fa-tag"></i> ${cert.clasificacion}
+                        </span>
+                        
+                        <div style="margin-top: 15px;">
+                            <button class="filter-btn" onclick="openCertificate(${cert.id})" 
+                                    style="padding: 8px 20px; font-size: 0.9rem; width: 100%;">
+                                <i class="fas fa-eye"></i> Ver Documento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ============================================
+        // FUNCIONES DEL MODAL
+        // ============================================
+        function openCertificate(certId) {
+            const certificate = allCertificates.find(c => c.id == certId);
+            if (!certificate) return;
+            
+            document.getElementById('modalImage').src = certificate.fullImageUrl || certificate.thumbnailUrl;
             document.getElementById('modalTitle').textContent = certificate.nombre;
             document.getElementById('modalFolder').textContent = certificate.carpeta;
             document.getElementById('modalDate').textContent = certificate.fecha;
+            document.getElementById('modalCategory').textContent = certificate.clasificacion;
             document.getElementById('modalDescription').textContent = 
-                certificate.titulo || 'Constancia certificada - ' + certificate.clasificacion;
-            document.getElementById('modalLink').href = certificate.link;
+                certificate.titulo || 'Constancia verificada y certificada';
+            document.getElementById('modalLink').href = certificate.link || '#';
             
-            document.getElementById('imageModal').style.display = 'block';
+            // Configurar botón compartir
+            document.getElementById('shareBtn').onclick = function() {
+                shareCertificate(certificate);
+            };
+            
+            document.getElementById('modalOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
         
-        // Actualizar estadísticas
-        function updateStats(certificates) {
-            document.getElementById('total-constancias').textContent = certificates.length;
-            
-            const categories = [...new Set(certificates.map(c => c.clasificacion))];
-            document.getElementById('categorias-count').textContent = categories.length;
-            
-            const now = new Date();
-            document.getElementById('actualizado').textContent = 
-                `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
         
-        // Configurar eventos
-        function setupEventListeners() {
-            // Filtros
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    currentFilter = this.getAttribute('data-filter');
-                    filterCertificates();
-                });
-            });
-            
-            // Cerrar modal
-            document.getElementById('closeModal').addEventListener('click', function() {
-                document.getElementById('imageModal').style.display = 'none';
-            });
-            
-            // Cerrar modal al hacer clic fuera
-            document.getElementById('imageModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
-                }
-            });
-            
-            // Buscar con teclado
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    document.getElementById('imageModal').style.display = 'none';
-                }
-            });
-        }
-        
-        // Filtrar constancias
+        // ============================================
+        // FILTRADO Y PAGINACIÓN
+        // ============================================
         function filterCertificates() {
             let filtered = [...allCertificates];
             
             if (currentFilter === 'all') {
                 // Mostrar todas
             } else if (currentFilter === 'constancias') {
-                // Solo constancias
                 filtered = filtered.filter(c => c.carpeta === 'constancias');
+            } else if (currentFilter === 'recientes') {
+                // Ordenar por fecha más reciente (asumiendo formato dd/MM/yyyy)
+                filtered.sort((a, b) => {
+                    const dateA = parseDate(a.fecha);
+                    const dateB = parseDate(b.fecha);
+                    return dateB - dateA;
+                });
             } else {
-                // Por categoría
                 filtered = filtered.filter(c => c.clasificacion === currentFilter);
             }
             
-            displayCertificates(filtered);
+            filteredCertificates = filtered;
+            currentPage = 0;
+            displayCertificates();
         }
         
-        // Mostrar error
+        function parseDate(dateStr) {
+            if (!dateStr) return new Date();
+            const parts = dateStr.split('/');
+            if (parts.length === 3) {
+                return new Date(parts[2], parts[1] - 1, parts[0]);
+            }
+            return new Date();
+        }
+        
+        function updateCarouselControls() {
+            const totalPages = Math.ceil(filteredCertificates.length / itemsPerPage);
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const carouselInfo = document.getElementById('carouselInfo');
+            
+            if (currentView === 'carousel') {
+                prevBtn.disabled = currentPage === 0;
+                nextBtn.disabled = currentPage >= totalPages - 1 || totalPages === 0;
+                carouselInfo.textContent = `Página ${currentPage + 1} de ${totalPages}`;
+                
+                // Mostrar/ocultar controles
+                document.querySelector('.carousel-controls').style.display = 
+                    totalPages > 1 ? 'flex' : 'none';
+            } else {
+                document.querySelector('.carousel-controls').style.display = 'none';
+            }
+        }
+        
+        function nextPage() {
+            const totalPages = Math.ceil(filteredCertificates.length / itemsPerPage);
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                displayCertificates();
+            }
+        }
+        
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                displayCertificates();
+            }
+        }
+        
+        // ============================================
+        // ESTADÍSTICAS
+        // ============================================
+        function updateStatistics() {
+            document.getElementById('totalCount').textContent = allCertificates.length;
+            
+            const docenciaCount = allCertificates.filter(c => 
+                c.clasificacion === 'Docencia' || c.carpeta === 'constancias'
+            ).length;
+            document.getElementById('docenciaCount').textContent = docenciaCount;
+            
+            const categories = [...new Set(allCertificates.map(c => c.clasificacion))];
+            document.getElementById('categoriesCount').textContent = categories.length;
+            
+            const now = new Date();
+            document.getElementById('updatedDate').textContent = 
+                `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}`;
+        }
+        
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        function setupEventListeners() {
+            // Filtros
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    filterCertificates();
+                });
+            });
+            
+            // Vista
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentView = this.getAttribute('data-view');
+                    currentPage = 0;
+                    displayCertificates();
+                });
+            });
+            
+            // Controles carrusel
+            document.getElementById('prevBtn').addEventListener('click', prevPage);
+            document.getElementById('nextBtn').addEventListener('click', nextPage);
+            
+            // Modal
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            document.getElementById('modalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            
+            // Teclado
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowRight' && currentView === 'carousel') nextPage();
+                if (e.key === 'ArrowLeft' && currentView === 'carousel') prevPage();
+            });
+        }
+        
+        function attachCardEvents() {
+            document.querySelectorAll('.certificate-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.closest('button')) {
+                        const certId = this.getAttribute('data-id');
+                        openCertificate(certId);
+                    }
+                });
+            });
+        }
+        
+        // ============================================
+        // FUNCIONES AUXILIARES
+        // ============================================
         function showError(message) {
-            const gallery = document.getElementById('gallery');
-            gallery.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                    <div style="color: #e74c3c; font-size: 3rem; margin-bottom: 20px;">
+            const galleryTrack = document.getElementById('galleryTrack');
+            galleryTrack.innerHTML = `
+                <div style="text-align: center; padding: 60px; grid-column: 1/-1;">
+                    <div style="color: #e74c3c; font-size: 4rem; margin-bottom: 20px;">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <h3 style="color: #e74c3c;">Error al cargar</h3>
-                    <p>${message}</p>
-                    <button onclick="loadCertificates()" class="filter-btn" style="margin-top: 20px;">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Error de conexión</h3>
+                    <p style="margin-bottom: 25px;">${message}</p>
+                    <button onclick="location.reload()" class="filter-btn" 
+                            style="padding: 12px 30px; background: #e74c3c; color: white; border: none;">
                         <i class="fas fa-redo"></i> Reintentar
                     </button>
                 </div>
@@ -510,53 +897,87 @@
             document.getElementById('loading').style.display = 'none';
         }
         
-        // Datos de ejemplo para pruebas
-        function loadSampleData() {
+        function shareCertificate(certificate) {
+            const shareData = {
+                title: certificate.nombre,
+                text: `Mira esta constancia verificada: ${certificate.nombre}`,
+                url: certificate.link || window.location.href
+            };
+            
+            if (navigator.share && navigator.canShare(shareData)) {
+                navigator.share(shareData);
+            } else {
+                // Copiar enlace
+                navigator.clipboard.writeText(certificate.link || certificate.nombre)
+                    .then(() => {
+                        alert('Información copiada al portapapeles');
+                    })
+                    .catch(() => {
+                        alert('Enlace: ' + certificate.link);
+                    });
+            }
+        }
+        
+        // ============================================
+        // DATOS DE FALLBACK (para pruebas)
+        // ============================================
+        function loadFallbackData() {
+            console.log('Cargando datos de ejemplo...');
+            
             const sampleData = [
                 {
                     id: 1,
-                    nombre: "Constancia de Participación - Curso Digital",
+                    nombre: "Constancia de Participación - Transformación Digital 2023",
                     carpeta: "constancias",
                     clasificacion: "Docencia",
                     fecha: "15/10/2023",
-                    titulo: "Curso de Transformación Digital",
-                    thumbnailUrl: "https://via.placeholder.com/300x200/3498db/ffffff?text=Constancia+Digital",
-                    imageUrl: "https://via.placeholder.com/800x600/3498db/ffffff?text=Constancia+Completa",
-                    link: "https://drive.google.com/file/d/example1/view"
+                    titulo: "Curso Avanzado de Transformación Digital",
+                    fileId: "example1",
+                    thumbnailUrl: "https://via.placeholder.com/400x300/3498db/ffffff?text=Constancia+Digital",
+                    fullImageUrl: "https://via.placeholder.com/1200x800/3498db/ffffff?text=CONSTANCIA+COMPLETA",
+                    link: "#"
                 },
                 {
                     id: 2,
-                    nombre: "Certificado de Estadísticas Avanzadas",
+                    nombre: "Certificado de Estadísticas Avanzadas con Python",
                     carpeta: "constancias",
                     clasificacion: "Análisis Estadístico",
                     fecha: "20/09/2023",
-                    titulo: "Análisis de Datos con Python",
-                    thumbnailUrl: "https://via.placeholder.com/300x200/2ecc71/ffffff?text=Certificado+Estadisticas",
-                    imageUrl: "https://via.placeholder.com/800x600/2ecc71/ffffff?text=Certificado+Completo",
-                    link: "https://drive.google.com/file/d/example2/view"
+                    titulo: "Análisis de Datos con Python y Machine Learning",
+                    fileId: "example2",
+                    thumbnailUrl: "https://via.placeholder.com/400x300/2ecc71/ffffff?text=Certificado+Estadisticas",
+                    fullImageUrl: "https://via.placeholder.com/1200x800/2ecc71/ffffff?text=CERTIFICADO+COMPLETO",
+                    link: "#"
+                },
+                {
+                    id: 3,
+                    nombre: "Diplomado en Gestión Documental Digital",
+                    carpeta: "constancias",
+                    clasificacion: "Gestión Documental",
+                    fecha: "05/11/2023",
+                    titulo: "Diplomado en Gestión Documental y Archivos Digitales",
+                    fileId: "example3",
+                    thumbnailUrl: "https://via.placeholder.com/400x300/e74c3c/ffffff?text=Diplomado+Gestión",
+                    fullImageUrl: "https://via.placeholder.com/1200x800/e74c3c/ffffff?text=DIPLOMADO+COMPLETO",
+                    link: "#"
                 }
             ];
             
             allCertificates = sampleData;
-            displayCertificates(allCertificates);
-            updateStats(allCertificates);
+            filteredCertificates = [...sampleData];
+            updateStatistics();
+            displayCertificates();
             document.getElementById('loading').style.display = 'none';
         }
         
-        // Función para compartir
-        function shareCertificate(certificate) {
-            if (navigator.share) {
-                navigator.share({
-                    title: certificate.nombre,
-                    text: `Mira esta constancia: ${certificate.nombre}`,
-                    url: certificate.link
-                });
-            } else {
-                // Copiar al portapapeles
-                navigator.clipboard.writeText(certificate.link);
-                alert('Enlace copiado al portapapeles');
-            }
-        }
+        // ============================================
+        // HACER FUNCIONES GLOBALES
+        // ============================================
+        window.openCertificate = openCertificate;
+        window.shareCertificate = shareCertificate;
+        window.closeModal = closeModal;
+        window.nextPage = nextPage;
+        window.prevPage = prevPage;
     </script>
 </body>
 </html>
