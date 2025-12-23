@@ -58,6 +58,9 @@
             background: transparent;
             border: 2px solid white;
         }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
         .warning {
             background: rgba(255, 193, 7, 0.2);
             border-left: 5px solid #ffc107;
@@ -76,6 +79,26 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .redirect-message {
+            background: rgba(76, 175, 80, 0.2);
+            border-left: 5px solid #4CAF50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -92,16 +115,25 @@
             <small>Alojado en Google Apps Script</small>
         </p>
         
+        <div class="redirect-message" id="redirectMessage">
+            <strong><i class="fas fa-clock"></i> Redirección automática:</strong><br>
+            Serás redirigido a la aplicación en <span id="countdown">5</span> segundos...
+            <button id="cancelRedirect" class="btn btn-secondary" style="margin-top: 10px; padding: 8px 20px; font-size: 0.9rem;">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+        </div>
+        
         <div class="warning">
             <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong><br>
-            Para acceder a la aplicación, haz clic en el botón inferior.<br>
-            El sistema no puede mostrarse directamente en esta página por restricciones de seguridad de Google.
+            • La aplicación se abrirá en una <strong>nueva pestaña</strong><br>
+            • Es necesario autorizar el acceso la primera vez<br>
+            • Los datos están sincronizados con Google Drive
         </div>
         
         <div style="margin: 30px 0;">
             <a id="openApp" href="#" class="btn">
                 <i class="fas fa-external-link-alt"></i>
-                Abrir Aplicación
+                Abrir Aplicación Ahora
             </a>
             
             <a href="https://docs.google.com/spreadsheets/d/1AfNThy_r0nPkALwTWgX3D7D9oUF6XipLnbRrD34_91Q/edit" 
@@ -109,6 +141,11 @@
                 <i class="fas fa-table"></i>
                 Ver Hoja de Cálculo
             </a>
+            
+            <button id="copyUrl" class="btn btn-secondary">
+                <i class="fas fa-copy"></i>
+                Copiar Enlace
+            </button>
         </div>
         
         <div class="features">
@@ -133,35 +170,196 @@
         <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
             <p>ID de la aplicación: <code id="appId">Cargando...</code></p>
             <p><i class="fas fa-info-circle"></i> Esta página es solo un portal de acceso a la aplicación principal</p>
+            <p><i class="fas fa-shield-alt"></i> Conexión segura con Google Apps Script</p>
         </div>
     </div>
 
     <script>
-        // URL de tu aplicación (REEMPLAZA ESTO con tu URL real)
+        // ============================================
+        // CONFIGURACIÓN
+        // ============================================
+        // REEMPLAZA ESTA URL con tu URL real de Apps Script
         const APP_URL = 'https://script.google.com/macros/s/AKfycbxt8mfqCyYCyUo8biDy8V9tf-h5rWnwIYpoyAYsnGReSiJviLRMuvqg8L6gsf6IvhtPjA/exec';
         
-        // O usa una búsqueda de parámetros
-        const urlParams = new URLSearchParams(window.location.search);
-        const customUrl = urlParams.get('appUrl');
+        // ============================================
+        // VARIABLES GLOBALES
+        // ============================================
+        let countdown = 5;
+        let redirectTimer;
+        let countdownInterval;
         
-        // Configurar botón principal
-        document.getElementById('openApp').href = customUrl || APP_URL;
+        // ============================================
+        // FUNCIONES PRINCIPALES
+        // ============================================
         
-        // Extraer ID de la aplicación para mostrar
-        const appIdMatch = (customUrl || APP_URL).match(/\/s\/([^\/]+)/);
-        if (appIdMatch) {
-            document.getElementById('appId').textContent = appIdMatch[1];
+        function initApp() {
+            // Configurar URL del botón
+            const openAppBtn = document.getElementById('openApp');
+            openAppBtn.href = APP_URL;
+            
+            // Extraer y mostrar ID de la aplicación
+            const appIdMatch = APP_URL.match(/\/s\/([^\/]+)/);
+            if (appIdMatch) {
+                document.getElementById('appId').textContent = appIdMatch[1];
+            }
+            
+            // Configurar eventos
+            setupEventListeners();
+            
+            // Iniciar redirección automática
+            startAutoRedirect();
         }
         
-        // Opción: Redirección automática después de 3 segundos
-        setTimeout(() => {
-            console.log('Redireccionando a la aplicación principal...');
-        }, 3000);
+        function setupEventListeners() {
+            // Botón "Abrir Aplicación Ahora"
+            document.getElementById('openApp').addEventListener('click', function(e) {
+                e.preventDefault();
+                openInNewTab(this.href);
+            });
+            
+            // Botón "Copiar Enlace"
+            document.getElementById('copyUrl').addEventListener('click', function() {
+                copyToClipboard(APP_URL);
+                showNotification('¡Enlace copiado al portapapeles!', 'success');
+            });
+            
+            // Botón "Cancelar Redirección"
+            document.getElementById('cancelRedirect').addEventListener('click', function() {
+                cancelAutoRedirect();
+            });
+            
+            // Abrir enlaces externos en nueva pestaña
+            document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openInNewTab(this.href);
+                });
+            });
+        }
         
-        // Opción: Abrir en ventana nueva al hacer clic
-        document.getElementById('openApp').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open(this.href, '_blank', 'noopener,noreferrer');
+        function startAutoRedirect() {
+            const countdownElement = document.getElementById('countdown');
+            
+            countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    openInNewTab(APP_URL);
+                }
+            }, 1000);
+            
+            // Redirección por timeout (seguridad)
+            redirectTimer = setTimeout(() => {
+                if (countdown > 0) {
+                    openInNewTab(APP_URL);
+                }
+            }, 6000); // 6 segundos máximo
+        }
+        
+        function cancelAutoRedirect() {
+            clearInterval(countdownInterval);
+            clearTimeout(redirectTimer);
+            
+            document.getElementById('redirectMessage').innerHTML = `
+                <strong><i class="fas fa-check-circle"></i> Redirección cancelada</strong><br>
+                Haz clic en "Abrir Aplicación Ahora" para acceder manualmente.
+            `;
+            
+            showNotification('Redirección cancelada', 'info');
+        }
+        
+        function openInNewTab(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Texto copiado al portapapeles');
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+                // Fallback para navegadores antiguos
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Eliminar notificación anterior si existe
+            const oldNotification = document.querySelector('.notification');
+            if (oldNotification) {
+                oldNotification.remove();
+            }
+            
+            // Crear nueva notificación
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            // Estilos
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                animation: slideIn 0.3s ease;
+                font-weight: 500;
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+            
+            // Añadir animaciones CSS
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // ============================================
+        // INICIALIZAR AL CARGAR LA PÁGINA
+        // ============================================
+        document.addEventListener('DOMContentLoaded', initApp);
+        
+        // ============================================
+        // DETECCIÓN DE ERRORES
+        // ============================================
+        window.addEventListener('error', function(e) {
+            console.error('Error en la página:', e.error);
+            showNotification('Error al cargar la aplicación', 'error');
         });
     </script>
 </body>
