@@ -3,414 +3,85 @@
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>Encuestas Beck — Índice</title>
-  <meta name='description' content='Página índice para acceder al Test de Depresión de Beck y al Test de Ansiedad de Beck. Diseño moderno, responsivo y gamificable para estudiantes de secundaria.'>
-
-  <style>
-    /* ====== Sistema de diseño (variables) ====== */
-    :root{
-      --bg: #0f1220;
-      --card: #171a2b;
-      --card-2: #1d2136;
-      --text: #e6e8f2;
-      --muted: #b7bdd6;
-      --brand: #6c8cff;
-      --brand-2: #9aa8ff;
-      --accent: #ff7ab6;
-      --success: #4cd4a0;
-      --warning: #ffd66c;
-      --danger: #ff6c7a;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius-xl: 18px;
-      --radius-lg: 14px;
-      --radius-md: 10px;
-      --radius-sm: 8px;
-      --gap: 16px;
-      --gap-lg: 24px;
-      --gap-xl: 32px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
-    }
-
-    /* ====== Reset mínimo y tipografía ====== */
-    *{ box-sizing: border-box }
-    html, body{ height: 100% }
-    body{
-      margin: 0;
-      font-family: var(--font);
-      color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% 10%, #1a1f35 0%, transparent 60%),
-        radial-gradient(900px 500px at 90% 20%, #1b2442 0%, transparent 60%),
-        linear-gradient(180deg, #0c0f1a 0%, var(--bg) 100%);
-      background-attachment: fixed;
-    }
-    a{ color: inherit; text-decoration: none }
-    img{ max-width: 100%; display: block }
-
-    /* ====== Layout principal ====== */
-    .wrap{
-      min-height: 100%;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-    }
-
-    header{
-      position: sticky;
-      top: 0;
-      backdrop-filter: saturate(1.2) blur(8px);
-      background: linear-gradient(180deg, rgba(15,18,32,.85), rgba(15,18,32,.65));
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      z-index: 50;
-    }
-
-    .nav{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 12px var(--gap);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: var(--gap);
-    }
-
-    .brand{
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
-
-    .brand-logo{
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      background: conic-gradient(from 180deg at 50% 50%, var(--brand), var(--accent), var(--success), var(--brand));
-      box-shadow: 0 6px 16px rgba(108,140,255,.35);
-    }
-
-    .actions{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn{
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, var(--card), var(--card-2));
-      color: var(--text);
-      font-weight: 600;
-      transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
-      box-shadow: 0 6px 16px rgba(0,0,0,.25);
-    }
-    .btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,.35) }
-    .btn-primary{
-      background: linear-gradient(180deg, var(--brand), var(--brand-2));
-      border-color: rgba(108,140,255,.35);
-      color: #0b0f1a;
-      box-shadow: 0 10px 24px rgba(108,140,255,.35);
-    }
-    .btn-ghost{
-      background: transparent;
-      border-color: rgba(255,255,255,.12);
-    }
-
-    main{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: var(--gap-xl) var(--gap);
-      display: grid;
-      gap: var(--gap-xl);
-    }
-
-    /* ====== Hero ====== */
-    .hero{
-      display: grid;
-      gap: var(--gap-lg);
-      grid-template-columns: 1fr;
-      text-align: left;
-    }
-    .hero-card{
-      border-radius: var(--radius-xl);
-      background:
-        radial-gradient(800px 300px at 10% 0%, rgba(108,140,255,.18) 0%, transparent 60%),
-        radial-gradient(600px 300px at 90% 100%, rgba(255,122,182,.18) 0%, transparent 60%),
-        linear-gradient(180deg, var(--card), var(--card-2));
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: var(--shadow);
-      padding: 28px;
-      display: grid;
-      gap: var(--gap-lg);
-    }
-    .hero h1{
-      margin: 0;
-      font-size: clamp(24px, 4.5vw, 40px);
-      line-height: 1.15;
-      letter-spacing: .2px;
-    }
-    .hero p{
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(14px, 2.5vw, 18px);
-    }
-    .hero-meta{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .chip{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    /* ====== Tarjetas de test ====== */
-    .grid{
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--gap-lg);
-    }
-    @media (min-width: 720px){
-      .grid{ grid-template-columns: repeat(2, 1fr) }
-    }
-
-    .card{
-      position: relative;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, var(--card), var(--card-2));
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: var(--shadow);
-      padding: 20px;
-      display: grid;
-      gap: 14px;
-      min-height: 220px;
-      overflow: hidden;
-    }
-    .card:hover .badge{ transform: translateY(-2px) }
-    .card h3{
-      margin: 0;
-      font-size: clamp(18px, 3vw, 22px);
-      letter-spacing: .2px;
-    }
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .badge{
-      position: absolute;
-      top: 16px; right: 16px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .3px;
-      background: linear-gradient(180deg, var(--accent), #ff9ac8);
-      color: #1a0f18;
-      box-shadow: 0 8px 18px rgba(255,122,182,.35);
-      transition: transform .12s ease;
-    }
-    .progress{
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.06);
-    }
-    .progress > i{
-      display: block;
-      height: 100%;
-      width: 28%;
-      background: linear-gradient(90deg, var(--success), #7ee6bf);
-    }
-
-    .cta{
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-
-    /* ====== Sección gamificación ====== */
-    .gamify{
-      border-radius: var(--radius-lg);
-      background:
-        radial-gradient(600px 300px at 0% 100%, rgba(76,212,160,.18) 0%, transparent 60%),
-        linear-gradient(180deg, var(--card), var(--card-2));
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: var(--shadow);
-      padding: 20px;
-      display: grid;
-      gap: var(--gap);
-    }
-    .gamify-list{
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    @media (min-width: 720px){
-      .gamify-list{ grid-template-columns: repeat(3, 1fr) }
-    }
-    .perk{
-      display: grid;
-      gap: 8px;
-      padding: 14px;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .perk h4{ margin: 0; font-size: 15px }
-    .perk p{ margin: 0; color: var(--muted); font-size: 13px }
-
-    /* ====== Footer ====== */
-    footer{
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: linear-gradient(180deg, rgba(23,26,43,.6), rgba(23,26,43,.9));
-    }
-    .foot{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px var(--gap);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: var(--gap);
-      align-items: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* ====== Accesibilidad visual ====== */
-    .sr-only{
-      position: absolute !important;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0,0,0,0);
-      white-space: nowrap; border: 0;
-    }
-
-    /* ====== Preferencias de usuario ====== */
-    @media (prefers-reduced-motion: reduce){
-      *{ transition: none !important; animation: none !important }
-    }
-  </style>
+  <title>Encuestas Beck — Inicio</title>
+  <meta name='description' content='Índice de encuestas Beck (Depresión y Ansiedad). Autocalificables, responsivas y gamificables.'>
+  <link rel='preload' href='app.css' as='style'>
+  <link rel='stylesheet' href='app.css'>
 </head>
-
 <body>
-  <div class='wrap'>
+  <header class='nav'>
+    <a class='brand' href='#'>
+      <span class='brand-logo' aria-hidden='true'></span>
+      <span>Encuestas Beck</span>
+    </a>
+    <div class='actions'>
+      <a class='btn btn-ghost' href='#gamificacion'>Gamificación</a>
+      <a class='btn btn-primary' href='#tests'>Ir a los tests</a>
+    </div>
+  </header>
 
-    <!-- ====== Header / navegación ====== -->
-    <header role='banner'>
-      <nav class='nav' aria-label='Navegación principal'>
-        <a class='brand' href='#' aria-label='Inicio'>
-          <span class='brand-logo' aria-hidden='true'></span>
-          <span>Encuestas Beck</span>
-        </a>
-
-        <div class='actions'>
-          <a class='btn btn-ghost' href='#gamificacion'>Gamificación</a>
-          <a class='btn btn-primary' href='#tests'>Ir a los tests</a>
-        </div>
-      </nav>
-    </header>
-
-    <!-- ====== Contenido principal ====== -->
-    <main id='contenido' role='main'>
-
-      <!-- ====== Hero ====== -->
-      <section class='hero hero-card' aria-labelledby='titulo'>
-        <h1 id='titulo'>Explora tus emociones con claridad</h1>
-        <p>Esta página reúne dos instrumentos reconocidos: el <strong>Test de Depresión de Beck</strong> y el <strong>Test de Ansiedad de Beck</strong>. Está pensada para estudiantes de secundaria, con un enfoque moderno, seguro y gamificable.</p>
-        <div class='hero-meta'>
-          <span class='chip'>Diseño responsivo</span>
-          <span class='chip'>Enfoque escolar</span>
-          <span class='chip'>Listo para GitHub Pages</span>
-        </div>
-      </section>
-
-      <!-- ====== Tarjetas de acceso a los tests ====== -->
-      <section id='tests' class='grid' aria-label='Lista de tests disponibles'>
-        <!-- Beck Depresión -->
-        <article class='card' aria-labelledby='bd-title'>
-          <span class='badge' aria-hidden='true'>Nuevo</span>
-          <h3 id='bd-title'>Test de Depresión de Beck</h3>
-          <p>Cuestionario estandarizado para explorar síntomas de estado de ánimo. La interpretación debe realizarla un profesional.</p>
-
-          <div class='progress' aria-label='Progreso de gamificación'>
-            <i style='width: 0%'></i>
-          </div>
-
-          <div class='cta'>
-            <!-- Reemplaza href con la ruta real en tu repo -->
-            <a class='btn btn-primary' href='beck-depresion/index.html' aria-label='Abrir Test de Depresión de Beck'>Comenzar</a>
-            <a class='btn' href='beck-depresion/info.html' aria-label='Ver información del Test de Depresión de Beck'>Información</a>
-          </div>
-        </article>
-
-        <!-- Beck Ansiedad -->
-        <article class='card' aria-labelledby='ba-title'>
-          <span class='badge' aria-hidden='true'>Nuevo</span>
-          <h3 id='ba-title'>Test de Ansiedad de Beck</h3>
-          <p>Instrumento para identificar síntomas de ansiedad. Los resultados son orientativos y requieren revisión profesional.</p>
-
-          <div class='progress' aria-label='Progreso de gamificación'>
-            <i style='width: 0%'></i>
-          </div>
-
-          <div class='cta'>
-            <!-- Reemplaza href con la ruta real en tu repo -->
-            <a class='btn btn-primary' href='beck-ansiedad/index.html' aria-label='Abrir Test de Ansiedad de Beck'>Comenzar</a>
-            <a class='btn' href='beck-ansiedad/info.html' aria-label='Ver información del Test de Ansiedad de Beck'>Información</a>
-          </div>
-        </article>
-      </section>
-
-      <!-- ====== Módulo de gamificación (listo para JS) ====== -->
-      <section id='gamificacion' class='gamify' aria-labelledby='gamify-title'>
-        <h2 id='gamify-title'>Tu progreso y recompensas</h2>
-        <p class='sr-only'>Sección preparada para mostrar puntos, niveles y logros. Requiere JavaScript para activarse.</p>
-
-        <div class='gamify-list'>
-          <div class='perk'>
-            <h4>Nivel</h4>
-            <p>Empiezas en nivel 1. Completa preguntas para subir de nivel.</p>
-          </div>
-          <div class='perk'>
-            <h4>Insignias</h4>
-            <p>Gana insignias por completar cada test y por constancia.</p>
-          </div>
-          <div class='perk'>
-            <h4>Rachas</h4>
-            <p>Mantén una racha de participación semanal para desbloquear recompensas.</p>
-          </div>
-        </div>
-
-        <div class='cta'>
-          <a class='btn btn-primary' href='#tests'>Empezar ahora</a>
-          <a class='btn btn-ghost' href='#' aria-label='Ver reglas de gamificación'>Reglas</a>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- ====== Footer ====== -->
-    <footer role='contentinfo'>
-      <div class='foot'>
-        <span>© 2026 Encuestas Beck — Uso educativo</span>
-        <span>Resultados orientativos. Consulta a un profesional para interpretación.</span>
+  <main class='container'>
+    <section class='hero card'>
+      <h1>Explora tus emociones con claridad</h1>
+      <p>Dos instrumentos reconocidos: <strong>BDI</strong> (Depresión) y <strong>BAI</strong> (Ansiedad). Resultados orientativos; la interpretación corresponde a profesionales.</p>
+      <div class='chips'>
+        <span class='chip'>Móvil-first</span>
+        <span class='chip'>Autocalificable</span>
+        <span class='chip'>Listo para GitHub Pages</span>
       </div>
-    </footer>
+    </section>
 
-  </div>
+    <section id='tests' class='grid'>
+      <article class='card'>
+        <span class='badge'>BDI</span>
+        <h3>Test de Depresión de Beck</h3>
+        <p>Inventario para explorar síntomas de estado de ánimo.</p>
+        <div class='progress' aria-label='Progreso BDI'><i id='prog-bdi'></i></div>
+        <div class='cta'>
+          <a class='btn btn-primary' href='beck-depresion.html'>Comenzar</a>
+          <button class='btn' id='reset-bdi'>Reiniciar</button>
+        </div>
+      </article>
+
+      <article class='card'>
+        <span class='badge'>BAI</span>
+        <h3>Test de Ansiedad de Beck</h3>
+        <p>Inventario para identificar síntomas de ansiedad.</p>
+        <div class='progress' aria-label='Progreso BAI'><i id='prog-bai'></i></div>
+        <div class='cta'>
+          <a class='btn btn-primary' href='beck-ansiedad.html'>Comenzar</a>
+          <button class='btn' id='reset-bai'>Reiniciar</button>
+        </div>
+      </article>
+    </section>
+
+    <section id='gamificacion' class='card'>
+      <h2>Tu progreso</h2>
+      <div class='gamify'>
+        <div class='perk'>
+          <h4>Nivel</h4>
+          <p><strong id='nivel'>1</strong> — sube completando preguntas.</p>
+        </div>
+        <div class='perk'>
+          <h4>Insignias</h4>
+          <p id='insignias'>Sin insignias aún.</p>
+        </div>
+        <div class='perk'>
+          <h4>Racha</h4>
+          <p>Racha semanal: <strong id='racha'>0</strong> días.</p>
+        </div>
+      </div>
+      <div class='cta'>
+        <button class='btn btn-ghost' id='reglas'>Reglas</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class='foot'>
+    <span>© 2026 Encuestas Beck — Uso educativo</span>
+    <span>Resultados orientativos. Consulta a un profesional para interpretación.</span>
+  </footer>
+
+  <script src='app.js' defer></script>
 </body>
 </html>

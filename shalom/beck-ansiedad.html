@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>BAI — Test de Ansiedad de Beck</title>
+  <link rel='stylesheet' href='app.css'>
+</head>
+<body>
+  <header class='nav'>
+    <a class='brand' href='index.html'><span class='brand-logo'></span><span>Encuestas Beck</span></a>
+    <div class='actions'><a class='btn btn-ghost' href='index.html'>Inicio</a></div>
+  </header>
+
+  <main class='container'>
+    <section class='card'>
+      <h1>BAI — Test de Ansiedad de Beck</h1>
+      <p>Indica la intensidad con la que has experimentado cada síntoma recientemente. Resultados orientativos.</p>
+    </section>
+
+    <form id='form-bai' class='card'>
+      <ol id='bai-list' class='list'></ol>
+      <div class='cta'>
+        <button type='button' class='btn btn-primary' id='calcular-bai'>Calcular</button>
+        <button type='button' class='btn' id='guardar-bai'>Guardar</button>
+        <button type='button' class='btn btn-ghost' id='reiniciar-bai'>Reiniciar</button>
+      </div>
+      <div id='resultado-bai' class='perk' style='margin-top:12px'></div>
+    </form>
+  </main>
+
+  <footer class='foot'>
+    <span>Uso educativo</span><span>Consulta a un profesional para interpretación.</span>
+  </footer>
+
+  <script src='app.js' defer></script>
+</body>
+</html>

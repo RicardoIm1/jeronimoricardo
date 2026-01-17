@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>BDI — Test de Depresión de Beck</title>
+  <link rel='stylesheet' href='app.css'>
+</head>
+<body>
+  <header class='nav'>
+    <a class='brand' href='index.html'><span class='brand-logo'></span><span>Encuestas Beck</span></a>
+    <div class='actions'><a class='btn btn-ghost' href='index.html'>Inicio</a></div>
+  </header>
+
+  <main class='container'>
+    <section class='card'>
+      <h1>BDI — Test de Depresión de Beck</h1>
+      <p>Selecciona la opción que mejor describe cómo te has sentido recientemente. Resultados orientativos.</p>
+    </section>
+
+    <form id='form-bdi' class='card'>
+      <ol id='bdi-list' class='list'></ol>
+      <div class='cta'>
+        <button type='button' class='btn btn-primary' id='calcular-bdi'>Calcular</button>
+        <button type='button' class='btn' id='guardar-bdi'>Guardar</button>
+        <button type='button' class='btn btn-ghost' id='reiniciar-bdi'>Reiniciar</button>
+      </div>
+      <div id='resultado-bdi' class='perk' style='margin-top:12px'></div>
+    </form>
+  </main>
+
+  <footer class='foot'>
+    <span>Uso educativo</span><span>Consulta a un profesional para interpretación.</span>
+  </footer>
+
+  <script src='app.js' defer></script>
+</body>
+</html>
