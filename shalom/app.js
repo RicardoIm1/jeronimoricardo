@@ -1,6 +1,7 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbwoOLEJPL12EvzSAt63WolJ7hDWzuzZKQB8u7kMx7Mp9TLar8NMgFKPdTzSUfJW26B6Ig/exec', 
+  /* sheetEndpoint: 'https://script.google.com/macros/s/AKfycbwoOLEJPL12EvzSAt63WolJ7hDWzuzZKQB8u7kMx7Mp9TLar8NMgFKPdTzSUfJW26B6Ig/exec', */ 
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbz3s1jGMaHvlT-I-2gyh8uo_owiUb2uUXyP2fbSi-M86NCLJ7JA82Ik6yqyM6C2qpGwHA/exec', 
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
