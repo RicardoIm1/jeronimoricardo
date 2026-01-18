@@ -148,7 +148,7 @@ const BDI_FULL = [
 ];
 
 /* ===== BAI con opciones completas (0–3) ===== */
-const BAI_FULL = [
+const BAI_ITEMS = [
   { q: '1 Torpe o entumecido (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
   { q: '2 Acalorado (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
   { q: '3 Con temblor en las piernas.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
@@ -359,15 +359,15 @@ function initBDI(){
 /* ===== Página: BAI ===== */
 function initBAI(){
   fillAlumnoFields();
-  renderList('#bai-list', BAI_FULL, 'bai');
+  renderList('#bai-list', BAI_ITEMS, 'bai');
 
   document.getElementById('calcular-bai')?.addEventListener('click', ()=>{
-    const r = calcScore('bai', BAI_FULL.length);
+    const r = calcScore('bai', BAI_ITEMS.length);
     showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
   });
 
   document.getElementById('guardar-bai')?.addEventListener('click', async ()=>{
-    const r = calcScore('bai', BAI_FULL.length);
+    const r = calcScore('bai', BAI_ITEMS.length);
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -385,7 +385,7 @@ function initBAI(){
 
   document.getElementById('reiniciar-bai')?.addEventListener('click', ()=>{
     localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_FULL, 'bai');
+    renderList('#bai-list', BAI_ITEMS, 'bai');
     document.getElementById('resultado-bai').innerHTML = '';
     updateProgressBars();
   });
