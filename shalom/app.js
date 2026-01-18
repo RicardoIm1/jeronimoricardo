@@ -1,6 +1,6 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxbfwC2-ML2L71MGso7BPz1kM-8UkCYC9lcC5pdDhsuBxjshxSTO-t7SlZw9LMkJoTyIA/exec', 
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbw-TgOli8LE2RoQkMGFuBFjFb9U0ayk1GHvwRIq5MyIvks1AO-XGZELjN6Md6a7pz8ZNQ/exec', 
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
@@ -317,8 +317,7 @@ async function sendToSheet(payload){
       method: 'POST',
       body: JSON.stringify(payload)
     });
-    const text = await res.text();
-    const data = JSON.parse(text);
+    const data = await res.json(); // ya no necesitas .text()
     return data;
   } catch(err){
     console.error('Error enviando a Sheets', err);
