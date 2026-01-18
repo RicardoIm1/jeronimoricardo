@@ -151,3 +151,6 @@ button{ color: inherit; font: inherit }
   color: var(--muted);
   padding: 6px 0;
 }
+h3{
+  margin-top: 2rem;
+}
