@@ -480,28 +480,23 @@ function initBDI() {
   fillAlumnoFields();
   renderList('#bdi-list', BDI_ITEMS, 'bdi');
 
-  document.getElementById('calcular-bdi')?.addEventListener('click', () => {
-    const r = calcScore('bdi', BDI_ITEMS.length);
-    showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
-  });
-
   document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
-    const r = calcScore('bdi', BDI_ITEMS.length);
-    const payload = {
-      proyecto: CONFIG.proyecto,
-      version: CONFIG.version,
-      test: 'BDI',
-      timestamp: todayISO(),
-      puntaje: r.sum,
-      rango: rangoBDI(r.sum),
-      respuestas: readLocal('bdi'),
-      alumno: alumnoData(),
-      token: SECRET   // SIEMPRE
-    };
+  const r = calcScore('bdi', BDI_ITEMS.length);
+  const payload = {
+    proyecto: CONFIG.proyecto,
+    version: CONFIG.version,
+    test: 'BDI',
+    timestamp: todayISO(),
+    puntaje: r.sum,
+    rango: rangoBDI(r.sum),
+    respuestas: readLocal('bdi'),
+    alumno: alumnoData(),
+    token: SECRET
+  };
 
-    const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
-  });
+  const resp = await sendToSheet(payload);
+  alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+});
 
   document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
     localStorage.removeItem('bdi');
