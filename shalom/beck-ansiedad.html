@@ -26,15 +26,14 @@
         <legend>Identificación</legend>
         <div class='grid' style='grid-template-columns: 1fr'>
           <label class='perk'>
-            <strong>Marca temporal</strong>
-            <input type='text' id='al-timestamp' placeholder='Se autocompleta' readonly>
+            <strong>Fecha de hoy</strong>
+            <input type='text' id='al-fecha' readonly>
           </label>
           <label class='perk'>
             <strong>Nombre completo empezando por apellidos</strong>
             <input type='text' id='al-nombre' placeholder='Apellidos Nombre(s)' required>
           </label>
-          <label class='perk'>
-            <strong>Edad</strong>
+          <label class='perk'> <strong>Edad</strong>
             <input type='number' id='al-edad' min='10' max='25' placeholder='Ej. 15' required>
           </label>
           <label class='perk'>
@@ -69,10 +68,6 @@
                 </optgroup>
               </select>
             </label>
-          </label>
-          <label class='perk'>
-            <strong>Fecha de hoy</strong>
-            <input type='date' id='al-fecha' required>
           </label>
         </div>
       </fieldset>
