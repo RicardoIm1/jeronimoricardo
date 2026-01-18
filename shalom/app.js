@@ -429,10 +429,6 @@ function initBAI() {
   alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
 });
 
-  const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
-});
-
 document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
   localStorage.removeItem('bai');
   renderList('#bai-list', BAI_ITEMS, 'bai');
