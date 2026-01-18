@@ -275,7 +275,7 @@ function showResult(elId, titulo, sum, rango){
 /* ===== Progreso en index ===== */
 function updateProgressBars(){
   const bdi = calcScore('bdi', BDI_FULL.length);
-  const bai = calcScore('bai', BAI_ITEMS.length);
+  const bai = calcScore('bai', BAI_FULL.length);
   const pbdi = document.getElementById('prog-bdi');
   const pbai = document.getElementById('prog-bai');
   if(pbdi) pbdi.style.width = `${Math.round((bdi.answered / bdi.total) * 100)}%`;
@@ -465,15 +465,15 @@ function initBDI(){
 
 function initBAI(){
   fillAlumnoFields();
-  renderList('#bai-list', BAI_ITEMS, 'bai');
+  renderList('#bai-list', BAI_FULL, 'bai');
 
   document.getElementById('calcular-bai')?.addEventListener('click', ()=>{
-    const r = calcScore('bai', BAI_ITEMS.length);
+    const r = calcScore('bai', BAI_FULL.length);
     showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
   });
 
   document.getElementById('guardar-bai')?.addEventListener('click', async ()=>{
-    const r = calcScore('bai', BAI_ITEMS.length);
+    const r = calcScore('bai', BAI_FULL.length);
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -490,7 +490,7 @@ function initBAI(){
 
   document.getElementById('reiniciar-bai')?.addEventListener('click', ()=>{
     localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_ITEMS, 'bai');
+    renderList('#bai-list', BAI_FULL, 'bai');
     document.getElementById('resultado-bai').innerHTML = '';
     updateProgressBars();
   });
