@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang='es'>
+
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -9,20 +10,29 @@
   <link rel='stylesheet' href='app.css'>
   <style>
     /* Ajuste para mantener el footer al fondo */
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       display: flex;
       flex-direction: column;
     }
+
     main.container {
-      flex: 1; /* ocupa todo el espacio disponible */
+      flex: 1;
+      /* ocupa todo el espacio disponible */
     }
+
     footer.foot {
-      margin-top: auto; /* empuja el footer al fondo */
+      margin-top: auto;
+      /* ya lo tienes */
+      text-align: center;
+      /* centra el contenido horizontalmente */
+      padding: 1rem;
     }
   </style>
 </head>
+
 <body>
   <header class='nav'>
     <a class='brand' href='#'>
@@ -30,14 +40,16 @@
       <span>Encuestas Beck</span>
     </a>
     <div class='actions'>
-      <a class='btn btn-primary' href='#tests'><span>Resultados orientativos. Consulta a un profesional para interpretación.</span></a>
+      <a class='btn btn-primary' href='#tests'><span>Resultados orientativos. Consulta a un profesional para
+          interpretación.</span></a>
     </div>
   </header>
 
   <main class='container'>
     <section class='hero card'>
       <h1>Explora tus emociones con claridad</h1>
-      <p>Dos instrumentos reconocidos: <strong>BDI</strong> (Depresión) y <strong>BAI</strong> (Ansiedad). Resultados orientativos; la interpretación corresponde a profesionales.</p>
+      <p>Dos instrumentos reconocidos: <strong>BDI</strong> (Depresión) y <strong>BAI</strong> (Ansiedad). Resultados
+        orientativos; la interpretación corresponde a profesionales.</p>
       <div class='chips'>
         <span class='chip'>Móvil-first</span>
         <span class='chip'>Autocalificable</span>
@@ -71,20 +83,19 @@
   </main>
 
   <footer class='foot'>
-  <p id="footerText">
-    Hecho para la Maestra Shalom con ❤️ por 
-    <a href="https://ricardoim1.github.io/jeronimoricardo/"
-       id="footerLink"
-       style="color: inherit; text-decoration: none;"
-       target="_blank" rel="noopener noreferrer">Ricardo</a> · 
-    <span id="currentYear"></span>
-  </p>
-</footer>
+    <p id="footerText">
+      Hecho para la Maestra Shalom con ❤️ por
+      <a href="https://ricardoim1.github.io/jeronimoricardo/" id="footerLink"
+        style="color: inherit; text-decoration: none;" target="_blank" rel="noopener noreferrer">Ricardo</a> ·
+      <span id="currentYear"></span>
+    </p>
+  </footer>
 
-<script>
-  // Insertar el año actual en el span
-  document.getElementById("currentYear").textContent = new Date().getFullYear();
-</script>
-<script src='app.js' defer></script>
+  <script>
+    // Insertar el año actual en el span
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+  <script src='app.js' defer></script>
 </body>
+
 </html>
