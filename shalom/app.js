@@ -354,19 +354,6 @@ function updateGamify(bdi, bai) {
 }
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
-/* async function sendToSheet(payload){
-  try {
-    const res = await fetch(CONFIG.sheetEndpoint, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    return data;
-  } catch(err){
-    console.error('Error enviando a Sheets', err);
-    return { ok: false, error: String(err) };
-  }
-} */
 async function sendToSheet(payload) {
   try {
     const res = await fetch(CONFIG.sheetEndpoint, {
