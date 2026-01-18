@@ -1,6 +1,6 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbw4Qh8h3YUYYw3MRknTYzVb2Ex1bZz28P2xz6J-PGRp0OSP1_d4b1R8VOjzJh8x1pwSCQ/exec', // reemplaza con tu URL publicada de Apps Script
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxQbn7pyldyrcW3R4EMlUaJCFlvMRJkB0YtW-kR2XgSHlSfL__e5MJc9s8jkQZa28LaGw/exec', 
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
