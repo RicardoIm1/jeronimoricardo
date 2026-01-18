@@ -259,9 +259,10 @@ function showResult(elId, titulo, sum, rango){
 
 /* ===== Progreso en index ===== */
 function updateProgressBars(){
-  const bdi = calcScore('bdi', BDI_ITEMS.length);
+  const bdi = calcScore('bdi', BDI_FULL.length);
   const bai = calcScore('bai', BAI_ITEMS.length);
-  const pbdi = $('#prog-bdi'); const pbai = $('#prog-bai');
+  const pbdi = document.getElementById('prog-bdi');
+  const pbai = document.getElementById('prog-bai');
   if(pbdi) pbdi.style.width = `${Math.round((bdi.answered / bdi.total) * 100)}%`;
   if(pbai) pbai.style.width = `${Math.round((bai.answered / bai.total) * 100)}%`;
   updateGamify(bdi, bai);
@@ -322,7 +323,7 @@ function initBDI(){
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
   $('#guardar-bdi')?.addEventListener('click', async ()=>{
-    const r = calcScore('bdi', BDI_ITEMS.length);
+    const r = calcScore('bdi', BDI_FULL.length);
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
