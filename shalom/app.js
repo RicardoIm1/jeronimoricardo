@@ -361,8 +361,8 @@ async function sendToSheet(payload) {
       body: JSON.stringify(payload)
     });
     const text = await res.text();
-    const data = JSON.parse(text);
-    return data;
+    console.log("Respuesta cruda del GAS:", text);
+    return JSON.parse(text);
   } catch (err) {
     console.error('Error enviando a Sheets', err);
     return { ok: false, error: String(err) };
@@ -416,25 +416,30 @@ function initBAI() {
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
-      test: 'BDI',
+      test: 'BAI',   // ← aquí debe ser BAI
       timestamp: todayISO(),
       puntaje: r.sum,
-      rango: rangoBDI(r.sum),
-      respuestas: readLocal('bdi'),
+      rango: rangoBAI(r.sum),
+      respuestas: readLocal('bai'),   // ← aquí deben ser las respuestas de bai
       alumno: alumnoData(),
-      token: SECRET   // SIEMPRE
+      token: SECRET   // ← siempre manda el token
     };
 
     const resp = await sendToSheet(payload);
     alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
   });
 
-  document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_ITEMS, 'bai');
-    document.getElementById('resultado-bai').innerHTML = '';
-    updateProgressBars();
-  });
+
+  const resp = await sendToSheet(payload);
+  alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+});
+
+document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
+  localStorage.removeItem('bai');
+  renderList('#bai-list', BAI_ITEMS, 'bai');
+  document.getElementById('resultado-bai').innerHTML = '';
+  updateProgressBars();
+});
 }
 
 /* ===== Página: Index ===== */
