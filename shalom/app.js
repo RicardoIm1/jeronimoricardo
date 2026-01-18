@@ -327,12 +327,15 @@ async function sendToSheet(payload){
 
 /* ===== Página: BDI ===== */
 function initBDI(){
+  fillAlumnoFields();
   renderList('#bdi-list', BDI_FULL, 'bdi');
-  $('#calcular-bdi')?.addEventListener('click', ()=>{
+
+  document.getElementById('calcular-bdi')?.addEventListener('click', ()=>{
     const r = calcScore('bdi', BDI_FULL.length);
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
-  $('#guardar-bdi')?.addEventListener('click', async ()=>{
+
+  document.getElementById('guardar-bdi')?.addEventListener('click', async ()=>{
     const r = calcScore('bdi', BDI_FULL.length);
     const payload = {
       proyecto: CONFIG.proyecto,
@@ -341,15 +344,19 @@ function initBDI(){
       timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBDI(r.sum),
-      respuestas: readLocal('bdi')
+      respuestas: readLocal('bdi') || {},   // asegura objeto
+      alumno: alumnoData(),
+      token: SECRET                         // token secreto
     };
     const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+    console.log("Respuesta GAS BDI:", resp);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
   });
-  $('#reiniciar-bdi')?.addEventListener('click', ()=>{
+
+  document.getElementById('reiniciar-bdi')?.addEventListener('click', ()=>{
     localStorage.removeItem('bdi');
     renderList('#bdi-list', BDI_FULL, 'bdi');
-    $('#resultado-bdi').innerHTML = '';
+    document.getElementById('resultado-bdi').innerHTML = '';
     updateProgressBars();
   });
 }
@@ -373,12 +380,13 @@ function initBAI(){
       timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai'),
+      respuestas: readLocal('bai') || {},   // asegura objeto
       alumno: alumnoData(),
-      token: 'clave123'
+      token: SECRET                         // token secreto
     };
     const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+    console.log("Respuesta GAS BAI:", resp);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
   });
 
   document.getElementById('reiniciar-bai')?.addEventListener('click', ()=>{
