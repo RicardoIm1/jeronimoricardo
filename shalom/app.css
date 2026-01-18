@@ -115,3 +115,10 @@ button{ color: inherit; font: inherit }
 }
 .opt input{ margin-top: 2px }
 .opt span{ font-size: 14px; color: var(--text) }
+
+.fecha-info {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  padding: 6px 0;
+}

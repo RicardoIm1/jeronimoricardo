@@ -395,12 +395,12 @@ function fillAlumnoFields(){
   const mm = String(d.getMonth()+1).padStart(2,'0');
   const yyyy = d.getFullYear();
   const fechaFormateada = `${dd}/${mm}/${yyyy}`;
-  if(fh) fh.value = fechaFormateada;
+  if(fh) fh.textContent = fechaFormateada;
 }
 
 function alumnoData(){
   return {
-    fecha_hoy: document.getElementById('al-fecha')?.value || '',
+    fecha_hoy: document.getElementById('al-fecha')?.textContent || '',
     nombre_completo: document.getElementById('al-nombre')?.value || '',
     edad: document.getElementById('al-edad')?.value || '',
     grado_grupo: document.getElementById('al-grado')?.value || ''
