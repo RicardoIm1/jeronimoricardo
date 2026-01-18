@@ -317,7 +317,7 @@ async function sendToSheet(payload){
       method: 'POST',
       body: JSON.stringify(payload)
     });
-    const data = await res.json(); // ya no necesitas .text()
+    const data = await res.json();
     return data;
   } catch(err){
     console.error('Error enviando a Sheets', err);
