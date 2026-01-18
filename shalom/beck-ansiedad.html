@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang='es'>
+
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <title>BAI — Test de Ansiedad de Beck</title>
   <link rel='stylesheet' href='app.css'>
 </head>
+
 <body>
   <header class='nav'>
     <a class='brand' href='index.html'><span class='brand-logo'></span><span>Encuestas Beck</span></a>
@@ -19,6 +21,33 @@
     </section>
 
     <form id='form-bai' class='card'>
+      <!-- Identificación del alumno -->
+      <fieldset class='card' style='margin-bottom:12px'>
+        <legend>Identificación</legend>
+        <div class='grid' style='grid-template-columns: 1fr'>
+          <label class='perk'>
+            <strong>Marca temporal</strong>
+            <input type='text' id='al-timestamp' placeholder='Se autocompleta' readonly>
+          </label>
+          <label class='perk'>
+            <strong>Nombre completo empezando por apellidos</strong>
+            <input type='text' id='al-nombre' placeholder='Apellidos Nombre(s)' required>
+          </label>
+          <label class='perk'>
+            <strong>Edad</strong>
+            <input type='number' id='al-edad' min='10' max='25' placeholder='Ej. 15' required>
+          </label>
+          <label class='perk'>
+            <strong>Grado y grupo</strong>
+            <input type='text' id='al-grado' placeholder='Ej. 3B' required>
+          </label>
+          <label class='perk'>
+            <strong>Fecha de hoy</strong>
+            <input type='date' id='al-fecha' required>
+          </label>
+        </div>
+      </fieldset>
+
       <ol id='bai-list' class='list'></ol>
       <div class='cta'>
         <button type='button' class='btn btn-primary' id='calcular-bai'>Calcular</button>
@@ -35,4 +64,5 @@
 
   <script src='app.js' defer></script>
 </body>
+
 </html>
