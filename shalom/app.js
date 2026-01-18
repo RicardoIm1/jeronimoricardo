@@ -6,7 +6,14 @@ const CONFIG = {
 };
 
 const SECRET = 'clave123';
-const payload = { test:'BDI', puntaje:12, token:SECRET };
+const payload = {
+  test: 'BDI',
+  puntaje: r.sum,
+  rango: rangoBDI(r.sum),
+  respuestas: readLocal('bdi'),
+  alumno: alumnoData(),
+  token: 'clave123' // debe coincidir con el del GAS
+};
 
 /* ===== Utilidades ===== */
 const $ = sel => document.querySelector(sel);
