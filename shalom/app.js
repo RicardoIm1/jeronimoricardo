@@ -389,27 +389,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 function fillAlumnoFields(){
-  const ts = document.getElementById('al-timestamp');
   const fh = document.getElementById('al-fecha');
   const d = new Date();
-
-  // Formato DD/MM/AAAA
   const dd = String(d.getDate()).padStart(2,'0');
   const mm = String(d.getMonth()+1).padStart(2,'0');
   const yyyy = d.getFullYear();
   const fechaFormateada = `${dd}/${mm}/${yyyy}`;
-
-  if(ts) ts.value = fechaFormateada;
   if(fh) fh.value = fechaFormateada;
 }
 
 function alumnoData(){
   return {
-    marca_temporal: document.getElementById('al-timestamp')?.value || '',
+    fecha_hoy: document.getElementById('al-fecha')?.value || '',
     nombre_completo: document.getElementById('al-nombre')?.value || '',
     edad: document.getElementById('al-edad')?.value || '',
-    grado_grupo: document.getElementById('al-grado')?.value || '',
-    fecha_hoy: document.getElementById('al-fecha')?.value || ''
+    grado_grupo: document.getElementById('al-grado')?.value || ''
   };
 }
 
