@@ -311,7 +311,7 @@ function updateGamify(bdi, bai){
 }
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
-async function sendToSheet(payload){
+/* async function sendToSheet(payload){
   try {
     const res = await fetch(CONFIG.sheetEndpoint, {
       method: 'POST',
@@ -323,7 +323,23 @@ async function sendToSheet(payload){
     console.error('Error enviando a Sheets', err);
     return { ok: false, error: String(err) };
   }
+} */
+async function sendToSheet(payload){
+  try {
+    const res = await fetch(CONFIG.sheetEndpoint, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const text = await res.text();   // <-- ver respuesta cruda
+    console.log("Respuesta cruda del GAS:", text);
+    const data = JSON.parse(text);
+    return data;
+  } catch(err){
+    console.error('Error enviando a Sheets', err);
+    return { ok: false, error: String(err) };
+  }
 }
+
 
 /* ===== Página: BDI ===== */
 function initBDI(){
