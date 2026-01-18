@@ -152,5 +152,8 @@ button{ color: inherit; font: inherit }
   padding: 6px 0;
 }
 h3{
-  margin-top: 2rem;
+  margin-top: 3rem;
+  text-align: center;
+  color: var(--brand);
+  font-size: 3rem;
 }
