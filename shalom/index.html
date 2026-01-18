@@ -7,6 +7,21 @@
   <meta name='description' content='Índice de encuestas Beck (Depresión y Ansiedad). Autocalificables y responsivas.'>
   <link rel='preload' href='app.css' as='style'>
   <link rel='stylesheet' href='app.css'>
+  <style>
+    /* Ajuste para mantener el footer al fondo */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    main.container {
+      flex: 1; /* ocupa todo el espacio disponible */
+    }
+    footer.foot {
+      margin-top: auto; /* empuja el footer al fondo */
+    }
+  </style>
 </head>
 <body>
   <header class='nav'>
