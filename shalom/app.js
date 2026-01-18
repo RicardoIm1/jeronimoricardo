@@ -297,19 +297,15 @@ function updateGamify(bdi, bai){
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
 async function sendToSheet(payload){
-  if(!CONFIG.sheetEndpoint || CONFIG.sheetEndpoint.includes('PASTE')){
-    alert('Configura CONFIG.sheetEndpoint con tu URL de Apps Script publicada.');
-    return { ok: false };
-  }
-  try{
+  try {
     const res = await fetch(CONFIG.sheetEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json().catch(()=>({ ok: res.ok }));
+    const text = await res.text();
+    const data = JSON.parse(text);
     return data;
-  }catch(err){
+  } catch(err){
     console.error('Error enviando a Sheets', err);
     return { ok: false, error: String(err) };
   }
