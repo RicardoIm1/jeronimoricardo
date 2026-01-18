@@ -18,7 +18,7 @@ const todayISO = () => new Date().toISOString();
 
 /* ===== Ítems (texto simplificado y neutral) ===== */
 /* ===== BDI con opciones completas (0–3) ===== */
-const BDI_FULL = [
+const BDI_ITEMS = [
   { q: '1 TRISTEZA', opts: [
     '0 No me siento triste',
     '1 Me siento triste gran parte del tiempo',
@@ -275,7 +275,7 @@ function showResult(elId, titulo, sum, rango){
 
 /* ===== Progreso en index ===== */
 function updateProgressBars(){
-  const bdi = calcScore('bdi', BDI_FULL.length);
+  const bdi = calcScore('bdi', BDI_ITEMS.length);
   const bai = calcScore('bai', BAI_ITEMS.length);
   const pbdi = document.getElementById('prog-bdi');
   const pbai = document.getElementById('prog-bai');
@@ -329,13 +329,13 @@ async function sendToSheet(payload){
 
 /* ===== Página: BDI ===== */
 function initBDI(){
-  renderList('#bdi-list', BDI_FULL, 'bdi');
+  renderList('#bdi-list', BDI_ITEMS, 'bdi');
   $('#calcular-bdi')?.addEventListener('click', ()=>{
-    const r = calcScore('bdi', BDI_FULL.length);
+    const r = calcScore('bdi', BDI_ITEMS.length);
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
   $('#guardar-bdi')?.addEventListener('click', async ()=>{
-    const r = calcScore('bdi', BDI_FULL.length);
+    const r = calcScore('bdi', BDI_ITEMS.length);
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -350,7 +350,7 @@ function initBDI(){
   });
   $('#reiniciar-bdi')?.addEventListener('click', ()=>{
     localStorage.removeItem('bdi');
-    renderList('#bdi-list', BDI_FULL, 'bdi');
+    renderList('#bdi-list', BDI_ITEMS, 'bdi');
     $('#resultado-bdi').innerHTML = '';
     updateProgressBars();
   });
@@ -432,15 +432,15 @@ function alumnoData(){
 /* En initBDI y initBAI, llama fillAlumnoFields() */
 function initBDI(){
   fillAlumnoFields();
-  renderList('#bdi-list', BDI_FULL, 'bdi');
+  renderList('#bdi-list', BDI_ITEMS, 'bdi');
 
   document.getElementById('calcular-bdi')?.addEventListener('click', ()=>{
-    const r = calcScore('bdi', BDI_FULL.length);
+    const r = calcScore('bdi', BDI_ITEMS.length);
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
 
   document.getElementById('guardar-bdi')?.addEventListener('click', async ()=>{
-    const r = calcScore('bdi', BDI_FULL.length);
+    const r = calcScore('bdi', BDI_ITEMS.length);
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -458,7 +458,7 @@ function initBDI(){
 
   document.getElementById('reiniciar-bdi')?.addEventListener('click', ()=>{
     localStorage.removeItem('bdi');
-    renderList('#bdi-list', BDI_FULL, 'bdi');
+    renderList('#bdi-list', BDI_ITEMS, 'bdi');
     document.getElementById('resultado-bdi').innerHTML = '';
     updateProgressBars();
   });
