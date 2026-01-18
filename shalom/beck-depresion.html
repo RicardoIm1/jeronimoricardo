@@ -17,7 +17,10 @@
   <main class='container'>
     <section class='card'>
       <h1>BDI — Test de Depresión de Beck</h1>
-      <p>Instrucciones: Este cuestionario consta de 21 grupos de afirmaciones. Por favor, lea con atención cada uno de ellos cuidadosamente. Luego elija uno de cada grupo, el que mejoren describa el modo como se ha sentido las ultimas dos semanas, incluyendo el día de hoy. Seleccione el número correspondiente al enunciado elegido, si varios enunciados de un mismo grupo le parecen igualmente  apropiados, marque el numero más alto. </p>
+      <p>Instrucciones: Este cuestionario consta de 21 grupos de afirmaciones. Por favor, lea con atención cada uno de
+        ellos cuidadosamente. Luego elija uno de cada grupo, el que mejoren describa el modo como se ha sentido las
+        ultimas dos semanas, incluyendo el día de hoy. Seleccione el número correspondiente al enunciado elegido, si
+        varios enunciados de un mismo grupo le parecen igualmente apropiados, marque el numero más alto. </p>
     </section>
 
     <form id='form-bdi' class='card'>
@@ -34,7 +37,7 @@
             <input type='text' id='al-nombre' placeholder='Apellidos Nombre(s)' required>
           </label>
           <label class='perk'> <strong>Edad</strong>
-            <input type='number' id='al-edad' min='10' max='25' placeholder='Ej. 15' required>
+            <input type="number" id="edad" name="edad" min="12" max="16" required>
           </label>
           <label class='perk'>
             <strong>Grado y grupo</strong>
@@ -72,7 +75,7 @@
       <ol id='bdi-list' class='list'></ol>
       <div class='cta'>
         <!-- <button type='button' class='btn btn-primary' id='calcular-bdi'>Calcular</button> -->
-        <button type='button' class='btn' id='guardar-bdi'>Guardar</button>
+        <button type='button' class='btn btn-primary' id='guardar-bai'>Guardar</button>
         <!-- <button type='button' class='btn btn-ghost' id='reiniciar-bdi'>Reiniciar</button> -->
       </div>
       <div id='resultado-bdi' class='perk' style='margin-top:12px'></div>
