@@ -2,37 +2,71 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Prueba conexión GAS</title>
+  <title>Prueba mínima BDI/BAI</title>
 </head>
 <body>
-  <h1>Prueba de conexión con Google Apps Script</h1>
-  <button id="enviar">Enviar prueba</button>
+  <h1>Prueba de guardado en Google Sheets</h1>
+  <button id="probar-bdi">Enviar prueba BDI</button>
+  <button id="probar-bai">Enviar prueba BAI</button>
 
   <script>
     const ENDPOINT = "https://script.google.com/macros/s/AKfycbwoOLEJPL12EvzSAt63WolJ7hDWzuzZKQB8u7kMx7Mp9TLar8NMgFKPdTzSUfJW26B6Ig/exec";
+    const SECRET = "clave123";
 
-    document.getElementById("enviar").addEventListener("click", async () => {
-      const payload = {
-        test: "PRUEBA",
-        alumno: { nombre_completo: "Test Alumno", edad: 15, grado_grupo: "2B" },
-        puntaje: 99,
-        rango: "Demo",
-        respuestas: { ejemplo: 1 },
-        token: "clave123"
-      };
-
+    async function enviar(payload){
       try {
         const res = await fetch(ENDPOINT, {
           method: "POST",
           body: JSON.stringify(payload)
         });
-        const data = await res.json();
-        console.log("Respuesta del GAS:", data);
-        alert(data.ok ? "✅ Conexión correcta" : "❌ Error: " + data.error);
-      } catch (err) {
+        const text = await res.text();
+        console.log("Respuesta cruda del GAS:", text);
+        const data = JSON.parse(text);
+        alert(data.ok ? "✅ Guardado correcto" : "❌ Error: " + data.error);
+      } catch(err){
         console.error("Error de conexión:", err);
         alert("❌ Falló la conexión: " + err);
       }
+    }
+
+    document.getElementById("probar-bdi").addEventListener("click", ()=>{
+      const payload = {
+        proyecto: "Encuestas Beck",
+        version: "1.0.0",
+        test: "BDI",
+        timestamp: new Date().toISOString(),
+        puntaje: 12,
+        rango: "Leve",
+        respuestas: { "bdi-0": 1, "bdi-1": 2 }, // ejemplo mínimo
+        alumno: {
+          fecha_hoy: "17/01/2026",
+          nombre_completo: "Ramírez Torres Jerónimo",
+          edad: 15,
+          grado_grupo: "2B"
+        },
+        token: SECRET
+      };
+      enviar(payload);
+    });
+
+    document.getElementById("probar-bai").addEventListener("click", ()=>{
+      const payload = {
+        proyecto: "Encuestas Beck",
+        version: "1.0.0",
+        test: "BAI",
+        timestamp: new Date().toISOString(),
+        puntaje: 7,
+        rango: "Mínimo",
+        respuestas: { "bai-0": 0, "bai-1": 3 }, // ejemplo mínimo
+        alumno: {
+          fecha_hoy: "17/01/2026",
+          nombre_completo: "Ramírez Torres Jerónimo",
+          edad: 15,
+          grado_grupo: "2B"
+        },
+        token: SECRET
+      };
+      enviar(payload);
     });
   </script>
 </body>
