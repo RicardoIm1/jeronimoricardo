@@ -146,14 +146,29 @@ const BDI_FULL = [
   ]}
 ];
 
-/* BAI: 20 ítems */
-const BAI_ITEMS = [
-  'Entumecimiento u hormigueo', 'Sensación de calor', 'Debilidad en las piernas',
-  'Incapacidad para relajarse', 'Miedo a que ocurra lo peor', 'Mareos o aturdimiento',
-  'Palpitaciones o aceleración del corazón', 'Inestabilidad', 'Temblor en las manos',
-  'Inquietud', 'Dificultad para respirar', 'Miedo a perder el control',
-  'Sensación de ahogo', 'Temblor', 'Nerviosismo', 'Indigestión o malestar abdominal',
-  'Desvanecimiento', 'Rubor facial', 'Sudoración', 'Miedo'
+/* ===== BAI con opciones completas (0–3) ===== */
+const BAI_FULL = [
+  { q: '1 Torpe o entumecido (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '2 Acalorado (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '3 Con temblor en las piernas.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '4 Incapaz de relajarse.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '5 Con temor a que ocurra lo peor.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '6 Mareado (a) o que se le va la cabeza.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '7 Con latidos del corazón fuertes y acelerados.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '8 Inestable.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '9 Atemorizado (a) o asustado (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '10 Nervioso (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '11 Con sensación de bloqueo.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '12 Con temblores en las manos.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '13 Inquieto (a), inseguro (a).', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '14 Con miedo a perder el control.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '15 Con sensación de ahogo.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '16 Con temor a morir.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '17 Con miedo.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '18 Con problemas digestivos.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '19 Con desvanecimientos.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '20 Te ruborizas constantemente.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] },
+  { q: '21 Con sudores, fríos o calientes.', opts: ['0 No','1 Leve','2 Moderado','3 Bastante'] }
 ];
 
 /* Opciones 0–3 */
@@ -342,13 +357,16 @@ function initBDI(){
 
 /* ===== Página: BAI ===== */
 function initBAI(){
-  renderList('#bai-list', BAI_ITEMS, 'bai');
-  $('#calcular-bai')?.addEventListener('click', ()=>{
-    const r = calcScore('bai', BAI_ITEMS.length);
+  fillAlumnoFields();
+  renderList('#bai-list', BAI_FULL, 'bai');
+
+  document.getElementById('calcular-bai')?.addEventListener('click', ()=>{
+    const r = calcScore('bai', BAI_FULL.length);
     showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
   });
-  $('#guardar-bai')?.addEventListener('click', async ()=>{
-    const r = calcScore('bai', BAI_ITEMS.length);
+
+  document.getElementById('guardar-bai')?.addEventListener('click', async ()=>{
+    const r = calcScore('bai', BAI_FULL.length);
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -356,15 +374,18 @@ function initBAI(){
       timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai')
+      respuestas: readLocal('bai'),
+      alumno: alumnoData(),
+      token: 'clave123'
     };
     const resp = await sendToSheet(payload);
     alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
   });
-  $('#reiniciar-bai')?.addEventListener('click', ()=>{
+
+  document.getElementById('reiniciar-bai')?.addEventListener('click', ()=>{
     localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_ITEMS, 'bai');
-    $('#resultado-bai').innerHTML = '';
+    renderList('#bai-list', BAI_FULL, 'bai');
+    document.getElementById('resultado-bai').innerHTML = '';
     updateProgressBars();
   });
 }
