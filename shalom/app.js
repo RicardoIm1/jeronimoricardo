@@ -1,19 +1,12 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxQbn7pyldyrcW3R4EMlUaJCFlvMRJkB0YtW-kR2XgSHlSfL__e5MJc9s8jkQZa28LaGw/exec', 
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxbfwC2-ML2L71MGso7BPz1kM-8UkCYC9lcC5pdDhsuBxjshxSTO-t7SlZw9LMkJoTyIA/exec', 
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
 
 const SECRET = 'clave123';
-const payload = {
-  test: 'BDI',
-  puntaje: r.sum,
-  rango: rangoBDI(r.sum),
-  respuestas: readLocal('bdi'),
-  alumno: alumnoData(),
-  token: 'clave123' // debe coincidir con el del GAS
-};
+const payload = { test:'BDI', puntaje:12, token:SECRET };
 
 /* ===== Utilidades ===== */
 const $ = sel => document.querySelector(sel);
@@ -320,9 +313,9 @@ async function sendToSheet(payload){
 
 /* ===== Página: BDI ===== */
 function initBDI(){
-  renderList('#bdi-list', BDI_ITEMS, 'bdi');
+  renderList('#bdi-list', BDI_FULL, 'bdi');
   $('#calcular-bdi')?.addEventListener('click', ()=>{
-    const r = calcScore('bdi', BDI_ITEMS.length);
+    const r = calcScore('bdi', BDI_FULL.length);
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
   $('#guardar-bdi')?.addEventListener('click', async ()=>{
@@ -341,7 +334,7 @@ function initBDI(){
   });
   $('#reiniciar-bdi')?.addEventListener('click', ()=>{
     localStorage.removeItem('bdi');
-    renderList('#bdi-list', BDI_ITEMS, 'bdi');
+    renderList('#bdi-list', BDI_FULL, 'bdi');
     $('#resultado-bdi').innerHTML = '';
     updateProgressBars();
   });
@@ -434,7 +427,8 @@ function initBDI(){
       puntaje: r.sum,
       rango: rangoBDI(r.sum),
       respuestas: readLocal('bdi'),
-      alumno: alumnoData()
+      alumno: alumnoData(),
+      token: 'clave123' // debe coincidir con el del GAS
     };
     const resp = await sendToSheet(payload);
     alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
