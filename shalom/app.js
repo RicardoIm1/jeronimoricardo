@@ -550,3 +550,17 @@ function initBAI() {
   });
 }
 
+const form = document.getElementById("beckForm");
+const submitBtn = form.querySelector("button[type='submit']");
+
+form.addEventListener("submit", e => {
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Enviando...";
+  
+  // Simulación de envío
+  setTimeout(() => {
+    // Si quieres reactivar en caso de error:
+    // submitBtn.disabled = false;
+    // submitBtn.textContent = "Enviar";
+  }, 2000);
+});
