@@ -104,3 +104,14 @@ button{ color: inherit; font: inherit }
   border-top: 1px solid rgba(255,255,255,.08);
   background: linear-gradient(180deg, rgba(23,26,43,.6), rgba(23,26,43,.9));
 }
+.list{ list-style: none; padding: 0; margin: 0; display: grid; gap: 12px }
+.item{ display: grid; gap: 8px }
+.item-title{ font-weight: 700; letter-spacing: .2px }
+.item-options{ display: grid; gap: 8px }
+.opt{
+  display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 10px;
+  padding: 10px; border-radius: 10px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+}
+.opt input{ margin-top: 2px }
+.opt span{ font-size: 14px; color: var(--text) }

@@ -13,14 +13,134 @@ const readLocal = key => JSON.parse(localStorage.getItem(key) || 'null');
 const todayISO = () => new Date().toISOString();
 
 /* ===== Ítems (texto simplificado y neutral) ===== */
-/* BDI: 21 ítems */
-const BDI_ITEMS = [
-  'Tristeza', 'Pesimismo', 'Fracaso', 'Pérdida de placer', 'Sentimientos de culpa',
-  'Sentimientos de castigo', 'Disconformidad con uno mismo', 'Autocrítica',
-  'Pensamientos o deseos de muerte', 'Llanto', 'Agitación', 'Pérdida de interés',
-  'Indecisión', 'Desvalorización', 'Pérdida de energía', 'Cambios en el sueño',
-  'Irritabilidad', 'Cambios en el apetito', 'Dificultad de concentración',
-  'Cansancio', 'Pérdida de interés sexual'
+/* ===== BDI con opciones completas (0–3) ===== */
+const BDI_FULL = [
+  { q: '1 TRISTEZA', opts: [
+    '0 No me siento triste',
+    '1 Me siento triste gran parte del tiempo',
+    '2 Me siento triste todo el tiempo',
+    '3 Me siento tan triste o soy tan infeliz que no puedo soportarlo'
+  ]},
+  { q: '2 PESIMISMO', opts: [
+    '0 No me siento especialmente desanimado (a) respecto a futuro',
+    '1 Me siento desanimado (a) respecto al futuro',
+    '2 Siento que no tengo nada que esperar',
+    '3 Siento que el futuro es desesperanzador y las cosas no mejoran'
+  ]},
+  { q: '3 FRACASO', opts: [
+    '0 No me siento fracasado (a)',
+    '1 Creo que he fracasado mas que la mayoría de las personas',
+    '2 Cuando miro hacia atrás, solo veo fracaso tras fracaso',
+    '3 Me siento ya persona totalmente fracasada'
+  ]},
+  { q: '4 PÉRDIDA DEL PLACER', opts: [
+    '0 Las cosas me satisfacen tanto como antes',
+    '1 No disfruto de las cosas tanto como antes',
+    '2 Ya no obtengo una satisfacción autentica',
+    '3 Estoy insatisfecho o aburrido de todo.'
+  ]},
+  { q: '5 SENTIMIENTOS DE CULPA', opts: [
+    '0 No me siento especialmente culpable',
+    '1 Me siento culpable en bastantes ocasiones',
+    '2 Me siento culpable en la mayoría de las ocasiones',
+    '3 Me siento culpable constantemente'
+  ]},
+  { q: '6 SENTIMIENTOS DE CASTIGO', opts: [
+    '0 No creo que este siendo castigado (a)',
+    '1 Me siento como si fuese a ser castigado (a)',
+    '2 Espero ser castigado (a)',
+    '3 Siento que estoy siendo castigado (a)'
+  ]},
+  { q: '7 DISCONFORMIDAD CON UNO MISMO', opts: [
+    '0 No estoy decepcionado (a) de mi mismo (a)',
+    '1 Estoy decepcionado (a) de mi mismo (a)',
+    '2 Me da vergüenza de mi mismo (a)',
+    '3 Me detesto'
+  ]},
+  { q: '8 AUTOCRÍTICA', opts: [
+    '0 No me considero peor que cualquier otro (a)',
+    '1 Me autocritico por mis debilidades o por mis errores',
+    '2 Continuamente me culpo por mis faltas',
+    '3 Me culpo por todo lo malo que me sucede'
+  ]},
+  { q: '9 PENSAMIENTOS O DESEOS SUICIDAS', opts: [
+    '0 No tengo ningún pensamiento de suicidio',
+    '1 A veces pienso en suicidarme pero no lo cometería',
+    '2 Desearía suicidarme',
+    '3 Me suicidaría si tuviera la oportunidad'
+  ]},
+  { q: '10 LLANTO', opts: [
+    '0 No lloro más de lo que solía',
+    '1 Ahora lloro más que antes',
+    '2 Lloro continuamente',
+    '3 Antes era capaz de llorar, pero ahora no puedo, incluso aunque quiera.'
+  ]},
+  { q: '11 AGITACIÓN', opts: [
+    '0 No estoy mas inquieto o tenso que lo habitual',
+    '1 Me siento mas inquieto o tenso que lo habitual',
+    '2 Estoy tan inquieto o agitado que me es difícil quedarme quieto',
+    '3 Estoy tan inquieto o agitado que tengo que estar siempre en movimiento o haciendo algo'
+  ]},
+  { q: '12 PÉRDIDA DE INTERÉS', opts: [
+    '0 No he perdido el interés por los demás',
+    '1 Estoy menos interesado en los demás que antes',
+    '2 He perdido la mayor parte de mi interés por los demás',
+    '3 He perdido todo el interés por los demás'
+  ]},
+  { q: '13 INDECISIÓN', opts: [
+    '0 Tomo decisiones más o menos como siempre lo he hecho',
+    '1 Evito tomar decisiones más que antes',
+    '2 Tomar decisiones me resulta mucho más difícil que antes',
+    '3 Ya me es imposible tomar decisiones'
+  ]},
+  { q: '14 DESVALORIZACIÓN', opts: [
+    '0 Me considero valioso (a)',
+    '1 No me considero a mi mismo (a) tan valioso (a) y útil como solía considerarme',
+    '2 Me siento menos valioso (a) cuando me comparo con otros',
+    '3 Siento que no valgo nada'
+  ]},
+  { q: '15 PÉRDIDA DE LA ENERGÍA', opts: [
+    '0 Tengo tanta energía como siempre',
+    '1 Tengo menos energía de la que solía tener',
+    '2 No tengo suficiente energía para hacer demasiado',
+    '3 No tengo energía suficiente para hacer nada'
+  ]},
+  { q: '16 CAMBIOS EN LOS HÁBITOS DE SUEÑO', opts: [
+    '0 No he experimentado ningún cambio en mis hábitos de sueño',
+    '1 Duermo un poco más de lo habitual o duermo un poco menos de lo habitual',
+    '2 Duermo mucho más de lo habitual o duermo mucho menos de lo habitual',
+    '3 Duermo la mayor parte del día o me despierto 1’2 horas más temprano y no puedo volver a dormirme'
+  ]},
+  { q: '17 IRRITABILIDAD', opts: [
+    '0 No estoy mas irritable que lo habitual',
+    '1 Estoy más irritable que lo habitual',
+    '2 Estoy mucho mas irritable que lo habitual',
+    '3 Estoy irritable todo el tiempo'
+  ]},
+  { q: '18 CAMBIOS EN EL APETITO', opts: [
+    '0 No he experimentado ningún cambio en el apetito',
+    '1 Mi apetito es un poco menor que lo habitual o mi apetito es un poco mayor que lo habitual',
+    '2 Mi apetito es mucho menor que antes o mi apetito mucho mayor que lo habitual',
+    '3 No tengo apetito en lo absoluto o quiero comer todo el día'
+  ]},
+  { q: '19 DIFICULTADES DE CONCENTRACIÓN', opts: [
+    '0 Me puedo concentrar tan bien como siempre',
+    '1 No puedo concentrarme tan bien como habitualmente',
+    '2 Me es difícil mantener la mente en algo por mucho tiempo',
+    '3 No puedo concentrarme en nada'
+  ]},
+  { q: '20 CANSANCIO O FATIGA', opts: [
+    '0 No estoy más cansado (a) o fatigado (a) que lo habitual',
+    '1 Me fatigo o me canso más fácilmente que lo habitual',
+    '2 Estoy demasiado fatigado (a) o cansado (a) para hacer muchas cosas de las que antes solía hacer',
+    '3 Estoy demasiado cansado (a) o fatigado (a) para hacer la mayoría de las cosas que solía hacer'
+  ]},
+  { q: '21 RENDIMIENTO ESCOLAR', opts: [
+    '0 Estudio igual que antes',
+    '1 Me cuesta un esfuerzo extra comenzar a hacer algo',
+    '2 Tengo que obligarme mucho para hacer algo',
+    '3 No puedo hacer nada en lo absoluto'
+  ]}
 ];
 
 /* BAI: 20 ítems */
@@ -43,23 +163,33 @@ const OPTIONS = [
 
 /* ===== Render dinámico ===== */
 function renderList(containerId, items, storageKey){
-  const list = $(containerId);
+  const list = document.querySelector(containerId);
   list.innerHTML = '';
   const saved = readLocal(storageKey) || {};
-  items.forEach((label, idx) => {
+
+  items.forEach((entry, idx) => {
     const li = document.createElement('li');
     li.className = 'item';
+
     const name = `${storageKey}-${idx}`;
     const selected = saved[name] ?? null;
 
     const title = document.createElement('div');
     title.className = 'item-title';
-    title.textContent = `${idx + 1}. ${label}`;
+    const isFull = typeof entry === 'object' && Array.isArray(entry.opts);
+    title.textContent = isFull ? entry.q : `${idx + 1}. ${entry}`;
 
     const group = document.createElement('div');
     group.className = 'item-options';
 
-    OPTIONS.forEach(opt => {
+    const opts = isFull ? entry.opts.map((t, i) => ({ v: i, t })) : [
+      { v: 0, t: 'Nada' },
+      { v: 1, t: 'Leve' },
+      { v: 2, t: 'Moderado' },
+      { v: 3, t: 'Severo' }
+    ];
+
+    opts.forEach(opt => {
       const id = `${name}-${opt.v}`;
       const labelEl = document.createElement('label');
       labelEl.className = 'opt';
@@ -257,3 +387,91 @@ document.addEventListener('DOMContentLoaded', ()=>{
   else if(path.endsWith('beck-ansiedad.html')) initBAI();
   else initIndex();
 });
+
+function fillAlumnoFields(){
+  const ts = document.getElementById('al-timestamp');
+  const fh = document.getElementById('al-fecha');
+  if(ts) ts.value = new Date().toISOString();
+  if(fh && !fh.value){
+    const d = new Date();
+    const iso = d.toISOString().slice(0,10);
+    fh.value = iso;
+  }
+}
+
+function alumnoData(){
+  return {
+    marca_temporal: document.getElementById('al-timestamp')?.value || todayISO(),
+    nombre_completo: document.getElementById('al-nombre')?.value || '',
+    edad: document.getElementById('al-edad')?.value || '',
+    grado_grupo: document.getElementById('al-grado')?.value || '',
+    fecha_hoy: document.getElementById('al-fecha')?.value || ''
+  };
+}
+
+/* En initBDI y initBAI, llama fillAlumnoFields() */
+function initBDI(){
+  fillAlumnoFields();
+  renderList('#bdi-list', BDI_FULL, 'bdi');
+
+  document.getElementById('calcular-bdi')?.addEventListener('click', ()=>{
+    const r = calcScore('bdi', BDI_FULL.length);
+    showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
+  });
+
+  document.getElementById('guardar-bdi')?.addEventListener('click', async ()=>{
+    const r = calcScore('bdi', BDI_FULL.length);
+    const payload = {
+      proyecto: CONFIG.proyecto,
+      version: CONFIG.version,
+      test: 'BDI',
+      timestamp: todayISO(),
+      puntaje: r.sum,
+      rango: rangoBDI(r.sum),
+      respuestas: readLocal('bdi'),
+      alumno: alumnoData()
+    };
+    const resp = await sendToSheet(payload);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+  });
+
+  document.getElementById('reiniciar-bdi')?.addEventListener('click', ()=>{
+    localStorage.removeItem('bdi');
+    renderList('#bdi-list', BDI_FULL, 'bdi');
+    document.getElementById('resultado-bdi').innerHTML = '';
+    updateProgressBars();
+  });
+}
+
+function initBAI(){
+  fillAlumnoFields();
+  renderList('#bai-list', BAI_ITEMS, 'bai');
+
+  document.getElementById('calcular-bai')?.addEventListener('click', ()=>{
+    const r = calcScore('bai', BAI_ITEMS.length);
+    showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
+  });
+
+  document.getElementById('guardar-bai')?.addEventListener('click', async ()=>{
+    const r = calcScore('bai', BAI_ITEMS.length);
+    const payload = {
+      proyecto: CONFIG.proyecto,
+      version: CONFIG.version,
+      test: 'BAI',
+      timestamp: todayISO(),
+      puntaje: r.sum,
+      rango: rangoBAI(r.sum),
+      respuestas: readLocal('bai'),
+      alumno: alumnoData()
+    };
+    const resp = await sendToSheet(payload);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+  });
+
+  document.getElementById('reiniciar-bai')?.addEventListener('click', ()=>{
+    localStorage.removeItem('bai');
+    renderList('#bai-list', BAI_ITEMS, 'bai');
+    document.getElementById('resultado-bai').innerHTML = '';
+    updateProgressBars();
+  });
+}
