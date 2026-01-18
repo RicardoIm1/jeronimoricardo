@@ -412,23 +412,22 @@ function initBAI() {
   });
 
   document.getElementById('guardar-bai')?.addEventListener('click', async () => {
-    const r = calcScore('bai', BAI_ITEMS.length);
-    const payload = {
-      proyecto: CONFIG.proyecto,
-      version: CONFIG.version,
-      test: 'BAI',   // ← aquí debe ser BAI
-      timestamp: todayISO(),
-      puntaje: r.sum,
-      rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai'),   // ← aquí deben ser las respuestas de bai
-      alumno: alumnoData(),
-      token: SECRET   // ← siempre manda el token
-    };
+  const r = calcScore('bai', BAI_ITEMS.length);
+  const payload = {
+    proyecto: CONFIG.proyecto,
+    version: CONFIG.version,
+    test: 'BAI',
+    timestamp: todayISO(),
+    puntaje: r.sum,
+    rango: rangoBAI(r.sum),
+    respuestas: readLocal('bai'),
+    alumno: alumnoData(),
+    token: SECRET
+  };
 
-    const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
-  });
-
+  const resp = await sendToSheet(payload);
+  alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+});
 
   const resp = await sendToSheet(payload);
   alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
