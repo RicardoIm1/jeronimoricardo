@@ -354,6 +354,19 @@ function updateGamify(bdi, bai) {
 }
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
+/* async function sendToSheet(payload){
+  try {
+    const res = await fetch(CONFIG.sheetEndpoint, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    return data;
+  } catch(err){
+    console.error('Error enviando a Sheets', err);
+    return { ok: false, error: String(err) };
+  }
+} */
 async function sendToSheet(payload) {
   try {
     const res = await fetch(CONFIG.sheetEndpoint, {
@@ -369,6 +382,7 @@ async function sendToSheet(payload) {
     return { ok: false, error: String(err) };
   }
 }
+
 
 /* ===== Página: BDI ===== */
 function initBDI() {
@@ -550,17 +564,3 @@ function initBAI() {
   });
 }
 
-const form = document.getElementById("beckForm");
-const submitBtn = form.querySelector("button[type='submit']");
-
-form.addEventListener("submit", e => {
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Enviando...";
-  
-  // Simulación de envío
-  setTimeout(() => {
-    // Si quieres reactivar en caso de error:
-    // submitBtn.disabled = false;
-    // submitBtn.textContent = "Enviar";
-  }, 2000);
-});
