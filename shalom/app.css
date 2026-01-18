@@ -57,21 +57,50 @@ button{ color: inherit; font: inherit }
 .hero h1{ margin: 0; font-size: clamp(24px, 4.5vw, 40px); line-height: 1.15 }
 .hero p{ margin: 0; color: var(--muted) }
 .chips{ display: flex; flex-wrap: wrap; gap: 10px }
-.chip{
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 12px; border-radius: 999px;
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
-  color: var(--muted); font-weight: 600; font-size: 13px;
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--text);
+  transition: background .2s ease, transform .15s ease;
 }
+.chip:hover {
+  background: linear-gradient(180deg, var(--brand), #9aa8ff);
+  color: #0b0f1a;
+  transform: translateY(-2px);
+}
+.chip i {
+  font-size: 14px;
+  opacity: .8;
+}
+
 
 .grid{ display: grid; grid-template-columns: 1fr; gap: 16px }
 @media (min-width: 720px){ .grid{ grid-template-columns: repeat(2, 1fr) } }
-.badge{
-  justify-self: end; padding: 6px 10px; border-radius: 999px;
-  font-size: 12px; font-weight: 700; letter-spacing: .3px;
-  background: linear-gradient(180deg, var(--accent), #ff9ac8); color: #1a0f18;
-  box-shadow: 0 8px 18px rgba(255,122,182,.35);
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  background: rgba(108,140,255,.15);
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  box-shadow: 0 0 8px rgba(108,140,255,.35);
 }
+.card {
+  position: relative; /* necesario para que el badge se posicione dentro */
+}
+
 .progress{ height: 8px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; border: 1px solid rgba(255,255,255,.06) }
 .progress > i{ display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--success), #7ee6bf) }
 
