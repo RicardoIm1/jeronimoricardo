@@ -1,7 +1,6 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  /* sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxbfwC2-ML2L71MGso7BPz1kM-8UkCYC9lcC5pdDhsuBxjshxSTO-t7SlZw9LMkJoTyIA/exec',  */
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbwoOLEJPL12EvzSAt63WolJ7hDWzuzZKQB8u7kMx7Mp9TLar8NMgFKPdTzSUfJW26B6Ig/exec',
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbwRdhBLvkeuISSAX5bmkjrCzZZ1lAX2GYL5LEdUp2CGrvQbcFawqAfR1JODb_arX0TtyA/exec',
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
@@ -358,11 +357,16 @@ async function sendToSheet(payload) {
   try {
     const res = await fetch(CONFIG.sheetEndpoint, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload)
     });
+
     const text = await res.text();
-    console.log("Respuesta cruda del GAS:", text);
+    console.log('Respuesta GAS:', text);
     return JSON.parse(text);
+
   } catch (err) {
     console.error('Error enviando a Sheets', err);
     return { ok: false, error: String(err) };
@@ -475,51 +479,9 @@ function alumnoData() {
   };
 }
 
-/* En initBDI y initBAI, llama fillAlumnoFields() */
-function initBDI() {
-  fillAlumnoFields();
-  renderList('#bdi-list', BDI_ITEMS, 'bdi');
-
-  document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
-  const r = calcScore('bdi', BDI_ITEMS.length);
-  const payload = {
-    proyecto: CONFIG.proyecto,
-    version: CONFIG.version,
-    test: 'BDI',
-    timestamp: todayISO(),
-    puntaje: r.sum,
-    rango: rangoBDI(r.sum),
-    respuestas: readLocal('bdi'),
-    alumno: alumnoData(),
-    token: SECRET
-  };
-
-  const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
-});
-
   document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
     localStorage.removeItem('bdi');
     renderList('#bdi-list', BDI_ITEMS, 'bdi');
     document.getElementById('resultado-bdi').innerHTML = '';
     updateProgressBars();
   });
-}
-
-function initBAI() {
-  fillAlumnoFields();
-  renderList('#bai-list', BAI_ITEMS, 'bai');
-
-  document.getElementById('calcular-bai')?.addEventListener('click', () => {
-    const r = calcScore('bai', BAI_ITEMS.length);
-    showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
-  });
-
-
-  document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_ITEMS, 'bai');
-    document.getElementById('resultado-bai').innerHTML = '';
-    updateProgressBars();
-  });
-}
