@@ -52,8 +52,6 @@ button{ color: inherit; font: inherit }
   background: #fff;
   max-width: 280px;            /* ancho máximo más pequeño */
   font-size: 0.9rem;           /* texto ligeramente más compacto */
-  flex: 1 1 220px;   /* mínimo 220px, se expanden hasta llenar */
-  max-width: 260px;
 }
 
 .grid {
