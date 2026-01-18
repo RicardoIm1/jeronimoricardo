@@ -5,6 +5,9 @@ const CONFIG = {
   version: '1.0.0'
 };
 
+const SECRET = 'clave123';
+const payload = { test:'BDI', puntaje:12, token:SECRET };
+
 /* ===== Utilidades ===== */
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
