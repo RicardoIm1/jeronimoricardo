@@ -44,16 +44,25 @@ button{ color: inherit; font: inherit }
 .actions{ display: flex; gap: 10px }
 
 .container{ max-width: 1100px; margin: 0 auto; padding: 24px var(--gap); display: grid; gap: 24px }
-.card{
-  border-radius: var(--radius-xl);
-  background:
-    radial-gradient(800px 300px at 10% 0%, rgba(108,140,255,.18) 0%, transparent 60%),
-    radial-gradient(600px 300px at 90% 100%, rgba(255,122,182,.18) 0%, transparent 60%),
-    linear-gradient(180deg, var(--card), var(--card-2));
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: var(--shadow);
-  padding: 20px; display: grid; gap: 14px;
+.card {
+  padding: 12px;              /* menos espacio interno */
+  margin: 8px;                /* separación más compacta */
+  border-radius: 8px;          /* esquinas suaves */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  max-width: 280px;            /* ancho máximo más pequeño */
+  font-size: 0.9rem;           /* texto ligeramente más compacto */
+  flex: 1 1 220px;   /* mínimo 220px, se expanden hasta llenar */
+  max-width: 260px;
 }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;                   /* espacio entre tarjetas */
+  justify-content: center;     /* centradas en pantalla */
+}
+
 .hero h1{ margin: 0; font-size: clamp(24px, 4.5vw, 40px); line-height: 1.15 }
 .hero p{ margin: 0; color: var(--muted) }
 .chips{ display: flex; flex-wrap: wrap; gap: 10px }
