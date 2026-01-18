@@ -505,19 +505,20 @@ function initBDI() {
 
   document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
     const r = calcScore('bdi', BDI_FULL.length);
-    const payload = {
-      proyecto: CONFIG.proyecto,
-      version: CONFIG.version,
-      test: 'BDI',
-      timestamp: todayISO(),
-      puntaje: r.sum,
-      rango: rangoBDI(r.sum),
-      respuestas: readLocal('bdi'),
-      alumno: alumnoData(),
-      token: 'clave123' // debe coincidir con el del GAS
+    const payload = { 
+      proyecto: CONFIG.proyecto, 
+      version: CONFIG.version, 
+      test: 'BDI', 
+      timestamp: todayISO(), 
+      puntaje: r.sum, 
+      rango: rangoBDI(r.sum), 
+      respuestas: readLocal('bdi') || {}, 
+      alumno: alumnoData(), 
+      token: SECRET 
     };
     const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+    console.log("Respuesta GAS BDI:", resp);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
   });
 
   document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
@@ -546,11 +547,13 @@ function initBAI() {
       timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai'),
-      alumno: alumnoData()
+      respuestas: readLocal('bai') || {},
+      alumno: alumnoData(),
+      token: SECRET
     };
     const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+    console.log("Respuesta GAS BAI:", resp);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
   });
 
   document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
@@ -560,3 +563,4 @@ function initBAI() {
     updateProgressBars();
   });
 }
+
