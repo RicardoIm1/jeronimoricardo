@@ -287,6 +287,7 @@ function alumnoData() {
 
 /* ================= SEND ================= */
 async function sendToSheet(payload) {
+  console.log(JSON.stringify(payload, null, 2));
   const res = await fetch(CONFIG.sheetEndpoint, {
     method: 'POST',
     body: JSON.stringify(payload)
@@ -306,15 +307,25 @@ function initBDI() {
 
     const respuestas = respuestasOrdenadas('bdi', BDI_FULL.length);
 
+    if (!respuestas) {
+      alert('Debes contestar todas las preguntas');
+      return;
+    }
+
+    if (!alumno.nombre_completo.trim()) {
+      alert('El nombre es obligatorio');
+      return;
+    }
+
     const payload = {
       fecha_hoy: todayISO(),
-      nombre_completo: alumnoData().nombre_completo,
-      edad: alumnoData().edad,
-      grado_grupo: alumnoData().grado_grupo,
+      nombre_completo: alumno.nombre_completo,
+      edad: alumno.edad,
+      grado_grupo: alumno.grado_grupo,
       test: 'BDI',
       puntaje: r.sum,
       rango: rangoBDI(r.sum),
-      respuestas, // ← ARRAY ORDENADO
+      respuestas, // ← OBJETO 1–21
       token: SECRET
     };
 
@@ -359,14 +370,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function respuestasOrdenadas(storageKey, total) {
   const data = readLocal(storageKey) || {};
-  const out = [];
+  const out = {};
 
   for (let i = 0; i < total; i++) {
-    out.push(
-      typeof data[`${storageKey}-${i}`] === 'number'
-        ? data[`${storageKey}-${i}`]
-        : 0
-    );
+    if (typeof data[i] !== 'number') {
+      return null; // ← faltan respuestas
+    }
+    out[i + 1] = data[i]; // backend espera 1–21
   }
 
   return out;
