@@ -478,7 +478,7 @@ function initBAI() {
     updateProgressBars();
   });
 }
-
+/* 
 const formBAI = document.getElementById('form-bai');
 
 formBAI?.addEventListener('submit', async (e) => {
@@ -533,4 +533,4 @@ formBDI?.addEventListener('submit', async (e) => {
 
   const resp = await sendToSheet(payload);
   alert(resp.ok ? 'Guardado' : 'Error al guardar');
-});
+}); */
