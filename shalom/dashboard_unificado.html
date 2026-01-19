@@ -1,235 +1,337 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Escolar - Ansiedad y Depresión</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-body { font-family: Arial, sans-serif; margin:0; background:#f0f4f8; }
-h1 { text-align:center; padding:20px 0; color:#333; }
-.tabs { display:flex; justify-content:center; margin-bottom:10px; }
-.tab { padding:10px 25px; cursor:pointer; background:#ddd; margin:0 5px; border-radius:12px 12px 0 0; font-weight:bold; transition:.3s; }
-.tab.active { background:#4a90e2; color:white; }
-.tab-content { display:none; padding:20px; }
-.tab-content.active { display:block; }
-.kpi { display:flex; flex-wrap:wrap; justify-content:space-around; margin:20px 0; }
-.kpi div { background:#fff; padding:20px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:center; flex:1 1 200px; margin:10px; }
-canvas { background:#fff; border-radius:12px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin:20px 0; }
-table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin-top:20px; }
-th, td { padding:12px; text-align:center; border-bottom:1px solid #eee; }
-th { background:#4a90e2; color:white; }
-select { padding:8px 12px; border-radius:8px; border:1px solid #ccc; margin-bottom:15px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Escolar - Ansiedad y Depresión</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f0f4f8;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+      color: #333;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .tab {
+      padding: 10px 25px;
+      cursor: pointer;
+      background: #ddd;
+      margin: 0 5px;
+      border-radius: 12px 12px 0 0;
+      font-weight: bold;
+      transition: .3s;
+    }
+
+    .tab.active {
+      background: #4a90e2;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .kpi {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+
+    .kpi div {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      flex: 1 1 200px;
+      margin: 10px;
+    }
+
+    canvas {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #4a90e2;
+      color: white;
+    }
+
+    select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>Dashboard Escolar - Ansiedad y Depresión</h1>
+  <h1>Dashboard Escolar - Ansiedad y Depresión</h1>
 
-<div class="tabs">
-  <div class="tab active" data-tab="bdi">Depresión (BDI)</div>
-  <div class="tab" data-tab="bai">Ansiedad (BAI)</div>
-</div>
-
-<div style="text-align:center;">
-  <label>Filtrar por Grado/Grupo: </label>
-  <select id="filtroGrupo">
-    <option value="Todos">Todos</option>
-  </select>
-</div>
-
-<div class="tab-content active" id="bdi">
-  <div class="kpi">
-    <div><h2 id="totalEncuestasBDI">0</h2><p>Total de encuestas</p></div>
-    <div><h2 id="promedioPuntajeBDI">0</h2><p>Puntaje promedio</p></div>
+  <div class="tabs">
+    <div class="tab active" data-tab="bdi">Depresión (BDI)</div>
+    <div class="tab" data-tab="bai">Ansiedad (BAI)</div>
   </div>
-  <canvas id="graficoRangosBDI" height="150"></canvas>
-  <canvas id="graficoItemsBDI" height="150"></canvas>
-  <table id="tablaResumenBDI">
-    <thead>
-      <tr>
-        <th>Grado/Grupo</th>
-        <th>Alumnos</th>
-        <th>Puntaje promedio</th>
-        <th>Mínimo</th>
-        <th>Leve</th>
-        <th>Moderado</th>
-        <th>Grave</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
 
-<div class="tab-content" id="bai">
-  <div class="kpi">
-    <div><h2 id="totalEncuestasBAI">0</h2><p>Total de encuestas</p></div>
-    <div><h2 id="promedioPuntajeBAI">0</h2><p>Puntaje promedio</p></div>
+  <div style="text-align:center;">
+    <label>Filtrar por Grado/Grupo: </label>
+    <select id="filtroGrupo">
+      <option value="Todos">Todos</option>
+    </select>
   </div>
-  <canvas id="graficoNivelesBAI" height="150"></canvas>
-  <canvas id="graficoItemsBAI" height="150"></canvas>
-  <table id="tablaResumenBAI">
-    <thead>
-      <tr>
-        <th>Grado/Grupo</th>
-        <th>Alumnos</th>
-        <th>Puntaje promedio</th>
-        <th>Baja</th>
-        <th>Moderada</th>
-        <th>Alta</th>
-        <th>Muy Alta</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
 
-<script>
-const SHEET_ID = '18OWcwGddwymRwmCVDa-MtN3iuFd5ST9o9s5Us3hMtzk';
-const HOJAS = { BDI: 'Respuestas_BDI', BAI: 'Respuestas_BAI' };
+  <div class="tab-content active" id="bdi">
+    <div class="kpi">
+      <div>
+        <h2 id="totalEncuestasBDI">0</h2>
+        <p>Total de encuestas</p>
+      </div>
+      <div>
+        <h2 id="promedioPuntajeBDI">0</h2>
+        <p>Puntaje promedio</p>
+      </div>
+    </div>
+    <canvas id="graficoRangosBDI" height="150"></canvas>
+    <canvas id="graficoItemsBDI" height="150"></canvas>
+    <table id="tablaResumenBDI">
+      <thead>
+        <tr>
+          <th>Grado/Grupo</th>
+          <th>Alumnos</th>
+          <th>Puntaje promedio</th>
+          <th>Mínimo</th>
+          <th>Leve</th>
+          <th>Moderado</th>
+          <th>Grave</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-let dataBDI = [], dataBAI = [];
+  <div class="tab-content" id="bai">
+    <div class="kpi">
+      <div>
+        <h2 id="totalEncuestasBAI">0</h2>
+        <p>Total de encuestas</p>
+      </div>
+      <div>
+        <h2 id="promedioPuntajeBAI">0</h2>
+        <p>Puntaje promedio</p>
+      </div>
+    </div>
+    <canvas id="graficoNivelesBAI" height="150"></canvas>
+    <canvas id="graficoItemsBAI" height="150"></canvas>
+    <table id="tablaResumenBAI">
+      <thead>
+        <tr>
+          <th>Grado/Grupo</th>
+          <th>Alumnos</th>
+          <th>Puntaje promedio</th>
+          <th>Baja</th>
+          <th>Moderada</th>
+          <th>Alta</th>
+          <th>Muy Alta</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-// Tabs
-document.querySelectorAll('.tab').forEach(tab=>{
-  tab.addEventListener('click', ()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
-    document.getElementById(tab.dataset.tab).classList.add('active');
-  });
-});
+  <script>
+    const SHEET_ID = '18OWcwGddwymRwmCVDa-MtN3iuFd5ST9o9s5Us3hMtzk';
+    const HOJAS = { BDI: 'Respuestas_BDI', BAI: 'Respuestas_BAI' };
 
-// Filtro
-document.getElementById('filtroGrupo').addEventListener('change', ()=>{
-  const g = document.getElementById('filtroGrupo').value;
-  renderBDI(g); 
-  renderBAI(g);
-});
+    let dataBDI = [], dataBAI = [];
 
-// Obtener datos desde Sheets
-async function obtenerDatos(hoja){
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${hoja}`;
-  const resp = await fetch(url);
-  const text = await resp.text();
-  const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}')+1));
-  const rows = json.table.rows.map(r=>{
-    const obj = {};
-    r.c.forEach((cell,i)=>{
-      obj[json.table.cols[i].label] = (cell && cell.v != null) ? cell.v : 0;
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
     });
-    return obj;
-  });
-  return rows;
-}
 
-// Inicialización
-async function init(){
-  dataBDI = await obtenerDatos(HOJAS.BDI);
-  dataBAI = await obtenerDatos(HOJAS.BAI);
+    // Filtro
+    document.getElementById('filtroGrupo').addEventListener('change', () => {
+      const g = document.getElementById('filtroGrupo').value;
+      renderBDI(g);
+      renderBAI(g);
+    });
 
-  // Llenar select de grupos
-  const gruposSet = new Set(dataBDI.map(d=>d['grado_grupo']).concat(dataBAI.map(d=>d['grado_grupo'])));
-  gruposSet.forEach(g=>{
-    const opt = document.createElement('option'); opt.value=g; opt.textContent=g;
-    document.getElementById('filtroGrupo').appendChild(opt);
-  });
+    // Obtener datos desde Sheets
+    async function obtenerDatos(hoja) {
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${hoja}`;
+      const resp = await fetch(url);
+      const text = await resp.text();
+      const json = JSON.parse(text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1));
+      const rows = json.table.rows.map(r => {
+        const obj = {};
+        r.c.forEach((cell, i) => {
+          obj[json.table.cols[i].label] = (cell && cell.v != null) ? cell.v : 0;
+        });
+        return obj;
+      });
+      return rows;
+    }
 
-  renderBDI(); 
-  renderBAI();
-}
+    // Inicialización
+    async function init() {
+      dataBDI = await obtenerDatos(HOJAS.BDI);
+      dataBAI = await obtenerDatos(HOJAS.BAI);
 
-init();
+      // Llenar select de grupos
+      const gruposSet = new Set(dataBDI.map(d => d['grado_grupo']).concat(dataBAI.map(d => d['grado_grupo'])));
+      gruposSet.forEach(g => {
+        const opt = document.createElement('option'); opt.value = g; opt.textContent = g;
+        document.getElementById('filtroGrupo').appendChild(opt);
+      });
 
-// Crear gráficos
-const graficoRangosBDI = new Chart(document.getElementById('graficoRangosBDI'), {type:'bar', data:{labels:['Mínimo','Leve','Moderado','Grave'], datasets:[{label:'Alumnos', data:[0,0,0,0], backgroundColor:['#2ecc71','#f1c40f','#e67e22','#e74c3c']}]}, options:{responsive:true, plugins:{legend:{display:false}}}});
-const graficoItemsBDI = new Chart(document.getElementById('graficoItemsBDI'), {type:'radar', data:{labels:[], datasets:[{label:'Promedio por ítem', data:[], backgroundColor:'rgba(46,204,113,0.2)', borderColor:'#2ecc71', pointBackgroundColor:'#27ae60'}]}, options:{responsive:true, scales:{r:{beginAtZero:true}}}});
-const graficoNivelesBAI = new Chart(document.getElementById('graficoNivelesBAI'), {type:'bar', data:{labels:['Baja','Moderada','Alta','Muy Alta'], datasets:[{label:'Alumnos', data:[0,0,0,0], backgroundColor:['#2ecc71','#f1c40f','#e67e22','#e74c3c']}]}, options:{responsive:true, plugins:{legend:{display:false}}}});
-const graficoItemsBAI = new Chart(document.getElementById('graficoItemsBAI'), {type:'radar', data:{labels:[], datasets:[{label:'Promedio por ítem', data:[], backgroundColor:'rgba(52,152,219,0.2)', borderColor:'#3498db', pointBackgroundColor:'#2980b9'}]}, options:{responsive:true, scales:{r:{beginAtZero:true}}}});
+      renderBDI();
+      renderBAI();
+    }
 
-// Render BDI
-function renderBDI(filtro="Todos"){
-  if(!dataBDI.length) return;
-  const filtered = filtro==="Todos"?dataBDI:dataBDI.filter(d=>d['grado_grupo']===filtro);
-  const total = filtered.length;
-  const suma = filtered.reduce((a,b)=>a + Number(b['puntaje']||0),0);
-  const promedio = total>0 ? (suma/total).toFixed(1) : 0;
-  document.getElementById('totalEncuestasBDI').innerText = total;
-  document.getElementById('promedioPuntajeBDI').innerText = promedio;
+    init();
 
-  // Rangos
-  const rangos = {Mínimo:0,Leve:0,Moderado:0,Grave:0};
-  filtered.forEach(d=>{ const r=d['rango']||'Mínimo'; if(rangos[r]!==undefined) rangos[r]++; });
-  graficoRangosBDI.data.datasets[0].data = Object.values(rangos); graficoRangosBDI.update();
+    // Crear gráficos
+    const graficoRangosBDI = new Chart(document.getElementById('graficoRangosBDI'), { type: 'bar', data: { labels: ['Mínimo', 'Leve', 'Moderado', 'Grave'], datasets: [{ label: 'Alumnos', data: [0, 0, 0, 0], backgroundColor: ['#2ecc71', '#f1c40f', '#e67e22', '#e74c3c'] }] }, options: { responsive: true, plugins: { legend: { display: false } } } });
+    const graficoItemsBDI = new Chart(document.getElementById('graficoItemsBDI'), { type: 'radar', data: { labels: [], datasets: [{ label: 'Promedio por ítem', data: [], backgroundColor: 'rgba(46,204,113,0.2)', borderColor: '#2ecc71', pointBackgroundColor: '#27ae60' }] }, options: { responsive: true, scales: { r: { beginAtZero: true } } } });
+    const graficoNivelesBAI = new Chart(document.getElementById('graficoNivelesBAI'), { type: 'bar', data: { labels: ['Baja', 'Moderada', 'Alta', 'Muy Alta'], datasets: [{ label: 'Alumnos', data: [0, 0, 0, 0], backgroundColor: ['#2ecc71', '#f1c40f', '#e67e22', '#e74c3c'] }] }, options: { responsive: true, plugins: { legend: { display: false } } } });
+    const graficoItemsBAI = new Chart(document.getElementById('graficoItemsBAI'), { type: 'radar', data: { labels: [], datasets: [{ label: 'Promedio por ítem', data: [], backgroundColor: 'rgba(52,152,219,0.2)', borderColor: '#3498db', pointBackgroundColor: '#2980b9' }] }, options: { responsive: true, scales: { r: { beginAtZero: true } } } });
 
-  // Items
-  const items = Object.keys(filtered[0]).filter(k=> /^[0-9]+ /.test(k));
-  graficoItemsBDI.data.labels = items;
-  graficoItemsBDI.data.datasets[0].data = items.map(i=>{
-    const vals = filtered.map(d=>Number(d[i]||0));
-    const sumaItem = vals.reduce((a,b)=>a+b,0);
-    return vals.length>0 ? (sumaItem/vals.length).toFixed(1) : 0;
-  });
-  graficoItemsBDI.update();
+    // Render BDI
+    function renderBDI(filtro = "Todos") {
+      if (!dataBDI.length) return;
+      const filtered = filtro === "Todos" ? dataBDI : dataBDI.filter(d => d['grado_grupo'] === filtro);
+      const total = filtered.length;
+      const suma = filtered.reduce((a, b) => a + Number(b['puntaje'] || 0), 0);
+      const promedio = total > 0 ? (suma / total).toFixed(1) : 0;
+      document.getElementById('totalEncuestasBDI').innerText = total;
+      document.getElementById('promedioPuntajeBDI').innerText = promedio;
 
-  // Tabla
-  const gruposData = {};
-  filtered.forEach(d=>{
-    const g=d['grado_grupo']||'Sin grupo';
-    if(!gruposData[g]) gruposData[g]={alumnos:0,puntaje:0,rangos:{Mínimo:0,Leve:0,Moderado:0,Grave:0}};
-    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['puntaje']||0);
-    gruposData[g].rangos[d['rango']||'Mínimo']++;
-  });
-  const tbody = document.querySelector('#tablaResumenBDI tbody'); tbody.innerHTML='';
-  Object.entries(gruposData).forEach(([g,v])=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${g}</td><td>${v.alumnos}</td><td>${(v.puntaje/v.alumnos).toFixed(1)}</td>
+      // Rangos
+      const rangos = { Mínimo: 0, Leve: 0, Moderado: 0, Grave: 0 };
+      filtered.forEach(d => { const r = d['rango'] || 'Mínimo'; if (rangos[r] !== undefined) rangos[r]++; });
+      graficoRangosBDI.data.datasets[0].data = Object.values(rangos); graficoRangosBDI.update();
+
+      // Items
+      const items = Object.keys(filtered[0]).filter(k => /^[0-9]+ /.test(k));
+      graficoItemsBDI.data.labels = items;
+      graficoItemsBDI.data.datasets[0].data = items.map(i => {
+        const vals = filtered.map(d => Number(d[i] || 0));
+        const sumaItem = vals.reduce((a, b) => a + b, 0);
+        return vals.length > 0 ? (sumaItem / vals.length).toFixed(1) : 0;
+      });
+      graficoItemsBDI.update();
+
+      // Tabla
+      const gruposData = {};
+      filtered.forEach(d => {
+        const g = d['grado_grupo'] || 'Sin grupo';
+        if (!gruposData[g]) gruposData[g] = { alumnos: 0, puntaje: 0, rangos: { Mínimo: 0, Leve: 0, Moderado: 0, Grave: 0 } };
+        gruposData[g].alumnos++; gruposData[g].puntaje += Number(d['puntaje'] || 0);
+        gruposData[g].rangos[d['rango'] || 'Mínimo']++;
+      });
+      const tbody = document.querySelector('#tablaResumenBDI tbody'); tbody.innerHTML = '';
+      Object.entries(gruposData).forEach(([g, v]) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${g}</td><td>${v.alumnos}</td><td>${(v.puntaje / v.alumnos).toFixed(1)}</td>
     <td>${v.rangos.Mínimo}</td><td>${v.rangos.Leve}</td><td>${v.rangos.Moderado}</td><td>${v.rangos.Grave}</td>`;
-    tbody.appendChild(tr);
-  });
-}
+        tbody.appendChild(tr);
+      });
+    }
 
-// Render BAI
-function renderBAI(filtro="Todos"){
-  if(!dataBAI.length) return;
-  const filtered = filtro==="Todos"?dataBAI:dataBAI.filter(d=>d['grado_grupo']===filtro);
-  const total = filtered.length;
-  const suma = filtered.reduce((a,b)=>a + Number(b['puntaje']||0),0);
-  const promedio = total>0 ? (suma/total).toFixed(1) : 0;
-  document.getElementById('totalEncuestasBAI').innerText = total;
-  document.getElementById('promedioPuntajeBAI').innerText = promedio;
+    // Render BAI
+    function renderBAI(filtro = "Todos") {
+      if (!dataBAI.length) return;
+      const filtered = filtro === "Todos" ? dataBAI : dataBAI.filter(d => d['grado_grupo'] === filtro);
+      const total = filtered.length;
+      const suma = filtered.reduce((a, b) => a + Number(b['puntaje'] || 0), 0);
+      const promedio = total > 0 ? (suma / total).toFixed(1) : 0;
+      document.getElementById('totalEncuestasBAI').innerText = total;
+      document.getElementById('promedioPuntajeBAI').innerText = promedio;
 
-  // Niveles
-  const niveles = {Baja:0,Moderada:0,Alta:0,"Muy Alta":0};
-  filtered.forEach(d=>{ const n=d['rango']||'Baja'; if(niveles[n]!==undefined) niveles[n]++; });
-  graficoNivelesBAI.data.datasets[0].data = Object.values(niveles); graficoNivelesBAI.update();
+      // Niveles
+      const niveles = {};
+      filtered.forEach(d => {
+        const n = d['rango'] || 'Sin rango';
+        niveles[n] = (niveles[n] || 0) + 1;
+      });
+      graficoNivelesBAI.data.labels = Object.keys(niveles);
+      graficoNivelesBAI.data.datasets[0].data = Object.values(niveles);
+      graficoNivelesBAI.update();
 
-  // Items
-  const items = Object.keys(filtered[0]).filter(k=> /^[0-9]+ /.test(k));
-  graficoItemsBAI.data.labels = items;
-  graficoItemsBAI.data.datasets[0].data = items.map(i=>{
-    const vals = filtered.map(d=>Number(d[i]||0));
-    const sumaItem = vals.reduce((a,b)=>a+b,0);
-    return vals.length>0 ? (sumaItem/vals.length).toFixed(1) : 0;
-  });
-  graficoItemsBAI.update();
 
-  // Tabla
-  const gruposData = {};
-  filtered.forEach(d=>{
-    const g=d['grado_grupo']||'Sin grupo';
-    if(!gruposData[g]) gruposData[g]={alumnos:0,puntaje:0,niveles:{Baja:0,Moderada:0,Alta:0,"Muy Alta":0}};
-    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['puntaje']||0);
-    gruposData[g].niveles[d['rango']||'Baja']++;
-  });
-  const tbody = document.querySelector('#tablaResumenBAI tbody'); tbody.innerHTML='';
-  Object.entries(gruposData).forEach(([g,v])=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${g}</td><td>${v.alumnos}</td><td>${(v.puntaje/v.alumnos).toFixed(1)}</td>
+      // Items
+      const items = Object.keys(filtered[0]).filter(k => /^[0-9]+ /.test(k));
+      graficoItemsBAI.data.labels = items;
+      graficoItemsBAI.data.datasets[0].data = items.map(i => {
+        const vals = filtered.map(d => Number(d[i] || 0));
+        const sumaItem = vals.reduce((a, b) => a + b, 0);
+        return vals.length > 0 ? (sumaItem / vals.length).toFixed(1) : 0;
+      });
+      graficoItemsBAI.update();
+
+      // Tabla
+      const gruposData = {};
+      filtered.forEach(d => {
+        const g = d['grado_grupo'] || 'Sin grupo';
+        if (!gruposData[g]) gruposData[g] = { alumnos: 0, puntaje: 0, niveles: { Baja: 0, Moderada: 0, Alta: 0, "Muy Alta": 0 } };
+        gruposData[g].alumnos++; gruposData[g].puntaje += Number(d['puntaje'] || 0);
+        gruposData[g].niveles[d['rango'] || 'Baja']++;
+      });
+      const tbody = document.querySelector('#tablaResumenBAI tbody'); tbody.innerHTML = '';
+      Object.entries(gruposData).forEach(([g, v]) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${g}</td><td>${v.alumnos}</td><td>${(v.puntaje / v.alumnos).toFixed(1)}</td>
     <td>${v.niveles.Baja}</td><td>${v.niveles.Moderada}</td><td>${v.niveles.Alta}</td><td>${v.niveles["Muy Alta"]}</td>`;
-    tbody.appendChild(tr);
-  });
-}
-</script>
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
 </body>
+
 </html>
