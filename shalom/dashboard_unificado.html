@@ -6,28 +6,39 @@
 <title>Dashboard Escolar - Ansiedad y Depresión</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body { font-family: Arial, sans-serif; margin:0; background:#f0f4f8; font-size:13px; }
+body { font-family: Arial, sans-serif; margin:0; background:#f0f4f8; font-size:13px; display:flex; justify-content:center; }
+.main-container { width:95%; max-width:1200px; display:flex; flex-direction:column; }
 h1 { text-align:center; padding:12px 0; font-size:20px; color:#333; }
 .tabs { display:flex; justify-content:center; margin-bottom:6px; flex-wrap:wrap; }
 .tab { padding:5px 12px; cursor:pointer; background:#ddd; margin:0 3px; border-radius:8px 8px 0 0; font-weight:bold; font-size:13px; transition:.3s; }
 .tab.active { background:#4a90e2; color:white; }
-.tab-content { display:none; padding:8px; }
-.tab-content.active { display:block; }
-.kpi { display:flex; flex-wrap:wrap; justify-content:space-around; margin:8px 0; }
-.kpi div { background:#fff; padding:10px; border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.1); text-align:center; flex:1 1 130px; margin:4px; font-size:12px; }
+.tab-content { display:none; padding:8px; display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+.tab-content.active { display:flex; }
+.kpi { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; width:100%; }
+.kpi div { background:#fff; padding:10px; border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.1); text-align:center; flex:1 1 130px; font-size:12px; }
 .kpi h2 { font-size:16px; margin:4px 0; }
-.graph-row { display:flex; flex-wrap:wrap; justify-content:space-around; }
-canvas { background:#fff; border-radius:8px; padding:6px; box-shadow:0 1px 3px rgba(0,0,0,0.1); margin:6px 0; flex:1 1 45%; min-width:200px; height:200px; }
+.graph-row { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; width:100%; }
+canvas { background:#fff; border-radius:8px; padding:6px; box-shadow:0 1px 3px rgba(0,0,0,0.1); flex:1 1 45%; min-width:200px; height:200px; }
 table { width:100%; border-collapse:collapse; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.1); margin-top:8px; font-size:12px; }
 th, td { padding:5px; text-align:center; border-bottom:1px solid #eee; }
 th { background:#4a90e2; color:white; font-size:11px; }
 select { padding:5px 8px; border-radius:5px; border:1px solid #ccc; margin-bottom:8px; font-size:12px; }
-.alert-zone { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+
+/* Alertas */
+.alert-zone { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
 .alert { flex:1 1 130px; padding:8px; border-radius:6px; color:white; font-size:11px; box-shadow:0 1px 3px rgba(0,0,0,0.15); }
 .alert.high { background:#e74c3c; }
 .alert.medium { background:#f1c40f; color:#333; }
 .alert.low { background:#2ecc71; }
+
+/* Responsivo: pantallas pequeñas */
+@media (max-width: 768px) {
+  .tab-content, .kpi, .graph-row, .alert-zone { justify-content:center; flex-direction:column; align-items:center; }
+  canvas { flex:1 1 90%; height:180px; }
+  .kpi div, .alert { flex:1 1 90%; }
+}
 </style>
+
 </head>
 <body>
 
