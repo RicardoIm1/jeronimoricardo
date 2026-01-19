@@ -169,6 +169,62 @@ function updateProgressBars() {
 }
 
 /* =========================
+   ÍTEMS BDI
+========================= */
+
+const BDI_ITEMS = [
+  'Tristeza',
+  'Pesimismo',
+  'Fracaso',
+  'Pérdida de placer',
+  'Sentimientos de culpa',
+  'Sentimientos de castigo',
+  'Disconformidad con uno mismo',
+  'Autocrítica',
+  'Pensamientos suicidas',
+  'Llanto',
+  'Agitación',
+  'Pérdida de interés',
+  'Indecisión',
+  'Desvalorización',
+  'Pérdida de energía',
+  'Cambios en el sueño',
+  'Irritabilidad',
+  'Cambios en el apetito',
+  'Dificultad de concentración',
+  'Cansancio o fatiga',
+  'Rendimiento escolar'
+];
+
+/* =========================
+   ÍTEMS BAI
+========================= */
+
+const BAI_ITEMS = [
+  'Torpe o entumecido',
+  'Acalorado',
+  'Temblor en las piernas',
+  'Incapaz de relajarse',
+  'Temor a que ocurra lo peor',
+  'Mareado o aturdido',
+  'Latidos acelerados',
+  'Inestable',
+  'Atemorizado',
+  'Nervioso',
+  'Sensación de bloqueo',
+  'Temblores en las manos',
+  'Inquietud',
+  'Miedo a perder el control',
+  'Sensación de ahogo',
+  'Temor a morir',
+  'Con miedo',
+  'Problemas digestivos',
+  'Desvanecimientos',
+  'Ruborización',
+  'Sudores'
+];
+
+/* =========================
    INIT BDI
 ========================= */
 
