@@ -450,10 +450,10 @@ function fillAlumnoFields() {
 
 function alumnoData() {
   return {
-    nombre: document.getElementById('al-nombre')?.value.trim() || '',
-    edad: Number(document.getElementById('edad')?.value) || null,
-    grado: document.getElementById('al-grado')?.value || '',
-    fecha: document.getElementById('al-fecha')?.textContent || todayISO()
+    fecha: document.getElementById('al-fecha')?.textContent || todayISO(),
+    nombre_completo: document.getElementById('al-nombre')?.value || '',
+    edad: document.getElementById('al-edad')?.value || '',
+    grado_grupo: document.getElementById('al-grado')?.value || ''
   };
 }
 
