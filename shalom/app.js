@@ -1,22 +1,18 @@
-/* ===== Configuración ===== */
+/* ================= CONFIG ================= */
 const CONFIG = {
   sheetEndpoint: 'https://script.google.com/macros/s/AKfycbz3s1jGMaHvlT-I-2gyh8uo_owiUb2uUXyP2fbSi-M86NCLJ7JA82Ik6yqyM6C2qpGwHA/exec',
-  /* sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxWO2pff3W4B7leHWSwnoURhz2c3_wfuodgIdEhiypvzZaBQJDA-2bXYYlyzVqzZEanBw/exec' */
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
 
 const SECRET = 'clave123';
-const payload = { test: 'BDI', puntaje: 12, token: SECRET };
 
-/* ===== Utilidades ===== */
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
-const saveLocal = (key, data) => localStorage.setItem(key, JSON.stringify(data));
-const readLocal = key => JSON.parse(localStorage.getItem(key) || 'null');
+/* ================= UTILS ================= */
+const $ = s => document.querySelector(s);
+const saveLocal = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+const readLocal = k => JSON.parse(localStorage.getItem(k) || '{}');
 const todayISO = () => new Date().toISOString();
 
-/* ===== Ítems (texto simplificado y neutral) ===== */
 /* ===== BDI con opciones completas (0–3) ===== */
 const BDI_FULL = [
   {
@@ -214,248 +210,100 @@ const BAI_FULL = [
   { q: '21 Con sudores, fríos o calientes.', opts: ['0 No', '1 Leve', '2 Moderado', '3 Bastante'] }
 ];
 
-/* Opciones 0–3 */
-const OPTIONS = [
-  { v: 0, t: 'Nada' },
-  { v: 1, t: 'Leve' },
-  { v: 2, t: 'Moderado' },
-  { v: 3, t: 'Severo' }
-];
+/* ================= RENDER ================= */
+function renderList(container, items, key) {
+  const ul = $(container);
+  ul.innerHTML = '';
+  const saved = readLocal(key);
 
-/* ===== Render dinámico ===== */
-function renderList(containerId, items, storageKey) {
-  const list = document.querySelector(containerId);
-  list.innerHTML = '';
-  const saved = readLocal(storageKey) || {};
-
-  items.forEach((entry, idx) => {
+  items.forEach((it, i) => {
     const li = document.createElement('li');
     li.className = 'item';
 
-    const name = `${storageKey}-${idx}`;
-    const selected = saved[name] ?? null;
-
     const title = document.createElement('div');
     title.className = 'item-title';
-    const isFull = typeof entry === 'object' && Array.isArray(entry.opts);
-    title.textContent = isFull ? entry.q : `${idx + 1}. ${entry}`;
+    title.textContent = it.q;
 
-    const group = document.createElement('div');
-    group.className = 'item-options';
+    const opts = document.createElement('div');
+    opts.className = 'item-options';
 
-    const opts = isFull ? entry.opts.map((t, i) => ({ v: i, t })) : [
-      { v: 0, t: 'Nada' },
-      { v: 1, t: 'Leve' },
-      { v: 2, t: 'Moderado' },
-      { v: 3, t: 'Severo' }
-    ];
-
-    opts.forEach(opt => {
-      const id = `${name}-${opt.v}`;
-      const labelEl = document.createElement('label');
-      labelEl.className = 'opt';
-      labelEl.setAttribute('for', id);
+    it.opts.forEach((txt, v) => {
+      const id = `${key}-${i}-${v}`;
+      const label = document.createElement('label');
+      label.className = 'opt';
 
       const input = document.createElement('input');
       input.type = 'radio';
-      input.name = name;
-      input.id = id;
-      input.value = String(opt.v);
-      if (String(selected) === String(opt.v)) input.checked = true;
+      input.name = `${key}-${i}`;
+      input.value = v;
+      input.checked = saved[`${i}`] === v;
 
-      input.addEventListener('change', () => {
-        const current = readLocal(storageKey) || {};
-        current[name] = Number(input.value);
-        saveLocal(storageKey, current);
-        updateProgressBars();
-      });
+      input.onchange = () => {
+        saved[i] = v;
+        saveLocal(key, saved);
+      };
 
-      const span = document.createElement('span');
-      span.textContent = opt.t;
-
-      labelEl.appendChild(input);
-      labelEl.appendChild(span);
-      group.appendChild(labelEl);
+      label.append(input, document.createTextNode(txt));
+      opts.appendChild(label);
     });
 
-    li.appendChild(title);
-    li.appendChild(group);
-    list.appendChild(li);
+    li.append(title, opts);
+    ul.appendChild(li);
   });
 }
 
-/* ===== Cálculo de puntajes ===== */
-function calcScore(storageKey, totalItems) {
-  const data = readLocal(storageKey) || {};
+/* ================= SCORE ================= */
+function calcScore(key, total) {
+  const d = readLocal(key);
   let sum = 0, answered = 0;
-  for (let i = 0; i < totalItems; i++) {
-    const v = data[`${storageKey}-${i}`];
-    if (typeof v === 'number') { sum += v; answered++ }
+  for (let i = 0; i < total; i++) {
+    if (typeof d[i] === 'number') {
+      sum += d[i];
+      answered++;
+    }
   }
-  return { sum, answered, total: totalItems };
+  return { sum, answered };
 }
 
-/* Rangos orientativos (no diagnósticos) */
-function rangoBDI(sum) {
-  if (sum <= 13) return 'Mínimo';
-  if (sum <= 19) return 'Leve';
-  if (sum <= 28) return 'Moderado';
-  return 'Severo';
-}
-function rangoBAI(sum) {
-  if (sum <= 7) return 'Mínimo';
-  if (sum <= 15) return 'Leve';
-  if (sum <= 25) return 'Moderado';
-  return 'Severo';
-}
+const rangoBDI = s => s <= 13 ? 'Mínimo' : s <= 19 ? 'Leve' : s <= 28 ? 'Moderado' : 'Severo';
+const rangoBAI = s => s <= 7 ? 'Mínimo' : s <= 15 ? 'Leve' : s <= 25 ? 'Moderado' : 'Severo';
 
-/* ===== UI resultado ===== */
-function showResult(elId, titulo, sum, rango) {
-  const el = $(elId);
-  el.innerHTML = `<strong>${titulo}</strong><span>Puntaje: ${sum} — Rango: ${rango}. Resultados orientativos; consulta a un profesional para interpretación.</span>`;
-}
-
-/* ===== Progreso en index ===== */
-function updateProgressBars() {
-  const bdi = calcScore('bdi', BDI_FULL.length);
-  const bai = calcScore('bai', BAI_FULL.length);
-  const pbdi = document.getElementById('prog-bdi');
-  const pbai = document.getElementById('prog-bai');
-  if (pbdi) pbdi.style.width = `${Math.round((bdi.answered / bdi.total) * 100)}%`;
-  if (pbai) pbai.style.width = `${Math.round((bai.answered / bai.total) * 100)}%`;
-  updateGamify(bdi, bai);
-}
-
-/* ===== Gamificación mínima ===== */
-function updateGamify(bdi, bai) {
-  const nivelEl = $('#nivel'); const rachaEl = $('#racha'); const insigniasEl = $('#insignias');
-  const completados = (bdi.answered === bdi.total) + (bai.answered === bai.total);
-  const nivel = 1 + completados + Math.floor((bdi.answered + bai.answered) / 10);
-  if (nivelEl) nivelEl.textContent = String(nivel);
-
-  // racha semanal
-  const last = readLocal('last-visit');
-  const today = new Date();
-  if (!last) {
-    saveLocal('last-visit', { d: todayISO(), streak: 1 });
-    if (rachaEl) rachaEl.textContent = '1';
-  } else {
-    const prev = new Date(last.d);
-    const diffDays = Math.floor((today - prev) / (1000 * 60 * 60 * 24));
-    const streak = diffDays <= 2 ? (last.streak + 1) : 1; // tolerancia 2 días
-    saveLocal('last-visit', { d: todayISO(), streak });
-    if (rachaEl) rachaEl.textContent = String(streak);
-  }
-
-  const badges = [];
-  if (bdi.answered === bdi.total) badges.push('BDI completado');
-  if (bai.answered === bai.total) badges.push('BAI completado');
-  insigniasEl && (insigniasEl.textContent = badges.length ? badges.join(' · ') : 'Sin insignias aún.');
-}
-
-/* ===== Envío a Google Sheets (Apps Script) ===== */
-async function sendToSheet(payload) {
-  try {
-    const res = await fetch(CONFIG.sheetEndpoint, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    const text = await res.text();   // <-- ver respuesta cruda
-    console.log("Respuesta cruda del GAS:", text);
-    const data = JSON.parse(text);
-    return data;
-  } catch (err) {
-    console.error('Error enviando a Sheets', err);
-    return { ok: false, error: String(err) };
-  }
-}
-
-/* ===== Página: BAI ===== */
-function initBAI() {
-  fillAlumnoFields();
-  renderList('#bai-list', BAI_FULL, 'bai');
-
-/*   document.getElementById('calcular-bai')?.addEventListener('click', () => { */
-    const r = calcScore('bai', BAI_FULL.length);
-    showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
-  });
-
-  document.getElementById('guardar-bai')?.addEventListener('click', async () => {
-    const r = calcScore('bai', BAI_FULL.length);
-    const payload = {
-      proyecto: CONFIG.proyecto,
-      version: CONFIG.version,
-      test: 'BAI',
-      timestamp: todayISO(),
-      puntaje: r.sum,
-      rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai') || {},
-      alumno: alumnoData(),
-      token: SECRET
-    };
-    const resp = await sendToSheet(payload);
-    console.log("Respuesta GAS BAI:", resp);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
-  });
-
-  document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_FULL, 'bai');
-    document.getElementById('resultado-bai').innerHTML = '';
-    updateProgressBars();
-  });
-}
-
-/* ===== Página: Index ===== */
-function initIndex() {
-  $('#reset-bdi')?.addEventListener('click', () => {
-    localStorage.removeItem('bdi'); updateProgressBars();
-  });
-  $('#reset-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai'); updateProgressBars();
-  });
-  updateProgressBars();
-}
-
-/* ===== Bootstrap según página ===== */
-document.addEventListener('DOMContentLoaded', () => {
-  const path = location.pathname.toLowerCase();
-  if (path.endsWith('beck-depresion.html')) initBDI();
-  else if (path.endsWith('beck-ansiedad.html')) initBAI();
-  else initIndex();
-});
-
-function fillAlumnoFields() {
-  const fh = document.getElementById('al-fecha');
-  const d = new Date();
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  const fechaFormateada = `${dd}/${mm}/${yyyy}`;
-  if (fh) fh.textContent = fechaFormateada;
-}
-
+/* ================= ALUMNO ================= */
 function alumnoData() {
+  const edad = Number($('#edad')?.value);
+
+  if (edad < 12 || edad > 16) {
+    alert('La edad debe estar entre 12 y 16 años');
+    return null;
+  }
+
   return {
-    fecha: document.getElementById('al-fecha')?.textContent || todayISO(),
-    nombre_completo: document.getElementById('al-nombre')?.value || '',
-    edad: Number(document.getElementById('edad')?.value) || null,
-    grado_grupo: document.getElementById('al-grado')?.value || ''
+    fecha: $('#al-fecha')?.textContent || todayISO(),
+    nombre: $('#al-nombre')?.value || '',
+    edad,
+    grupo: $('#al-grado')?.value || ''
   };
 }
 
-/* En initBDI y initBAI, llama fillAlumnoFields() */
+/* ================= SEND ================= */
+async function sendToSheet(payload) {
+  const res = await fetch(CONFIG.sheetEndpoint, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+  return JSON.parse(await res.text());
+}
+
+/* ================= INIT BDI ================= */
 function initBDI() {
-  fillAlumnoFields();
   renderList('#bdi-list', BDI_FULL, 'bdi');
 
-  document.getElementById('calcular-bdi')?.addEventListener('click', () => {
-    const r = calcScore('bdi', BDI_FULL.length);
-    showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
-  });
+  $('#guardar-bdi')?.addEventListener('click', async () => {
+    const alumno = alumnoData();
+    if (!alumno) return;
 
-  document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
     const r = calcScore('bdi', BDI_FULL.length);
+
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -463,34 +311,26 @@ function initBDI() {
       timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBDI(r.sum),
-      respuestas: readLocal('bdi') || {},
-      alumno: alumnoData(),
+      respuestas: readLocal('bdi'),
+      alumno,
       token: SECRET
     };
-    const resp = await sendToSheet(payload);
-    console.log("Respuesta GAS BDI:", resp);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
-  });
 
-  document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
-    localStorage.removeItem('bdi');
-    renderList('#bdi-list', BDI_FULL, 'bdi');
-    document.getElementById('resultado-bdi').innerHTML = '';
-    updateProgressBars();
+    const resp = await sendToSheet(payload);
+    alert(resp.ok ? 'BDI guardado' : 'Error al guardar');
   });
 }
 
+/* ================= INIT BAI ================= */
 function initBAI() {
-  fillAlumnoFields();
   renderList('#bai-list', BAI_FULL, 'bai');
 
-/*   document.getElementById('calcular-bai')?.addEventListener('click', () => { */
-    const r = calcScore('bai', BAI_FULL.length);
-    showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
-  });
+  $('#guardar-bai')?.addEventListener('click', async () => {
+    const alumno = alumnoData();
+    if (!alumno) return;
 
-  document.getElementById('guardar-bai')?.addEventListener('click', async () => {
     const r = calcScore('bai', BAI_FULL.length);
+
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -498,75 +338,19 @@ function initBAI() {
       timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai') || {},
-      alumno: alumnoData(),
+      respuestas: readLocal('bai'),
+      alumno,
       token: SECRET
     };
-    const resp = await sendToSheet(payload);
-    console.log("Respuesta GAS BAI:", resp);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
-  });
 
-  document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_FULL, 'bai');
-    document.getElementById('resultado-bai').innerHTML = '';
-    updateProgressBars();
+    const resp = await sendToSheet(payload);
+    alert(resp.ok ? 'BAI guardado' : 'Error al guardar');
   });
 }
 
-const formBAI = document.getElementById('form-bai');
-
-formBAI?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  if (!formBAI.checkValidity()) {
-    formBAI.reportValidity();
-    return;
-  }
-
-  const r = calcScore('bai', BAI_FULL.length);
-
-  const payload = {
-    proyecto: CONFIG.proyecto,
-    version: CONFIG.version,
-    test: 'BAI',
-    timestamp: todayISO(),
-    puntaje: r.sum,
-    rango: rangoBAI(r.sum),
-    respuestas: readLocal('bai') || {},
-    alumno: alumnoData(),
-    token: SECRET
-  };
-
-  const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado' : 'Error al guardar');
-});
-
-const formBDI = document.getElementById('form-bdi');
-
-formBDI?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  if (!formBDI.checkValidity()) {
-    formBDI.reportValidity();
-    return;
-  }
-
-  const r = calcScore('bdi', BDI_FULL.length);
-
-  const payload = {
-    proyecto: CONFIG.proyecto,
-    version: CONFIG.version,
-    test: 'BDI',
-    timestamp: todayISO(),
-    puntaje: r.sum,
-    rango: rangoBAI(r.sum),
-    respuestas: readLocal('bdi') || {},
-    alumno: alumnoData(),
-    token: SECRET
-  };
-
-  const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado' : 'Error al guardar');
+/* ================= BOOT ================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const p = location.pathname.toLowerCase();
+  if (p.includes('depresion')) initBDI();
+  if (p.includes('ansiedad')) initBAI();
 });
