@@ -480,41 +480,6 @@ function initBDI() {
   });
 }
 
-function initBAI() {
-  fillAlumnoFields();
-  renderList('#bai-list', BAI_FULL, 'bai');
-
-  document.getElementById('calcular-bai')?.addEventListener('click', () => {
-    const r = calcScore('bai', BAI_FULL.length);
-    showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
-  });
-
-  document.getElementById('guardar-bai')?.addEventListener('click', async () => {
-    const r = calcScore('bai', BAI_FULL.length);
-    const payload = {
-      proyecto: CONFIG.proyecto,
-      version: CONFIG.version,
-      test: 'BAI',
-      timestamp: todayISO(),
-      puntaje: r.sum,
-      rango: rangoBAI(r.sum),
-      respuestas: readLocal('bai') || {},
-      alumno: alumnoData(),
-      token: SECRET
-    };
-    const resp = await sendToSheet(payload);
-    console.log("Respuesta GAS BAI:", resp);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
-  });
-
-  document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai');
-    renderList('#bai-list', BAI_FULL, 'bai');
-    document.getElementById('resultado-bai').innerHTML = '';
-    updateProgressBars();
-  });
-}
-
 const formBAI = document.getElementById('form-bai');
 
 formBAI?.addEventListener('submit', async (e) => {
