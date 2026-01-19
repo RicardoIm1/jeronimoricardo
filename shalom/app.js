@@ -47,10 +47,29 @@ const BDI_ITEMS = [ /* === TAL CUAL LOS PUSISTE === */
 /* =============================
    ÍTEMS BAI
 ============================= */
-const BAI_ITEMS = Array.from({ length: 21 }, (_, i) => ({
-  q: `${i + 1}`,
-  opts: ['0 No', '1 Leve', '2 Moderado', '3 Bastante']
-}));
+const BAI_ITEMS = [
+  { q: 'Entumecimiento u hormigueo', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Sensación de calor', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Temblor en las piernas', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Incapacidad para relajarse', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Miedo a que ocurra lo peor', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Mareo o aturdimiento', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Latidos acelerados', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Inestabilidad', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Sensación de terror', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Nerviosismo', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Sensación de ahogo', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Manos temblorosas', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Temblor generalizado', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Miedo a perder el control', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Dificultad para respirar', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Miedo a morir', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Sensación de miedo', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Indigestión o malestar abdominal', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Sensación de desmayo', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Rubor facial', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] },
+  { q: 'Sudoración', opts: ['0 Nada', '1 Leve', '2 Moderado', '3 Severo'] }
+];
 
 /* =============================
    RENDER
