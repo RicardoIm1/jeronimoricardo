@@ -520,13 +520,18 @@ formBDI?.addEventListener('submit', async (e) => {
 
   const r = calcScore('bdi', BDI_FULL.length);
 
+  if (r.answered !== r.total) {
+    alert('Debes responder todas las preguntas');
+    return;
+  }
+
   const payload = {
     proyecto: CONFIG.proyecto,
     version: CONFIG.version,
     test: 'BDI',
     timestamp: todayISO(),
     puntaje: r.sum,
-    rango: rangoBAI(r.sum),
+    rango: rangoBDI(r.sum),
     respuestas: readLocal('bdi') || {},
     alumno: alumnoData(),
     token: SECRET
