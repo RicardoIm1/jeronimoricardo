@@ -1,6 +1,6 @@
 /* ================= CONFIG ================= */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbyrd8ZYWj24MHlVcJV2UhmQx3igSM6cx4qgAmZngBAWG_RdTZS-9XQuXArqierxYuqQFA/exec',
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbwh5aXMq81pccdOfU42cp5b8EKWGngQUkfUN9Th6DtdOmccNlQ0R63Rz3dqxP95KWBF-A/exec',
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
@@ -288,6 +288,7 @@ function alumnoData() {
 /* ================= SEND ================= */
 async function sendToSheet(payload) {
   console.log(JSON.stringify(payload, null, 2));
+
   const res = await fetch(CONFIG.sheetEndpoint, {
     method: 'POST',
     body: JSON.stringify(payload)
