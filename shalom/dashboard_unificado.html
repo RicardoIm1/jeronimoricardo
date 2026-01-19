@@ -602,6 +602,46 @@
       options: barOptionsCompact
     });
 
+    // Radar BDI
+    const itemsBDI = Object.keys(filtered[0]).filter(k => /^[0-9]+ /.test(k));
+    const dataItemsBDI = itemsBDI.map(i => {
+      const vals = filtered.map(d => Number(d[i] || 0));
+      const suma = vals.reduce((a, b) => a + b, 0);
+      return vals.length > 0 ? (suma / vals.length).toFixed(1) : 0;
+    });
+    graficoItemsBDI.data.labels = itemsBDI;
+    graficoItemsBDI.data.datasets[0].data = dataItemsBDI;
+    graficoItemsBDI.update();
+
+    // Radar BAI
+    const itemsBAI = Object.keys(filtered[0]).filter(k => /^[0-9]+ /.test(k));
+    const dataItemsBAI = itemsBAI.map(i => {
+      const vals = filtered.map(d => Number(d[i] || 0));
+      const suma = vals.reduce((a, b) => a + b, 0);
+      return vals.length > 0 ? (suma / vals.length).toFixed(1) : 0;
+    });
+    graficoItemsBAI.data.labels = itemsBAI;
+    graficoItemsBAI.data.datasets[0].data = dataItemsBAI;
+    graficoItemsBAI.update();
+
+    // BDI
+    const rangosBDI = { Mínimo: 0, Leve: 0, Moderado: 0, Grave: 0 };
+    filtered.forEach(d => { const r = d['rango'] || 'Mínimo'; if (rangosBDI[r] !== undefined) rangosBDI[r]++; });
+    graficoRangosBDI.data.datasets[0].data = Object.values(rangosBDI);
+    graficoRangosBDI.update();
+
+    // BAI
+    const nivelesBAI = {};
+    filtered.forEach(d => { const n = d['rango'] || 'Baja'; nivelesBAI[n] = (nivelesBAI[n] || 0) + 1; });
+    graficoNivelesBAI.data.labels = Object.keys(nivelesBAI);
+    graficoNivelesBAI.data.datasets[0].data = Object.values(nivelesBAI);
+    graficoNivelesBAI.data.datasets[0].backgroundColor = Object.keys(nivelesBAI).map(k => {
+      if (k.includes('Alta') || k.includes('Grave')) return '#e74c3c';
+      if (k.includes('Moderada') || k.includes('Leve')) return '#f1c40f';
+      return '#2ecc71';
+    });
+    graficoNivelesBAI.update();
+
   </script>
 </body>
 
