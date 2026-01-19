@@ -122,13 +122,28 @@ const rangoBAI = s => s <= 7 ? 'Mínimo' : s <= 15 ? 'Leve' : s <= 25 ? 'Moderad
 /* =============================
    ENVÍO (CORS SAFE)
 ============================= */
-function sendToSheet(payload) {
-  fetch(CONFIG.sheetEndpoint, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: JSON.stringify(payload)
-  });
+async function sendToSheet(payload) {
+  try {
+    console.log('📤 Enviando payload:', payload);
+
+    await fetch('https://script.google.com/macros/s/AKfycbyDw9N6FLIlCDAfzuhLZBp6r66pHZOl5waUysdHYNBGYk5v_MGi71kJWPmTM8-3RdYNNA/exec', {
+      method: 'POST',
+      mode: 'no-cors',   // ← CLAVE
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    console.log('✅ Enviado correctamente (no-cors)');
+    alert('Respuestas guardadas correctamente');
+
+  } catch (err) {
+    console.error('❌ Error enviando a Sheets:', err);
+    alert('Error al guardar respuestas');
+  }
 }
+
 
 /* =============================
    ALUMNO
