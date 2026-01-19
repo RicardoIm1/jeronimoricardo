@@ -375,7 +375,7 @@ function initBAI() {
   fillAlumnoFields();
   renderList('#bai-list', BAI_FULL, 'bai');
 
-  document.getElementById('calcular-bai')?.addEventListener('click', () => {
+/*   document.getElementById('calcular-bai')?.addEventListener('click', () => { */
     const r = calcScore('bai', BAI_FULL.length);
     showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
   });
@@ -484,7 +484,7 @@ function initBAI() {
   fillAlumnoFields();
   renderList('#bai-list', BAI_FULL, 'bai');
 
-  document.getElementById('calcular-bai')?.addEventListener('click', () => {
+/*   document.getElementById('calcular-bai')?.addEventListener('click', () => { */
     const r = calcScore('bai', BAI_FULL.length);
     showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
   });
