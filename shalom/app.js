@@ -452,7 +452,7 @@ function alumnoData() {
   return {
     fecha: document.getElementById('al-fecha')?.textContent || todayISO(),
     nombre_completo: document.getElementById('al-nombre')?.value || '',
-    edad: document.getElementById('al-edad')?.value || '',
+    edad: Number(document.getElementById('edad')?.value) || null,
     grado_grupo: document.getElementById('al-grado')?.value || ''
   };
 }
