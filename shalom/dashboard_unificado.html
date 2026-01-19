@@ -28,6 +28,46 @@ select { padding:6px 10px; border-radius:6px; border:1px solid #ccc; margin-bott
 .alert.medium { background:#f1c40f; color:#333; }
 .alert.low { background:#2ecc71; }
 </style>
+<style>
+body { font-family: Arial, sans-serif; margin:0; background:#f0f4f8; font-size:13px; }
+h1 { text-align:center; padding:15px 0; font-size:20px; color:#333; }
+
+.tabs { display:flex; justify-content:center; margin-bottom:8px; flex-wrap:wrap; gap:4px; }
+.tab { padding:6px 12px; cursor:pointer; background:#ddd; border-radius:10px 10px 0 0; font-weight:bold; font-size:13px; transition:.3s; }
+.tab.active { background:#4a90e2; color:white; }
+
+.tab-content { display:none; padding:10px; }
+.tab-content.active { display:block; }
+
+.kpi { display:flex; flex-wrap:wrap; justify-content:space-around; margin:10px 0; gap:6px; }
+.kpi div { background:#fff; padding:10px; border-radius:10px; box-shadow:0 1px 4px rgba(0,0,0,0.1); text-align:center; flex:1 1 120px; min-width:120px; font-size:12px; }
+.kpi h2 { font-size:16px; margin:4px 0; }
+
+.graph-row { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px; }
+canvas { background:#fff; border-radius:10px; padding:8px; box-shadow:0 1px 4px rgba(0,0,0,0.1); flex:1 1 45%; min-width:200px; height:220px; }
+
+table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1); margin-top:10px; font-size:11px; }
+th, td { padding:4px; text-align:center; border-bottom:1px solid #eee; }
+th { background:#4a90e2; color:white; font-size:11px; }
+
+select { padding:5px 8px; border-radius:6px; border:1px solid #ccc; margin-bottom:10px; font-size:12px; }
+
+.alert-zone { margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; }
+.alert { flex:1 1 120px; padding:8px; border-radius:8px; color:white; font-size:11px; box-shadow:0 1px 4px rgba(0,0,0,0.15); }
+.alert.high { background:#e74c3c; }
+.alert.medium { background:#f1c40f; color:#333; }
+.alert.low { background:#2ecc71; }
+
+/* ======= MEDIA QUERIES ======= */
+@media (max-width:900px){
+  .graph-row { flex-direction:column; }
+  canvas { flex:1 1 100%; min-width:100%; height:200px; }
+  .kpi { flex-direction:column; align-items:center; }
+  .kpi div { flex:1 1 90%; max-width:300px; }
+  select { width:90%; }
+}
+</style>
+
 
 </head>
 <body>
