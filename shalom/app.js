@@ -354,19 +354,6 @@ function updateGamify(bdi, bai) {
 }
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
-/* async function sendToSheet(payload){
-  try {
-    const res = await fetch(CONFIG.sheetEndpoint, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    return data;
-  } catch(err){
-    console.error('Error enviando a Sheets', err);
-    return { ok: false, error: String(err) };
-  }
-} */
 async function sendToSheet(payload) {
   try {
     const res = await fetch(CONFIG.sheetEndpoint, {
@@ -469,16 +456,16 @@ function initBDI() {
 
   document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
     const r = calcScore('bdi', BDI_FULL.length);
-    const payload = { 
-      proyecto: CONFIG.proyecto, 
-      version: CONFIG.version, 
-      test: 'BDI', 
-      timestamp: todayISO(), 
-      puntaje: r.sum, 
-      rango: rangoBDI(r.sum), 
-      respuestas: readLocal('bdi') || {}, 
-      alumno: alumnoData(), 
-      token: SECRET 
+    const payload = {
+      proyecto: CONFIG.proyecto,
+      version: CONFIG.version,
+      test: 'BDI',
+      timestamp: todayISO(),
+      puntaje: r.sum,
+      rango: rangoBDI(r.sum),
+      respuestas: readLocal('bdi') || {},
+      alumno: alumnoData(),
+      token: SECRET
     };
     const resp = await sendToSheet(payload);
     console.log("Respuesta GAS BDI:", resp);
@@ -527,3 +514,59 @@ function initBAI() {
     updateProgressBars();
   });
 }
+
+const formBAI = document.getElementById('form-bai');
+
+formBAI?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if (!formBAI.checkValidity()) {
+    formBAI.reportValidity();
+    return;
+  }
+
+  const r = calcScore('bai', BAI_FULL.length);
+
+  const payload = {
+    proyecto: CONFIG.proyecto,
+    version: CONFIG.version,
+    test: 'BAI',
+    timestamp: todayISO(),
+    puntaje: r.sum,
+    rango: rangoBAI(r.sum),
+    respuestas: readLocal('bai') || {},
+    alumno: alumnoData(),
+    token: SECRET
+  };
+
+  const resp = await sendToSheet(payload);
+  alert(resp.ok ? 'Guardado' : 'Error al guardar');
+});
+
+const formBDI = document.getElementById('form-bdi');
+
+formBDI?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if (!formBDI.checkValidity()) {
+    formBDI.reportValidity();
+    return;
+  }
+
+  const r = calcScore('bdi', BDI_FULL.length);
+
+  const payload = {
+    proyecto: CONFIG.proyecto,
+    version: CONFIG.version,
+    test: 'BDI',
+    timestamp: todayISO(),
+    puntaje: r.sum,
+    rango: rangoBAI(r.sum),
+    respuestas: readLocal('bdi') || {},
+    alumno: alumnoData(),
+    token: SECRET
+  };
+
+  const resp = await sendToSheet(payload);
+  alert(resp.ok ? 'Guardado' : 'Error al guardar');
+});
