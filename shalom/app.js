@@ -355,13 +355,12 @@ function updateGamify(bdi, bai) {
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
 function sendToSheet(payload) {
-  fetch('https://script.google.com/macros/s/AKfycbyDw9N6FLIlCDAfzuhLZBp6r66pHZOl5waUysdHYNBGYk5v_MGi71kJWPmTM8-3RdYNNA/exec', {
+  fetch(CONFIG.sheetEndpoint, {
     method: 'POST',
     mode: 'no-cors',
     body: JSON.stringify(payload)
   });
 }
-
 
 /* ===== Página: BDI ===== */
 function initBDI() {
@@ -370,8 +369,9 @@ function initBDI() {
     const r = calcScore('bdi', BDI_ITEMS.length);
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
-  $('#guardar-bdi')?.addEventListener('click', async () => {
+  $('#guardar-bdi')?.addEventListener('click', () => {
     const r = calcScore('bdi', BDI_ITEMS.length);
+
     const payload = {
       proyecto: CONFIG.proyecto,
       version: CONFIG.version,
@@ -381,12 +381,13 @@ function initBDI() {
       rango: rangoBDI(r.sum),
       respuestas: readLocal('bdi'),
       alumno: alumnoData(),
-      token: SECRET   // SIEMPRE
+      token: SECRET
     };
 
-    const resp = await sendToSheet(payload);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
+    sendToSheet(payload);
+    alert('Resultados enviados correctamente.');
   });
+
   $('#reiniciar-bdi')?.addEventListener('click', () => {
     localStorage.removeItem('bdi');
     renderList('#bdi-list', BDI_ITEMS, 'bdi');
@@ -406,72 +407,70 @@ function initBAI() {
   });
 
   document.getElementById('guardar-bai')?.addEventListener('click', async () => {
-  const r = calcScore('bai', BAI_ITEMS.length);
-  const payload = {
-    proyecto: CONFIG.proyecto,
-    version: CONFIG.version,
-    test: 'BAI',
-    timestamp: todayISO(),
-    puntaje: r.sum,
-    rango: rangoBAI(r.sum),
-    respuestas: readLocal('bai'),
-    alumno: alumnoData(),
-    token: SECRET
-  };
+    const r = calcScore('bai', BAI_ITEMS.length);
+    const payload = {
+      proyecto: CONFIG.proyecto,
+      version: CONFIG.version,
+      test: 'BAI',
+      timestamp: todayISO(),
+      puntaje: r.sum,
+      rango: rangoBAI(r.sum),
+      respuestas: readLocal('bai'),
+      alumno: alumnoData(),
+      token: SECRET
+    };
 
-  const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar');
-});
+    sendToSheet(payload);
+    alert('Resultados enviados correctamente.');
 
-document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
-  localStorage.removeItem('bai');
-  renderList('#bai-list', BAI_ITEMS, 'bai');
-  document.getElementById('resultado-bai').innerHTML = '';
-  updateProgressBars();
-});
-}
+    document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
+      localStorage.removeItem('bai');
+      renderList('#bai-list', BAI_ITEMS, 'bai');
+      document.getElementById('resultado-bai').innerHTML = '';
+      updateProgressBars();
+    });
 
-/* ===== Página: Index ===== */
-function initIndex() {
-  $('#reset-bdi')?.addEventListener('click', () => {
-    localStorage.removeItem('bdi'); updateProgressBars();
-  });
-  $('#reset-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai'); updateProgressBars();
-  });
-  updateProgressBars();
-}
+    /* ===== Página: Index ===== */
+    function initIndex() {
+      $('#reset-bdi')?.addEventListener('click', () => {
+        localStorage.removeItem('bdi'); updateProgressBars();
+      });
+      $('#reset-bai')?.addEventListener('click', () => {
+        localStorage.removeItem('bai'); updateProgressBars();
+      });
+      updateProgressBars();
+    }
 
-/* ===== Bootstrap según página ===== */
-document.addEventListener('DOMContentLoaded', () => {
-  const path = location.pathname.toLowerCase();
-  if (path.endsWith('beck-depresion.html')) initBDI();
-  else if (path.endsWith('beck-ansiedad.html')) initBAI();
-  else initIndex();
-});
+    /* ===== Bootstrap según página ===== */
+    document.addEventListener('DOMContentLoaded', () => {
+      const path = location.pathname.toLowerCase();
+      if (path.endsWith('beck-depresion.html')) initBDI();
+      else if (path.endsWith('beck-ansiedad.html')) initBAI();
+      else initIndex();
+    });
 
-function fillAlumnoFields() {
-  const fh = document.getElementById('al-fecha');
-  const d = new Date();
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  const fechaFormateada = `${dd}/${mm}/${yyyy}`;
-  if (fh) fh.textContent = fechaFormateada;
-}
+    function fillAlumnoFields() {
+      const fh = document.getElementById('al-fecha');
+      const d = new Date();
+      const dd = String(d.getDate()).padStart(2, '0');
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      const fechaFormateada = `${dd}/${mm}/${yyyy}`;
+      if (fh) fh.textContent = fechaFormateada;
+    }
 
-function alumnoData() {
-  return {
-    fecha_hoy: document.getElementById('al-fecha')?.textContent || '',
-    nombre_completo: document.getElementById('al-nombre')?.value || '',
-    edad: document.getElementById('al-edad')?.value || '',
-    grado_grupo: document.getElementById('al-grado')?.value || ''
-  };
-}
+    function alumnoData() {
+      return {
+        fecha_hoy: document.getElementById('al-fecha')?.textContent || '',
+        nombre_completo: document.getElementById('al-nombre')?.value || '',
+        edad: document.getElementById('al-edad')?.value || '',
+        grado_grupo: document.getElementById('al-grado')?.value || ''
+      };
+    }
 
-  document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
-    localStorage.removeItem('bdi');
-    renderList('#bdi-list', BDI_ITEMS, 'bdi');
-    document.getElementById('resultado-bdi').innerHTML = '';
-    updateProgressBars();
-  });
+    document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
+      localStorage.removeItem('bdi');
+      renderList('#bdi-list', BDI_ITEMS, 'bdi');
+      document.getElementById('resultado-bdi').innerHTML = '';
+      updateProgressBars();
+    });
