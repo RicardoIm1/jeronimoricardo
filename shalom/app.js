@@ -354,25 +354,14 @@ function updateGamify(bdi, bai) {
 }
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
-async function sendToSheet(payload) {
-  try {
-    const res = await fetch(CONFIG.sheetEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const text = await res.text();
-    console.log('Respuesta GAS:', text);
-    return JSON.parse(text);
-
-  } catch (err) {
-    console.error('Error enviando a Sheets', err);
-    return { ok: false, error: String(err) };
-  }
+function sendToSheet(payload) {
+  fetch('https://script.google.com/macros/s/AKfycbyDw9N6FLIlCDAfzuhLZBp6r66pHZOl5waUysdHYNBGYk5v_MGi71kJWPmTM8-3RdYNNA/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify(payload)
+  });
 }
+
 
 /* ===== Página: BDI ===== */
 function initBDI() {
