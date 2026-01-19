@@ -341,3 +341,23 @@ h3 {
 .toast.error {
   background: linear-gradient(135deg, #b91c1c, #ef4444);
 }
+
+/* Inputs y selects más altos y con texto más grande */
+input[type="text"],
+input[type="number"],
+select {
+  height: 50px;           /* aumenta la altura */
+  font-size: 1.2rem;      /* texto más grande */
+  padding: 0 12px;        /* espacio interno horizontal */
+  border-radius: 8px;     /* bordes suaves */
+  border: 1px solid #ccc; /* borde claro */
+  box-sizing: border-box; /* asegura que padding no aumente el tamaño total */
+}
+
+/* Opcional: enfoque visual más claro */
+input:focus,
+select:focus {
+  border-color: #007bff;  /* borde azul al enfocar */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
