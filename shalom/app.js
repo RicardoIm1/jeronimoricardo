@@ -383,42 +383,6 @@ async function sendToSheet(payload) {
   }
 }
 
-
-/* ===== Página: BDI ===== */
-function initBDI() {
-  fillAlumnoFields();
-  renderList('#bdi-list', BDI_FULL, 'bdi');
-
-  document.getElementById('calcular-bdi')?.addEventListener('click', () => {
-    const r = calcScore('bdi', BDI_FULL.length);
-    showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
-  });
-
-  document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
-    const r = calcScore('bdi', BDI_FULL.length);
-    const payload = { 
-      proyecto: CONFIG.proyecto, 
-      version: CONFIG.version, 
-      test: 'BDI', 
-      timestamp: todayISO(), 
-      puntaje: r.sum, 
-      rango: rangoBDI(r.sum), 
-      respuestas: readLocal('bdi') || {}, 
-      alumno: alumnoData(), 
-      token: SECRET };
-    const resp = await sendToSheet(payload);
-    console.log("Respuesta GAS BDI:", resp);
-    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
-  });
-
-  document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
-    localStorage.removeItem('bdi');
-    renderList('#bdi-list', BDI_FULL, 'bdi');
-    document.getElementById('resultado-bdi').innerHTML = '';
-    updateProgressBars();
-  });
-}
-
 /* ===== Página: BAI ===== */
 function initBAI() {
   fillAlumnoFields();
