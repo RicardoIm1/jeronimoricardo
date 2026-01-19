@@ -6,6 +6,31 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <title>BDI — Test de Depresión de Beck</title>
   <link rel='stylesheet' href='app.css'>
+  <style>
+    /* Ajuste para mantener el footer al fondo */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main.container {
+      flex: 1;
+      /* ocupa todo el espacio disponible */
+    }
+
+    footer.foot {
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      /* centra horizontalmente */
+      align-items: center;
+      /* centra verticalmente si hay más altura */
+      padding: 1rem;
+    }
+  </style>
 </head>
 
 <body>
