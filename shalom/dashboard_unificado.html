@@ -214,8 +214,8 @@
       key: URL_SHEET,
       simpleSheet: false,
       callback: function(tables, tabletop){
-        dataBDI = tables['BDI'].elements;
-        dataBAI = tables['BAI'].elements;
+        dataBDI = tables['Respuestas_BDI'].elements;
+        dataBAI = tables['Respuestas_BAI'].elements;
 
         // Rellenar filtro de grupo
         const gruposSet = new Set(dataBDI.map(d=>d['Grado/Grupo']).concat(dataBAI.map(d=>d['Grado/Grupo'])));
