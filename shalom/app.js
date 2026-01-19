@@ -1,14 +1,10 @@
 /* ===== Configuración ===== */
-/* const CONFIG = {
+const CONFIG = {
   sheetEndpoint: 'https://script.google.com/macros/s/AKfycbyDw9N6FLIlCDAfzuhLZBp6r66pHZOl5waUysdHYNBGYk5v_MGi71kJWPmTM8-3RdYNNA/exec',
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
-}; */
-fetch('https://script.google.com/macros/s/AKfycbxHOxIhQYhBfnD-h1tY2aDzshyrHKDhC85ZrumlFiGGKDwP9smOqxwZpHZWUwXWUWHJDQ/exec', {
-  method: 'POST',
-  mode: 'no-cors',
-  body: JSON.stringify(payload)
-});
+};
+
 
 const SECRET = 'clave123';
 const payload = { test: 'BDI', puntaje: 12, token: SECRET };
