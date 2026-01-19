@@ -1,6 +1,6 @@
 /* ================= CONFIG ================= */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxPhKK77YK0A-4ifWsBiJ3Z-hWeZkgaM3mGXhRw2e8hvcLbZoSdC2oyB1azcfqHt8CStw/exec',
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbyrd8ZYWj24MHlVcJV2UhmQx3igSM6cx4qgAmZngBAWG_RdTZS-9XQuXArqierxYuqQFA/exec',
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
