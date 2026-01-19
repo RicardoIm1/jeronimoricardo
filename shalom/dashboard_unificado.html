@@ -38,7 +38,6 @@ select { padding:8px 12px; border-radius:8px; border:1px solid #ccc; margin-bott
   </select>
 </div>
 
-<!-- Contenido BDI -->
 <div class="tab-content active" id="bdi">
   <div class="kpi">
     <div><h2 id="totalEncuestasBDI">0</h2><p>Total de encuestas</p></div>
@@ -62,7 +61,6 @@ select { padding:8px 12px; border-radius:8px; border:1px solid #ccc; margin-bott
   </table>
 </div>
 
-<!-- Contenido BAI -->
 <div class="tab-content" id="bai">
   <div class="kpi">
     <div><h2 id="totalEncuestasBAI">0</h2><p>Total de encuestas</p></div>
@@ -87,8 +85,8 @@ select { padding:8px 12px; border-radius:8px; border:1px solid #ccc; margin-bott
 </div>
 
 <script>
-const SHEET_ID = '18OWcwGddwymRwmCVDa-MtN3iuFd5ST9o9s5Us3hMtzk'; // ID de tu Sheet
-const HOJAS = { BDI: 'BDI', BAI: 'BAI' }; // nombres exactos de las hojas
+const SHEET_ID = '18OWcwGddwymRwmCVDa-MtN3iuFd5ST9o9s5Us3hMtzk';
+const HOJAS = { BDI: 'BDI', BAI: 'BAI' };
 
 let dataBDI = [], dataBAI = [];
 
@@ -109,7 +107,7 @@ document.getElementById('filtroGrupo').addEventListener('change', ()=>{
   renderBAI(g);
 });
 
-// Función para obtener datos desde Google Sheets API
+// Obtener datos desde Sheets
 async function obtenerDatos(hoja){
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${hoja}`;
   const resp = await fetch(url);
@@ -118,7 +116,7 @@ async function obtenerDatos(hoja){
   const rows = json.table.rows.map(r=>{
     const obj = {};
     r.c.forEach((cell,i)=>{
-      obj[json.table.cols[i].label] = cell && cell.v ? cell.v : '';
+      obj[json.table.cols[i].label] = (cell && cell.v != null) ? cell.v : 0;
     });
     return obj;
   });
@@ -131,7 +129,7 @@ async function init(){
   dataBAI = await obtenerDatos(HOJAS.BAI);
 
   // Llenar select de grupos
-  const gruposSet = new Set(dataBDI.map(d=>d['Grado/Grupo']).concat(dataBAI.map(d=>d['Grado/Grupo'])));
+  const gruposSet = new Set(dataBDI.map(d=>d['grado_grupo']).concat(dataBAI.map(d=>d['grado_grupo'])));
   gruposSet.forEach(g=>{
     const opt = document.createElement('option'); opt.value=g; opt.textContent=g;
     document.getElementById('filtroGrupo').appendChild(opt);
@@ -152,20 +150,20 @@ const graficoItemsBAI = new Chart(document.getElementById('graficoItemsBAI'), {t
 // Render BDI
 function renderBDI(filtro="Todos"){
   if(!dataBDI.length) return;
-  const filtered = filtro==="Todos"?dataBDI:dataBDI.filter(d=>d['Grado/Grupo']===filtro);
+  const filtered = filtro==="Todos"?dataBDI:dataBDI.filter(d=>d['grado_grupo']===filtro);
   const total = filtered.length;
-  const suma = filtered.reduce((a,b)=>a + Number(b['Puntaje Total']||0),0);
+  const suma = filtered.reduce((a,b)=>a + Number(b['puntaje']||0),0);
   const promedio = total>0 ? (suma/total).toFixed(1) : 0;
   document.getElementById('totalEncuestasBDI').innerText = total;
   document.getElementById('promedioPuntajeBDI').innerText = promedio;
 
   // Rangos
   const rangos = {Mínimo:0,Leve:0,Moderado:0,Grave:0};
-  filtered.forEach(d=>{ const r=d['Rango']||'Mínimo'; if(rangos[r]!==undefined) rangos[r]++; });
+  filtered.forEach(d=>{ const r=d['rango']||'Mínimo'; if(rangos[r]!==undefined) rangos[r]++; });
   graficoRangosBDI.data.datasets[0].data = Object.values(rangos); graficoRangosBDI.update();
 
   // Items
-  const items = Object.keys(filtered[0]).filter(k=>k.startsWith('Pregunta'));
+  const items = Object.keys(filtered[0]).filter(k=> /^[0-9]+ /.test(k));
   graficoItemsBDI.data.labels = items;
   graficoItemsBDI.data.datasets[0].data = items.map(i=>{
     const vals = filtered.map(d=>Number(d[i]||0));
@@ -177,10 +175,10 @@ function renderBDI(filtro="Todos"){
   // Tabla
   const gruposData = {};
   filtered.forEach(d=>{
-    const g=d['Grado/Grupo']||'Sin grupo';
+    const g=d['grado_grupo']||'Sin grupo';
     if(!gruposData[g]) gruposData[g]={alumnos:0,puntaje:0,rangos:{Mínimo:0,Leve:0,Moderado:0,Grave:0}};
-    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['Puntaje Total']||0);
-    gruposData[g].rangos[d['Rango']||'Mínimo']++;
+    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['puntaje']||0);
+    gruposData[g].rangos[d['rango']||'Mínimo']++;
   });
   const tbody = document.querySelector('#tablaResumenBDI tbody'); tbody.innerHTML='';
   Object.entries(gruposData).forEach(([g,v])=>{
@@ -194,20 +192,20 @@ function renderBDI(filtro="Todos"){
 // Render BAI
 function renderBAI(filtro="Todos"){
   if(!dataBAI.length) return;
-  const filtered = filtro==="Todos"?dataBAI:dataBAI.filter(d=>d['Grado/Grupo']===filtro);
+  const filtered = filtro==="Todos"?dataBAI:dataBAI.filter(d=>d['grado_grupo']===filtro);
   const total = filtered.length;
-  const suma = filtered.reduce((a,b)=>a + Number(b['Puntaje Total']||0),0);
+  const suma = filtered.reduce((a,b)=>a + Number(b['puntaje']||0),0);
   const promedio = total>0 ? (suma/total).toFixed(1) : 0;
   document.getElementById('totalEncuestasBAI').innerText = total;
   document.getElementById('promedioPuntajeBAI').innerText = promedio;
 
   // Niveles
   const niveles = {Baja:0,Moderada:0,Alta:0,"Muy Alta":0};
-  filtered.forEach(d=>{ const n=d['Nivel']||'Baja'; if(niveles[n]!==undefined) niveles[n]++; });
+  filtered.forEach(d=>{ const n=d['rango']||'Baja'; if(niveles[n]!==undefined) niveles[n]++; });
   graficoNivelesBAI.data.datasets[0].data = Object.values(niveles); graficoNivelesBAI.update();
 
   // Items
-  const items = Object.keys(filtered[0]).filter(k=>k.startsWith('Pregunta'));
+  const items = Object.keys(filtered[0]).filter(k=> /^[0-9]+ /.test(k));
   graficoItemsBAI.data.labels = items;
   graficoItemsBAI.data.datasets[0].data = items.map(i=>{
     const vals = filtered.map(d=>Number(d[i]||0));
@@ -219,10 +217,10 @@ function renderBAI(filtro="Todos"){
   // Tabla
   const gruposData = {};
   filtered.forEach(d=>{
-    const g=d['Grado/Grupo']||'Sin grupo';
+    const g=d['grado_grupo']||'Sin grupo';
     if(!gruposData[g]) gruposData[g]={alumnos:0,puntaje:0,niveles:{Baja:0,Moderada:0,Alta:0,"Muy Alta":0}};
-    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['Puntaje Total']||0);
-    gruposData[g].niveles[d['Nivel']||'Baja']++;
+    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['puntaje']||0);
+    gruposData[g].niveles[d['rango']||'Baja']++;
   });
   const tbody = document.querySelector('#tablaResumenBAI tbody'); tbody.innerHTML='';
   Object.entries(gruposData).forEach(([g,v])=>{
