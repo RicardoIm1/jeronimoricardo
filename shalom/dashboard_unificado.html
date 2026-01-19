@@ -259,7 +259,9 @@
       graficoItemsBDI.data.labels = items;
       graficoItemsBDI.data.datasets[0].data = items.map(i => {
         const vals = filtered.map(d => Number(d[i] || 0));
-        return (vals.reduce((a, b) => a + b, 0) / vals.length || 0).toFixed(1);
+        let sumaItems = vals.reduce((a, b) => a + b, 0);
+        let promedioItem = vals.length > 0 ? (sumaItems / vals.length).toFixed(1) : 0;
+        return promedioItem;
       });
       graficoItemsBDI.update();
 
@@ -298,7 +300,9 @@
       graficoItemsBAI.data.labels = items;
       graficoItemsBAI.data.datasets[0].data = items.map(i => {
         const vals = filtered.map(d => Number(d[i] || 0));
-        return (vals.reduce((a, b) => a + b, 0) / vals.length || 0).toFixed(1);
+        let sumaItems = vals.reduce((a, b) => a + b, 0);
+        let promedioItem = vals.length > 0 ? (sumaItems / vals.length).toFixed(1) : 0;
+        return promedioItem;
       });
       graficoItemsBAI.update();
 
