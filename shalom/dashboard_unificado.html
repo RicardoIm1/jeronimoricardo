@@ -6,45 +6,36 @@
 <title>Dashboard Escolar Premium</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-/* ===== BODY & TITULO ===== */
 body { font-family: Arial, sans-serif; margin:0; background:#f0f4f8; font-size:13px; }
 h1 { text-align:center; padding:12px 0; font-size:22px; color:#333; margin:0; }
 
-/* ===== TABS ===== */
 .tabs { display:flex; justify-content:center; flex-wrap:wrap; margin-bottom:8px; gap:6px; }
 .tab { padding:6px 14px; cursor:pointer; background:#ddd; border-radius:8px 8px 0 0; font-weight:bold; font-size:13px; transition:.3s; white-space:nowrap; }
 .tab.active { background:#4a90e2; color:white; }
 
-/* ===== CONTENIDO DE TAB ===== */
 .tab-content { display:none; padding:10px; }
 .tab-content.active { display:block; }
 
-/* ===== KPI ===== */
 .kpi { display:flex; flex-wrap:wrap; justify-content:space-around; gap:8px; margin:10px 0; }
 .kpi div { background:#fff; padding:10px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:center; flex:1 1 130px; min-width:120px; font-size:13px; transition:.3s; }
 .kpi h2 { font-size:16px; margin:4px 0; color:#333; }
 
-/* ===== GRÁFICOS ===== */
 .graph-row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; margin-bottom:8px; }
 canvas { background:#fff; border-radius:10px; padding:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); flex:1 1 48%; min-width:220px; height:180px; display:block; }
 
-/* ===== TABLAS ===== */
 .table-wrapper { overflow-x:auto; }
 table { width:100%; border-collapse:collapse; background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1); margin-top:8px; font-size:12px; min-width:600px; }
 th, td { padding:5px; text-align:center; border-bottom:1px solid #eee; }
 th { background:#4a90e2; color:white; font-size:12px; }
 
-/* ===== SELECT ===== */
 select { padding:5px 8px; border-radius:6px; border:1px solid #ccc; margin-bottom:10px; font-size:13px; width:90%; max-width:280px; display:block; margin-left:auto; margin-right:auto; }
 
-/* ===== ALERTAS ===== */
 .alert-zone { margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
 .alert { flex:1 1 110px; padding:8px; border-radius:6px; color:white; font-size:11px; box-shadow:0 1px 4px rgba(0,0,0,0.1); text-align:center; transition:.3s; }
 .alert.high { background:#e74c3c; }
 .alert.medium { background:#f1c40f; color:#333; }
 .alert.low { background:#2ecc71; }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width:1200px){
   .graph-row { flex-wrap:wrap; gap:8px; }
   canvas { flex:1 1 48%; min-width:200px; height:160px; }
@@ -173,6 +164,117 @@ async function obtenerDatos(hoja){
   return rows;
 }
 
+// === GRÁFICOS ===
+const graficoRangosBDI = new Chart(document.getElementById('graficoRangosBDI'), {type:'bar', data:{labels:['Mínimo','Leve','Moderado','Grave'], datasets:[{label:'Alumnos', data:[0,0,0,0], backgroundColor:['#2ecc71','#f1c40f','#e67e22','#e74c3c']}]}, options:{responsive:true, plugins:{legend:{display:false}}, maintainAspectRatio:false}});
+const graficoItemsBDI = new Chart(document.getElementById('graficoItemsBDI'), {type:'radar', data:{labels:[], datasets:[{label:'Promedio por ítem', data:[], backgroundColor:'rgba(46,204,113,0.2)', borderColor:'#2ecc71', pointBackgroundColor:'#27ae60'}]}, options:{responsive:true, scales:{r:{beginAtZero:true}}, maintainAspectRatio:false}});
+const graficoNivelesBAI = new Chart(document.getElementById('graficoNivelesBAI'), {type:'bar', data:{labels:[], datasets:[{label:'Alumnos', data:[], backgroundColor:[]}]} , options:{responsive:true, plugins:{legend:{display:false}}, maintainAspectRatio:false}});
+const graficoItemsBAI = new Chart(document.getElementById('graficoItemsBAI'), {type:'radar', data:{labels:[], datasets:[{label:'Promedio por ítem', data:[], backgroundColor:'rgba(52,152,219,0.2)', borderColor:'#3498db', pointBackgroundColor:'#2980b9'}]}, options:{responsive:true, scales:{r:{beginAtZero:true}}, maintainAspectRatio:false}});
+
+// === RENDER BDI ===
+function renderBDI(filtro="Todos"){
+  if(!dataBDI.length) return;
+  const filtered = filtro==="Todos"?dataBDI:dataBDI.filter(d=>d['grado_grupo']===filtro);
+  const total = filtered.length;
+  const promedio = total>0 ? (filtered.reduce((a,b)=>a + Number(b['puntaje']||0),0)/total).toFixed(1) : 0;
+  document.getElementById('totalEncuestasBDI').innerText = total;
+  document.getElementById('promedioPuntajeBDI').innerText = promedio;
+
+  const rangos = {Mínimo:0,Leve:0,Moderado:0,Grave:0};
+  filtered.forEach(d=>{ const r=d['rango']||'Mínimo'; if(rangos[r]!==undefined) rangos[r]++; });
+  graficoRangosBDI.data.datasets[0].data = Object.values(rangos); graficoRangosBDI.update();
+
+  const items = Object.keys(filtered[0]).filter(k=> /^[0-9]+ /.test(k));
+  graficoItemsBDI.data.labels = items;
+  graficoItemsBDI.data.datasets[0].data = items.map(i=>{
+    const vals = filtered.map(d=>Number(d[i]||0));
+    const suma = vals.reduce((a,b)=>a+b,0);
+    return vals.length>0 ? (suma/vals.length).toFixed(1) : 0;
+  });
+  graficoItemsBDI.update();
+
+  const gruposData = {};
+  filtered.forEach(d=>{
+    const g=d['grado_grupo']||'Sin grupo';
+    if(!gruposData[g]) gruposData[g]={alumnos:0,puntaje:0,rangos:{Mínimo:0,Leve:0,Moderado:0,Grave:0}};
+    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['puntaje']||0);
+    gruposData[g].rangos[d['rango']||'Mínimo']++;
+  });
+  const tbody = document.querySelector('#tablaResumenBDI tbody'); tbody.innerHTML='';
+  Object.entries(gruposData).forEach(([g,v])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${g}</td><td>${v.alumnos}</td><td>${(v.puntaje/v.alumnos).toFixed(1)}</td>
+    <td>${v.rangos.Mínimo}</td><td>${v.rangos.Leve}</td><td>${v.rangos.Moderado}</td><td>${v.rangos.Grave}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  const alertZone = document.getElementById('alertBDI'); alertZone.innerHTML='';
+  items.forEach(i=>{
+    const vals = filtered.map(d=>Number(d[i]||0));
+    const max = Math.max(...vals);
+    if(max>=2){
+      const div = document.createElement('div'); div.className='alert high';
+      div.textContent = `${i}: valor alto (${max}) → vigilar`;
+      alertZone.appendChild(div);
+    }
+  });
+}
+
+// === RENDER BAI ===
+function renderBAI(filtro="Todos"){
+  if(!dataBAI.length) return;
+  const filtered = filtro==="Todos"?dataBAI:dataBAI.filter(d=>d['grado_grupo']===filtro);
+  const total = filtered.length;
+  const promedio = total>0 ? (filtered.reduce((a,b)=>a + Number(b['puntaje']||0),0)/total).toFixed(1) : 0;
+  document.getElementById('totalEncuestasBAI').innerText = total;
+  document.getElementById('promedioPuntajeBAI').innerText = promedio;
+
+  const niveles = {};
+  filtered.forEach(d=>{
+    const n = d['rango'] || 'Sin rango';
+    niveles[n] = (niveles[n] || 0) + 1;
+  });
+  graficoNivelesBAI.data.labels = Object.keys(niveles);
+  graficoNivelesBAI.data.datasets[0].data = Object.values(niveles);
+  graficoNivelesBAI.data.datasets[0].backgroundColor = Object.keys(niveles).map((_,i)=>['#2ecc71','#f1c40f','#e67e22','#e74c3c','#9b59b6','#3498db'][i%6]);
+  graficoNivelesBAI.update();
+
+  const items = Object.keys(filtered[0]).filter(k=> /^[0-9]+ /.test(k));
+  graficoItemsBAI.data.labels = items;
+  graficoItemsBAI.data.datasets[0].data = items.map(i=>{
+    const vals = filtered.map(d=>Number(d[i]||0));
+    const suma = vals.reduce((a,b)=>a+b,0);
+    return vals.length>0 ? (suma/vals.length).toFixed(1) : 0;
+  });
+  graficoItemsBAI.update();
+
+  const gruposData = {};
+  filtered.forEach(d=>{
+    const g=d['grado_grupo']||'Sin grupo';
+    if(!gruposData[g]) gruposData[g]={alumnos:0,puntaje:0,niveles:{}};
+    gruposData[g].alumnos++; gruposData[g].puntaje+=Number(d['puntaje']||0);
+    const r = d['rango'] || 'Sin rango';
+    gruposData[g].niveles[r] = (gruposData[g].niveles[r] || 0) +1;
+  });
+  const tbody = document.querySelector('#tablaResumenBAI tbody'); tbody.innerHTML='';
+  Object.entries(gruposData).forEach(([g,v])=>{
+    const cols = Object.values(v.niveles).map(n=>`<td>${n}</td>`).join('');
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${g}</td><td>${v.alumnos}</td><td>${(v.puntaje/v.alumnos).toFixed(1)}</td>${cols}`;
+    tbody.appendChild(tr);
+  });
+
+  const alertZone = document.getElementById('alertBAI'); alertZone.innerHTML='';
+  items.forEach(i=>{
+    const vals = filtered.map(d=>Number(d[i]||0));
+    const max = Math.max(...vals);
+    if(max>=2){
+      const div = document.createElement('div'); div.className='alert high';
+      div.textContent = `${i}: valor alto (${max}) → vigilar`;
+      alertZone.appendChild(div);
+    }
+  });
+}
+
 // === INIT ===
 async function init(){
   dataBDI = await obtenerDatos(HOJAS.BDI);
@@ -184,17 +286,9 @@ async function init(){
     document.getElementById('filtroGrupo').appendChild(opt);
   });
 
-  renderBDI(); renderBAI();
+  renderBDI();
+  renderBAI();
 }
-
-// === GRÁFICOS ===
-const graficoRangosBDI = new Chart(document.getElementById('graficoRangosBDI'), {type:'bar', data:{labels:['Mínimo','Leve','Moderado','Grave'], datasets:[{label:'Alumnos', data:[0,0,0,0], backgroundColor:['#2ecc71','#f1c40f','#e67e22','#e74c3c']}]}, options:{responsive:true, plugins:{legend:{display:false}}, maintainAspectRatio:false}});
-const graficoItemsBDI = new Chart(document.getElementById('graficoItemsBDI'), {type:'radar', data:{labels:[], datasets:[{label:'Promedio por ítem', data:[], backgroundColor:'rgba(46,204,113,0.2)', borderColor:'#2ecc71', pointBackgroundColor:'#27ae60'}]}, options:{responsive:true, scales:{r:{beginAtZero:true}}, maintainAspectRatio:false}});
-const graficoNivelesBAI = new Chart(document.getElementById('graficoNivelesBAI'), {type:'bar', data:{labels:[], datasets:[{label:'Alumnos', data:[], backgroundColor:[]}]} , options:{responsive:true, plugins:{legend:{display:false}}, maintainAspectRatio:false}});
-const graficoItemsBAI = new Chart(document.getElementById('graficoItemsBAI'), {type:'radar', data:{labels:[], datasets:[{label:'Promedio por ítem', data:[], backgroundColor:'rgba(52,152,219,0.2)', borderColor:'#3498db', pointBackgroundColor:'#2980b9'}]}, options:{responsive:true, scales:{r:{beginAtZero:true}}, maintainAspectRatio:false}});
-
-// === FUNCIONES renderBDI y renderBAI ===
-// Usa exactamente las funciones que ya tenías, sin modificaciones de lógica
 init();
 </script>
 </body>
