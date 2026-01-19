@@ -558,7 +558,7 @@ formBDI?.addEventListener('submit', async (e) => {
   const payload = {
     proyecto: CONFIG.proyecto,
     version: CONFIG.version,
-    test: 'BAI',
+    test: 'BDI',
     timestamp: todayISO(),
     puntaje: r.sum,
     rango: rangoBAI(r.sum),
