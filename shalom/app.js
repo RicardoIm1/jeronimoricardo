@@ -1,6 +1,6 @@
 /* ================= CONFIG ================= */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbz3s1jGMaHvlT-I-2gyh8uo_owiUb2uUXyP2fbSi-M86NCLJ7JA82Ik6yqyM6C2qpGwHA/exec',
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxPhKK77YK0A-4ifWsBiJ3Z-hWeZkgaM3mGXhRw2e8hvcLbZoSdC2oyB1azcfqHt8CStw/exec',
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
@@ -278,10 +278,10 @@ function alumnoData() {
   }
 
   return {
-    fecha: $('#al-fecha')?.textContent || todayISO(),
-    nombre: $('#al-nombre')?.value || '',
+    fecha_hoy: $('#al-fecha')?.textContent || todayISO(),
+    nombre_completo: $('#al-nombre')?.value || '',
     edad,
-    grupo: $('#al-grado')?.value || ''
+    grado_grupo: $('#al-grado')?.value || ''
   };
 }
 
