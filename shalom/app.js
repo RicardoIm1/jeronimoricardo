@@ -304,15 +304,17 @@ function initBDI() {
 
     const r = calcScore('bdi', BDI_FULL.length);
 
+    const respuestas = respuestasOrdenadas('bdi', BDI_FULL.length);
+
     const payload = {
-      proyecto: CONFIG.proyecto,
-      version: CONFIG.version,
+      fecha_hoy: todayISO(),
+      nombre_completo: alumnoData().nombre_completo,
+      edad: alumnoData().edad,
+      grado_grupo: alumnoData().grado_grupo,
       test: 'BDI',
-      timestamp: todayISO(),
       puntaje: r.sum,
       rango: rangoBDI(r.sum),
-      respuestas: readLocal('bdi'),
-      alumno,
+      respuestas, // ← ARRAY ORDENADO
       token: SECRET
     };
 
@@ -354,3 +356,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (p.includes('depresion')) initBDI();
   if (p.includes('ansiedad')) initBAI();
 });
+
+function respuestasOrdenadas(storageKey, total) {
+  const data = readLocal(storageKey) || {};
+  const out = [];
+
+  for (let i = 0; i < total; i++) {
+    out.push(
+      typeof data[`${storageKey}-${i}`] === 'number'
+        ? data[`${storageKey}-${i}`]
+        : 0
+    );
+  }
+
+  return out;
+}
