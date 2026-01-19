@@ -492,6 +492,11 @@ formBAI?.addEventListener('submit', async (e) => {
 
   const r = calcScore('bai', BAI_FULL.length);
 
+  if (r.answered !== r.total) {
+    alert('Debes responder todas las preguntas del BAI');
+    return;
+  }
+
   const payload = {
     proyecto: CONFIG.proyecto,
     version: CONFIG.version,
@@ -499,15 +504,14 @@ formBAI?.addEventListener('submit', async (e) => {
     timestamp: todayISO(),
     puntaje: r.sum,
     rango: rangoBAI(r.sum),
-    respuestas: readLocal('bai') || {},
+    respuestas: respuestasOrdenadas('bai', BAI_FULL.length),
     alumno: alumnoData(),
     token: SECRET
   };
 
   const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado' : 'Error al guardar');
+  alert(resp.ok ? 'Guardado correctamente' : 'Error al guardar');
 });
-
 const formBDI = document.getElementById('form-bdi');
 
 formBDI?.addEventListener('submit', async (e) => {
@@ -521,7 +525,7 @@ formBDI?.addEventListener('submit', async (e) => {
   const r = calcScore('bdi', BDI_FULL.length);
 
   if (r.answered !== r.total) {
-    alert('Debes responder todas las preguntas');
+    alert('Debes responder todas las preguntas del BDI');
     return;
   }
 
@@ -532,11 +536,20 @@ formBDI?.addEventListener('submit', async (e) => {
     timestamp: todayISO(),
     puntaje: r.sum,
     rango: rangoBDI(r.sum),
-    respuestas: readLocal('bdi') || {},
+    respuestas: respuestasOrdenadas('bdi', BDI_FULL.length),
     alumno: alumnoData(),
     token: SECRET
   };
 
   const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado' : 'Error al guardar');
+  alert(resp.ok ? 'Guardado correctamente' : 'Error al guardar');
 });
+
+function respuestasOrdenadas(storageKey, total) {
+  const raw = readLocal(storageKey) || {};
+  const arr = [];
+  for (let i = 0; i < total; i++) {
+    arr.push(raw[`${storageKey}-${i}`] ?? '');
+  }
+  return arr;
+}
