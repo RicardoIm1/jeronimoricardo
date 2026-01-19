@@ -510,7 +510,11 @@ formBAI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado correctamente' : 'Error al guardar');
+  if (resp.ok) {
+    showToast('Registro guardado correctamente ✔');
+  } else {
+    showToast('Error al guardar', 'error');
+  }
 });
 const formBDI = document.getElementById('form-bdi');
 
@@ -542,7 +546,11 @@ formBDI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
-  alert(resp.ok ? 'Guardado correctamente' : 'Error al guardar');
+  if (resp.ok) {
+    showToast('Registro guardado correctamente ✔');
+  } else {
+    showToast('Error al guardar', 'error');
+  }
 });
 
 function respuestasOrdenadas(storageKey, total) {
@@ -552,4 +560,16 @@ function respuestasOrdenadas(storageKey, total) {
     arr.push(raw[`${storageKey}-${i}`] ?? '');
   }
   return arr;
+}
+
+function showToast(msg, type = 'ok', time = 2500) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+
+  toast.textContent = msg;
+  toast.className = `toast show ${type}`;
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, time);
 }
