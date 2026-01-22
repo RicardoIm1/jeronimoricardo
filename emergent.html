@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerónimo Ricardo Ramírez Torres - CV Profesional</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       CSS VARIABLES - TEMA CLARO Y OSCURO
+       ============================================ */
+    :root {
+      /* Tema Claro */
+      --bg-primary: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+      --bg-header: rgba(255, 255, 255, 0.8);
+      --text-primary: #1a202c;
+      --text-secondary: rgba(26, 32, 44, 0.8);
+      --header-title-color: #FF9D02;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --scrollbar-track: rgba(0, 0, 0, 0.05);
+      --scrollbar-thumb: rgba(0, 122, 255, 0.5);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --shadow-hover: rgba(0, 0, 0, 0.2);
+      
+      /* Tiles Tema Claro */
+      --tile-border: rgba(0, 0, 0, 0.1);
+      --tag-bg: rgba(0, 0, 0, 0.1);
+      --tag-border: rgba(0, 0, 0, 0.2);
+      --year-badge-bg: rgba(0, 0, 0, 0.15);
+      
+      /* Colores de tiles - Tema Claro */
+      --tile-blue-from: rgba(0, 102, 204, 0.1);
+      --tile-blue-to: rgba(0, 150, 255, 0.15);
+      --tile-blue-hover-from: rgba(0, 122, 255, 0.2);
+      --tile-blue-hover-to: rgba(0, 180, 255, 0.25);
+      
+      --tile-green-from: rgba(0, 168, 107, 0.1);
+      --tile-green-to: rgba(0, 200, 120, 0.15);
+      --tile-green-hover-from: rgba(0, 200, 120, 0.2);
+      --tile-green-hover-to: rgba(0, 230, 140, 0.25);
+      
+      --tile-purple-from: rgba(120, 0, 200, 0.1);
+      --tile-purple-to: rgba(160, 0, 255, 0.15);
+      --tile-purple-hover-from: rgba(160, 0, 255, 0.2);
+      --tile-purple-hover-to: rgba(190, 50, 255, 0.25);
+      
+      --tile-orange-from: rgba(255, 140, 0, 0.1);
+      --tile-orange-to: rgba(255, 165, 0, 0.15);
+      --tile-orange-hover-from: rgba(255, 165, 0, 0.2);
+      --tile-orange-hover-to: rgba(255, 190, 0, 0.25);
+      
+      --tile-red-from: rgba(220, 40, 40, 0.1);
+      --tile-red-to: rgba(255, 80, 80, 0.15);
+      --tile-red-hover-from: rgba(255, 80, 80, 0.2);
+      --tile-red-hover-to: rgba(255, 120, 120, 0.25);
+      
+      --tile-teal-from: rgba(0, 168, 150, 0.1);
+      --tile-teal-to: rgba(0, 200, 180, 0.15);
+      --tile-teal-hover-from: rgba(0, 200, 180, 0.2);
+      --tile-teal-hover-to: rgba(0, 230, 210, 0.25);
+      
+      --tile-pink-from: rgba(200, 0, 100, 0.1);
+      --tile-pink-to: rgba(255, 0, 130, 0.15);
+      --tile-pink-hover-from: rgba(255, 0, 130, 0.2);
+      --tile-pink-hover-to: rgba(255, 50, 160, 0.25);
+    }
+
+    /* Tema Oscuro */
+    [data-theme="dark"] {
+      --bg-primary: linear-gradient(135deg, #020817 0%, #0f172a 100%);
+      --bg-header: rgba(115, 159, 235, 0.8);
+      --text-primary: #f8f9fa;
+      --text-secondary: rgba(248, 249, 250, 0.8);
+      --header-title-color: #FF9D02;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --scrollbar-track: rgba(255, 255, 255, 0.05);
+      --scrollbar-thumb: rgba(0, 122, 255, 0.5);
+      --shadow-color: rgba(0, 0, 0, 0.2);
+      --shadow-hover: rgba(0, 0, 0, 0.3);
+      
+      --tile-border: rgba(255, 255, 255, 0.1);
+      --tag-bg: rgba(255, 255, 255, 0.15);
+      --tag-border: rgba(255, 255, 255, 0.2);
+      --year-badge-bg: rgba(255, 255, 255, 0.2);
+      
+      /* Colores más intensos para tema oscuro */
+      --tile-blue-from: rgba(0, 102, 204, 0.15);
+      --tile-blue-to: rgba(0, 150, 255, 0.2);
+      --tile-blue-hover-from: rgba(0, 122, 255, 0.25);
+      --tile-blue-hover-to: rgba(0, 180, 255, 0.3);
+      
+      --tile-green-from: rgba(0, 168, 107, 0.15);
+      --tile-green-to: rgba(0, 200, 120, 0.2);
+      --tile-green-hover-from: rgba(0, 200, 120, 0.25);
+      --tile-green-hover-to: rgba(0, 230, 140, 0.3);
+      
+      --tile-purple-from: rgba(120, 0, 200, 0.15);
+      --tile-purple-to: rgba(160, 0, 255, 0.2);
+      --tile-purple-hover-from: rgba(160, 0, 255, 0.25);
+      --tile-purple-hover-to: rgba(190, 50, 255, 0.3);
+      
+      --tile-orange-from: rgba(255, 140, 0, 0.15);
+      --tile-orange-to: rgba(255, 165, 0, 0.2);
+      --tile-orange-hover-from: rgba(255, 165, 0, 0.25);
+      --tile-orange-hover-to: rgba(255, 190, 0, 0.3);
+      
+      --tile-red-from: rgba(220, 40, 40, 0.15);
+      --tile-red-to: rgba(255, 80, 80, 0.2);
+      --tile-red-hover-from: rgba(255, 80, 80, 0.25);
+      --tile-red-hover-to: rgba(255, 120, 120, 0.3);
+      
+      --tile-teal-from: rgba(0, 168, 150, 0.15);
+      --tile-teal-to: rgba(0, 200, 180, 0.2);
+      --tile-teal-hover-from: rgba(0, 200, 180, 0.25);
+      --tile-teal-hover-to: rgba(0, 230, 210, 0.3);
+      
+      --tile-pink-from: rgba(200, 0, 100, 0.15);
+      --tile-pink-to: rgba(255, 0, 130, 0.2);
+      --tile-pink-hover-from: rgba(255, 0, 130, 0.25);
+      --tile-pink-hover-to: rgba(255, 50, 160, 0.3);
+    }
+
+    /* ============================================
+       ESTILOS BASE
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg-primary);
+      font-family: "Poppins", sans-serif;
+      color: var(--text-primary);
+      transition: background 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+
+    /* ============================================
+       HEADER - ESTILO APPLE
+       ============================================ */
+    header {
+      background: var(--bg-header);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 22px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .header-logo {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .header-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--header-title-color);
+      flex: 1;
+    }
+
+    /* Toggle Theme Button */
+    .theme-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .theme-toggle {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border: 2px solid var(--border-color);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .theme-toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="dark"] .theme-toggle-slider {
+      transform: translateX(30px);
+    }
+
+    /* Print Button */
+    .btn-print {
+      appearance: none;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 157, 2, 0.9);
+      color: white;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 157, 2, 0.3);
+    }
+
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 157, 2, 0.4);
+      background: rgba(255, 157, 2, 1);
+    }
+
+    .btn-print:active {
+      transform: translateY(0);
+    }
+
+    /* ============================================
+       METRO GRID
+       ============================================ */
+    .main-container {
+      padding: 40px 22px;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    .metro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-auto-rows: 180px;
+      grid-auto-flow: dense;
+      gap: 22px;
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================
+       TILE BASE
+       ============================================ */
+    .tile {
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      border: 1px solid var(--tile-border);
+      box-shadow: 0 4px 12px var(--shadow-color);
+      animation: tileAppear 0.5s ease-out backwards;
+      position: relative;
+    }
+
+    @keyframes tileAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .tile:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 30px var(--shadow-hover);
+      z-index: 10;
+    }
+
+    /* Animación escalonada para tiles */
+    .tile:nth-child(1) { animation-delay: 0.05s; }
+    .tile:nth-child(2) { animation-delay: 0.1s; }
+    .tile:nth-child(3) { animation-delay: 0.15s; }
+    .tile:nth-child(4) { animation-delay: 0.2s; }
+    .tile:nth-child(5) { animation-delay: 0.25s; }
+    .tile:nth-child(6) { animation-delay: 0.3s; }
+
+    /* ============================================
+       COLORES DE TILES
+       ============================================ */
+    .tile-blue {
+      background: linear-gradient(135deg, var(--tile-blue-from) 0%, var(--tile-blue-to) 100%);
+    }
+
+    .tile-blue:hover {
+      background: linear-gradient(135deg, var(--tile-blue-hover-from) 0%, var(--tile-blue-hover-to) 100%);
+    }
+
+    .tile-green {
+      background: linear-gradient(135deg, var(--tile-green-from) 0%, var(--tile-green-to) 100%);
+    }
+
+    .tile-green:hover {
+      background: linear-gradient(135deg, var(--tile-green-hover-from) 0%, var(--tile-green-hover-to) 100%);
+    }
+
+    .tile-purple {
+      background: linear-gradient(135deg, var(--tile-purple-from) 0%, var(--tile-purple-to) 100%);
+    }
+
+    .tile-purple:hover {
+      background: linear-gradient(135deg, var(--tile-purple-hover-from) 0%, var(--tile-purple-hover-to) 100%);
+    }
+
+    .tile-orange {
+      background: linear-gradient(135deg, var(--tile-orange-from) 0%, var(--tile-orange-to) 100%);
+    }
+
+    .tile-orange:hover {
+      background: linear-gradient(135deg, var(--tile-orange-hover-from) 0%, var(--tile-orange-hover-to) 100%);
+    }
+
+    .tile-red {
+      background: linear-gradient(135deg, var(--tile-red-from) 0%, var(--tile-red-to) 100%);
+    }
+
+    .tile-red:hover {
+      background: linear-gradient(135deg, var(--tile-red-hover-from) 0%, var(--tile-red-hover-to) 100%);
+    }
+
+    .tile-teal {
+      background: linear-gradient(135deg, var(--tile-teal-from) 0%, var(--tile-teal-to) 100%);
+    }
+
+    .tile-teal:hover {
+      background: linear-gradient(135deg, var(--tile-teal-hover-from) 0%, var(--tile-teal-hover-to) 100%);
+    }
+
+    .tile-pink {
+      background: linear-gradient(135deg, var(--tile-pink-from) 0%, var(--tile-pink-to) 100%);
+    }
+
+    .tile-pink:hover {
+      background: linear-gradient(135deg, var(--tile-pink-hover-from) 0%, var(--tile-pink-hover-to) 100%);
+    }
+
+    /* ============================================
+       TAMAÑOS DE TILES
+       ============================================ */
+    .small {
+      grid-row: span 1;
+      grid-column: span 1;
+    }
+
+    .medium {
+      grid-row: span 1;
+      grid-column: span 2;
+    }
+
+    .wide {
+      grid-row: span 1;
+      grid-column: span 3;
+    }
+
+    .large {
+      grid-row: span 2;
+      grid-column: span 2;
+    }
+
+    .tall {
+      grid-row: span 3;
+      grid-column: span 1;
+    }
+
+    .x-large {
+      grid-row: span 2;
+      grid-column: span 3;
+    }
+
+    .xx-large {
+      grid-row: span 3;
+      grid-column: span 3;
+    }
+
+    /* ============================================
+       TAGS Y BADGES
+       ============================================ */
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--tag-border);
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    .year-badge {
+      background: var(--year-badge-bg);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      margin-left: 8px;
+      transition: all 0.3s ease;
+    }
+
+    /* ============================================
+       TIPOGRAFÍA Y ELEMENTOS DE TEXTO
+       ============================================ */
+    .tile h2,
+    .tile h3 {
+      margin: 0 0 15px 0;
+      font-size: 1.0rem;
+      font-weight: 600;
+    }
+
+    .tile h2 {
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .tile p {
+      margin: 0 0 12px 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .tile ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .tile li {
+      margin-bottom: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    .tile li:hover {
+      transform: translateX(4px);
+    }
+
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .tile-title {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .tile-subtitle {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      margin: 18px 0 10px 0;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--tile-border);
+      padding-bottom: 6px;
+      font-weight: 600;
+    }
+
+    /* ============================================
+       SCROLLABLE CONTENT
+       ============================================ */
+    .scrollable {
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 8px;
+    }
+
+    .scrollable::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .scrollable::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+      border-radius: 3px;
+    }
+
+    .scrollable::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+
+    .scrollable::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 122, 255, 0.7);
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    
+    /* Tablet y pantallas medianas */
+    @media (max-width: 1024px) {
+      .metro-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-auto-rows: 160px;
+        gap: 18px;
+      }
+
+      .main-container {
+        padding: 30px 18px;
+      }
+
+      header {
+        height: 60px;
+        padding: 0 18px;
+      }
+
+      .header-logo {
+        height: 50px;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+
+      .tile {
+        padding: 20px;
+      }
+
+      .tile h2 {
+        font-size: 1.3rem;
+      }
+
+      .tile h3 {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Móviles */
+    @media (max-width: 640px) {
+      .metro-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        gap: 16px;
+      }
+
+      .main-container {
+        padding: 20px 16px;
+      }
+
+      header {
+        height: auto;
+        min-height: 60px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+      }
+
+      .header-content {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .header-logo {
+        height: 45px;
+      }
+
+      .header-title {
+        font-size: 14px;
+        flex: 1 1 100%;
+        text-align: center;
+      }
+
+      .theme-controls {
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      .btn-print {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      /* Todos los tiles ocupan una columna en móvil */
+      .small, .medium, .wide, .large, .tall, .x-large, .xx-large {
+        grid-column: span 1;
+        grid-row: auto;
+      }
+
+      .tile {
+        padding: 18px;
+        min-height: 150px;
+      }
+
+      .tile h2 {
+        font-size: 1.2rem;
+      }
+
+      .tile h3 {
+        font-size: 0.9rem;
+      }
+
+      .tile p, .tile ul {
+        font-size: 0.85rem;
+      }
+
+      .tags {
+        gap: 6px;
+      }
+
+      .tag {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+      }
+    }
+
+    /* Pantallas muy pequeñas */
+    @media (max-width: 380px) {
+      .header-title {
+        font-size: 12px;
+      }
+
+      .btn-print {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .tile {
+        padding: 16px;
+      }
+
+      .tile h2 {
+        font-size: 1.1rem;
+      }
+
+      .tile h3 {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ============================================
+       ESTILOS DE IMPRESIÓN
+       ============================================ */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      header {
+        position: static;
+        background: white;
+        border-bottom: 2px solid #333;
+        box-shadow: none;
+      }
+
+      .theme-controls,
+      .btn-print {
+        display: none !important;
+      }
+
+      .metro-grid {
+        display: block;
+        page-break-inside: avoid;
+      }
+
+      .tile {
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        box-shadow: none;
+      }
+
+      .tile:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+      .scrollable {
+        overflow: visible;
+        max-height: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    /* ============================================
+       UTILIDADES
+       ============================================ */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 640px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compact-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .compact-list li {
+      margin-bottom: 6px;
+    }
+
+    /* Accesibilidad */
+    .tile:focus-within {
+      outline: 2px solid var(--header-title-color);
+      outline-offset: 4px;
+    }
+
+    button:focus,
+    a:focus {
+      outline: 2px solid var(--header-title-color);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <a href="" aria-label="Inicio">
+        <img src="logo.png" alt="Logotipo Rick" class="header-logo">
+      </a>
+      <div class="header-title">Mi Curriculum Vitae Profesional</div>
+    </div>
+    <div class="theme-controls">
+      <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Cambiar tema">
+        <div class="theme-toggle-slider" id="themeSlider">
+          <span id="themeIcon">☀️</span>
+        </div>
+      </div>
+      <button class="btn-print" onclick="abrirCVImpresion()" aria-label="Imprimir CV">
+        <span>🖨️</span>
+        <span>Imprimir CV</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="metro-grid">
+
+      <!-- NOMBRE Y PUESTO -->
+      <div class="tile x-large tile-blue">
+        <div class="scrollable">
+          <h2>Jerónimo Ricardo Ramírez Torres</h2>
+          <p class="tile-subtitle">Apoyo Administrativo en Salud A-3</p>
+          <p>Profesional con formación especializada en gestión de información, análisis de datos y tecnologías aplicadas
+            a la organización documental. Destaca por su capacidad para organizar, analizar y optimizar procesos
+            estadísticos y de archivo clínico.</p>
+          <p>Posee experiencia en gestión documental, manejo de bases de datos y capacitación en áreas de salud,
+            informática y administración. Su formación incluye administración y gestión de archivos. Está respaldado por
+            formación en derechos humanos, trabajo en equipo y manejo de estrés en entornos complejos.</p>
+          <p>Certificado en áreas como Big Data, Gobernanza TI y evaluación de procesos, con habilidades para liderar
+            equipos, implementar sistemas de archivo eficientes y generar reportes estadísticos confiables para la toma de
+            decisiones en el ámbito clínico.</p>
+          <div class="tags">
+            <span class="tag">Gestión Documental</span>
+            <span class="tag">Análisis de Datos</span>
+            <span class="tag">Archivo Clínico</span>
+            <span class="tag">Estadísticas</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Business Analytics</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBJETIVO PROFESIONAL -->
+      <div class="tile large tile-green">
+        <div class="scrollable">
+          <h3>Objetivo Profesional</h3>
+          <p>Aplicar sus conocimientos optimizar los procesos de estadísticas y archivo clínico, contribuyendo a la
+            eficiencia y calidad en el servicio de salud.</p>
+          <p>Su formación en matemáticas financieras y estrategias de inversión le permite abordar desafíos técnicos con
+            rigor analítico, mientras que sus habilidades interpersonales facilitan la colaboración en entornos
+            multidisciplinarios.</p>
+          <p>Aplicar sus conocimientos en tecnología, y gestión de información para optimizar los sistemas de estadísticas
+            y archivo clínico, garantizando precisión, confidencialidad y accesibilidad de los datos en beneficio de la
+            institución y los pacientes.</p>
+          <p>Postularse como Jefe de Estadísticas y Archivo Clínico para contribuir con su expertise en la gestión de
+            datos, mejora de procesos y cumplimiento de estándares de calidad, asegurando la eficiencia y confiabilidad de
+            la información en el ámbito de la salud.</p>
+        </div>
+      </div>
+
+      <!-- FORMACIÓN ACADÉMICA -->
+      <div class="tile medium tile-purple">
+        <div class="scrollable">
+          <h3>Formación Académica</h3>
+          <p><strong>Licenciatura en Administración Financiera y Sistemas</strong></p>
+          <p>Universidad de Guadalajara | 2001 - 2005</p>
+          <p>Testimonio de Desempeño Sobresaliente (CENEVAL, 2017)</p>
+          <p><strong>Bachillerato General</strong></p>
+          <p>Escuela Preparatoria Regional de Ameca | 1994 - 1997</p>
+        </div>
+      </div>
+
+      <!-- EXPERIENCIA PROFESIONAL 1 -->
+      <div class="tile large tile-blue">
+        <div class="scrollable">
+          <h3>Experiencia Profesional</h3>
+          <p><strong>Jefe de Recursos Financieros</strong> - Hospital Regional Puerto Vallarta | 2011-2018</p>
+          <ul>
+            <li>Gestión y organización de archivos contables electrónicos y físicos</li>
+            <li>Análisis de datos para informes administrativos</li>
+            <li>Implementación de protocolos de protección de datos personales</li>
+            <li>Capacitación al personal en manejo de información sensible y normativas vigentes</li>
+            <li>Gestión y análisis de datos estadísticos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- EXPERIENCIA PROFESIONAL 2 -->
+      <div class="tile medium tile-blue">
+        <div class="scrollable">
+          <h3>Experiencia Profesional</h3>
+          <p><strong>Jefe de Recursos Financieros</strong> (Continuación)</p>
+          <ul>
+            <li>Implementación de sistemas de bases de datos para Recursos Financieros</li>
+            <li>Generación de informes para la toma de decisiones</li>
+            <li>Optimización de procesos de almacenamiento y recuperación de información financiera</li>
+          </ul>
+          <p><strong>Desarrollo de Sistema de Gestión Documental</strong></p>
+          <p>OPD Servicios de Salud Jalisco</p>
+          <p>Registro de Derecho de Autor (2016) por la creación de una base de datos para el gasto directo de unidades de
+            salud.</p>
+        </div>
+      </div>
+
+      <!-- HABILIDADES TÉCNICAS 1 -->
+      <div class="tile medium tile-green">
+        <div class="scrollable">
+          <h3>Habilidades Técnicas</h3>
+          <p class="section-title">Análisis de Datos y Estadístico</p>
+          <ul>
+            <li>Capacidad para procesar y analizar información cuantitativa y cualitativa</li>
+            <li>Análisis de datos clínicos y estadísticas de salud</li>
+            <li>Análisis estadístico y reportes clínicos</li>
+            <li>Interpretación y presentación de información clínica</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HABILIDADES TÉCNICAS 2 -->
+      <div class="tile medium tile-green">
+        <div class="scrollable">
+          <h3>Habilidades Técnicas</h3>
+          <p class="section-title">Análisis de Datos (Continuación)</p>
+          <ul>
+            <li>Análisis de datos con herramientas avanzadas (Python, Business Analytics)</li>
+            <li>Análisis de datos con herramientas como Excel, Looker Studio</li>
+            <li>Análisis de Datos: MySQL, RStudio, Looker Studio</li>
+            <li>Visualización de Datos: Dashboards interactivos, reportes automatizados</li>
+            <li>Dominio de la Clasificación Internacional de Enfermedades (CIE-11) para morbilidad y mortalidad</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HABILIDADES TÉCNICAS 3 -->
+      <div class="tile medium tile-teal">
+        <div class="scrollable">
+          <h3>Habilidades Técnicas</h3>
+          <p class="section-title">Gestión de Archivos Clínicos</p>
+          <ul>
+            <li>Organización y mantenimiento de registros clínicos y administrativos</li>
+            <li>Gestión de Archivos: Organización, digitalización y cumplimiento normativo</li>
+            <li>Gestión documental</li>
+            <li>Gestión de bases de datos y sistemas documentales</li>
+            <li>Gestión de datos clínicos (organización, clasificación, análisis)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HABILIDADES TÉCNICAS 4 -->
+      <div class="tile medium tile-teal">
+        <div class="scrollable">
+          <h3>Habilidades Técnicas</h3>
+          <p class="section-title">Gestión de Archivos (Continuación)</p>
+          <ul>
+            <li>Sistemas de registros electrónicos y normativas de confidencialidad</li>
+            <li>Conocimiento en protección de datos (Ley Federal de Protección de Datos Personales)</li>
+            <li>Manejo de información sensible</li>
+          </ul>
+          <p class="section-title">Cumplimiento Normativo</p>
+          <ul>
+            <li>Conocimiento en normativas de seguridad del paciente</li>
+            <li>Acciones Esenciales para la Seguridad del Paciente (AESP)</li>
+            <li>Conocimiento en protección de datos personales</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HABILIDADES TÉCNICAS 5 -->
+      <div class="tile large tile-purple">
+        <div class="scrollable">
+          <h3>Habilidades Técnicas</h3>
+          <p class="section-title">Herramientas Tecnológicas</p>
+          <ul>
+            <li>Dominio de sistemas de bases de datos, hojas de cálculo (Excel) y software estadístico</li>
+            <li>Uso de herramientas virtuales para administración de proyectos</li>
+            <li>Conocimiento en Big Data, sistemas BI, bases de datos</li>
+            <li>Programación (JavaScript para automatización de procesos, Python)</li>
+            <li>Looker Studio, MySQL, WordPress (creación y gestión de sitios informativos)</li>
+            <li>Bootstrap, React, UI/UX Design con Figma, HTML, CSS</li>
+            <li>Herramientas digitales</li>
+          </ul>
+          <p class="section-title">Gestión y Optimización</p>
+          <ul>
+            <li>Enfoque en mejora continua y procesos eficientes</li>
+            <li>Optimización de procesos estadísticos y de archivo clínico</li>
+            <li>Evaluación de procesos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HABILIDADES BLANDAS -->
+      <div class="tile medium tile-orange">
+        <div class="scrollable">
+          <h3>Habilidades Interpersonales</h3>
+          <ul>
+            <li>Trabajo en equipo</li>
+            <li>Liderazgo y coordinación de equipos multidisciplinarios</li>
+            <li>Comunicación efectiva</li>
+            <li>Resolución de conflictos</li>
+            <li>Motivación para el trabajo</li>
+            <li>Adaptabilidad en entornos complejos o de contingencia</li>
+            <li>Ética profesional</li>
+            <li>Integridad y confidencialidad</li>
+            <li>Trato Digno</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OTRAS HABILIDADES -->
+      <div class="tile small tile-orange">
+        <div class="scrollable">
+          <h3>Otras Habilidades</h3>
+          <ul class="compact-list">
+            <li>Atención al detalle</li>
+            <li>Capacidad analítica</li>
+            <li>Manejo de estrés</li>
+            <li>Trabajo remoto</li>
+            <li>Marketing digital</li>
+            <li>Networking</li>
+            <li>Innovación</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CERTIFICACIONES TECNOLÓGICAS 1 -->
+      <div class="tile tall tile-purple">
+        <div class="scrollable">
+          <h3>Certificaciones Tecnológicas</h3>
+          <ul>
+            <li>Principios Básicos de Big Data <span class="year-badge">2022</span></li>
+            <li>Programación con JavaScript <span class="year-badge">2022</span></li>
+            <li>Gobernanza TI <span class="year-badge">2022</span></li>
+            <li>Analista de Proyectos BI <span class="year-badge">2022</span></li>
+            <li>Evaluador de Procesos <span class="year-badge">2022</span></li>
+            <li>Asistente Web <span class="year-badge">2022</span></li>
+            <li>Desarrollador de Contenido Digital <span class="year-badge">2022</span></li>
+            <li>Gestor de Imagen Web <span class="year-badge">2022</span></li>
+            <li>Técnico en Business Analytics <span class="year-badge">2022</span></li>
+            <li>Business Analytics (Curso Avanzado) <span class="year-badge">2023</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CERTIFICACIONES TECNOLÓGICAS 2 -->
+      <div class="tile tall tile-blue">
+        <div class="scrollable">
+          <h3>Certificaciones Tecnológicas</h3>
+          <ul>
+            <li>Optimización de Modelos de Aprendizaje Automático en Banca con Python <span class="year-badge">2022</span>
+            </li>
+            <li>Marketing Digital <span class="year-badge">2022</span></li>
+            <li>Networking y Marketing Personal <span class="year-badge">2022</span></li>
+            <li>Trabajo Remoto <span class="year-badge">2022</span></li>
+            <li>JavaScript Moderno <span class="year-badge">2023</span></li>
+            <li>Diseño UX/UI con Figma <span class="year-badge">2023</span></li>
+            <li>Desarrollo de Tiendas Virtuales con WordPress <span class="year-badge">2023</span></li>
+            <li>Bootstrap 5: El Curso Completo, Práctico y Desde Cero <span class="year-badge">2024</span></li>
+            <li>UI/UX Design Hybrid: From Figma to HTML, CSS, and JavaScript <span class="year-badge">2024</span></li>
+            <li>React: De cero a experto (Hooks y MERN) <span class="year-badge">2023</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CERTIFICACIONES TECNOLÓGICAS 3 -->
+      <div class="tile medium tile-teal">
+        <div class="scrollable">
+          <h3>Certificaciones Tecnológicas</h3>
+          <ul>
+            <li>Registro de Marca. ¡Hazlo tú mismo! <span class="year-badge">2024</span></li>
+            <li>Ciencia de Datos con MySQL, RStudio y Looker Studio: Casos Reales <span class="year-badge">2024</span>
+            </li>
+            <li>Build a Free Website with WordPress <span class="year-badge">2024</span></li>
+            <li>Fundamentals of Digital Marketing <span class="year-badge">2024</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CERTIFICACIONES SALUD 1 -->
+      <div class="tile tall tile-green">
+        <div class="scrollable">
+          <h3>Certificaciones en Salud</h3>
+          <ul>
+            <li>Acciones Esenciales para la Seguridad del Paciente <span class="year-badge">2023</span></li>
+            <li>Actualización de Acciones Esenciales para la Seguridad del Paciente (AESP) <span
+                class="year-badge">2024</span></li>
+            <li>Protección de Datos Personales <span class="year-badge">2023</span></li>
+            <li>Ética e Integridad en el Servicio Público <span class="year-badge">2023</span></li>
+            <li>Manejo de Residuos Peligrosos Biológico-Infecciosos (RPBI) <span class="year-badge">2023</span></li>
+            <li>Guía para la Expedición del Certificado Electrónico de Nacimiento <span class="year-badge">2023</span>
+            </li>
+            <li>Interculturalidad y Género en Derechos Humanos <span class="year-badge">2023</span></li>
+            <li>Higiene de Manos <span class="year-badge">2023</span></li>
+            <li>Curso de Higiene de Manos <span class="year-badge">2024</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CERTIFICACIONES SALUD 2 -->
+      <div class="tile tall tile-orange">
+        <div class="scrollable">
+          <h3>Certificaciones en Salud</h3>
+          <ul>
+            <li>1er. Curso Básico de la Clasificación Internacional de Enfermedades (CIE-11) - Módulo II: Morbilidad <span
+                class="year-badge">2024</span></li>
+            <li>1er. Curso Básico de la Clasificación Internacional de Enfermedades (CIE-11) - Módulo I: Mortalidad <span
+                class="year-badge">2024</span></li>
+            <li>Archivo Clínico y Documentación</li>
+            <li>Programa de Capacitación en Infección por SARS-CoV-2 <span class="year-badge">2020</span></li>
+            <li>Derechos Humanos, Género y Salud <span class="year-badge">2018</span></li>
+            <li>Trato Digno a través del Trabajo en Equipo <span class="year-badge">2019</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CURSOS COMPLEMENTARIOS 1 -->
+      <div class="tile medium tile-red">
+        <div class="scrollable">
+          <h3>Cursos Complementarios</h3>
+          <ul>
+            <li>Matemáticas Aplicadas a las Finanzas <span class="year-badge">2004</span></li>
+            <li>Asesor en Estrategias de Inversión <span class="year-badge">2006</span></li>
+            <li>Nómina Integral <span class="year-badge">2004</span></li>
+            <li>Relaciones Humanas y Trabajo en Equipo <span class="year-badge">2014</span></li>
+            <li>Calidad en el Servicio <span class="year-badge">2005</span></li>
+            <li>Motivación para el Trabajo <span class="year-badge">2003</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CURSOS COMPLEMENTARIOS 2 -->
+      <div class="tile medium tile-pink">
+        <div class="scrollable">
+          <h3>Cursos Complementarios</h3>
+          <ul>
+            <li>Inglés Básico <span class="year-badge">2015</span></li>
+            <li>Certificado como Administrador de Proyectos para Ambientes Virtuales de Aprendizaje <span
+                class="year-badge">2022</span></li>
+            <li>Jornadas de Capacitación en Informática <span class="year-badge">2018</span></li>
+            <li>Taller de Estrategias para el Manejo de Estrés <span class="year-badge">2021</span></li>
+            <li>Jornadas de Actualización Administrativas III <span class="year-badge">2020</span></li>
+            <li>Jornadas de Actualización Administrativa <span class="year-badge">2022</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LOGROS DESTACADOS -->
+      <div class="tile large tile-teal">
+        <div class="scrollable">
+          <h3>Logros Destacados</h3>
+          <ul>
+            <li>Diseño y registro de un sistema de gestión documental para el sector salud, optimizando procesos de
+              administración financiera</li>
+            <li>Reconocimiento por desempeño sobresaliente en evaluación CENEVAL (2017)</li>
+            <li>Registro de Derecho de Autor (2016) por la creación de una base de datos para el gasto directo de unidades
+              de salud</li>
+            <li>Proyectos Destacados: Desarrollo de Sistema para control de Cartillas Nacionales de Salud en la Región
+              Sanitaria VIII (2021)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- INFORMACIÓN ADICIONAL -->
+      <div class="tile small tile-blue">
+        <div class="scrollable">
+          <h3>Información Adicional</h3>
+          <p><strong>Disponibilidad:</strong> Inmediata</p>
+          <p><strong>Idiomas:</strong> Español: Nativo. Inglés: Básico.</p>
+        </div>
+      </div>
+
+      <!-- DOCUMENTACIÓN -->
+      <div class="tile small tile-green">
+        <div class="scrollable">
+          <h3>Documentación</h3>
+          <p>Documentación respaldatoria disponible para verificación: Constancias y certificados emitidos por la
+            Universidad de Guadalajara, Udemy, Secretaría de Salud Jalisco, CENEVAL, Coursera y Capacítate para el Empleo.
+          </p>
+          <p>Registro de Derecho de Autor (INDautor, 2016).</p>
+        </div>
+      </div>
+
+      <!-- PERFIL COMPLEMENTO 1 -->
+      <div class="tile medium tile-purple">
+        <div class="scrollable">
+          <h3>Perfil Profesional</h3>
+          <p>Formación en Business Analytics, Marketing Digital, y gestión de datos, con experiencia en el análisis de
+            información clínica y estadísticas de salud.</p>
+          <p>Certificado en acciones esenciales para la seguridad del paciente. Habilidades en herramientas digitales,
+            trabajo remoto y optimización de procesos, orientado a la mejora continua y al cumplimiento normativo en
+            archivos clínicos.</p>
+        </div>
+      </div>
+
+      <!-- PERFIL COMPLEMENTO 2 -->
+      <div class="tile medium tile-orange">
+        <div class="scrollable">
+          <h3>Perfil Profesional</h3>
+          <p>Amplia experiencia en gestión de datos, estadísticas y archivo clínico, respaldado por una sólida formación
+            en protección de datos personales, ética en servicios públicos, y manejo de información sensible.</p>
+          <p>Capacitado en herramientas tecnológicas modernas y comprometido con la integridad y eficiencia en el manejo
+            de registros médicos.</p>
+        </div>
+      </div>
+
+      <!-- PERFIL COMPLEMENTO 3 -->
+      <div class="tile medium tile-red">
+        <div class="scrollable">
+          <h3>Perfil Profesional</h3>
+          <p>Formación especializada en estadísticas de salud, clasificación de enfermedades (CIE-11), y manejo de
+            archivos clínicos.</p>
+          <p>Experiencia en capacitación en seguridad del paciente, higiene de manos, y herramientas tecnológicas para la
+            gestión de datos. Comprometido con la calidad, la innovación y el cumplimiento de estándares en el ámbito de
+            la salud.</p>
+        </div>
+      </div>
+
+      <!-- PERFIL COMPLEMENTO 4 -->
+      <div class="tile medium tile-pink">
+        <div class="scrollable">
+          <h3>Perfil Profesional</h3>
+          <p>Especializado en ciencia de datos, gestión de información clínica y análisis estadístico, con formación en
+            herramientas como MySQL, RStudio, Looker Studio y WordPress.</p>
+          <p>Experiencia en el manejo de bases de datos, visualización de datos y desarrollo de soluciones tecnológicas
+            para la optimización de procesos clínicos y estadísticos.</p>
+        </div>
+      </div>
+
+      <!-- TAGS HABILIDADES 1 -->
+      <div class="tile small tile-teal">
+        <div class="scrollable">
+          <h3>Habilidades Clave</h3>
+          <div class="tags">
+            <span class="tag">Análisis Datos</span>
+            <span class="tag">Estadísticas</span>
+            <span class="tag">Archivo Clínico</span>
+            <span class="tag">Gestión Documental</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">RStudio</span>
+            <span class="tag">Looker Studio</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAGS HABILIDADES 2 -->
+      <div class="tile small tile-blue">
+        <div class="scrollable">
+          <h3>Habilidades Clave</h3>
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">React</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">Figma</span>
+            <span class="tag">WordPress</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAGS HABILIDADES 3 -->
+      <div class="tile small tile-green">
+        <div class="scrollable">
+          <h3>Habilidades Clave</h3>
+          <div class="tags">
+            <span class="tag">Business Analytics</span>
+            <span class="tag">Big Data</span>
+            <span class="tag">Gobernanza TI</span>
+            <span class="tag">CIE-11</span>
+            <span class="tag">Seguridad Paciente</span>
+            <span class="tag">Protección Datos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTIFICADOS URL -->
+      <div class="tile small tile-purple">
+        <div class="scrollable">
+          <h3>Certificados URL</h3>
+          <p><strong>Ciencia de Datos:</strong><br>ude.my/UC-a@afied1-af86-4751-93d5-d8147a94a0e</p>
+          <p><strong>WordPress:</strong><br>coursera.org/verify/WRAXIOST4IPU</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // THEME TOGGLE FUNCTIONALITY
+    // ============================================
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    // Cargar tema guardado o usar tema oscuro por defecto
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    // Toggle theme on click
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Toggle theme on keyboard (Enter or Space)
+    themeToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleTheme();
+      }
+    });
+
+    function toggleTheme() {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    // ============================================
+    // PRINT FUNCTIONALITY
+    // ============================================
+    function abrirCVImpresion() {
+      const win = window.open(
+        'original.html',
+        '_blank',
+        'width=900,height=1200'
+      );
+
+      if (win) {
+        win.onload = () => {
+          win.focus();
+          win.print();
+        };
+      } else {
+        // Si el popup fue bloqueado, usar print directo
+        alert('Por favor, permite las ventanas emergentes o presiona Ctrl+P para imprimir');
+        window.print();
+      }
+    }
+
+    // ============================================
+    // SMOOTH SCROLL AND ANIMATIONS
+    // ============================================
+    
+    // Intersection Observer para animaciones al hacer scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    // Observar todas las tiles
+    document.querySelectorAll('.tile').forEach(tile => {
+      observer.observe(tile);
+    });
+
+    // ============================================
+    // ACCESSIBILITY - Focus management
+    // ============================================
+    document.querySelectorAll('.tile').forEach(tile => {
+      tile.setAttribute('tabindex', '0');
+    });
+
+    // ============================================
+    // PERFORMANCE - Lazy load for better initial render
+    // ============================================
+    if ('IntersectionObserver' in window) {
+      const lazyLoadObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('loaded');
+            lazyLoadObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      document.querySelectorAll('.tile').forEach(tile => {
+        lazyLoadObserver.observe(tile);
+      });
+    }
+
+    // ============================================
+    // KEYBOARD SHORTCUTS
+    // ============================================
+    document.addEventListener('keydown', (e) => {
+      // Ctrl/Cmd + P para imprimir
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        abrirCVImpresion();
+      }
+      
+      // Ctrl/Cmd + D para toggle theme
+      if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+        e.preventDefault();
+        toggleTheme();
+      }
+    });
+
+    // ============================================
+    // CONSOLE INFO
+    // ============================================
+    console.log('%c📄 CV Profesional - Jerónimo Ricardo Ramírez Torres', 'font-size: 16px; font-weight: bold; color: #FF9D02;');
+    console.log('%cAtajos de teclado:', 'font-weight: bold;');
+    console.log('  Ctrl/Cmd + P: Imprimir CV');
+    console.log('  Ctrl/Cmd + D: Cambiar tema');
+  </script>
+
+</body>
+
+</html>
