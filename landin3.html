@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jerónimo Ramírez | Soluciones Digitales Premium</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-blue: #2196f3;
+      --primary-green: #4caf50;
+      --primary-orange: #ff6f61;
+      --primary-yellow: #ffcc00;
+      --dark-bg: #0f172a;
+      --light-bg: #f8fafc;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: #333;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    
+    /* Header */
+    header {
+      background-color: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .logo-icon {
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #fff, #e0f2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    nav a:hover {
+      color: white;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+      transition: var(--transition);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      padding: 12rem 2rem 8rem;
+      text-align: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(76, 175, 80, 0.1) 0%, transparent 50%);
+    }
+    
+    .hero h2 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #ffcc00, #ff6f61, #2196f3, #4caf50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: #cbd5e1;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+      color: white;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(33, 150, 243, 0.4);
+    }
+    
+    /* Grid Container */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 3.5rem;
+      color: var(--dark-bg);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+      border-radius: 2px;
+    }
+    
+    /* Tile Grid */
+    .tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 280px;
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+    
+    .tile {
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .tile:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+    
+    .tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      z-index: -1;
+    }
+    
+    .tile-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    .tile h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    
+    .tile p {
+      color: #475569;
+      font-size: 1rem;
+    }
+    
+    /* Tile Sizes */
+    .tile-small {
+      grid-column: span 4;
+    }
+    
+    .tile-medium {
+      grid-column: span 6;
+    }
+    
+    .tile-large {
+      grid-column: span 8;
+    }
+    
+    .tile-xlarge {
+      grid-column: span 12;
+    }
+    
+    /* Tile Colors */
+    .tile-blue {
+      border-top: 5px solid var(--primary-blue);
+    }
+    
+    .tile-blue .tile-icon {
+      color: var(--primary-blue);
+    }
+    
+    .tile-green {
+      border-top: 5px solid var(--primary-green);
+    }
+    
+    .tile-green .tile-icon {
+      color: var(--primary-green);
+    }
+    
+    .tile-orange {
+      border-top: 5px solid var(--primary-orange);
+    }
+    
+    .tile-orange .tile-icon {
+      color: var(--primary-orange);
+    }
+    
+    .tile-yellow {
+      border-top: 5px solid var(--primary-yellow);
+    }
+    
+    .tile-yellow .tile-icon {
+      color: var(--primary-yellow);
+    }
+    
+    .tile-purple {
+      border-top: 5px solid #9c27b0;
+    }
+    
+    .tile-purple .tile-icon {
+      color: #9c27b0;
+    }
+    
+    /* Architecture Section */
+    .architecture-section {
+      background-color: #f1f5f9;
+      padding: 6rem 0;
+      margin: 4rem 0;
+    }
+    
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .architecture-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+    
+    .architecture-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .architecture-card h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--dark-bg);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    /* Pitch Section */
+    .pitch-section {
+      padding: 6rem 0;
+    }
+    
+    .pitch-card {
+      background: linear-gradient(135deg, var(--dark-bg), #1e293b);
+      color: white;
+      border-radius: 20px;
+      padding: 3.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      margin-bottom: 4rem;
+    }
+    
+    .pitch-card h3 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      background: linear-gradient(90deg, #ffcc00, #4caf50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .pitch-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: #e2e8f0;
+    }
+    
+    .pitch-card ul {
+      margin-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .pitch-card li {
+      margin-bottom: 0.8rem;
+      color: #e2e8f0;
+    }
+    
+    .highlight {
+      background: linear-gradient(90deg, rgba(255, 204, 0, 0.2), rgba(33, 150, 243, 0.2));
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    /* Contact Form */
+    .contact-section {
+      padding: 6rem 0;
+      background-color: #f8fafc;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      align-items: start;
+    }
+    
+    .contact-info {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .contact-info h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--dark-bg);
+    }
+    
+    .contact-info p {
+      margin-bottom: 1.5rem;
+      color: #475569;
+    }
+    
+    .contact-details {
+      margin-top: 2rem;
+    }
+    
+    .contact-details div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    .contact-details i {
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    label {
+      font-weight: 600;
+      color: var(--dark-bg);
+    }
+    
+    input, textarea {
+      padding: 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+    
+    #status {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .success {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+    
+    .error {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--dark-bg), #1e293b);
+      color: white;
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #ffcc00, #2196f3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .footer-tagline {
+      color: #cbd5e1;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      font-size: 1.1rem;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      margin-top: 3rem;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .tile-small, .tile-medium, .tile-large, .tile-xlarge {
+        grid-column: span 6;
+      }
+      
+      .hero h2 {
+        font-size: 2.8rem;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      nav {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(15, 23, 42, 0.98);
+        padding: 2rem;
+        z-index: 999;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      
+      .mobile-menu.active {
+        display: block;
+      }
+      
+      .mobile-menu a {
+        display: block;
+        color: #cbd5e1;
+        text-decoration: none;
+        padding: 1rem 0;
+        font-size: 1.2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+      }
+      
+      .mobile-menu a:hover {
+        color: white;
+        padding-left: 1rem;
+      }
+      
+      .hero {
+        padding: 10rem 1.5rem 6rem;
+      }
+      
+      .hero h2 {
+        font-size: 2.4rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .tile-small, .tile-medium, .tile-large, .tile-xlarge {
+        grid-column: span 12;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .pitch-card {
+        padding: 2rem;
+      }
+      
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem 1.5rem;
+      }
+      
+      .hero {
+        padding: 9rem 1rem 5rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+      
+      .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+      
+      .tile {
+        padding: 1.5rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">JR</div>
+      <div class="logo-text">Jerónimo Ramírez</div>
+    </div>
+    
+    <nav class="desktop-nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#arquitectura">Arquitectura</a>
+      <a href="#casos">Casos de Éxito</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#servicios">Servicios</a>
+      <a href="#arquitectura">Arquitectura</a>
+      <a href="#casos">Casos de Éxito</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2><span class="hero-gradient">Soluciones Digitales Premium</span> para la Transformación Institucional</h2>
+    <p class="hero-subtitle">Conectamos procesos, simplificamos operaciones y entregamos resultados con elegancia, precisión y eficiencia comprobada.</p>
+    <a href="#contacto" class="cta-button">Solicitar una Demostración <i class="fas fa-arrow-right"></i></a>
+  </section>
+
+  <section id="servicios" class="container">
+    <h2 class="section-title">Servicios Especializados</h2>
+    
+    <div class="tiles-grid">
+      <!-- Tile 1 -->
+      <div class="tile tile-medium tile-blue">
+        <div class="tile-icon">
+          <i class="fas fa-hospital"></i>
+        </div>
+        <h3>Sistemas Hospitalarios en Tiempo Real</h3>
+        <p>Plataformas de control clínico y estadístico: defunciones, nacimientos, egresos y urgencias. Conecta departamentos y asegura información confiable para la toma de decisiones estratégicas.</p>
+      </div>
+      
+      <!-- Tile 2 -->
+      <div class="tile tile-small tile-green">
+        <div class="tile-icon">
+          <i class="fas fa-university"></i>
+        </div>
+        <h3>Plataformas Académicas</h3>
+        <p>Desarrollo web especializado para instituciones educativas con temarios interconectados, documentos accesibles y herramientas interactivas de aprendizaje.</p>
+      </div>
+      
+      <!-- Tile 3 -->
+      <div class="tile tile-small tile-orange">
+        <div class="tile-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3>Administración Gubernamental</h3>
+        <p>Soluciones digitales para gobiernos locales: formularios inteligentes, trazabilidad completa y eliminación de burocracia mediante automatización.</p>
+      </div>
+      
+      <!-- Tile 4 -->
+      <div class="tile tile-large tile-purple">
+        <div class="tile-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Dashboards y Paneles de Control</h3>
+        <p>Visualización de datos en tiempo real con métricas clave, indicadores de desempeño y reportes automatizados para la gestión informada de cualquier institución.</p>
+      </div>
+      
+      <!-- Tile 5 -->
+      <div class="tile tile-medium tile-yellow">
+        <div class="tile-icon">
+          <i class="fas fa-database"></i>
+        </div>
+        <h3>Migración y Centralización de Datos</h3>
+        <p>Integración de sistemas fragmentados en una plataforma unificada, con historial completo y accesibilidad controlada según roles y responsabilidades.</p>
+      </div>
+      
+      <!-- Tile 6 -->
+      <div class="tile tile-small tile-blue">
+        <div class="tile-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3>Aplicaciones Móviles</h3>
+        <p>Extensión de funcionalidades a dispositivos móviles con interfaces intuitivas, notificaciones push y acceso offline para trabajo en campo.</p>
+      </div>
+      
+      <!-- Tile 7 -->
+      <div class="tile tile-xlarge tile-green">
+        <div class="tile-icon">
+          <i class="fas fa-cogs"></i>
+        </div>
+        <h3>Automatización de Procesos Institucionales</h3>
+        <p>Reducción de trabajo manual mediante flujos automatizados, triggers inteligentes y alertas programadas que optimizan el uso de recursos humanos y técnicos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="arquitectura" class="architecture-section">
+    <div class="container">
+      <h2 class="section-title">Arquitectura Híbrida Premium</h2>
+      <p class="hero-subtitle" style="color: #475569; text-align: center; max-width: 900px; margin: 0 auto 3rem;">Una combinación estratégica de tecnologías modernas para maximizar eficiencia y minimizar costos</p>
+      
+      <div class="architecture-grid">
+        <div class="architecture-card">
+          <h4><i class="fab fa-github" style="color: #333;"></i> Frontend en GitHub Pages</h4>
+          <p>Despliegue gratuito y rápido con control de versiones, integración continua y diseño moderno con glassmorphism y animaciones fluidas.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Cero costos de hosting</li>
+            <li>Actualizaciones instantáneas</li>
+            <li>Máxima seguridad y disponibilidad</li>
+          </ul>
+        </div>
+        
+        <div class="architecture-card">
+          <h4><i class="fas fa-bridge" style="color: #34a853;"></i> Google Apps Script como Puente</h4>
+          <p>API personalizada, autenticación ligera y automatización de procesos que conectan el frontend con bases de datos y servicios en la nube.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Integración con servicios Google</li>
+            <li>Automatización sin servidores</li>
+            <li>Escalabilidad automática</li>
+          </ul>
+        </div>
+        
+        <div class="architecture-card">
+          <h4><i class="fas fa-table" style="color: #0f9d58;"></i> Google Sheets como Base Operativa</h4>
+          <p>Interfaz editable familiar, control granular de permisos y triggers automáticos para operaciones en tiempo real con trazabilidad completa.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Interfaz intuitiva para usuarios</li>
+            <li>Colaboración en tiempo real</li>
+            <li>Historial de cambios detallado</li>
+          </ul>
+        </div>
+        
+        <div class="architecture-card">
+          <h4><i class="fas fa-chart-bar" style="color: #4285f4;"></i> BigQuery como Motor Analítico</h4>
+          <p>Consultas avanzadas sobre millones de registros, escalabilidad real y dashboards conectados para inteligencia de negocio en tiempo real.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Análisis de datos a gran escala</li>
+            <li>Consultas SQL complejas</li>
+            <li>Integración con herramientas BI</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="casos" class="container pitch-section">
+    <h2 class="section-title">Casos de Éxito</h2>
+    
+    <div class="pitch-card">
+      <h3>🚀 Del Caos al Control: La Transformación Digital Institucional</h3>
+      
+      <p>Las instituciones hoy enfrentan un dilema crítico: sistemas fragmentados que no se comunican, costos de infraestructura elevados y procesos que se estancan en la burocracia. <span class="highlight">Mi solución rompe este paradigma</span>.</p>
+      
+      <p>Con un <span class="highlight">frontend moderno alojado en GitHub Pages</span>, entrego interfaces visuales limpias, responsivas y atractivas, <strong>sin costos de hosting ni dominios</strong>. Esto significa actualizaciones inmediatas con control de versiones y despliegue automático.</p>
+      
+      <p>En el backend, aprovecho la potencia de <span class="highlight">Google Sheets y Google Drive</span> como base operativa editable y transparente, donde cualquier colaborador puede ver y modificar datos con seguridad y trazabilidad. Cuando la institución necesita escalar, conecto todo con <span class="highlight">BigQuery</span>, capaz de procesar millones de registros en segundos.</p>
+      
+      <p>El puente entre ambos mundos es <span class="highlight">Google Apps Script</span>, que me permite crear APIs personalizadas, automatizar procesos, validar datos y disparar alertas. Con esta arquitectura híbrida, las instituciones obtienen un sistema <strong>ágil, escalable y económico</strong>.</p>
+      
+      <h4 style="color: #ffcc00; margin-top: 2rem;">Resultados Tangibles para Nuestros Clientes:</h4>
+      <ul>
+        <li><strong>Hospital Regional Puerto Vallarta:</strong> Reducción del 40% en tiempo de reportes clínicos y paneles de control en tiempo real para decisiones basadas en datos confiables.</li>
+        <li><strong>Universidad Tecnológica:</strong> Plataforma académica con aumento del 25% en engagement estudiantil y reducción del 60% en carga administrativa.</li>
+        <li><strong>Gobierno Municipal:</strong> Digitalización de 12 procesos burocráticos, ahorrando aproximadamente 200 horas mensuales de trabajo manual.</li>
+      </ul>
+      
+      <p style="margin-top: 2rem; font-size: 1.2rem; font-weight: 600;">En resumen: <span class="highlight">del caos al control, del papel al pixel, de lo costoso a lo eficiente</span>. Mi stack convierte la digitalización institucional en una experiencia premium, accesible y memorable.</p>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">¿Listo para Transformar su Institución?</h2>
+      
+      <div class="contact-container">
+        <div class="contact-info">
+          <h4>Conversemos sobre su Proyecto</h4>
+          <p>¿Quieres llevar tu institución al siguiente nivel digital? Escríbeme y conversemos sobre cómo podemos optimizar tus procesos con soluciones tecnológicas a medida.</p>
+          
+          <div class="contact-details">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Soluciones disponibles para toda Latinoamérica</span>
+            </div>
+            <div>
+              <i class="fas fa-clock"></i>
+              <span>Respuesta en menos de 24 horas hábiles</span>
+            </div>
+            <div>
+              <i class="fas fa-check-circle"></i>
+              <span>Primera consulta sin costo</span>
+            </div>
+          </div>
+          
+          <div style="margin-top: 2.5rem;">
+            <h4>Ventajas Clave</h4>
+            <ul style="margin-top: 1rem;">
+              <li>Implementación en 2-4 semanas</li>
+              <li>Costos hasta 70% menores que soluciones tradicionales</li>
+              <li>Soporte continuo y capacitación incluida</li>
+              <li>Arquitectura escalable según sus necesidades</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="nombre">Nombre Completo *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Correo Electrónico *</label>
+              <input type="email" id="email" name="email" placeholder="Tu correo" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="institucion">Institución/Organización *</label>
+              <input type="text" id="institucion" name="institucion" placeholder="Nombre de su institución" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="necesidad">¿Qué necesitas administrar/digitalizar?</label>
+              <textarea id="necesidad" name="necesidad" rows="3" placeholder="Ej: Procesos hospitalarios, plataforma académica, gestión municipal..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="mensaje">Mensaje Detallado *</label>
+              <textarea id="mensaje" name="mensaje" rows="5" placeholder="Describe tu proyecto, necesidades específicas y cualquier requisito importante..." required></textarea>
+            </div>
+            
+            <button type="submit" class="cta-button" style="width: 100%;">Solicitar Propuesta Personalizada</button>
+          </form>
+          <p id="status"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">Jerónimo Ramírez</div>
+      <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conectamos procesos, simplificamos operaciones y entregamos resultados.</p>
+      
+      <div style="margin: 3rem 0;">
+        <a href="#contacto" class="cta-button" style="display: inline-block;">Solicitar Demostración</a>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© <span id="year">2023</span> Jerónimo Ramírez - Soluciones Digitales Premium. Todos los derechos reservados.</p>
+        <p style="margin-top: 0.5rem;">Transformando instituciones con tecnología elegante, eficiente y accesible.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Año actual en el footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking a link
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
+    // Form submission con Google Apps Script
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "Enviando...";
+      status.className = "";
+      
+      try {
+        // URL de tu Google Apps Script desplegado como Web App
+        const scriptURL = "https://script.google.com/macros/s/AKfycbye0EHqQhLtxmFAokEle-sy2pl_zQGDxJB6VnXubEuHxyQBDd-0Nxy8Y4jKzRmxFckH/exec";
+        const formData = new FormData(form);
+        await fetch(scriptURL, { method: "POST", body: formData });
+        status.textContent = "¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
+        status.className = "success";
+        form.reset();
+      } catch (error) {
+        status.textContent = "Error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente.";
+        status.className = "error";
+        console.error('Error!', error.message);
+      }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Add scroll effect to header
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+      } else {
+        header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+      }
+    });
+  </script>
+</body>
+</html>
