@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jerónimo Ramírez | Soluciones Digitales</title>
+  <title>Jerónimo Ricardo Ramírez Torres | Soluciones Digitales</title>
   <style>
     body {
       margin: 0;
@@ -68,11 +68,11 @@
 </head>
 <body>
   <header>
-    <h1>Jerónimo Ramírez</h1>
+    <h1>Jerónimo Ramírez Ramírez Torres</h1>
     <nav>
       <a href="#hospital">Hospital</a>
       <a href="#academico">Académico</a>
-      <a href="#arquitectura">Arquitectura</a>
+      <a href="#beneficios">Beneficios</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
@@ -96,14 +96,22 @@
     </div>
   </section>
 
-  <section id="arquitectura">
-    <h3>🚀 Arquitectura Híbrida</h3>
+  <section id="beneficios">
+    <h3>Beneficios de mi Stack</h3>
     <div class="card">
-      <p><strong>Frontend en GitHub Pages:</strong> despliegue gratuito y rápido, control de versiones, integración continua y diseño moderno con glassmorphism y animaciones.</p>
-      <p><strong>Google Apps Script como puente:</strong> API personalizada, autenticación ligera y automatización de procesos.</p>
-      <p><strong>Google Sheets como base operativa:</strong> interfaz editable, control granular y triggers automáticos.</p>
-      <p><strong>BigQuery como motor analítico:</strong> consultas avanzadas, escalabilidad real y dashboards conectados.</p>
-      <p><strong>Casos de uso:</strong> sistemas clínicos con trazabilidad, formularios inteligentes, paneles de control y campañas interactivas.</p>
+      <p><strong>Google Sheets como backend ligero:</strong> base de datos viva, editable en tiempo real, con validaciones y reportes instantáneos.</p>
+      <p><strong>Google Drive como repositorio institucional:</strong> documentos siempre disponibles, con control de permisos y trazabilidad.</p>
+      <p><strong>Frontend sin hosting ni dominio:</strong> cero costos de infraestructura, actualizaciones rápidas y sencillas, ideal para prototipos y producción ligera.</p>
+      
+      Hospedar tu frontend en GitHub te da varias ventajas:
+
+Despliegue gratuito y rápido: GitHub Pages permite publicar sitios estáticos sin costo, ideal para prototipos o productos funcionales.
+
+Control de versiones: Puedes rastrear cambios, colaborar con otros y revertir errores fácilmente.
+
+Integración continua: Puedes automatizar el despliegue con GitHub Actions para que cada push actualice tu sitio.
+
+Diseño moderno: Puedes aplicar tus habilidades en glassmorphism y animaciones como confetti para crear experiencias atractivas y memorables.
     </div>
   </section>
 
@@ -120,7 +128,7 @@
   </section>
 
   <footer>
-    © <span id="year"></span> Jerónimo Ramírez. Todos los derechos reservados.
+    © <span id="year"></span> Jerónimo Ricardo Ramírez Torres. Todos los derechos reservados.
   </footer>
 
   <script>
@@ -134,7 +142,7 @@
       status.textContent = "Enviando...";
       try {
         // URL de tu Google Apps Script desplegado como Web App
-        const scriptURL = "TU_URL_DE_GOOGLE_APPS_SCRIPT";
+        const scriptURL = "https://script.google.com/macros/s/AKfycbye0EHqQhLtxmFAokEle-sy2pl_zQGDxJB6VnXubEuHxyQBDd-0Nxy8Y4jKzRmxFckH/exec";
         const formData = new FormData(form);
         await fetch(scriptURL, { method: "POST", body: formData });
         status.textContent = "¡Mensaje enviado con éxito!";
