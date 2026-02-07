@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jerónimo Ricardo Ramírez Torres| Soluciones Digitales Premium</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/jeronimoricardo/favicon-32x32.png">
-<!--     <link rel="manifest" href="/site.webmanifest"> -->
+    <!--     <link rel="manifest" href="/site.webmanifest"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -1186,7 +1186,7 @@
 
             try {
                 // URL de tu Google Apps Script desplegado como Web App
-                const scriptURL = "https://script.google.com/macros/s/AKfycbzu1IQpMs86EzqeLD473XZX_rLmI2jSqnZEDrSVAc5XP35UyZplWh3kU9Ut7Wp8rvnB/exec";
+                const scriptURL = "https://script.google.com/macros/s/AKfycbzQA2vMJpTA9ftbE1FIdiuTgGD3BxQ8kA6Cgz3PxN_ocoYq2m_sNMIjPd7feRunUSc/exec";
                 const formData = new FormData(form);
                 await fetch(scriptURL, { method: "POST", body: formData });
                 status.textContent = "¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
@@ -1312,6 +1312,32 @@
                 registros: registros
             })).setMimeType(ContentService.MimeType.JSON);
         }
+
+        // ========== DIAGNÓSTICO AUTOMÁTICO ==========
+        console.log("🔍 INICIANDO DIAGNÓSTICO GAS");
+
+        // Prueba la conexión inmediatamente
+        fetch(SCRIPT_URL + '?action=test&timestamp=' + Date.now())
+            .then(response => {
+                console.log("✅ Conexión HTTP:", response.status, response.statusText);
+                return response.json();
+            })
+            .then(data => {
+                console.log("✅ Respuesta GAS:", data);
+
+                // Si funciona, cargar datos iniciales
+                if (data.status === "ok") {
+                    console.log("✅ GAS funcionando correctamente");
+                    loadDashboardData();
+                }
+            })
+            .catch(error => {
+                console.error("❌ Error de conexión:", error);
+                console.log("ℹ️ Mostrando datos de ejemplo...");
+                showSampleData();
+            });
+
+        console.log("🌐 URL GAS configurada:", SCRIPT_URL);
     </script>
 </body>
 
