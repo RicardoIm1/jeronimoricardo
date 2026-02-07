@@ -678,6 +678,29 @@
                 font-size: 1.8rem;
             }
         }
+
+        /* REGLAS ESPECÍFICAS PARA FORZAR EL COLOR BLANCO */
+        #mobileMenu a {
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+        #mobileMenu a:hover,
+        #mobileMenu a:focus,
+        #mobileMenu a:active {
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+        /* Asegurar que el menú móvil herede el color blanco */
+        .mobile-menu a,
+        .mobile-menu a:link,
+        .mobile-menu a:visited,
+        .mobile-menu a:hover,
+        .mobile-menu a:active {
+            color: white !important;
+            text-decoration: none !important;
+        }
     </style>
 </head>
 
