@@ -20,17 +20,17 @@
       top: 0;
       z-index: 1000;
       color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header h1 {
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin: 0;
     }
-    nav {
-      float: right;
-    }
     nav a {
-      margin-left: 1.5rem;
+      margin-left: 1rem;
       text-decoration: none;
       color: #fff;
       font-weight: 600;
@@ -43,17 +43,16 @@
     .hero {
       text-align: center;
       padding-top: 8rem;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
       background: linear-gradient(135deg, #ffcc00, #ff6f61, #2196f3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero h2 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
     .hero p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #444;
     }
     .card {
@@ -84,11 +83,11 @@
       color: #fff;
       font-size: 0.9rem;
     }
-    button {
+    button, input, textarea {
       background: linear-gradient(90deg, #ff6f61, #ffcc00, #2196f3);
       color: #fff;
       border: none;
-      padding: 0.9rem 1.6rem;
+      padding: 0.8rem 1.2rem;
       border-radius: 10px;
       cursor: pointer;
       font-size: 1rem;
@@ -98,6 +97,34 @@
     button:hover {
       opacity: 0.85;
     }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input, textarea {
+      background: #fff;
+      color: #222;
+      border: 1px solid #ccc;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 0.5rem;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+      section {
+        padding: 4rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -106,7 +133,7 @@
     <nav>
       <a href="#hospital">Hospital</a>
       <a href="#academico">Académico</a>
-      <a href="#portafolio">Portafolio</a>
+      <a href="#beneficios">Beneficios</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
@@ -114,7 +141,6 @@
   <section class="hero">
     <h2>Soluciones Digitales Premium</h2>
     <p>Transformación institucional con elegancia, precisión y color vibrante.</p>
-    <button onclick="scrollToSection('contacto')">Contáctame</button>
   </section>
 
   <section id="hospital">
@@ -133,19 +159,24 @@
     </div>
   </section>
 
-  <section id="portafolio">
-    <h3>Portafolio</h3>
-    <p>Más de 8 proyectos en producción, alojados en GitHub, que muestran mi experiencia en digitalización institucional y educativa.</p>
+  <section id="beneficios">
+    <h3>Beneficios de mi Stack</h3>
     <div class="card">
-      <img src="https://via.placeholder.com/900x400/4caf50/ffffff?text=Proyecto+Extra" alt="Proyecto adicional">
-      <p>Ejemplo de otro desarrollo en producción.</p>
+      <p><strong>Google Sheets como backend ligero:</strong> base de datos viva, editable en tiempo real, con validaciones y reportes instantáneos.</p>
+      <p><strong>Google Drive como repositorio institucional:</strong> documentos siempre disponibles, con control de permisos y trazabilidad.</p>
+      <p><strong>Frontend sin hosting ni dominio:</strong> cero costos de infraestructura, actualizaciones rápidas y sencillas, ideal para prototipos y producción ligera.</p>
     </div>
   </section>
 
   <section id="contacto">
     <h3>Contacto</h3>
     <p>¿Quieres llevar tu institución al siguiente nivel? Escríbeme y conversemos.</p>
-    <button onclick="alert('Gracias por tu interés, pronto me pondré en contacto contigo.')">Enviar mensaje</button>
+    <form action="mailto:jeronimoricardo1@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu correo" required>
+      <textarea name="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
+      <button type="submit">Enviar mensaje</button>
+    </form>
   </section>
 
   <footer>
@@ -154,9 +185,6 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({behavior: "smooth"});
-    }
   </script>
 </body>
 </html>
