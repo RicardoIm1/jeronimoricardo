@@ -1186,7 +1186,7 @@
 
             try {
                 // URL de tu Google Apps Script desplegado como Web App
-                const scriptURL = "https://script.google.com/macros/s/AKfycbx2H6Ad8B13vqWJomsAL_JtuLkyndzjS4eWHIOGeEKzlNaRU-v-V8Fb8C3QalBfkJFM/exec";
+                const scriptURL = "https://script.google.com/macros/s/AKfycbwZDILxHrgaS67s18VDXaRC28uG8k5qAxfWVfWJB5bV2B9kBpsAr7dfuPq0LGRJoQ93/exec";
                 const formData = new FormData(form);
                 await fetch(scriptURL, { method: "POST", body: formData });
                 status.textContent = "¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
