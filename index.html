@@ -181,6 +181,16 @@
             margin: 0 auto 3rem;
         }
 
+        /* === CONTROL BASE DE MENÚS === */
+        .desktop-nav {
+            display: flex;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+
         .cta-button {
             display: inline-block;
             background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
@@ -589,14 +599,18 @@
         }
 
         @media (max-width: 992px) {
-            nav {
+
+            /* Ocultar menú desktop */
+            .desktop-nav {
                 display: none;
             }
 
+            /* Mostrar botón hamburguesa */
             .mobile-menu-btn {
                 display: block;
             }
 
+            /* Menú móvil */
             .mobile-menu {
                 display: none;
                 position: fixed;
@@ -612,31 +626,33 @@
             .mobile-menu.active {
                 display: block;
             }
+        }
 
-            .mobile-menu a {
-                display: block;
-                color: white;
-                /* ← AQUÍ ESTÁ CAMBIADO */
-                text-decoration: none;
-                padding: 1rem 0;
-                font-size: 1.2rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                transition: var(--transition);
-            }
 
-            .mobile-menu a:hover {
-                color: white !important;
-                padding-left: 1rem;
-                text-decoration: none !important;
-            }
+        .mobile-menu a {
+            display: block;
+            color: white;
+            /* ← AQUÍ ESTÁ CAMBIADO */
+            text-decoration: none;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
 
-            .hero {
-                padding: 10rem 1.5rem 6rem;
-            }
+        .mobile-menu a:hover {
+            color: white !important;
+            padding-left: 1rem;
+            text-decoration: none !important;
+        }
 
-            .hero h2 {
-                font-size: 2.4rem;
-            }
+        .hero {
+            padding: 10rem 1.5rem 6rem;
+        }
+
+        .hero h2 {
+            font-size: 2.4rem;
+        }
         }
 
         @media (max-width: 768px) {
