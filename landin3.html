@@ -1220,6 +1220,7 @@
 
                     console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
 
+                    // ====== ¡SOLUCIÓN FINAL! ======
                     // Preparar datos para enviar
                     const params = new URLSearchParams();
                     params.append('nombre', nombre);
@@ -1227,8 +1228,6 @@
                     params.append('institucion', institucion || '');
                     params.append('necesidad', necesidad || '');
                     params.append('mensaje', mensaje);
-
-                    console.log("📤 Enviando datos:", params.toString());
 
                     // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
@@ -1251,13 +1250,6 @@
                         status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
                         status.className = "success";
 
-                        // Enviar notificación por email (opcional)
-                        try {
-                            await sendEmailNotification({ nombre, email, institucion, necesidad, mensaje });
-                        } catch (emailError) {
-                            console.log("ℹ️ No se pudo enviar notificación por email:", emailError);
-                        }
-
                         // Resetear formulario
                         form.reset();
 
@@ -1274,7 +1266,7 @@
                     } else if (error.message.includes('completa')) {
                         status.textContent = "⚠️ Por favor completa los campos requeridos (*)";
                     } else {
-                        status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente.";
+                        status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente.";
                     }
                     status.className = "error";
 
