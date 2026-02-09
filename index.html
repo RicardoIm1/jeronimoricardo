@@ -137,10 +137,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(76, 175, 80, 0.1) 0%, transparent 50%);
+            background: radial-gradient(...);
         }
+
 
         .hero h2 {
             font-size: 3.2rem;
@@ -1226,7 +1225,7 @@
                     params.append('institucion', institucion || '');
                     params.append('necesidad', necesidad || '');
                     params.append('mensaje', mensaje);
-                    
+
 
                     // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
