@@ -1158,7 +1158,7 @@
 
     <script>
         // ========== CONFIGURACIÓN GLOBAL ==========
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi_WjDLgj5GXok5QKC79p_hwv8XVVdbBSDKy7WcAXfNEktgdGQ_1ll3D0nlt0z53NS/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxvzUmqF2H4HE4bepwNdYO23SVkabdYKZJutjKIPACRRqhpZtEj9mDxpZVbBB2Mj3rZ/exec";
 
         console.log("✅ URL de GAS configurada:", SCRIPT_URL);
 
@@ -1227,6 +1227,8 @@
                     params.append('institucion', institucion || '');
                     params.append('necesidad', necesidad || '');
                     params.append('mensaje', mensaje);
+                    params.append('action', 'contacto');
+
 
                     // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
