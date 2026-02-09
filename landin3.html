@@ -1220,7 +1220,6 @@
 
                     console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
 
-                    // ====== ¡SOLUCIÓN FINAL! ======
                     // Preparar datos para enviar
                     const params = new URLSearchParams();
                     params.append('nombre', nombre);
@@ -1258,15 +1257,20 @@
                     }
 
                 } catch (error) {
-                    console.error("❌ Error en formulario de contacto:", error);
+                    console.error("❌ Error COMPLETO en formulario de contacto:", error);
+                    console.error("📊 Tipo de error:", typeof error);
+                    console.error("🔍 Mensaje:", error.message);
+                    console.error("📋 Stack:", error.stack);
 
                     // Mostrar mensaje de error apropiado
                     if (error.message.includes('email')) {
                         status.textContent = "⚠️ Por favor ingresa un email válido";
                     } else if (error.message.includes('completa')) {
                         status.textContent = "⚠️ Por favor completa los campos requeridos (*)";
+                    } else if (error.message.includes('Error al procesar')) {
+                        status.textContent = "❌ Error del servidor. Intenta nuevamente.";
                     } else {
-                        status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente.";
+                        status.textContent = "❌ Error: " + error.message;
                     }
                     status.className = "error";
 
