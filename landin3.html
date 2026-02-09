@@ -1375,22 +1375,26 @@
                 console.log("💾 Enviando a GAS:", datos);
 
                 try {
+                    // Preparar datos para enviar - VERSIÓN CORREGIDA
                     const params = new URLSearchParams();
-                    params.append('action', 'guardar_registro');
-                    params.append('nombre', datos.nombre);
-                    params.append('departamento', datos.departamento);
-                    params.append('cantidad', datos.cantidad);
-                    params.append('tipo', datos.tipo);
-                    params.append('ip', datos.ip || 'web-' + Date.now());
+                    params.append('nombre', nombre);
+                    params.append('email', email);
+                    params.append('institucion', institucion || '');
+                    params.append('necesidad', necesidad || '');
+                    params.append('mensaje', mensaje);
+                    // NO agregues 'action' aquí - el GAS procesará como contacto automáticamente
 
+                    console.log("📤 Enviando datos:", params.toString());
+
+                    // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        body: params
+                        body: params.toString()
                     });
-
+                    
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}`);
                     }
