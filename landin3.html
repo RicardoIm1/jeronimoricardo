@@ -1357,25 +1357,21 @@
 
             // ========== FUNCIÓN PARA GUARDAR EN GAS ==========
             async function saveToGAS(datos) {
-                console.log("💾 Enviando a GAS:", datos);
+                console.log("💾 Enviando a GAS (demo):", datos);
 
                 try {
-                    // Preparar datos para enviar - VERSIÓN CORREGIDA
                     const params = new URLSearchParams();
-                    params.append('nombre', nombre);
-                    params.append('email', email);
-                    params.append('institucion', institucion || '');
-                    params.append('necesidad', necesidad || '');
-                    params.append('mensaje', mensaje);
-                    // NO agregues 'action' aquí - el GAS procesará como contacto automáticamente
+                    params.append('action', 'guardar_registro');
+                    params.append('nombre', datos.nombre);
+                    params.append('departamento', datos.departamento);
+                    params.append('cantidad', datos.cantidad.toString());
+                    params.append('tipo', datos.tipo);
+                    params.append('ip', 'web-' + Date.now());
 
-                    console.log("📤 Enviando datos:", params.toString());
-
-                    // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                            'Content-Type': 'application/x-www-form-urlencoded',
                         },
                         body: params.toString()
                     });
