@@ -1220,62 +1220,54 @@
 
                     console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
 
+                    // ====== ¡SOLUCIÓN DEFINITIVA - SOLO GET! ======
                     // Preparar datos para enviar
-                    const params = new URLSearchParams();
-                    params.append('nombre', nombre);
-                    params.append('email', email);
-                    params.append('institucion', institucion || '');
-                    params.append('necesidad', necesidad || '');
-                    params.append('mensaje', mensaje);
+                    const datos = {
+                        nombre: nombre,
+                        email: email,
+                        institucion: institucion || '',
+                        necesidad: necesidad || '',
+                        mensaje: mensaje
+                    };
 
-                    // Enviar a GAS
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: params.toString()
+                    // Construir query string (URL segura)
+                    const queryParams = Object.keys(datos)
+                        .map(key => `${key}=${encodeURIComponent(datos[key])}`)
+                        .join('&');
+
+                    console.log("📤 Enviando vía GET:", queryParams);
+
+                    // Enviar a GAS usando GET (más confiable)
+                    const response = await fetch(`${SCRIPT_URL}?${queryParams}`, {
+                        method: 'GET'
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`Error del servidor: ${response.status}`);
-                    }
+                    console.log("📨 Response status:", response.status);
 
                     const result = await response.json();
-                    console.log("✅ Respuesta de GAS:", result);
+                    console.log("✅ Respuesta GET:", result);
 
                     if (result.success) {
-                        console.log("📊 Respuesta CRUDA de GAS:", result);
-                        console.log("✅ Success:", result.success);
-                        console.log("❌ Error:", result.error);
-                        console.log("📝 Message:", result.message);
-
                         // Éxito
                         status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
                         status.className = "success";
-
-                        // Resetear formulario
                         form.reset();
-
                     } else {
+                        // Mostrar error específico de GAS
+                        console.error("❌ Error de GAS:", result.error);
                         throw new Error(result.error || 'Error al procesar el formulario');
                     }
 
                 } catch (error) {
-                    console.error("❌ Error COMPLETO en formulario de contacto:", error);
-                    console.error("📊 Tipo de error:", typeof error);
-                    console.error("🔍 Mensaje:", error.message);
-                    console.error("📋 Stack:", error.stack);
+                    console.error("❌ Error en formulario de contacto:", error);
 
                     // Mostrar mensaje de error apropiado
                     if (error.message.includes('email')) {
                         status.textContent = "⚠️ Por favor ingresa un email válido";
                     } else if (error.message.includes('completa')) {
                         status.textContent = "⚠️ Por favor completa los campos requeridos (*)";
-                    } else if (error.message.includes('Error al procesar')) {
-                        status.textContent = "❌ Error del servidor. Intenta nuevamente.";
                     } else {
-                        status.textContent = "❌ Error: " + error.message;
+                        status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente.";
                     }
                     status.className = "error";
 
@@ -1390,20 +1382,6 @@
                     }
 
                     const result = await response.json();
-                    console.log("🔍 DEBUG - Respuesta CRUDA de GAS:");
-                    console.log("  Status:", response.status);
-                    console.log("  OK:", response.ok);
-                    console.log("  Result object:", result);
-                    console.log("  ¿Tiene success?:", result.hasOwnProperty('success'));
-                    console.log("  Success value:", result.success);
-                    console.log("  Error:", result.error);
-                    console.log("  Message:", result.message);
-
-                    // Si success es false, mostrar el error real
-                    if (result.success === false) {
-                        console.error("❌ ERROR DE GAS:", result.error || "Error sin mensaje");
-                        throw new Error(result.error || "Error del servidor");
-                    }
                     console.log("✅ Guardado en GAS:", result);
                     return result;
                 } catch (error) {
@@ -1588,16 +1566,16 @@
                         const color = getDepartmentColor(depto);
 
                         chartHTML += `
-                    <div style="margin-bottom: 0.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                            <span style="font-weight: 600; color: #334155;">${depto}</span>
-                            <span style="color: #64748b;">${count} (${percentage}%)</span>
-                        </div>
-                        <div style="height: 8px; background-color: #e2e8f0; border-radius: 4px; overflow: hidden;">
-                            <div style="height: 100%; width: ${percentage}%; background: ${color}; border-radius: 4px;"></div>
-                        </div>
+                <div style="margin-bottom: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                        <span style="font-weight: 600; color: #334155;">${depto}</span>
+                        <span style="color: #64748b;">${count} (${percentage}%)</span>
                     </div>
-                    `;
+                    <div style="height: 8px; background-color: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                        <div style="height: 100%; width: ${percentage}%; background: ${color}; border-radius: 4px;"></div>
+                    </div>
+                </div>
+                `;
                     });
 
                     chartHTML += '</div>';
@@ -1653,24 +1631,24 @@
                     }
 
                     html += `
-                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${borderColor};">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div>
-                            <div style="font-weight: 600; color: var(--dark-bg);">
-                                ${reg.nombre || "Usuario"}
-                                ${reg.local ? '<span style="color: #f59e0b; font-size: 0.8em; margin-left: 0.5em;">(local)</span>' : ''}
-                                ${sonReales && !reg.local ? '<span style="color: #3b82f6; font-size: 0.8em; margin-left: 0.5em;">(nube)</span>' : ''}
-                            </div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
-                                <span><i class="fas fa-building"></i> ${reg.departamento || "General"}</span>
-                                <span><i class="fas fa-tag"></i> ${reg.tipo || "Registro"}</span>
-                                ${reg.cantidad ? `<span><i class="fas fa-hashtag"></i> ${reg.cantidad}</span>` : ''}
-                            </div>
+            <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${borderColor};">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--dark-bg);">
+                            ${reg.nombre || "Usuario"}
+                            ${reg.local ? '<span style="color: #f59e0b; font-size: 0.8em; margin-left: 0.5em;">(local)</span>' : ''}
+                            ${sonReales && !reg.local ? '<span style="color: #3b82f6; font-size: 0.8em; margin-left: 0.5em;">(nube)</span>' : ''}
                         </div>
-                        <div style="font-size: 0.8rem; color: #94a3b8; white-space: nowrap;">${fechaTexto}</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
+                            <span><i class="fas fa-building"></i> ${reg.departamento || "General"}</span>
+                            <span><i class="fas fa-tag"></i> ${reg.tipo || "Registro"}</span>
+                            ${reg.cantidad ? `<span><i class="fas fa-hashtag"></i> ${reg.cantidad}</span>` : ''}
+                        </div>
                     </div>
+                    <div style="font-size: 0.8rem; color: #94a3b8; white-space: nowrap;">${fechaTexto}</div>
                 </div>
-                `;
+            </div>
+            `;
                 });
 
                 html += '</div>';
