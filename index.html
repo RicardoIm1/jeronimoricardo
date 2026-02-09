@@ -743,6 +743,7 @@
         }
 
         #demo.demo-visible {
+            border-radius: 5px;
             opacity: 1;
             visibility: visible;
             max-height: 5000px;
@@ -755,9 +756,6 @@
 
         /* Asegurar que el contenedor interno mantenga su estructura */
         #demo>.container {
-            border-radius: 5px;
-            border: red 1px solid  !important;
-
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
@@ -777,8 +775,8 @@
             opacity: 0;
         }
 
-        #demo.demo-visible .contact-info {
-            STATUS animation: fadeInUp 0.8s ease-out forwards;
+        #demo.demo-visible .contact-info {STATUS
+            animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.7s;
             opacity: 0;
         }
