@@ -1245,6 +1245,11 @@
                     console.log("✅ Respuesta de GAS:", result);
 
                     if (result.success) {
+                        console.log("📊 Respuesta CRUDA de GAS:", result);
+                        console.log("✅ Success:", result.success);
+                        console.log("❌ Error:", result.error);
+                        console.log("📝 Message:", result.message);
+                        
                         // Éxito
                         status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
                         status.className = "success";
