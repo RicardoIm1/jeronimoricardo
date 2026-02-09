@@ -657,36 +657,15 @@
         }
 
         @media (max-width: 768px) {
-
-            .tiles-grid {
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                grid-auto-rows: auto;
+            #demo.demo-visible {
+                padding-top: 4rem !important;
+                padding-bottom: 4rem !important;
+                margin-top: 2rem !important;
+                margin-bottom: 2rem !important;
             }
 
-            .tile {
-                padding: 1.25rem;
-            }
-
-            .tile h3 {
-                font-size: 1.25rem;
-            }
-
-            .tile p {
-                font-size: 1rem;
-                padding: 0;
-                line-height: 1.5;
-            }
-
-            .tile-icon {
-                font-size: 2rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .tile-small,
-            .tile-medium,
-            .tile-large,
-            .tile-xlarge {
-                grid-column: auto;
+            #demo>.container {
+                padding: 0 1rem !important;
             }
         }
 
@@ -738,6 +717,94 @@
         .mobile-menu a:active {
             color: white !important;
             text-decoration: none !important;
+        }
+
+        /* ========== ESTILOS PARA DEMO OCULTO/ANIMADO ========== */
+        #demo {
+            opacity: 0;
+            visibility: hidden;
+            max-height: 0;
+            overflow: hidden;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #demo.demo-visible {
+            opacity: 1;
+            visibility: visible;
+            max-height: 5000px;
+            transform: translateY(0);
+            padding-top: 6rem !important;
+            padding-bottom: 6rem !important;
+            margin-top: 4rem !important;
+            margin-bottom: 4rem !important;
+        }
+
+        /* Asegurar que el contenedor interno mantenga su estructura */
+        #demo>.container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+
+        #demo.demo-visible>.container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efecto de entrada para los elementos internos */
+        #demo.demo-visible .contact-container,
+        #demo.demo-visible .section-title,
+        #demo.demo-visible .hero-subtitle {
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+
+        #demo.demo-visible .contact-info {
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.7s;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Resaltar enlace activo del menú */
+        nav a.active,
+        .mobile-menu a.active {
+            color: #4cc9f0 !important;
+        }
+
+        nav a.active::after,
+        .mobile-menu a.active::after {
+            width: 100% !important;
+            background: linear-gradient(90deg, #4cc9f0, #4361ee) !important;
+        }
+
+        /* Optimización para dispositivos táctiles */
+        @media (hover: none) and (pointer: coarse) {
+            #demo {
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+
+        /* Prevenir parpadeo durante la transición */
+        #demo * {
+            will-change: transform, opacity;
         }
     </style>
 
@@ -1333,6 +1400,155 @@
         }
 
         // Smooth scrolling for anchor links
+        // ========== CONTROL DE VISIBILIDAD DE DEMO ==========
+        let demoSection = document.getElementById('demo');
+        let isDemoVisible = false;
+
+        // Función para mostrar/ocultar demo con transición
+        function toggleDemoSection(show = true, scrollTo = true) {
+            if (!demoSection) return;
+
+            isDemoVisible = show;
+
+            if (show) {
+                // Mostrar demo
+                demoSection.classList.add('demo-visible');
+
+                // Marcar enlaces activos
+                document.querySelectorAll('a[href="#demo"]').forEach(link => {
+                    link.classList.add('active');
+                });
+
+                // Remover activo de otros enlaces
+                document.querySelectorAll('nav a, .mobile-menu a').forEach(link => {
+                    if (link.getAttribute('href') !== '#demo') {
+                        link.classList.remove('active');
+                    }
+                });
+
+                // Scroll suave a la sección
+                if (scrollTo) {
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: demoSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+
+                // Inicializar demo si es necesario
+                if (typeof loadDashboardData === 'function') {
+                    setTimeout(loadDashboardData, 300);
+                }
+            } else {
+                // Ocultar demo
+                demoSection.classList.remove('demo-visible');
+
+                // Remover activo
+                document.querySelectorAll('a[href="#demo"]').forEach(link => {
+                    link.classList.remove('active');
+                });
+            }
+        }
+
+        // Ocultar demo inicialmente (solo si no hay hash #demo en URL)
+        if (!window.location.hash.includes('#demo')) {
+            setTimeout(() => {
+                demoSection.style.transition = 'none';
+                demoSection.classList.remove('demo-visible');
+                setTimeout(() => {
+                    demoSection.style.transition = '';
+                }, 10);
+            }, 100);
+        }
+
+        // Modificar el smooth scrolling para manejar la sección demo
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+
+                if (targetId === '#demo') {
+                    e.preventDefault();
+
+                    // Si la demo ya está visible, solo hacer scroll
+                    if (isDemoVisible) {
+                        window.scrollTo({
+                            top: demoSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        return;
+                    }
+
+                    // Mostrar demo
+                    toggleDemoSection(true);
+
+                    // Cerrar menú móvil si está abierto
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                } else {
+                    // Para otras secciones, ocultar demo
+                    if (isDemoVisible && targetId !== '#') {
+                        toggleDemoSection(false, false);
+                    }
+
+                    // Comportamiento normal de scroll
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement && targetId !== '#') {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Mostrar demo si la URL contiene #demo
+        if (window.location.hash === '#demo') {
+            setTimeout(() => {
+                toggleDemoSection(true, false);
+            }, 500);
+        }
+
+        // También mostrar demo al hacer click en los botones CTA
+        document.querySelectorAll('.cta-button[href="#demo"]').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                toggleDemoSection(true);
+            });
+        });
+
+        // Monitorear cambios en el hash de la URL
+        window.addEventListener('hashchange', function () {
+            if (window.location.hash === '#demo' && !isDemoVisible) {
+                toggleDemoSection(true, false);
+            } else if (window.location.hash !== '#demo' && isDemoVisible) {
+                toggleDemoSection(false, false);
+            }
+        });
+
+        // Ocultar demo al hacer scroll a otras secciones
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function () {
+            if (!isDemoVisible) return;
+
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            const demoRect = demoSection.getBoundingClientRect();
+
+            // Si se scrollea fuera de la sección demo, ocultarla
+            if (demoRect.top > window.innerHeight || demoRect.bottom < 0) {
+                // Solo ocultar si estamos scrolleando hacia abajo y pasamos la sección
+                if (currentScroll > lastScrollTop && currentScroll > demoSection.offsetTop + demoSection.offsetHeight) {
+                    toggleDemoSection(false, false);
+                }
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
