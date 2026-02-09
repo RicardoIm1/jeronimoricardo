@@ -1158,7 +1158,7 @@
 
     <script>
         // ========== CONFIGURACIÓN GLOBAL ==========
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_H6q0Zi1XxOzpcvmQ90aCXwzRyJJzMA7PTjsJQD1ZYVDhcPJhFN5CrnsOluy3jlxb/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzj5A49QihzGYgxW2LzDJ0vwrgO221MrKPxNVGmJhvmNNwUv-DQj93GufMuy51pctA_/exec";
 
         console.log("✅ URL de GAS configurada:", SCRIPT_URL);
 
@@ -1243,159 +1243,147 @@
             const demoStatus = document.getElementById('demo-status');
             const refreshBtn = document.getElementById('refresh-btn');
             const clearDemoBtn = document.getElementById('clear-demo-btn');
+            const submitBtn = demoForm.querySelector('button[type="submit"]');
 
-            // ========== FUNCIÓN JSONP PARA OBTENER DATOS ==========
-            function fetchDataWithJSONP() {
-                return new Promise((resolve, reject) => {
-                    const callbackName = 'jsonp_callback_' + Date.now() + '_' + Math.random().toString(36).substr(2);
+            // Variable para controlar si estamos usando datos reales
+            let usandoDatosReales = false;
+            let registrosReales = [];
+            let registrosLocales = [];
 
-                    window[callbackName] = function (data) {
-                        delete window[callbackName];
-                        document.body.removeChild(script);
+            // ========== FUNCIÓN PARA OBTENER DATOS DE GAS ==========
+            async function fetchDataFromGAS() {
+                console.log("📡 Conectando a GAS...");
 
-                        if (data && data.registros !== undefined) {
-                            resolve(data);
-                        } else {
-                            reject(new Error('Datos inválidos recibidos'));
-                        }
-                    };
+                try {
+                    const response = await fetch(SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now());
 
-                    const script = document.createElement('script');
-                    script.src = SCRIPT_URL +
-                        '?action=obtener_registros' +
-                        '&callback=' + callbackName +
-                        '&_=' + Date.now();
-                    script.onerror = function () {
-                        delete window[callbackName];
-                        document.body.removeChild(script);
-                        reject(new Error('Error cargando script'));
-                    };
-
-                    document.body.appendChild(script);
-
-                    // Timeout después de 8 segundos
-                    setTimeout(() => {
-                        if (window[callbackName]) {
-                            delete window[callbackName];
-                            if (script.parentNode) {
-                                document.body.removeChild(script);
-                            }
-                            reject(new Error('Timeout'));
-                        }
-                    }, 8000);
-                });
-            }
-
-            // ========== FUNCIÓN PARA GUARDAR CON JSONP ==========
-            function saveDataWithJSONP(datos) {
-                return new Promise((resolve, reject) => {
-                    const callbackName = 'jsonp_save_' + Date.now() + '_' + Math.random().toString(36).substr(2);
-
-                    window[callbackName] = function (response) {
-                        delete window[callbackName];
-                        if (saveScript.parentNode) {
-                            document.body.removeChild(saveScript);
-                        }
-
-                        if (response && response.success !== undefined) {
-                            resolve(response);
-                        } else {
-                            reject(new Error('Respuesta inválida'));
-                        }
-                    };
-
-                    // Construir URL con parámetros
-                    let url = SCRIPT_URL + '?action=guardar_registro&callback=' + callbackName;
-
-                    // Agregar parámetros
-                    const params = {
-                        nombre: datos.nombre,
-                        departamento: datos.departamento,
-                        cantidad: datos.cantidad,
-                        tipo: datos.tipo,
-                        ip: datos.ip || 'web-' + Date.now(),
-                        timestamp: Date.now()
-                    };
-
-                    for (const key in params) {
-                        if (params[key] !== undefined && params[key] !== null) {
-                            url += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-                        }
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
                     }
 
-                    const saveScript = document.createElement('script');
-                    saveScript.src = url;
-                    saveScript.onerror = function () {
-                        delete window[callbackName];
-                        if (saveScript.parentNode) {
-                            document.body.removeChild(saveScript);
-                        }
-                        reject(new Error('Error enviando datos'));
-                    };
-
-                    document.body.appendChild(saveScript);
-
-                    // Timeout
-                    setTimeout(() => {
-                        if (window[callbackName]) {
-                            delete window[callbackName];
-                            if (saveScript.parentNode) {
-                                document.body.removeChild(saveScript);
-                            }
-                            reject(new Error('Timeout al guardar'));
-                        }
-                    }, 8000);
-                });
+                    const data = await response.json();
+                    console.log("✅ Respuesta de GAS:", data);
+                    return data;
+                } catch (error) {
+                    console.error("❌ Error conectando a GAS:", error);
+                    throw error;
+                }
             }
 
-            // ========== CARGAR DATOS REALES ==========
-            async function loadDashboardData() {
-                console.log("🔄 Cargando datos REALES del dashboard...");
+            // ========== FUNCIÓN PARA GUARDAR EN GAS ==========
+            async function saveToGAS(datos) {
+                console.log("💾 Enviando a GAS:", datos);
 
-                demoStatus.textContent = "⏳ Conectando a la base de datos...";
+                try {
+                    const params = new URLSearchParams();
+                    params.append('action', 'guardar_registro');
+                    params.append('nombre', datos.nombre);
+                    params.append('departamento', datos.departamento);
+                    params.append('cantidad', datos.cantidad);
+                    params.append('tipo', datos.tipo);
+                    params.append('ip', datos.ip || 'web-' + Date.now());
+
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    console.log("✅ Guardado en GAS:", result);
+                    return result;
+                } catch (error) {
+                    console.error("❌ Error guardando en GAS:", error);
+                    throw error;
+                }
+            }
+
+            // ========== CARGAR DATOS ==========
+            async function loadDashboardData() {
+                console.log("🔄 Cargando datos...");
+
+                demoStatus.textContent = "⏳ Actualizando...";
                 demoStatus.className = "";
 
                 if (refreshBtn) {
                     refreshBtn.disabled = true;
-                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 }
 
                 try {
-                    // Intentar obtener datos con JSONP
-                    const data = await fetchDataWithJSONP();
+                    // Intentar cargar datos REALES de GAS
+                    const gasData = await fetchDataFromGAS();
 
-                    console.log("✅ Datos REALES obtenidos:", data);
+                    if (gasData.registros && gasData.registros.length > 0) {
+                        // ¡TENEMOS DATOS REALES!
+                        registrosReales = gasData.registros;
+                        usandoDatosReales = true;
 
-                    if (data.registros && data.registros.length > 0) {
-                        updateDashboardWithRealData(data);
-                        demoStatus.textContent = `✅ ${data.registros.length} registros reales cargados`;
+                        console.log(`✅ ${gasData.registros.length} registros reales cargados`);
+                        updateDashboard(registrosReales, true);
+
+                        demoStatus.textContent = `✅ ${gasData.registros.length} registros reales cargados`;
                         demoStatus.className = "success";
+
                     } else {
-                        showSampleData();
-                        demoStatus.textContent = "ℹ️ No hay registros reales aún";
-                        demoStatus.className = "";
+                        // No hay datos reales, cargar locales
+                        console.log("ℹ️ No hay datos reales, cargando locales");
+                        loadLocalData();
                     }
 
                 } catch (error) {
-                    console.log("⚠️ No se pudieron obtener datos reales:", error.message);
-
-                    // Intentar cargar datos locales
-                    const localData = loadLocalData();
-                    if (localData.registros.length > 0) {
-                        updateDashboardWithRealData(localData);
-                        demoStatus.textContent = `📱 Mostrando ${localData.registros.length} registros locales`;
-                        demoStatus.className = "";
-                    } else {
-                        showSampleData();
-                        demoStatus.textContent = "ℹ️ Mostrando datos de ejemplo";
-                        demoStatus.className = "";
-                    }
+                    console.log("⚠️ Error cargando datos reales, usando locales");
+                    loadLocalData();
                 } finally {
                     if (refreshBtn) {
                         refreshBtn.disabled = false;
-                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar Datos';
+                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar';
                     }
                 }
+            }
+
+            // ========== CARGAR DATOS LOCALES ==========
+            function loadLocalData() {
+                const stored = localStorage.getItem('demo_registros_locales');
+                if (stored) {
+                    registrosLocales = JSON.parse(stored);
+                }
+
+                // Combinar con datos de ejemplo si hay pocos
+                if (registrosLocales.length === 0) {
+                    registrosLocales = getSampleData();
+                }
+
+                usandoDatosReales = false;
+                updateDashboard(registrosLocales, false);
+
+                demoStatus.textContent = `📱 ${registrosLocales.length} registros locales`;
+                demoStatus.className = "";
+            }
+
+            // ========== GUARDAR DATOS LOCALES ==========
+            function saveLocalData(registro) {
+                registro.id = Date.now();
+                registro.fecha = new Date().toISOString();
+                registro.local = true;
+
+                registrosLocales.unshift(registro); // Agregar al inicio
+
+                // Limitar a 100 registros
+                if (registrosLocales.length > 100) {
+                    registrosLocales = registrosLocales.slice(0, 100);
+                }
+
+                localStorage.setItem('demo_registros_locales', JSON.stringify(registrosLocales));
+                console.log("💾 Guardado local. Total:", registrosLocales.length);
+
+                return registro;
             }
 
             // ========== SUBMIT DEL FORMULARIO ==========
@@ -1408,117 +1396,55 @@
                 const tipo = document.getElementById('demo-tipo').value;
 
                 if (!nombre) {
-                    demoStatus.textContent = "⚠️ Por favor ingresa tu nombre";
+                    demoStatus.textContent = "⚠️ Ingresa tu nombre";
                     demoStatus.className = "error";
                     return;
                 }
 
-                demoStatus.textContent = "⏳ Guardando registro REAL...";
+                const registro = {
+                    nombre: nombre,
+                    departamento: departamento,
+                    cantidad: parseInt(cantidad) || 1,
+                    tipo: tipo
+                };
+
+                demoStatus.textContent = "⏳ Guardando...";
                 demoStatus.className = "";
 
-                // Deshabilitar botones mientras se guarda
-                const submitBtn = demoForm.querySelector('button[type="submit"]');
                 if (submitBtn) submitBtn.disabled = true;
 
                 try {
-                    console.log("📤 Enviando datos a GAS:", { nombre, departamento, cantidad, tipo });
+                    // PRIMERO intentar guardar en GAS
+                    const resultadoGAS = await saveToGAS(registro);
 
-                    // Intentar guardar en GAS usando JSONP
-                    const resultado = await saveDataWithJSONP({
-                        nombre: nombre,
-                        departamento: departamento,
-                        cantidad: cantidad,
-                        tipo: tipo,
-                        ip: 'web-' + Date.now()
-                    });
+                    // Éxito en GAS
+                    demoStatus.textContent = `✅ ${resultadoGAS.message || 'Guardado en la nube!'}`;
+                    demoStatus.className = "success";
 
-                    console.log("✅ Respuesta de GAS:", resultado);
+                    // También guardar localmente como respaldo
+                    saveLocalData(registro);
 
-                    if (resultado.success) {
-                        demoStatus.textContent = `✅ ${resultado.message || 'Registro guardado!'} Total: ${resultado.total || '0'} registros`;
-                        demoStatus.className = "success";
-
-                        // También guardar localmente
-                        saveToLocalStorage({
-                            nombre: nombre,
-                            departamento: departamento,
-                            cantidad: parseInt(cantidad),
-                            tipo: tipo
-                        });
-
-                        demoForm.reset();
-
-                        // Actualizar dashboard después de 1 segundo
-                        setTimeout(() => {
-                            loadDashboardData();
-                        }, 1000);
-                    } else {
-                        throw new Error(resultado.error || 'Error desconocido');
-                    }
+                    // Recargar datos para incluir el nuevo registro
+                    setTimeout(() => loadDashboardData(), 1500);
 
                 } catch (error) {
-                    console.error("❌ Error guardando en GAS:", error);
+                    // Falló GAS, guardar solo localmente
+                    console.log("📱 Guardando localmente:", error.message);
 
-                    // Guardar solo localmente
-                    saveToLocalStorage({
-                        nombre: nombre,
-                        departamento: departamento,
-                        cantidad: parseInt(cantidad),
-                        tipo: tipo
-                    });
+                    const registroLocal = saveLocalData(registro);
+                    updateDashboard(usandoDatosReales ? registrosReales : registrosLocales, usandoDatosReales);
 
-                    demoStatus.textContent = "📱 Guardado localmente. Intenta más tarde para guardar en la nube.";
+                    demoStatus.textContent = "📱 Guardado localmente (sin conexión a la nube)";
                     demoStatus.className = "warning";
-                    demoForm.reset();
 
-                    // Actualizar con datos locales
-                    setTimeout(() => {
-                        const localData = loadLocalData();
-                        updateDashboardWithRealData(localData);
-                    }, 500);
                 } finally {
+                    demoForm.reset();
                     if (submitBtn) submitBtn.disabled = false;
                 }
             });
 
-            // ========== FUNCIONES PARA DATOS LOCALES ==========
-            function saveToLocalStorage(registro) {
-                const registros = JSON.parse(localStorage.getItem('demo_registros') || '[]');
-
-                registros.push({
-                    ...registro,
-                    fecha: new Date().toISOString(),
-                    id: Date.now(),
-                    local: true // Marcar como registro local
-                });
-
-                // Mantener solo los últimos 50 registros locales
-                if (registros.length > 50) {
-                    registros.splice(0, registros.length - 50);
-                }
-
-                localStorage.setItem('demo_registros', JSON.stringify(registros));
-                console.log("💾 Guardado local. Total:", registros.length);
-            }
-
-            function loadLocalData() {
-                const registros = JSON.parse(localStorage.getItem('demo_registros') || '[]');
-
-                return {
-                    registros: registros,
-                    total: registros.length,
-                    message: "Datos locales cargados"
-                };
-            }
-
-            function clearLocalData() {
-                localStorage.removeItem('demo_registros');
-                console.log("🗑️ Datos locales eliminados");
-            }
-
             // ========== ACTUALIZAR DASHBOARD ==========
-            function updateDashboardWithRealData(data) {
-                const registros = data.registros || [];
+            function updateDashboard(registros, sonReales) {
                 const totalRegistros = registros.length;
 
                 let cantidadTotal = 0;
@@ -1533,11 +1459,18 @@
                     porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
                 });
 
-                // 1. Actualizar contadores principales
+                // 1. Actualizar contadores
                 document.getElementById('total-registros').textContent = totalRegistros;
                 document.getElementById('cantidad-total').textContent = cantidadTotal;
 
-                // 2. Actualizar gráfico de departamentos
+                // 2. Actualizar indicador de fuente
+                const fuenteElement = document.getElementById('data-source');
+                if (fuenteElement) {
+                    fuenteElement.textContent = sonReales ? 'Datos en tiempo real' : 'Datos de demostración';
+                    fuenteElement.style.color = sonReales ? '#10b981' : '#f59e0b';
+                }
+
+                // 3. Actualizar gráfico
                 const chartContainer = document.getElementById('chart-departamentos');
                 if (Object.keys(porDepartamento).length > 0) {
                     let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
@@ -1565,11 +1498,11 @@
                     chartContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
                 }
 
-                // 3. Actualizar últimos registros
-                updateLastRegistros(registros);
+                // 4. Actualizar últimos registros
+                updateLastRegistros(registros, sonReales);
             }
 
-            function updateLastRegistros(registros) {
+            function updateLastRegistros(registros, sonReales) {
                 const container = document.getElementById('ultimos-registros');
 
                 if (!registros || registros.length === 0) {
@@ -1578,24 +1511,30 @@
                 }
 
                 const sortedRegistros = [...registros]
-                    .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+                    .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
                     .slice(0, 5);
 
                 let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
 
                 sortedRegistros.forEach(reg => {
-                    let fechaTexto = "Hoy";
+                    let fechaTexto = "Ahora";
                     let esLocal = reg.local ? ' (local)' : '';
+                    let borderColor = reg.local ? '#f59e0b' : (sonReales ? '#3b82f6' : '#10b981');
 
                     try {
-                        const fecha = new Date(reg.fecha);
-                        const hoy = new Date();
+                        const fecha = reg.fecha ? new Date(reg.fecha) : new Date();
+                        const ahora = new Date();
+                        const diferenciaHoras = (ahora - fecha) / (1000 * 60 * 60);
 
-                        if (fecha.toDateString() === hoy.toDateString()) {
-                            fechaTexto = fecha.toLocaleTimeString('es-MX', {
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            });
+                        if (diferenciaHoras < 24) {
+                            if (diferenciaHoras < 1) {
+                                fechaTexto = "Hace " + Math.round(diferenciaHoras * 60) + " min";
+                            } else {
+                                fechaTexto = "Hoy " + fecha.toLocaleTimeString('es-MX', {
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                });
+                            }
                         } else {
                             fechaTexto = fecha.toLocaleDateString('es-MX', {
                                 day: '2-digit',
@@ -1607,15 +1546,18 @@
                     }
 
                     html += `
-                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${reg.local ? '#f59e0b' : 'var(--primary-blue)'};">
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${borderColor};">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div>
-                            <div style="font-weight: 600; color: var(--dark-bg);">${reg.nombre || "Usuario"}${esLocal}</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
+                            <div style="font-weight: 600; color: var(--dark-bg);">
+                                ${reg.nombre || "Usuario"}
+                                ${reg.local ? '<span style="color: #f59e0b; font-size: 0.8em; margin-left: 0.5em;">(local)</span>' : ''}
+                                ${sonReales && !reg.local ? '<span style="color: #3b82f6; font-size: 0.8em; margin-left: 0.5em;">(nube)</span>' : ''}
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
                                 <span><i class="fas fa-building"></i> ${reg.departamento || "General"}</span>
                                 <span><i class="fas fa-tag"></i> ${reg.tipo || "Registro"}</span>
                                 ${reg.cantidad ? `<span><i class="fas fa-hashtag"></i> ${reg.cantidad}</span>` : ''}
-                                ${reg.local ? '<span style="color: #f59e0b;"><i class="fas fa-laptop"></i> Local</span>' : ''}
                             </div>
                         </div>
                         <div style="font-size: 0.8rem; color: #94a3b8; white-space: nowrap;">${fechaTexto}</div>
@@ -1630,39 +1572,46 @@
 
             function getDepartmentColor(depto) {
                 const colors = {
-                    'Urgencias': 'linear-gradient(90deg, #ef4444, #f87171)',
-                    'Pediatría': 'linear-gradient(90deg, #3b82f6, #60a5fa)',
-                    'Cirugía': 'linear-gradient(90deg, #8b5cf6, #a78bfa)',
-                    'Laboratorio': 'linear-gradient(90deg, #10b981, #34d399)',
-                    'Administración': 'linear-gradient(90deg, #f59e0b, #fbbf24)',
-                    'General': 'linear-gradient(90deg, #94a3b8, #cbd5e1)'
+                    'Urgencias': '#ef4444',
+                    'Pediatría': '#3b82f6',
+                    'Cirugía': '#8b5cf6',
+                    'Laboratorio': '#10b981',
+                    'Administración': '#f59e0b',
+                    'General': '#94a3b8'
                 };
-                return colors[depto] || 'linear-gradient(90deg, var(--primary-blue), var(--primary-green))';
+                return colors[depto] || '#3b82f6';
             }
 
-            function showSampleData() {
-                const sampleData = {
-                    registros: [
-                        {
-                            nombre: "Dr. Juan Pérez",
-                            departamento: "Urgencias",
-                            tipo: "Ingreso",
-                            cantidad: 5,
-                            fecha: new Date().toISOString(),
-                            local: false
-                        },
-                        {
-                            nombre: "Dra. Ana García",
-                            departamento: "Pediatría",
-                            tipo: "Consulta",
-                            cantidad: 3,
-                            fecha: new Date(Date.now() - 3600000).toISOString(),
-                            local: false
-                        }
-                    ]
-                };
-
-                updateDashboardWithRealData(sampleData);
+            function getSampleData() {
+                return [
+                    {
+                        id: 1,
+                        nombre: "Dr. Juan Pérez",
+                        departamento: "Urgencias",
+                        tipo: "Ingreso",
+                        cantidad: 5,
+                        fecha: new Date(Date.now() - 3600000).toISOString(),
+                        local: false
+                    },
+                    {
+                        id: 2,
+                        nombre: "Dra. Ana García",
+                        departamento: "Pediatría",
+                        tipo: "Consulta",
+                        cantidad: 3,
+                        fecha: new Date(Date.now() - 7200000).toISOString(),
+                        local: false
+                    },
+                    {
+                        id: 3,
+                        nombre: "Lic. Carlos López",
+                        departamento: "Administración",
+                        tipo: "Alta",
+                        cantidad: 2,
+                        fecha: new Date(Date.now() - 10800000).toISOString(),
+                        local: false
+                    }
+                ];
             }
 
             // ========== BOTONES ==========
@@ -1674,34 +1623,39 @@
 
             if (clearDemoBtn) {
                 clearDemoBtn.addEventListener('click', () => {
-                    if (confirm("¿Limpiar TODOS los datos locales?\n\nLos datos en Google Sheets NO se verán afectados.")) {
-                        clearLocalData();
-                        showSampleData();
-                        demoStatus.textContent = "✅ Datos locales eliminados";
+                    if (confirm("¿Limpiar todos los datos locales?\n\nLos datos en la nube NO se verán afectados.")) {
+                        localStorage.removeItem('demo_registros_locales');
+                        registrosLocales = getSampleData();
+                        updateDashboard(registrosLocales, false);
+                        demoStatus.textContent = "✅ Datos locales reiniciados";
                         demoStatus.className = "success";
                     }
                 });
             }
 
             // ========== INICIALIZAR ==========
-            setTimeout(() => {
-                loadDashboardData();
-            }, 500);
+            // Cargar datos inmediatamente
+            loadDashboardData();
 
-            // Actualizar automáticamente cada 30 segundos
+            // Actualizar cada 30 segundos
             setInterval(loadDashboardData, 30000);
 
-            console.log("✅ Demo inicializada - Usando JSONP para GAS");
+            console.log("✅ Demo lista - Conexión GAS verificada");
 
         } else {
             console.log("ℹ️ No se encontró sección de demo");
         }
 
-        // ========== PRUEBA SIMPLE ==========
-        console.log("🔍 Verificando conexión...");
-        setTimeout(() => {
-            console.log("✅ Aplicación lista");
-        }, 100);
+        // ========== VERIFICAR GAS ==========
+        console.log("🔍 Probando conexión GAS...");
+        fetch(SCRIPT_URL + '?action=test')
+            .then(response => response.json())
+            .then(data => {
+                console.log("✅ GAS funcionando:", data);
+            })
+            .catch(error => {
+                console.log("⚠️ GAS no responde, usando modo local:", error.message);
+            });
     </script>
 
 </body>
