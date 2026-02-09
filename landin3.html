@@ -1249,7 +1249,7 @@
                         console.log("✅ Success:", result.success);
                         console.log("❌ Error:", result.error);
                         console.log("📝 Message:", result.message);
-                        
+
                         // Éxito
                         status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
                         status.className = "success";
@@ -1390,6 +1390,20 @@
                     }
 
                     const result = await response.json();
+                    console.log("🔍 DEBUG - Respuesta CRUDA de GAS:");
+                    console.log("  Status:", response.status);
+                    console.log("  OK:", response.ok);
+                    console.log("  Result object:", result);
+                    console.log("  ¿Tiene success?:", result.hasOwnProperty('success'));
+                    console.log("  Success value:", result.success);
+                    console.log("  Error:", result.error);
+                    console.log("  Message:", result.message);
+
+                    // Si success es false, mostrar el error real
+                    if (result.success === false) {
+                        console.error("❌ ERROR DE GAS:", result.error || "Error sin mensaje");
+                        throw new Error(result.error || "Error del servidor");
+                    }
                     console.log("✅ Guardado en GAS:", result);
                     return result;
                 } catch (error) {
