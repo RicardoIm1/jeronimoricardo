@@ -1163,10 +1163,8 @@
         console.log("✅ URL de GAS configurada:", SCRIPT_URL);
 
         // ========== CÓDIGO ORIGINAL ==========
-        // Año actual en el footer
         document.getElementById("year").textContent = new Date().getFullYear();
 
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1177,7 +1175,6 @@
                 : '<i class="fas fa-bars"></i>';
         });
 
-        // Close mobile menu when clicking a link
         const mobileLinks = document.querySelectorAll('.mobile-menu a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -1186,7 +1183,6 @@
             });
         });
 
-        // Form submission con Google Apps Script
         const form = document.getElementById("contact-form");
         const status = document.getElementById("status");
 
@@ -1209,7 +1205,6 @@
             }
         });
 
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1227,7 +1222,6 @@
             });
         });
 
-        // Add scroll effect to header
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
@@ -1239,138 +1233,221 @@
             }
         });
 
-        // ========== CÓDIGO DE LA DEMO INTERACTIVA ==========
-        // Verificar si existe la sección de demo
+        // ========== DEMO INTERACTIVA ==========
         const demoForm = document.getElementById('demo-form');
         const demoSection = document.getElementById('demo');
 
         if (demoForm && demoSection) {
             console.log("✅ Sección de demo detectada, inicializando...");
 
-            // Elementos de la demo
             const demoStatus = document.getElementById('demo-status');
             const refreshBtn = document.getElementById('refresh-btn');
             const clearDemoBtn = document.getElementById('clear-demo-btn');
 
-            // Función para obtener IP
-            async function getIP() {
+            // ========== FUNCIÓN PARA OBTENER DATOS REALES ==========
+            async function fetchDataFromGAS() {
+                console.log("📡 Conectando a GAS para obtener registros reales...");
+
                 try {
-                    const response = await fetch('https://api.ipify.org?format=json');
-                    const data = await response.json();
-                    return data.ip;
+                    // Usar un proxy CORS para evitar problemas
+                    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+                    const url = SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now();
+
+                    const response = await fetch(corsProxy + url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Origin': window.location.origin
+                        }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log("✅ Datos reales obtenidos de GAS:", data);
+                        return data;
+                    } else {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
                 } catch (error) {
-                    return "demo-" + Date.now();
+                    console.log("⚠️ Error conectando a GAS, intentando método directo...");
+
+                    // Método alternativo: Intentar directamente
+                    try {
+                        const response = await fetch(SCRIPT_URL + '?action=obtener_registros&callback=test&_=' + Date.now());
+                        const text = await response.text();
+
+                        // Intentar parsear como JSON
+                        if (text.startsWith('{')) {
+                            const data = JSON.parse(text);
+                            return data;
+                        }
+                    } catch (e) {
+                        console.error("❌ No se pudo conectar a GAS:", e);
+                        return null;
+                    }
                 }
             }
 
-            // ========== FUNCIÓN PARA GUARDAR REGISTROS (MEJORADA) ==========
-            async function guardarRegistroDemo(data) {
-                return new Promise((resolve, reject) => {
-                    // Crear formulario dinámico para enviar datos
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = SCRIPT_URL;
-                    form.style.display = 'none';
+            // ========== GUARDAR REGISTRO REAL ==========
+            async function guardarRegistroReal(datos) {
+                console.log("💾 Guardando registro real en GAS...", datos);
 
-                    // Agregar campos al formulario
-                    for (const key in data) {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = key;
-                        input.value = data[key];
-                        form.appendChild(input);
+                try {
+                    const params = new URLSearchParams();
+                    params.append('action', 'guardar_registro');
+                    params.append('nombre', datos.nombre);
+                    params.append('departamento', datos.departamento);
+                    params.append('cantidad', datos.cantidad);
+                    params.append('tipo', datos.tipo);
+                    params.append('ip', datos.ip || 'web-' + Date.now());
+
+                    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+                    const response = await fetch(corsProxy + SCRIPT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: params
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        console.log("✅ Registro guardado en GAS:", result);
+                        return result;
                     }
+                } catch (error) {
+                    console.error("❌ Error guardando en GAS:", error);
+                }
 
-                    // Agregar campo action
-                    const actionInput = document.createElement('input');
-                    actionInput.type = 'hidden';
-                    actionInput.name = 'action';
-                    actionInput.value = 'guardar_registro';
-                    form.appendChild(actionInput);
-
-                    // Agregar formulario al DOM y enviar
-                    document.body.appendChild(form);
-                    form.submit();
-
-                    // Para pruebas, simular respuesta exitosa
-                    setTimeout(() => {
-                        resolve({
-                            success: true,
-                            message: "Registro guardado exitosamente",
-                            total: Math.floor(Math.random() * 10) + 1
-                        });
-                    }, 1000);
-                });
+                return null;
             }
 
-            // ========== GUARDAR REGISTRO DE DEMO ==========
-            demoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
+            // ========== CARGAR DATOS REALES ==========
+            async function loadDashboardData() {
+                console.log("🔄 Cargando datos REALES del dashboard...");
 
-                demoStatus.textContent = "⏳ Guardando registro...";
+                demoStatus.textContent = "⏳ Conectando a la base de datos...";
                 demoStatus.className = "";
 
                 try {
-                    const nombre = document.getElementById('demo-nombre').value;
+                    // Intentar obtener datos REALES de GAS
+                    const data = await fetchDataFromGAS();
+
+                    if (data && data.registros && data.registros.length > 0) {
+                        console.log(`✅ ${data.registros.length} registros reales encontrados`);
+                        updateDashboardWithRealData(data);
+                        demoStatus.textContent = `✅ Dashboard actualizado con ${data.registros.length} registros reales`;
+                        demoStatus.className = "success";
+                    } else {
+                        console.log("ℹ️ No hay registros reales aún, mostrando ejemplo");
+                        showSampleData();
+                        demoStatus.textContent = "ℹ️ No hay registros reales aún. ¡Sé el primero en registrar!";
+                        demoStatus.className = "";
+                    }
+
+                } catch (error) {
+                    console.error("💥 Error cargando datos reales:", error);
+                    showSampleData();
+                    demoStatus.textContent = "⚠️ Error de conexión. Mostrando datos de ejemplo.";
+                    demoStatus.className = "error";
+                }
+            }
+
+            // ========== SUBMIT DEL FORMULARIO ==========
+            demoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                demoStatus.textContent = "⏳ Guardando registro REAL...";
+                demoStatus.className = "";
+
+                try {
+                    const nombre = document.getElementById('demo-nombre').value.trim();
                     const departamento = document.getElementById('demo-departamento').value;
                     const cantidad = document.getElementById('demo-cantidad').value || "1";
                     const tipo = document.getElementById('demo-tipo').value;
-                    const ip = await getIP();
 
-                    console.log("Enviando datos:", { nombre, departamento, cantidad, tipo });
+                    if (!nombre) {
+                        demoStatus.textContent = "⚠️ Por favor ingresa tu nombre";
+                        demoStatus.className = "error";
+                        return;
+                    }
 
-                    // Intentar conectar a GAS
-                    const result = await guardarRegistroDemo({
+                    console.log("📤 Enviando datos REALES a GAS:", { nombre, departamento, cantidad, tipo });
+
+                    // Intentar guardar en GAS
+                    const resultado = await guardarRegistroReal({
                         nombre: nombre,
                         departamento: departamento,
                         cantidad: cantidad,
                         tipo: tipo,
-                        ip: ip
+                        ip: 'web-' + Date.now()
                     });
 
-                    console.log("Respuesta:", result);
+                    if (resultado && resultado.success) {
+                        demoStatus.textContent = `✅ ${resultado.message || 'Registro REAL guardado!'} Total: ${resultado.total || '?'} registros`;
+                        demoStatus.className = "success";
+                        demoForm.reset();
 
-                    demoStatus.textContent = `✅ ${result.message || 'Registro guardado!'} Total: ${result.total || '?'} registros`;
-                    demoStatus.className = "success";
-
-                    demoForm.reset();
-
-                    // Actualizar dashboard
-                    setTimeout(() => {
-                        loadDashboardData();
-                    }, 1500);
+                        // Actualizar dashboard después de 2 segundos
+                        setTimeout(() => {
+                            loadDashboardData();
+                        }, 2000);
+                    } else {
+                        // Si falla GAS, guardar localmente
+                        throw new Error('Falló conexión con GAS');
+                    }
 
                 } catch (error) {
-                    console.error("Error guardando registro:", error);
-                    demoStatus.textContent = "⚠️ Error de conexión. Usando demostración local...";
+                    console.error("Error guardando:", error);
+                    demoStatus.textContent = "⚠️ Guardando localmente. El registro NO se guardó en la base de datos.";
                     demoStatus.className = "error";
-                    simulateLocalSave();
+
+                    // Guardar localmente en localStorage
+                    saveToLocalStorage();
+                    demoForm.reset();
+
+                    setTimeout(() => {
+                        loadLocalData();
+                    }, 1000);
                 }
             });
 
-            // ========== CARGAR DATOS DEL DASHBOARD (SIMPLIFICADO) ==========
-            async function loadDashboardData() {
-                console.log("🔄 Cargando datos del dashboard...");
+            // ========== FUNCIONES PARA DATOS LOCALES ==========
+            function saveToLocalStorage() {
+                const nombre = document.getElementById('demo-nombre').value.trim() || "Usuario";
+                const departamento = document.getElementById('demo-departamento').value || "General";
+                const cantidad = document.getElementById('demo-cantidad').value || "1";
+                const tipo = document.getElementById('demo-tipo').value || "Prueba";
 
-                demoStatus.textContent = "⏳ Cargando datos...";
-                demoStatus.className = "";
+                // Obtener registros existentes
+                const registros = JSON.parse(localStorage.getItem('demo_registros') || '[]');
 
-                try {
-                    // Intentar obtener datos reales
-                    const response = await fetch(SCRIPT_URL + '?action=obtener_registros&_=' + Date.now(), {
-                        method: 'GET',
-                        mode: 'no-cors' // Usar no-cors para evitar errores
-                    });
+                // Agregar nuevo registro
+                registros.push({
+                    nombre: nombre,
+                    departamento: departamento,
+                    cantidad: parseInt(cantidad),
+                    tipo: tipo,
+                    fecha: new Date().toISOString(),
+                    id: Date.now()
+                });
 
-                    // Como no-cors no permite leer la respuesta, usar datos de ejemplo
-                    showSampleData();
-                    demoStatus.textContent = "✅ Dashboard actualizado con datos de ejemplo";
+                // Guardar en localStorage
+                localStorage.setItem('demo_registros', JSON.stringify(registros));
+
+                console.log("💾 Guardado en localStorage:", registros.length, "registros");
+            }
+
+            function loadLocalData() {
+                const registros = JSON.parse(localStorage.getItem('demo_registros') || '[]');
+
+                if (registros.length > 0) {
+                    updateDashboardWithRealData({ registros: registros });
+                    demoStatus.textContent = `✅ Mostrando ${registros.length} registros locales`;
                     demoStatus.className = "success";
-
-                } catch (error) {
-                    console.log("ℹ️ Mostrando datos de ejemplo:", error);
+                } else {
                     showSampleData();
-                    demoStatus.textContent = "✅ Dashboard cargado con datos de ejemplo";
+                    demoStatus.textContent = "ℹ️ No hay registros. ¡Agrega el primero!";
                     demoStatus.className = "";
                 }
             }
@@ -1387,7 +1464,9 @@
                     if (registro.cantidad) {
                         cantidadTotal += parseInt(registro.cantidad) || 0;
                     }
-                    porDepartamento[registro.departamento] = (porDepartamento[registro.departamento] || 0) + 1;
+
+                    const depto = registro.departamento || "General";
+                    porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
                 });
 
                 // 1. Actualizar contadores principales
@@ -1400,7 +1479,7 @@
                     let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
 
                     Object.entries(porDepartamento).forEach(([depto, count]) => {
-                        const percentage = Math.round((count / totalRegistros) * 100);
+                        const percentage = totalRegistros > 0 ? Math.round((count / totalRegistros) * 100) : 0;
                         const color = getDepartmentColor(depto);
 
                         chartHTML += `
@@ -1413,7 +1492,7 @@
                             <div style="height: 100%; width: ${percentage}%; background: ${color}; border-radius: 4px;"></div>
                         </div>
                     </div>
-                `;
+                    `;
                     });
 
                     chartHTML += '</div>';
@@ -1424,12 +1503,8 @@
 
                 // 3. Actualizar últimos registros
                 updateLastRegistros(registros);
-
-                demoStatus.textContent = `✅ Dashboard actualizado con ${totalRegistros} registros`;
-                demoStatus.className = "success";
             }
 
-            // ========== ACTUALIZAR ÚLTIMOS REGISTROS ==========
             function updateLastRegistros(registros) {
                 const container = document.getElementById('ultimos-registros');
 
@@ -1448,13 +1523,17 @@
                     let fechaTexto = "Hoy";
                     try {
                         const fecha = new Date(reg.fecha);
-                        fechaTexto = fecha.toLocaleString('es-MX', {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            day: '2-digit',
-                            month: 'short'
-                        });
-                    } catch (e) { }
+                        const hoy = new Date();
+                        const esHoy = fecha.toDateString() === hoy.toDateString();
+
+                        if (esHoy) {
+                            fechaTexto = fecha.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+                        } else {
+                            fechaTexto = fecha.toLocaleDateString('es-MX', { day: '2-digit', month: 'short' });
+                        }
+                    } catch (e) {
+                        fechaTexto = "Reciente";
+                    }
 
                     html += `
                 <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid var(--primary-blue);">
@@ -1467,24 +1546,24 @@
                                 ${reg.cantidad ? `<span><i class="fas fa-hashtag"></i> ${reg.cantidad}</span>` : ''}
                             </div>
                         </div>
-                        <div style="font-size: 0.8rem; color: #94a3b8;">${fechaTexto}</div>
+                        <div style="font-size: 0.8rem; color: #94a3b8; white-space: nowrap;">${fechaTexto}</div>
                     </div>
                 </div>
-            `;
+                `;
                 });
 
                 html += '</div>';
                 container.innerHTML = html;
             }
 
-            // ========== FUNCIONES AUXILIARES ==========
             function getDepartmentColor(depto) {
                 const colors = {
                     'Urgencias': 'linear-gradient(90deg, #ef4444, #f87171)',
                     'Pediatría': 'linear-gradient(90deg, #3b82f6, #60a5fa)',
                     'Cirugía': 'linear-gradient(90deg, #8b5cf6, #a78bfa)',
                     'Laboratorio': 'linear-gradient(90deg, #10b981, #34d399)',
-                    'Administración': 'linear-gradient(90deg, #f59e0b, #fbbf24)'
+                    'Administración': 'linear-gradient(90deg, #f59e0b, #fbbf24)',
+                    'General': 'linear-gradient(90deg, #94a3b8, #cbd5e1)'
                 };
                 return colors[depto] || 'linear-gradient(90deg, var(--primary-blue), var(--primary-green))';
             }
@@ -1505,20 +1584,6 @@
                             tipo: "Consulta",
                             cantidad: 3,
                             fecha: new Date(Date.now() - 3600000).toISOString()
-                        },
-                        {
-                            nombre: "Lic. Carlos López",
-                            departamento: "Administración",
-                            tipo: "Alta",
-                            cantidad: 2,
-                            fecha: new Date(Date.now() - 7200000).toISOString()
-                        },
-                        {
-                            nombre: "Dra. María Torres",
-                            departamento: "Cirugía",
-                            tipo: "Intervención",
-                            cantidad: 1,
-                            fecha: new Date(Date.now() - 10800000).toISOString()
                         }
                     ]
                 };
@@ -1526,59 +1591,11 @@
                 updateDashboardWithRealData(sampleData);
             }
 
-            function simulateLocalSave() {
-                const nombre = document.getElementById('demo-nombre').value || "Usuario";
-                const departamento = document.getElementById('demo-departamento').value || "General";
-
-                demoStatus.textContent = `✅ (Demo local) Registro de ${nombre} en ${departamento} simulado.`;
-                demoStatus.className = "success";
-
-                demoForm.reset();
-
-                // Agregar el registro simulado a los datos de ejemplo
-                const nuevoRegistro = {
-                    nombre: nombre,
-                    departamento: departamento,
-                    tipo: document.getElementById('demo-tipo').value || "Prueba",
-                    cantidad: parseInt(document.getElementById('demo-cantidad').value) || 1,
-                    fecha: new Date().toISOString()
-                };
-
-                // Actualizar dashboard con el nuevo registro
-                const container = document.getElementById('ultimos-registros');
-                const currentHTML = container.innerHTML;
-
-                const nuevoHTML = `
-            <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid var(--primary-green); margin-bottom: 0.75rem;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                    <div>
-                        <div style="font-weight: 600; color: var(--dark-bg);">${nuevoRegistro.nombre}</div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
-                            <span><i class="fas fa-building"></i> ${nuevoRegistro.departamento}</span>
-                            <span><i class="fas fa-tag"></i> ${nuevoRegistro.tipo}</span>
-                            <span><i class="fas fa-hashtag"></i> ${nuevoRegistro.cantidad}</span>
-                        </div>
-                    </div>
-                    <div style="font-size: 0.8rem; color: #94a3b8;">Ahora</div>
-                </div>
-            </div>
-            ` + currentHTML.replace('<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>', '').replace('<div style="display: flex; flex-direction: column; gap: 0.75rem;">', '<div style="display: flex; flex-direction: column; gap: 0.75rem;">' + nuevoHTML);
-
-                container.innerHTML = nuevoHTML;
-
-                // Actualizar contadores
-                const totalActual = parseInt(document.getElementById('total-registros').textContent) || 0;
-                const cantidadActual = parseInt(document.getElementById('cantidad-total').textContent) || 0;
-
-                document.getElementById('total-registros').textContent = totalActual + 1;
-                document.getElementById('cantidad-total').textContent = cantidadActual + nuevoRegistro.cantidad;
-            }
-
-            // ========== EVENTOS DE BOTONES ==========
+            // ========== BOTONES ==========
             if (refreshBtn) {
                 refreshBtn.addEventListener('click', () => {
                     refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualizando...';
-                    demoStatus.textContent = "⏳ Actualizando datos...";
+                    demoStatus.textContent = "⏳ Actualizando datos REALES...";
                     demoStatus.className = "";
 
                     loadDashboardData();
@@ -1591,44 +1608,48 @@
 
             if (clearDemoBtn) {
                 clearDemoBtn.addEventListener('click', () => {
-                    if (confirm("¿Reiniciar la demostración?")) {
+                    if (confirm("¿Reiniciar TODOS los datos de demostración?\n\nEsto limpiará tanto los datos locales como intentará limpiar los datos en Google Sheets.")) {
+                        // Limpiar localStorage
+                        localStorage.removeItem('demo_registros');
+
+                        // Limpiar interfaz
                         document.getElementById('total-registros').textContent = "0";
                         document.getElementById('cantidad-total').textContent = "0";
                         document.getElementById('chart-departamentos').innerHTML =
                             '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
                         document.getElementById('ultimos-registros').innerHTML =
                             '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
-                        demoStatus.textContent = "✅ Dashboard reiniciado.";
+
+                        demoStatus.textContent = "✅ Dashboard reiniciado. Los datos REALES en Google Sheets permanecen.";
                         demoStatus.className = "success";
                     }
                 });
             }
 
-            // ========== INICIALIZAR DEMO ==========
+            // ========== INICIALIZAR ==========
+            // Primero cargar datos REALES de GAS
             setTimeout(() => {
                 loadDashboardData();
             }, 1000);
 
-            setInterval(loadDashboardData, 30000);
+            // Actualizar automáticamente cada 60 segundos
+            setInterval(loadDashboardData, 60000);
 
-            console.log("✅ Demo interactiva inicializada correctamente");
+            console.log("✅ Demo interactiva inicializada - Buscando datos REALES");
 
         } else {
-            console.log("ℹ️ No se encontró sección de demo, omitiendo inicialización");
+            console.log("ℹ️ No se encontró sección de demo");
         }
 
-        // ========== PRUEBA DE CONEXIÓN GAS ==========
-        console.log("🔍 Probando conexión con GAS...");
-        // Usar un iframe para probar la conexión sin problemas de CORS
-        const testFrame = document.createElement('iframe');
-        testFrame.style.display = 'none';
-        testFrame.src = SCRIPT_URL + '?action=test&timestamp=' + Date.now();
-        document.body.appendChild(testFrame);
-
+        // ========== PRUEBA SIMPLE ==========
+        console.log("🔍 Verificando GAS...");
         setTimeout(() => {
-            console.log("✅ Prueba de conexión completada");
-            document.body.removeChild(testFrame);
-        }, 2000);
+            fetch(SCRIPT_URL + '?action=test', {
+                method: 'GET',
+                mode: 'no-cors'
+            }).catch(() => { });
+            console.log("✅ Aplicación lista para usar");
+        }, 100);
     </script>
 
 </body>
