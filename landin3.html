@@ -1244,82 +1244,108 @@
             const refreshBtn = document.getElementById('refresh-btn');
             const clearDemoBtn = document.getElementById('clear-demo-btn');
 
-            // ========== FUNCIÓN PARA OBTENER DATOS REALES ==========
-            async function fetchDataFromGAS() {
-                console.log("📡 Conectando a GAS para obtener registros reales...");
+            // ========== FUNCIÓN JSONP PARA OBTENER DATOS ==========
+            function fetchDataWithJSONP() {
+                return new Promise((resolve, reject) => {
+                    const callbackName = 'jsonp_callback_' + Date.now() + '_' + Math.random().toString(36).substr(2);
 
-                try {
-                    // Usar un proxy CORS para evitar problemas
-                    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-                    const url = SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now();
+                    window[callbackName] = function (data) {
+                        delete window[callbackName];
+                        document.body.removeChild(script);
 
-                    const response = await fetch(corsProxy + url, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Origin': window.location.origin
+                        if (data && data.registros !== undefined) {
+                            resolve(data);
+                        } else {
+                            reject(new Error('Datos inválidos recibidos'));
                         }
-                    });
+                    };
 
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log("✅ Datos reales obtenidos de GAS:", data);
-                        return data;
-                    } else {
-                        throw new Error('Error en la respuesta del servidor');
-                    }
-                } catch (error) {
-                    console.log("⚠️ Error conectando a GAS, intentando método directo...");
+                    const script = document.createElement('script');
+                    script.src = SCRIPT_URL +
+                        '?action=obtener_registros' +
+                        '&callback=' + callbackName +
+                        '&_=' + Date.now();
+                    script.onerror = function () {
+                        delete window[callbackName];
+                        document.body.removeChild(script);
+                        reject(new Error('Error cargando script'));
+                    };
 
-                    // Método alternativo: Intentar directamente
-                    try {
-                        const response = await fetch(SCRIPT_URL + '?action=obtener_registros&callback=test&_=' + Date.now());
-                        const text = await response.text();
+                    document.body.appendChild(script);
 
-                        // Intentar parsear como JSON
-                        if (text.startsWith('{')) {
-                            const data = JSON.parse(text);
-                            return data;
+                    // Timeout después de 8 segundos
+                    setTimeout(() => {
+                        if (window[callbackName]) {
+                            delete window[callbackName];
+                            if (script.parentNode) {
+                                document.body.removeChild(script);
+                            }
+                            reject(new Error('Timeout'));
                         }
-                    } catch (e) {
-                        console.error("❌ No se pudo conectar a GAS:", e);
-                        return null;
-                    }
-                }
+                    }, 8000);
+                });
             }
 
-            // ========== GUARDAR REGISTRO REAL ==========
-            async function guardarRegistroReal(datos) {
-                console.log("💾 Guardando registro real en GAS...", datos);
+            // ========== FUNCIÓN PARA GUARDAR CON JSONP ==========
+            function saveDataWithJSONP(datos) {
+                return new Promise((resolve, reject) => {
+                    const callbackName = 'jsonp_save_' + Date.now() + '_' + Math.random().toString(36).substr(2);
 
-                try {
-                    const params = new URLSearchParams();
-                    params.append('action', 'guardar_registro');
-                    params.append('nombre', datos.nombre);
-                    params.append('departamento', datos.departamento);
-                    params.append('cantidad', datos.cantidad);
-                    params.append('tipo', datos.tipo);
-                    params.append('ip', datos.ip || 'web-' + Date.now());
+                    window[callbackName] = function (response) {
+                        delete window[callbackName];
+                        if (saveScript.parentNode) {
+                            document.body.removeChild(saveScript);
+                        }
 
-                    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-                    const response = await fetch(corsProxy + SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params
-                    });
+                        if (response && response.success !== undefined) {
+                            resolve(response);
+                        } else {
+                            reject(new Error('Respuesta inválida'));
+                        }
+                    };
 
-                    if (response.ok) {
-                        const result = await response.json();
-                        console.log("✅ Registro guardado en GAS:", result);
-                        return result;
+                    // Construir URL con parámetros
+                    let url = SCRIPT_URL + '?action=guardar_registro&callback=' + callbackName;
+
+                    // Agregar parámetros
+                    const params = {
+                        nombre: datos.nombre,
+                        departamento: datos.departamento,
+                        cantidad: datos.cantidad,
+                        tipo: datos.tipo,
+                        ip: datos.ip || 'web-' + Date.now(),
+                        timestamp: Date.now()
+                    };
+
+                    for (const key in params) {
+                        if (params[key] !== undefined && params[key] !== null) {
+                            url += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+                        }
                     }
-                } catch (error) {
-                    console.error("❌ Error guardando en GAS:", error);
-                }
 
-                return null;
+                    const saveScript = document.createElement('script');
+                    saveScript.src = url;
+                    saveScript.onerror = function () {
+                        delete window[callbackName];
+                        if (saveScript.parentNode) {
+                            document.body.removeChild(saveScript);
+                        }
+                        reject(new Error('Error enviando datos'));
+                    };
+
+                    document.body.appendChild(saveScript);
+
+                    // Timeout
+                    setTimeout(() => {
+                        if (window[callbackName]) {
+                            delete window[callbackName];
+                            if (saveScript.parentNode) {
+                                document.body.removeChild(saveScript);
+                            }
+                            reject(new Error('Timeout al guardar'));
+                        }
+                    }, 8000);
+                });
             }
 
             // ========== CARGAR DATOS REALES ==========
@@ -1329,27 +1355,46 @@
                 demoStatus.textContent = "⏳ Conectando a la base de datos...";
                 demoStatus.className = "";
 
-                try {
-                    // Intentar obtener datos REALES de GAS
-                    const data = await fetchDataFromGAS();
+                if (refreshBtn) {
+                    refreshBtn.disabled = true;
+                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+                }
 
-                    if (data && data.registros && data.registros.length > 0) {
-                        console.log(`✅ ${data.registros.length} registros reales encontrados`);
+                try {
+                    // Intentar obtener datos con JSONP
+                    const data = await fetchDataWithJSONP();
+
+                    console.log("✅ Datos REALES obtenidos:", data);
+
+                    if (data.registros && data.registros.length > 0) {
                         updateDashboardWithRealData(data);
-                        demoStatus.textContent = `✅ Dashboard actualizado con ${data.registros.length} registros reales`;
+                        demoStatus.textContent = `✅ ${data.registros.length} registros reales cargados`;
                         demoStatus.className = "success";
                     } else {
-                        console.log("ℹ️ No hay registros reales aún, mostrando ejemplo");
                         showSampleData();
-                        demoStatus.textContent = "ℹ️ No hay registros reales aún. ¡Sé el primero en registrar!";
+                        demoStatus.textContent = "ℹ️ No hay registros reales aún";
                         demoStatus.className = "";
                     }
 
                 } catch (error) {
-                    console.error("💥 Error cargando datos reales:", error);
-                    showSampleData();
-                    demoStatus.textContent = "⚠️ Error de conexión. Mostrando datos de ejemplo.";
-                    demoStatus.className = "error";
+                    console.log("⚠️ No se pudieron obtener datos reales:", error.message);
+
+                    // Intentar cargar datos locales
+                    const localData = loadLocalData();
+                    if (localData.registros.length > 0) {
+                        updateDashboardWithRealData(localData);
+                        demoStatus.textContent = `📱 Mostrando ${localData.registros.length} registros locales`;
+                        demoStatus.className = "";
+                    } else {
+                        showSampleData();
+                        demoStatus.textContent = "ℹ️ Mostrando datos de ejemplo";
+                        demoStatus.className = "";
+                    }
+                } finally {
+                    if (refreshBtn) {
+                        refreshBtn.disabled = false;
+                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar Datos';
+                    }
                 }
             }
 
@@ -1357,25 +1402,29 @@
             demoForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
+                const nombre = document.getElementById('demo-nombre').value.trim();
+                const departamento = document.getElementById('demo-departamento').value;
+                const cantidad = document.getElementById('demo-cantidad').value || "1";
+                const tipo = document.getElementById('demo-tipo').value;
+
+                if (!nombre) {
+                    demoStatus.textContent = "⚠️ Por favor ingresa tu nombre";
+                    demoStatus.className = "error";
+                    return;
+                }
+
                 demoStatus.textContent = "⏳ Guardando registro REAL...";
                 demoStatus.className = "";
 
+                // Deshabilitar botones mientras se guarda
+                const submitBtn = demoForm.querySelector('button[type="submit"]');
+                if (submitBtn) submitBtn.disabled = true;
+
                 try {
-                    const nombre = document.getElementById('demo-nombre').value.trim();
-                    const departamento = document.getElementById('demo-departamento').value;
-                    const cantidad = document.getElementById('demo-cantidad').value || "1";
-                    const tipo = document.getElementById('demo-tipo').value;
+                    console.log("📤 Enviando datos a GAS:", { nombre, departamento, cantidad, tipo });
 
-                    if (!nombre) {
-                        demoStatus.textContent = "⚠️ Por favor ingresa tu nombre";
-                        demoStatus.className = "error";
-                        return;
-                    }
-
-                    console.log("📤 Enviando datos REALES a GAS:", { nombre, departamento, cantidad, tipo });
-
-                    // Intentar guardar en GAS
-                    const resultado = await guardarRegistroReal({
+                    // Intentar guardar en GAS usando JSONP
+                    const resultado = await saveDataWithJSONP({
                         nombre: nombre,
                         departamento: departamento,
                         cantidad: cantidad,
@@ -1383,73 +1432,88 @@
                         ip: 'web-' + Date.now()
                     });
 
-                    if (resultado && resultado.success) {
-                        demoStatus.textContent = `✅ ${resultado.message || 'Registro REAL guardado!'} Total: ${resultado.total || '?'} registros`;
+                    console.log("✅ Respuesta de GAS:", resultado);
+
+                    if (resultado.success) {
+                        demoStatus.textContent = `✅ ${resultado.message || 'Registro guardado!'} Total: ${resultado.total || '0'} registros`;
                         demoStatus.className = "success";
+
+                        // También guardar localmente
+                        saveToLocalStorage({
+                            nombre: nombre,
+                            departamento: departamento,
+                            cantidad: parseInt(cantidad),
+                            tipo: tipo
+                        });
+
                         demoForm.reset();
 
-                        // Actualizar dashboard después de 2 segundos
+                        // Actualizar dashboard después de 1 segundo
                         setTimeout(() => {
                             loadDashboardData();
-                        }, 2000);
+                        }, 1000);
                     } else {
-                        // Si falla GAS, guardar localmente
-                        throw new Error('Falló conexión con GAS');
+                        throw new Error(resultado.error || 'Error desconocido');
                     }
 
                 } catch (error) {
-                    console.error("Error guardando:", error);
-                    demoStatus.textContent = "⚠️ Guardando localmente. El registro NO se guardó en la base de datos.";
-                    demoStatus.className = "error";
+                    console.error("❌ Error guardando en GAS:", error);
 
-                    // Guardar localmente en localStorage
-                    saveToLocalStorage();
+                    // Guardar solo localmente
+                    saveToLocalStorage({
+                        nombre: nombre,
+                        departamento: departamento,
+                        cantidad: parseInt(cantidad),
+                        tipo: tipo
+                    });
+
+                    demoStatus.textContent = "📱 Guardado localmente. Intenta más tarde para guardar en la nube.";
+                    demoStatus.className = "warning";
                     demoForm.reset();
 
+                    // Actualizar con datos locales
                     setTimeout(() => {
-                        loadLocalData();
-                    }, 1000);
+                        const localData = loadLocalData();
+                        updateDashboardWithRealData(localData);
+                    }, 500);
+                } finally {
+                    if (submitBtn) submitBtn.disabled = false;
                 }
             });
 
             // ========== FUNCIONES PARA DATOS LOCALES ==========
-            function saveToLocalStorage() {
-                const nombre = document.getElementById('demo-nombre').value.trim() || "Usuario";
-                const departamento = document.getElementById('demo-departamento').value || "General";
-                const cantidad = document.getElementById('demo-cantidad').value || "1";
-                const tipo = document.getElementById('demo-tipo').value || "Prueba";
-
-                // Obtener registros existentes
+            function saveToLocalStorage(registro) {
                 const registros = JSON.parse(localStorage.getItem('demo_registros') || '[]');
 
-                // Agregar nuevo registro
                 registros.push({
-                    nombre: nombre,
-                    departamento: departamento,
-                    cantidad: parseInt(cantidad),
-                    tipo: tipo,
+                    ...registro,
                     fecha: new Date().toISOString(),
-                    id: Date.now()
+                    id: Date.now(),
+                    local: true // Marcar como registro local
                 });
 
-                // Guardar en localStorage
-                localStorage.setItem('demo_registros', JSON.stringify(registros));
+                // Mantener solo los últimos 50 registros locales
+                if (registros.length > 50) {
+                    registros.splice(0, registros.length - 50);
+                }
 
-                console.log("💾 Guardado en localStorage:", registros.length, "registros");
+                localStorage.setItem('demo_registros', JSON.stringify(registros));
+                console.log("💾 Guardado local. Total:", registros.length);
             }
 
             function loadLocalData() {
                 const registros = JSON.parse(localStorage.getItem('demo_registros') || '[]');
 
-                if (registros.length > 0) {
-                    updateDashboardWithRealData({ registros: registros });
-                    demoStatus.textContent = `✅ Mostrando ${registros.length} registros locales`;
-                    demoStatus.className = "success";
-                } else {
-                    showSampleData();
-                    demoStatus.textContent = "ℹ️ No hay registros. ¡Agrega el primero!";
-                    demoStatus.className = "";
-                }
+                return {
+                    registros: registros,
+                    total: registros.length,
+                    message: "Datos locales cargados"
+                };
+            }
+
+            function clearLocalData() {
+                localStorage.removeItem('demo_registros');
+                console.log("🗑️ Datos locales eliminados");
             }
 
             // ========== ACTUALIZAR DASHBOARD ==========
@@ -1513,37 +1577,45 @@
                     return;
                 }
 
-                const sortedRegistros = [...registros].sort((a, b) => {
-                    return new Date(b.fecha) - new Date(a.fecha);
-                }).slice(0, 5);
+                const sortedRegistros = [...registros]
+                    .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+                    .slice(0, 5);
 
                 let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
 
                 sortedRegistros.forEach(reg => {
                     let fechaTexto = "Hoy";
+                    let esLocal = reg.local ? ' (local)' : '';
+
                     try {
                         const fecha = new Date(reg.fecha);
                         const hoy = new Date();
-                        const esHoy = fecha.toDateString() === hoy.toDateString();
 
-                        if (esHoy) {
-                            fechaTexto = fecha.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+                        if (fecha.toDateString() === hoy.toDateString()) {
+                            fechaTexto = fecha.toLocaleTimeString('es-MX', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
                         } else {
-                            fechaTexto = fecha.toLocaleDateString('es-MX', { day: '2-digit', month: 'short' });
+                            fechaTexto = fecha.toLocaleDateString('es-MX', {
+                                day: '2-digit',
+                                month: 'short'
+                            });
                         }
                     } catch (e) {
                         fechaTexto = "Reciente";
                     }
 
                     html += `
-                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid var(--primary-blue);">
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${reg.local ? '#f59e0b' : 'var(--primary-blue)'};">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div>
-                            <div style="font-weight: 600; color: var(--dark-bg);">${reg.nombre || "Usuario"}</div>
+                            <div style="font-weight: 600; color: var(--dark-bg);">${reg.nombre || "Usuario"}${esLocal}</div>
                             <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
                                 <span><i class="fas fa-building"></i> ${reg.departamento || "General"}</span>
                                 <span><i class="fas fa-tag"></i> ${reg.tipo || "Registro"}</span>
                                 ${reg.cantidad ? `<span><i class="fas fa-hashtag"></i> ${reg.cantidad}</span>` : ''}
+                                ${reg.local ? '<span style="color: #f59e0b;"><i class="fas fa-laptop"></i> Local</span>' : ''}
                             </div>
                         </div>
                         <div style="font-size: 0.8rem; color: #94a3b8; white-space: nowrap;">${fechaTexto}</div>
@@ -1576,14 +1648,16 @@
                             departamento: "Urgencias",
                             tipo: "Ingreso",
                             cantidad: 5,
-                            fecha: new Date().toISOString()
+                            fecha: new Date().toISOString(),
+                            local: false
                         },
                         {
                             nombre: "Dra. Ana García",
                             departamento: "Pediatría",
                             tipo: "Consulta",
                             cantidad: 3,
-                            fecha: new Date(Date.now() - 3600000).toISOString()
+                            fecha: new Date(Date.now() - 3600000).toISOString(),
+                            local: false
                         }
                     ]
                 };
@@ -1594,61 +1668,39 @@
             // ========== BOTONES ==========
             if (refreshBtn) {
                 refreshBtn.addEventListener('click', () => {
-                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Actualizando...';
-                    demoStatus.textContent = "⏳ Actualizando datos REALES...";
-                    demoStatus.className = "";
-
                     loadDashboardData();
-
-                    setTimeout(() => {
-                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar Datos';
-                    }, 1500);
                 });
             }
 
             if (clearDemoBtn) {
                 clearDemoBtn.addEventListener('click', () => {
-                    if (confirm("¿Reiniciar TODOS los datos de demostración?\n\nEsto limpiará tanto los datos locales como intentará limpiar los datos en Google Sheets.")) {
-                        // Limpiar localStorage
-                        localStorage.removeItem('demo_registros');
-
-                        // Limpiar interfaz
-                        document.getElementById('total-registros').textContent = "0";
-                        document.getElementById('cantidad-total').textContent = "0";
-                        document.getElementById('chart-departamentos').innerHTML =
-                            '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
-                        document.getElementById('ultimos-registros').innerHTML =
-                            '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
-
-                        demoStatus.textContent = "✅ Dashboard reiniciado. Los datos REALES en Google Sheets permanecen.";
+                    if (confirm("¿Limpiar TODOS los datos locales?\n\nLos datos en Google Sheets NO se verán afectados.")) {
+                        clearLocalData();
+                        showSampleData();
+                        demoStatus.textContent = "✅ Datos locales eliminados";
                         demoStatus.className = "success";
                     }
                 });
             }
 
             // ========== INICIALIZAR ==========
-            // Primero cargar datos REALES de GAS
             setTimeout(() => {
                 loadDashboardData();
-            }, 1000);
+            }, 500);
 
-            // Actualizar automáticamente cada 60 segundos
-            setInterval(loadDashboardData, 60000);
+            // Actualizar automáticamente cada 30 segundos
+            setInterval(loadDashboardData, 30000);
 
-            console.log("✅ Demo interactiva inicializada - Buscando datos REALES");
+            console.log("✅ Demo inicializada - Usando JSONP para GAS");
 
         } else {
             console.log("ℹ️ No se encontró sección de demo");
         }
 
         // ========== PRUEBA SIMPLE ==========
-        console.log("🔍 Verificando GAS...");
+        console.log("🔍 Verificando conexión...");
         setTimeout(() => {
-            fetch(SCRIPT_URL + '?action=test', {
-                method: 'GET',
-                mode: 'no-cors'
-            }).catch(() => { });
-            console.log("✅ Aplicación lista para usar");
+            console.log("✅ Aplicación lista");
         }, 100);
     </script>
 
