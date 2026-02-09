@@ -1157,419 +1157,419 @@
     </footer>
 
     <script>
-        // ========== CONFIGURACIÓN GLOBAL ==========
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxy_BWTCkRERklZqqMPo2w9YcylpEC-cnNKoZrSRBowB31VnKzRyht5jm1Ycb8UdzVw/exec";
+    // ========== CONFIGURACIÓN GLOBAL ==========
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPC0u6zLWalTn0xptU09Vtnw3fWrF25AW2HgkU4I9LXR89GxFpczOBAF0f6kobNJRb/exec";
 
-        console.log("✅ URL de GAS configurada:", SCRIPT_URL);
+    console.log("✅ URL de GAS configurada:", SCRIPT_URL);
 
-        // ========== CÓDIGO ORIGINAL ==========
-        document.getElementById("year").textContent = new Date().getFullYear();
+    // ========== CÓDIGO ORIGINAL ==========
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active')
-                ? '<i class="fas fa-times"></i>'
-                : '<i class="fas fa-bars"></i>';
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active')
+            ? '<i class="fas fa-times"></i>'
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    const mobileLinks = document.querySelectorAll('.mobile-menu a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         });
+    });
 
-        const mobileLinks = document.querySelectorAll('.mobile-menu a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
+    // ========== FORMULARIO DE CONTACTO CORREGIDO ==========
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
 
-        // ========== FORMULARIO DE CONTACTO CORREGIDO ==========
-        const form = document.getElementById("contact-form");
-        const status = document.getElementById("status");
-
-        if (form) {
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                // Mostrar estado
-                status.textContent = "⏳ Enviando mensaje...";
-                status.className = "";
-
-                // Deshabilitar botón
-                const submitBtn = form.querySelector('button[type="submit"]');
-                if (submitBtn) submitBtn.disabled = true;
-
-                try {
-                    // Obtener datos del formulario
-                    const nombre = document.getElementById('nombre').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const institucion = document.getElementById('institucion').value.trim();
-                    const necesidad = document.getElementById('necesidad').value;
-                    const mensaje = document.getElementById('mensaje').value.trim();
-
-                    // Validaciones básicas
-                    if (!nombre || !email || !mensaje) {
-                        throw new Error('Por favor completa los campos requeridos');
-                    }
-
-                    // Validar email
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        throw new Error('Por favor ingresa un email válido');
-                    }
-
-                    console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
-
-                    // Preparar datos para enviar
-                    const formData = new FormData();
-                    formData.append('nombre', nombre);
-                    formData.append('email', email);
-                    formData.append('institucion', institucion || '');
-                    formData.append('necesidad', necesidad || '');
-                    formData.append('mensaje', mensaje);
-                    formData.append('action', 'contacto'); // IMPORTANTE: Especificar acción
-                    formData.append('timestamp', Date.now());
-
-                    // Enviar a GAS
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Error del servidor: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    console.log("✅ Respuesta de GAS:", result);
-
-                    if (result.success) {
-                        // Éxito
-                        status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
-                        status.className = "success";
-
-                        // Enviar notificación por email (opcional)
-                        try {
-                            await sendEmailNotification({ nombre, email, institucion, necesidad, mensaje });
-                        } catch (emailError) {
-                            console.log("ℹ️ No se pudo enviar notificación por email:", emailError);
-                        }
-
-                        // Resetear formulario
-                        form.reset();
-
-                    } else {
-                        throw new Error(result.error || 'Error al procesar el formulario');
-                    }
-
-                } catch (error) {
-                    console.error("❌ Error en formulario de contacto:", error);
-
-                    // Mostrar mensaje de error apropiado
-                    if (error.message.includes('email')) {
-                        status.textContent = "⚠️ Por favor ingresa un email válido";
-                    } else if (error.message.includes('completa')) {
-                        status.textContent = "⚠️ Por favor completa los campos requeridos (*)";
-                    } else {
-                        status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente.";
-                    }
-                    status.className = "error";
-
-                } finally {
-                    // Rehabilitar botón
-                    if (submitBtn) {
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                        }, 2000);
-                    }
+    if (form) {
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            // Mostrar estado
+            status.textContent = "⏳ Enviando mensaje...";
+            status.className = "";
+            
+            // Deshabilitar botón
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) submitBtn.disabled = true;
+            
+            try {
+                // Obtener datos del formulario
+                const nombre = document.getElementById('nombre').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const institucion = document.getElementById('institucion').value.trim();
+                const necesidad = document.getElementById('necesidad').value;
+                const mensaje = document.getElementById('mensaje').value.trim();
+                
+                // Validaciones básicas
+                if (!nombre || !email || !mensaje) {
+                    throw new Error('Por favor completa los campos requeridos');
                 }
-            });
-        }
-
-        // Función opcional para enviar notificación por email
-        async function sendEmailNotification(data) {
-            // Esto es opcional - puedes usar un servicio como EmailJS o simplemente confiar en GAS
-            console.log("📧 Datos para notificación:", data);
-            return Promise.resolve();
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
+                
+                // Validar email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    throw new Error('Por favor ingresa un email válido');
                 }
-            });
-        });
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            }
-        });
-
-        // ========== DEMO INTERACTIVA ==========
-        const demoForm = document.getElementById('demo-form');
-        const demoSection = document.getElementById('demo');
-
-        if (demoForm && demoSection) {
-            console.log("✅ Sección de demo detectada, inicializando...");
-
-            const demoStatus = document.getElementById('demo-status');
-            const refreshBtn = document.getElementById('refresh-btn');
-            const clearDemoBtn = document.getElementById('clear-demo-btn');
-            const demoSubmitBtn = demoForm.querySelector('button[type="submit"]');
-
-            // Variable para controlar si estamos usando datos reales
-            let usandoDatosReales = false;
-            let registrosReales = [];
-            let registrosLocales = [];
-
-            // ========== FUNCIÓN PARA OBTENER DATOS DE GAS ==========
-            async function fetchDataFromGAS() {
-                console.log("📡 Conectando a GAS...");
-
-                try {
-                    const response = await fetch(SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now());
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    console.log("✅ Respuesta de GAS:", data);
-                    return data;
-                } catch (error) {
-                    console.error("❌ Error conectando a GAS:", error);
-                    throw error;
-                }
-            }
-
-            // ========== FUNCIÓN PARA GUARDAR EN GAS ==========
-            async function saveToGAS(datos) {
-                console.log("💾 Enviando a GAS:", datos);
-
-                try {
-                    const params = new URLSearchParams();
-                    params.append('action', 'guardar_registro');
-                    params.append('nombre', datos.nombre);
-                    params.append('departamento', datos.departamento);
-                    params.append('cantidad', datos.cantidad);
-                    params.append('tipo', datos.tipo);
-                    params.append('ip', datos.ip || 'web-' + Date.now());
-
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: params
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    console.log("✅ Guardado en GAS:", result);
-                    return result;
-                } catch (error) {
-                    console.error("❌ Error guardando en GAS:", error);
-                    throw error;
-                }
-            }
-
-            // ========== CARGAR DATOS ==========
-            async function loadDashboardData() {
-                console.log("🔄 Cargando datos...");
-
-                demoStatus.textContent = "⏳ Actualizando...";
-                demoStatus.className = "";
-
-                if (refreshBtn) {
-                    refreshBtn.disabled = true;
-                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                }
-
-                try {
-                    // Intentar cargar datos REALES de GAS
-                    const gasData = await fetchDataFromGAS();
-
-                    if (gasData.registros && gasData.registros.length > 0) {
-                        // ¡TENEMOS DATOS REALES!
-                        registrosReales = gasData.registros;
-                        usandoDatosReales = true;
-
-                        console.log(`✅ ${gasData.registros.length} registros reales cargados`);
-                        updateDashboard(registrosReales, true);
-
-                        demoStatus.textContent = `✅ ${gasData.registros.length} registros reales cargados`;
-                        demoStatus.className = "success";
-
-                    } else {
-                        // No hay datos reales, cargar locales
-                        console.log("ℹ️ No hay datos reales, cargando locales");
-                        loadLocalData();
-                    }
-
-                } catch (error) {
-                    console.log("⚠️ Error cargando datos reales, usando locales");
-                    loadLocalData();
-                } finally {
-                    if (refreshBtn) {
-                        refreshBtn.disabled = false;
-                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar';
-                    }
-                }
-            }
-
-            // ========== CARGAR DATOS LOCALES ==========
-            function loadLocalData() {
-                const stored = localStorage.getItem('demo_registros_locales');
-                if (stored) {
-                    registrosLocales = JSON.parse(stored);
-                }
-
-                // Combinar con datos de ejemplo si hay pocos
-                if (registrosLocales.length === 0) {
-                    registrosLocales = getSampleData();
-                }
-
-                usandoDatosReales = false;
-                updateDashboard(registrosLocales, false);
-
-                demoStatus.textContent = `📱 ${registrosLocales.length} registros locales`;
-                demoStatus.className = "";
-            }
-
-            // ========== GUARDAR DATOS LOCALES ==========
-            function saveLocalData(registro) {
-                registro.id = Date.now();
-                registro.fecha = new Date().toISOString();
-                registro.local = true;
-
-                registrosLocales.unshift(registro); // Agregar al inicio
-
-                // Limitar a 100 registros
-                if (registrosLocales.length > 100) {
-                    registrosLocales = registrosLocales.slice(0, 100);
-                }
-
-                localStorage.setItem('demo_registros_locales', JSON.stringify(registrosLocales));
-                console.log("💾 Guardado local. Total:", registrosLocales.length);
-
-                return registro;
-            }
-
-            // ========== SUBMIT DEL FORMULARIO DEMO ==========
-            demoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const nombre = document.getElementById('demo-nombre').value.trim();
-                const departamento = document.getElementById('demo-departamento').value;
-                const cantidad = document.getElementById('demo-cantidad').value || "1";
-                const tipo = document.getElementById('demo-tipo').value;
-
-                if (!nombre) {
-                    demoStatus.textContent = "⚠️ Ingresa tu nombre";
-                    demoStatus.className = "error";
-                    return;
-                }
-
-                const registro = {
-                    nombre: nombre,
-                    departamento: departamento,
-                    cantidad: parseInt(cantidad) || 1,
-                    tipo: tipo
-                };
-
-                demoStatus.textContent = "⏳ Guardando...";
-                demoStatus.className = "";
-
-                if (demoSubmitBtn) demoSubmitBtn.disabled = true;
-
-                try {
-                    // PRIMERO intentar guardar en GAS
-                    const resultadoGAS = await saveToGAS(registro);
-
-                    // Éxito en GAS
-                    demoStatus.textContent = `✅ ${resultadoGAS.message || 'Guardado en la nube!'}`;
-                    demoStatus.className = "success";
-
-                    // También guardar localmente como respaldo
-                    saveLocalData(registro);
-
-                    // Recargar datos para incluir el nuevo registro
-                    setTimeout(() => loadDashboardData(), 1500);
-
-                } catch (error) {
-                    // Falló GAS, guardar solo localmente
-                    console.log("📱 Guardando localmente:", error.message);
-
-                    const registroLocal = saveLocalData(registro);
-                    updateDashboard(usandoDatosReales ? registrosReales : registrosLocales, usandoDatosReales);
-
-                    demoStatus.textContent = "📱 Guardado localmente (sin conexión a la nube)";
-                    demoStatus.className = "warning";
-
-                } finally {
-                    demoForm.reset();
-                    if (demoSubmitBtn) demoSubmitBtn.disabled = false;
-                }
-            });
-
-            // ========== ACTUALIZAR DASHBOARD ==========
-            function updateDashboard(registros, sonReales) {
-                const totalRegistros = registros.length;
-
-                let cantidadTotal = 0;
-                let porDepartamento = {};
-
-                registros.forEach(registro => {
-                    if (registro.cantidad) {
-                        cantidadTotal += parseInt(registro.cantidad) || 0;
-                    }
-
-                    const depto = registro.departamento || "General";
-                    porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
+                
+                console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
+                
+                // Preparar datos para enviar
+                const formData = new FormData();
+                formData.append('nombre', nombre);
+                formData.append('email', email);
+                formData.append('institucion', institucion || '');
+                formData.append('necesidad', necesidad || '');
+                formData.append('mensaje', mensaje);
+                formData.append('action', 'contacto'); // IMPORTANTE: Especificar acción
+                formData.append('timestamp', Date.now());
+                
+                // Enviar a GAS
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
                 });
-
-                // 1. Actualizar contadores
-                document.getElementById('total-registros').textContent = totalRegistros;
-                document.getElementById('cantidad-total').textContent = cantidadTotal;
-
-                // 2. Actualizar indicador de fuente
-                const fuenteElement = document.getElementById('data-source');
-                if (fuenteElement) {
-                    fuenteElement.textContent = sonReales ? 'Datos en tiempo real' : 'Datos de demostración';
-                    fuenteElement.style.color = sonReales ? '#10b981' : '#f59e0b';
+                
+                if (!response.ok) {
+                    throw new Error(`Error del servidor: ${response.status}`);
                 }
+                
+                const result = await response.json();
+                console.log("✅ Respuesta de GAS:", result);
+                
+                if (result.success) {
+                    // Éxito
+                    status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
+                    status.className = "success";
+                    
+                    // Enviar notificación por email (opcional)
+                    try {
+                        await sendEmailNotification({ nombre, email, institucion, necesidad, mensaje });
+                    } catch (emailError) {
+                        console.log("ℹ️ No se pudo enviar notificación por email:", emailError);
+                    }
+                    
+                    // Resetear formulario
+                    form.reset();
+                    
+                } else {
+                    throw new Error(result.error || 'Error al procesar el formulario');
+                }
+                
+            } catch (error) {
+                console.error("❌ Error en formulario de contacto:", error);
+                
+                // Mostrar mensaje de error apropiado
+                if (error.message.includes('email')) {
+                    status.textContent = "⚠️ Por favor ingresa un email válido";
+                } else if (error.message.includes('completa')) {
+                    status.textContent = "⚠️ Por favor completa los campos requeridos (*)";
+                } else {
+                    status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente.";
+                }
+                status.className = "error";
+                
+            } finally {
+                // Rehabilitar botón
+                if (submitBtn) {
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                    }, 2000);
+                }
+            }
+        });
+    }
 
-                // 3. Actualizar gráfico
-                const chartContainer = document.getElementById('chart-departamentos');
-                if (Object.keys(porDepartamento).length > 0) {
-                    let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
+    // Función opcional para enviar notificación por email
+    async function sendEmailNotification(data) {
+        // Esto es opcional - puedes usar un servicio como EmailJS o simplemente confiar en GAS
+        console.log("📧 Datos para notificación:", data);
+        return Promise.resolve();
+    }
 
-                    Object.entries(porDepartamento).forEach(([depto, count]) => {
-                        const percentage = totalRegistros > 0 ? Math.round((count / totalRegistros) * 100) : 0;
-                        const color = getDepartmentColor(depto);
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-                        chartHTML += `
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Add scroll effect to header
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
+            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+        } else {
+            header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        }
+    });
+
+    // ========== DEMO INTERACTIVA ==========
+    const demoForm = document.getElementById('demo-form');
+    const demoSection = document.getElementById('demo');
+
+    if (demoForm && demoSection) {
+        console.log("✅ Sección de demo detectada, inicializando...");
+
+        const demoStatus = document.getElementById('demo-status');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const clearDemoBtn = document.getElementById('clear-demo-btn');
+        const demoSubmitBtn = demoForm.querySelector('button[type="submit"]');
+
+        // Variable para controlar si estamos usando datos reales
+        let usandoDatosReales = false;
+        let registrosReales = [];
+        let registrosLocales = [];
+
+        // ========== FUNCIÓN PARA OBTENER DATOS DE GAS ==========
+        async function fetchDataFromGAS() {
+            console.log("📡 Conectando a GAS...");
+            
+            try {
+                const response = await fetch(SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now());
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log("✅ Respuesta de GAS:", data);
+                return data;
+            } catch (error) {
+                console.error("❌ Error conectando a GAS:", error);
+                throw error;
+            }
+        }
+
+        // ========== FUNCIÓN PARA GUARDAR EN GAS ==========
+        async function saveToGAS(datos) {
+            console.log("💾 Enviando a GAS:", datos);
+            
+            try {
+                const params = new URLSearchParams();
+                params.append('action', 'guardar_registro');
+                params.append('nombre', datos.nombre);
+                params.append('departamento', datos.departamento);
+                params.append('cantidad', datos.cantidad);
+                params.append('tipo', datos.tipo);
+                params.append('ip', datos.ip || 'web-' + Date.now());
+                
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log("✅ Guardado en GAS:", result);
+                return result;
+            } catch (error) {
+                console.error("❌ Error guardando en GAS:", error);
+                throw error;
+            }
+        }
+
+        // ========== CARGAR DATOS ==========
+        async function loadDashboardData() {
+            console.log("🔄 Cargando datos...");
+            
+            demoStatus.textContent = "⏳ Actualizando...";
+            demoStatus.className = "";
+            
+            if (refreshBtn) {
+                refreshBtn.disabled = true;
+                refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            }
+            
+            try {
+                // Intentar cargar datos REALES de GAS
+                const gasData = await fetchDataFromGAS();
+                
+                if (gasData.registros && gasData.registros.length > 0) {
+                    // ¡TENEMOS DATOS REALES!
+                    registrosReales = gasData.registros;
+                    usandoDatosReales = true;
+                    
+                    console.log(`✅ ${gasData.registros.length} registros reales cargados`);
+                    updateDashboard(registrosReales, true);
+                    
+                    demoStatus.textContent = `✅ ${gasData.registros.length} registros reales cargados`;
+                    demoStatus.className = "success";
+                    
+                } else {
+                    // No hay datos reales, cargar locales
+                    console.log("ℹ️ No hay datos reales, cargando locales");
+                    loadLocalData();
+                }
+                
+            } catch (error) {
+                console.log("⚠️ Error cargando datos reales, usando locales");
+                loadLocalData();
+            } finally {
+                if (refreshBtn) {
+                    refreshBtn.disabled = false;
+                    refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar';
+                }
+            }
+        }
+
+        // ========== CARGAR DATOS LOCALES ==========
+        function loadLocalData() {
+            const stored = localStorage.getItem('demo_registros_locales');
+            if (stored) {
+                registrosLocales = JSON.parse(stored);
+            }
+            
+            // Combinar con datos de ejemplo si hay pocos
+            if (registrosLocales.length === 0) {
+                registrosLocales = getSampleData();
+            }
+            
+            usandoDatosReales = false;
+            updateDashboard(registrosLocales, false);
+            
+            demoStatus.textContent = `📱 ${registrosLocales.length} registros locales`;
+            demoStatus.className = "";
+        }
+
+        // ========== GUARDAR DATOS LOCALES ==========
+        function saveLocalData(registro) {
+            registro.id = Date.now();
+            registro.fecha = new Date().toISOString();
+            registro.local = true;
+            
+            registrosLocales.unshift(registro); // Agregar al inicio
+            
+            // Limitar a 100 registros
+            if (registrosLocales.length > 100) {
+                registrosLocales = registrosLocales.slice(0, 100);
+            }
+            
+            localStorage.setItem('demo_registros_locales', JSON.stringify(registrosLocales));
+            console.log("💾 Guardado local. Total:", registrosLocales.length);
+            
+            return registro;
+        }
+
+        // ========== SUBMIT DEL FORMULARIO DEMO ==========
+        demoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nombre = document.getElementById('demo-nombre').value.trim();
+            const departamento = document.getElementById('demo-departamento').value;
+            const cantidad = document.getElementById('demo-cantidad').value || "1";
+            const tipo = document.getElementById('demo-tipo').value;
+            
+            if (!nombre) {
+                demoStatus.textContent = "⚠️ Ingresa tu nombre";
+                demoStatus.className = "error";
+                return;
+            }
+
+            const registro = {
+                nombre: nombre,
+                departamento: departamento,
+                cantidad: parseInt(cantidad) || 1,
+                tipo: tipo
+            };
+
+            demoStatus.textContent = "⏳ Guardando...";
+            demoStatus.className = "";
+            
+            if (demoSubmitBtn) demoSubmitBtn.disabled = true;
+
+            try {
+                // PRIMERO intentar guardar en GAS
+                const resultadoGAS = await saveToGAS(registro);
+                
+                // Éxito en GAS
+                demoStatus.textContent = `✅ ${resultadoGAS.message || 'Guardado en la nube!'}`;
+                demoStatus.className = "success";
+                
+                // También guardar localmente como respaldo
+                saveLocalData(registro);
+                
+                // Recargar datos para incluir el nuevo registro
+                setTimeout(() => loadDashboardData(), 1500);
+                
+            } catch (error) {
+                // Falló GAS, guardar solo localmente
+                console.log("📱 Guardando localmente:", error.message);
+                
+                const registroLocal = saveLocalData(registro);
+                updateDashboard(usandoDatosReales ? registrosReales : registrosLocales, usandoDatosReales);
+                
+                demoStatus.textContent = "📱 Guardado localmente (sin conexión a la nube)";
+                demoStatus.className = "warning";
+                
+            } finally {
+                demoForm.reset();
+                if (demoSubmitBtn) demoSubmitBtn.disabled = false;
+            }
+        });
+
+        // ========== ACTUALIZAR DASHBOARD ==========
+        function updateDashboard(registros, sonReales) {
+            const totalRegistros = registros.length;
+
+            let cantidadTotal = 0;
+            let porDepartamento = {};
+
+            registros.forEach(registro => {
+                if (registro.cantidad) {
+                    cantidadTotal += parseInt(registro.cantidad) || 0;
+                }
+                
+                const depto = registro.departamento || "General";
+                porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
+            });
+
+            // 1. Actualizar contadores
+            document.getElementById('total-registros').textContent = totalRegistros;
+            document.getElementById('cantidad-total').textContent = cantidadTotal;
+            
+            // 2. Actualizar indicador de fuente
+            const fuenteElement = document.getElementById('data-source');
+            if (fuenteElement) {
+                fuenteElement.textContent = sonReales ? 'Datos en tiempo real' : 'Datos de demostración';
+                fuenteElement.style.color = sonReales ? '#10b981' : '#f59e0b';
+            }
+
+            // 3. Actualizar gráfico
+            const chartContainer = document.getElementById('chart-departamentos');
+            if (Object.keys(porDepartamento).length > 0) {
+                let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
+
+                Object.entries(porDepartamento).forEach(([depto, count]) => {
+                    const percentage = totalRegistros > 0 ? Math.round((count / totalRegistros) * 100) : 0;
+                    const color = getDepartmentColor(depto);
+
+                    chartHTML += `
                     <div style="margin-bottom: 0.5rem;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
                             <span style="font-weight: 600; color: #334155;">${depto}</span>
@@ -1580,61 +1580,61 @@
                         </div>
                     </div>
                     `;
-                    });
+                });
 
-                    chartHTML += '</div>';
-                    chartContainer.innerHTML = chartHTML;
-                } else {
-                    chartContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
-                }
-
-                // 4. Actualizar últimos registros
-                updateLastRegistros(registros, sonReales);
+                chartHTML += '</div>';
+                chartContainer.innerHTML = chartHTML;
+            } else {
+                chartContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
             }
 
-            function updateLastRegistros(registros, sonReales) {
-                const container = document.getElementById('ultimos-registros');
+            // 4. Actualizar últimos registros
+            updateLastRegistros(registros, sonReales);
+        }
 
-                if (!registros || registros.length === 0) {
-                    container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
-                    return;
-                }
+        function updateLastRegistros(registros, sonReales) {
+            const container = document.getElementById('ultimos-registros');
 
-                const sortedRegistros = [...registros]
-                    .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
-                    .slice(0, 5);
+            if (!registros || registros.length === 0) {
+                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
+                return;
+            }
 
-                let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
+            const sortedRegistros = [...registros]
+                .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
+                .slice(0, 5);
 
-                sortedRegistros.forEach(reg => {
-                    let fechaTexto = "Ahora";
-                    let borderColor = reg.local ? '#f59e0b' : (sonReales ? '#3b82f6' : '#10b981');
+            let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
 
-                    try {
-                        const fecha = reg.fecha ? new Date(reg.fecha) : new Date();
-                        const ahora = new Date();
-                        const diferenciaHoras = (ahora - fecha) / (1000 * 60 * 60);
-
-                        if (diferenciaHoras < 24) {
-                            if (diferenciaHoras < 1) {
-                                fechaTexto = "Hace " + Math.round(diferenciaHoras * 60) + " min";
-                            } else {
-                                fechaTexto = "Hoy " + fecha.toLocaleTimeString('es-MX', {
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                });
-                            }
+            sortedRegistros.forEach(reg => {
+                let fechaTexto = "Ahora";
+                let borderColor = reg.local ? '#f59e0b' : (sonReales ? '#3b82f6' : '#10b981');
+                
+                try {
+                    const fecha = reg.fecha ? new Date(reg.fecha) : new Date();
+                    const ahora = new Date();
+                    const diferenciaHoras = (ahora - fecha) / (1000 * 60 * 60);
+                    
+                    if (diferenciaHoras < 24) {
+                        if (diferenciaHoras < 1) {
+                            fechaTexto = "Hace " + Math.round(diferenciaHoras * 60) + " min";
                         } else {
-                            fechaTexto = fecha.toLocaleDateString('es-MX', {
-                                day: '2-digit',
-                                month: 'short'
+                            fechaTexto = "Hoy " + fecha.toLocaleTimeString('es-MX', { 
+                                hour: '2-digit', 
+                                minute: '2-digit' 
                             });
                         }
-                    } catch (e) {
-                        fechaTexto = "Reciente";
+                    } else {
+                        fechaTexto = fecha.toLocaleDateString('es-MX', { 
+                            day: '2-digit', 
+                            month: 'short' 
+                        });
                     }
+                } catch (e) {
+                    fechaTexto = "Reciente";
+                }
 
-                    html += `
+                html += `
                 <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${borderColor};">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div>
@@ -1653,354 +1653,101 @@
                     </div>
                 </div>
                 `;
-                });
+            });
 
-                html += '</div>';
-                container.innerHTML = html;
-            }
-
-            function getDepartmentColor(depto) {
-                const colors = {
-                    'Urgencias': '#ef4444',
-                    'Pediatría': '#3b82f6',
-                    'Cirugía': '#8b5cf6',
-                    'Laboratorio': '#10b981',
-                    'Administración': '#f59e0b',
-                    'General': '#94a3b8'
-                };
-                return colors[depto] || '#3b82f6';
-            }
-
-            function getSampleData() {
-                return [
-                    {
-                        id: 1,
-                        nombre: "Dr. Juan Pérez",
-                        departamento: "Urgencias",
-                        tipo: "Ingreso",
-                        cantidad: 5,
-                        fecha: new Date(Date.now() - 3600000).toISOString(),
-                        local: false
-                    },
-                    {
-                        id: 2,
-                        nombre: "Dra. Ana García",
-                        departamento: "Pediatría",
-                        tipo: "Consulta",
-                        cantidad: 3,
-                        fecha: new Date(Date.now() - 7200000).toISOString(),
-                        local: false
-                    },
-                    {
-                        id: 3,
-                        nombre: "Lic. Carlos López",
-                        departamento: "Administración",
-                        tipo: "Alta",
-                        cantidad: 2,
-                        fecha: new Date(Date.now() - 10800000).toISOString(),
-                        local: false
-                    }
-                ];
-            }
-
-            // ========== BOTONES ==========
-            if (refreshBtn) {
-                refreshBtn.addEventListener('click', () => {
-                    loadDashboardData();
-                });
-            }
-
-            if (clearDemoBtn) {
-                clearDemoBtn.addEventListener('click', () => {
-                    if (confirm("¿Limpiar todos los datos locales?\n\nLos datos en la nube NO se verán afectados.")) {
-                        localStorage.removeItem('demo_registros_locales');
-                        registrosLocales = getSampleData();
-                        updateDashboard(registrosLocales, false);
-                        demoStatus.textContent = "✅ Datos locales reiniciados";
-                        demoStatus.className = "success";
-                    }
-                });
-            }
-
-            // ========== INICIALIZAR ==========
-            // Cargar datos inmediatamente
-            loadDashboardData();
-
-            // Actualizar cada 30 segundos
-            setInterval(loadDashboardData, 30000);
-
-            console.log("✅ Demo lista - Conexión GAS verificada");
-
-        } else {
-            console.log("ℹ️ No se encontró sección de demo");
+            html += '</div>';
+            container.innerHTML = html;
         }
 
-        // ========== VERIFICAR GAS ==========
-        console.log("🔍 Probando conexión GAS...");
-        fetch(SCRIPT_URL + '?action=test')
-            .then(response => response.json())
-            .then(data => {
-                console.log("✅ GAS funcionando:", data);
-            })
-            .catch(error => {
-                console.log("⚠️ GAS no responde, usando modo local:", error.message);
-            });
-    </script>
+        function getDepartmentColor(depto) {
+            const colors = {
+                'Urgencias': '#ef4444',
+                'Pediatría': '#3b82f6',
+                'Cirugía': '#8b5cf6',
+                'Laboratorio': '#10b981',
+                'Administración': '#f59e0b',
+                'General': '#94a3b8'
+            };
+            return colors[depto] || '#3b82f6';
+        }
 
-    <script>
-        // ========== CONFIGURACIÓN GLOBAL ==========
-
-        console.log("✅ URL de GAS configurada:", SCRIPT_URL);
-
-        // ========== CÓDIGO ORIGINAL ==========
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active')
-                ? '<i class="fas fa-times"></i>'
-                : '<i class="fas fa-bars"></i>';
-        });
-
-        const mobileLinks = document.querySelectorAll('.mobile-menu a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-
-        // ========== FORMULARIO DE CONTACTO MEJORADO ==========
-        const form = document.getElementById("contact-form");
-        const status = document.getElementById("status");
-
-        if (form) {
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
-
-                console.log("📝 Iniciando envío de formulario de contacto");
-
-                // Mostrar estado
-                status.textContent = "⏳ Enviando mensaje...";
-                status.className = "loading";
-
-                // Deshabilitar botón
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        function getSampleData() {
+            return [
+                {
+                    id: 1,
+                    nombre: "Dr. Juan Pérez",
+                    departamento: "Urgencias",
+                    tipo: "Ingreso",
+                    cantidad: 5,
+                    fecha: new Date(Date.now() - 3600000).toISOString(),
+                    local: false
+                },
+                {
+                    id: 2,
+                    nombre: "Dra. Ana García",
+                    departamento: "Pediatría",
+                    tipo: "Consulta",
+                    cantidad: 3,
+                    fecha: new Date(Date.now() - 7200000).toISOString(),
+                    local: false
+                },
+                {
+                    id: 3,
+                    nombre: "Lic. Carlos López",
+                    departamento: "Administración",
+                    tipo: "Alta",
+                    cantidad: 2,
+                    fecha: new Date(Date.now() - 10800000).toISOString(),
+                    local: false
                 }
+            ];
+        }
 
-                try {
-                    // Obtener datos del formulario
-                    const formData = new FormData(form);
-                    const data = Object.fromEntries(formData.entries());
+        // ========== BOTONES ==========
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                loadDashboardData();
+            });
+        }
 
-                    // Log para debugging
-                    console.log("📤 Datos del formulario:", data);
-
-                    // Validaciones básicas
-                    if (!data.nombre || !data.email || !data.mensaje) {
-                        throw new Error('Por favor completa los campos requeridos (*)');
-                    }
-
-                    // Validar email
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(data.email)) {
-                        throw new Error('Por favor ingresa un email válido');
-                    }
-
-                    // Preparar datos para GAS - DOS FORMATOS para compatibilidad
-                    const params = new URLSearchParams();
-
-                    // Formato 1: Campos nombrados como espera tu GAS
-                    params.append('nombre', data.nombre);
-                    params.append('email', data.email);
-                    params.append('institucion', data.institucion || '');
-                    params.append('necesidad', data.necesidad || '');
-                    params.append('mensaje', data.mensaje);
-
-                    // Formato 2: Campos como entry.XXXX (si tu GAS los espera así)
-                    // params.append('entry.1234567890', data.nombre); // Reemplaza con IDs reales
-                    // params.append('entry.2345678901', data.email);
-                    // params.append('entry.3456789012', data.institucion || '');
-                    // params.append('entry.4567890123', data.necesidad || '');
-                    // params.append('entry.5678901234', data.mensaje);
-
-                    // Agregar timestamp para evitar caché
-                    params.append('timestamp', Date.now());
-
-                    console.log("📡 Enviando a GAS:", params.toString());
-
-                    // Enviar a GAS - PRIMERO probar sin 'action' (como formulario simple)
-                    let response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: params,
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                        }
-                    });
-
-                    console.log("📊 Respuesta HTTP:", response.status, response.statusText);
-
-                    // Intentar parsear la respuesta
-                    let result;
-                    try {
-                        const text = await response.text();
-                        console.log("📄 Respuesta cruda:", text.substring(0, 500));
-
-                        if (text) {
-                            result = JSON.parse(text);
-                        } else {
-                            result = { success: false, error: "Respuesta vacía del servidor" };
-                        }
-                    } catch (parseError) {
-                        console.error("❌ Error parseando respuesta:", parseError);
-                        // Si no es JSON, quizás es HTML o texto plano
-                        if (response.ok) {
-                            // Asumir éxito si la respuesta HTTP es OK aunque no sea JSON
-                            result = { success: true, message: "Mensaje enviado (respuesta no JSON)" };
-                        } else {
-                            result = { success: false, error: "Error en el servidor" };
-                        }
-                    }
-
-                    console.log("✅ Respuesta procesada:", result);
-
-                    // Verificar si fue exitoso
-                    if (result && result.success === true) {
-                        // ÉXITO
-                        status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
-                        status.className = "success";
-
-                        // Resetear formulario después de éxito
-                        setTimeout(() => {
-                            form.reset();
-                        }, 1000);
-
-                        // Log adicional
-                        console.log("🎉 Formulario enviado exitosamente a GAS");
-
-                    } else if (result && result.success === false) {
-                        // Error específico de GAS
-                        throw new Error(result.error || result.message || 'Error al procesar el formulario');
-
-                    } else {
-                        // Respuesta inesperada - probar método alternativo
-                        console.log("⚠️ Respuesta inesperada, probando método alternativo...");
-
-                        // Método alternativo: Enviar como FormData simple (sin params)
-                        const formDataSimple = new FormData(form);
-                        const altResponse = await fetch(SCRIPT_URL, {
-                            method: 'POST',
-                            body: formDataSimple
-                        });
-
-                        if (altResponse.ok) {
-                            status.textContent = "✅ ¡Mensaje enviado! (método alternativo)";
-                            status.className = "success";
-                            form.reset();
-                        } else {
-                            throw new Error('No se pudo enviar con ningún método');
-                        }
-                    }
-
-                } catch (error) {
-                    console.error("❌ Error completo en formulario:", error);
-
-                    // Mensajes de error específicos
-                    let errorMessage = "❌ Error al enviar el mensaje. ";
-
-                    if (error.message.includes('email')) {
-                        errorMessage = "⚠️ Por favor ingresa un email válido";
-                    } else if (error.message.includes('completa')) {
-                        errorMessage = "⚠️ Por favor completa los campos requeridos (*)";
-                    } else if (error.message.includes('red')) {
-                        errorMessage = "🌐 Error de conexión. Verifica tu internet e intenta nuevamente.";
-                    } else {
-                        errorMessage += "Por favor intenta nuevamente o contáctame directamente.";
-                    }
-
-                    status.textContent = errorMessage;
-                    status.className = "error";
-
-                    // Mostrar detalles en consola para debugging
-                    console.log("🔍 Detalles del error:", {
-                        message: error.message,
-                        stack: error.stack,
-                        timestamp: new Date().toISOString()
-                    });
-
-                } finally {
-                    // Rehabilitar botón después de 3 segundos
-                    if (submitBtn) {
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
-                        }, 3000);
-                    }
+        if (clearDemoBtn) {
+            clearDemoBtn.addEventListener('click', () => {
+                if (confirm("¿Limpiar todos los datos locales?\n\nLos datos en la nube NO se verán afectados.")) {
+                    localStorage.removeItem('demo_registros_locales');
+                    registrosLocales = getSampleData();
+                    updateDashboard(registrosLocales, false);
+                    demoStatus.textContent = "✅ Datos locales reiniciados";
+                    demoStatus.className = "success";
                 }
             });
         }
 
-        // ========== DEBUG: Probar conexión con GAS ==========
-        console.log("🔍 Probando conexión con GAS para formulario de contacto...");
+        // ========== INICIALIZAR ==========
+        // Cargar datos inmediatamente
+        loadDashboardData();
+        
+        // Actualizar cada 30 segundos
+        setInterval(loadDashboardData, 30000);
 
-        // Crear un test simple
-        setTimeout(async () => {
-            try {
-                const testResponse = await fetch(SCRIPT_URL + '?test=contacto&timestamp=' + Date.now());
-                const testText = await testResponse.text();
-                console.log("🧪 Test GAS contacto - Status:", testResponse.status, "- Respuesta:", testText.substring(0, 200));
-            } catch (testError) {
-                console.log("⚠️ Test GAS falló:", testError.message);
-            }
-        }, 1000);
+        console.log("✅ Demo lista - Conexión GAS verificada");
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+    } else {
+        console.log("ℹ️ No se encontró sección de demo");
+    }
 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+    // ========== VERIFICAR GAS ==========
+    console.log("🔍 Probando conexión GAS...");
+    fetch(SCRIPT_URL + '?action=test')
+        .then(response => response.json())
+        .then(data => {
+            console.log("✅ GAS funcionando:", data);
+        })
+        .catch(error => {
+            console.log("⚠️ GAS no responde, usando modo local:", error.message);
         });
+</script>
 
-        // Add scroll effect to header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            }
-        });
 
-        // [MANTÉN AQUÍ EL RESTO DE TU CÓDIGO DE LA DEMO SIN CAMBIOS]
-        // ========== DEMO INTERACTIVA ==========
-        const demoForm = document.getElementById('demo-form');
-        const demoSection = document.getElementById('demo');
-
-        if (demoForm && demoSection) {
-            console.log("✅ Sección de demo detectada, inicializando...");
-            // ... [TODO EL CÓDIGO DE LA DEMO QUE YA FUNCIONA] ...
-        }
-    </script>
 </body>
 
 </html>
