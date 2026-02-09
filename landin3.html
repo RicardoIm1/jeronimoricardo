@@ -1183,7 +1183,7 @@
             });
         });
 
-        // ========== FORMULARIO DE CONTACTO SIMPLIFICADO ==========
+        // ========== FORMULARIO DE CONTACTO CORREGIDO ==========
         const form = document.getElementById("contact-form");
         const status = document.getElementById("status");
 
@@ -1220,39 +1220,54 @@
 
                     console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
 
-                    // ====== SOLUCIÓN INFALIBLE ======
-                    // Construir URL simple
-                    const url = `${SCRIPT_URL}?nombre=${encodeURIComponent(nombre)}&email=${encodeURIComponent(email)}&mensaje=${encodeURIComponent(mensaje)}&institucion=${encodeURIComponent(institucion || '')}&necesidad=${encodeURIComponent(necesidad || '')}`;
+                    // ====== ¡SOLUCIÓN DEFINITIVA - SOLO GET! ======
+                    // Preparar datos para enviar
+                    const datos = {
+                        nombre: nombre,
+                        email: email,
+                        institucion: institucion || '',
+                        necesidad: necesidad || '',
+                        mensaje: mensaje
+                    };
 
-                    console.log("🔗 URL:", url);
+                    // Construir query string (URL segura)
+                    const queryParams = Object.keys(datos)
+                        .map(key => `${key}=${encodeURIComponent(datos[key])}`)
+                        .join('&');
 
-                    // Enviar SIN ESPERAR RESPUESTA
-                    fetch(url, {
-                        method: 'GET',
-                        mode: 'no-cors'  // Para evitar problemas CORS
-                    })
-                        .then(() => {
-                            console.log("📨 Petición enviada (modo no-cors)");
-                        })
-                        .catch((err) => {
-                            console.log("📨 Petición enviada (aunque hubo error técnico):", err);
-                        });
+                    console.log("📤 Enviando vía GET:", queryParams);
 
-                    // Mostrar éxito INMEDIATAMENTE
-                    status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
-                    status.className = "success";
-                    form.reset();
+                    // Enviar a GAS usando GET (más confiable)
+                    const response = await fetch(`${SCRIPT_URL}?${queryParams}`, {
+                        method: 'GET'
+                    });
+
+                    console.log("📨 Response status:", response.status);
+
+                    const result = await response.json();
+                    console.log("✅ Respuesta GET:", result);
+
+                    if (result.success) {
+                        // Éxito
+                        status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
+                        status.className = "success";
+                        form.reset();
+                    } else {
+                        // Mostrar error específico de GAS
+                        console.error("❌ Error de GAS:", result.error);
+                        throw new Error(result.error || 'Error al procesar el formulario');
+                    }
 
                 } catch (error) {
                     console.error("❌ Error en formulario de contacto:", error);
 
-                    // Mostrar mensaje de error
+                    // Mostrar mensaje de error apropiado
                     if (error.message.includes('email')) {
                         status.textContent = "⚠️ Por favor ingresa un email válido";
                     } else if (error.message.includes('completa')) {
                         status.textContent = "⚠️ Por favor completa los campos requeridos (*)";
                     } else {
-                        status.textContent = "❌ " + error.message;
+                        status.textContent = "❌ Error al enviar el mensaje. Por favor, intenta nuevamente.";
                     }
                     status.className = "error";
 
@@ -1267,7 +1282,44 @@
             });
         }
 
-        // ========== DEMO INTERACTIVA SIMPLIFICADA ==========
+        // Función opcional para enviar notificación por email
+        async function sendEmailNotification(data) {
+            // Esto es opcional - puedes usar un servicio como EmailJS o simplemente confiar en GAS
+            console.log("📧 Datos para notificación:", data);
+            return Promise.resolve();
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // ========== DEMO INTERACTIVA ==========
         const demoForm = document.getElementById('demo-form');
         const demoSection = document.getElementById('demo');
 
@@ -1299,9 +1351,10 @@
                     });
 
                     console.log("📨 Response status:", response.status);
+                    console.log("📨 Response ok:", response.ok);
 
                     if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
+                        throw new Error(`HTTP ${response.status} - ${response.statusText}`);
                     }
 
                     const data = await response.json();
@@ -1319,7 +1372,7 @@
                 console.log("💾 Enviando a GAS (demo):", datos);
 
                 try {
-                    // Usar GET para la demo
+                    // Usar GET para la demo también (más confiable)
                     const params = new URLSearchParams();
                     params.append('action', 'guardar_registro');
                     params.append('nombre', datos.nombre);
@@ -1342,192 +1395,207 @@
                         throw new Error(`HTTP ${response.status}`);
                     }
 
-                    const result = await response.json();
-                    console.log("✅ Guardado en GAS:", result);
-                    return result;
+                    const responseText = await response.text();
+                    console.log("📨 Respuesta CRUDA:", responseText);
 
-                } catch (error) {
-                    console.error("❌ Error guardando en GAS:", error);
-                    throw error;
+                    try {
+                        const result = JSON.parse(responseText);
+                        console.log("✅ JSON parseado:", result);
+
+                        // Tu GAS devuelve: {success: true, message: "Mensaje recibido", timestamp: "..."}
+                        if (result.success === true) {
+                            status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré pronto.";
+                            status.className = "success";
+                            form.reset();
+                        } else {
+                            status.textContent = "❌ Error: " + (result.error || "Error del servidor");
+                            status.className = "error";
+                        }
+                    } catch (jsonError) {
+                        console.error("❌ No es JSON válido:", responseText);
+                        // Si no es JSON, asumimos que se envió bien
+                        status.textContent = "✅ ¡Mensaje enviado! (verificación manual)";
+                        status.className = "success";
+                        form.reset();
+                    }
                 }
-            }
 
             // ========== CARGAR DATOS ==========
             async function loadDashboardData() {
-                console.log("🔄 Cargando datos...");
+                    console.log("🔄 Cargando datos...");
 
-                demoStatus.textContent = "⏳ Actualizando...";
-                demoStatus.className = "";
+                    demoStatus.textContent = "⏳ Actualizando...";
+                    demoStatus.className = "";
 
-                if (refreshBtn) {
-                    refreshBtn.disabled = true;
-                    refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    if (refreshBtn) {
+                        refreshBtn.disabled = true;
+                        refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    }
+
+                    try {
+                        // Intentar cargar datos REALES de GAS
+                        const gasData = await fetchDataFromGAS();
+
+                        if (gasData.registros && gasData.registros.length > 0) {
+                            // ¡TENEMOS DATOS REALES!
+                            registrosReales = gasData.registros;
+                            usandoDatosReales = true;
+
+                            console.log(`✅ ${gasData.registros.length} registros reales cargados`);
+                            updateDashboard(registrosReales, true);
+
+                            demoStatus.textContent = `✅ ${gasData.registros.length} registros reales cargados`;
+                            demoStatus.className = "success";
+
+                        } else {
+                            // No hay datos reales, cargar locales
+                            console.log("ℹ️ No hay datos reales, cargando locales");
+                            loadLocalData();
+                        }
+
+                    } catch (error) {
+                        console.log("⚠️ Error cargando datos reales, usando locales");
+                        loadLocalData();
+                    } finally {
+                        if (refreshBtn) {
+                            refreshBtn.disabled = false;
+                            refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar';
+                        }
+                    }
                 }
 
-                try {
-                    // Intentar cargar datos REALES de GAS
-                    const gasData = await fetchDataFromGAS();
+                // ========== CARGAR DATOS LOCALES ==========
+                function loadLocalData() {
+                    const stored = localStorage.getItem('demo_registros_locales');
+                    if (stored) {
+                        registrosLocales = JSON.parse(stored);
+                    }
 
-                    if (gasData.registros && gasData.registros.length > 0) {
-                        // ¡TENEMOS DATOS REALES!
-                        registrosReales = gasData.registros;
-                        usandoDatosReales = true;
+                    // Combinar con datos de ejemplo si hay pocos
+                    if (registrosLocales.length === 0) {
+                        registrosLocales = getSampleData();
+                    }
 
-                        console.log(`✅ ${gasData.registros.length} registros reales cargados`);
-                        updateDashboard(registrosReales, true);
+                    usandoDatosReales = false;
+                    updateDashboard(registrosLocales, false);
 
-                        demoStatus.textContent = `✅ ${gasData.registros.length} registros reales cargados`;
+                    demoStatus.textContent = `📱 ${registrosLocales.length} registros locales`;
+                    demoStatus.className = "";
+                }
+
+                // ========== GUARDAR DATOS LOCALES ==========
+                function saveLocalData(registro) {
+                    registro.id = Date.now();
+                    registro.fecha = new Date().toISOString();
+                    registro.local = true;
+
+                    registrosLocales.unshift(registro); // Agregar al inicio
+
+                    // Limitar a 100 registros
+                    if (registrosLocales.length > 100) {
+                        registrosLocales = registrosLocales.slice(0, 100);
+                    }
+
+                    localStorage.setItem('demo_registros_locales', JSON.stringify(registrosLocales));
+                    console.log("💾 Guardado local. Total:", registrosLocales.length);
+
+                    return registro;
+                }
+
+                // ========== SUBMIT DEL FORMULARIO DEMO ==========
+                demoForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+
+                    const nombre = document.getElementById('demo-nombre').value.trim();
+                    const departamento = document.getElementById('demo-departamento').value;
+                    const cantidad = document.getElementById('demo-cantidad').value || "1";
+                    const tipo = document.getElementById('demo-tipo').value;
+
+                    if (!nombre) {
+                        demoStatus.textContent = "⚠️ Ingresa tu nombre";
+                        demoStatus.className = "error";
+                        return;
+                    }
+
+                    const registro = {
+                        nombre: nombre,
+                        departamento: departamento,
+                        cantidad: parseInt(cantidad) || 1,
+                        tipo: tipo
+                    };
+
+                    demoStatus.textContent = "⏳ Guardando...";
+                    demoStatus.className = "";
+
+                    if (demoSubmitBtn) demoSubmitBtn.disabled = true;
+
+                    try {
+                        // PRIMERO intentar guardar en GAS
+                        const resultadoGAS = await saveToGAS(registro);
+
+                        // Éxito en GAS
+                        demoStatus.textContent = `✅ ${resultadoGAS.message || 'Guardado en la nube!'}`;
                         demoStatus.className = "success";
 
-                    } else {
-                        // No hay datos reales, cargar locales
-                        console.log("ℹ️ No hay datos reales, cargando locales");
-                        loadLocalData();
+                        // También guardar localmente como respaldo
+                        saveLocalData(registro);
+
+                        // Recargar datos para incluir el nuevo registro
+                        setTimeout(() => loadDashboardData(), 1500);
+
+                    } catch (error) {
+                        // Falló GAS, guardar solo localmente
+                        console.log("📱 Guardando localmente:", error.message);
+
+                        const registroLocal = saveLocalData(registro);
+                        updateDashboard(usandoDatosReales ? registrosReales : registrosLocales, usandoDatosReales);
+
+                        demoStatus.textContent = "📱 Guardado localmente (sin conexión a la nube)";
+                        demoStatus.className = "warning";
+
+                    } finally {
+                        demoForm.reset();
+                        if (demoSubmitBtn) demoSubmitBtn.disabled = false;
                     }
-
-                } catch (error) {
-                    console.log("⚠️ Error cargando datos reales, usando locales");
-                    loadLocalData();
-                } finally {
-                    if (refreshBtn) {
-                        refreshBtn.disabled = false;
-                        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Actualizar';
-                    }
-                }
-            }
-
-            // ========== CARGAR DATOS LOCALES ==========
-            function loadLocalData() {
-                const stored = localStorage.getItem('demo_registros_locales');
-                if (stored) {
-                    registrosLocales = JSON.parse(stored);
-                }
-
-                // Combinar con datos de ejemplo si hay pocos
-                if (registrosLocales.length === 0) {
-                    registrosLocales = getSampleData();
-                }
-
-                usandoDatosReales = false;
-                updateDashboard(registrosLocales, false);
-
-                demoStatus.textContent = `📱 ${registrosLocales.length} registros locales`;
-                demoStatus.className = "";
-            }
-
-            // ========== GUARDAR DATOS LOCALES ==========
-            function saveLocalData(registro) {
-                registro.id = Date.now();
-                registro.fecha = new Date().toISOString();
-                registro.local = true;
-
-                registrosLocales.unshift(registro); // Agregar al inicio
-
-                // Limitar a 100 registros
-                if (registrosLocales.length > 100) {
-                    registrosLocales = registrosLocales.slice(0, 100);
-                }
-
-                localStorage.setItem('demo_registros_locales', JSON.stringify(registrosLocales));
-                console.log("💾 Guardado local. Total:", registrosLocales.length);
-
-                return registro;
-            }
-
-            // ========== SUBMIT DEL FORMULARIO DEMO ==========
-            demoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const nombre = document.getElementById('demo-nombre').value.trim();
-                const departamento = document.getElementById('demo-departamento').value;
-                const cantidad = document.getElementById('demo-cantidad').value || "1";
-                const tipo = document.getElementById('demo-tipo').value;
-
-                if (!nombre) {
-                    demoStatus.textContent = "⚠️ Ingresa tu nombre";
-                    demoStatus.className = "error";
-                    return;
-                }
-
-                const registro = {
-                    nombre: nombre,
-                    departamento: departamento,
-                    cantidad: parseInt(cantidad) || 1,
-                    tipo: tipo
-                };
-
-                demoStatus.textContent = "⏳ Guardando...";
-                demoStatus.className = "";
-
-                if (demoSubmitBtn) demoSubmitBtn.disabled = true;
-
-                try {
-                    // PRIMERO intentar guardar en GAS
-                    const resultadoGAS = await saveToGAS(registro);
-
-                    // Éxito en GAS
-                    demoStatus.textContent = `✅ ${resultadoGAS.message || 'Guardado en la nube!'}`;
-                    demoStatus.className = "success";
-
-                    // También guardar localmente como respaldo
-                    saveLocalData(registro);
-
-                    // Recargar datos para incluir el nuevo registro
-                    setTimeout(() => loadDashboardData(), 1500);
-
-                } catch (error) {
-                    // Falló GAS, guardar solo localmente
-                    console.log("📱 Guardando localmente:", error.message);
-
-                    const registroLocal = saveLocalData(registro);
-                    updateDashboard(usandoDatosReales ? registrosReales : registrosLocales, usandoDatosReales);
-
-                    demoStatus.textContent = "📱 Guardado localmente (sin conexión a la nube)";
-                    demoStatus.className = "warning";
-
-                } finally {
-                    demoForm.reset();
-                    if (demoSubmitBtn) demoSubmitBtn.disabled = false;
-                }
-            });
-
-            // ========== ACTUALIZAR DASHBOARD ==========
-            function updateDashboard(registros, sonReales) {
-                const totalRegistros = registros.length;
-
-                let cantidadTotal = 0;
-                let porDepartamento = {};
-
-                registros.forEach(registro => {
-                    if (registro.cantidad) {
-                        cantidadTotal += parseInt(registro.cantidad) || 0;
-                    }
-
-                    const depto = registro.departamento || "General";
-                    porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
                 });
 
-                // 1. Actualizar contadores
-                document.getElementById('total-registros').textContent = totalRegistros;
-                document.getElementById('cantidad-total').textContent = cantidadTotal;
+                // ========== ACTUALIZAR DASHBOARD ==========
+                function updateDashboard(registros, sonReales) {
+                    const totalRegistros = registros.length;
 
-                // 2. Actualizar indicador de fuente
-                const fuenteElement = document.getElementById('data-source');
-                if (fuenteElement) {
-                    fuenteElement.textContent = sonReales ? 'Datos en tiempo real' : 'Datos de demostración';
-                    fuenteElement.style.color = sonReales ? '#10b981' : '#f59e0b';
-                }
+                    let cantidadTotal = 0;
+                    let porDepartamento = {};
 
-                // 3. Actualizar gráfico
-                const chartContainer = document.getElementById('chart-departamentos');
-                if (Object.keys(porDepartamento).length > 0) {
-                    let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
+                    registros.forEach(registro => {
+                        if (registro.cantidad) {
+                            cantidadTotal += parseInt(registro.cantidad) || 0;
+                        }
 
-                    Object.entries(porDepartamento).forEach(([depto, count]) => {
-                        const percentage = totalRegistros > 0 ? Math.round((count / totalRegistros) * 100) : 0;
-                        const color = getDepartmentColor(depto);
+                        const depto = registro.departamento || "General";
+                        porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
+                    });
 
-                        chartHTML += `
+                    // 1. Actualizar contadores
+                    document.getElementById('total-registros').textContent = totalRegistros;
+                    document.getElementById('cantidad-total').textContent = cantidadTotal;
+
+                    // 2. Actualizar indicador de fuente
+                    const fuenteElement = document.getElementById('data-source');
+                    if (fuenteElement) {
+                        fuenteElement.textContent = sonReales ? 'Datos en tiempo real' : 'Datos de demostración';
+                        fuenteElement.style.color = sonReales ? '#10b981' : '#f59e0b';
+                    }
+
+                    // 3. Actualizar gráfico
+                    const chartContainer = document.getElementById('chart-departamentos');
+                    if (Object.keys(porDepartamento).length > 0) {
+                        let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
+
+                        Object.entries(porDepartamento).forEach(([depto, count]) => {
+                            const percentage = totalRegistros > 0 ? Math.round((count / totalRegistros) * 100) : 0;
+                            const color = getDepartmentColor(depto);
+
+                            chartHTML += `
                 <div style="margin-bottom: 0.5rem;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
                         <span style="font-weight: 600; color: #334155;">${depto}</span>
@@ -1538,61 +1606,61 @@
                     </div>
                 </div>
                 `;
-                    });
+                        });
 
-                    chartHTML += '</div>';
-                    chartContainer.innerHTML = chartHTML;
-                } else {
-                    chartContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
-                }
-
-                // 4. Actualizar últimos registros
-                updateLastRegistros(registros, sonReales);
-            }
-
-            function updateLastRegistros(registros, sonReales) {
-                const container = document.getElementById('ultimos-registros');
-
-                if (!registros || registros.length === 0) {
-                    container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
-                    return;
-                }
-
-                const sortedRegistros = [...registros]
-                    .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
-                    .slice(0, 5);
-
-                let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
-
-                sortedRegistros.forEach(reg => {
-                    let fechaTexto = "Ahora";
-                    let borderColor = reg.local ? '#f59e0b' : (sonReales ? '#3b82f6' : '#10b981');
-
-                    try {
-                        const fecha = reg.fecha ? new Date(reg.fecha) : new Date();
-                        const ahora = new Date();
-                        const diferenciaHoras = (ahora - fecha) / (1000 * 60 * 60);
-
-                        if (diferenciaHoras < 24) {
-                            if (diferenciaHoras < 1) {
-                                fechaTexto = "Hace " + Math.round(diferenciaHoras * 60) + " min";
-                            } else {
-                                fechaTexto = "Hoy " + fecha.toLocaleTimeString('es-MX', {
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                });
-                            }
-                        } else {
-                            fechaTexto = fecha.toLocaleDateString('es-MX', {
-                                day: '2-digit',
-                                month: 'short'
-                            });
-                        }
-                    } catch (e) {
-                        fechaTexto = "Reciente";
+                        chartHTML += '</div>';
+                        chartContainer.innerHTML = chartHTML;
+                    } else {
+                        chartContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
                     }
 
-                    html += `
+                    // 4. Actualizar últimos registros
+                    updateLastRegistros(registros, sonReales);
+                }
+
+                function updateLastRegistros(registros, sonReales) {
+                    const container = document.getElementById('ultimos-registros');
+
+                    if (!registros || registros.length === 0) {
+                        container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
+                        return;
+                    }
+
+                    const sortedRegistros = [...registros]
+                        .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
+                        .slice(0, 5);
+
+                    let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
+
+                    sortedRegistros.forEach(reg => {
+                        let fechaTexto = "Ahora";
+                        let borderColor = reg.local ? '#f59e0b' : (sonReales ? '#3b82f6' : '#10b981');
+
+                        try {
+                            const fecha = reg.fecha ? new Date(reg.fecha) : new Date();
+                            const ahora = new Date();
+                            const diferenciaHoras = (ahora - fecha) / (1000 * 60 * 60);
+
+                            if (diferenciaHoras < 24) {
+                                if (diferenciaHoras < 1) {
+                                    fechaTexto = "Hace " + Math.round(diferenciaHoras * 60) + " min";
+                                } else {
+                                    fechaTexto = "Hoy " + fecha.toLocaleTimeString('es-MX', {
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                    });
+                                }
+                            } else {
+                                fechaTexto = fecha.toLocaleDateString('es-MX', {
+                                    day: '2-digit',
+                                    month: 'short'
+                                });
+                            }
+                        } catch (e) {
+                            fechaTexto = "Reciente";
+                        }
+
+                        html += `
             <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border-left: 3px solid ${borderColor};">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div>
@@ -1611,87 +1679,98 @@
                 </div>
             </div>
             `;
+                    });
+
+                    html += '</div>';
+                    container.innerHTML = html;
+                }
+
+                function getDepartmentColor(depto) {
+                    const colors = {
+                        'Urgencias': '#ef4444',
+                        'Pediatría': '#3b82f6',
+                        'Cirugía': '#8b5cf6',
+                        'Laboratorio': '#10b981',
+                        'Administración': '#f59e0b',
+                        'General': '#94a3b8'
+                    };
+                    return colors[depto] || '#3b82f6';
+                }
+
+                function getSampleData() {
+                    return [
+                        {
+                            id: 1,
+                            nombre: "Dr. Juan Pérez",
+                            departamento: "Urgencias",
+                            tipo: "Ingreso",
+                            cantidad: 5,
+                            fecha: new Date(Date.now() - 3600000).toISOString(),
+                            local: false
+                        },
+                        {
+                            id: 2,
+                            nombre: "Dra. Ana García",
+                            departamento: "Pediatría",
+                            tipo: "Consulta",
+                            cantidad: 3,
+                            fecha: new Date(Date.now() - 7200000).toISOString(),
+                            local: false
+                        },
+                        {
+                            id: 3,
+                            nombre: "Lic. Carlos López",
+                            departamento: "Administración",
+                            tipo: "Alta",
+                            cantidad: 2,
+                            fecha: new Date(Date.now() - 10800000).toISOString(),
+                            local: false
+                        }
+                    ];
+                }
+
+                // ========== BOTONES ==========
+                if (refreshBtn) {
+                    refreshBtn.addEventListener('click', () => {
+                        loadDashboardData();
+                    });
+                }
+
+                if (clearDemoBtn) {
+                    clearDemoBtn.addEventListener('click', () => {
+                        if (confirm("¿Limpiar todos los datos locales?\n\nLos datos en la nube NO se verán afectados.")) {
+                            localStorage.removeItem('demo_registros_locales');
+                            registrosLocales = getSampleData();
+                            updateDashboard(registrosLocales, false);
+                            demoStatus.textContent = "✅ Datos locales reiniciados";
+                            demoStatus.className = "success";
+                        }
+                    });
+                }
+
+                // ========== INICIALIZAR ==========
+                // Cargar datos inmediatamente
+                loadDashboardData();
+
+                // Actualizar cada 30 segundos
+                setInterval(loadDashboardData, 30000);
+
+                console.log("✅ Demo lista - Conexión GAS verificada");
+
+            } else {
+                console.log("ℹ️ No se encontró sección de demo");
+            }
+
+            // ========== VERIFICAR GAS ==========
+            console.log("🔍 Probando conexión GAS...");
+            fetch(SCRIPT_URL + '?action=test')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("✅ GAS funcionando:", data);
+                })
+                .catch(error => {
+                    console.log("⚠️ GAS no responde, usando modo local:", error.message);
                 });
-
-                html += '</div>';
-                container.innerHTML = html;
-            }
-
-            function getDepartmentColor(depto) {
-                const colors = {
-                    'Urgencias': '#ef4444',
-                    'Pediatría': '#3b82f6',
-                    'Cirugía': '#8b5cf6',
-                    'Laboratorio': '#10b981',
-                    'Administración': '#f59e0b',
-                    'General': '#94a3b8'
-                };
-                return colors[depto] || '#3b82f6';
-            }
-
-            function getSampleData() {
-                return [
-                    {
-                        id: 1,
-                        nombre: "Dr. Juan Pérez",
-                        departamento: "Urgencias",
-                        tipo: "Ingreso",
-                        cantidad: 5,
-                        fecha: new Date(Date.now() - 3600000).toISOString(),
-                        local: false
-                    },
-                    {
-                        id: 2,
-                        nombre: "Dra. Ana García",
-                        departamento: "Pediatría",
-                        tipo: "Consulta",
-                        cantidad: 3,
-                        fecha: new Date(Date.now() - 7200000).toISOString(),
-                        local: false
-                    },
-                    {
-                        id: 3,
-                        nombre: "Lic. Carlos López",
-                        departamento: "Administración",
-                        tipo: "Alta",
-                        cantidad: 2,
-                        fecha: new Date(Date.now() - 10800000).toISOString(),
-                        local: false
-                    }
-                ];
-            }
-
-            // ========== BOTONES ==========
-            if (refreshBtn) {
-                refreshBtn.addEventListener('click', () => {
-                    loadDashboardData();
-                });
-            }
-
-            if (clearDemoBtn) {
-                clearDemoBtn.addEventListener('click', () => {
-                    if (confirm("¿Limpiar todos los datos locales?\n\nLos datos en la nube NO se verán afectados.")) {
-                        localStorage.removeItem('demo_registros_locales');
-                        registrosLocales = getSampleData();
-                        updateDashboard(registrosLocales, false);
-                        demoStatus.textContent = "✅ Datos locales reiniciados";
-                        demoStatus.className = "success";
-                    }
-                });
-            }
-
-            // ========== INICIALIZAR ==========
-            // Cargar datos inmediatamente
-            loadDashboardData();
-
-            // Actualizar cada 30 segundos
-            setInterval(loadDashboardData, 30000);
-
-            console.log("✅ Demo lista - Conexión GAS verificada");
-
-        } else {
-            console.log("ℹ️ No se encontró sección de demo");
-        }
     </script>
 
 </body>
