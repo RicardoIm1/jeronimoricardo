@@ -1338,31 +1338,20 @@
 
             // ========== FUNCIÓN PARA OBTENER DATOS DE GAS ==========
             async function fetchDataFromGAS() {
-                console.log("📡 Conectando a GAS para demo...");
+                console.log("📡 Conectando a GAS...");
 
                 try {
-                    // URL CORRECTA para obtener registros de demo
-                    const url = `${SCRIPT_URL}?action=obtener_registros&_=${Date.now()}`;
-                    console.log("🔗 URL:", url);
-
-                    const response = await fetch(url, {
-                        method: 'GET',
-                        cache: 'no-cache'
-                    });
-
-                    console.log("📨 Response status:", response.status);
-                    console.log("📨 Response ok:", response.ok);
+                    const response = await fetch(SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now());
 
                     if (!response.ok) {
-                        throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+                        throw new Error(`HTTP ${response.status}`);
                     }
 
                     const data = await response.json();
-                    console.log("✅ Respuesta de GAS (demo):", data);
+                    console.log("✅ Respuesta de GAS:", data);
                     return data;
-
                 } catch (error) {
-                    console.error("❌ Error conectando a GAS para demo:", error.message);
+                    console.error("❌ Error conectando a GAS:", error);
                     throw error;
                 }
             }
