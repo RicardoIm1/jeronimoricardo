@@ -1051,6 +1051,8 @@
                     y paneles de control en tiempo real para decisiones basadas en datos confiables.</li>
                 <li><strong>Universidad Regional de los Altos:</strong> Plataforma académica con aumento del 25% en
                     engagement estudiantil y reducción del 60% en carga administrativa.</li>
+                <li><strong>Gobierno Municipal:</strong> Digitalización de 12 procesos burocráticos, ahorrando
+                    aproximadamente 200 horas mensuales de trabajo manual.</li>
             </ul>
 
             <p style="margin-top: 2rem; font-size: 1.2rem; font-weight: 600;">En resumen: <span class="highlight">del
@@ -1061,7 +1063,7 @@
 
     <section id="contacto" class="contact-section">
         <div class="container">
-            <h2 class="section-title">¿Listo para Transformar tu Institución?</h2>
+            <h2 class="section-title">¿Listo para Transformar su Institución?</h2>
 
             <div class="contact-container">
                 <div class="contact-info">
@@ -1156,7 +1158,7 @@
 
     <script>
         // ========== CONFIGURACIÓN GLOBAL ==========
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxvzUmqF2H4HE4bepwNdYO23SVkabdYKZJutjKIPACRRqhpZtEj9mDxpZVbBB2Mj3rZ/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi_WjDLgj5GXok5QKC79p_hwv8XVVdbBSDKy7WcAXfNEktgdGQ_1ll3D0nlt0z53NS/exec";
 
         console.log("✅ URL de GAS configurada:", SCRIPT_URL);
 
@@ -1225,8 +1227,7 @@
                     params.append('institucion', institucion || '');
                     params.append('necesidad', necesidad || '');
                     params.append('mensaje', mensaje);
-                    params.append('action', 'contacto');
-
+                    
 
                     // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
