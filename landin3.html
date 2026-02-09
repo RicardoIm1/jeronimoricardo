@@ -1221,29 +1221,22 @@
                     console.log("📤 Enviando formulario de contacto:", { nombre, email, institucion, necesidad, mensaje });
 
                     // Preparar datos para enviar
-                    const formData = new FormData();
-                    formData.append('nombre', nombre);
-                    formData.append('email', email);
-                    formData.append('institucion', institucion || '');
-                    formData.append('necesidad', necesidad || '');
-                    formData.append('mensaje', mensaje);
-                    formData.append('action', 'contacto'); // IMPORTANTE: Especificar acción
-                    formData.append('timestamp', Date.now());
+                    const params = new URLSearchParams();
+                    params.append('nombre', nombre);
+                    params.append('email', email);
+                    params.append('institucion', institucion || '');
+                    params.append('necesidad', necesidad || '');
+                    params.append('mensaje', mensaje);
+
+                    console.log("📤 Enviando datos:", params.toString());
 
                     // Enviar a GAS
                     const response = await fetch(SCRIPT_URL, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        body: new URLSearchParams({
-                            'nombre': nombre,
-                            'email': email,
-                            'institucion': institucion || '',
-                            'necesidad': necesidad || '',
-                            'mensaje': mensaje
-                            // NO agregues 'action' aquí - el backend ya detecta que es contacto
-                        }).toString()
+                        body: params.toString()
                     });
 
                     if (!response.ok) {
@@ -1394,7 +1387,7 @@
                         },
                         body: params.toString()
                     });
-                    
+
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}`);
                     }
@@ -1760,7 +1753,6 @@
                 console.log("⚠️ GAS no responde, usando modo local:", error.message);
             });
     </script>
-
 
 </body>
 
