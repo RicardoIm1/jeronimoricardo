@@ -236,8 +236,9 @@
             background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
             border-radius: 2px;
         }
-        span{
-            color:var(--primary-green);
+
+        span {
+            color: var(--primary-green);
             font-weight: 300;
         }
 
@@ -328,32 +329,36 @@
         }
 
         .tile-green {
-/*             border-top: 5px solid var(--primary-green);
- */        }
+            /*             border-top: 5px solid var(--primary-green);
+ */
+        }
 
         .tile-green .tile-icon {
             color: var(--primary-green);
         }
 
         .tile-orange {
-/*             border-top: 5px solid var(--primary-orange);
- */        }
+            /*             border-top: 5px solid var(--primary-orange);
+ */
+        }
 
         .tile-orange .tile-icon {
             color: var(--primary-orange);
         }
 
         .tile-yellow {
-/*             border-top: 5px solid var(--primary-yellow);
- */        }
+            /*             border-top: 5px solid var(--primary-yellow);
+ */
+        }
 
         .tile-yellow .tile-icon {
             color: var(--primary-yellow);
         }
 
         .tile-purple {
-/*             border-top: 5px solid #9c27b0;
- */        }
+            /*             border-top: 5px solid #9c27b0;
+ */
+        }
 
         .tile-purple .tile-icon {
             color: #9c27b0;
@@ -821,98 +826,168 @@
         }
     </style>
     <style>
-        .opiniones-section {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f9fafc;
+        /* ========== SECCIÓN CASOS DE ÉXITO EN TILES ========== */
+        #casos {
+            background-color: var(--light-bg);
+            padding: 6rem 0;
         }
 
-        .opiniones-header {
+        .casos-subtitle {
             text-align: center;
-            margin-bottom: 50px;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            color: #64748b;
+            font-size: 1.2rem;
+            line-height: 1.7;
         }
 
-        .opiniones-header h2 {
-            font-size: 2.5rem;
-            color: #1a365d;
-            margin-bottom: 15px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .opiniones-header p {
-            color: #718096;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .opiniones-container {
+        /* Grid para casos de éxito */
+        .casos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(320px, auto);
+            gap: 1.8rem;
+            margin-bottom: 4rem;
         }
 
-        .opinion-card {
+        /* Estilo de tile para casos */
+        .caso-tile {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            /* border-left: 5px solid #4f46e5; */
-            height: 100%;
+            border-radius: 16px;
+            padding: 2.2rem;
             display: flex;
             flex-direction: column;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid transparent;
+            height: 100%;
         }
 
-        .opinion-card:hover {
+        .caso-tile:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
 
-        .opinion-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #4f46e5, #3b82f6);
+        /* Colores para diferentes sectores */
+        .caso-tile.health {
+            border-top-color: var(--primary-blue);
+        }
+
+        .caso-tile.education {
+            border-top-color: var(--primary-green);
+        }
+
+        .caso-tile.public {
+            border-top-color: var(--primary-orange);
+        }
+
+        .caso-tile.mental {
+            border-top-color: #9c27b0;
+        }
+
+        .caso-tile.wellness {
+            border-top-color: var(--primary-yellow);
+        }
+
+        /* Encabezado del caso */
+        .caso-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid #f1f5f9;
+            position: relative;
         }
 
         .cliente-nombre {
-            font-size: 1.4rem;
-            color: #1a365d;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .sector-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 600;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e2e8f0;
+            letter-spacing: 0.5px;
         }
 
-        .cliente-descripcion {
-            color: #4a5568;
+        .health .sector-tag {
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+            color: #1d4ed8;
+        }
+
+        .education .sector-tag {
+            background: linear-gradient(135deg, #dcfce7, #d1fae5);
+            color: #15803d;
+        }
+
+        .public .sector-tag {
+            background: linear-gradient(135deg, #ffe4e6, #fee2e2);
+            color: #dc2626;
+        }
+
+        .mental .sector-tag {
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+            color: #7c3aed;
+        }
+
+        .wellness .sector-tag {
+            background: linear-gradient(135deg, #fef3c7, #fef08a);
+            color: #d97706;
+        }
+
+        /* Descripción del caso */
+        .caso-descripcion {
+            color: #475569;
             line-height: 1.7;
-            margin-bottom: 20px;
+            margin-bottom: 1.8rem;
             flex-grow: 1;
+            font-size: 1.05rem;
         }
 
+        /* Resultados */
         .resultados-container {
-            background-color: #f7fafc;
-            border-radius: 8px;
-            padding: 18px;
-            margin-top: 10px;
-            border-left: 4px solid #c7d2fe;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: auto;
+            border-left: 4px solid;
+        }
+
+        .health .resultados-container {
+            border-left-color: var(--primary-blue);
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        }
+
+        .education .resultados-container {
+            border-left-color: var(--primary-green);
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .public .resultados-container {
+            border-left-color: var(--primary-orange);
+            background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+        }
+
+        .mental .resultados-container {
+            border-left-color: #9c27b0;
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+        }
+
+        .wellness .resultados-container {
+            border-left-color: var(--primary-yellow);
+            background: linear-gradient(135deg, #fefce8, #fef9c3);
         }
 
         .resultado-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 8px;
+            margin-bottom: 0.8rem;
             font-size: 0.95rem;
         }
 
@@ -921,37 +996,98 @@
         }
 
         .check-icon {
-            color: #10b981;
-            margin-right: 10px;
-            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            margin-right: 12px;
             flex-shrink: 0;
-            margin-top: 2px;
+            font-size: 0.9rem;
+            margin-top: 1px;
         }
 
-        .sector-tag {
-            display: inline-block;
-            background-color: #e0e7ff;
-            color: #4f46e5;
-            padding: 5px 12px;
-            border-radius: 20px;
+        .health .check-icon {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .education .check-icon {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .public .check-icon {
+            background-color: #f97316;
+            color: white;
+        }
+
+        .mental .check-icon {
+            background-color: #8b5cf6;
+            color: white;
+        }
+
+        .wellness .check-icon {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        /* Tamaños de tiles para casos */
+        .caso-small {
+            grid-column: span 4;
+        }
+
+        .caso-medium {
+            grid-column: span 6;
+        }
+
+        .caso-large {
+            grid-column: span 8;
+        }
+
+        /* Fecha de implementación */
+        .implementacion {
+            margin-top: 1.2rem;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 15px;
-            align-self: flex-start;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        /* Responsive adjustments */
+        .implementacion i {
+            color: var(--primary-green);
+        }
+
+        /* Responsive para casos */
+        @media (max-width: 1200px) {
+
+            .caso-small,
+            .caso-medium,
+            .caso-large {
+                grid-column: span 6;
+            }
+        }
+
         @media (max-width: 768px) {
-            .opiniones-container {
+            .casos-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .opiniones-header h2 {
-                font-size: 2rem;
+            .caso-tile {
+                padding: 1.8rem;
             }
 
-            .opinion-card {
-                padding: 25px;
+            .cliente-nombre {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .caso-tile {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -1423,30 +1559,49 @@
             <p style="margin-top: 2rem; font-size: 1.2rem; font-weight: 600;">En resumen: <span class="highlight">del
                     caos al control, del papel al pixel, de lo costoso a lo eficiente</span>. Mi stack convierte la
                 digitalización institucional en una experiencia premium, accesible y memorable.</p>
-            <div class="opiniones-container">
-                <div class="opinion-card">
-                    <div class="cliente-nombre">Hospital Regional Puerto Vallarta</div>
-                    <div class="cliente-descripcion">Implementación de sistema de reportes clínicos y paneles de control
-                        en
-                        tiempo real para mejorar la toma de decisiones basada en datos confiables. Mi iniciativa como Jefe de Estadísticas y Archivo Clínico</div>
+
+            <div class="casos-grid">
+                <!-- Caso 1: Hospital -->
+                <div class="caso-tile caso-medium health">
+                    <div class="caso-header">
+                        <div class="cliente-nombre">Hospital Regional Puerto Vallarta</div>
+                        <span class="sector-tag">Sector Salud</span>
+                    </div>
+
+                    <div class="caso-descripcion">
+                        Como Jefe de Estadísticas y Archivo Clínico, implementé sistema de reportes clínicos y paneles
+                        de control en tiempo real que optimizaron la toma de decisiones basada en datos confiables.
+                    </div>
+
                     <div class="resultados-container">
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span>Reducción del <strong>40%</strong> en tiempo de reportes clínicos</span>
+                            <span>Reducción del <strong>40%</strong> en tiempo de generación de reportes clínicos</span>
                         </div>
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span>Paneles de control en tiempo real para decisiones basadas en datos confiables</span>
+                            <span>Paneles de control en tiempo real para seguimiento operativo</span>
                         </div>
                     </div>
-                    <span class="sector-tag">Sector Salud</span>
+
+                    <div class="implementacion">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Implementado durante mi gestión como Jefe del área</span>
+                    </div>
                 </div>
 
-                <div class="opinion-card">
-                    <div class="cliente-nombre">Universidad Regional de los Altos</div>
-                    <div class="cliente-descripcion">Desarrollo de plataforma académica para las materias que yo imparto en
-                        el
-                        Campus Bahía de Banderas, mejorando la experiencia educativa.</div>
+                <!-- Caso 2: Universidad -->
+                <div class="caso-tile caso-medium education">
+                    <div class="caso-header">
+                        <div class="cliente-nombre">Universidad Regional de los Altos</div>
+                        <span class="sector-tag">Educación Superior</span>
+                    </div>
+
+                    <div class="caso-descripcion">
+                        Plataforma académica desarrollada para las materias que imparto en el Campus Bahía de Banderas,
+                        con herramientas interactivas y gestión documental optimizada.
+                    </div>
+
                     <div class="resultados-container">
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
@@ -1457,14 +1612,25 @@
                             <span>Reducción del <strong>60%</strong> en carga administrativa</span>
                         </div>
                     </div>
-                    <span class="sector-tag">Educación</span>
+
+                    <div class="implementacion">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Plataforma activa para mis clases</span>
+                    </div>
                 </div>
 
-                <div class="opinion-card">
-                    <div class="cliente-nombre">Dra. Magdalena RSVIII - Programa Cartillas Nacionales de Salud</div>
-                    <div class="cliente-descripcion">Plataforma de salud regional para el programa de Cartillas
-                        Nacionales
-                        de Salud con censo por unidad médica.</div>
+                <!-- Caso 3: Cartillas de Salud -->
+                <div class="caso-tile caso-large public">
+                    <div class="caso-header">
+                        <div class="cliente-nombre">Dra. Magdalena RSVIII - Cartillas Nacionales de Salud</div>
+                        <span class="sector-tag">Salud Pública</span>
+                    </div>
+
+                    <div class="caso-descripcion">
+                        Plataforma regional para el programa de Cartillas Nacionales de Salud con censo por unidad
+                        médica, trazabilidad completa y reportes automatizados.
+                    </div>
+
                     <div class="resultados-container">
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
@@ -1472,47 +1638,75 @@
                         </div>
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span><strong>100%</strong> de eficiencia en el conteo de Cartillas Nacionales</span>
+                            <span><strong>100%</strong> de eficiencia en conteo y seguimiento de Cartillas</span>
                         </div>
                     </div>
-                    <span class="sector-tag">Sector Salud Pública</span>
+
+                    <div class="implementacion">
+                        <i class="fas fa-chart-line"></i>
+                        <span>En operación continua desde 2021 con resultados sostenidos</span>
+                    </div>
                 </div>
 
-                <div class="opinion-card">
-                    <div class="cliente-nombre">Mtra. Shalom - Encuestas de salud mental</div>
-                    <div class="cliente-descripcion">Plataforma para detección de niveles de ansiedad y depresión en
-                        alumnos
-                        de secundaria y bachillerato, con enfoque en accesibilidad.</div>
+                <!-- Caso 4: Salud Mental -->
+                <div class="caso-tile caso-small mental">
+                    <div class="caso-header">
+                        <div class="cliente-nombre">Mtra. Shalom - Encuestas de Salud Mental</div>
+                        <span class="sector-tag">Salud Mental & Educación</span>
+                    </div>
+
+                    <div class="caso-descripcion">
+                        Plataforma gamificada para detección de niveles de ansiedad y depresión en alumnos de secundaria
+                        y bachillerato, con enfoque en accesibilidad y privacidad.
+                    </div>
+
                     <div class="resultados-container">
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span>Acceso sencillo y sistema gamificable</span>
+                            <span>Acceso sencillo e interfaz amigable para jóvenes</span>
                         </div>
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span>Respuestas satisfactorias de <strong>más de 200 jóvenes</strong> en un mes</span>
+                            <span><strong>200+</strong> respuestas obtenidas en un mes</span>
                         </div>
                     </div>
-                    <span class="sector-tag">Salud Mental / Educación</span>
+
+                    <div class="implementacion">
+                        <i class="fas fa-heart"></i>
+                        <span>Proyecto de impacto social y educativo</span>
+                    </div>
                 </div>
 
-                <div class="opinion-card">
-                    <div class="cliente-nombre">Nutrióloga De Niz</div>
-                    <div class="cliente-descripcion">Landing page personalizada para promover acceso a un estilo de vida
-                        saludable bajo la compañía personalizada de la Lic. Mimi.</div>
+                <!-- Caso 5: Nutrición -->
+                <div class="caso-tile caso-small wellness">
+                    <div class="caso-header">
+                        <div class="cliente-nombre">Nutrióloga De Niz</div>
+                        <span class="sector-tag">Bienestar & Nutrición</span>
+                    </div>
+
+                    <div class="caso-descripcion">
+                        Landing page personalizada para promover acceso a un estilo de vida saludable, bajo la compañía
+                        personalizada de la Lic. Mimi, con diseño conversacional y funcional.
+                    </div>
+
                     <div class="resultados-container">
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span>Diseño atractivo y funcional para conversión de clientes</span>
+                            <span>Diseño atractivo optimizado para conversión de clientes</span>
                         </div>
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
-                            <span>Presencia digital profesional para servicios de nutrición personalizada</span>
+                            <span>Presencia digital profesional para servicios personalizados</span>
                         </div>
                     </div>
-                    <span class="sector-tag">Bienestar & Nutrición</span>
+
+                    <div class="implementacion">
+                        <i class="fas fa-leaf"></i>
+                        <span>Experiencia digital premium para clientes de nutrición</span>
+                    </div>
                 </div>
             </div>
+
         </div>
 
     </section>
