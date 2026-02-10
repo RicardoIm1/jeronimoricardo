@@ -236,8 +236,9 @@
             background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
             border-radius: 2px;
         }
-        span{
-            color:var(--primary-green);
+
+        span {
+            color: var(--primary-green);
             font-weight: 300;
         }
 
@@ -328,32 +329,36 @@
         }
 
         .tile-green {
-/*             border-top: 5px solid var(--primary-green);
- */        }
+            /*             border-top: 5px solid var(--primary-green);
+ */
+        }
 
         .tile-green .tile-icon {
             color: var(--primary-green);
         }
 
         .tile-orange {
-/*             border-top: 5px solid var(--primary-orange);
- */        }
+            /*             border-top: 5px solid var(--primary-orange);
+ */
+        }
 
         .tile-orange .tile-icon {
             color: var(--primary-orange);
         }
 
         .tile-yellow {
-/*             border-top: 5px solid var(--primary-yellow);
- */        }
+            /*             border-top: 5px solid var(--primary-yellow);
+ */
+        }
 
         .tile-yellow .tile-icon {
             color: var(--primary-yellow);
         }
 
         .tile-purple {
-/*             border-top: 5px solid #9c27b0;
- */        }
+            /*             border-top: 5px solid #9c27b0;
+ */
+        }
 
         .tile-purple .tile-icon {
             color: #9c27b0;
@@ -670,6 +675,17 @@
 
             #demo>.container {
                 padding: 0 1rem !important;
+            }
+            
+            .tiles-grid {
+                grid-template-columns: 1fr !important;
+            }
+    
+            .tile-small,
+            .tile-medium,
+            .tile-large,
+            .tile-xlarge {
+                grid-column: span 12 !important;
             }
         }
 
@@ -1428,7 +1444,8 @@
                     <div class="cliente-nombre">Hospital Regional Puerto Vallarta</div>
                     <div class="cliente-descripcion">Implementación de sistema de reportes clínicos y paneles de control
                         en
-                        tiempo real para mejorar la toma de decisiones basada en datos confiables. Mi iniciativa como Jefe de Estadísticas y Archivo Clínico</div>
+                        tiempo real para mejorar la toma de decisiones basada en datos confiables. Mi iniciativa como
+                        Jefe de Estadísticas y Archivo Clínico</div>
                     <div class="resultados-container">
                         <div class="resultado-item">
                             <span class="check-icon">✓</span>
@@ -1444,7 +1461,8 @@
 
                 <div class="opinion-card">
                     <div class="cliente-nombre">Universidad Regional de los Altos</div>
-                    <div class="cliente-descripcion">Desarrollo de plataforma académica para las materias que yo imparto en
+                    <div class="cliente-descripcion">Desarrollo de plataforma académica para las materias que yo imparto
+                        en
                         el
                         Campus Bahía de Banderas, mejorando la experiencia educativa.</div>
                     <div class="resultados-container">
