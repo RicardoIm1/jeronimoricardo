@@ -687,6 +687,16 @@
             .tile-xlarge {
                 grid-column: span 12 !important;
             }
+
+            .logo {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+
+            .logo-text {
+                margin-top: 0.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1129,8 +1139,7 @@
                     </p>
                 </div>
 
-                <div
-                    style="background: #f0f9ff; padding: 1rem; border-radius: 10px; margin-top: 2rem;">
+                <div style="background: #f0f9ff; padding: 1rem; border-radius: 10px; margin-top: 2rem;">
                     <p style="margin: 0; color: #0366d6; font-size: 0.9rem;">
                         <i class="fas fa-lightbulb"></i> <strong>Estos datos serían de TU institución:</strong>
                         visitas por departamento, formularios completados, tiempo promedio por proceso.
@@ -1354,8 +1363,7 @@
                         </select>
                     </div>
 
-                    <div
-                        style="background-color: #e8f4fd; padding: 1rem; border-radius: 10px; margin: 1.5rem 0;">
+                    <div style="background-color: #e8f4fd; padding: 1rem; border-radius: 10px; margin: 1.5rem 0;">
                         <p style="margin: 0; color: #0366d6; font-size: 0.9rem;">
                             <i class="fas fa-info-circle"></i> Estos datos se guardarán en Google Sheets y podrás verlos
                             actualizarse en tiempo real abajo.
@@ -1367,7 +1375,9 @@
                         <i class="fas fa-paper-plane"></i> Guardar Registro de Prueba
                     </button>
                 </form>
-                <p id="demo-status" style="margin-top: 1.5rem; border-radius: 6px; padding: 0.5rem; text-transform: uppercase; text-align: center; font-weight: 400;"></p>
+                <p id="demo-status"
+                    style="margin-top: 1.5rem; border-radius: 6px; padding: 0.5rem; text-transform: uppercase; text-align: center; font-weight: 400;">
+                </p>
             </div>
 
             <!-- Dashboard en Tiempo Real -->
