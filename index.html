@@ -676,11 +676,11 @@
             #demo>.container {
                 padding: 0 1rem !important;
             }
-            
+
             .tiles-grid {
                 grid-template-columns: 1fr !important;
             }
-    
+
             .tile-small,
             .tile-medium,
             .tile-large,
@@ -971,7 +971,46 @@
             }
         }
     </style>
+    <style>
+        /* SOLUCIÓN PARA EL ESPACIO BLANCO A LA DERECHA */
+        html,
+        body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            position: relative;
+        }
 
+        @media (max-width: 768px) {
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 16px !important;
+                margin: 0 auto !important;
+            }
+
+            /* Asegura que las secciones ocupen todo el ancho */
+            section[id] {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            /* Ajustes específicos para la cuadrícula de servicios */
+            .tiles-grid {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .tile {
+                width: 100% !important;
+                margin: 1rem 0 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
