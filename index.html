@@ -816,6 +816,141 @@
             will-change: transform, opacity;
         }
     </style>
+    <style>
+        .opiniones-section {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f9fafc;
+        }
+
+        .opiniones-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .opiniones-header h2 {
+            font-size: 2.5rem;
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .opiniones-header p {
+            color: #718096;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .opiniones-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .opinion-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #4f46e5;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opinion-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .opinion-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #4f46e5, #3b82f6);
+        }
+
+        .cliente-nombre {
+            font-size: 1.4rem;
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cliente-descripcion {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .resultados-container {
+            background-color: #f7fafc;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 10px;
+            border-left: 4px solid #c7d2fe;
+        }
+
+        .resultado-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .resultado-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-icon {
+            color: #10b981;
+            margin-right: 10px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .sector-tag {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 15px;
+            align-self: flex-start;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .opiniones-container {
+                grid-template-columns: 1fr;
+            }
+
+            .opiniones-header h2 {
+                font-size: 2rem;
+            }
+
+            .opinion-card {
+                padding: 25px;
+            }
+        }
+    </style>
 
 </head>
 
@@ -1282,16 +1417,118 @@
             <ul>
                 <li><strong>Hospital Regional Puerto Vallarta:</strong> Reducción del 40% en tiempo de reportes clínicos
                     y paneles de control en tiempo real para decisiones basadas en datos confiables.</li>
-                <li><strong>Universidad Regional de los Altos para las materias que imparto en el Campus Bahía de Banderas:</strong> Plataforma académica con aumento del 25% en
+                <li><strong>Universidad Regional de los Altos para las materias que imparto en el Campus Bahía de
+                        Banderas:</strong> Plataforma académica con aumento del 25% en
                     engagement estudiantil y reducción del 60% en carga administrativa.</li>
-                <li><strong>Dra Magdalena RSVIII Puerto Vallarta. Programa Cartillas Nacionales de Salud. Censo por Unidad:</strong> Plataforma de salud regional con logrando sostenidamente desde su implementacion en 2021 60% en carga administrativa y 100% de eficiencia en el conteo de Cartillas.</li>
-                <li><strong>Mtra Shalom. Encuestas para detección de niveles de ansiedad y de depresión en alumnos de secundaria y bachillerato:</strong> Plataforma de salud escolar con acceso sencillo y gamificable que ha obtenido satisfactoriamente respuestas de más de 200 jovenes en un mes.</li>
-                <li><strong>Nutrióloga De Niz. Landing page para acceso a un estilo de vida saludable.</strong> En la compañia personalizada de la Lic. Mimi</li>
+                <li><strong>Dra Magdalena RSVIII Puerto Vallarta. Programa Cartillas Nacionales de Salud. Censo por
+                        Unidad:</strong> Plataforma de salud regional con logrando sostenidamente desde su
+                    implementacion en 2021 60% en carga administrativa y 100% de eficiencia en el conteo de Cartillas.
+                </li>
+                <li><strong>Mtra Shalom. Encuestas para detección de niveles de ansiedad y de depresión en alumnos de
+                        secundaria y bachillerato:</strong> Plataforma de salud escolar con acceso sencillo y
+                    gamificable que ha obtenido satisfactoriamente respuestas de más de 200 jovenes en un mes.</li>
+                <li><strong>Nutrióloga De Niz. Landing page para acceso a un estilo de vida saludable.</strong> En la
+                    compañia personalizada de la Lic. Mimi</li>
             </ul>
 
             <p style="margin-top: 2rem; font-size: 1.2rem; font-weight: 600;">En resumen: <span class="highlight">del
                     caos al control, del papel al pixel, de lo costoso a lo eficiente</span>. Mi stack convierte la
                 digitalización institucional en una experiencia premium, accesible y memorable.</p>
+        </div>
+    </section>
+
+    <section class="opiniones-section">
+        <div class="opiniones-header">
+            <h2>Casos de Éxito</h2>
+            <p>Resultados tangibles que he ayudado a lograr para mis clientes a través de soluciones tecnológicas
+                innovadoras y eficientes.</p>
+        </div>
+
+        <div class="opiniones-container">
+            <div class="opinion-card">
+                <div class="cliente-nombre">Hospital Regional Puerto Vallarta</div>
+                <div class="cliente-descripcion">Implementación de sistema de reportes clínicos y paneles de control en
+                    tiempo real para mejorar la toma de decisiones basada en datos confiables.</div>
+                <div class="resultados-container">
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Reducción del <strong>40%</strong> en tiempo de reportes clínicos</span>
+                    </div>
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Paneles de control en tiempo real para decisiones basadas en datos confiables</span>
+                    </div>
+                </div>
+                <span class="sector-tag">Sector Salud</span>
+            </div>
+
+            <div class="opinion-card">
+                <div class="cliente-nombre">Universidad Regional de los Altos</div>
+                <div class="cliente-descripcion">Desarrollo de plataforma académica para las materias impartidas en el
+                    Campus Bahía de Banderas, mejorando la experiencia educativa.</div>
+                <div class="resultados-container">
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Aumento del <strong>25%</strong> en engagement estudiantil</span>
+                    </div>
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Reducción del <strong>60%</strong> en carga administrativa</span>
+                    </div>
+                </div>
+                <span class="sector-tag">Educación</span>
+            </div>
+
+            <div class="opinion-card">
+                <div class="cliente-nombre">Dra. Magdalena RSVIII - Programa Cartillas Nacionales de Salud</div>
+                <div class="cliente-descripcion">Plataforma de salud regional para el programa de Cartillas Nacionales
+                    de Salud con censo por unidad médica.</div>
+                <div class="resultados-container">
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Reducción sostenida del <strong>60%</strong> en carga administrativa desde 2021</span>
+                    </div>
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span><strong>100%</strong> de eficiencia en el conteo de Cartillas Nacionales</span>
+                    </div>
+                </div>
+                <span class="sector-tag">Sector Salud Pública</span>
+            </div>
+
+            <div class="opinion-card">
+                <div class="cliente-nombre">Mtra. Shalom - Encuestas de salud mental</div>
+                <div class="cliente-descripcion">Plataforma para detección de niveles de ansiedad y depresión en alumnos
+                    de secundaria y bachillerato, con enfoque en accesibilidad.</div>
+                <div class="resultados-container">
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Acceso sencillo y sistema gamificable</span>
+                    </div>
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Respuestas satisfactorias de <strong>más de 200 jóvenes</strong> en un mes</span>
+                    </div>
+                </div>
+                <span class="sector-tag">Salud Mental / Educación</span>
+            </div>
+
+            <div class="opinion-card">
+                <div class="cliente-nombre">Nutrióloga De Niz</div>
+                <div class="cliente-descripcion">Landing page personalizada para promover acceso a un estilo de vida
+                    saludable bajo la compañía personalizada de la Lic. Mimi.</div>
+                <div class="resultados-container">
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Diseño atractivo y funcional para conversión de clientes</span>
+                    </div>
+                    <div class="resultado-item">
+                        <span class="check-icon">✓</span>
+                        <span>Presencia digital profesional para servicios de nutrición personalizada</span>
+                    </div>
+                </div>
+                <span class="sector-tag">Bienestar & Nutrición</span>
+            </div>
         </div>
     </section>
 
