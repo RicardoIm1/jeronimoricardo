@@ -226,6 +226,76 @@
             border-radius: 2px;
         }
 
+        /* Tile Grid */
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(280px, auto);
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .tile {
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            z-index: -1;
+        }
+
+        .tile-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            padding: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .tile h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .tile p {
+            color: #475569;
+            font-size: 1.2rem;
+            padding: 1rem;
+        }
+
+        .tile-small { grid-column: span 4; }
+        .tile-medium { grid-column: span 6; }
+        .tile-large { grid-column: span 8; }
+        .tile-xlarge { grid-column: span 12; }
+
+        .tile-blue .tile-icon { color: var(--primary-blue); }
+        .tile-green .tile-icon { color: var(--primary-green); }
+        .tile-orange .tile-icon { color: var(--primary-orange); }
+        .tile-yellow .tile-icon { color: var(--primary-yellow); }
+        .tile-purple .tile-icon { color: #9c27b0; }
+
+        /* Contact Form */
         .contact-section {
             padding: 6rem 0;
             background-color: #f8fafc;
@@ -297,7 +367,8 @@
         }
 
         input,
-        textarea {
+        textarea,
+        select {
             padding: 1rem;
             border: 1px solid #cbd5e1;
             border-radius: 10px;
@@ -307,13 +378,15 @@
         }
 
         input:focus,
-        textarea:focus {
+        textarea:focus,
+        select:focus {
             outline: none;
             border-color: var(--primary-blue);
             box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
         }
 
-        #status {
+        #status,
+        #demo-status {
             margin-top: 1rem;
             padding: 0.8rem;
             border-radius: 8px;
@@ -331,6 +404,7 @@
             color: #991b1b;
         }
 
+        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark-bg), #1e293b);
             color: white;
@@ -369,15 +443,25 @@
             font-size: 0.9rem;
         }
 
+        @media (max-width: 1200px) {
+            .tile-small,
+            .tile-medium,
+            .tile-large,
+            .tile-xlarge {
+                grid-column: span 6;
+            }
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+        }
+
         @media (max-width: 992px) {
             .desktop-nav {
                 display: none;
             }
-
             .mobile-menu-btn {
                 display: block;
             }
-
             .mobile-menu {
                 display: none;
                 position: fixed;
@@ -389,11 +473,9 @@
                 z-index: 999;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             }
-
             .mobile-menu.active {
                 display: block;
             }
-
             .mobile-menu a {
                 display: block;
                 color: white;
@@ -402,7 +484,6 @@
                 font-size: 1.2rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
-
             .mobile-menu a:hover {
                 color: white;
                 padding-left: 1rem;
@@ -414,22 +495,18 @@
                 padding: 10rem 1.5rem 6rem;
                 margin-top: 80px;
             }
-
             .hero h2 {
                 font-size: 2.4rem;
             }
-
             .contact-container {
                 grid-template-columns: 1fr !important;
                 gap: 1.2rem !important;
             }
-
             .contact-info {
                 padding: 1rem !important;
                 width: 100% !important;
                 overflow: visible !important;
             }
-
             #locations-list,
             #devices-chart {
                 width: 100% !important;
@@ -437,11 +514,19 @@
                 max-height: none !important;
                 min-height: 120px !important;
             }
-
             #locations-list > div,
             #devices-chart > div {
                 font-size: 0.95rem !important;
                 padding: 0.5rem 0 !important;
+            }
+            .tiles-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .tile-small,
+            .tile-medium,
+            .tile-large,
+            .tile-xlarge {
+                grid-column: span 12 !important;
             }
         }
 
@@ -449,31 +534,30 @@
             header {
                 padding: 1rem 1.5rem;
             }
-
             .hero {
                 padding: 9rem 1rem 5rem;
             }
-
             .hero h2 {
                 font-size: 1.8rem;
             }
-
             .cta-button {
                 padding: 1rem 2rem;
                 font-size: 1rem;
             }
-
             .contact-info {
                 padding: 1rem !important;
             }
-
             #locations-list,
             #devices-chart {
                 min-height: 100px !important;
             }
+            .section-title {
+                font-size: 1.8rem;
+            }
         }
 
-        html, body {
+        html,
+        body {
             overflow-x: hidden !important;
             max-width: 100vw !important;
             position: relative;
@@ -491,6 +575,8 @@
         <nav class="desktop-nav">
             <a href="#analytics-demo">Analíticas</a>
             <a href="#servicios">Servicios</a>
+            <a href="#demo">Demo</a>
+            <a href="#casos">Casos</a>
             <a href="#contacto">Contacto</a>
         </nav>
 
@@ -501,6 +587,8 @@
         <div class="mobile-menu" id="mobileMenu">
             <a href="#analytics-demo">Analíticas</a>
             <a href="#servicios">Servicios</a>
+            <a href="#demo">Demo</a>
+            <a href="#casos">Casos</a>
             <a href="#contacto">Contacto</a>
         </div>
     </header>
@@ -509,7 +597,7 @@
         <h2><span class="hero-gradient">Soluciones Digitales Premium</span> para la Transformación Institucional</h2>
         <p class="hero-subtitle">Conecto procesos, simplifico operaciones y entrego resultados con elegancia, precisión y eficiencia comprobada.</p>
         <div style="margin: 3rem 0;">
-            <a href="#analytics-demo" class="cta-button" style="display: inline-block;">Probar Demo</a>
+            <a href="#demo" class="cta-button" style="display: inline-block;">Probar Demo</a>
         </div>
     </section>
 
@@ -525,7 +613,6 @@
         </div>
 
         <div class="contact-container" style="max-width: 1200px; margin: 0 auto;">
-            <!-- Columna 1: Métricas Principales -->
             <div class="contact-info">
                 <h4><i class="fas fa-chart-line"></i> Dashboard de Visitas</h4>
                 <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">
@@ -553,7 +640,6 @@
                 </div>
             </div>
 
-            <!-- Columna 2: Dispositivos y Comportamiento -->
             <div class="contact-info">
                 <h4><i class="fas fa-desktop"></i> Dispositivos & Comportamiento</h4>
 
@@ -578,18 +664,182 @@
                         </div>
                         <div style="font-weight: 600; color: #475569;" id="engagement-percent">65%</div>
                     </div>
-                    <p style="color: #64748b; font-size: 0.85rem;">
-                        <i class="fas fa-info-circle"></i> Porcentaje de usuarios que interactúan con formularios
-                    </p>
-                </div>
-
-                <div style="background: #f0f9ff; padding: 1rem; border-radius: 10px; margin-top: 2rem;">
-                    <p style="margin: 0; color: #0366d6; font-size: 0.9rem;">
-                        <i class="fas fa-lightbulb"></i> <strong>Estos datos serían de TU institución:</strong> visitas por departamento, formularios completados, tiempo promedio por proceso.
-                    </p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <section id="servicios" class="container" style="padding: 6rem 0;">
+        <h2 class="section-title">Servicios Especializados</h2>
+
+        <div class="tiles-grid">
+            <div class="tile tile-medium tile-blue">
+                <div class="tile-icon">
+                    <i class="fas fa-hospital"></i>
+                </div>
+                <h3>Sistemas Hospitalarios en Tiempo Real</h3>
+                <p>Plataformas de control clínico y estadístico: defunciones, nacimientos, egresos y urgencias.</p>
+            </div>
+
+            <div class="tile tile-small tile-green">
+                <div class="tile-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>Plataformas Académicas</h3>
+                <p>Desarrollo web especializado para instituciones educativas con herramientas interactivas.</p>
+            </div>
+
+            <div class="tile tile-small tile-orange">
+                <div class="tile-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Administración Gubernamental</h3>
+                <p>Soluciones digitales para gobiernos locales con automatización y trazabilidad.</p>
+            </div>
+
+            <div class="tile tile-large tile-purple">
+                <div class="tile-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Dashboards y Paneles de Control</h3>
+                <p>Visualización de datos en tiempo real con métricas clave e indicadores de desempeño.</p>
+            </div>
+
+            <div class="tile tile-medium tile-yellow">
+                <div class="tile-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Migración y Centralización de Datos</h3>
+                <p>Integración de sistemas fragmentados en una plataforma unificada con historial completo.</p>
+            </div>
+
+            <div class="tile tile-small tile-blue">
+                <div class="tile-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Aplicaciones Móviles</h3>
+                <p>Extensión de funcionalidades a dispositivos móviles con interfaces intuitivas.</p>
+            </div>
+
+            <div class="tile tile-xlarge tile-green">
+                <div class="tile-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Automatización de Procesos Institucionales</h3>
+                <p>Reducción de trabajo manual mediante flujos automatizados, triggers inteligentes y alertas programadas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="container" style="padding: 6rem 0;">
+        <h2 class="section-title">Demo Interactiva: Sistema de Gestión</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #475569; font-size: 1.1rem;">
+            Experimenta cómo funciona mi arquitectura. Ingresa datos ficticios y observa cómo se procesan en tiempo real.
+        </p>
+
+        <div class="contact-container" style="max-width: 1200px;">
+            <!-- Formulario de Demo -->
+            <div class="contact-info">
+                <h4>Ingresar Registro de Prueba</h4>
+                <p>Simula el ingreso de datos como en un sistema real. Los datos se guardarán localmente.</p>
+
+                <form id="demo-form" style="margin-top: 2rem;">
+                    <div class="form-group">
+                        <label for="demo-nombre">Nombre del Responsable *</label>
+                        <input type="text" id="demo-nombre" name="nombre" placeholder="Ej: Dr. Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="demo-departamento">Departamento/Área *</label>
+                        <select id="demo-departamento" name="departamento" required>
+                            <option value="">Selecciona un departamento</option>
+                            <option value="Urgencias">Urgencias</option>
+                            <option value="Pediatría">Pediatría</option>
+                            <option value="Cirugía">Cirugía</option>
+                            <option value="Laboratorio">Laboratorio</option>
+                            <option value="Administración">Administración</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="demo-cantidad">Cantidad (ej: pacientes, insumos)</label>
+                        <input type="number" id="demo-cantidad" name="cantidad" placeholder="Ej: 15" min="1" max="1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="demo-tipo">Tipo de Registro *</label>
+                        <select id="demo-tipo" name="tipo" required>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="Ingreso">Ingreso</option>
+                            <option value="Egreso">Egreso</option>
+                            <option value="Consulta">Consulta</option>
+                            <option value="Procedimiento">Procedimiento</option>
+                            <option value="Reporte">Reporte</option>
+                        </select>
+                    </div>
+
+                    <div style="background-color: #e8f4fd; padding: 1rem; border-radius: 10px; margin: 1.5rem 0;">
+                        <p style="margin: 0; color: #0366d6; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Estos datos se guardarán localmente y podrás verlos en el dashboard.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="cta-button" style="width: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--primary-yellow));">
+                        <i class="fas fa-paper-plane"></i> Guardar Registro
+                    </button>
+                </form>
+                <p id="demo-status"></p>
+            </div>
+
+            <!-- Dashboard en Tiempo Real -->
+            <div class="contact-info">
+                <h4>Dashboard en Tiempo Real</h4>
+                <p>Visualización inmediata de los datos ingresados. Actualización automática.</p>
+
+                <div id="dashboard" style="margin-top: 2rem;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--primary-blue);" id="total-registros">0</div>
+                            <div style="color: #64748b; font-size: 0.9rem;">Registros Totales</div>
+                        </div>
+                        <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--primary-green);" id="cantidad-total">0</div>
+                            <div style="color: #64748b; font-size: 0.9rem;">Cantidad Acumulada</div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 1.5rem;">
+                        <h5 style="margin-bottom: 1rem; color: var(--dark-bg);"><i class="fas fa-chart-pie"></i> Distribución por Departamento</h5>
+                        <div id="chart-departamentos" style="min-height: 200px;">
+                            <p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún. Ingresa el primer registro.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                        <h5 style="margin-bottom: 1rem; color: var(--dark-bg);"><i class="fas fa-history"></i> Últimos Registros</h5>
+                        <div id="ultimos-registros" style="max-height: 300px; overflow-y: auto;">
+                            <p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button id="refresh-btn" class="cta-button" style="padding: 0.8rem 1.5rem; background: linear-gradient(90deg, #6b7280, #9ca3af);">
+                            <i class="fas fa-sync-alt"></i> Actualizar
+                        </button>
+                        <button id="clear-demo-btn" class="cta-button" style="padding: 0.8rem 1.5rem; background: linear-gradient(90deg, #ef4444, #f87171);">
+                            <i class="fas fa-trash-alt"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="casos" class="container" style="padding: 6rem 0;">
+        <h2 class="section-title">Casos de Éxito</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #475569;">
+            Casos reales donde la transformación digital impactó positivamente a instituciones de diferentes sectores.
+        </p>
     </section>
 
     <section id="contacto" class="contact-section">
@@ -599,7 +849,7 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h4>Conversemos sobre tu Proyecto</h4>
-                    <p>¿Quieres llevar tu institución al siguiente nivel digital? Escríbeme y conversemos sobre cómo podemos optimizar tus procesos con soluciones tecnológicas a medida.</p>
+                    <p>¿Quieres llevar tu institución al siguiente nivel digital? Escríbeme y conversemos sobre cómo podemos optimizar tus procesos.</p>
 
                     <div class="contact-details">
                         <div>
@@ -620,15 +870,15 @@
                         <h4>Ventajas Clave</h4>
                         <ul style="margin-top: 1rem; margin-left: 1rem; color: #475569;">
                             <li>Implementación en 2-4 semanas</li>
-                            <li>Costos hasta 70% menores que soluciones tradicionales</li>
-                            <li>Soporte continuo y capacitación incluida</li>
-                            <li>Arquitectura escalable según tus necesidades</li>
+                            <li>Costos hasta 70% menores</li>
+                            <li>Soporte continuo incluido</li>
+                            <li>Arquitectura escalable</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="contact-info">
-                    <h4>Solicitar Propuesta Personalizada</h4>
+                    <h4>Solicitar Propuesta</h4>
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo *</label>
@@ -661,17 +911,17 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">Jerónimo Ricardo Ramírez Torres</div>
-            <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conecto procesos, simplifico operaciones y entrego resultados.</p>
+            <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional.</p>
 
             <div class="footer-bottom">
-                <p>© <span id="year">2023</span> Jerónimo Ricardo Ramírez Torres - Soluciones Digitales Premium. Todos los derechos reservados.</p>
-                <p style="margin-top: 0.5rem;">Transformando instituciones con tecnología elegante, eficiente y accesible.</p>
+                <p>© <span id="year">2023</span> Jerónimo Ricardo Ramírez Torres - Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Set year
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-YmdVdh_9ixKyqDJhMc56eNoogR4JhOzsAdNwIlQ1ZSUS_P9WpvDqH2wtlNlZFybJ/exec";
+
         document.getElementById("year").textContent = new Date().getFullYear();
 
         // Mobile menu
@@ -762,6 +1012,167 @@
             return { simulateAnalyticsData, updateDashboard };
         }
 
+        // ========== DEMO INTERACTIVA ==========
+        const demoForm = document.getElementById('demo-form');
+        const demoStatus = document.getElementById('demo-status');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const clearDemoBtn = document.getElementById('clear-demo-btn');
+
+        let registrosLocales = [];
+
+        function getDepartmentColor(depto) {
+            const colors = {
+                'Urgencias': '#ef4444',
+                'Pediatría': '#3b82f6',
+                'Cirugía': '#8b5cf6',
+                'Laboratorio': '#10b981',
+                'Administración': '#f59e0b',
+                'General': '#94a3b8'
+            };
+            return colors[depto] || '#3b82f6';
+        }
+
+        function updateDashboardDemo(registros) {
+            const totalRegistros = registros.length;
+            let cantidadTotal = 0;
+            let porDepartamento = {};
+
+            registros.forEach(registro => {
+                if (registro.cantidad) {
+                    cantidadTotal += parseInt(registro.cantidad) || 0;
+                }
+                const depto = registro.departamento || "General";
+                porDepartamento[depto] = (porDepartamento[depto] || 0) + 1;
+            });
+
+            document.getElementById('total-registros').textContent = totalRegistros;
+            document.getElementById('cantidad-total').textContent = cantidadTotal;
+
+            const chartContainer = document.getElementById('chart-departamentos');
+            if (Object.keys(porDepartamento).length > 0) {
+                let chartHTML = '<div style="display: flex; flex-direction: column; gap: 0.5rem;">';
+
+                Object.entries(porDepartamento).forEach(([depto, count]) => {
+                    const percentage = totalRegistros > 0 ? Math.round((count / totalRegistros) * 100) : 0;
+                    const color = getDepartmentColor(depto);
+
+                    chartHTML += `
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="font-weight: 600; color: #334155;">${depto}</span>
+                            <span style="color: #64748b;">${count} (${percentage}%)</span>
+                        </div>
+                        <div style="height: 8px; background-color: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                            <div style="height: 100%; width: ${percentage}%; background: ${color}; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    `;
+                });
+
+                chartHTML += '</div>';
+                chartContainer.innerHTML = chartHTML;
+            } else {
+                chartContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay datos aún.</p>';
+            }
+
+            const container = document.getElementById('ultimos-registros');
+            if (!registros || registros.length === 0) {
+                container.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 2rem;">No hay registros aún.</p>';
+                return;
+            }
+
+            const sortedRegistros = [...registros].slice(0, 5);
+
+            let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
+
+            sortedRegistros.forEach(reg => {
+                html += `
+                <div style="background: #f8fafc; padding: 1rem; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-weight: 600; color: var(--dark-bg);">
+                                ${reg.nombre || "Usuario"}
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.25rem; font-size: 0.85rem; color: #64748b;">
+                                <span><i class="fas fa-building"></i> ${reg.departamento || "General"}</span>
+                                <span><i class="fas fa-tag"></i> ${reg.tipo || "Registro"}</span>
+                                ${reg.cantidad ? `<span><i class="fas fa-hashtag"></i> ${reg.cantidad}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        if (demoForm) {
+            const stored = localStorage.getItem('demo_registros_locales');
+            if (stored) {
+                registrosLocales = JSON.parse(stored);
+            }
+            updateDashboardDemo(registrosLocales);
+
+            demoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const nombre = document.getElementById('demo-nombre').value.trim();
+                const departamento = document.getElementById('demo-departamento').value;
+                const cantidad = document.getElementById('demo-cantidad').value || "1";
+                const tipo = document.getElementById('demo-tipo').value;
+
+                if (!nombre) {
+                    demoStatus.textContent = "⚠️ Ingresa tu nombre";
+                    demoStatus.className = "error";
+                    return;
+                }
+
+                const registro = {
+                    id: Date.now(),
+                    nombre: nombre,
+                    departamento: departamento,
+                    cantidad: parseInt(cantidad) || 1,
+                    tipo: tipo,
+                    fecha: new Date().toISOString()
+                };
+
+                registrosLocales.unshift(registro);
+                if (registrosLocales.length > 100) {
+                    registrosLocales = registrosLocales.slice(0, 100);
+                }
+
+                localStorage.setItem('demo_registros_locales', JSON.stringify(registrosLocales));
+                updateDashboardDemo(registrosLocales);
+
+                demoStatus.textContent = "✅ ¡Registro guardado!";
+                demoStatus.className = "success";
+
+                demoForm.reset();
+            });
+
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', () => {
+                    updateDashboardDemo(registrosLocales);
+                    demoStatus.textContent = "✅ Dashboard actualizado";
+                    demoStatus.className = "success";
+                });
+            }
+
+            if (clearDemoBtn) {
+                clearDemoBtn.addEventListener('click', () => {
+                    if (confirm("¿Limpiar todos los datos locales?")) {
+                        localStorage.removeItem('demo_registros_locales');
+                        registrosLocales = [];
+                        updateDashboardDemo(registrosLocales);
+                        demoStatus.textContent = "✅ Datos limpiados";
+                        demoStatus.className = "success";
+                    }
+                });
+            }
+        }
+
         // ========== SOLO UN DOMContentLoaded ==========
         document.addEventListener('DOMContentLoaded', function () {
             console.log("✅ Inicializando dashboard...");
@@ -776,7 +1187,6 @@
                 }
             }, 750);
 
-            // Actualizar cada 60 segundos
             setInterval(() => {
                 const data = analytics.simulateAnalyticsData();
                 analytics.updateDashboard(data);
@@ -800,7 +1210,6 @@
                 statusEl.className = "";
 
                 try {
-                    // Aquí iría tu lógica para enviar datos (FormSubmit, EmailJS, tu backend, etc.)
                     console.log("📧 Formulario:", { nombre, email, institucion, mensaje });
                     
                     statusEl.textContent = "✅ ¡Mensaje enviado! Te contactaremos pronto.";
@@ -812,6 +1221,23 @@
                 }
             });
         }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
     </script>
 
 </body>
