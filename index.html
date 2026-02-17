@@ -1434,6 +1434,76 @@
             }
         });
 
+        // ========== ANALYTICS DASHBOARD ==========
+        function initAnalyticsDashboard() {
+            const simulateAnalyticsData = () => {
+                const baseVisitors = 42;
+                const basePageviews = 187;
+                const hour = new Date().getHours();
+                const hourMultiplier = hour >= 9 && hour <= 17 ? 1.5 : 1.0;
+
+                const todayVisitors = Math.floor(baseVisitors + (Math.random() * 10 * hourMultiplier));
+                const totalPageviews = Math.floor(basePageviews + (Math.random() * 50));
+
+                const locations = [
+                    { country: "México", city: "Guadalajara", count: Math.floor(todayVisitors * 0.4) },
+                    { country: "México", city: "Puerto Vallarta", count: Math.floor(todayVisitors * 0.25) },
+                    { country: "México", city: "CDMX", count: Math.floor(todayVisitors * 0.15) },
+                    { country: "Colombia", city: "Bogotá", count: Math.floor(todayVisitors * 0.1) },
+                    { country: "Perú", city: "Lima", count: Math.floor(todayVisitors * 0.05) }
+                ].sort((a, b) => b.count - a.count).slice(0, 3);
+
+                const devices = [
+                    { type: "Desktop", percent: 65, color: "#3b82f6" },
+                    { type: "Mobile", percent: 30, color: "#10b981" },
+                    { type: "Tablet", percent: 5, color: "#8b5cf6" }
+                ];
+
+                const engagement = 65 + Math.floor(Math.random() * 15);
+
+                return { todayVisitors, totalPageviews, locations, devices, engagement };
+            };
+
+            function updateDashboard(data) {
+                document.getElementById('visitors-today').textContent = data.todayVisitors.toLocaleString();
+                document.getElementById('pageviews-total').textContent = data.totalPageviews.toLocaleString();
+
+                const locationsHtml = data.locations.map(loc => `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;">
+                        <div>
+                            <div style="font-weight: 600; color: #334155;">${loc.city}, ${loc.country}</div>
+                            <div style="font-size: 0.8rem; color: #64748b;">${loc.count} visitas</div>
+                        </div>
+                        <div style="width: 8px; height: 8px; background-color: #3b82f6; border-radius: 50%;"></div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('locations-list').innerHTML = locationsHtml || '<p style="color: #94a3b8; text-align: center;">No hay datos</p>';
+
+                const devicesHtml = data.devices.map(device => `
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="font-weight: 600; color: #334155;">
+                                <i class="fas fa-${device.type === 'Desktop' ? 'desktop' : device.type === 'Mobile' ? 'mobile-alt' : 'tablet-alt'}"></i>
+                                ${device.type}
+                            </span>
+                            <span style="color: #64748b;">${device.percent}%</span>
+                        </div>
+                        <div style="height: 8px; background-color: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                            <div style="height: 100%; width: ${device.percent}%; background: ${device.color}; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('devices-chart').innerHTML = devicesHtml;
+
+                document.getElementById('engagement-bar').style.width = `${data.engagement}%`;
+                document.getElementById('engagement-percent').textContent = `${data.engagement}%`;
+            }
+
+            return { simulateAnalyticsData, updateDashboard };
+        }
+
         // ========== DEMO INTERACTIVA ==========
         const demoForm = document.getElementById('demo-form');
         const demoSection = document.getElementById('demo');
