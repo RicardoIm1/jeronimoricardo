@@ -2297,7 +2297,7 @@
 
                 const sortedRegistros = [...registros]
                     .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
-                    .slice(0, 5);
+                    .slice(0, 50);
 
                 let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
 
