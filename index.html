@@ -1041,6 +1041,99 @@
                     </div>
                 </div>
             </div>
+            <!-- Botón de diagnóstico (solo visible en móvil) -->
+            <div id="mobile-diagnostic"
+                style="display: none; margin-top: 2rem; padding: 1rem; background: #fff3cd; border-radius: 8px; border-left: 4px solid #ffc107;">
+                <h5 style="color: #856404;"><i class="fas fa-wifi"></i> Diagnóstico Móvil</h5>
+                <div id="diagnostic-info"></div>
+                <button onclick="runMobileDiagnostic()"
+                    style="margin-top: 1rem; padding: 0.5rem 1rem; background: #856404; color: white; border: none; border-radius: 4px;">Ejecutar
+                    diagnóstico</button>
+            </div>
+
+            <script>
+                // Mostrar diagnóstico solo en móvil
+                if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    document.getElementById('mobile-diagnostic').style.display = 'block';
+                }
+
+                // Función de diagnóstico
+                window.runMobileDiagnostic = async function () {
+                    const diag = document.getElementById('diagnostic-info');
+                    diag.innerHTML = '⏳ Ejecutando pruebas...';
+
+                    let results = [];
+
+                    // Prueba 1: Conectividad básica
+                    try {
+                        await fetch('https://script.google.com/macros/s/AKfycbw-YmdVdh_9ixKyqDJhMc56eNoogR4JhOzsAdNwIlQ1ZSUS_P9WpvDqH2wtlNlZFybJ/exec?action=test', { mode: 'no-cors' });
+                        results.push('✅ Conectividad básica: OK');
+                    } catch (e) {
+                        results.push('❌ Conectividad básica: FALLÓ');
+                    }
+
+                    // Prueba 2: CORS
+                    try {
+                        await fetch('https://script.google.com/macros/s/AKfycbw-YmdVdh_9ixKyqDJhMc56eNoogR4JhOzsAdNwIlQ1ZSUS_P9WpvDqH2wtlNlZFybJ/exec?action=test');
+                        results.push('✅ CORS: OK');
+                    } catch (e) {
+                        results.push('❌ CORS: ' + e.message);
+                    }
+
+                    // Prueba 3: LocalStorage
+                    try {
+                        localStorage.setItem('test', 'ok');
+                        localStorage.removeItem('test');
+                        results.push('✅ LocalStorage: OK');
+                    } catch (e) {
+                        results.push('❌ LocalStorage: FALLÓ');
+                    }
+
+                    diag.innerHTML = results.map(r => `<div style="margin: 0.25rem 0;">${r}</div>`).join('');
+                };
+            </script>
+            <style>
+                /* Mejoras específicas para móvil */
+                @media (max-width: 768px) {
+                    #dashboard {
+                        padding: 0.5rem;
+                    }
+
+                    #dashboard .contact-info {
+                        padding: 1rem;
+                    }
+
+                    #dashboard [style*="grid-template-columns: repeat(2, 1fr)"] {
+                        grid-template-columns: 1fr !important;
+                        /* Una columna en móvil */
+                        gap: 0.75rem;
+                    }
+
+                    #dashboard [style*="background: white; padding: 1.5rem;"] {
+                        padding: 1rem !important;
+                    }
+
+                    #ultimos-registros div[style*="padding: 1rem"] {
+                        padding: 0.75rem !important;
+                    }
+
+                    #ultimos-registros [style*="display: flex; flex-wrap: wrap;"] {
+                        flex-direction: column;
+                        gap: 0.25rem !important;
+                    }
+
+                    #chart-departamentos {
+                        min-height: auto !important;
+                    }
+
+                    /* Botones más grandes para móvil */
+                    #dashboard button {
+                        padding: 0.8rem !important;
+                        font-size: 1rem !important;
+                        width: 100%;
+                    }
+                }
+            </style>
         </div>
 
         <!-- Explicación Arquitectura -->
@@ -1196,6 +1289,17 @@
     </footer>
 
     <script>
+        // ========== DIAGNÓSTICO PARA MÓVIL ==========
+        console.log("📱 Dispositivo detectado:", /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? "MÓVIL" : "ESCRITORIO");
+        console.log("📡 URL de GAS configurada:", SCRIPT_URL);
+
+        // Verificar conectividad básica
+        fetch('https://script.google.com/macros/s/AKfycbw-YmdVdh_9ixKyqDJhMc56eNoogR4JhOzsAdNwIlQ1ZSUS_P9WpvDqH2wtlNlZFybJ/exec?action=test', {
+            mode: 'no-cors' // Esto permitirá ver si al menos hay conectividad
+        })
+            .then(() => console.log("✅ Conectividad con GAS detectada"))
+            .catch(err => console.error("❌ Sin conectividad con GAS:", err));
+
         // ========== CONFIGURACIÓN GLOBAL ==========
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-YmdVdh_9ixKyqDJhMc56eNoogR4JhOzsAdNwIlQ1ZSUS_P9WpvDqH2wtlNlZFybJ/exec";
 
@@ -1385,11 +1489,24 @@
             let registrosLocales = [];
 
             // ========== FUNCIÓN PARA OBTENER DATOS DE GAS ==========
+            // ========== FUNCIÓN PARA OBTENER DATOS DE GAS (MEJORADA PARA MÓVIL) ==========
             async function fetchDataFromGAS() {
-                console.log("📡 Conectando a GAS...");
+                console.log("📡 Conectando a GAS desde móvil...");
 
                 try {
-                    const response = await fetch(SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now());
+                    // IMPORTANTE: Agregar timestamp y evitar caché
+                    const url = SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now();
+
+                    // Opciones específicas para móvil
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        mode: 'cors', // Cambiar a cors explícitamente
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        cache: 'no-cache' // Evitar caché en móvil
+                    });
 
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}`);
@@ -1398,10 +1515,38 @@
                     const data = await response.json();
                     console.log("✅ Respuesta de GAS:", data);
                     return data;
+
                 } catch (error) {
                     console.error("❌ Error conectando a GAS:", error);
-                    throw error;
+
+                    // En móvil, intentar con JSONP como fallback
+                    console.log("🔄 Intentando con JSONP...");
+                    return fetchWithJSONP();
                 }
+            }
+
+            // Fallback con JSONP para móviles
+            function fetchWithJSONP() {
+                return new Promise((resolve, reject) => {
+                    const callbackName = 'jsonp_callback_' + Date.now();
+                    const script = document.createElement('script');
+
+                    window[callbackName] = function (data) {
+                        delete window[callbackName];
+                        document.body.removeChild(script);
+                        console.log("✅ JSONP exitoso:", data);
+                        resolve(data);
+                    };
+
+                    script.src = SCRIPT_URL + '?action=obtener_registros&callback=' + callbackName;
+                    script.onerror = () => {
+                        delete window[callbackName];
+                        document.body.removeChild(script);
+                        reject(new Error('JSONP falló'));
+                    };
+
+                    document.body.appendChild(script);
+                });
             }
 
             // ========== FUNCIÓN PARA GUARDAR EN GAS ==========
