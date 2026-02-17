@@ -1492,12 +1492,12 @@
                         registrosReales = gasData.registros;
                         usandoDatosReales = true;
 
-                        console.log(`✅ ${gasData.registros.length} registros reales cargados`);
+                        console.log(` ${gasData.registros.length} registros reales cargados`);
 
                         updateDashboard(registrosReales, true);
 
                         demoStatus.textContent =
-                            `✅ ${gasData.registros.length} registros reales cargados`;
+                            ` ${gasData.registros.length} registros reales cargados`;
                         demoStatus.className = "success";
 
                     } else {
@@ -1678,7 +1678,7 @@
 
                 const sortedRegistros = [...registros]
                     .sort((a, b) => new Date(b.fecha || b.timestamp) - new Date(a.fecha || a.timestamp))
-                    .slice(0, 5);
+                    .slice(0, 50);
 
                 let html = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
 
@@ -1792,7 +1792,7 @@
                         localStorage.removeItem('demo_registros_locales');
                         registrosLocales = getSampleData();
                         updateDashboard(registrosLocales, false);
-                        demoStatus.textContent = "✅ Datos locales reiniciados";
+                        demoStatus.textContent = " Datos locales reiniciados";
                         demoStatus.className = "success";
                     }
                 });
@@ -1805,7 +1805,7 @@
             // Actualizar cada 30 segundos
             setInterval(loadDashboardData, 30000);
 
-            console.log("✅ Demo lista - Conexión GAS verificada");
+            console.log(" Demo lista - Conexión GAS verificada");
 
         } else {
             console.log("ℹ️ No se encontró sección de demo");
@@ -1816,7 +1816,7 @@
         fetch(SCRIPT_URL + '?action=test')
             .then(response => response.json())
             .then(data => {
-                console.log("✅ GAS funcionando:", data);
+                console.log(" GAS funcionando:", data);
             })
             .catch(error => {
                 console.log("⚠️ GAS no responde, usando modo local:", error.message);
