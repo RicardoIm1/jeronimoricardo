@@ -968,8 +968,7 @@
                         </select>
                     </div>
 
-                    <div
-                        style="background-color: #e8f4fd; padding: 1rem; border-radius: 10px; margin: 1.5rem 0;">
+                    <div style="background-color: #e8f4fd; padding: 1rem; border-radius: 10px; margin: 1.5rem 0;">
                         <p style="margin: 0; color: #0366d6; font-size: 0.9rem;">
                             <i class="fas fa-info-circle"></i> Estos datos se guardarán en Google Sheets y podrás verlos
                             actualizarse en tiempo real abajo.
@@ -1378,26 +1377,28 @@
             const refreshBtn = document.getElementById('refresh-btn');
             const clearDemoBtn = document.getElementById('clear-demo-btn');
             const demoSubmitBtn = demoForm.querySelector('button[type="submit"]');
-            
+
             // Variable para controlar si estamos usando datos reales
             let usandoDatosReales = false;
             let registrosReales = [];
             let registrosLocales = [];
-            
+
             // ========== FUNCIÓN PARA obtener datos de GAS ==========
             async function fetchDataFromGAS() {
                 console.log("📡 Conectando a GAS...");
 
                 try {
-                    const response = await fetch(
-                        SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now(),
-                        {
-                            method: "GET",
-                            headers: {
-                                "Accept": "application/json"
-                            }
+                    const url = SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now();
+
+                    const response = await fetch(url, {
+                        method: "GET",
+                        mode: "cors",
+                        cache: "no-store",
+                        headers: {
+                            "Accept": "application/json"
                         }
-                    );
+                    });
+
 
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}`);
