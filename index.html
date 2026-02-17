@@ -1688,7 +1688,7 @@
         // ========== CONFIGURACIÓN GLOBAL ==========
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-YmdVdh_9ixKyqDJhMc56eNoogR4JhOzsAdNwIlQ1ZSUS_P9WpvDqH2wtlNlZFybJ/exec";
 
-        console.log("✅ URL de GAS configurada:", SCRIPT_URL);
+        console.log(" URL de GAS configurada:", SCRIPT_URL);
 
         // ========== CÓDIGO ORIGINAL ==========
         document.getElementById("year").textContent = new Date().getFullYear();
@@ -1771,16 +1771,16 @@
                     }
 
                     const result = await response.json();
-                    console.log("✅ Respuesta de GAS:", result);
+                    console.log(" Respuesta de GAS:", result);
 
                     if (result.success) {
                         console.log("📊 Respuesta CRUDA de GAS:", result);
-                        console.log("✅ Success:", result.success);
+                        console.log(" Success:", result.success);
                         console.log("❌ Error:", result.error);
                         console.log("📝 Message:", result.message);
 
                         // Éxito
-                        status.textContent = "✅ ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
+                        status.textContent = " ¡Mensaje enviado con éxito! Te contactaré en menos de 24 horas.";
                         status.className = "success";
 
                         // Resetear formulario
@@ -2033,7 +2033,7 @@
                     }
 
                     const data = await response.json();
-                    console.log("✅ Respuesta de GAS:", data);
+                    console.log(" Respuesta de GAS:", data);
                     return data;
                 } catch (error) {
                     console.error("❌ Error conectando a GAS:", error);
@@ -2081,7 +2081,7 @@
                         console.error("❌ ERROR DE GAS:", result.error || "Error sin mensaje");
                         throw new Error(result.error || "Error del servidor");
                     }
-                    console.log("✅ Guardado en GAS:", result);
+                    console.log(" Guardado en GAS:", result);
                     return result;
                 } catch (error) {
                     console.error("❌ Error guardando en GAS:", error);
@@ -2110,10 +2110,10 @@
                         registrosReales = gasData.registros;
                         usandoDatosReales = true;
 
-                        console.log(`✅ ${gasData.registros.length} registros reales cargados`);
+                        console.log(` ${gasData.registros.length} registros reales cargados`);
                         updateDashboard(registrosReales, true);
 
-                        demoStatus.textContent = `✅ ${gasData.registros.length} registros reales cargados`;
+                        demoStatus.textContent = ` ${gasData.registros.length} registros reales cargados`;
                         demoStatus.className = "success";
 
                     } else {
@@ -2203,7 +2203,7 @@
                     const resultadoGAS = await saveToGAS(registro);
 
                     // Éxito en GAS
-                    demoStatus.textContent = `✅ ${resultadoGAS.message || 'Guardado en la nube!'}`;
+                    demoStatus.textContent = ` ${resultadoGAS.message || 'Guardado en la nube!'}`;
                     demoStatus.className = "success";
 
                     // También guardar localmente como respaldo
@@ -2411,7 +2411,7 @@
                         localStorage.removeItem('demo_registros_locales');
                         registrosLocales = getSampleData();
                         updateDashboard(registrosLocales, false);
-                        demoStatus.textContent = "✅ Datos locales reiniciados";
+                        demoStatus.textContent = " Datos locales reiniciados";
                         demoStatus.className = "success";
                     }
                 });
@@ -2424,7 +2424,7 @@
             // Actualizar cada 30 segundos
             setInterval(loadDashboardData, 30000);
 
-            console.log("✅ Demo lista - Conexión GAS verificada");
+            console.log(" Demo lista - Conexión GAS verificada");
 
         } else {
             console.log("ℹ️ No se encontró sección de demo");
@@ -2435,7 +2435,7 @@
         fetch(SCRIPT_URL + '?action=test')
             .then(response => response.json())
             .then(data => {
-                console.log("✅ GAS funcionando:", data);
+                console.log(" GAS funcionando:", data);
             })
             .catch(error => {
                 console.log("⚠️ GAS no responde, usando modo local:", error.message);
