@@ -1378,31 +1378,45 @@
             const refreshBtn = document.getElementById('refresh-btn');
             const clearDemoBtn = document.getElementById('clear-demo-btn');
             const demoSubmitBtn = demoForm.querySelector('button[type="submit"]');
-
+            
             // Variable para controlar si estamos usando datos reales
             let usandoDatosReales = false;
             let registrosReales = [];
             let registrosLocales = [];
-
-            // ========== FUNCIÓN PARA OBTENER DATOS DE GAS ==========
+            
+            // ========== FUNCIÓN PARA obtener datos de GAS ==========
             async function fetchDataFromGAS() {
                 console.log("📡 Conectando a GAS...");
 
                 try {
-                    const response = await fetch(SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now());
+                    const response = await fetch(
+                        SCRIPT_URL + '?action=obtener_registros&timestamp=' + Date.now(),
+                        {
+                            method: "GET",
+                            headers: {
+                                "Accept": "application/json"
+                            }
+                        }
+                    );
 
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}`);
                     }
 
-                    const data = await response.json();
-                    console.log("✅ Respuesta de GAS:", data);
+                    const text = await response.text();
+                    console.log("📦 Respuesta cruda:", text);
+
+                    const data = JSON.parse(text);
+                    console.log("✅ JSON parseado:", data);
+
                     return data;
+
                 } catch (error) {
                     console.error("❌ Error conectando a GAS:", error);
                     throw error;
                 }
             }
+
 
             // ========== FUNCIÓN PARA GUARDAR EN GAS ==========
             async function saveToGAS(datos) {
