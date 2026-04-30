@@ -810,6 +810,12 @@
       if (promB > 19) h.push(`📊 Promedio BDI: ${promB} puntos (elevado)`);
       if (promA > 15) h.push(`📊 Promedio BAI: ${promA} puntos (elevado)`);
       if (!h.length) h.push(`✅ Sin hallazgos críticos`);
+
+      const hallazgosList = document.getElementById('hallazgosList');
+      if (hallazgosList) {
+        hallazgosList.innerHTML = h.map(hh => `<div class="finding-item">${hh}</div>`).join('');
+      }
+
       return h;
     }
 
@@ -852,99 +858,136 @@
     function renderBDI(data) {
       const rangos = { Mínimo: 0, Leve: 0, Moderado: 0, Severo: 0 };
       data.forEach(d => rangos[getRango(d, 'BDI')]++);
-      document.getElementById('bdiMinimo').innerText = rangos.Mínimo;
-      document.getElementById('bdiLeve').innerText = rangos.Leve;
-      document.getElementById('bdiModerado').innerText = rangos.Moderado;
-      document.getElementById('bdiSevero').innerText = rangos.Severo;
-      document.getElementById('bdiCount').innerText = data.length;
+
+      const bdiMinimo = document.getElementById('bdiMinimo');
+      const bdiLeve = document.getElementById('bdiLeve');
+      const bdiModerado = document.getElementById('bdiModerado');
+      const bdiSevero = document.getElementById('bdiSevero');
+      const bdiCount = document.getElementById('bdiCount');
+
+      if (bdiMinimo) bdiMinimo.innerText = rangos.Mínimo;
+      if (bdiLeve) bdiLeve.innerText = rangos.Leve;
+      if (bdiModerado) bdiModerado.innerText = rangos.Moderado;
+      if (bdiSevero) bdiSevero.innerText = rangos.Severo;
+      if (bdiCount) bdiCount.innerText = data.length;
 
       if (chartBDIRangos) chartBDIRangos.destroy();
-      chartBDIRangos = new Chart(document.getElementById('chartBDIRangos'), {
-        type: 'doughnut',
-        data: { labels: ['Mínimo', 'Leve', 'Moderado', 'Severo'], datasets: [{ data: [rangos.Mínimo, rangos.Leve, rangos.Moderado, rangos.Severo], backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'], borderWidth: 0 }] },
-        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
-      });
+      const chartBDIRangosEl = document.getElementById('chartBDIRangos');
+      if (chartBDIRangosEl) {
+        chartBDIRangos = new Chart(chartBDIRangosEl, {
+          type: 'doughnut',
+          data: { labels: ['Mínimo', 'Leve', 'Moderado', 'Severo'], datasets: [{ data: [rangos.Mínimo, rangos.Leve, rangos.Moderado, rangos.Severo], backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'], borderWidth: 0 }] },
+          options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
+        });
+      }
 
       const proms = [];
       for (let i = 1; i <= 21; i++) {
         let s = 0; data.forEach(d => { const it = getItems(d).find(x => x.n === i); if (it) s += it.v; });
         proms.push(data.length ? (s / data.length).toFixed(1) : 0);
       }
+
       if (chartBDIItems) chartBDIItems.destroy();
-      chartBDIItems = new Chart(document.getElementById('chartBDIItems'), {
-        type: 'bar', data: { labels: proms.map((_, i) => i + 1), datasets: [{ label: 'Promedio', data: proms, backgroundColor: '#6366f1', borderRadius: 8 }] },
-        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3 } }, plugins: { legend: { display: false } } }
-      });
-
-      const tbody = document.getElementById('tablaBDI');
-      tbody.innerHTML = data.slice(0, 50).map(d => `
-    <tr>
-      <td>${getNombre(d) || '—'}</td>
-      <td>${getGrado(d) || '—'}</td>
-      <td><strong>${getPuntaje(d)}</strong></td>
-      <td><span class="range-badge range-${getRango(d, 'BDI').toLowerCase()}">${getRango(d, 'BDI')}</span></td>
-      <td>${getFechaFormateada(d)}</td>
-    </tr>
-  `).join('');
-
-      const alertas = document.getElementById('alertasBDI');
-      const itemsAlerta = proms.map((p, i) => ({ i: i + 1, p })).filter(x => x.p >= 2);
-      if (itemsAlerta.length) {
-        alertas.innerHTML = `<div class="alerts-title">⚠️ Ítems de alerta</div>${itemsAlerta.map(a => `<div class="alert-item">⚠️ Ítem ${a.i} · promedio ${a.p}</div>`).join('')}`;
-      } else {
-        alertas.innerHTML = `<div class="alerts-title">✅ Sin ítems destacados</div>`;
+      const chartBDIItemsEl = document.getElementById('chartBDIItems');
+      if (chartBDIItemsEl) {
+        chartBDIItems = new Chart(chartBDIItemsEl, {
+          type: 'bar', data: { labels: proms.map((_, i) => i + 1), datasets: [{ label: 'Promedio', data: proms, backgroundColor: '#6366f1', borderRadius: 8 }] },
+          options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3 } }, plugins: { legend: { display: false } } }
+        });
       }
+
+      const tablaBDI = document.getElementById('tablaBDI');
+      if (tablaBDI) {
+        tablaBDI.innerHTML = data.slice(0, 50).map(d => `
+      <tr>
+        <td>${getNombre(d) || '—'}</td>
+        <td>${getGrado(d) || '—'}</td>
+        <td><strong>${getPuntaje(d)}</strong></td>
+        <td><span class="range-badge range-${getRango(d, 'BDI').toLowerCase()}">${getRango(d, 'BDI')}</span></td>
+        <td>${getFechaFormateada(d)}</td>
+      </tr>
+    `).join('');
+      }
+
+      const alertasBDI = document.getElementById('alertasBDI');
+      if (alertasBDI) {
+        const itemsAlerta = proms.map((p, i) => ({ i: i + 1, p })).filter(x => x.p >= 2);
+        if (itemsAlerta.length) {
+          alertasBDI.innerHTML = `<div class="alerts-title">⚠️ Ítems de alerta</div>${itemsAlerta.map(a => `<div class="alert-item">⚠️ Ítem ${a.i} · promedio ${a.p}</div>`).join('')}`;
+        } else {
+          alertasBDI.innerHTML = `<div class="alerts-title">✅ Sin ítems destacados</div>`;
+        }
+      }
+
       initAccordion('accordionBDI');
     }
 
     function renderBAI(data) {
       const rangos = { Mínimo: 0, Leve: 0, Moderado: 0, Severo: 0 };
       data.forEach(d => rangos[getRango(d, 'BAI')]++);
-      document.getElementById('baiMinimo').innerText = rangos.Mínimo;
-      document.getElementById('baiLeve').innerText = rangos.Leve;
-      document.getElementById('baiModerado').innerText = rangos.Moderado;
-      document.getElementById('baiSevero').innerText = rangos.Severo;
-      document.getElementById('baiCount').innerText = data.length;
+
+      const baiMinimo = document.getElementById('baiMinimo');
+      const baiLeve = document.getElementById('baiLeve');
+      const baiModerado = document.getElementById('baiModerado');
+      const baiSevero = document.getElementById('baiSevero');
+      const baiCount = document.getElementById('baiCount');
+
+      if (baiMinimo) baiMinimo.innerText = rangos.Mínimo;
+      if (baiLeve) baiLeve.innerText = rangos.Leve;
+      if (baiModerado) baiModerado.innerText = rangos.Moderado;
+      if (baiSevero) baiSevero.innerText = rangos.Severo;
+      if (baiCount) baiCount.innerText = data.length;
 
       if (chartBAIRangos) chartBAIRangos.destroy();
-      chartBAIRangos = new Chart(document.getElementById('chartBAIRangos'), {
-        type: 'doughnut',
-        data: { labels: ['Mínimo', 'Leve', 'Moderado', 'Severo'], datasets: [{ data: [rangos.Mínimo, rangos.Leve, rangos.Moderado, rangos.Severo], backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'], borderWidth: 0 }] },
-        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
-      });
+      const chartBAIRangosEl = document.getElementById('chartBAIRangos');
+      if (chartBAIRangosEl) {
+        chartBAIRangos = new Chart(chartBAIRangosEl, {
+          type: 'doughnut',
+          data: { labels: ['Mínimo', 'Leve', 'Moderado', 'Severo'], datasets: [{ data: [rangos.Mínimo, rangos.Leve, rangos.Moderado, rangos.Severo], backgroundColor: ['#10b981', '#f59e0b', '#f97316', '#ef4444'], borderWidth: 0 }] },
+          options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
+        });
+      }
 
       const proms = [];
       for (let i = 1; i <= 21; i++) {
         let s = 0; data.forEach(d => { const it = getItems(d).find(x => x.n === i); if (it) s += it.v; });
         proms.push(data.length ? (s / data.length).toFixed(1) : 0);
       }
+
       if (chartBAIItems) chartBAIItems.destroy();
-      chartBAIItems = new Chart(document.getElementById('chartBAIItems'), {
-        type: 'bar', data: { labels: proms.map((_, i) => i + 1), datasets: [{ label: 'Promedio', data: proms, backgroundColor: '#10b981', borderRadius: 8 }] },
-        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3 } }, plugins: { legend: { display: false } } }
-      });
-
-      const tbody = document.getElementById('tablaBAI');
-      tbody.innerHTML = data.slice(0, 50).map(d => `
-    <tr>
-      <td>${getNombre(d) || '—'}</td>
-      <td>${getGrado(d) || '—'}</td>
-      <td><strong>${getPuntaje(d)}</strong></td>
-      <td><span class="range-badge range-${getRango(d, 'BAI').toLowerCase()}">${getRango(d, 'BAI')}</span></td>
-      <td>${getFechaFormateada(d)}</td>
-    </tr>
-  `).join('');
-
-      const alertas = document.getElementById('alertasBAI');
-      const itemsAlerta = proms.map((p, i) => ({ i: i + 1, p })).filter(x => x.p >= 2);
-      if (itemsAlerta.length) {
-        alertas.innerHTML = `<div class="alerts-title">⚠️ Ítems de alerta</div>${itemsAlerta.map(a => `<div class="alert-item">⚠️ Ítem ${a.i} · promedio ${a.p}</div>`).join('')}`;
-      } else {
-        alertas.innerHTML = `<div class="alerts-title">✅ Sin ítems destacados</div>`;
+      const chartBAIItemsEl = document.getElementById('chartBAIItems');
+      if (chartBAIItemsEl) {
+        chartBAIItems = new Chart(chartBAIItemsEl, {
+          type: 'bar', data: { labels: proms.map((_, i) => i + 1), datasets: [{ label: 'Promedio', data: proms, backgroundColor: '#10b981', borderRadius: 8 }] },
+          options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3 } }, plugins: { legend: { display: false } } }
+        });
       }
+
+      const tablaBAI = document.getElementById('tablaBAI');
+      if (tablaBAI) {
+        tablaBAI.innerHTML = data.slice(0, 50).map(d => `
+      <tr>
+        <td>${getNombre(d) || '—'}</td>
+        <td>${getGrado(d) || '—'}</td>
+        <td><strong>${getPuntaje(d)}</strong></td>
+        <td><span class="range-badge range-${getRango(d, 'BAI').toLowerCase()}">${getRango(d, 'BAI')}</span></td>
+        <td>${getFechaFormateada(d)}</td>
+      </tr>
+    `).join('');
+      }
+
+      const alertasBAI = document.getElementById('alertasBAI');
+      if (alertasBAI) {
+        const itemsAlerta = proms.map((p, i) => ({ i: i + 1, p })).filter(x => x.p >= 2);
+        if (itemsAlerta.length) {
+          alertasBAI.innerHTML = `<div class="alerts-title">⚠️ Ítems de alerta</div>${itemsAlerta.map(a => `<div class="alert-item">⚠️ Ítem ${a.i} · promedio ${a.p}</div>`).join('')}`;
+        } else {
+          alertasBAI.innerHTML = `<div class="alerts-title">✅ Sin ítems destacados</div>`;
+        }
+      }
+
       initAccordion('accordionBAI');
     }
-
     // ==================== EVENTOS E INICIO ====================
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.onclick = () => {
