@@ -545,14 +545,6 @@ formBDI?.addEventListener('submit', async (e) => {
     return;
   }
 
-  // 👇 VALIDACIÓN ESPECÍFICA DEL NOMBRE
-  const nombreInput = document.getElementById('al-nombre');
-  if (!nombreInput || !nombreInput.value.trim()) {
-    alert('❌ El nombre completo es obligatorio');
-    nombreInput?.focus();
-    return;
-  }
-
   const r = calcScore('bdi', BDI_FULL.length);
 
   if (r.answered !== r.total) {
