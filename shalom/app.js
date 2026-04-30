@@ -576,13 +576,11 @@ function showToast(msg, type = 'ok', time = 2500) {
 // ===== PREVENIR ENVÍOS DUPLICADOS =====
 let isSubmitting = false;
 
-// Reemplazar el event listener existente de formBAI
+// ===== FORMULARIO BAI =====
+const formBAI = document.getElementById('form-bai');
+
 if (formBAI) {
-  // Remover event listener anterior si existe
-  const newFormBAI = formBAI.cloneNode(true);
-  formBAI.parentNode.replaceChild(newFormBAI, formBAI);
-  
-  newFormBAI.addEventListener('submit', async (e) => {
+  formBAI.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Prevenir envíos múltiples
@@ -591,8 +589,8 @@ if (formBAI) {
       return;
     }
 
-    if (!newFormBAI.checkValidity()) {
-      newFormBAI.reportValidity();
+    if (!formBAI.checkValidity()) {
+      formBAI.reportValidity();
       return;
     }
 
@@ -605,9 +603,9 @@ if (formBAI) {
 
     // Bloquear nuevo envío
     isSubmitting = true;
-    
+
     // Deshabilitar botón de guardar
-    const submitBtn = newFormBAI.querySelector('button[type="submit"]');
+    const submitBtn = formBAI.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn?.textContent;
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -630,7 +628,7 @@ if (formBAI) {
       };
 
       const resp = await sendToSheet(payload);
-      
+
       if (resp.ok) {
         showToast('Registro guardado correctamente ✔');
         // Limpiar localStorage después de guardar exitosamente
@@ -639,7 +637,7 @@ if (formBAI) {
         document.getElementById('resultado-bai').innerHTML = '';
         updateProgressBars();
       } else {
-        showToast(resp.error || 'Error al guardar', 'error');
+        showToast(resp.error || 'Error al guardar: ' + resp.error, 'error');
       }
     } catch (error) {
       showToast('Error al guardar: ' + error.message, 'error');
@@ -654,13 +652,11 @@ if (formBAI) {
   });
 }
 
-// Reemplazar el event listener existente de formBDI
+// ===== FORMULARIO BDI =====
+const formBDI = document.getElementById('form-bdi');
+
 if (formBDI) {
-  // Remover event listener anterior si existe
-  const newFormBDI = formBDI.cloneNode(true);
-  formBDI.parentNode.replaceChild(newFormBDI, formBDI);
-  
-  newFormBDI.addEventListener('submit', async (e) => {
+  formBDI.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Prevenir envíos múltiples
@@ -669,8 +665,8 @@ if (formBDI) {
       return;
     }
 
-    if (!newFormBDI.checkValidity()) {
-      newFormBDI.reportValidity();
+    if (!formBDI.checkValidity()) {
+      formBDI.reportValidity();
       return;
     }
 
@@ -683,9 +679,9 @@ if (formBDI) {
 
     // Bloquear nuevo envío
     isSubmitting = true;
-    
+
     // Deshabilitar botón de guardar
-    const submitBtn = newFormBDI.querySelector('button[type="submit"]');
+    const submitBtn = formBDI.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn?.textContent;
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -708,7 +704,7 @@ if (formBDI) {
       };
 
       const resp = await sendToSheet(payload);
-      
+
       if (resp.ok) {
         showToast('Registro guardado correctamente ✔');
         // Limpiar localStorage después de guardar exitosamente
@@ -717,7 +713,7 @@ if (formBDI) {
         document.getElementById('resultado-bdi').innerHTML = '';
         updateProgressBars();
       } else {
-        showToast(resp.error || 'Error al guardar', 'error');
+        showToast(resp.error || 'Error al guardar: ' + resp.error, 'error');
       }
     } catch (error) {
       showToast('Error al guardar: ' + error.message, 'error');
@@ -730,4 +726,25 @@ if (formBDI) {
       }
     }
   });
+}
+
+function respuestasOrdenadas(storageKey, total) {
+  const raw = readLocal(storageKey) || {};
+  const arr = [];
+  for (let i = 0; i < total; i++) {
+    arr.push(raw[`${storageKey}-${i}`] ?? '');
+  }
+  return arr;
+}
+
+function showToast(msg, type = 'ok', time = 2500) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+
+  toast.textContent = msg;
+  toast.className = `toast show ${type}`;
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, time);
 }
