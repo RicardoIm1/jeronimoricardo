@@ -650,28 +650,26 @@
     function formatearFechaDesdeString(fechaStr) {
       if (!fechaStr) return '—';
 
-      // Si es ISO
-      if (typeof fechaStr === 'string' && fechaStr.includes('T')) {
-        const d = new Date(fechaStr);
-        if (!isNaN(d.getTime())) {
-          return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()}`;
-        }
-      }
+      let fechaLimpia = String(fechaStr).split(' ')[0];
+      let partes = fechaLimpia.split('/');
 
-      // Formato europeo: "17/1/2026 20:42:26"
-      if (typeof fechaStr === 'string') {
-        const partes = fechaStr.split(' ');
-        const fechaParte = partes[0];
-        const fechaParts = fechaParte.split('/');
-        if (fechaParts.length === 3) {
-          const dia = fechaParts[0].padStart(2, '0');
-          const mes = fechaParts[1].padStart(2, '0');
-          const anio = fechaParts[2];
-          return `${dia}/${mes}/${anio}`;
-        }
+      if (partes.length === 3) {
+        let dia = partes[0].padStart(2, '0');
+        let mes = partes[1].padStart(2, '0');
+        let anio = partes[2];
+        if (anio.length === 2) anio = '20' + anio;
+        return `${dia}/${mes}/${anio}`;
       }
 
       return '—';
+    }
+
+    function getFechaRaw(reg) {
+      if (reg.fecha_hoy) return reg.fecha_hoy;
+      if (reg.Fecha_hoy) return reg.Fecha_hoy;
+      if (reg.fecha) return reg.fecha;
+      if (reg.Fecha) return reg.Fecha;
+      return '';
     }
 
     function getValorFlexible(reg, nombres) {
@@ -696,14 +694,6 @@
 
     function getGrado(reg) {
       return getValorFlexible(reg, ['grado_grupo', 'Grado/Grupo', 'Grado', 'GRADO_GRUPO']);
-    }
-
-    function getFechaRaw(reg) {
-      // Buscar específicamente 'fecha_hoy' (el nombre real en tus datos)
-      let fecha = reg['fecha_hoy'];
-      if (!fecha) fecha = reg['Fecha_hoy'];
-      if (!fecha) fecha = getValorFlexible(reg, ['fecha', 'Fecha']);
-      return fecha || '';
     }
 
     function getFechaFormateada(reg) {
