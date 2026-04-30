@@ -491,6 +491,14 @@ formBAI?.addEventListener('submit', async (e) => {
     return;
   }
 
+  // 👇 VALIDACIÓN ESPECÍFICA DEL NOMBRE
+  const nombreInput = document.getElementById('al-nombre');
+  if (!nombreInput || !nombreInput.value.trim()) {
+    alert('❌ El nombre completo es obligatorio');
+    nombreInput?.focus();
+    return;
+  }
+
   const r = calcScore('bai', BAI_FULL.length);
 
   if (r.answered !== r.total) {
@@ -498,7 +506,6 @@ formBAI?.addEventListener('submit', async (e) => {
     return;
   }
 
-  // 👇 AÑADE ESTO
   const submitBtn = formBAI.querySelector('button[type="submit"]');
   const originalText = submitBtn.textContent;
   submitBtn.disabled = true;
@@ -517,15 +524,14 @@ formBAI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
-  
-  // 👇 RESTAURA EL BOTÓN
+
   submitBtn.disabled = false;
   submitBtn.textContent = originalText;
-  
+
   if (resp.ok) {
     showToast('Registro guardado correctamente ✔');
   } else {
-    showToast('Error al guardar', 'error');
+    showToast('Error al guardar: ' + (resp.error || 'desconocido'), 'error');
   }
 });
 
@@ -539,6 +545,14 @@ formBDI?.addEventListener('submit', async (e) => {
     return;
   }
 
+  // 👇 VALIDACIÓN ESPECÍFICA DEL NOMBRE
+  const nombreInput = document.getElementById('al-nombre');
+  if (!nombreInput || !nombreInput.value.trim()) {
+    alert('❌ El nombre completo es obligatorio');
+    nombreInput?.focus();
+    return;
+  }
+
   const r = calcScore('bdi', BDI_FULL.length);
 
   if (r.answered !== r.total) {
@@ -546,7 +560,6 @@ formBDI?.addEventListener('submit', async (e) => {
     return;
   }
 
-  // 👇 AÑADE ESTO
   const submitBtn = formBDI.querySelector('button[type="submit"]');
   const originalText = submitBtn.textContent;
   submitBtn.disabled = true;
@@ -565,15 +578,14 @@ formBDI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
-  
-  // 👇 RESTAURA EL BOTÓN
+
   submitBtn.disabled = false;
   submitBtn.textContent = originalText;
-  
+
   if (resp.ok) {
     showToast('Registro guardado correctamente ✔');
   } else {
-    showToast('Error al guardar', 'error');
+    showToast('Error al guardar: ' + (resp.error || 'desconocido'), 'error');
   }
 });
 
