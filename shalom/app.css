@@ -620,3 +620,93 @@ select:focus {
   width: 300px;
   height: 300px;
 }
+
+/* ===== CAMPOS DE FORMULARIO RESPONSIVOS ===== */
+
+/* Grid de 1 columna por defecto (móviles pequeños) */
+.fields-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Tablets y pantallas medianas (600px en adelante) */
+@media (min-width: 600px) {
+  .fields-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Desktop (1024px en adelante) */
+@media (min-width: 1024px) {
+  .fields-row {
+    gap: 24px;
+  }
+}
+
+/* Estilos para los campos individuales */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+
+.field-group input,
+.field-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid rgba(99, 102, 241, 0.15);
+  border-radius: 60px;
+  font-size: 0.9rem;
+  font-family: var(--font);
+  transition: var(--transition);
+  background: white;
+}
+
+.field-group input:focus,
+.field-group select:focus {
+  border-color: var(--brand);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Fecha info (para mostrar la fecha actual) */
+.fecha-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--brand);
+  background: rgba(99, 102, 241, 0.1);
+  padding: 6px 16px;
+  border-radius: 40px;
+  margin-top: 8px;
+  width: fit-content;
+}
+
+/* Para móviles muy pequeños (menos de 480px) */
+@media (max-width: 480px) {
+  .field-group label {
+    font-size: 0.75rem;
+  }
+  
+  .field-group input,
+  .field-group select {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+  
+  .fecha-info {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+  }
+}
