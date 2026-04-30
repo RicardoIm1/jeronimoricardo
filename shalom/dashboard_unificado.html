@@ -17,7 +17,105 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
+    }
+
+    /* Login Overlay */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: all 0.5s ease;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 30px;
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-box h2 {
+      color: #2d3748;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .login-box p {
+      color: #718096;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e2e8f0;
+      border-radius: 15px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .login-box button:hover {
+      transform: translateY(-2px);
+    }
+
+    .error-msg {
+      color: #e53e3e;
+      font-size: 14px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    /* Dashboard Content */
+    .dashboard-content {
+      display: none;
       padding: 20px;
+    }
+
+    .dashboard-content.show {
+      display: block;
     }
 
     .container {
@@ -278,13 +376,16 @@
       color: #742a2a;
     }
 
-    .alerts {
+    .alerts,
+    .findings {
       background: white;
       border-radius: 20px;
       padding: 20px;
+      margin-bottom: 25px;
     }
 
-    .alerts-title {
+    .alerts-title,
+    .findings-title {
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 15px;
@@ -302,14 +403,31 @@
       border-left: 4px solid #fc8181;
     }
 
+    .finding-item {
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ebf8ff;
+      border-left: 4px solid #4299e1;
+    }
+
+    .finding-icon,
     .alert-icon {
       font-size: 20px;
     }
 
+    .finding-text,
     .alert-text {
       flex: 1;
       font-size: 13px;
       color: #2d3748;
+    }
+
+    .finding-text strong {
+      color: #2b6cb0;
     }
 
     .alert-text strong {
@@ -318,6 +436,10 @@
 
     @media (max-width: 768px) {
       body {
+        padding: 0;
+      }
+
+      .dashboard-content {
         padding: 10px;
       }
 
@@ -334,179 +456,227 @@
 
 <body>
 
-  <div class="container">
-
-    <div class="header">
-      <h1>📊 Dashboard de Salud Estudiantil</h1>
-      <p>Monitoreo de Depresión (BDI) y Ansiedad (BAI) | Resultados orientativos</p>
+  <!-- Login -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>🔐 Acceso Restringido</h2>
+      <p>Ingresa el código secreto para continuar</p>
+      <input type="password" id="codigoSecreto" placeholder="Código de acceso" autocomplete="off">
+      <button id="btnLogin">Ingresar</button>
+      <div class="error-msg" id="errorMsg">Código incorrecto</div>
     </div>
+  </div>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value" id="totalBDI">0</div>
-        <div class="stat-label">Encuestas BDI</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="totalBAI">0</div>
-        <div class="stat-label">Encuestas BAI</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="avgScoreBDI">0</div>
-        <div class="stat-label">Promedio BDI</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="avgScoreBAI">0</div>
-        <div class="stat-label">Promedio BAI</div>
-      </div>
-    </div>
+  <!-- Dashboard -->
+  <div class="dashboard-content" id="dashboardContent">
+    <div class="container">
 
-    <div class="filter-bar">
-      <div class="filter-group">
-        <label>📚 Filtro por grado:</label>
-        <select id="filtroGrado">
-          <option value="todos">Todos los grados</option>
-        </select>
+      <div class="header">
+        <h1>📊 Dashboard de Salud Estudiantil</h1>
+        <p>Monitoreo de Depresión (BDI) y Ansiedad (BAI) | Resultados orientativos</p>
       </div>
-      <div class="filter-group">
-        <label>📅 Filtro por fecha:</label>
-        <select id="filtroFecha">
-          <option value="todo">Todo el período</option>
-          <option value="semana">Última semana</option>
-          <option value="mes">Último mes</option>
-        </select>
-      </div>
-    </div>
 
-    <div class="tabs">
-      <button class="tab-btn active" data-test="BDI">🧠 Depresión (BDI)</button>
-      <button class="tab-btn" data-test="BAI">😰 Ansiedad (BAI)</button>
-    </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="totalBDI">0</div>
+          <div class="stat-label">Encuestas BDI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalBAI">0</div>
+          <div class="stat-label">Encuestas BAI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="avgScoreBDI">0</div>
+          <div class="stat-label">Promedio BDI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="avgScoreBAI">0</div>
+          <div class="stat-label">Promedio BAI</div>
+        </div>
+      </div>
 
-    <div class="tab-content active" id="tabBDI">
-      <div class="metrics">
-        <div class="metric-card">
-          <div class="metric-value" id="bdiMinimo">0</div>
-          <div class="metric-label">Mínimo</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value" id="bdiLeve">0</div>
-          <div class="metric-label">Leve</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value" id="bdiModerado">0</div>
-          <div class="metric-label">Moderado</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value" id="bdiSevero">0</div>
-          <div class="metric-label">Severo</div>
-        </div>
+      <!-- Hallazgos generales -->
+      <div class="findings" id="hallazgosGenerales">
+        <div class="findings-title">📋 Análisis de Hallazgos</div>
       </div>
-      <div class="charts-row">
-        <div class="chart-card">
-          <div class="chart-title">📈 Distribución por rango</div><canvas id="chartBDIRangos"></canvas>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">📊 Ítems con mayor puntuación</div><canvas id="chartBDIItems"></canvas>
-        </div>
-      </div>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Alumno</th>
-              <th>Grado</th>
-              <th>Puntaje</th>
-              <th>Rango</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody id="tablaBDI"></tbody>
-        </table>
-      </div>
-      <div class="alerts" id="alertasBDI"></div>
-    </div>
 
-    <div class="tab-content" id="tabBAI">
-      <div class="metrics">
-        <div class="metric-card">
-          <div class="metric-value" id="baiMinimo">0</div>
-          <div class="metric-label">Mínimo</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value" id="baiLeve">0</div>
-          <div class="metric-label">Leve</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value" id="baiModerado">0</div>
-          <div class="metric-label">Moderado</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-value" id="baiSevero">0</div>
-          <div class="metric-label">Severo</div>
-        </div>
+      <div class="filter-bar">
+        <div class="filter-group"><label>📚 Filtro por grado:</label><select id="filtroGrado">
+            <option value="todos">Todos los grados</option>
+          </select></div>
+        <div class="filter-group"><label>📅 Filtro por fecha:</label><select id="filtroFecha">
+            <option value="todo">Todo el período</option>
+            <option value="semana">Última semana</option>
+            <option value="mes">Último mes</option>
+          </select></div>
       </div>
-      <div class="charts-row">
-        <div class="chart-card">
-          <div class="chart-title">📈 Distribución por rango</div><canvas id="chartBAIRangos"></canvas>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">📊 Ítems con mayor puntuación</div><canvas id="chartBAIItems"></canvas>
-        </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-test="BDI">🧠 Depresión (BDI)</button>
+        <button class="tab-btn" data-test="BAI">😰 Ansiedad (BAI)</button>
       </div>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Alumno</th>
-              <th>Grado</th>
-              <th>Puntaje</th>
-              <th>Rango</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody id="tablaBAI"></tbody>
-        </table>
+
+      <div class="tab-content active" id="tabBDI">
+        <div class="metrics">
+          <div class="metric-card">
+            <div class="metric-value" id="bdiMinimo">0</div>
+            <div class="metric-label">Mínimo</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="bdiLeve">0</div>
+            <div class="metric-label">Leve</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="bdiModerado">0</div>
+            <div class="metric-label">Moderado</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="bdiSevero">0</div>
+            <div class="metric-label">Severo</div>
+          </div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-title">📈 Distribución por rango</div><canvas id="chartBDIRangos"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">📊 Ítems con mayor puntuación</div><canvas id="chartBDIItems"></canvas>
+          </div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Alumno</th>
+                <th>Grado</th>
+                <th>Puntaje</th>
+                <th>Rango</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="tablaBDI"></tbody>
+          </table>
+        </div>
+        <div class="alerts" id="alertasBDI"></div>
       </div>
-      <div class="alerts" id="alertasBAI"></div>
+
+      <div class="tab-content" id="tabBAI">
+        <div class="metrics">
+          <div class="metric-card">
+            <div class="metric-value" id="baiMinimo">0</div>
+            <div class="metric-label">Mínimo</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="baiLeve">0</div>
+            <div class="metric-label">Leve</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="baiModerado">0</div>
+            <div class="metric-label">Moderado</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value" id="baiSevero">0</div>
+            <div class="metric-label">Severo</div>
+          </div>
+        </div>
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-title">📈 Distribución por rango</div><canvas id="chartBAIRangos"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">📊 Ítems con mayor puntuación</div><canvas id="chartBAIItems"></canvas>
+          </div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Alumno</th>
+                <th>Grado</th>
+                <th>Puntaje</th>
+                <th>Rango</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody id="tablaBAI"></tbody>
+          </table>
+        </div>
+        <div class="alerts" id="alertasBAI"></div>
+      </div>
     </div>
   </div>
 
   <script>
     const SHEET_ID = '18OWcwGddwymRwmCVDa-MtN3iuFd5ST9o9s5Us3hMtzk';
+    const CODIGO_SECRETO = 'admin123'; // Cambia esto por el código que quieras
     let datosBDI = [], datosBAI = [];
     let chartBDIRangos, chartBDIItems, chartBAIRangos, chartBAIItems;
 
-    // Convertir fecha en múltiples formatos a Date object
+    // ==================== FUNCIONES DE FECHA ====================
     function parseFecha(fechaStr) {
       if (!fechaStr) return null;
 
-      // Si ya es ISO (2026-04-30T16:08:55.014Z)
-      if (fechaStr.includes('T') && fechaStr.includes('Z')) {
-        return new Date(fechaStr);
+      // Si ya es objeto Date
+      if (fechaStr instanceof Date) return fechaStr;
+
+      // Formato ISO: 2026-04-30T16:08:55.014Z
+      if (typeof fechaStr === 'string' && fechaStr.includes('T') && fechaStr.includes('Z')) {
+        const d = new Date(fechaStr);
+        if (!isNaN(d.getTime())) return d;
       }
 
-      // Formato europeo: "17/1/2026 20:42:26" o "17/01/2026 20:42:26"
-      const partes = fechaStr.split(' ');
-      const fechaParte = partes[0];
-      const fechaParts = fechaParte.split('/');
-      if (fechaParts.length === 3) {
-        const dia = parseInt(fechaParts[0]);
-        const mes = parseInt(fechaParts[1]) - 1;
-        const anio = parseInt(fechaParts[2]);
-        let horas = 0, minutos = 0, segundos = 0;
-        if (partes[1]) {
-          const tiempoParts = partes[1].split(':');
-          horas = parseInt(tiempoParts[0]);
-          minutos = parseInt(tiempoParts[1]);
-          segundos = parseInt(tiempoParts[2]);
+      // Formato europeo: "17/1/2026 20:42:26"
+      if (typeof fechaStr === 'string') {
+        const partes = fechaStr.split(' ');
+        const fechaParte = partes[0];
+        const fechaParts = fechaParte.split('/');
+        if (fechaParts.length === 3) {
+          const dia = parseInt(fechaParts[0]);
+          const mes = parseInt(fechaParts[1]) - 1;
+          const anio = parseInt(fechaParts[2]);
+          let horas = 0, minutos = 0, segundos = 0;
+          if (partes[1]) {
+            const tiempoParts = partes[1].split(':');
+            horas = parseInt(tiempoParts[0]);
+            minutos = parseInt(tiempoParts[1]);
+            segundos = parseInt(tiempoParts[2]);
+          }
+          const d = new Date(anio, mes, dia, horas, minutos, segundos);
+          if (!isNaN(d.getTime())) return d;
         }
-        return new Date(anio, mes, dia, horas, minutos, segundos);
       }
 
-      // Intento fallback
-      return new Date(fechaStr);
+      // Último intento
+      const d = new Date(fechaStr);
+      return isNaN(d.getTime()) ? null : d;
     }
 
+    function formatearFecha(fecha) {
+      if (!fecha) return '-';
+      const d = parseFecha(fecha);
+      if (!d) return '-';
+      return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    }
+
+    // ==================== LOGIN ====================
+    document.getElementById('btnLogin').addEventListener('click', () => {
+      const codigo = document.getElementById('codigoSecreto').value;
+      if (codigo === CODIGO_SECRETO) {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('dashboardContent').classList.add('show');
+        init();
+      } else {
+        const errorMsg = document.getElementById('errorMsg');
+        errorMsg.style.display = 'block';
+        setTimeout(() => { errorMsg.style.display = 'none'; }, 2000);
+      }
+    });
+
+    document.getElementById('codigoSecreto').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') document.getElementById('btnLogin').click();
+    });
+
+    // ==================== CARGA DE DATOS ====================
     async function cargarDatos(hoja) {
       const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${hoja}`;
       try {
@@ -514,7 +684,7 @@
         const texto = await res.text();
         const json = JSON.parse(texto.substring(texto.indexOf('{'), texto.lastIndexOf('}') + 1));
 
-        const rows = json.table.rows.map(r => {
+        return json.table.rows.map(r => {
           const obj = {};
           json.table.cols.forEach((col, i) => {
             let valor = r.c[i]?.v;
@@ -523,8 +693,6 @@
           });
           return obj;
         });
-
-        return rows;
       } catch (e) {
         console.error(`Error cargando ${hoja}:`, e);
         return [];
@@ -533,35 +701,19 @@
 
     function getValor(registro, posiblesNombres) {
       for (let nombre of posiblesNombres) {
-        if (registro[nombre] !== undefined && registro[nombre] !== '') {
-          return registro[nombre];
-        }
+        if (registro[nombre] !== undefined && registro[nombre] !== '') return registro[nombre];
       }
       return '';
     }
 
-    function getPuntaje(registro) {
-      const puntaje = getValor(registro, ['puntaje', 'Puntaje', 'PUNTAJE']);
-      return Number(puntaje) || 0;
-    }
-
-    function getNombre(registro) {
-      return getValor(registro, ['nombre_completo', 'Nombre Completo', 'NOMBRE_COMPLETO', 'Nombre']);
-    }
-
-    function getGrado(registro) {
-      return getValor(registro, ['grado_grupo', 'Grado/Grupo', 'GRADO_GRUPO', 'Grado']);
-    }
-
-    function getFecha(registro) {
-      const fechaStr = getValor(registro, ['fecha_hoy', 'Fecha_hoy', 'Fecha', 'fecha']);
-      return parseFecha(fechaStr);
-    }
+    function getPuntaje(registro) { return Number(getValor(registro, ['puntaje', 'Puntaje', 'PUNTAJE'])) || 0; }
+    function getNombre(registro) { return getValor(registro, ['nombre_completo', 'Nombre Completo', 'Nombre']); }
+    function getGrado(registro) { return getValor(registro, ['grado_grupo', 'Grado/Grupo', 'Grado']); }
+    function getFechaObj(registro) { return parseFecha(getValor(registro, ['fecha_hoy', 'Fecha_hoy', 'Fecha'])); }
 
     function getRango(registro, test) {
-      let rango = getValor(registro, ['rango', 'Rango', 'RANGO']);
+      let rango = getValor(registro, ['rango', 'Rango']);
       if (rango) return rango;
-
       const puntaje = getPuntaje(registro);
       if (test === 'BDI') {
         if (puntaje <= 13) return 'Mínimo';
@@ -594,22 +746,66 @@
       const limite = new Date();
       if (filtro === 'semana') limite.setDate(ahora.getDate() - 7);
       if (filtro === 'mes') limite.setDate(ahora.getDate() - 30);
-
       return data.filter(d => {
-        const fecha = getFecha(d);
-        if (!fecha) return true;
-        return fecha >= limite;
+        const fecha = getFechaObj(d);
+        return fecha && fecha >= limite;
       });
     }
 
+    // ==================== ANÁLISIS Y HALLAZGOS ====================
+    function generarHallazgos(bdiData, baiData) {
+      const hallazgos = [];
+
+      // Análisis BDI
+      const totalBDI = bdiData.length;
+      const bdiSeveros = bdiData.filter(d => getRango(d, 'BDI') === 'Severo').length;
+      const bdiModerados = bdiData.filter(d => getRango(d, 'BDI') === 'Moderado').length;
+      const bdiLeves = bdiData.filter(d => getRango(d, 'BDI') === 'Leve').length;
+      const promedioBDI = totalBDI ? (bdiData.reduce((a, b) => a + getPuntaje(b), 0) / totalBDI).toFixed(1) : 0;
+
+      if (totalBDI > 0) {
+        if (bdiSeveros > 0) hallazgos.push(`🔴 <strong>Depresión Severa:</strong> ${bdiSeveros} estudiante(s) (${Math.round(bdiSeveros / totalBDI * 100)}%) presentan niveles severos de depresión. Requiere atención inmediata.`);
+        if (bdiModerados > 0) hallazgos.push(`🟠 <strong>Depresión Moderada:</strong> ${bdiModerados} estudiante(s) (${Math.round(bdiModerados / totalBDI * 100)}%) presentan depresión moderada. Se recomienda seguimiento.`);
+        if (bdiLeves > 0) hallazgos.push(`🟡 <strong>Depresión Leve:</strong> ${bdiLeves} estudiante(s) (${Math.round(bdiLeves / totalBDI * 100)}%) presentan síntomas leves.`);
+        if (promedioBDI > 19) hallazgos.push(`📊 <strong>Puntaje BDI promedio alto:</strong> ${promedioBDI} puntos (rango moderado-severo).`);
+      }
+
+      // Análisis BAI
+      const totalBAI = baiData.length;
+      const baiSeveros = baiData.filter(d => getRango(d, 'BAI') === 'Severo').length;
+      const baiModerados = baiData.filter(d => getRango(d, 'BAI') === 'Moderado').length;
+      const promedioBAI = totalBAI ? (baiData.reduce((a, b) => a + getPuntaje(b), 0) / totalBAI).toFixed(1) : 0;
+
+      if (totalBAI > 0) {
+        if (baiSeveros > 0) hallazgos.push(`🔴 <strong>Ansiedad Severa:</strong> ${baiSeveros} estudiante(s) (${Math.round(baiSeveros / totalBAI * 100)}%) presentan ansiedad severa.`);
+        if (baiModerados > 0) hallazgos.push(`🟠 <strong>Ansiedad Moderada:</strong> ${baiModerados} estudiante(s) (${Math.round(baiModerados / totalBAI * 100)}%) presentan ansiedad moderada.`);
+        if (promedioBAI > 15) hallazgos.push(`📊 <strong>Puntaje BAI promedio alto:</strong> ${promedioBAI} puntos.`);
+      }
+
+      // Análisis comparativo
+      if (totalBDI > 0 && totalBAI > 0) {
+        if (bdiSeveros > baiSeveros) hallazgos.push(`⚖️ <strong>Comparativa:</strong> La depresión severa (${bdiSeveros} casos) es más frecuente que la ansiedad severa (${baiSeveros} casos).`);
+        else if (baiSeveros > bdiSeveros) hallazgos.push(`⚖️ <strong>Comparativa:</strong> La ansiedad severa (${baiSeveros} casos) es más frecuente que la depresión severa (${bdiSeveros} casos).`);
+      }
+
+      if (hallazgos.length === 0) {
+        hallazgos.push(`✅ <strong>Sin hallazgos críticos:</strong> Los niveles de depresión y ansiedad se encuentran dentro de rangos esperados.`);
+      }
+
+      return hallazgos;
+    }
+
+    function actualizarHallazgos(bdiData, baiData) {
+      const hallazgos = generarHallazgos(bdiData, baiData);
+      const container = document.getElementById('hallazgosGenerales');
+      container.innerHTML = `<div class="findings-title">📋 Análisis de Hallazgos</div>${hallazgos.map(h => `<div class="finding-item"><span class="finding-icon">📌</span><span class="finding-text">${h}</span></div>`).join('')}`;
+    }
+
+    // ==================== RENDERIZADO ====================
     async function renderizar() {
       if (datosBDI.length === 0) {
         datosBDI = await cargarDatos('Respuestas_BDI');
         datosBAI = await cargarDatos('Respuestas_BAI');
-        console.log('Datos BDI cargados:', datosBDI.length);
-        console.log('Primer registro BDI:', datosBDI[0]);
-        console.log('Datos BAI cargados:', datosBAI.length);
-        console.log('Primer registro BAI:', datosBAI[0]);
       }
 
       const grado = document.getElementById('filtroGrado').value;
@@ -628,6 +824,9 @@
       const avgBAI = baiFiltrados.length ? (baiFiltrados.reduce((a, b) => a + getPuntaje(b), 0) / baiFiltrados.length).toFixed(1) : 0;
       document.getElementById('avgScoreBDI').textContent = avgBDI;
       document.getElementById('avgScoreBAI').textContent = avgBAI;
+
+      // Actualizar hallazgos
+      actualizarHallazgos(bdiFiltrados, baiFiltrados);
 
       renderizarBDI(bdiFiltrados);
       renderizarBAI(baiFiltrados);
@@ -664,27 +863,24 @@
       chartBDIItems = new Chart(document.getElementById('chartBDIItems'), {
         type: 'bar',
         data: { labels: promediosItems.map((_, i) => `${i + 1}`), datasets: [{ label: 'Puntaje promedio', data: promediosItems, backgroundColor: '#667eea', borderRadius: 8 }] },
-        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3, title: { display: true, text: 'Puntaje (0-3)' } } } }
+        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3 } } }
       });
 
       const tbody = document.getElementById('tablaBDI');
-      tbody.innerHTML = data.slice(0, 30).map(d => {
-        const fecha = getFecha(d);
-        return `
-      <tr>
-        <td>${getNombre(d) || '-'}</td>
-        <td>${getGrado(d) || '-'}</td>
-        <td><strong>${getPuntaje(d)}</strong></td>
-        <td><span class="range-badge range-${getRango(d, 'BDI').toLowerCase()}">${getRango(d, 'BDI')}</span></td>
-        <td>${fecha ? fecha.toLocaleDateString('es-ES') : '-'}</td>
-      </tr>
-    `;
-      }).join('');
+      tbody.innerHTML = data.slice(0, 30).map(d => `
+    <tr>
+      <td>${getNombre(d) || '-'}</td>
+      <td>${getGrado(d) || '-'}</td>
+      <td><strong>${getPuntaje(d)}</strong></td>
+      <td><span class="range-badge range-${getRango(d, 'BDI').toLowerCase()}">${getRango(d, 'BDI')}</span></td>
+      <td>${formatearFecha(getFechaObj(d))}</td>
+    </tr>
+  `).join('');
 
       const alertas = document.getElementById('alertasBDI');
       const itemsAlerta = promediosItems.map((p, i) => ({ item: i + 1, promedio: p })).filter(p => p.promedio >= 2);
       if (itemsAlerta.length) {
-        alertas.innerHTML = `<div class="alerts-title">⚠️ Alertas</div>${itemsAlerta.map(a => `<div class="alert-item"><span class="alert-icon">⚠️</span><span class="alert-text"><strong>Ítem ${a.item}</strong> - Puntaje promedio elevado (${a.promedio})</span></div>`).join('')}`;
+        alertas.innerHTML = `<div class="alerts-title">⚠️ Alertas por Ítem</div>${itemsAlerta.map(a => `<div class="alert-item"><span class="alert-icon">⚠️</span><span class="alert-text"><strong>Ítem ${a.item}</strong> - Puntaje promedio elevado (${a.promedio})</span></div>`).join('')}`;
       } else {
         alertas.innerHTML = `<div class="alerts-title">✅ Sin alertas destacadas</div>`;
       }
@@ -721,32 +917,30 @@
       chartBAIItems = new Chart(document.getElementById('chartBAIItems'), {
         type: 'bar',
         data: { labels: promediosItems.map((_, i) => `${i + 1}`), datasets: [{ label: 'Puntaje promedio', data: promediosItems, backgroundColor: '#48bb78', borderRadius: 8 }] },
-        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3, title: { display: true, text: 'Puntaje (0-3)' } } } }
+        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, max: 3 } } }
       });
 
       const tbody = document.getElementById('tablaBAI');
-      tbody.innerHTML = data.slice(0, 30).map(d => {
-        const fecha = getFecha(d);
-        return `
-      <tr>
-        <td>${getNombre(d) || '-'}</td>
-        <td>${getGrado(d) || '-'}</td>
-        <td><strong>${getPuntaje(d)}</strong></td>
-        <td><span class="range-badge range-${getRango(d, 'BAI').toLowerCase()}">${getRango(d, 'BAI')}</span></td>
-        <td>${fecha ? fecha.toLocaleDateString('es-ES') : '-'}</td>
-      </tr>
-    `;
-      }).join('');
+      tbody.innerHTML = data.slice(0, 30).map(d => `
+    <tr>
+      <td>${getNombre(d) || '-'}</td>
+      <td>${getGrado(d) || '-'}</td>
+      <td><strong>${getPuntaje(d)}</strong></td>
+      <td><span class="range-badge range-${getRango(d, 'BAI').toLowerCase()}">${getRango(d, 'BAI')}</span></td>
+      <td>${formatearFecha(getFechaObj(d))}</td>
+    </tr>
+  `).join('');
 
       const alertas = document.getElementById('alertasBAI');
       const itemsAlerta = promediosItems.map((p, i) => ({ item: i + 1, promedio: p })).filter(p => p.promedio >= 2);
       if (itemsAlerta.length) {
-        alertas.innerHTML = `<div class="alerts-title">⚠️ Alertas</div>${itemsAlerta.map(a => `<div class="alert-item"><span class="alert-icon">⚠️</span><span class="alert-text"><strong>Ítem ${a.item}</strong> - Puntaje promedio elevado (${a.promedio})</span></div>`).join('')}`;
+        alertas.innerHTML = `<div class="alerts-title">⚠️ Alertas por Ítem</div>${itemsAlerta.map(a => `<div class="alert-item"><span class="alert-icon">⚠️</span><span class="alert-text"><strong>Ítem ${a.item}</strong> - Puntaje promedio elevado (${a.promedio})</span></div>`).join('')}`;
       } else {
         alertas.innerHTML = `<div class="alerts-title">✅ Sin alertas destacadas</div>`;
       }
     }
 
+    // ==================== EVENTOS E INICIO ====================
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -769,8 +963,6 @@
 
       renderizar();
     }
-
-    init();
   </script>
 </body>
 
