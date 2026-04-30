@@ -51,15 +51,22 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
   animation: twinkle 3s ease-in-out infinite;
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
 
 body::after {
@@ -126,8 +133,15 @@ button {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .actions {
@@ -262,7 +276,7 @@ button {
   position: relative;
 }
 
-.progress > i {
+.progress>i {
   display: block;
   height: 100%;
   width: 0%;
@@ -272,20 +286,25 @@ button {
   position: relative;
 }
 
-.progress > i::after {
+.progress>i::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /* Botones mejorados */
@@ -436,6 +455,10 @@ button {
   accent-color: var(--brand);
 }
 
+span {
+  color:#34d399;
+}
+
 .opt span {
   font-size: 0.95rem;
   color: var(--text);
@@ -555,7 +578,10 @@ select:focus {
 }
 
 /* Animación de entrada para elementos */
-.card, .perk, .item, .opt {
+.card,
+.perk,
+.item,
+.opt {
   animation: fadeInUp 0.4s ease-out backwards;
 }
 
@@ -564,6 +590,7 @@ select:focus {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
