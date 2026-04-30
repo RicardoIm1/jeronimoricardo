@@ -498,6 +498,12 @@ formBAI?.addEventListener('submit', async (e) => {
     return;
   }
 
+  // 👇 AÑADE ESTO
+  const submitBtn = formBAI.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Guardando...';
+
   const payload = {
     proyecto: CONFIG.proyecto,
     version: CONFIG.version,
@@ -511,12 +517,18 @@ formBAI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
+  
+  // 👇 RESTAURA EL BOTÓN
+  submitBtn.disabled = false;
+  submitBtn.textContent = originalText;
+  
   if (resp.ok) {
     showToast('Registro guardado correctamente ✔');
   } else {
     showToast('Error al guardar', 'error');
   }
 });
+
 const formBDI = document.getElementById('form-bdi');
 
 formBDI?.addEventListener('submit', async (e) => {
@@ -534,6 +546,12 @@ formBDI?.addEventListener('submit', async (e) => {
     return;
   }
 
+  // 👇 AÑADE ESTO
+  const submitBtn = formBDI.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Guardando...';
+
   const payload = {
     proyecto: CONFIG.proyecto,
     version: CONFIG.version,
@@ -547,6 +565,11 @@ formBDI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
+  
+  // 👇 RESTAURA EL BOTÓN
+  submitBtn.disabled = false;
+  submitBtn.textContent = originalText;
+  
   if (resp.ok) {
     showToast('Registro guardado correctamente ✔');
   } else {
