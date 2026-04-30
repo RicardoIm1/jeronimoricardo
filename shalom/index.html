@@ -8,8 +8,7 @@
   <meta name='description' content='Índice de encuestas Beck (Depresión y Ansiedad). Autocalificables y responsivas.'>
   <link rel='preload' href='app.css' as='style'>
   <link rel='stylesheet' href='app.css'>
-  <style>
-    /* Ajuste para mantener el footer al fondo */
+  <!-- <style>
     html,
     body {
       height: 100%;
@@ -20,7 +19,6 @@
 
     main.container {
       flex: 1;
-      /* ocupa todo el espacio disponible */
     }
 
     footer.foot {
@@ -32,6 +30,451 @@
       /* centra verticalmente si hay más altura */
       padding: 1rem;
     }
+  </style> -->
+  <style>
+    /* ===== HEADER RESPONSIVO MEJORADO ===== */
+
+    /* Navbar - Versión mejorada */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+
+    @media (min-width: 640px) {
+      .nav {
+        padding: 16px 32px;
+        gap: var(--gap);
+        flex-wrap: nowrap;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav {
+        padding: 16px 48px;
+      }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      background: var(--gradient-primary);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 480px) {
+      .brand {
+        font-size: 1.3rem;
+        gap: 12px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .brand {
+        font-size: 1.4rem;
+      }
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: var(--gradient-primary);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      animation: float 3s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 480px) {
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 16px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    @media (min-width: 480px) {
+      .actions {
+        gap: 10px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .actions {
+        gap: 12px;
+      }
+    }
+
+    /* Botones responsivos */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 60px;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 480px) {
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        gap: 8px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        gap: 10px;
+      }
+    }
+
+    /* Hero section responsiva */
+    .hero {
+      text-align: center;
+      padding: 32px 20px;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 40px 24px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: 48px 32px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 60px 40px;
+      }
+    }
+
+    .hero h1 {
+      margin: 0 0 12px 0;
+      font-size: clamp(28px, 6vw, 56px);
+      line-height: 1.2;
+      background: var(--gradient-primary);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 480px) {
+      .hero h1 {
+        margin-bottom: 14px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero h1 {
+        margin-bottom: 16px;
+      }
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    @media (min-width: 480px) {
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero p {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Chips responsivos */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 0 8px;
+    }
+
+    @media (min-width: 480px) {
+      .chips {
+        gap: 10px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .chips {
+        gap: 12px;
+      }
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: white;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      color: var(--brand);
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 480px) {
+      .chip {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+        gap: 8px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .chip {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Footer responsivo */
+    .foot {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 16px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(99, 102, 241, 0.1);
+      text-align: center;
+    }
+
+    @media (min-width: 480px) {
+      .foot {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 24px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .foot {
+        padding: 24px 32px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Container responsivo */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      display: grid;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        padding: 32px 24px;
+        gap: 28px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 40px 24px;
+        gap: 32px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 48px 32px;
+      }
+    }
+
+    /* Grid responsivo */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        gap: 24px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+
+    /* Gamify responsivo */
+    .gamify {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 480px) {
+      .gamify {
+        gap: 20px;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .gamify {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .gamify {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* Ajustes para móviles muy pequeños */
+    @media (max-width: 380px) {
+      .nav {
+        padding: 10px 12px;
+      }
+
+      .brand {
+        font-size: 0.9rem;
+      }
+
+      .brand-logo {
+        width: 28px;
+        height: 28px;
+      }
+
+      .btn {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+      }
+
+      .hero {
+        padding: 24px 16px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero p {
+        font-size: 0.8rem;
+      }
+
+      .chip {
+        padding: 4px 10px;
+        font-size: 0.65rem;
+      }
+    }
+
+    /* Menú hamburguesa opcional (si necesitas más espacio) */
+    .menu-toggle {
+      display: none;
+      background: var(--gradient-primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .actions {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .actions.show {
+        display: flex;
+      }
+
+      .actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 
@@ -40,7 +483,8 @@
     <a class='brand' href='/jeronimoricardo/shalom/index.html'>
       <span class='brand-logo'></span>Encuestas<span> Beck</span>
     </a>
-    <div class='actions'><a class='btn btn-ghost' href='/jeronimoricardo/shalom/dashboard_unificado.html'>Dashboard</a></div>
+    <div class='actions'><a class='btn btn-ghost' href='/jeronimoricardo/shalom/dashboard_unificado.html'>Dashboard</a>
+    </div>
   </header>
 
   <main class='container'>
