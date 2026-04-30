@@ -479,106 +479,17 @@ function initBDI() {
   });
 }
 
-const formBAI = document.getElementById('form-bai');
-
-formBAI?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  if (!formBAI.checkValidity()) {
-    formBAI.reportValidity();
-    return;
-  }
-
-  const r = calcScore('bai', BAI_FULL.length);
-
-  if (r.answered !== r.total) {
-    alert('Debes responder todas las preguntas del BAI');
-    return;
-  }
-
-  const payload = {
-    proyecto: CONFIG.proyecto,
-    version: CONFIG.version,
-    test: 'BAI',
-    timestamp: todayISO(),
-    puntaje: r.sum,
-    rango: rangoBAI(r.sum),
-    respuestas: respuestasOrdenadas('bai', BAI_FULL.length),
-    alumno: alumnoData(),
-    token: SECRET
-  };
-
-  const resp = await sendToSheet(payload);
-  if (resp.ok) {
-    showToast('Registro guardado correctamente ✔');
-  } else {
-    showToast('Error al guardar', 'error');
-  }
-});
-const formBDI = document.getElementById('form-bdi');
-
-formBDI?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  if (!formBDI.checkValidity()) {
-    formBDI.reportValidity();
-    return;
-  }
-
-  const r = calcScore('bdi', BDI_FULL.length);
-
-  if (r.answered !== r.total) {
-    alert('Debes responder todas las preguntas del BDI');
-    return;
-  }
-
-  const payload = {
-    proyecto: CONFIG.proyecto,
-    version: CONFIG.version,
-    test: 'BDI',
-    timestamp: todayISO(),
-    puntaje: r.sum,
-    rango: rangoBDI(r.sum),
-    respuestas: respuestasOrdenadas('bdi', BDI_FULL.length),
-    alumno: alumnoData(),
-    token: SECRET
-  };
-
-  const resp = await sendToSheet(payload);
-  if (resp.ok) {
-    showToast('Registro guardado correctamente ✔');
-  } else {
-    showToast('Error al guardar', 'error');
-  }
-});
-
-function respuestasOrdenadas(storageKey, total) {
-  const raw = readLocal(storageKey) || {};
-  const arr = [];
-  for (let i = 0; i < total; i++) {
-    arr.push(raw[`${storageKey}-${i}`] ?? '');
-  }
-  return arr;
-}
-
-function showToast(msg, type = 'ok', time = 2500) {
-  const toast = document.getElementById('toast');
-  if (!toast) return;
-
-  toast.textContent = msg;
-  toast.className = `toast show ${type}`;
-
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, time);
-}
-
 // ===== PREVENIR DOBLE CLIC SIMPLE =====
 let isSubmitting = false;
 
 // ===== FORMULARIO BAI =====
-if (typeof formBAI !== 'undefined' && formBAI) {
-  formBAI.addEventListener('submit', async (e) => {
+const formBAI = document.getElementById('form-bai');
+if (formBAI) {
+  // Remover event listeners anteriores si existen
+  const newFormBAI = formBAI.cloneNode(true);
+  formBAI.parentNode.replaceChild(newFormBAI, formBAI);
+  
+  newFormBAI.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (isSubmitting) {
@@ -586,8 +497,8 @@ if (typeof formBAI !== 'undefined' && formBAI) {
       return;
     }
 
-    if (!formBAI.checkValidity()) {
-      formBAI.reportValidity();
+    if (!newFormBAI.checkValidity()) {
+      newFormBAI.reportValidity();
       return;
     }
 
@@ -598,7 +509,7 @@ if (typeof formBAI !== 'undefined' && formBAI) {
     }
 
     isSubmitting = true;
-    const submitBtn = formBAI.querySelector('button[type="submit"]');
+    const submitBtn = newFormBAI.querySelector('button[type="submit"]');
     const originalText = submitBtn?.textContent;
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -645,8 +556,13 @@ if (typeof formBAI !== 'undefined' && formBAI) {
 }
 
 // ===== FORMULARIO BDI =====
-if (typeof formBDI !== 'undefined' && formBDI) {
-  formBDI.addEventListener('submit', async (e) => {
+const formBDI = document.getElementById('form-bdi');
+if (formBDI) {
+  // Remover event listeners anteriores si existen
+  const newFormBDI = formBDI.cloneNode(true);
+  formBDI.parentNode.replaceChild(newFormBDI, formBDI);
+  
+  newFormBDI.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (isSubmitting) {
@@ -654,8 +570,8 @@ if (typeof formBDI !== 'undefined' && formBDI) {
       return;
     }
 
-    if (!formBDI.checkValidity()) {
-      formBDI.reportValidity();
+    if (!newFormBDI.checkValidity()) {
+      newFormBDI.reportValidity();
       return;
     }
 
@@ -666,7 +582,7 @@ if (typeof formBDI !== 'undefined' && formBDI) {
     }
 
     isSubmitting = true;
-    const submitBtn = formBDI.querySelector('button[type="submit"]');
+    const submitBtn = newFormBDI.querySelector('button[type="submit"]');
     const originalText = submitBtn?.textContent;
     if (submitBtn) {
       submitBtn.disabled = true;
