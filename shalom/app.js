@@ -1,6 +1,6 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxM8cxVYDyQH7SjjolyvIg1znQOLnX9-1RjSLqIaN09l89CYRN5ZNrPDK2gft5U0Bxuzw/exec',
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbyULZxdW7M-ZsLehNQKYVskFcGE8aMQHVSr0adpAhXuofHq17SHG6x5S8GWngMSYjx-nA/exec',
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
@@ -573,19 +573,16 @@ function showToast(msg, type = 'ok', time = 2500) {
   }, time);
 }
 
-// ===== PREVENIR ENVÍOS DUPLICADOS =====
+// ===== PREVENIR DOBLE CLIC SIMPLE =====
 let isSubmitting = false;
 
 // ===== FORMULARIO BAI =====
-const formBAI = document.getElementById('form-bai');
-
-if (formBAI) {
+if (typeof formBAI !== 'undefined' && formBAI) {
   formBAI.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Prevenir envíos múltiples
     if (isSubmitting) {
-      showToast('Ya se está guardando, por favor espera...', 'error');
+      showToast('Ya se está guardando, espera...', 'warning');
       return;
     }
 
@@ -595,18 +592,14 @@ if (formBAI) {
     }
 
     const r = calcScore('bai', BAI_FULL.length);
-
     if (r.answered !== r.total) {
       alert('Debes responder todas las preguntas del BAI');
       return;
     }
 
-    // Bloquear nuevo envío
     isSubmitting = true;
-
-    // Deshabilitar botón de guardar
     const submitBtn = formBAI.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn?.textContent;
+    const originalText = submitBtn?.textContent;
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Guardando...';
@@ -614,8 +607,6 @@ if (formBAI) {
 
     try {
       const payload = {
-        proyecto: CONFIG.proyecto,
-        version: CONFIG.version,
         test: 'BAI',
         fecha_hoy: todayISO(),
         nombre_completo: document.getElementById('al-nombre')?.value || '',
@@ -627,41 +618,39 @@ if (formBAI) {
         token: SECRET
       };
 
+      console.log('Enviando BAI:', payload);
       const resp = await sendToSheet(payload);
-
+      console.log('Respuesta:', resp);
+      
       if (resp.ok) {
-        showToast('Registro guardado correctamente ✔');
-        // Limpiar localStorage después de guardar exitosamente
+        showToast('✓ Registro guardado', 'ok');
         localStorage.removeItem('bai');
         renderList('#bai-list', BAI_FULL, 'bai');
         document.getElementById('resultado-bai').innerHTML = '';
         updateProgressBars();
       } else {
-        showToast(resp.error || 'Error al guardar: ' + resp.error, 'error');
+        showToast('✗ Error: ' + (resp.error || 'Desconocido'), 'error');
       }
     } catch (error) {
-      showToast('Error al guardar: ' + error.message, 'error');
+      console.error('Error:', error);
+      showToast('✗ Error: ' + error.message, 'error');
     } finally {
-      // Desbloquear y restaurar botón
       isSubmitting = false;
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText || 'Guardar';
+        submitBtn.textContent = originalText || 'Guardar';
       }
     }
   });
 }
 
 // ===== FORMULARIO BDI =====
-const formBDI = document.getElementById('form-bdi');
-
-if (formBDI) {
+if (typeof formBDI !== 'undefined' && formBDI) {
   formBDI.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Prevenir envíos múltiples
     if (isSubmitting) {
-      showToast('Ya se está guardando, por favor espera...', 'error');
+      showToast('Ya se está guardando, espera...', 'warning');
       return;
     }
 
@@ -671,18 +660,14 @@ if (formBDI) {
     }
 
     const r = calcScore('bdi', BDI_FULL.length);
-
     if (r.answered !== r.total) {
       alert('Debes responder todas las preguntas del BDI');
       return;
     }
 
-    // Bloquear nuevo envío
     isSubmitting = true;
-
-    // Deshabilitar botón de guardar
     const submitBtn = formBDI.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn?.textContent;
+    const originalText = submitBtn?.textContent;
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Guardando...';
@@ -690,8 +675,6 @@ if (formBDI) {
 
     try {
       const payload = {
-        proyecto: CONFIG.proyecto,
-        version: CONFIG.version,
         test: 'BDI',
         fecha_hoy: todayISO(),
         nombre_completo: document.getElementById('al-nombre')?.value || '',
@@ -703,26 +686,27 @@ if (formBDI) {
         token: SECRET
       };
 
+      console.log('Enviando BDI:', payload);
       const resp = await sendToSheet(payload);
-
+      console.log('Respuesta:', resp);
+      
       if (resp.ok) {
-        showToast('Registro guardado correctamente ✔');
-        // Limpiar localStorage después de guardar exitosamente
+        showToast('✓ Registro guardado', 'ok');
         localStorage.removeItem('bdi');
         renderList('#bdi-list', BDI_FULL, 'bdi');
         document.getElementById('resultado-bdi').innerHTML = '';
         updateProgressBars();
       } else {
-        showToast(resp.error || 'Error al guardar: ' + resp.error, 'error');
+        showToast('✗ Error: ' + (resp.error || 'Desconocido'), 'error');
       }
     } catch (error) {
-      showToast('Error al guardar: ' + error.message, 'error');
+      console.error('Error:', error);
+      showToast('✗ Error: ' + error.message, 'error');
     } finally {
-      // Desbloquear y restaurar botón
       isSubmitting = false;
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText || 'Guardar';
+        submitBtn.textContent = originalText || 'Guardar';
       }
     }
   });
@@ -740,10 +724,8 @@ function respuestasOrdenadas(storageKey, total) {
 function showToast(msg, type = 'ok', time = 2500) {
   const toast = document.getElementById('toast');
   if (!toast) return;
-
   toast.textContent = msg;
   toast.className = `toast show ${type}`;
-
   setTimeout(() => {
     toast.classList.remove('show');
   }, time);
