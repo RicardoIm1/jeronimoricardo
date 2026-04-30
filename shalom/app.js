@@ -1,6 +1,8 @@
 /* ===== Configuración ===== */
 const CONFIG = {
-  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbztaG0AVq1u4HYl15065N2dgmVBiYmykGUuBB7fiy4HDjUiRWYvmh1zbMJb_Emuq9zHWw/exec',
+  sheetEndpoint: 'https://script.google.com/macros/s/AKfycbzBsytyFUikaftPNzrl8p3FQpnfZD1xjrkGKLF3qf11EnafExDD9QaB53gT6tynKcTLSQ/exec',
+  /* sheetEndpoint: 'https://script.google.com/macros/s/AKfycbz3s1jGMaHvlT-I-2gyh8uo_owiUb2uUXyP2fbSi-M86NCLJ7JA82Ik6yqyM6C2qpGwHA/exec', */
+  /* sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxWO2pff3W4B7leHWSwnoURhz2c3_wfuodgIdEhiypvzZaBQJDA-2bXYYlyzVqzZEanBw/exec' */
   proyecto: 'Encuestas Beck',
   version: '1.0.0'
 };
@@ -489,25 +491,12 @@ formBAI?.addEventListener('submit', async (e) => {
     return;
   }
 
-  // 👇 VALIDACIÓN ESPECÍFICA DEL NOMBRE
-  const nombreInput = document.getElementById('al-nombre');
-  if (!nombreInput || !nombreInput.value.trim()) {
-    alert('❌ El nombre completo es obligatorio');
-    nombreInput?.focus();
-    return;
-  }
-
   const r = calcScore('bai', BAI_FULL.length);
 
   if (r.answered !== r.total) {
     alert('Debes responder todas las preguntas del BAI');
     return;
   }
-
-  const submitBtn = formBAI.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Guardando...';
 
   const payload = {
     proyecto: CONFIG.proyecto,
@@ -522,17 +511,12 @@ formBAI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
-
-  submitBtn.disabled = false;
-  submitBtn.textContent = originalText;
-
   if (resp.ok) {
     showToast('Registro guardado correctamente ✔');
   } else {
-    showToast('Error al guardar: ' + (resp.error || 'desconocido'), 'error');
+    showToast('Error al guardar', 'error');
   }
 });
-
 const formBDI = document.getElementById('form-bdi');
 
 formBDI?.addEventListener('submit', async (e) => {
@@ -550,11 +534,6 @@ formBDI?.addEventListener('submit', async (e) => {
     return;
   }
 
-  const submitBtn = formBDI.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Guardando...';
-
   const payload = {
     proyecto: CONFIG.proyecto,
     version: CONFIG.version,
@@ -568,14 +547,10 @@ formBDI?.addEventListener('submit', async (e) => {
   };
 
   const resp = await sendToSheet(payload);
-
-  submitBtn.disabled = false;
-  submitBtn.textContent = originalText;
-
   if (resp.ok) {
     showToast('Registro guardado correctamente ✔');
   } else {
-    showToast('Error al guardar: ' + (resp.error || 'desconocido'), 'error');
+    showToast('Error al guardar', 'error');
   }
 });
 
