@@ -572,3 +572,162 @@ function showToast(msg, type = 'ok', time = 2500) {
     toast.classList.remove('show');
   }, time);
 }
+
+// ===== PREVENIR ENVÍOS DUPLICADOS =====
+let isSubmitting = false;
+
+// Reemplazar el event listener existente de formBAI
+if (formBAI) {
+  // Remover event listener anterior si existe
+  const newFormBAI = formBAI.cloneNode(true);
+  formBAI.parentNode.replaceChild(newFormBAI, formBAI);
+  
+  newFormBAI.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Prevenir envíos múltiples
+    if (isSubmitting) {
+      showToast('Ya se está guardando, por favor espera...', 'error');
+      return;
+    }
+
+    if (!newFormBAI.checkValidity()) {
+      newFormBAI.reportValidity();
+      return;
+    }
+
+    const r = calcScore('bai', BAI_FULL.length);
+
+    if (r.answered !== r.total) {
+      alert('Debes responder todas las preguntas del BAI');
+      return;
+    }
+
+    // Bloquear nuevo envío
+    isSubmitting = true;
+    
+    // Deshabilitar botón de guardar
+    const submitBtn = newFormBAI.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn?.textContent;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Guardando...';
+    }
+
+    try {
+      const payload = {
+        proyecto: CONFIG.proyecto,
+        version: CONFIG.version,
+        test: 'BAI',
+        fecha_hoy: todayISO(),
+        nombre_completo: document.getElementById('al-nombre')?.value || '',
+        edad: Number(document.getElementById('edad')?.value) || null,
+        grado_grupo: document.getElementById('al-grado')?.value || '',
+        puntaje: r.sum,
+        rango: rangoBAI(r.sum),
+        respuestas: respuestasOrdenadas('bai', BAI_FULL.length),
+        token: SECRET
+      };
+
+      const resp = await sendToSheet(payload);
+      
+      if (resp.ok) {
+        showToast('Registro guardado correctamente ✔');
+        // Limpiar localStorage después de guardar exitosamente
+        localStorage.removeItem('bai');
+        renderList('#bai-list', BAI_FULL, 'bai');
+        document.getElementById('resultado-bai').innerHTML = '';
+        updateProgressBars();
+      } else {
+        showToast(resp.error || 'Error al guardar', 'error');
+      }
+    } catch (error) {
+      showToast('Error al guardar: ' + error.message, 'error');
+    } finally {
+      // Desbloquear y restaurar botón
+      isSubmitting = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText || 'Guardar';
+      }
+    }
+  });
+}
+
+// Reemplazar el event listener existente de formBDI
+if (formBDI) {
+  // Remover event listener anterior si existe
+  const newFormBDI = formBDI.cloneNode(true);
+  formBDI.parentNode.replaceChild(newFormBDI, formBDI);
+  
+  newFormBDI.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Prevenir envíos múltiples
+    if (isSubmitting) {
+      showToast('Ya se está guardando, por favor espera...', 'error');
+      return;
+    }
+
+    if (!newFormBDI.checkValidity()) {
+      newFormBDI.reportValidity();
+      return;
+    }
+
+    const r = calcScore('bdi', BDI_FULL.length);
+
+    if (r.answered !== r.total) {
+      alert('Debes responder todas las preguntas del BDI');
+      return;
+    }
+
+    // Bloquear nuevo envío
+    isSubmitting = true;
+    
+    // Deshabilitar botón de guardar
+    const submitBtn = newFormBDI.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn?.textContent;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Guardando...';
+    }
+
+    try {
+      const payload = {
+        proyecto: CONFIG.proyecto,
+        version: CONFIG.version,
+        test: 'BDI',
+        fecha_hoy: todayISO(),
+        nombre_completo: document.getElementById('al-nombre')?.value || '',
+        edad: Number(document.getElementById('edad')?.value) || null,
+        grado_grupo: document.getElementById('al-grado')?.value || '',
+        puntaje: r.sum,
+        rango: rangoBDI(r.sum),
+        respuestas: respuestasOrdenadas('bdi', BDI_FULL.length),
+        token: SECRET
+      };
+
+      const resp = await sendToSheet(payload);
+      
+      if (resp.ok) {
+        showToast('Registro guardado correctamente ✔');
+        // Limpiar localStorage después de guardar exitosamente
+        localStorage.removeItem('bdi');
+        renderList('#bdi-list', BDI_FULL, 'bdi');
+        document.getElementById('resultado-bdi').innerHTML = '';
+        updateProgressBars();
+      } else {
+        showToast(resp.error || 'Error al guardar', 'error');
+      }
+    } catch (error) {
+      showToast('Error al guardar: ' + error.message, 'error');
+    } finally {
+      // Desbloquear y restaurar botón
+      isSubmitting = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText || 'Guardar';
+      }
+    }
+  });
+}
