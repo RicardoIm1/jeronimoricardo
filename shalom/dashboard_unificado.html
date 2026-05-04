@@ -844,17 +844,23 @@
       let bai = grado === 'todos' ? [...datosBAI] : datosBAI.filter(d => getGrado(d) === grado);
       bai = filtrarPorFecha(bai, fecha);
 
-      document.getElementById('totalBDI').innerText = bdi.length;
-      document.getElementById('totalBAI').innerText = bai.length;
-      document.getElementById('avgScoreBDI').innerText = bdi.length ? (bdi.reduce((a, b) => a + getPuntaje(b), 0) / bdi.length).toFixed(1) : 0;
-      document.getElementById('avgScoreBAI').innerText = bai.length ? (bai.reduce((a, b) => a + getPuntaje(b), 0) / bai.length).toFixed(1) : 0;
+      const totalBDI = document.getElementById('totalBDI');
+      const totalBAI = document.getElementById('totalBAI');
+      const avgScoreBDI = document.getElementById('avgScoreBDI');
+      const avgScoreBAI = document.getElementById('avgScoreBAI');
 
-      document.getElementById('hallazgosList').innerHTML = generarHallazgos(bdi, bai).map(h => `<div class="finding-item">${h}</div>`).join('');
+      if (totalBDI) totalBDI.innerText = bdi.length;
+      if (totalBAI) totalBAI.innerText = bai.length;
+      if (avgScoreBDI) avgScoreBDI.innerText = bdi.length ? (bdi.reduce((a, b) => a + getPuntaje(b), 0) / bdi.length).toFixed(1) : 0;
+      if (avgScoreBAI) avgScoreBAI.innerText = bai.length ? (bai.reduce((a, b) => a + getPuntaje(b), 0) / bai.length).toFixed(1) : 0;
+
+      // SOLO llamar a generarHallazgos (ella misma actualiza el innerHTML)
+      generarHallazgos(bdi, bai);
 
       renderBDI(bdi);
       renderBAI(bai);
     }
-
+    
     function renderBDI(data) {
       const rangos = { Mínimo: 0, Leve: 0, Moderado: 0, Severo: 0 };
       data.forEach(d => rangos[getRango(d, 'BDI')]++);
