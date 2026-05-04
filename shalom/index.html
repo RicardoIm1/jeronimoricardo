@@ -609,11 +609,13 @@
         max-height: 550px;
         overflow-y: auto;
         padding-right: 8px;
-        scrollbar-width: thin;
+        scrollbar-width: none; /* Firefox - oculta el scroll */
+        -ms-overflow-style: none; /* IE/Edge - oculta el scroll */
       }
 
       #beck-history::-webkit-scrollbar {
         width: 5px;
+        display: none; /* Chrome/Safari/Opera - oculta el scroll */
       }
 
       #beck-history::-webkit-scrollbar-track {
