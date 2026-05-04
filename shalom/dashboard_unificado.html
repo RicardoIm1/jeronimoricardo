@@ -656,26 +656,59 @@
     // ==================== FUNCIONES DE FECHA CORREGIDAS ====================
     function formatearFechaDesdeString(fechaStr) {
       if (!fechaStr) return '—';
+      if (fechaStr === '—') return '—';
 
-      let fechaLimpia = String(fechaStr).split(' ')[0];
+      const fechaStrClean = String(fechaStr).trim();
+
+      // Si es formato ISO (2026-04-30T16:08:55.014Z)
+      if (fechaStrClean.includes('T')) {
+        const d = new Date(fechaStrClean);
+        if (!isNaN(d.getTime())) {
+          return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()}`;
+        }
+      }
+
+      // Separar fecha de hora si existe
+      let fechaLimpia = fechaStrClean.split(' ')[0];
       let partes = fechaLimpia.split('/');
 
       if (partes.length === 3) {
         let dia = partes[0].padStart(2, '0');
         let mes = partes[1].padStart(2, '0');
         let anio = partes[2];
+        // Si el año tiene 2 dígitos, convertir a 4
         if (anio.length === 2) anio = '20' + anio;
         return `${dia}/${mes}/${anio}`;
       }
 
+      // Intentar con guiones (aaaa-mm-dd)
+      partes = fechaLimpia.split('-');
+      if (partes.length === 3 && partes[0].length === 4) {
+        return `${partes[2].padStart(2, '0')}/${partes[1].padStart(2, '0')}/${partes[0]}`;
+      }
+
+      console.log('No se pudo formatear fecha:', fechaStr);
       return '—';
     }
 
     function getFechaRaw(reg) {
-      if (reg.fecha_hoy) return reg.fecha_hoy;
-      if (reg.Fecha_hoy) return reg.Fecha_hoy;
-      if (reg.fecha) return reg.fecha;
-      if (reg.Fecha) return reg.Fecha;
+      // Buscar directamente 'fecha_hoy' (el nombre exacto de tu columna)
+      if (reg.fecha_hoy !== undefined && reg.fecha_hoy !== '') return reg.fecha_hoy;
+      if (reg.Fecha_hoy !== undefined && reg.Fecha_hoy !== '') return reg.Fecha_hoy;
+      if (reg.fecha !== undefined && reg.fecha !== '') return reg.fecha;
+      if (reg.Fecha !== undefined && reg.Fecha !== '') return reg.Fecha;
+
+      // Buscar cualquier clave que contenga 'fecha' (por si acaso)
+      for (let key in reg) {
+        if (key.toLowerCase().includes('fecha') || key.toLowerCase().includes('date')) {
+          if (reg[key] && reg[key] !== '') return reg[key];
+        }
+      }
+
+      // Debug: mostrar qué columnas tiene el registro
+      console.log('Columnas disponibles:', Object.keys(reg));
+      console.log('Valor de fecha_hoy:', reg['fecha_hoy']);
+
       return '';
     }
 
@@ -860,7 +893,7 @@
       renderBDI(bdi);
       renderBAI(bai);
     }
-    
+
     function renderBDI(data) {
       const rangos = { Mínimo: 0, Leve: 0, Moderado: 0, Severo: 0 };
       data.forEach(d => rangos[getRango(d, 'BDI')]++);
