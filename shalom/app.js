@@ -1,3 +1,15 @@
+// ===== FUNCIÓN SEGURA PARA innerHTML =====
+function safeInnerHTML(id, contenido) {
+  const elemento = document.getElementById(id);
+  if (elemento) {
+    elemento.innerHTML = contenido;
+    return true;
+  } else {
+    console.warn(`Elemento no encontrado: ${id}`);
+    return false;
+  }
+}
+
 /* ===== Configuración ===== */
 const CONFIG = {
   sheetEndpoint: 'https://script.google.com/macros/s/AKfycbxlG9z64rWMUXvbPZeqqDX7hsMEwQqJ2TDeWNJELg7dzZE4-RRukjtVUs9toIaqmmCn2w/exec',
