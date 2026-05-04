@@ -236,7 +236,6 @@ const OPTIONS = [
 /* ===== Render dinámico ===== */
 function renderList(containerId, items, storageKey) {
   const list = document.querySelector(containerId);
-  if (!list) return;
   list.innerHTML = '';
   const saved = readLocal(storageKey) || {};
 
@@ -302,7 +301,7 @@ function calcScore(storageKey, totalItems) {
   let sum = 0, answered = 0;
   for (let i = 0; i < totalItems; i++) {
     const v = data[`${storageKey}-${i}`];
-    if (typeof v === 'number') { sum += v; answered++; }
+    if (typeof v === 'number') { sum += v; answered++ }
   }
   return { sum, answered, total: totalItems };
 }
@@ -314,7 +313,6 @@ function rangoBDI(sum) {
   if (sum <= 28) return 'Moderado';
   return 'Severo';
 }
-
 function rangoBAI(sum) {
   if (sum <= 7) return 'Mínimo';
   if (sum <= 15) return 'Leve';
@@ -325,9 +323,7 @@ function rangoBAI(sum) {
 /* ===== UI resultado ===== */
 function showResult(elId, titulo, sum, rango) {
   const el = $(elId);
-  if (el) {
-    el.innerHTML = `<strong>${titulo}</strong><span>Puntaje: ${sum} — Rango: ${rango}. Resultados orientativos; consulta a un profesional para interpretación.</span>`;
-  }
+  el.innerHTML = `<strong>${titulo}</strong><span>Puntaje: ${sum} — Rango: ${rango}. Resultados orientativos; consulta a un profesional para interpretación.</span>`;
 }
 
 /* ===== Progreso en index ===== */
@@ -343,13 +339,12 @@ function updateProgressBars() {
 
 /* ===== Gamificación mínima ===== */
 function updateGamify(bdi, bai) {
-  const nivelEl = $('#nivel');
-  const rachaEl = $('#racha');
-  const insigniasEl = $('#insignias');
+  const nivelEl = $('#nivel'); const rachaEl = $('#racha'); const insigniasEl = $('#insignias');
   const completados = (bdi.answered === bdi.total) + (bai.answered === bai.total);
   const nivel = 1 + completados + Math.floor((bdi.answered + bai.answered) / 10);
   if (nivelEl) nivelEl.textContent = String(nivel);
 
+  // racha semanal
   const last = readLocal('last-visit');
   const today = new Date();
   if (!last) {
@@ -358,7 +353,7 @@ function updateGamify(bdi, bai) {
   } else {
     const prev = new Date(last.d);
     const diffDays = Math.floor((today - prev) / (1000 * 60 * 60 * 24));
-    const streak = diffDays <= 2 ? (last.streak + 1) : 1;
+    const streak = diffDays <= 2 ? (last.streak + 1) : 1; // tolerancia 2 días
     saveLocal('last-visit', { d: todayISO(), streak });
     if (rachaEl) rachaEl.textContent = String(streak);
   }
@@ -366,7 +361,7 @@ function updateGamify(bdi, bai) {
   const badges = [];
   if (bdi.answered === bdi.total) badges.push('BDI completado');
   if (bai.answered === bai.total) badges.push('BAI completado');
-  if (insigniasEl) insigniasEl.textContent = badges.length ? badges.join(' · ') : 'Sin insignias aún.';
+  insigniasEl && (insigniasEl.textContent = badges.length ? badges.join(' · ') : 'Sin insignias aún.');
 }
 
 /* ===== Envío a Google Sheets (Apps Script) ===== */
@@ -376,7 +371,7 @@ async function sendToSheet(payload) {
       method: 'POST',
       body: JSON.stringify(payload)
     });
-    const text = await res.text();
+    const text = await res.text();   // <-- ver respuesta cruda
     console.log("Respuesta cruda del GAS:", text);
     const data = JSON.parse(text);
     return data;
@@ -396,11 +391,28 @@ function initBAI() {
     showResult('#resultado-bai', 'Resultado BAI', r.sum, rangoBAI(r.sum));
   });
 
+  /* document.getElementById('guardar-bai')?.addEventListener('click', async () => {
+    const r = calcScore('bai', BAI_FULL.length);
+    const payload = {
+      proyecto: CONFIG.proyecto,
+      version: CONFIG.version,
+      test: 'BAI',
+      timestamp: todayISO(),
+      puntaje: r.sum,
+      rango: rangoBAI(r.sum),
+      respuestas: readLocal('bai') || {},
+      alumno: alumnoData(),
+      token: SECRET
+    };
+    const resp = await sendToSheet(payload);
+    console.log("Respuesta GAS BAI:", resp);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
+  }); */
+
   document.getElementById('reiniciar-bai')?.addEventListener('click', () => {
     localStorage.removeItem('bai');
     renderList('#bai-list', BAI_FULL, 'bai');
-    const resultado = document.getElementById('resultado-bai');
-    if (resultado) resultado.innerHTML = '';
+    document.getElementById('resultado-bai').innerHTML = '';
     updateProgressBars();
   });
 }
@@ -408,12 +420,10 @@ function initBAI() {
 /* ===== Página: Index ===== */
 function initIndex() {
   $('#reset-bdi')?.addEventListener('click', () => {
-    localStorage.removeItem('bdi');
-    updateProgressBars();
+    localStorage.removeItem('bdi'); updateProgressBars();
   });
   $('#reset-bai')?.addEventListener('click', () => {
-    localStorage.removeItem('bai');
-    updateProgressBars();
+    localStorage.removeItem('bai'); updateProgressBars();
   });
   updateProgressBars();
 }
@@ -455,11 +465,28 @@ function initBDI() {
     showResult('#resultado-bdi', 'Resultado BDI', r.sum, rangoBDI(r.sum));
   });
 
+  /* document.getElementById('guardar-bdi')?.addEventListener('click', async () => {
+    const r = calcScore('bdi', BDI_FULL.length);
+    const payload = {
+      proyecto: CONFIG.proyecto,
+      version: CONFIG.version,
+      test: 'BDI',
+      timestamp: todayISO(),
+      puntaje: r.sum,
+      rango: rangoBDI(r.sum),
+      respuestas: readLocal('bdi') || {},
+      alumno: alumnoData(),
+      token: SECRET
+    };
+    const resp = await sendToSheet(payload);
+    console.log("Respuesta GAS BDI:", resp);
+    alert(resp.ok ? 'Guardado en hoja' : 'No se pudo guardar: ' + resp.error);
+  }); */
+
   document.getElementById('reiniciar-bdi')?.addEventListener('click', () => {
     localStorage.removeItem('bdi');
     renderList('#bdi-list', BDI_FULL, 'bdi');
-    const resultado = document.getElementById('resultado-bdi');
-    if (resultado) resultado.innerHTML = '';
+    document.getElementById('resultado-bdi').innerHTML = '';
     updateProgressBars();
   });
 }
@@ -470,6 +497,7 @@ let isSubmitting = false;
 // ===== FORMULARIO BAI =====
 const formBAI = document.getElementById('form-bai');
 if (formBAI) {
+  // Remover event listeners anteriores si existen
   const newFormBAI = formBAI.cloneNode(true);
   formBAI.parentNode.replaceChild(newFormBAI, formBAI);
   
@@ -521,8 +549,7 @@ if (formBAI) {
         showToast('✓ Registro guardado', 'ok');
         localStorage.removeItem('bai');
         renderList('#bai-list', BAI_FULL, 'bai');
-        const resultado = document.getElementById('resultado-bai');
-        if (resultado) resultado.innerHTML = '';
+        document.getElementById('resultado-bai').innerHTML = '';
         updateProgressBars();
       } else {
         showToast('✗ Error: ' + (resp.error || 'Desconocido'), 'error');
@@ -543,6 +570,7 @@ if (formBAI) {
 // ===== FORMULARIO BDI =====
 const formBDI = document.getElementById('form-bdi');
 if (formBDI) {
+  // Remover event listeners anteriores si existen
   const newFormBDI = formBDI.cloneNode(true);
   formBDI.parentNode.replaceChild(newFormBDI, formBDI);
   
@@ -594,8 +622,7 @@ if (formBDI) {
         showToast('✓ Registro guardado', 'ok');
         localStorage.removeItem('bdi');
         renderList('#bdi-list', BDI_FULL, 'bdi');
-        const resultado = document.getElementById('resultado-bdi');
-        if (resultado) resultado.innerHTML = '';
+        document.getElementById('resultado-bdi').innerHTML = '';
         updateProgressBars();
       } else {
         showToast('✗ Error: ' + (resp.error || 'Desconocido'), 'error');
