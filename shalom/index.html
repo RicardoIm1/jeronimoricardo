@@ -494,6 +494,346 @@
         orientativos; la interpretación corresponde a profesionales.</p>
     </section>
 
+    <section id='beck-history' class='grid'>
+
+      <!-- Tarjeta: Historia de Beck -->
+      <div class="card beck-card">
+        <div class="beck-header">
+          <div class="beck-icon">🧠</div>
+          <div class="beck-title">
+            <h3>El señor que cambió todo</h3>
+            <p>Dr. Aaron Beck · 1921-2021</p>
+          </div>
+        </div>
+
+        <div class="beck-fact">
+          <div class="fact-emoji">😮</div>
+          <div class="fact-text">
+            <strong>¿Sabías esto?</strong><br>
+            Beck <span class="highlight">NO creía en su propio invento</span> al principio.
+            Él pensaba que la depresión era "enojo escondido", como decía Freud.
+          </div>
+        </div>
+
+        <!-- Acordeón -->
+        <div class="beck-accordion">
+          <div class="accordion-item">
+            <div class="accordion-question">
+              <span class="q-icon">🔍</span>
+              <span>¿Qué descubrió cuando investigó?</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-answer">
+              <p>Les pidió a sus pacientes que <strong>escribieran sus pensamientos</strong>.
+                Esperaba encontrar "coraje escondido", pero encontró pensamientos tristes como:</p>
+              <div class="thought-bubble">
+                “Soy un fracaso”<br>
+                “Nada me sale bien”
+              </div>
+              <p>¡Y lo loco es que <strong>ellos mismos sabían</strong> que pensaban eso!
+                No estaba escondido en su mente.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-question">
+              <span class="q-icon">🔄</span>
+              <span>¿Qué hizo con ese descubrimiento?</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-answer">
+              <p>Beck <strong>cambió de opinión</strong> (algo muy difícil para cualquier persona).</p>
+              <p>Dejó de lado el psicoanálisis y creó algo nuevo:
+                la <strong>Terapia Cognitiva</strong>, que enseña que nuestros pensamientos
+                afectan cómo nos sentimos.</p>
+              <div class="formula">
+                💭 + ❤️ = 🎯
+                <span>Pensamiento + Emoción = Acción</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-question">
+              <span class="q-icon">🌎</span>
+              <span>¿Por qué es famoso?</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-answer">
+              <p>Inventó el <strong>Inventario de Depresión de Beck (BDI)</strong>,
+                que es el cuestionario que tú acabas de responder.</p>
+              <p>Hoy se usa en <strong>más de 30 países</strong> y en todos los idiomas.</p>
+              <p>Vivió <strong>100 años</strong> y trabajó hasta el final. Dijo:</p>
+              <div class="beck-quote">
+                “El mayor error fue pensar que las personas no pueden cambiar”
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta: Dato curioso extra -->
+      <div class="card funny-card">
+        <div class="funny-header">
+          <span>😂</span>
+          <h3>El plot twist más épico</h3>
+        </div>
+        <p>Beck quería <strong>demostrar que Freud tenía razón</strong>...
+          y terminó demostrando que <strong>Freud estaba equivocado</strong>.</p>
+        <p style="margin-top: 12px; font-size: 0.9rem; color: #64748b;">
+          ⚡ Moraleja: A veces, investigar te lleva a verdades que no esperabas.
+        </p>
+        <div class="funny-emoji">🤯</div>
+      </div>
+    </section>
+
+    <style>
+      /* ===== ESTILOS PARA LA SECCIÓN BECK ===== */
+
+      #beck-history {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin: 32px 0;
+      }
+
+      /* Tarjetas generales */
+      .card {
+        background: white;
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Tarjeta Beck */
+      .beck-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #eef2ff;
+        padding-bottom: 16px;
+      }
+
+      .beck-icon {
+        font-size: 48px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 60px;
+        padding: 8px;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .beck-title h3 {
+        font-size: 1.3rem;
+        margin: 0;
+        color: #1e293b;
+      }
+
+      .beck-title p {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin: 4px 0 0;
+      }
+
+      /* Dato sorpresa */
+      .beck-fact {
+        display: flex;
+        gap: 14px;
+        background: #fef3c7;
+        padding: 16px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        border-left: 5px solid #f59e0b;
+      }
+
+      .fact-emoji {
+        font-size: 28px;
+      }
+
+      .fact-text {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #78350f;
+      }
+
+      .highlight {
+        background: #fde68a;
+        padding: 2px 6px;
+        border-radius: 12px;
+        font-weight: 600;
+      }
+
+      /* Acordeón */
+      .beck-accordion {
+        margin-top: 8px;
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+
+      .accordion-question {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 0;
+        cursor: pointer;
+        font-weight: 500;
+        color: #334155;
+        transition: background 0.2s;
+      }
+
+      .accordion-question:hover {
+        background: #f8fafc;
+        padding-left: 8px;
+      }
+
+      .q-icon {
+        font-size: 20px;
+      }
+
+      .accordion-question span:first-of-type {
+        flex: 1;
+      }
+
+      .accordion-arrow {
+        font-size: 14px;
+        transition: transform 0.2s;
+        color: #94a3b8;
+      }
+
+      .accordion-item.active .accordion-arrow {
+        transform: rotate(180deg);
+      }
+
+      .accordion-answer {
+        max-height: 0;
+        padding: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.2s;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #475569;
+      }
+
+      .accordion-item.active .accordion-answer {
+        max-height: 300px;
+        padding: 0 0 16px 0;
+      }
+
+      /* Burbuja de pensamiento */
+      .thought-bubble {
+        background: #e0e7ff;
+        padding: 12px 16px;
+        border-radius: 24px;
+        margin: 12px 0;
+        text-align: center;
+        font-style: italic;
+        color: #3730a3;
+        border-bottom-right-radius: 8px;
+      }
+
+      /* Fórmula visual */
+      .formula {
+        background: linear-gradient(135deg, #667eea10, #764ba210);
+        padding: 12px;
+        border-radius: 16px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 12px 0 8px;
+      }
+
+      .formula span {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: normal;
+        color: #64748b;
+        margin-top: 4px;
+      }
+
+      /* Cita de Beck */
+      .beck-quote {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 14px 18px;
+        border-radius: 20px;
+        font-style: italic;
+        font-size: 0.85rem;
+        margin-top: 12px;
+        text-align: center;
+      }
+
+      /* Tarjeta divertida */
+      .funny-card {
+        background: linear-gradient(135deg, #fef2f2, #fffbeb);
+      }
+
+      .funny-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .funny-header span {
+        font-size: 32px;
+      }
+
+      .funny-header h3 {
+        font-size: 1.2rem;
+        color: #b45309;
+        margin: 0;
+      }
+
+      .funny-emoji {
+        font-size: 48px;
+        text-align: center;
+        margin-top: 16px;
+        opacity: 0.6;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        #tests {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+
+      /* Scroll invisible vertical (para la sección completa si es necesario) */
+      #beck-history {
+        max-height: 500px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+      }
+
+      #beck-history::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+      }
+    </style>
+
+    <script>
+      // Acordeón para la sección Beck
+      document.querySelectorAll('.accordion-question').forEach(question => {
+        question.addEventListener('click', () => {
+          const item = question.closest('.accordion-item');
+          item.classList.toggle('active');
+        });
+      });
+    </script>
+
     <section id='tests' class='grid'>
       <article class='card'>
         <span class='badge'>BDI</span>
