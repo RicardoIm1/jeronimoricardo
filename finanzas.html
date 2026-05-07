@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>El Chingón Económico | Dashboard Ultra Completo</title>
+    <title>Jerónimo Ricardo Ramírez Torres| Soluciones Digitales Premium</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
     <style>
@@ -493,101 +493,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: var(--transition);
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
-            transition: var(--transition);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Ocultar menú desktop */
-        .desktop-nav {
-            display: none;
-        }
-
-        /* Mostrar botón hamburguesa */
-        .mobile-menu-btn {
-            display: block;
-        }
-
-        /* Menú móvil */
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            background-color: rgba(15, 23, 42, 0.98);
-            padding: 2rem;
-            z-index: 999;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .desktop-nav {
-            display: flex;
-        }
-
-        .mobile-menu {
-            display: none;
-        }
-
-        .mobile-menu a {
-            display: block;
-            color: white;
-            /* ← AQUÍ ESTÁ CAMBIADO */
-            text-decoration: none;
-            padding: 1rem 0;
-            font-size: 1.2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        .mobile-menu a:hover {
-            color: white !important;
-            padding-left: 1rem;
-            text-decoration: none !important;
-        }
     </style>
 </head>
 
@@ -609,27 +514,7 @@
                 <div class="ticker-item">📊 CETES: <span id="cetes" class="valor">---</span> <span id="fechaCetes"
                         class="fecha"></span></div>
             </div>
-            <nav class="desktop-nav">
-                <a href="#analytics-demo">Analíticas</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#arquitectura">Arquitectura</a>
-                <a href="#demo">Demo</a>
-                <a href="#casos">Casos de Éxito</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
-
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <div class="mobile-menu" id="mobileMenu">
-                <a href="#analytics-demo">Analíticas</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#arquitectura">Arquitectura</a>
-                <a href="#demo">Demo</a>
-                <a href="#casos">Casos de Éxito</a>
-                <a href="#contacto">Contacto</a>
-            </div>
+            
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <input type="text" id="apiKeyInput" placeholder="API Key Banxico"
                     style="background:#1e293b; border:none; padding:0.5rem 1rem; border-radius:40px; color:white; width:200px; font-size:0.8rem;">
