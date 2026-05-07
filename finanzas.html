@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Jerónimo Ricardo Ramírez Torres | Dashboard Económico México</title>
-    <meta name="description"
-        content="Dashboard económico en vivo con datos oficiales del Banco de México: dólar, inflación, tasas, CETES, noticias y recomendaciones financieras actualizadas en tiempo real. Datos de 2024-2026.">
-    <meta name="keywords"
-        content="dólar hoy, inflación México, CETES, Banxico, tipo de cambio, economía México, finanzas personales">
+    <meta name="description" content="Dashboard económico en vivo con datos oficiales del Banco de México: dólar, inflación, tasas, CETES, noticias y recomendaciones financieras actualizadas en tiempo real. Datos de 2024-2026.">
+    <meta name="keywords" content="dólar hoy, inflación México, CETES, Banxico, tipo de cambio, economía México, finanzas personales">
     <meta name="author" content="Jerónimo Ricardo Ramírez Torres">
     <meta name="robots" content="index, follow">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -189,7 +187,6 @@
             font-weight: bold;
             color: white;
         }
-
         .contador-numero {
             font-size: 1rem;
             font-weight: bold;
@@ -202,73 +199,25 @@
         }
 
         @media (max-width: 1100px) {
-            .logo-text {
-                font-size: 0.85rem;
-            }
-
-            .ticker {
-                font-size: 0.65rem;
-                gap: 0.7rem;
-                padding: 0.3rem 0.7rem;
-            }
-
-            .header-buttons input {
-                width: 130px;
-                font-size: 0.7rem;
-            }
-
-            .btn {
-                padding: 0.35rem 0.7rem;
-                font-size: 0.7rem;
-            }
-
-            .contador-visitas {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.8rem;
-            }
-
-            .contador-numero {
-                font-size: 0.85rem;
-                min-width: 40px;
-            }
+            .logo-text { font-size: 0.85rem; }
+            .ticker { font-size: 0.65rem; gap: 0.7rem; padding: 0.3rem 0.7rem; }
+            .header-buttons input { width: 130px; font-size: 0.7rem; }
+            .btn { padding: 0.35rem 0.7rem; font-size: 0.7rem; }
+            .contador-visitas { font-size: 0.65rem; padding: 0.2rem 0.8rem; }
+            .contador-numero { font-size: 0.85rem; min-width: 40px; }
         }
 
         @media (max-width: 900px) {
-            .logo-text {
-                font-size: 0.75rem;
-            }
-
-            .logo-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 0.9rem;
-            }
-
-            .ticker-item .fecha {
-                display: none;
-            }
+            .logo-text { font-size: 0.75rem; }
+            .logo-icon { width: 28px; height: 28px; font-size: 0.9rem; }
+            .ticker-item .fecha { display: none; }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding-top: 120px;
-            }
-
-            .header-contenido {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-
-            .ticker {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .header-buttons {
-                order: 2;
-                justify-content: center;
-            }
+            body { padding-top: 120px; }
+            .header-contenido { flex-wrap: wrap; gap: 0.5rem; }
+            .ticker { order: 3; width: 100%; justify-content: center; }
+            .header-buttons { order: 2; justify-content: center; }
         }
 
         .contenedor {
@@ -502,8 +451,7 @@
             line-height: 1.3;
         }
 
-        .modal,
-        .modal-bienvenida {
+        .modal, .modal-bienvenida {
             display: none;
             position: fixed;
             top: 0;
@@ -516,9 +464,7 @@
             align-items: center;
             backdrop-filter: blur(5px);
         }
-
-        .modal-contenido,
-        .modal-bienvenida-contenido {
+        .modal-contenido, .modal-bienvenida-contenido {
             background: var(--bg-card);
             border-radius: 24px;
             max-width: 700px;
@@ -528,9 +474,7 @@
             padding: 2rem;
             position: relative;
         }
-
-        .modal-cerrar,
-        .modal-bienvenida-cerrar {
+        .modal-cerrar, .modal-bienvenida-cerrar {
             position: sticky;
             top: 0;
             right: 0;
@@ -544,7 +488,6 @@
             margin-top: -1rem;
             margin-right: -0.5rem;
         }
-
         .badge-modal {
             display: inline-block;
             background: var(--morado);
@@ -555,28 +498,10 @@
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
-
-        .modal-bienvenida h1 {
-            color: var(--naranja);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-
-        .modal-bienvenida h2 {
-            color: var(--verde);
-            margin: 1.5rem 0 0.8rem 0;
-            font-size: 1.3rem;
-        }
-
-        .modal-bienvenida p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .modal-bienvenida ul {
-            margin: 1rem 0 1rem 2rem;
-        }
-
+        .modal-bienvenida h1 { color: var(--naranja); margin-bottom: 1rem; font-size: 1.8rem; }
+        .modal-bienvenida h2 { color: var(--verde); margin: 1.5rem 0 0.8rem 0; font-size: 1.3rem; }
+        .modal-bienvenida p { margin-bottom: 1rem; line-height: 1.6; }
+        .modal-bienvenida ul { margin: 1rem 0 1rem 2rem; }
         .footer-nota {
             background: rgba(16, 185, 129, 0.1);
             border-radius: 16px;
@@ -585,7 +510,6 @@
             text-align: center;
             border-left: 3px solid var(--verde);
         }
-
         .share-buttons {
             display: flex;
             justify-content: center;
@@ -593,9 +517,8 @@
             margin-top: 1rem;
             flex-wrap: wrap;
         }
-
         .share-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 0.4rem 1rem;
             border-radius: 40px;
             font-size: 0.7rem;
@@ -603,12 +526,10 @@
             color: var(--texto);
             transition: all 0.2s;
         }
-
         .share-btn:hover {
             background: var(--azul);
             transform: translateY(-2px);
         }
-
         footer {
             background: var(--bg-card);
             padding: 2rem;
@@ -617,7 +538,6 @@
             font-size: 0.75rem;
             color: var(--texto-muted);
         }
-
         .footer-logo {
             font-weight: bold;
             font-size: 1rem;
@@ -627,21 +547,14 @@
             background-clip: text;
             color: transparent;
         }
-
         .footer-tagline {
             max-width: 600px;
             margin: 0 auto 1rem auto;
             font-size: 0.8rem;
         }
-
-        .cargando {
-            text-align: center;
-            padding: 40px;
-            color: var(--texto-muted);
-        }
-
+        .cargando { text-align: center; padding: 40px; color: var(--texto-muted); }
         .mensaje-error-temporal {
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239,68,68,0.1);
             border: 1px solid #ef4444;
             border-radius: 12px;
             padding: 1rem;
@@ -650,490 +563,354 @@
         }
 
         @media (max-width: 768px) {
-            .dashboard-graficos {
-                grid-template-columns: 1fr;
-            }
-
-            .kpi-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .grid-noticias {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-bienvenida-contenido {
-                padding: 1.2rem;
-            }
-
-            .modal-bienvenida h1 {
-                font-size: 1.3rem;
-            }
+            .dashboard-graficos { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-noticias { grid-template-columns: 1fr; }
+            .modal-bienvenida-contenido { padding: 1.2rem; }
+            .modal-bienvenida h1 { font-size: 1.3rem; }
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="header-contenido">
-            <a href="/jeronimoricardo/index.html">
-                <div class="logo">
-                    <div class="logo-icon">JR</div>
-                    <div class="logo-text">Jerónimo Ricardo Ramírez Torres</div>
-                </div>
-            </a>
-            <div class="ticker" id="ticker">
-                <div class="ticker-item">🇲🇽 USD/MXN: <span id="usdmxn" class="valor">---</span> <span id="fechaTC"
-                        class="fecha"></span></div>
-                <div class="ticker-item">📈 INPC: <span id="inflacion" class="valor">---</span> <span id="fechaInf"
-                        class="fecha"></span></div>
-                <div class="ticker-item">🏦 Tasa: <span id="tasa" class="valor">---</span> <span id="fechaTasa"
-                        class="fecha"></span></div>
-                <div class="ticker-item">📊 CETES: <span id="cetes" class="valor">---</span> <span id="fechaCetes"
-                        class="fecha"></span></div>
+<header>
+    <div class="header-contenido">
+        <a href="/jeronimoricardo/index.html">
+            <div class="logo">
+                <div class="logo-icon">JR</div>
+                <div class="logo-text">Jerónimo Ricardo Ramírez Torres</div>
             </div>
-            <div class="header-buttons">
-                <input type="text" id="apiKeyInput" placeholder="API Key Banxico">
-                <button id="conectarBtn" class="btn">🔗 Conectar</button>
-                <button id="exportBtn" class="btn">📎 Excel</button>
-                <button id="darkModeToggle" class="btn dark-toggle">🌙 Dark</button>
-                <div class="contador-visitas">👁️ Visitas: <span id="contadorNumero" class="contador-numero">0</span>
-                </div>
-            </div>
+        </a>
+        <div class="ticker" id="ticker">
+            <div class="ticker-item">🇲🇽 USD/MXN: <span id="usdmxn" class="valor">---</span> <span id="fechaTC" class="fecha"></span></div>
+            <div class="ticker-item">📈 INPC: <span id="inflacion" class="valor">---</span> <span id="fechaInf" class="fecha"></span></div>
+            <div class="ticker-item">🏦 Tasa: <span id="tasa" class="valor">---</span> <span id="fechaTasa" class="fecha"></span></div>
+            <div class="ticker-item">📊 CETES: <span id="cetes" class="valor">---</span> <span id="fechaCetes" class="fecha"></span></div>
         </div>
-    </header>
+        <div class="header-buttons">
+            <input type="text" id="apiKeyInput" placeholder="API Key Banxico">
+            <button id="conectarBtn" class="btn">🔗 Conectar</button>
+            <button id="exportBtn" class="btn">📎 Excel</button>
+            <button id="darkModeToggle" class="btn dark-toggle">🌙 Dark</button>
+            <div class="contador-visitas">👁️ Visitas: <span id="contadorNumero" class="contador-numero">0</span></div>
+        </div>
+    </div>
+</header>
 
-    <main>
-        <div class="contenedor">
-            <div class="recomendaciones-panel">
-                <h3>💡 RECOMENDACIONES PARA TU BOLSILLO (ACTUALIZADAS EN VIVO)</h3>
-                <div id="recomendacionesLista">
-                    <div class="recomendacion-item">
-                        <div class="recomendacion-icono">🔌</div>
-                        <div class="recomendacion-texto">
-                            <div class="recomendacion-titulo">Conecta tu API Key de Banxico</div>
-                            <div class="recomendacion-descripcion">Para obtener recomendaciones personalizadas según la
-                                situación económica actual.</div>
-                        </div>
+<main>
+    <div class="contenedor">
+        <div class="recomendaciones-panel">
+            <h3>💡 RECOMENDACIONES PARA TU BOLSILLO (ACTUALIZADAS EN VIVO)</h3>
+            <div id="recomendacionesLista">
+                <div class="recomendacion-item">
+                    <div class="recomendacion-icono">🔌</div>
+                    <div class="recomendacion-texto">
+                        <div class="recomendacion-titulo">Conecta tu API Key de Banxico</div>
+                        <div class="recomendacion-descripcion">Para obtener recomendaciones personalizadas según la situación económica actual.</div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <h4>🇲🇽 DÓLAR HOY</h4>
-                    <div class="kpi-valor" id="kpiTC">---</div>
-                    <div class="kpi-explicacion">Valor del peso frente al dólar</div>
-                    <div class="kpi-fecha" id="kpiFechTC"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>📈 INFLACIÓN</h4>
-                    <div class="kpi-valor" id="kpiInf">---</div>
-                    <div class="kpi-explicacion">Qué tan caro está todo vs hace un año</div>
-                    <div class="kpi-fecha" id="kpiFechInf"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>🏦 TASA BANXICO</h4>
-                    <div class="kpi-valor" id="kpiTasa">---</div>
-                    <div class="kpi-explicacion">Lo que ganas si ahorras en CETES</div>
-                    <div class="kpi-fecha" id="kpiFechTasa"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>📊 CETES 28D</h4>
-                    <div class="kpi-valor" id="kpiCetes">---</div>
-                    <div class="kpi-explicacion">Rendimiento del ahorro seguro</div>
-                    <div class="kpi-fecha" id="kpiFechCetes"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>💵 RESERVAS</h4>
-                    <div class="kpi-valor" id="kpiReservas">---</div>
-                    <div class="kpi-explicacion">El colchón de dólares de México</div>
-                    <div class="kpi-fecha" id="kpiFechReservas"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>📉 VOLATILIDAD</h4>
-                    <div class="kpi-valor" id="kpiVolatilidad">---</div>
-                    <div class="kpi-explicacion">Rango últimas 20 sesiones</div>
-                </div>
-            </div>
+        <div class="kpi-grid">
+            <div class="kpi-card"><h4>🇲🇽 DÓLAR HOY</h4><div class="kpi-valor" id="kpiTC">---</div><div class="kpi-explicacion">Valor del peso frente al dólar</div><div class="kpi-fecha" id="kpiFechTC"></div></div>
+            <div class="kpi-card"><h4>📈 INFLACIÓN</h4><div class="kpi-valor" id="kpiInf">---</div><div class="kpi-explicacion">Qué tan caro está todo vs hace un año</div><div class="kpi-fecha" id="kpiFechInf"></div></div>
+            <div class="kpi-card"><h4>🏦 TASA BANXICO</h4><div class="kpi-valor" id="kpiTasa">---</div><div class="kpi-explicacion">Lo que ganas si ahorras en CETES</div><div class="kpi-fecha" id="kpiFechTasa"></div></div>
+            <div class="kpi-card"><h4>📊 CETES 28D</h4><div class="kpi-valor" id="kpiCetes">---</div><div class="kpi-explicacion">Rendimiento del ahorro seguro</div><div class="kpi-fecha" id="kpiFechCetes"></div></div>
+            <div class="kpi-card"><h4>💵 RESERVAS</h4><div class="kpi-valor" id="kpiReservas">---</div><div class="kpi-explicacion">El colchón de dólares de México</div><div class="kpi-fecha" id="kpiFechReservas"></div></div>
+            <div class="kpi-card"><h4>📉 VOLATILIDAD</h4><div class="kpi-valor" id="kpiVolatilidad">---</div><div class="kpi-explicacion">Rango últimas 20 sesiones</div></div>
+        </div>
 
-            <div class="dashboard-graficos">
-                <div class="grafico-card">
-                    <h3>💱 1. Tipo de Cambio USD/MXN <button class="btn" onclick="descargarPNG('chartTC')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Línea azul = precio de cierre. Si
-                        sube, peso débil. Niveles clave: $17.50 (fuerte), $19.50 (débil).</div><canvas
-                        id="chartTC"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>📈 2. MÁXIMOS y MÍNIMOS (20 días) <button class="btn" onclick="descargarPNG('chartRange')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El área sombreada muestra el rango de
-                        precios. Rango amplio = alta volatilidad.</div><canvas id="chartRange"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>📊 3. PRECIO de CIERRE vs APERTURA <button class="btn" onclick="descargarPNG('chartCandle')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Barras verdes = subió el día; rojas =
-                        bajó. Velas largas = movimientos fuertes.</div><canvas id="chartCandle"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>🏦 4. Tasas: Banxico vs CETES <button class="btn" onclick="descargarPNG('chartTasas')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Naranja = tasa Banxico, Verde = CETES.
-                        Spread amplio = buen momento para ahorrar.</div><canvas id="chartTasas"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>📉 5. Inflación (INPC) <button class="btn" onclick="descargarPNG('chartInf')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Sobre 4% = tu dinero pierde valor
-                        rápido. Meta oficial del Banxico: 3%.</div><canvas id="chartInf"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>🛢️ 6. Petróleo Brent <button class="btn" onclick="descargarPNG('chartPetroleo')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El petróleo impacta gasolinas,
-                        inflación y finanzas de Pemex.</div><canvas id="chartPetroleo"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>📦 7. VOLUMEN de Operación <button class="btn" onclick="descargarPNG('chartVolumen')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Barras altas = mucha actividad de
-                        mercado. Bajas = poca liquidez.</div><canvas id="chartVolumen"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>💵 8. Reservas Internacionales <button class="btn" onclick="descargarPNG('chartReservas')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El colchón de dólares de México. Sobre
-                        $200 mil millones = posición sólida.</div><canvas id="chartReservas"></canvas>
-                </div>
-            </div>
+        <div class="dashboard-graficos">
+            <div class="grafico-card"><h3>💱 1. Tipo de Cambio USD/MXN <button class="btn" onclick="descargarPNG('chartTC')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> Línea azul = precio de cierre. Si sube, peso débil. Niveles clave: $17.50 (fuerte), $19.50 (débil).</div><canvas id="chartTC"></canvas></div>
+            <div class="grafico-card"><h3>📈 2. MÁXIMOS y MÍNIMOS (20 días) <button class="btn" onclick="descargarPNG('chartRange')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> El área sombreada muestra el rango de precios. Rango amplio = alta volatilidad.</div><canvas id="chartRange"></canvas></div>
+            <div class="grafico-card"><h3>📊 3. PRECIO de CIERRE vs APERTURA <button class="btn" onclick="descargarPNG('chartCandle')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> Barras verdes = subió el día; rojas = bajó. Velas largas = movimientos fuertes.</div><canvas id="chartCandle"></canvas></div>
+            <div class="grafico-card"><h3>🏦 4. Tasas: Banxico vs CETES <button class="btn" onclick="descargarPNG('chartTasas')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> Naranja = tasa Banxico, Verde = CETES. Spread amplio = buen momento para ahorrar.</div><canvas id="chartTasas"></canvas></div>
+            <div class="grafico-card"><h3>📉 5. Inflación (INPC) <button class="btn" onclick="descargarPNG('chartInf')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> Sobre 4% = tu dinero pierde valor rápido. Meta oficial del Banxico: 3%.</div><canvas id="chartInf"></canvas></div>
+            <div class="grafico-card"><h3>🛢️ 6. Petróleo Brent <button class="btn" onclick="descargarPNG('chartPetroleo')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> El petróleo impacta gasolinas, inflación y finanzas de Pemex.</div><canvas id="chartPetroleo"></canvas></div>
+            <div class="grafico-card"><h3>📦 7. VOLUMEN de Operación <button class="btn" onclick="descargarPNG('chartVolumen')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> Barras altas = mucha actividad de mercado. Bajas = poca liquidez.</div><canvas id="chartVolumen"></canvas></div>
+            <div class="grafico-card"><h3>💵 8. Reservas Internacionales <button class="btn" onclick="descargarPNG('chartReservas')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3><div class="interpretacion">📌 <strong>Qué observar:</strong> El colchón de dólares de México. Sobre $200 mil millones = posición sólida.</div><canvas id="chartReservas"></canvas></div>
+        </div>
 
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <div class="tip-icono">🏦</div>
-                    <div class="tip-titulo">CETES: ¿Cómo empezar?</div>
-                    <div class="tip-descripcion">Invertir en CETES desde $100 pesos. Es el instrumento más seguro de
-                        México. Rendimientos de hasta 11% anual. Solo necesitas tu e.firma o CURP.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">💳</div>
-                    <div class="tip-titulo">Tarjetas de crédito</div>
-                    <div class="tip-descripcion">Nunca pagues el mínimo. Siempre pago total para no generar intereses.
-                        Las tasas de interés están en 30-80% anual.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">🏠</div>
-                    <div class="tip-titulo">Comprar casa</div>
-                    <div class="tip-descripcion">Las tasas hipotecarias están entre 9-12%. Si la tasa de Banxico baja,
-                        las hipotecas se abaratan. Espera si puedes.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">📱</div>
-                    <div class="tip-titulo">Apps para ahorrar</div>
-                    <div class="tip-descripcion">GBM+, Fondeadora, Nu, Klar. Compara rendimientos. Algunas pagan hasta
-                        15% en cuentas de ahorro con liquidez diaria.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">💰</div>
-                    <div class="tip-titulo">Fondo de emergencia</div>
-                    <div class="tip-descripcion">Guarda 3-6 meses de gastos en un lugar de fácil acceso (CETES o cuenta
-                        de ahorro). Te salvará de imprevistos.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">📉</div>
-                    <div class="tip-titulo">Dólar caro o barato</div>
-                    <div class="tip-descripcion">Si el dólar sube (>$19), evita comprar en Amazon USA. Si baja (<$18),
-                            es buen momento para comprar tecnología.</div>
-                    </div>
-                </div>
+        <div class="tips-grid">
+            <div class="tip-card"><div class="tip-icono">🏦</div><div class="tip-titulo">CETES: ¿Cómo empezar?</div><div class="tip-descripcion">Invertir en CETES desde $100 pesos. Es el instrumento más seguro de México. Rendimientos de hasta 11% anual. Solo necesitas tu e.firma o CURP.</div></div>
+            <div class="tip-card"><div class="tip-icono">💳</div><div class="tip-titulo">Tarjetas de crédito</div><div class="tip-descripcion">Nunca pagues el mínimo. Siempre pago total para no generar intereses. Las tasas de interés están en 30-80% anual.</div></div>
+            <div class="tip-card"><div class="tip-icono">🏠</div><div class="tip-titulo">Comprar casa</div><div class="tip-descripcion">Las tasas hipotecarias están entre 9-12%. Si la tasa de Banxico baja, las hipotecas se abaratan. Espera si puedes.</div></div>
+            <div class="tip-card"><div class="tip-icono">📱</div><div class="tip-titulo">Apps para ahorrar</div><div class="tip-descripcion">GBM+, Fondeadora, Nu, Klar. Compara rendimientos. Algunas pagan hasta 15% en cuentas de ahorro con liquidez diaria.</div></div>
+            <div class="tip-card"><div class="tip-icono">💰</div><div class="tip-titulo">Fondo de emergencia</div><div class="tip-descripcion">Guarda 3-6 meses de gastos en un lugar de fácil acceso (CETES o cuenta de ahorro). Te salvará de imprevistos.</div></div>
+            <div class="tip-card"><div class="tip-icono">📉</div><div class="tip-titulo">Dólar caro o barato</div><div class="tip-descripcion">Si el dólar sube (>$19), evita comprar en Amazon USA. Si baja (<$18), es buen momento para comprar tecnología.</div></div>
+        </div>
 
-                <div class="noticias-header">
-                    <h3>📰 NOTICIAS ECONÓMICAS (click para leer completo)</h3>
-                    <button id="refreshNoticiasBtn" class="btn" style="background:var(--morado);">🔄 Actualizar</button>
-                </div>
-                <div class="grid-noticias" id="noticiasGrid">
-                    <div class="cargando">📡 Cargando noticias económicas de México...</div>
-                </div>
+        <div class="noticias-header">
+            <h3>📰 NOTICIAS ECONÓMICAS (click para leer completo)</h3>
+            <button id="refreshNoticiasBtn" class="btn" style="background:var(--morado);">🔄 Actualizar</button>
+        </div>
+        <div class="grid-noticias" id="noticiasGrid"><div class="cargando">📡 Cargando noticias económicas de México...</div></div>
 
-                <div class="share-buttons">
-                    <a href="#" id="shareWhatsApp" class="share-btn">📱 Compartir en WhatsApp</a>
-                    <a href="#" id="shareFacebook" class="share-btn">📘 Compartir en Facebook</a>
-                    <a href="#" id="shareTwitter" class="share-btn">🐦 Compartir en X</a>
-                    <a href="#" id="shareLinkedIn" class="share-btn">🔗 Compartir en LinkedIn</a>
-                </div>
-            </div>
-    </main>
-
-    <div id="modalNoticia" class="modal" style="display: none;">
-        <div class="modal-contenido">
-            <span class="modal-cerrar" onclick="cerrarModal()">&times;</span>
-            <img id="modalImagen" class="modal-imagen" alt="Imagen noticia">
-            <div id="modalTitulo" class="modal-titulo"></div>
-            <div id="modalFecha" class="modal-fecha"></div>
-            <div id="modalDescripcion" class="modal-descripcion"></div>
+        <div class="share-buttons">
+            <a href="#" id="shareWhatsApp" class="share-btn">📱 Compartir en WhatsApp</a>
+            <a href="#" id="shareFacebook" class="share-btn">📘 Compartir en Facebook</a>
+            <a href="#" id="shareTwitter" class="share-btn">🐦 Compartir en X</a>
+            <a href="#" id="shareLinkedIn" class="share-btn">🔗 Compartir en LinkedIn</a>
         </div>
     </div>
+</main>
 
-    <div id="modalBienvenida" class="modal-bienvenida">
-        <div class="modal-bienvenida-contenido">
-            <span class="modal-bienvenida-cerrar" onclick="cerrarBienvenida()">&times;</span>
-            <div style="margin-bottom: 1rem;">
-                <span class="badge-modal">HECHO EN MÉXICO</span>
-                <span class="badge-modal">DATOS BANXICO</span>
-                <span class="badge-modal">2024-2026</span>
-            </div>
-            <h1>Esto no es un periódico, ni un gurú financiero, ni el vecino que "sabe de economía"</h1>
-            <p>Es <strong>la economía real de México</strong> mostrándose en tiempo real. Sin filtros. Sin opiniones.
-                Con datos oficiales del Banco de México.</p>
-            <p>Me presento: soy <strong>Jerónimo Ricardo Ramírez Torres</strong>. Desarrollador de software. Y esto que
-                tienes frente a ti es un proyecto que nació de una necesidad muy simple: <strong>que los datos
-                    económicos dejen de ser un privilegio y se conviertan en una herramienta útil para
-                    cualquiera</strong>.</p>
-            <h2>📊 ¿Qué estás viendo exactamente?</h2>
-            <ul>
-                <li><strong>Tipo de cambio USD/MXN</strong> — el real, actualizado cada día hábil</li>
-                <li><strong>Inflación (INPC)</strong> — la que sí le pega a tu bolsillo</li>
-                <li><strong>Tasa Banxico vs CETES</strong> — para que sepas si conviene ahorrar o endeudarte</li>
-                <li><strong>Reservas internacionales</strong> — el colchón de dólares de México</li>
-                <li><strong>8 gráficas interactivas</strong> — máximos, mínimos, velas, tendencias</li>
-                <li><strong>Noticias económicas</strong> — actualizadas desde Google News</li>
-                <li><strong>Recomendaciones financieras</strong> — que cambian según el mercado</li>
-            </ul>
-            <h2>🔌 ¿Y eso de la API Key de Banxico?</h2>
-            <p>El Banco de México tiene una API pública y gratuita. Si colocas tu clave (la sacas en 2 minutos en
-                banxico.org.mx/SieAPIRest), el dashboard se vuelve <strong>completamente funcional</strong> con datos
-                actualizados. Sin la clave, puedes ver noticias y consejos. No hay muros de pago ni suscripciones.</p>
-            <h2>💼 ¿Y esto qué tiene que ver con tu negocio?</h2>
-            <p>Yo me dedico a desarrollar soluciones digitales. Dashboards. Automatizaciones. APIs. Sistemas a la
-                medida. Esto que ves es <strong>una demostración de lo que puedo hacer</strong>. Si te gusta cómo
-                funciona, si crees que algo así le serviría a tu empresa... <strong>podemos platicar</strong>. Sin
-                compromiso.</p>
-            <div class="footer-nota">
-                <p>📬 <strong>Jerónimo Ricardo Ramírez Torres</strong><br>Soluciones Digitales Premium · Desarrollo de
-                    software · Dashboards · Automatizaciones · APIs</p>
-            </div>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <button onclick="cerrarBienvenida()"
-                    style="background: var(--verde); border: none; padding: 0.6rem 1.5rem; border-radius: 40px; color: white; font-weight: bold; cursor: pointer;">Entendido,
-                    quiero ver el dashboard</button>
-            </div>
+<div id="modalNoticia" class="modal" style="display: none;">
+    <div class="modal-contenido">
+        <span class="modal-cerrar" onclick="cerrarModal()">&times;</span>
+        <img id="modalImagen" class="modal-imagen" alt="Imagen noticia">
+        <div id="modalTitulo" class="modal-titulo"></div>
+        <div id="modalFecha" class="modal-fecha"></div>
+        <div id="modalDescripcion" class="modal-descripcion"></div>
+    </div>
+</div>
+
+<div id="modalBienvenida" class="modal-bienvenida">
+    <div class="modal-bienvenida-contenido">
+        <span class="modal-bienvenida-cerrar" onclick="cerrarBienvenida()">&times;</span>
+        <div style="margin-bottom: 1rem;">
+            <span class="badge-modal">HECHO EN MÉXICO</span>
+            <span class="badge-modal">DATOS BANXICO</span>
+            <span class="badge-modal">2024-2026</span>
+        </div>
+        <h1>Esto no es un periódico, ni un gurú financiero, ni el vecino que "sabe de economía"</h1>
+        <p>Es <strong>la economía real de México</strong> mostrándose en tiempo real. Sin filtros. Sin opiniones. Con datos oficiales del Banco de México.</p>
+        <p>Me presento: soy <strong>Jerónimo Ricardo Ramírez Torres</strong>. Desarrollador de software. Y esto que tienes frente a ti es un proyecto que nació de una necesidad muy simple: <strong>que los datos económicos dejen de ser un privilegio y se conviertan en una herramienta útil para cualquiera</strong>.</p>
+        <h2>📊 ¿Qué estás viendo exactamente?</h2>
+        <ul>
+            <li><strong>Tipo de cambio USD/MXN</strong> — el real, actualizado cada día hábil</li>
+            <li><strong>Inflación (INPC)</strong> — la que sí le pega a tu bolsillo</li>
+            <li><strong>Tasa Banxico vs CETES</strong> — para que sepas si conviene ahorrar o endeudarte</li>
+            <li><strong>Reservas internacionales</strong> — el colchón de dólares de México</li>
+            <li><strong>8 gráficas interactivas</strong> — máximos, mínimos, velas, tendencias</li>
+            <li><strong>Noticias económicas</strong> — actualizadas desde Google News</li>
+            <li><strong>Recomendaciones financieras</strong> — que cambian según el mercado</li>
+        </ul>
+        <h2>🔌 ¿Y eso de la API Key de Banxico?</h2>
+        <p>El Banco de México tiene una API pública y gratuita. Si colocas tu clave (la sacas en 2 minutos en banxico.org.mx/SieAPIRest), el dashboard se vuelve <strong>completamente funcional</strong> con datos actualizados. Sin la clave, puedes ver noticias y consejos. No hay muros de pago ni suscripciones.</p>
+        <h2>💼 ¿Y esto qué tiene que ver con tu negocio?</h2>
+        <p>Yo me dedico a desarrollar soluciones digitales. Dashboards. Automatizaciones. APIs. Sistemas a la medida. Esto que ves es <strong>una demostración de lo que puedo hacer</strong>. Si te gusta cómo funciona, si crees que algo así le serviría a tu empresa... <strong>podemos platicar</strong>. Sin compromiso.</p>
+        <div class="footer-nota">
+            <p>📬 <strong>Jerónimo Ricardo Ramírez Torres</strong><br>Soluciones Digitales Premium · Desarrollo de software · Dashboards · Automatizaciones · APIs</p>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <button onclick="cerrarBienvenida()" style="background: var(--verde); border: none; padding: 0.6rem 1.5rem; border-radius: 40px; color: white; font-weight: bold; cursor: pointer;">Entendido, quiero ver el dashboard</button>
         </div>
     </div>
+</div>
 
-    <footer>
-        <div class="footer-logo">Jerónimo Ricardo Ramírez Torres</div>
-        <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conecto procesos,
-            simplifico operaciones y entrego resultados.</p>
-        <p>© <span id="year">2025</span> Jerónimo Ricardo Ramírez Torres - Todos los derechos reservados.</p>
-    </footer>
+<footer>
+    <div class="footer-logo">Jerónimo Ricardo Ramírez Torres</div>
+    <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conecto procesos, simplifico operaciones y entrego resultados.</p>
+    <p>© <span id="year">2025</span> Jerónimo Ricardo Ramírez Torres - Todos los derechos reservados.</p>
+</footer>
 
-    <script>
-        // ==================== MODAL BIENVENIDA ====================
-        function mostrarBienvenida() {
-            if (!localStorage.getItem('bienvenida_vista')) {
-                document.getElementById('modalBienvenida').style.display = 'flex';
-                localStorage.setItem('bienvenida_vista', 'true');
+<script>
+    // ==================== MODAL BIENVENIDA ====================
+    function mostrarBienvenida() {
+        if (!localStorage.getItem('bienvenida_vista')) {
+            document.getElementById('modalBienvenida').style.display = 'flex';
+            localStorage.setItem('bienvenida_vista', 'true');
+        }
+    }
+    function cerrarBienvenida() { document.getElementById('modalBienvenida').style.display = 'none'; }
+    window.cerrarBienvenida = cerrarBienvenida;
+
+    // ==================== CONTADOR ====================
+    function actualizarContador() {
+        let visitas = localStorage.getItem('dashboard_visitas');
+        if (visitas === null) visitas = 1;
+        else visitas = parseInt(visitas) + 1;
+        localStorage.setItem('dashboard_visitas', visitas);
+        document.getElementById('contadorNumero').innerText = visitas;
+    }
+    if (!sessionStorage.getItem('visita_contada')) {
+        actualizarContador();
+        sessionStorage.setItem('visita_contada', 'true');
+    } else {
+        document.getElementById('contadorNumero').innerText = localStorage.getItem('dashboard_visitas') || '0';
+    }
+
+    // ==================== COMPARTIR ====================
+    const urlActual = encodeURIComponent(window.location.href);
+    const titulo = encodeURIComponent("Dashboard Económico México - Datos Banxico en Vivo");
+    document.getElementById('shareWhatsApp')?.setAttribute('href', `https://wa.me/?text=${titulo}%20-%20${urlActual}`);
+    document.getElementById('shareFacebook')?.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${urlActual}`);
+    document.getElementById('shareTwitter')?.setAttribute('href', `https://twitter.com/intent/tweet?text=${titulo}&url=${urlActual}`);
+    document.getElementById('shareLinkedIn')?.setAttribute('href', `https://www.linkedin.com/shareArticle?mini=true&url=${urlActual}&title=${titulo}`);
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // ==================== VARIABLES Y API ====================
+    let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
+    let charts = {};
+    let valoresActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
+    let fechasActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
+    let intervalActualizacion;
+
+    const SERIES = { tipoCambio: "SF60653", inflacion: "SP1", tasaReferencia: "SF43783", cetes28: "SF339621", reservas: "SF10146" };
+
+    async function consultarBanxicoConFecha(serieId, token) {
+        if (!token) return null;
+        try {
+            const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos/oportuno?token=${token}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data?.bmx?.series?.[0]?.datos?.[0]) {
+                return { valor: parseFloat(data.bmx.series[0].datos[0].dato), fecha: data.bmx.series[0].datos[0].fecha };
             }
-        }
-        function cerrarBienvenida() { document.getElementById('modalBienvenida').style.display = 'none'; }
-        window.cerrarBienvenida = cerrarBienvenida;
+            return null;
+        } catch (error) { return null; }
+    }
 
-        // ==================== CONTADOR ====================
-        function actualizarContador() {
-            let visitas = localStorage.getItem('dashboard_visitas');
-            if (visitas === null) visitas = 1;
-            else visitas = parseInt(visitas) + 1;
-            localStorage.setItem('dashboard_visitas', visitas);
-            document.getElementById('contadorNumero').innerText = visitas;
-        }
-        if (!sessionStorage.getItem('visita_contada')) {
-            actualizarContador();
-            sessionStorage.setItem('visita_contada', 'true');
-        } else {
-            document.getElementById('contadorNumero').innerText = localStorage.getItem('dashboard_visitas') || '0';
-        }
+    async function consultarHistorico(serieId, token, dias = 60) {
+        if (!token) return [];
+        try {
+            const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos?token=${token}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data?.bmx?.series?.[0]?.datos) {
+                return data.bmx.series[0].datos.slice(0, dias).reverse().map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha })).filter(v => !isNaN(v.valor));
+            }
+            return [];
+        } catch (error) { return []; }
+    }
 
-        // ==================== COMPARTIR ====================
-        const urlActual = encodeURIComponent(window.location.href);
-        const titulo = encodeURIComponent("Dashboard Económico México - Datos Banxico en Vivo");
-        document.getElementById('shareWhatsApp')?.setAttribute('href', `https://wa.me/?text=${titulo}%20-%20${urlActual}`);
-        document.getElementById('shareFacebook')?.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${urlActual}`);
-        document.getElementById('shareTwitter')?.setAttribute('href', `https://twitter.com/intent/tweet?text=${titulo}&url=${urlActual}`);
-        document.getElementById('shareLinkedIn')?.setAttribute('href', `https://www.linkedin.com/shareArticle?mini=true&url=${urlActual}&title=${titulo}`);
-        document.getElementById('year').innerText = new Date().getFullYear();
-
-        // ==================== VARIABLES Y API ====================
-        let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
-        let charts = {};
-        let valoresActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
-        let fechasActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
-        let intervalActualizacion;
-
-        const SERIES = { tipoCambio: "SF60653", inflacion: "SP1", tasaReferencia: "SF43783", cetes28: "SF339621", reservas: "SF10146" };
-
-        async function consultarBanxicoConFecha(serieId, token) {
-            if (!token) return null;
-            try {
-                const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos/oportuno?token=${token}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                if (data?.bmx?.series?.[0]?.datos?.[0]) {
-                    return { valor: parseFloat(data.bmx.series[0].datos[0].dato), fecha: data.bmx.series[0].datos[0].fecha };
-                }
-                return null;
-            } catch (error) { return null; }
-        }
-
-        async function consultarHistorico(serieId, token, dias = 60) {
-            if (!token) return [];
-            try {
-                const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos?token=${token}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                if (data?.bmx?.series?.[0]?.datos) {
-                    return data.bmx.series[0].datos.slice(0, dias).reverse().map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha })).filter(v => !isNaN(v.valor));
-                }
-                return [];
-            } catch (error) { return []; }
-        }
-
-        // ==================== NOTICIAS ====================
-        async function cargarNoticias() {
-            const grid = document.getElementById('noticiasGrid');
-            grid.innerHTML = `<div class="cargando">🔄 Cargando noticias económicas...</div>`;
-            try {
-                const rssUrl = 'https://news.google.com/rss/search?q=economía+méxico+OR+banxico+OR+peso+mexicano&hl=es-419&gl=MX&ceid=MX:es-419';
-                const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-                if (data.status === 'ok' && data.items?.length) {
-                    grid.innerHTML = data.items.slice(0, 15).map((n, idx) => {
-                        const img = n.thumbnail || `https://picsum.photos/400/200?random=${idx}`;
-                        return `<div class="noticia-card" onclick='abrirModal(${JSON.stringify({ titulo: n.title.replace(' - Google News', ''), descripcion: n.description?.replace(/<[^>]*>/g, ''), fecha: n.pubDate, imagen: img })})'>
+    // ==================== NOTICIAS ====================
+    async function cargarNoticias() {
+        const grid = document.getElementById('noticiasGrid');
+        grid.innerHTML = `<div class="cargando">🔄 Cargando noticias económicas...</div>`;
+        try {
+            const rssUrl = 'https://news.google.com/rss/search?q=economía+méxico+OR+banxico+OR+peso+mexicano&hl=es-419&gl=MX&ceid=MX:es-419';
+            const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+            const response = await fetch(proxyUrl);
+            const data = await response.json();
+            if (data.status === 'ok' && data.items?.length) {
+                grid.innerHTML = data.items.slice(0, 15).map((n, idx) => {
+                    const img = n.thumbnail || `https://picsum.photos/400/200?random=${idx}`;
+                    return `<div class="noticia-card" onclick='abrirModal(${JSON.stringify({ titulo: n.title.replace(' - Google News', ''), descripcion: n.description?.replace(/<[^>]*>/g, ''), fecha: n.pubDate, imagen: img })})'>
                         <img class="noticia-imagen" src="${img}" onerror="this.src='https://picsum.photos/400/200?random=${idx}'">
                         <div class="noticia-titulo">📰 ${n.title.substring(0, 100)}</div>
                         <div class="noticia-fuente">📅 ${new Date(n.pubDate).toLocaleDateString('es-MX')} · Google News</div>
                         <div class="noticia-resumen">${(n.description?.replace(/<[^>]*>/g, '') || '').substring(0, 120)}...</div>
                     </div>`;
-                    }).join('');
-                } else throw new Error();
-            } catch (error) {
-                grid.innerHTML = `<div class="cargando">⚠️ Usando noticias de respaldo</div>`;
-            }
+                }).join('');
+            } else throw new Error();
+        } catch (error) {
+            grid.innerHTML = `<div class="cargando">⚠️ Usando noticias de respaldo</div>`;
         }
+    }
 
-        function abrirModal(n) {
-            document.getElementById('modalImagen').src = n.imagen;
-            document.getElementById('modalTitulo').innerText = n.titulo;
-            document.getElementById('modalFecha').innerText = `📅 ${new Date(n.fecha).toLocaleDateString('es-MX')}`;
-            document.getElementById('modalDescripcion').innerText = n.descripcion;
-            document.getElementById('modalNoticia').style.display = 'flex';
+    function abrirModal(n) {
+        document.getElementById('modalImagen').src = n.imagen;
+        document.getElementById('modalTitulo').innerText = n.titulo;
+        document.getElementById('modalFecha').innerText = `📅 ${new Date(n.fecha).toLocaleDateString('es-MX')}`;
+        document.getElementById('modalDescripcion').innerText = n.descripcion;
+        document.getElementById('modalNoticia').style.display = 'flex';
+    }
+    function cerrarModal() { document.getElementById('modalNoticia').style.display = 'none'; }
+    window.abrirModal = abrirModal;
+    window.cerrarModal = cerrarModal;
+
+    // ==================== RECOMENDACIONES ====================
+    function actualizarRecomendaciones() {
+        const { tc, inflacion, tasa, cetes } = valoresActuales;
+        let recs = [];
+        if (tc) recs.push(tc > 19.5 ? { icono: "💵", titulo: "Dólar CARO", texto: "Evita comprar dólares o importados." } : tc < 17.5 ? { icono: "🛒", titulo: "Dólar BARATO", texto: "Buen momento para comprar tecnología." } : { icono: "⚖️", titulo: "Dólar estable", texto: "Sigue con tu vida normal." });
+        if (inflacion) recs.push(inflacion > 4.5 ? { icono: "🛡️", titulo: "Precios suben", texto: "Compra hoy cosas duraderas." } : inflacion < 3 ? { icono: "📉", titulo: "Precios bajan", texto: "Aprovecha promociones." } : { icono: "📊", titulo: "Precios controlados", texto: "Sigue comparando precios." });
+        if (tasa && cetes) recs.push(tasa > 10 ? { icono: "🏦", titulo: "Tasas ALTAS", texto: `CETES pagan ${cetes.toFixed(1)}%. Ahorra.` } : tasa < 7 ? { icono: "💳", titulo: "Tasas BAJAS", texto: "Buen momento para créditos." } : { icono: "⚡", titulo: "Tasas neutrales", texto: "Compara opciones de ahorro." });
+        recs.push({ icono: "🧠", titulo: "Tip de oro", texto: "Fondo de emergencia de 3 meses." });
+        document.getElementById('recomendacionesLista').innerHTML = recs.map(r => `<div class="recomendacion-item"><div class="recomendacion-icono">${r.icono}</div><div class="recomendacion-texto"><div class="recomendacion-titulo">✨ ${r.titulo}</div><div class="recomendacion-descripcion">${r.texto}</div></div></div>`).join('');
+    }
+
+    // ==================== GRÁFICAS CON FILTRO DE FECHA ====================
+    async function actualizarDatosBanxico() {
+        if (!apiKeyBanxico) return;
+        const [tcData, infData, tasaData, cetesData, reservasData] = await Promise.all([
+            consultarBanxicoConFecha(SERIES.tipoCambio, apiKeyBanxico),
+            consultarBanxicoConFecha(SERIES.inflacion, apiKeyBanxico),
+            consultarBanxicoConFecha(SERIES.tasaReferencia, apiKeyBanxico),
+            consultarBanxicoConFecha(SERIES.cetes28, apiKeyBanxico),
+            consultarBanxicoConFecha(SERIES.reservas, apiKeyBanxico)
+        ]);
+        if (tcData) { valoresActuales.tc = tcData.valor; fechasActuales.tc = tcData.fecha; document.getElementById('usdmxn').innerText = tcData.valor.toFixed(4); document.getElementById('kpiTC').innerHTML = `$${tcData.valor.toFixed(4)}`; document.getElementById('kpiFechTC').innerHTML = `📅 ${tcData.fecha}`; }
+        if (infData) { valoresActuales.inflacion = infData.valor; document.getElementById('inflacion').innerText = `${infData.valor.toFixed(2)}%`; document.getElementById('kpiInf').innerHTML = `${infData.valor.toFixed(2)}%`; }
+        if (tasaData) { valoresActuales.tasa = tasaData.valor; document.getElementById('tasa').innerText = `${tasaData.valor.toFixed(2)}%`; document.getElementById('kpiTasa').innerHTML = `${tasaData.valor.toFixed(2)}%`; }
+        if (cetesData) { valoresActuales.cetes = cetesData.valor; document.getElementById('cetes').innerText = `${cetesData.valor.toFixed(2)}%`; document.getElementById('kpiCetes').innerHTML = `${cetesData.valor.toFixed(2)}%`; }
+        if (reservasData) { valoresActuales.reservas = reservasData.valor; document.getElementById('kpiReservas').innerHTML = `$${(reservasData.valor/1000).toFixed(0)} MMD`; }
+
+        // Obtener históricos y filtrar por fecha (solo 2024-2026, nada de 1990)
+        const [histTC, histInf, histTasa, histCetes] = await Promise.all([
+            consultarHistorico(SERIES.tipoCambio, apiKeyBanxico, 90),
+            consultarHistorico(SERIES.inflacion, apiKeyBanxico, 60),
+            consultarHistorico(SERIES.tasaReferencia, apiKeyBanxico, 60),
+            consultarHistorico(SERIES.cetes28, apiKeyBanxico, 60)
+        ]);
+        
+        const fechaLimite = new Date('2024-01-01');
+        const tcReciente = histTC.filter(d => new Date(d.fecha) >= fechaLimite);
+        const infReciente = histInf.filter(d => new Date(d.fecha) >= fechaLimite);
+        const tasaReciente = histTasa.filter(d => new Date(d.fecha) >= fechaLimite);
+        const cetesReciente = histCetes.filter(d => new Date(d.fecha) >= fechaLimite);
+
+        if (tcReciente.length) {
+            const valores = tcReciente.map(h => h.valor);
+            document.getElementById('kpiVolatilidad').innerHTML = `$${(Math.max(...valores) - Math.min(...valores)).toFixed(4)}`;
+            actualizarGraficaTC(tcReciente);
+            actualizarGraficaRange(tcReciente);
+            actualizarGraficaCandle(tcReciente);
+            if (charts.volumen) { charts.volumen.data.labels = tcReciente.map(h => h.fecha); charts.volumen.data.datasets[0].data = tcReciente.map(() => Math.random()*100+20); charts.volumen.update(); }
         }
-        function cerrarModal() { document.getElementById('modalNoticia').style.display = 'none'; }
-        window.abrirModal = abrirModal;
-        window.cerrarModal = cerrarModal;
+        if (tasaReciente.length && cetesReciente.length) actualizarGraficaTasas(tasaReciente, cetesReciente);
+        if (infReciente.length) actualizarGraficaInflacion(infReciente);
+        actualizarGraficaPetroleo();
+        actualizarGraficaReservas(valoresActuales.reservas);
+        actualizarRecomendaciones();
+    }
 
-        // ==================== RECOMENDACIONES ====================
-        function actualizarRecomendaciones() {
-            const { tc, inflacion, tasa, cetes } = valoresActuales;
-            let recs = [];
-            if (tc) recs.push(tc > 19.5 ? { icono: "💵", titulo: "Dólar CARO", texto: "Evita comprar dólares o importados." } : tc < 17.5 ? { icono: "🛒", titulo: "Dólar BARATO", texto: "Buen momento para comprar tecnología." } : { icono: "⚖️", titulo: "Dólar estable", texto: "Sigue con tu vida normal." });
-            if (inflacion) recs.push(inflacion > 4.5 ? { icono: "🛡️", titulo: "Precios suben", texto: "Compra hoy cosas duraderas." } : inflacion < 3 ? { icono: "📉", titulo: "Precios bajan", texto: "Aprovecha promociones." } : { icono: "📊", titulo: "Precios controlados", texto: "Sigue comparando precios." });
-            if (tasa && cetes) recs.push(tasa > 10 ? { icono: "🏦", titulo: "Tasas ALTAS", texto: `CETES pagan ${cetes.toFixed(1)}%. Ahorra.` } : tasa < 7 ? { icono: "💳", titulo: "Tasas BAJAS", texto: "Buen momento para créditos." } : { icono: "⚡", titulo: "Tasas neutrales", texto: "Compara opciones de ahorro." });
-            recs.push({ icono: "🧠", titulo: "Tip de oro", texto: "Fondo de emergencia de 3 meses." });
-            document.getElementById('recomendacionesLista').innerHTML = recs.map(r => `<div class="recomendacion-item"><div class="recomendacion-icono">${r.icono}</div><div class="recomendacion-texto"><div class="recomendacion-titulo">✨ ${r.titulo}</div><div class="recomendacion-descripcion">${r.texto}</div></div></div>`).join('');
-        }
+    function actualizarGraficaTC(hist) { if (charts.tc) { charts.tc.data.labels = hist.map(h => h.fecha); charts.tc.data.datasets[0].data = hist.map(h => h.valor); charts.tc.update(); } }
+    function actualizarGraficaRange(hist) {
+        if (!charts.range) return;
+        const v = hist.map(h => h.valor);
+        charts.range.data.labels = hist.map(h => h.fecha);
+        charts.range.data.datasets[0].data = v.map((_, i) => Math.max(...v.slice(Math.max(0, i-5), i+1)));
+        charts.range.data.datasets[1].data = v.map((_, i) => Math.min(...v.slice(Math.max(0, i-5), i+1)));
+        charts.range.update();
+    }
+    function actualizarGraficaCandle(hist) { if (charts.candle) { const v = hist.map(h => h.valor); charts.candle.data.labels = hist.map(h => h.fecha); charts.candle.data.datasets[0].data = v.map((x, i) => i ? Math.abs(x - v[i-1]) : 0); charts.candle.update(); } }
+    function actualizarGraficaTasas(tasa, cetes) { if (charts.tasas) { charts.tasas.data.labels = tasa.map(h => h.fecha); charts.tasas.data.datasets[0].data = tasa.map(h => h.valor); charts.tasas.data.datasets[1].data = cetes.map(h => h.valor); charts.tasas.update(); } }
+    function actualizarGraficaInflacion(hist) { if (charts.inf) { charts.inf.data.labels = hist.map(h => h.fecha); charts.inf.data.datasets[0].data = hist.map(h => h.valor); charts.inf.update(); } }
+    function actualizarGraficaPetroleo() { if (charts.petroleo) { const data = [82,79,76,73,70,68,65,63,61,59,57,55,53,51,50]; charts.petroleo.data.labels = data.map((_,i)=>`D-${data.length-i}`); charts.petroleo.data.datasets[0].data = data; charts.petroleo.update(); } }
+    function actualizarGraficaReservas(r) { if (charts.reservas) { const data = [210,215,218,220,222,225,223,226,228,230]; if (r) data.push(r/1000); charts.reservas.data.labels = data.map((_,i)=>`E${i+1}`); charts.reservas.data.datasets[0].data = data; charts.reservas.update(); } }
 
-        // ==================== GRÁFICAS CON FILTRO DE FECHA ====================
-        async function actualizarDatosBanxico() {
-            if (!apiKeyBanxico) return;
-            const [tcData, infData, tasaData, cetesData, reservasData] = await Promise.all([
-                consultarBanxicoConFecha(SERIES.tipoCambio, apiKeyBanxico),
-                consultarBanxicoConFecha(SERIES.inflacion, apiKeyBanxico),
-                consultarBanxicoConFecha(SERIES.tasaReferencia, apiKeyBanxico),
-                consultarBanxicoConFecha(SERIES.cetes28, apiKeyBanxico),
-                consultarBanxicoConFecha(SERIES.reservas, apiKeyBanxico)
-            ]);
-            if (tcData) { valoresActuales.tc = tcData.valor; fechasActuales.tc = tcData.fecha; document.getElementById('usdmxn').innerText = tcData.valor.toFixed(4); document.getElementById('kpiTC').innerHTML = `$${tcData.valor.toFixed(4)}`; document.getElementById('kpiFechTC').innerHTML = `📅 ${tcData.fecha}`; }
-            if (infData) { valoresActuales.inflacion = infData.valor; document.getElementById('inflacion').innerText = `${infData.valor.toFixed(2)}%`; document.getElementById('kpiInf').innerHTML = `${infData.valor.toFixed(2)}%`; }
-            if (tasaData) { valoresActuales.tasa = tasaData.valor; document.getElementById('tasa').innerText = `${tasaData.valor.toFixed(2)}%`; document.getElementById('kpiTasa').innerHTML = `${tasaData.valor.toFixed(2)}%`; }
-            if (cetesData) { valoresActuales.cetes = cetesData.valor; document.getElementById('cetes').innerText = `${cetesData.valor.toFixed(2)}%`; document.getElementById('kpiCetes').innerHTML = `${cetesData.valor.toFixed(2)}%`; }
-            if (reservasData) { valoresActuales.reservas = reservasData.valor; document.getElementById('kpiReservas').innerHTML = `$${(reservasData.valor / 1000).toFixed(0)} MMD`; }
+    function initCharts() {
+        charts.tc = new Chart(document.getElementById('chartTC'), { type: 'line', data: { labels: [], datasets: [{ label: 'USD/MXN', borderColor: '#3b82f6', tension: 0.3, data: [] }] }, options: { responsive: true } });
+        charts.range = new Chart(document.getElementById('chartRange'), { type: 'line', data: { labels: [], datasets: [{ label: 'Máximo 5d', borderColor: '#10b981', data: [] }, { label: 'Mínimo 5d', borderColor: '#ef4444', data: [] }] }, options: { responsive: true } });
+        charts.candle = new Chart(document.getElementById('chartCandle'), { type: 'bar', data: { labels: [], datasets: [{ label: 'Cambio diario', backgroundColor: '#f59e0b', data: [] }] }, options: { responsive: true } });
+        charts.tasas = new Chart(document.getElementById('chartTasas'), { type: 'line', data: { labels: [], datasets: [{ label: 'Tasa Banxico', borderColor: '#f59e0b', data: [] }, { label: 'CETES 28d', borderColor: '#10b981', data: [] }] }, options: { responsive: true } });
+        charts.inf = new Chart(document.getElementById('chartInf'), { type: 'line', data: { labels: [], datasets: [{ label: 'INPC (%)', borderColor: '#ef4444', tension: 0.3, data: [] }] }, options: { responsive: true } });
+        charts.petroleo = new Chart(document.getElementById('chartPetroleo'), { type: 'line', data: { labels: [], datasets: [{ label: 'Petróleo Brent', borderColor: '#8b5cf6', data: [] }] }, options: { responsive: true } });
+        charts.volumen = new Chart(document.getElementById('chartVolumen'), { type: 'bar', data: { labels: [], datasets: [{ label: 'Volumen', backgroundColor: '#06b6d4', data: [] }] }, options: { responsive: true } });
+        charts.reservas = new Chart(document.getElementById('chartReservas'), { type: 'line', data: { labels: [], datasets: [{ label: 'Reservas (miles M USD)', borderColor: '#ec489a', data: [] }] }, options: { responsive: true } });
+    }
 
-            // Obtener históricos y filtrar por fecha (solo 2024-2026, nada de 1990)
-            const [histTC, histInf, histTasa, histCetes] = await Promise.all([
-                consultarHistorico(SERIES.tipoCambio, apiKeyBanxico, 90),
-                consultarHistorico(SERIES.inflacion, apiKeyBanxico, 60),
-                consultarHistorico(SERIES.tasaReferencia, apiKeyBanxico, 60),
-                consultarHistorico(SERIES.cetes28, apiKeyBanxico, 60)
-            ]);
+    async function descargarPNG(id) { const canvas = document.getElementById(id); const link = document.createElement('a'); link.download = `${id}.png`; link.href = canvas.toDataURL(); link.click(); }
+    function exportarExcel() { const ws = XLSX.utils.json_to_sheet([{ timestamp: new Date().toISOString(), ...valoresActuales }]); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Datos"); XLSX.writeFile(wb, `datos_${Date.now()}.xlsx`); }
+    function initDarkMode() { const toggle = document.getElementById('darkModeToggle'); const isDark = localStorage.getItem('darkMode') !== 'false'; if (!isDark) document.body.classList.add('light-mode'); toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark'; toggle.onclick = () => { document.body.classList.toggle('light-mode'); localStorage.setItem('darkMode', !document.body.classList.contains('light-mode')); toggle.textContent = document.body.classList.contains('light-mode') ? '🌙 Dark' : '☀️ Light'; }; }
 
-            const fechaLimite = new Date('2024-01-01');
-            const tcReciente = histTC.filter(d => new Date(d.fecha) >= fechaLimite);
-            const infReciente = histInf.filter(d => new Date(d.fecha) >= fechaLimite);
-            const tasaReciente = histTasa.filter(d => new Date(d.fecha) >= fechaLimite);
-            const cetesReciente = histCetes.filter(d => new Date(d.fecha) >= fechaLimite);
-
-            if (tcReciente.length) {
-                const valores = tcReciente.map(h => h.valor);
-                document.getElementById('kpiVolatilidad').innerHTML = `$${(Math.max(...valores) - Math.min(...valores)).toFixed(4)}`;
-                actualizarGraficaTC(tcReciente);
-                actualizarGraficaRange(tcReciente);
-                actualizarGraficaCandle(tcReciente);
-                if (charts.volumen) { charts.volumen.data.labels = tcReciente.map(h => h.fecha); charts.volumen.data.datasets[0].data = tcReciente.map(() => Math.random() * 100 + 20); charts.volumen.update(); }
-            }
-            if (tasaReciente.length && cetesReciente.length) actualizarGraficaTasas(tasaReciente, cetesReciente);
-            if (infReciente.length) actualizarGraficaInflacion(infReciente);
-            actualizarGraficaPetroleo();
-            actualizarGraficaReservas(valoresActuales.reservas);
-            actualizarRecomendaciones();
-        }
-
-        function actualizarGraficaTC(hist) { if (charts.tc) { charts.tc.data.labels = hist.map(h => h.fecha); charts.tc.data.datasets[0].data = hist.map(h => h.valor); charts.tc.update(); } }
-        function actualizarGraficaRange(hist) {
-            if (!charts.range) return;
-            const v = hist.map(h => h.valor);
-            charts.range.data.labels = hist.map(h => h.fecha);
-            charts.range.data.datasets[0].data = v.map((_, i) => Math.max(...v.slice(Math.max(0, i - 5), i + 1)));
-            charts.range.data.datasets[1].data = v.map((_, i) => Math.min(...v.slice(Math.max(0, i - 5), i + 1)));
-            charts.range.update();
-        }
-        function actualizarGraficaCandle(hist) { if (charts.candle) { const v = hist.map(h => h.valor); charts.candle.data.labels = hist.map(h => h.fecha); charts.candle.data.datasets[0].data = v.map((x, i) => i ? Math.abs(x - v[i - 1]) : 0); charts.candle.update(); } }
-        function actualizarGraficaTasas(tasa, cetes) { if (charts.tasas) { charts.tasas.data.labels = tasa.map(h => h.fecha); charts.tasas.data.datasets[0].data = tasa.map(h => h.valor); charts.tasas.data.datasets[1].data = cetes.map(h => h.valor); charts.tasas.update(); } }
-        function actualizarGraficaInflacion(hist) { if (charts.inf) { charts.inf.data.labels = hist.map(h => h.fecha); charts.inf.data.datasets[0].data = hist.map(h => h.valor); charts.inf.update(); } }
-        function actualizarGraficaPetroleo() { if (charts.petroleo) { const data = [82, 79, 76, 73, 70, 68, 65, 63, 61, 59, 57, 55, 53, 51, 50]; charts.petroleo.data.labels = data.map((_, i) => `D-${data.length - i}`); charts.petroleo.data.datasets[0].data = data; charts.petroleo.update(); } }
-        function actualizarGraficaReservas(r) { if (charts.reservas) { const data = [210, 215, 218, 220, 222, 225, 223, 226, 228, 230]; if (r) data.push(r / 1000); charts.reservas.data.labels = data.map((_, i) => `E${i + 1}`); charts.reservas.data.datasets[0].data = data; charts.reservas.update(); } }
-
-        function initCharts() {
-            charts.tc = new Chart(document.getElementById('chartTC'), { type: 'line', data: { labels: [], datasets: [{ label: 'USD/MXN', borderColor: '#3b82f6', tension: 0.3, data: [] }] }, options: { responsive: true } });
-            charts.range = new Chart(document.getElementById('chartRange'), { type: 'line', data: { labels: [], datasets: [{ label: 'Máximo 5d', borderColor: '#10b981', data: [] }, { label: 'Mínimo 5d', borderColor: '#ef4444', data: [] }] }, options: { responsive: true } });
-            charts.candle = new Chart(document.getElementById('chartCandle'), { type: 'bar', data: { labels: [], datasets: [{ label: 'Cambio diario', backgroundColor: '#f59e0b', data: [] }] }, options: { responsive: true } });
-            charts.tasas = new Chart(document.getElementById('chartTasas'), { type: 'line', data: { labels: [], datasets: [{ label: 'Tasa Banxico', borderColor: '#f59e0b', data: [] }, { label: 'CETES 28d', borderColor: '#10b981', data: [] }] }, options: { responsive: true } });
-            charts.inf = new Chart(document.getElementById('chartInf'), { type: 'line', data: { labels: [], datasets: [{ label: 'INPC (%)', borderColor: '#ef4444', tension: 0.3, data: [] }] }, options: { responsive: true } });
-            charts.petroleo = new Chart(document.getElementById('chartPetroleo'), { type: 'line', data: { labels: [], datasets: [{ label: 'Petróleo Brent', borderColor: '#8b5cf6', data: [] }] }, options: { responsive: true } });
-            charts.volumen = new Chart(document.getElementById('chartVolumen'), { type: 'bar', data: { labels: [], datasets: [{ label: 'Volumen', backgroundColor: '#06b6d4', data: [] }] }, options: { responsive: true } });
-            charts.reservas = new Chart(document.getElementById('chartReservas'), { type: 'line', data: { labels: [], datasets: [{ label: 'Reservas (miles M USD)', borderColor: '#ec489a', data: [] }] }, options: { responsive: true } });
-        }
-
-        async function descargarPNG(id) { const canvas = document.getElementById(id); const link = document.createElement('a'); link.download = `${id}.png`; link.href = canvas.toDataURL(); link.click(); }
-        function exportarExcel() { const ws = XLSX.utils.json_to_sheet([{ timestamp: new Date().toISOString(), ...valoresActuales }]); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Datos"); XLSX.writeFile(wb, `datos_${Date.now()}.xlsx`); }
-        function initDarkMode() { const toggle = document.getElementById('darkModeToggle'); const isDark = localStorage.getItem('darkMode') !== 'false'; if (!isDark) document.body.classList.add('light-mode'); toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark'; toggle.onclick = () => { document.body.classList.toggle('light-mode'); localStorage.setItem('darkMode', !document.body.classList.contains('light-mode')); toggle.textContent = document.body.classList.contains('light-mode') ? '🌙 Dark' : '☀️ Light'; }; }
-
-        async function init() {
-            initCharts();
-            initDarkMode();
-            await cargarNoticias();
-            mostrarBienvenida();
-            if (apiKeyBanxico) { document.getElementById('apiKeyInput').value = apiKeyBanxico; await actualizarDatosBanxico(); intervalActualizacion = setInterval(actualizarDatosBanxico, 300000); }
-            document.getElementById('conectarBtn').onclick = async () => { const k = document.getElementById('apiKeyInput').value.trim(); if (k) { apiKeyBanxico = k; localStorage.setItem('banxico_api_key', k); await actualizarDatosBanxico(); if (intervalActualizacion) clearInterval(intervalActualizacion); intervalActualizacion = setInterval(actualizarDatosBanxico, 300000); } else alert("⚠️ Ingresa tu API Key de Banxico"); };
-            document.getElementById('refreshNoticiasBtn').onclick = () => cargarNoticias();
-            document.getElementById('exportBtn').onclick = exportarExcel;
-            window.descargarPNG = descargarPNG;
-        }
-        init();
-    </script>
+    async function init() {
+        initCharts();
+        initDarkMode();
+        await cargarNoticias();
+        mostrarBienvenida();
+        if (apiKeyBanxico) { document.getElementById('apiKeyInput').value = apiKeyBanxico; await actualizarDatosBanxico(); intervalActualizacion = setInterval(actualizarDatosBanxico, 300000); }
+        document.getElementById('conectarBtn').onclick = async () => { const k = document.getElementById('apiKeyInput').value.trim(); if (k) { apiKeyBanxico = k; localStorage.setItem('banxico_api_key', k); await actualizarDatosBanxico(); if (intervalActualizacion) clearInterval(intervalActualizacion); intervalActualizacion = setInterval(actualizarDatosBanxico, 300000); } else alert("⚠️ Ingresa tu API Key de Banxico"); };
+        document.getElementById('refreshNoticiasBtn').onclick = () => cargarNoticias();
+        document.getElementById('exportBtn').onclick = exportarExcel;
+        window.descargarPNG = descargarPNG;
+    }
+    init();
+</script>
 </body>
-
 </html>
