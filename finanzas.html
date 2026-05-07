@@ -740,20 +740,6 @@
     </footer>
 
     <script>
-
-        // ========== AÑO ==========
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active')
-                ? '<i class="fas fa-times"></i>'
-                : '<i class="fas fa-bars"></i>';
-        });
-
         // ==================== VARIABLES ====================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
         let charts = {};
