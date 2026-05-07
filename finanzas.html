@@ -536,6 +536,58 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
+
+        /* Ocultar menú desktop */
+        .desktop-nav {
+            display: none;
+        }
+
+        /* Mostrar botón hamburguesa */
+        .mobile-menu-btn {
+            display: block;
+        }
+
+        /* Menú móvil */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.98);
+            padding: 2rem;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .desktop-nav {
+            display: flex;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: white;
+            /* ← AQUÍ ESTÁ CAMBIADO */
+            text-decoration: none;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            color: white !important;
+            padding-left: 1rem;
+            text-decoration: none !important;
+        }
     </style>
 </head>
 
