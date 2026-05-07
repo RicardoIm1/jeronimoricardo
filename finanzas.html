@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description"
-        content="Dashboard económico en vivo con datos del Banco de México: dólar, inflación, tasas, CETES, noticias y recomendaciones financieras actualizadas.">
-    <meta name="keywords" content="dólar hoy, inflación México, CETES, Banxico, tipo de cambio, economía México">
     <title>Jerónimo Ricardo Ramírez Torres | Soluciones Digitales Premium</title>
+    <!-- Meta tags SEO -->
+    <meta name="description" content="Dashboard económico en vivo con datos oficiales del Banco de México: dólar, inflación, tasas, CETES, noticias y recomendaciones financieras actualizadas en tiempo real.">
+    <meta name="keywords" content="dólar hoy, inflación México, CETES, Banxico, tipo de cambio, economía México, finanzas personales, indicadores económicos">
+    <meta name="author" content="Jerónimo Ricardo Ramírez Torres">
+    <meta name="robots" content="index, follow">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
     <style>
@@ -48,7 +50,7 @@
             padding-top: 70px;
         }
 
-        /* === HEADER OPTIMIZADO PARA UNA SOLA LÍNEA === */
+        /* Header optimizado */
         header {
             background-color: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
@@ -71,7 +73,6 @@
             gap: 1rem;
         }
 
-        /* Logo - no se encoge */
         .header-contenido a {
             flex-shrink: 0;
             text-decoration: none;
@@ -109,7 +110,6 @@
             white-space: nowrap;
         }
 
-        /* Ticker - se encoge pero no se rompe */
         .ticker {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 40px;
@@ -143,7 +143,6 @@
             color: var(--texto-muted);
         }
 
-        /* Grupo de botones e input - no se encoge */
         .header-buttons {
             display: flex;
             gap: 0.5rem;
@@ -183,75 +182,59 @@
             background: var(--morado);
         }
 
-        /* Responsive para cuando la pantalla es mediana */
+        /* Contador de visitas */
+        .contador-visitas {
+            background: linear-gradient(135deg, var(--naranja), var(--morado));
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            margin-left: 0.5rem;
+        }
+        .contador-numero {
+            font-size: 1rem;
+            font-weight: bold;
+            background: white;
+            color: var(--morado);
+            padding: 0.1rem 0.5rem;
+            border-radius: 30px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Responsive */
         @media (max-width: 1100px) {
-            .logo-text {
-                font-size: 0.85rem;
-            }
-
-            .ticker {
-                font-size: 0.65rem;
-                gap: 0.7rem;
-                padding: 0.3rem 0.7rem;
-            }
-
-            .header-buttons input {
-                width: 130px;
-                font-size: 0.7rem;
-            }
-
-            .btn {
-                padding: 0.35rem 0.7rem;
-                font-size: 0.7rem;
-            }
+            .logo-text { font-size: 0.85rem; }
+            .ticker { font-size: 0.65rem; gap: 0.7rem; padding: 0.3rem 0.7rem; }
+            .header-buttons input { width: 130px; font-size: 0.7rem; }
+            .btn { padding: 0.35rem 0.7rem; font-size: 0.7rem; }
+            .contador-visitas { font-size: 0.65rem; padding: 0.2rem 0.8rem; }
+            .contador-numero { font-size: 0.85rem; min-width: 40px; }
         }
 
         @media (max-width: 900px) {
-            .logo-text {
-                font-size: 0.75rem;
-            }
-
-            .logo-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 0.9rem;
-            }
-
-            .ticker-item .fecha {
-                display: none;
-            }
+            .logo-text { font-size: 0.75rem; }
+            .logo-icon { width: 28px; height: 28px; font-size: 0.9rem; }
+            .ticker-item .fecha { display: none; }
         }
 
-        /* Para tablets, se envuelve pero mantiene todo */
         @media (max-width: 768px) {
-            body {
-                padding-top: 120px;
-            }
-
-            .header-contenido {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-
-            .ticker {
-                order: 3;
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .header-buttons {
-                order: 2;
-            }
+            body { padding-top: 120px; }
+            .header-contenido { flex-wrap: wrap; gap: 0.5rem; }
+            .ticker { order: 3; width: 100%; justify-content: flex-start; }
+            .header-buttons { order: 2; }
         }
 
-        /* Contenedor principal */
         .contenedor {
             max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* KPIs */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -297,7 +280,6 @@
             margin-top: 0.2rem;
         }
 
-        /* Gráficos */
         .dashboard-graficos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -337,7 +319,6 @@
             width: 100%;
         }
 
-        /* Tarjetas de consejos */
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -374,7 +355,6 @@
             line-height: 1.4;
         }
 
-        /* Recomendaciones panel */
         .recomendaciones-panel {
             background: linear-gradient(135deg, #0f172a, #1e1b4b);
             border-radius: var(--border-radius);
@@ -421,7 +401,6 @@
             color: var(--texto-muted);
         }
 
-        /* Noticias */
         .noticias-header {
             display: flex;
             justify-content: space-between;
@@ -481,7 +460,6 @@
             line-height: 1.3;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -541,46 +519,64 @@
             line-height: 1.5;
         }
 
-        /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--dark-bg), #1e293b);
-            color: white;
-            padding: 4rem 0 2rem;
+            background: var(--bg-card);
+            padding: 2rem;
             text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.75rem;
+            color: var(--texto-muted);
         }
 
         .footer-logo {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, #ffcc00, #2196f3);
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #677bed, #0672ba);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
 
         .footer-tagline {
-            color: white;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1rem auto;
+            font-size: 0.8rem;
         }
 
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            margin-top: 3rem;
-            color: #94a3b8;
-            font-size: 0.9rem;
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .share-btn {
+            background: rgba(255,255,255,0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            text-decoration: none;
+            color: var(--texto);
+            transition: all 0.2s;
+        }
+        .share-btn:hover {
+            background: var(--azul);
+            transform: translateY(-2px);
+        }
+
+        .cargando {
+            text-align: center;
+            padding: 40px;
+            color: var(--texto-muted);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-graficos { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-noticias { grid-template-columns: 1fr; }
         }
     </style>
-
 </head>
 
 <body>
@@ -595,14 +591,10 @@
             </a>
 
             <div class="ticker" id="ticker">
-                <div class="ticker-item">🇲🇽 USD/MXN: <span id="usdmxn" class="valor">---</span> <span id="fechaTC"
-                        class="fecha"></span></div>
-                <div class="ticker-item">📈 INPC: <span id="inflacion" class="valor">---</span> <span id="fechaInf"
-                        class="fecha"></span></div>
-                <div class="ticker-item">🏦 Tasa: <span id="tasa" class="valor">---</span> <span id="fechaTasa"
-                        class="fecha"></span></div>
-                <div class="ticker-item">📊 CETES: <span id="cetes" class="valor">---</span> <span id="fechaCetes"
-                        class="fecha"></span></div>
+                <div class="ticker-item">🇲🇽 USD/MXN: <span id="usdmxn" class="valor">---</span> <span id="fechaTC" class="fecha"></span></div>
+                <div class="ticker-item">📈 INPC: <span id="inflacion" class="valor">---</span> <span id="fechaInf" class="fecha"></span></div>
+                <div class="ticker-item">🏦 Tasa: <span id="tasa" class="valor">---</span> <span id="fechaTasa" class="fecha"></span></div>
+                <div class="ticker-item">📊 CETES: <span id="cetes" class="valor">---</span> <span id="fechaCetes" class="fecha"></span></div>
             </div>
 
             <div class="header-buttons">
@@ -610,6 +602,9 @@
                 <button id="conectarBtn" class="btn">🔗 Conectar</button>
                 <button id="exportBtn" class="btn">📎 Excel</button>
                 <button id="darkModeToggle" class="btn dark-toggle">🌙 Dark</button>
+                <div class="contador-visitas">
+                    👁️ Visitas: <span id="contadorNumero" class="contador-numero">0</span>
+                </div>
             </div>
         </div>
     </header>
@@ -617,7 +612,6 @@
     <main>
         <div class="contenedor">
 
-            <!-- Recomendaciones Panel -->
             <div class="recomendaciones-panel">
                 <h3>💡 RECOMENDACIONES PARA TU BOLSILLO (ACTUALIZADAS EN VIVO)</h3>
                 <div id="recomendacionesLista">
@@ -625,166 +619,92 @@
                         <div class="recomendacion-icono">🔌</div>
                         <div class="recomendacion-texto">
                             <div class="recomendacion-titulo">Conecta tu API Key de Banxico</div>
-                            <div class="recomendacion-descripcion">Para obtener recomendaciones personalizadas según la
-                                situación económica actual.</div>
+                            <div class="recomendacion-descripcion">Para obtener recomendaciones personalizadas según la situación económica actual.</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- KPIs -->
             <div class="kpi-grid">
-                <div class="kpi-card">
-                    <h4>🇲🇽 DÓLAR HOY</h4>
-                    <div class="kpi-valor" id="kpiTC">---</div>
-                    <div class="kpi-explicacion">Valor del peso frente al dólar</div>
-                    <div class="kpi-fecha" id="kpiFechTC"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>📈 INFLACIÓN</h4>
-                    <div class="kpi-valor" id="kpiInf">---</div>
-                    <div class="kpi-explicacion">Qué tan caro está todo vs hace un año</div>
-                    <div class="kpi-fecha" id="kpiFechInf"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>🏦 TASA BANXICO</h4>
-                    <div class="kpi-valor" id="kpiTasa">---</div>
-                    <div class="kpi-explicacion">Lo que ganas si ahorras en CETES</div>
-                    <div class="kpi-fecha" id="kpiFechTasa"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>📊 CETES 28D</h4>
-                    <div class="kpi-valor" id="kpiCetes">---</div>
-                    <div class="kpi-explicacion">Rendimiento del ahorro seguro</div>
-                    <div class="kpi-fecha" id="kpiFechCetes"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>💵 RESERVAS</h4>
-                    <div class="kpi-valor" id="kpiReservas">---</div>
-                    <div class="kpi-explicacion">El colchón de dólares de México</div>
-                    <div class="kpi-fecha" id="kpiFechReservas"></div>
-                </div>
-                <div class="kpi-card">
-                    <h4>📉 VOLATILIDAD</h4>
-                    <div class="kpi-valor" id="kpiVolatilidad">---</div>
-                    <div class="kpi-explicacion">Rango últimas 20 sesiones</div>
-                    <div class="kpi-fecha"></div>
-                </div>
+                <div class="kpi-card"><h4>🇲🇽 DÓLAR HOY</h4><div class="kpi-valor" id="kpiTC">---</div><div class="kpi-explicacion">Valor del peso frente al dólar</div><div class="kpi-fecha" id="kpiFechTC"></div></div>
+                <div class="kpi-card"><h4>📈 INFLACIÓN</h4><div class="kpi-valor" id="kpiInf">---</div><div class="kpi-explicacion">Qué tan caro está todo vs hace un año</div><div class="kpi-fecha" id="kpiFechInf"></div></div>
+                <div class="kpi-card"><h4>🏦 TASA BANXICO</h4><div class="kpi-valor" id="kpiTasa">---</div><div class="kpi-explicacion">Lo que ganas si ahorras en CETES</div><div class="kpi-fecha" id="kpiFechTasa"></div></div>
+                <div class="kpi-card"><h4>📊 CETES 28D</h4><div class="kpi-valor" id="kpiCetes">---</div><div class="kpi-explicacion">Rendimiento del ahorro seguro</div><div class="kpi-fecha" id="kpiFechCetes"></div></div>
+                <div class="kpi-card"><h4>💵 RESERVAS</h4><div class="kpi-valor" id="kpiReservas">---</div><div class="kpi-explicacion">El colchón de dólares de México</div><div class="kpi-fecha" id="kpiFechReservas"></div></div>
+                <div class="kpi-card"><h4>📉 VOLATILIDAD</h4><div class="kpi-valor" id="kpiVolatilidad">---</div><div class="kpi-explicacion">Rango últimas 20 sesiones</div><div class="kpi-fecha"></div></div>
             </div>
 
-            <!-- GRÁFICAS - 8 EN TOTAL -->
             <div class="dashboard-graficos">
                 <div class="grafico-card">
-                    <h3>💱 1. Tipo de Cambio USD/MXN <button class="btn" onclick="descargarPNG('chartTC')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Línea azul = precio de cierre. Si
-                        sube, peso débil. Niveles clave: $17.50 (fuerte), $19.50 (débil).</div>
+                    <h3>💱 1. Tipo de Cambio USD/MXN <button class="btn" onclick="descargarPNG('chartTC')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Línea azul = precio de cierre. Si sube, peso débil. Niveles clave: $17.50 (fuerte), $19.50 (débil).</div>
                     <canvas id="chartTC"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>📈 2. MÁXIMOS y MÍNIMOS (20 días) <button class="btn" onclick="descargarPNG('chartRange')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El área sombreada muestra el rango de
-                        precios. Rango amplio = alta volatilidad.</div>
+                    <h3>📈 2. MÁXIMOS y MÍNIMOS (20 días) <button class="btn" onclick="descargarPNG('chartRange')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El área sombreada muestra el rango de precios. Rango amplio = alta volatilidad.</div>
                     <canvas id="chartRange"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>📊 3. PRECIO de CIERRE vs APERTURA <button class="btn" onclick="descargarPNG('chartCandle')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Barras verdes = subió el día; rojas =
-                        bajó. Velas largas = movimientos fuertes.</div>
+                    <h3>📊 3. PRECIO de CIERRE vs APERTURA <button class="btn" onclick="descargarPNG('chartCandle')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Barras verdes = subió el día; rojas = bajó. Velas largas = movimientos fuertes.</div>
                     <canvas id="chartCandle"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>🏦 4. Tasas: Banxico vs CETES <button class="btn" onclick="descargarPNG('chartTasas')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Naranja = tasa Banxico, Verde = CETES.
-                        Spread amplio = buen momento para ahorrar.</div>
+                    <h3>🏦 4. Tasas: Banxico vs CETES <button class="btn" onclick="descargarPNG('chartTasas')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Naranja = tasa Banxico, Verde = CETES. Spread amplio = buen momento para ahorrar.</div>
                     <canvas id="chartTasas"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>📉 5. Inflación (INPC) <button class="btn" onclick="descargarPNG('chartInf')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Sobre 4% = tu dinero pierde valor
-                        rápido. Meta oficial del Banxico: 3%.</div>
+                    <h3>📉 5. Inflación (INPC) <button class="btn" onclick="descargarPNG('chartInf')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Sobre 4% = tu dinero pierde valor rápido. Meta oficial del Banxico: 3%.</div>
                     <canvas id="chartInf"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>🛢️ 6. Petróleo Brent (USD/barril) <button class="btn" onclick="descargarPNG('chartPetroleo')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El petróleo impacta gasolinas,
-                        inflación y finanzas de Pemex.</div>
+                    <h3>🛢️ 6. Petróleo Brent (USD/barril) <button class="btn" onclick="descargarPNG('chartPetroleo')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El petróleo impacta gasolinas, inflación y finanzas de Pemex.</div>
                     <canvas id="chartPetroleo"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>📦 7. VOLUMEN de Operación <button class="btn" onclick="descargarPNG('chartVolumen')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Barras altas = mucha actividad de
-                        mercado. Bajas = poca liquidez.</div>
+                    <h3>📦 7. VOLUMEN de Operación <button class="btn" onclick="descargarPNG('chartVolumen')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> Barras altas = mucha actividad de mercado. Bajas = poca liquidez.</div>
                     <canvas id="chartVolumen"></canvas>
                 </div>
                 <div class="grafico-card">
-                    <h3>💵 8. Reservas Internacionales <button class="btn" onclick="descargarPNG('chartReservas')"
-                            style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
-                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El colchón de dólares de México. Sobre
-                        $200 mil millones = posición sólida.</div>
+                    <h3>💵 8. Reservas Internacionales <button class="btn" onclick="descargarPNG('chartReservas')" style="font-size:0.7rem; padding:0.2rem 0.6rem;">📸</button></h3>
+                    <div class="interpretacion">📌 <strong>Qué observar:</strong> El colchón de dólares de México. Sobre $200 mil millones = posición sólida.</div>
                     <canvas id="chartReservas"></canvas>
                 </div>
             </div>
 
-            <!-- Tarjetas de Consejos Fijos -->
             <div class="tips-grid">
-                <div class="tip-card">
-                    <div class="tip-icono">🏦</div>
-                    <div class="tip-titulo">CETES: ¿Cómo empezar?</div>
-                    <div class="tip-descripcion">Invertir en CETES desde $100 pesos. Es el instrumento más seguro de
-                        México. Rendimientos de hasta 11% anual. Solo necesitas tu e.firma o CURP.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">💳</div>
-                    <div class="tip-titulo">Tarjetas de crédito</div>
-                    <div class="tip-descripcion">Nunca pagues el mínimo. Siempre pago total para no generar intereses.
-                        Las tasas de interés están en 30-80% anual.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">🏠</div>
-                    <div class="tip-titulo">Comprar casa</div>
-                    <div class="tip-descripcion">Las tasas hipotecarias están entre 9-12%. Si la tasa de Banxico baja,
-                        las hipotecas se abaratan. Espera si puedes.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">📱</div>
-                    <div class="tip-titulo">Apps para ahorrar</div>
-                    <div class="tip-descripcion">GBM+, Fondeadora, Nu, Klar. Compara rendimientos. Algunas pagan hasta
-                        15% en cuentas de ahorro con liquidez diaria.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">💰</div>
-                    <div class="tip-titulo">Fondo de emergencia</div>
-                    <div class="tip-descripcion">Guarda 3-6 meses de gastos en un lugar de fácil acceso (CETES o cuenta
-                        de ahorro). Te salvará de imprevistos.</div>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icono">📉</div>
-                    <div class="tip-titulo">Dólar caro o barato</div>
-                    <div class="tip-descripcion">Si el dólar sube (>$19), evita comprar en Amazon USA. Si baja (<$18),
-                            es buen momento para comprar tecnología.</div>
-                    </div>
-                </div>
-
-                <!-- NOTICIAS CON MODAL -->
-                <div class="noticias-header">
-                    <h3>📰 NOTICIAS ECONÓMICAS (click para leer completo)</h3>
-                    <button id="refreshNoticiasBtn" class="btn" style="background:var(--morado);">🔄 Actualizar</button>
-                </div>
-                <div class="grid-noticias" id="noticiasGrid">
-                    <div class="cargando">📡 Cargando noticias económicas de México...</div>
-                </div>
-
+                <div class="tip-card"><div class="tip-icono">🏦</div><div class="tip-titulo">CETES: ¿Cómo empezar?</div><div class="tip-descripcion">Invertir en CETES desde $100 pesos. Es el instrumento más seguro de México. Rendimientos de hasta 11% anual. Solo necesitas tu e.firma o CURP.</div></div>
+                <div class="tip-card"><div class="tip-icono">💳</div><div class="tip-titulo">Tarjetas de crédito</div><div class="tip-descripcion">Nunca pagues el mínimo. Siempre pago total para no generar intereses. Las tasas de interés están en 30-80% anual.</div></div>
+                <div class="tip-card"><div class="tip-icono">🏠</div><div class="tip-titulo">Comprar casa</div><div class="tip-descripcion">Las tasas hipotecarias están entre 9-12%. Si la tasa de Banxico baja, las hipotecas se abaratan. Espera si puedes.</div></div>
+                <div class="tip-card"><div class="tip-icono">📱</div><div class="tip-titulo">Apps para ahorrar</div><div class="tip-descripcion">GBM+, Fondeadora, Nu, Klar. Compara rendimientos. Algunas pagan hasta 15% en cuentas de ahorro con liquidez diaria.</div></div>
+                <div class="tip-card"><div class="tip-icono">💰</div><div class="tip-titulo">Fondo de emergencia</div><div class="tip-descripcion">Guarda 3-6 meses de gastos en un lugar de fácil acceso (CETES o cuenta de ahorro). Te salvará de imprevistos.</div></div>
+                <div class="tip-card"><div class="tip-icono">📉</div><div class="tip-titulo">Dólar caro o barato</div><div class="tip-descripcion">Si el dólar sube (>$19), evita comprar en Amazon USA. Si baja (<$18), es buen momento para comprar tecnología.</div></div>
             </div>
+
+            <div class="noticias-header">
+                <h3>📰 NOTICIAS ECONÓMICAS (click para leer completo)</h3>
+                <button id="refreshNoticiasBtn" class="btn" style="background:var(--morado);">🔄 Actualizar</button>
+            </div>
+            <div class="grid-noticias" id="noticiasGrid">
+                <div class="cargando">📡 Cargando noticias económicas de México...</div>
+            </div>
+
+            <!-- Botones de compartir -->
+            <div class="share-buttons">
+                <a href="#" id="shareWhatsApp" class="share-btn">📱 Compartir en WhatsApp</a>
+                <a href="#" id="shareFacebook" class="share-btn">📘 Compartir en Facebook</a>
+                <a href="#" id="shareTwitter" class="share-btn">🐦 Compartir en X</a>
+                <a href="#" id="shareLinkedIn" class="share-btn">🔗 Compartir en LinkedIn</a>
+            </div>
+
+        </div>
     </main>
 
-    <!-- Modal -->
     <div id="modalNoticia" class="modal">
         <div class="modal-contenido">
             <span class="modal-cerrar" onclick="cerrarModal()">&times;</span>
@@ -796,22 +716,50 @@
     </div>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Jerónimo Ricardo Ramírez Torres</div>
-            <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conecto
-                procesos, simplifico operaciones y entrego resultados.</p>
-
-            <div class="footer-bottom">
-                <p>© <span id="year">2023</span> Jerónimo Ricardo Ramírez Torres - Soluciones Digitales Premium. Todos
-                    los derechos reservados.</p>
-                <p style="margin-top: 0.5rem;">Transformando instituciones con tecnología elegante, eficiente y
-                    accesible.</p>
-            </div>
+        <div class="footer-logo">Jerónimo Ricardo Ramírez Torres</div>
+        <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conecto procesos, simplifico operaciones y entrego resultados.</p>
+        <div>
+            <p>© <span id="year">2025</span> Jerónimo Ricardo Ramírez Torres - Soluciones Digitales Premium. Todos los derechos reservados.</p>
+            <p style="margin-top: 0.5rem;">Transformando instituciones con tecnología elegante, eficiente y accesible.</p>
         </div>
     </footer>
 
     <script>
-        // ==================== VARIABLES ====================
+        // ==================== CONTADOR DE VISITAS ====================
+        function actualizarContadorVisitas() {
+            let visitas = localStorage.getItem('dashboard_visitas');
+            if (visitas === null) {
+                visitas = 1;
+            } else {
+                visitas = parseInt(visitas) + 1;
+            }
+            localStorage.setItem('dashboard_visitas', visitas);
+            document.getElementById('contadorNumero').innerText = visitas;
+        }
+        
+        // Detectar si es primera visita en esta sesión (para no contar recargas)
+        let sesionContada = sessionStorage.getItem('visita_contada');
+        if (!sesionContada) {
+            actualizarContadorVisitas();
+            sessionStorage.setItem('visita_contada', 'true');
+        } else {
+            let visitas = localStorage.getItem('dashboard_visitas');
+            document.getElementById('contadorNumero').innerText = visitas || '0';
+        }
+
+        // ==================== BOTONES DE COMPARTIR ====================
+        const urlActual = encodeURIComponent(window.location.href);
+        const titulo = encodeURIComponent("Dashboard Económico México - Datos Banxico en Vivo");
+        
+        document.getElementById('shareWhatsApp')?.setAttribute('href', `https://wa.me/?text=${titulo}%20-%20${urlActual}`);
+        document.getElementById('shareFacebook')?.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${urlActual}`);
+        document.getElementById('shareTwitter')?.setAttribute('href', `https://twitter.com/intent/tweet?text=${titulo}&url=${urlActual}`);
+        document.getElementById('shareLinkedIn')?.setAttribute('href', `https://www.linkedin.com/shareArticle?mini=true&url=${urlActual}&title=${titulo}`);
+
+        // Año en footer
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        // ==================== VARIABLES Y API BANXICO ====================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
         let charts = {};
         let valoresActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
@@ -828,7 +776,6 @@
 
         let datosHistoricosTC = [];
 
-        // ==================== API BANXICO ====================
         async function consultarBanxicoConFecha(serieId, token) {
             if (!token) return null;
             try {
@@ -890,11 +837,11 @@
                 const resumen = noticia.description?.replace(/<[^>]*>/g, '').substring(0, 120) || 'Sin descripción';
                 return `
                     <div class="noticia-card" onclick='abrirModal(${JSON.stringify({
-                    titulo: titulo,
-                    descripcion: noticia.description?.replace(/<[^>]*>/g, '') || 'Sin descripción completa',
-                    fecha: noticia.pubDate,
-                    imagen: imagenUrl
-                })})'>
+                        titulo: titulo,
+                        descripcion: noticia.description?.replace(/<[^>]*>/g, '') || 'Sin descripción completa',
+                        fecha: noticia.pubDate,
+                        imagen: imagenUrl
+                    })})'>
                         <img class="noticia-imagen" src="${imagenUrl}" alt="Noticia" onerror="this.src='https://picsum.photos/400/200?random=${idx}'">
                         <div class="noticia-titulo">📰 ${titulo}</div>
                         <div class="noticia-fuente">
@@ -918,11 +865,11 @@
             const grid = document.getElementById('noticiasGrid');
             grid.innerHTML = noticiasBackup.map(noticia => `
                 <div class="noticia-card" onclick='abrirModal(${JSON.stringify({
-                titulo: noticia.titulo,
-                descripcion: noticia.descripcion,
-                fecha: noticia.fecha,
-                imagen: noticia.imagen
-            })})'>
+                    titulo: noticia.titulo,
+                    descripcion: noticia.descripcion,
+                    fecha: noticia.fecha,
+                    imagen: noticia.imagen
+                })})'>
                     <img class="noticia-imagen" src="${noticia.imagen}" alt="Noticia">
                     <div class="noticia-titulo">📰 ${noticia.titulo}</div>
                     <div class="noticia-fuente">📅 ${new Date(noticia.fecha).toLocaleDateString('es-MX')}</div>
@@ -931,7 +878,6 @@
             `).join('');
         }
 
-        // Modal functions
         function abrirModal(noticia) {
             const modal = document.getElementById('modalNoticia');
             document.getElementById('modalImagen').src = noticia.imagen;
@@ -1140,7 +1086,6 @@
             charts.reservas.update();
         }
 
-        // ==================== INICIALIZAR GRÁFICAS ====================
         function initCharts() {
             charts.tc = new Chart(document.getElementById('chartTC'), { type: 'line', data: { labels: [], datasets: [{ label: 'USD/MXN (Cierre)', borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3, data: [] }] }, options: { responsive: true } });
             charts.range = new Chart(document.getElementById('chartRange'), { type: 'line', data: { labels: [], datasets: [{ label: 'Máximo 5 días', borderColor: '#10b981', data: [] }, { label: 'Mínimo 5 días', borderColor: '#ef4444', data: [] }] }, options: { responsive: true, fill: 1 } });
@@ -1152,7 +1097,6 @@
             charts.reservas = new Chart(document.getElementById('chartReservas'), { type: 'line', data: { labels: [], datasets: [{ label: 'Reservas (miles M USD)', borderColor: '#ec489a', backgroundColor: 'rgba(236,72,153,0.1)', fill: true, data: [] }] }, options: { responsive: true } });
         }
 
-        // ==================== UTILERÍAS ====================
         async function descargarPNG(chartId) {
             const canvas = document.getElementById(chartId);
             const link = document.createElement('a');
@@ -1193,7 +1137,6 @@
             };
         }
 
-        // ==================== INICIALIZACIÓN ====================
         async function init() {
             initCharts();
             initDarkMode();
