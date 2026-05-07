@@ -723,12 +723,36 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <p>🔹 8 gráficas con datos Banxico · Máximos, mínimos, velas, volumen · Noticias con imágenes reales</p>
-        <p>🔹 Las recomendaciones cambian según los datos económicos en vivo · Consejos financieros prácticos</p>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Jerónimo Ricardo Ramírez Torres</div>
+            <p class="footer-tagline">Soluciones Digitales Premium para la Transformación Institucional. Conecto
+                procesos, simplifico operaciones y entrego resultados.</p>
+
+            <div class="footer-bottom">
+                <p>© <span id="year">2023</span> Jerónimo Ricardo Ramírez Torres - Soluciones Digitales Premium. Todos
+                    los derechos reservados.</p>
+                <p style="margin-top: 0.5rem;">Transformando instituciones con tecnología elegante, eficiente y
+                    accesible.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
+
+        // ========== AÑO ==========
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mobileMenu.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
+                : '<i class="fas fa-bars"></i>';
+        });
+
         // ==================== VARIABLES ====================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
         let charts = {};
