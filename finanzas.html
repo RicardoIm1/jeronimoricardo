@@ -4,19 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JERONIMORICARDO | Economic Intelligence</title>
+    <title>MEX Dashboard | Economic Intelligence</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js">
     </script>
     <style>
-        /* ===== DARK PROFESSIONAL THEME ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ===== THEME VARIABLES ===== */
         :root {
             --bg-primary: #0a0e17;
             --bg-secondary: #111927;
@@ -40,6 +34,132 @@
             --transition: all 0.25s ease;
         }
 
+        /* ===== LIGHT THEME ===== */
+        [data-theme="light"] {
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --text-primary: #1a2332;
+            --text-secondary: #4a5a7a;
+            --text-muted: #8899bb;
+            --border-color: #dce4ed;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="light"] .market-card .interpretation.bullish {
+            background: rgba(0, 212, 170, 0.15);
+            color: #00a88a;
+        }
+        [data-theme="light"] .market-card .interpretation.bearish {
+            background: rgba(255, 71, 87, 0.15);
+            color: #d63031;
+        }
+        [data-theme="light"] .market-card .interpretation.neutral {
+            background: rgba(74, 158, 255, 0.12);
+            color: #2980b9;
+        }
+        [data-theme="light"] .news-card .news-analysis {
+            background: #f0f4f8;
+        }
+        [data-theme="light"] .rec-panel {
+            background: #f8fafc;
+        }
+        [data-theme="light"] .rec-item {
+            background: #ffffff;
+        }
+        [data-theme="light"] .rec-item .rec-title {
+            color: #1a2332;
+        }
+        [data-theme="light"] .rec-item .rec-desc {
+            color: #4a5a7a;
+        }
+        [data-theme="light"] .status-bar {
+            background: #ffffff;
+        }
+        [data-theme="light"] .ticker {
+            background: #f0f4f8;
+        }
+        [data-theme="light"] .ticker-item {
+            color: #4a5a7a;
+        }
+        [data-theme="light"] .ticker-item .valor {
+            color: #1a2332;
+        }
+        [data-theme="light"] .contador-visitas {
+            border-color: #dce4ed;
+            color: #4a5a7a;
+        }
+        [data-theme="light"] .contador-visitas span {
+            color: #1a2332;
+        }
+        [data-theme="light"] .modal-content {
+            background: #ffffff;
+        }
+        [data-theme="light"] .modal .modal-body-text {
+            background: #f0f4f8;
+            color: #4a5a7a;
+        }
+        [data-theme="light"] .modal .modal-example {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 140, 66, 0.08));
+        }
+        [data-theme="light"] .modal .tabs .tab {
+            background: #f0f4f8;
+            color: #4a5a7a;
+        }
+        [data-theme="light"] .modal .tabs .tab.active {
+            background: var(--blue);
+            color: white;
+        }
+        [data-theme="light"] .welcome-content {
+            background: #ffffff;
+        }
+        [data-theme="light"] .welcome-features .item {
+            background: #f0f4f8;
+        }
+        [data-theme="light"] footer {
+            background: #ffffff;
+            border-color: #dce4ed;
+        }
+        [data-theme="light"] .header-buttons input {
+            background: #f0f4f8;
+            color: #1a2332;
+        }
+        [data-theme="light"] .header-buttons input::placeholder {
+            color: #8899bb;
+        }
+        [data-theme="light"] .btn-outline {
+            color: #4a5a7a;
+            border-color: #dce4ed;
+        }
+        [data-theme="light"] .btn-outline:hover {
+            background: #f0f4f8;
+            color: #1a2332;
+        }
+        [data-theme="light"] .share-btn {
+            background: #f0f4f8;
+            color: #4a5a7a;
+            border-color: #dce4ed;
+        }
+        [data-theme="light"] .share-btn:hover {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+        }
+        [data-theme="light"] .chart-card .insight {
+            background: #f0f4f8;
+        }
+        [data-theme="light"] .tip-card {
+            background: #ffffff;
+        }
+
+        /* ===== BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
             background: var(--bg-primary);
@@ -47,6 +167,7 @@
             min-height: 100vh;
             padding-top: 60px;
             -webkit-font-smoothing: antialiased;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* ===== SCROLLBAR ===== */
@@ -54,21 +175,18 @@
             width: 6px;
             height: 6px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--border-color);
             border-radius: 4px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-muted);
         }
 
-        /* ===== HEADER PROFESSIONAL ===== */
+        /* ===== HEADER ===== */
         header {
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
@@ -78,6 +196,7 @@
             top: 0;
             z-index: 1000;
             backdrop-filter: blur(12px);
+            transition: background 0.3s ease;
         }
 
         .header-contenido {
@@ -113,12 +232,11 @@
             font-weight: 700;
             font-size: 1.1rem;
             letter-spacing: -0.5px;
+            color: var(--text-primary);
         }
-
         .logo-text .highlight {
             color: var(--gold);
         }
-
         .logo-sub {
             font-size: 0.5rem;
             color: var(--text-muted);
@@ -142,6 +260,7 @@
             min-width: 0;
             border: 1px solid var(--border-color);
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            transition: background 0.3s ease;
         }
 
         .ticker-item {
@@ -166,23 +285,6 @@
             font-size: 0.7rem;
         }
 
-        .ticker-item .change {
-            font-size: 0.55rem;
-            font-weight: 600;
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-        }
-
-        .ticker-item .change.up {
-            color: var(--green);
-            background: var(--green-bg);
-        }
-
-        .ticker-item .change.down {
-            color: var(--red);
-            background: var(--red-bg);
-        }
-
         .status-dot {
             display: inline-block;
             width: 6px;
@@ -191,26 +293,21 @@
             margin-right: 4px;
             animation: pulse-dot 2s infinite;
         }
-
         .status-dot.online {
             background: var(--green);
         }
-
         .status-dot.fallback {
             background: var(--gold);
         }
-
         .status-dot.offline {
             background: var(--red);
         }
 
         @keyframes pulse-dot {
-
             0%,
             100% {
                 opacity: 1;
             }
-
             50% {
                 opacity: 0.3;
             }
@@ -233,12 +330,11 @@
             width: 150px;
             font-size: 0.6rem;
             font-family: 'JetBrains Mono', monospace;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-
         .header-buttons input::placeholder {
             color: var(--text-muted);
         }
-
         .header-buttons input:focus {
             outline: none;
             border-color: var(--blue);
@@ -261,7 +357,6 @@
             background: var(--blue);
             color: white;
         }
-
         .btn-primary:hover {
             background: #3a8aee;
             transform: translateY(-1px);
@@ -272,7 +367,6 @@
             background: var(--green);
             color: var(--bg-primary);
         }
-
         .btn-success:hover {
             background: #00c49a;
             transform: translateY(-1px);
@@ -283,7 +377,6 @@
             color: var(--text-secondary);
             border: 1px solid var(--border-color);
         }
-
         .btn-outline:hover {
             background: var(--bg-card);
             color: var(--text-primary);
@@ -293,7 +386,6 @@
             background: var(--gold);
             color: var(--bg-primary);
         }
-
         .btn-gold:hover {
             background: #f0ca00;
             transform: translateY(-1px);
@@ -308,8 +400,8 @@
             padding: 0.2rem 0.6rem;
             border: 1px solid var(--border-color);
             border-radius: 40px;
+            transition: border-color 0.3s ease;
         }
-
         .contador-visitas span {
             color: var(--text-primary);
             font-weight: 700;
@@ -336,6 +428,7 @@
             color: var(--text-secondary);
             flex-wrap: wrap;
             gap: 0.5rem;
+            transition: background 0.3s ease;
         }
 
         .status-bar .left {
@@ -360,17 +453,14 @@
             font-size: 0.55rem;
             font-weight: 600;
         }
-
         .status-badge.live {
             background: var(--green-bg);
             color: var(--green);
         }
-
         .status-badge.demo {
             background: var(--blue-bg);
             color: var(--blue);
         }
-
         .status-badge.fallback {
             background: rgba(255, 215, 0, 0.12);
             color: var(--gold);
@@ -440,6 +530,7 @@
             font-family: 'JetBrains Mono', monospace;
             letter-spacing: -0.5px;
             margin: 0.1rem 0;
+            color: var(--text-primary);
         }
 
         .market-card .sub {
@@ -460,43 +551,35 @@
             background: var(--green-bg);
             color: var(--green);
         }
-
         .market-card .interpretation.bearish {
             background: var(--red-bg);
             color: var(--red);
         }
-
         .market-card .interpretation.neutral {
             background: var(--blue-bg);
             color: var(--blue);
         }
 
-        /* Colores de borde por card */
         .market-card:nth-child(1)::before {
             background: var(--blue);
         }
-
         .market-card:nth-child(2)::before {
             background: var(--red);
         }
-
         .market-card:nth-child(3)::before {
             background: var(--orange);
         }
-
         .market-card:nth-child(4)::before {
             background: var(--green);
         }
-
         .market-card:nth-child(5)::before {
             background: var(--purple);
         }
-
         .market-card:nth-child(6)::before {
             background: var(--gold);
         }
 
-        /* ===== CHARTS SECTION ===== */
+        /* ===== CHARTS ===== */
         .charts-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -548,6 +631,7 @@
             border-radius: 6px;
             margin-bottom: 0.6rem;
             border-left: 2px solid var(--blue);
+            transition: background 0.3s ease;
         }
 
         canvas {
@@ -563,6 +647,7 @@
             padding: 1.2rem 1.5rem;
             margin-bottom: 24px;
             border: 1px solid var(--border-color);
+            transition: background 0.3s ease;
         }
 
         .rec-panel .rec-header {
@@ -649,6 +734,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--text-primary);
         }
 
         .news-header h3 .count {
@@ -711,6 +797,7 @@
             background: var(--bg-primary);
             border-radius: 6px;
             border-left: 2px solid var(--orange);
+            transition: background 0.3s ease;
         }
 
         .news-card .news-action {
@@ -810,6 +897,7 @@
             padding: 1.5rem 2rem;
             border: 1px solid var(--border-color);
             position: relative;
+            transition: background 0.3s ease;
         }
 
         .modal-close {
@@ -824,7 +912,6 @@
             line-height: 1;
             transition: var(--transition);
         }
-
         .modal-close:hover {
             color: var(--red);
         }
@@ -836,6 +923,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--text-primary);
         }
 
         .modal .modal-sub {
@@ -853,6 +941,7 @@
             font-size: 0.85rem;
             color: var(--text-secondary);
             border: 1px solid var(--border-color);
+            transition: background 0.3s ease;
         }
 
         .modal .modal-example {
@@ -901,7 +990,6 @@
             display: none;
             animation: fadeIn 0.25s ease;
         }
-
         .modal .tab-content.active {
             display: block;
         }
@@ -911,14 +999,13 @@
                 opacity: 0;
                 transform: translateY(6px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* ===== WELCOME MODAL ===== */
+        /* ===== WELCOME ===== */
         .welcome-modal {
             display: none;
             position: fixed;
@@ -945,14 +1032,15 @@
             border: 1px solid var(--border-color);
             text-align: center;
             position: relative;
+            transition: background 0.3s ease;
         }
 
         .welcome-content h1 {
             font-size: 1.8rem;
             font-weight: 800;
             margin-bottom: 0.3rem;
+            color: var(--text-primary);
         }
-
         .welcome-content h1 .highlight {
             background: linear-gradient(135deg, var(--gold), var(--orange));
             -webkit-background-clip: text;
@@ -1019,6 +1107,7 @@
             font-size: 0.6rem;
             border-top: 1px solid var(--border-color);
             margin-top: 10px;
+            transition: background 0.3s ease;
         }
 
         footer .footer-brand {
@@ -1032,29 +1121,43 @@
             color: var(--gold);
         }
 
+        /* ===== ERROR ===== */
+        .error-msg {
+            background: var(--red-bg);
+            border: 1px solid var(--red);
+            border-radius: var(--radius);
+            padding: 0.6rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.7rem;
+            color: var(--red);
+            display: none;
+        }
+
+        /* ===== LOADING ===== */
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             body {
                 padding-top: 90px;
             }
-
             .charts-section {
                 grid-template-columns: 1fr;
             }
-
             .market-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .news-grid {
                 grid-template-columns: 1fr;
             }
-
             .header-contenido {
                 flex-direction: column;
                 gap: 0.4rem;
             }
-
             .ticker {
                 width: 100%;
                 justify-content: center;
@@ -1062,37 +1165,29 @@
                 padding: 0.3rem 0.8rem;
                 gap: 0.6rem;
             }
-
             .header-buttons {
                 justify-content: center;
             }
-
             .header-buttons input {
                 width: 120px;
             }
-
             .modal-content {
                 padding: 1rem;
             }
-
             .welcome-content {
                 padding: 1.2rem;
             }
-
             .welcome-content h1 {
                 font-size: 1.3rem;
             }
-
             .status-bar {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.3rem;
             }
-
             .rec-grid {
                 grid-template-columns: 1fr;
             }
-
             .tips-grid {
                 grid-template-columns: 1fr 1fr;
             }
@@ -1103,38 +1198,17 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
             }
-
             .market-card .value {
                 font-size: 1.1rem;
             }
-
             .btn {
                 font-size: 0.5rem;
                 padding: 0.2rem 0.6rem;
             }
-
             .header-buttons input {
                 width: 100px;
                 font-size: 0.5rem;
             }
-        }
-
-        /* ===== LOADING ===== */
-        .loading {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-        }
-
-        .error-msg {
-            background: var(--red-bg);
-            border: 1px solid var(--red);
-            border-radius: var(--radius);
-            padding: 0.6rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.7rem;
-            color: var(--red);
-            display: none;
         }
     </style>
 </head>
@@ -1147,7 +1221,7 @@
             <div class="logo">
                 <div class="logo-icon">M</div>
                 <div>
-                    <div class="logo-text">JERONIMO<span class="highlight">RICARDO</span></div>
+                    <div class="logo-text">MEX<span class="highlight">DASH</span></div>
                     <span class="logo-sub">Economic Intelligence</span>
                 </div>
             </div>
@@ -1178,7 +1252,7 @@
             <div class="header-buttons">
                 <input type="text" id="apiKeyInput" placeholder="API Key Banxico">
                 <button id="conectarBtn" class="btn btn-primary">🔗 Conectar</button>
-                <button id="exportBtn" class="btn btn-outline">📊 Export</button>
+                <button id="exportBtn" class="btn btn-success">📊 Exportar</button>
                 <button id="darkModeToggle" class="btn btn-outline">🌙</button>
                 <div class="contador-visitas">👁 <span id="contadorNumero">0</span></div>
             </div>
@@ -1204,8 +1278,7 @@
             <!-- ===== ERROR ===== -->
             <div class="error-msg" id="errorMsg">
                 ⚠️ <span id="errorText">No se pudo conectar con Banxico. Usando datos de demostración.</span>
-                <button class="btn btn-primary" onclick="intentarReconectar()"
-                    style="margin-left:10px;padding:0.15rem 0.6rem;font-size:0.55rem;">Reintentar</button>
+                <button class="btn btn-primary" onclick="intentarReconectar()" style="margin-left:10px;padding:0.15rem 0.6rem;font-size:0.55rem;">Reintentar</button>
             </div>
 
             <!-- ===== MARKET GRID ===== -->
@@ -1277,8 +1350,7 @@
                         <h3>💱 USD/MXN · Spot</h3>
                         <span class="badge">últimos 30 días</span>
                     </div>
-                    <div class="insight">📌 Si la línea sube, el peso se debilita. Niveles clave: $17.50 (soporte),
-                        $19.50 (resistencia).</div>
+                    <div class="insight">📌 Si la línea sube, el peso se debilita. Niveles clave: $17.50 (soporte), $19.50 (resistencia).</div>
                     <canvas id="chartTC"></canvas>
                 </div>
                 <div class="chart-card">
@@ -1294,8 +1366,7 @@
                         <h3>📊 Movimiento diario</h3>
                         <span class="badge">cambio %</span>
                     </div>
-                    <div class="insight">📌 Barras verdes = ganancia, rojas = pérdida. Muestra la dirección del mercado.
-                    </div>
+                    <div class="insight">📌 Barras verdes = ganancia, rojas = pérdida. Muestra la dirección del mercado.</div>
                     <canvas id="chartCandle"></canvas>
                 </div>
                 <div class="chart-card">
@@ -1303,8 +1374,7 @@
                         <h3>🏦 Tasas de interés</h3>
                         <span class="badge">Banxico vs CETES</span>
                     </div>
-                    <div class="insight">📌 Naranja = Tasa Banxico, Verde = CETES. Spread amplio = buen momento para
-                        ahorrar.</div>
+                    <div class="insight">📌 Naranja = Tasa Banxico, Verde = CETES. Spread amplio = buen momento para ahorrar.</div>
                     <canvas id="chartTasas"></canvas>
                 </div>
                 <div class="chart-card">
@@ -1312,8 +1382,7 @@
                         <h3>📉 Inflación (INPC)</h3>
                         <span class="badge">meta 3%</span>
                     </div>
-                    <div class="insight">📌 Sobre 4% = pérdida de poder adquisitivo. Bajo 3% = estabilidad de precios.
-                    </div>
+                    <div class="insight">📌 Sobre 4% = pérdida de poder adquisitivo. Bajo 3% = estabilidad de precios.</div>
                     <canvas id="chartInf"></canvas>
                 </div>
                 <div class="chart-card">
@@ -1329,8 +1398,7 @@
                         <h3>💵 Reservas Internacionales</h3>
                         <span class="badge">colchón de México</span>
                     </div>
-                    <div class="insight">📌 Sobre $200 mil millones = posición sólida. Indicador de fortaleza económica.
-                    </div>
+                    <div class="insight">📌 Sobre $200 mil millones = posición sólida. Indicador de fortaleza económica.</div>
                     <canvas id="chartReservas"></canvas>
                 </div>
             </div>
@@ -1340,20 +1408,17 @@
                 <div class="tip-card">
                     <span class="tip-icon">🏦</span>
                     <div class="tip-title">CETES · El ahorro más seguro</div>
-                    <div class="tip-desc">Desde $100 pesos. Rendimientos de hasta 11% anual. Solo necesitas tu CURP y
-                        e.firma.</div>
+                    <div class="tip-desc">Desde $100 pesos. Rendimientos de hasta 11% anual. Solo necesitas tu CURP y e.firma.</div>
                 </div>
                 <div class="tip-card" style="border-color:var(--red);">
                     <span class="tip-icon">💳</span>
                     <div class="tip-title">Tarjetas de crédito · Alerta</div>
-                    <div class="tip-desc">Nunca pagues el mínimo. Las tasas están en 30-80% anual. Pago total siempre.
-                    </div>
+                    <div class="tip-desc">Nunca pagues el mínimo. Las tasas están en 30-80% anual. Pago total siempre.</div>
                 </div>
                 <div class="tip-card" style="border-color:var(--orange);">
                     <span class="tip-icon">🏠</span>
                     <div class="tip-title">Hipotecas · Timing</div>
-                    <div class="tip-desc">Tasas entre 9-12%. Si Banxico baja la tasa, las hipotecas se abaratan. Espera
-                        si puedes.</div>
+                    <div class="tip-desc">Tasas entre 9-12%. Si Banxico baja la tasa, las hipotecas se abaratan. Espera si puedes.</div>
                 </div>
                 <div class="tip-card" style="border-color:var(--purple);">
                     <span class="tip-icon">💰</span>
@@ -1414,7 +1479,7 @@
     <!-- ===== WELCOME ===== -->
     <div id="welcomeModal" class="welcome-modal">
         <div class="welcome-content">
-            <h1>JERONIMO<span class="highlight">RICARDO</span></h1>
+            <h1>MEX<span class="highlight">DASH</span></h1>
             <p class="sub">Inteligencia económica para la próxima generación</p>
 
             <div class="welcome-features">
@@ -1439,7 +1504,7 @@
     </div>
 
     <footer>
-        <div class="footer-brand">JERONIMO<span class="highlight">RICARDO</span></div>
+        <div class="footer-brand">MEX<span class="highlight">DASH</span></div>
         <p style="margin-bottom:0.2rem;">Economic Intelligence · Datos del Banco de México</p>
         <p>© <span id="year">2025</span> Jerónimo Ricardo Ramírez Torres</p>
     </footer>
@@ -1525,7 +1590,7 @@
             },
             reservas: {
                 titulo: "💵 Reservas Internacionales",
-                subtituto: "Colchón financiero de México",
+                subtitulo: "Colchón financiero de México",
                 queEs: "Son los activos en moneda extranjera (principalmente dólares) que Banxico tiene como respaldo. Indican la fortaleza económica del país.",
                 paraTi: "Reservas >$200,000 MMD: México está sólido. Si caen, podría haber depreciación del peso o crisis de confianza.",
                 ejemplo: "México tiene un fondo de emergencia de más de $200 mil millones de dólares para enfrentar crisis.",
@@ -1546,11 +1611,12 @@
         // ============================================================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
         let charts = {};
-        let valoresActuales = {tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232};
-        let fechasActuales = {tc: null, inf: null, tasa: null, cetes: null, reservas: null};
+        let valoresActuales = { tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232 };
+        let fechasActuales = { tc: null, inf: null, tasa: null, cetes: null, reservas: null };
         let intervalActualizacion;
+        let historicoCompleto = { tc: [], inf: [], tasa: [], cetes: [], reservas: [] };
 
-        const SERIES = {tc: "SF60653", inf: "SP1", tasa: "SF43783", cetes: "SF339621", reservas: "SF10146"};
+        const SERIES = { tc: "SF60653", inf: "SP1", tasa: "SF43783", cetes: "SF339621", reservas: "SF10146" };
 
         // ============================================================
         //  FUNCIONES DE CONEXIÓN
@@ -1601,7 +1667,7 @@
             }
 
             document.getElementById('lastUpdate').textContent = 'Última actualización: ' + new Date().toLocaleTimeString(
-                'es-MX');
+            'es-MX');
         }
 
         // ============================================================
@@ -1618,14 +1684,14 @@
                 if (data?.bmx?.series?.[0]?.datos?.[0]) {
                     const valor = parseFloat(data.bmx.series[0].datos[0].dato);
                     if (!isNaN(valor)) {
-                        return {valor, fecha: data.bmx.series[0].datos[0].fecha};
+                        return { valor, fecha: data.bmx.series[0].datos[0].fecha };
                     }
                 }
                 return null;
-            } catch (e) {return null;}
+            } catch (e) { return null; }
         }
 
-        async function consultarHistorico(serieId, token, dias = 30) {
+        async function consultarHistorico(serieId, token, dias = 60) {
             if (!token) return [];
             try {
                 const url =
@@ -1636,12 +1702,128 @@
                 if (data?.bmx?.series?.[0]?.datos) {
                     return data.bmx.series[0].datos
                         .slice(0, dias)
-                        .map(d => ({valor: parseFloat(d.dato), fecha: d.fecha}))
+                        .map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha }))
                         .filter(v => !isNaN(v.valor) && v.valor > 0)
                         .reverse();
                 }
                 return [];
-            } catch (e) {return [];}
+            } catch (e) { return []; }
+        }
+
+        // ============================================================
+        //  EXPORTACIÓN MEJORADA - MÚLTIPLES COLUMNAS
+        // ============================================================
+        function exportarDatosCompletos() {
+            try {
+                // Obtener todos los datos históricos disponibles
+                const tcData = historicoCompleto.tc.length > 0 ? historicoCompleto.tc : FALLBACK.tc.map((v, i) => ({
+                    valor: v,
+                    fecha: fechasTC[i] || new Date().toISOString().split('T')[0]
+                }));
+                const infData = historicoCompleto.inf.length > 0 ? historicoCompleto.inf : FALLBACK.inf.map((v, i) => ({
+                    valor: v,
+                    fecha: fechasInf[i] || new Date().toISOString().split('T')[0]
+                }));
+                const tasaData = historicoCompleto.tasa.length > 0 ? historicoCompleto.tasa : FALLBACK.tasa.map((v,
+                i) => ({ valor: v, fecha: fechasTasa[i] || new Date().toISOString().split('T')[0] }));
+                const cetesData = historicoCompleto.cetes.length > 0 ? historicoCompleto.cetes : FALLBACK.cetes.map((
+                    v, i) => ({ valor: v, fecha: fechasCetes[i] || new Date().toISOString().split('T')[0] }));
+                const reservasData = historicoCompleto.reservas.length > 0 ? historicoCompleto.reservas : FALLBACK
+                    .reservas.map((v, i) => ({ valor: v, fecha: fechasReservas[i] || new Date().toISOString().split(
+                            'T')[0] }));
+
+                // Encontrar la fecha más larga para alinear
+                const maxLen = Math.max(tcData.length, infData.length, tasaData.length, cetesData.length, reservasData
+                    .length);
+
+                // Construir array de datos con todas las columnas
+                const datosExport = [];
+                for (let i = 0; i < maxLen; i++) {
+                    const row = {
+                        'Fecha': tcData[i]?.fecha || infData[i]?.fecha || tasaData[i]?.fecha || cetesData[i]
+                            ?.fecha || reservasData[i]?.fecha || '',
+                        'Tipo_Cambio_USD_MXN': tcData[i]?.valor !== undefined ? tcData[i].valor : '',
+                        'Inflacion_INPC': infData[i]?.valor !== undefined ? infData[i].valor : '',
+                        'Tasa_Banxico': tasaData[i]?.valor !== undefined ? tasaData[i].valor : '',
+                        'CETES_28D': cetesData[i]?.valor !== undefined ? cetesData[i].valor : '',
+                        'Reservas_Internacionales_MMD': reservasData[i]?.valor !== undefined ? reservasData[i].valor :
+                            ''
+                    };
+                    datosExport.push(row);
+                }
+
+                // Agregar fila con valores actuales
+                datosExport.push({
+                    'Fecha': new Date().toISOString().split('T')[0] + ' (ACTUAL)',
+                    'Tipo_Cambio_USD_MXN': valoresActuales.tc,
+                    'Inflacion_INPC': valoresActuales.inflacion,
+                    'Tasa_Banxico': valoresActuales.tasa,
+                    'CETES_28D': valoresActuales.cetes,
+                    'Reservas_Internacionales_MMD': valoresActuales.reservas
+                });
+
+                // Crear libro de Excel con múltiples hojas
+                const wb = XLSX.utils.book_new();
+
+                // Hoja 1: Datos históricos completos
+                const ws1 = XLSX.utils.json_to_sheet(datosExport);
+                XLSX.utils.book_append_sheet(wb, ws1, 'Datos_Historicos');
+
+                // Hoja 2: Resumen actual
+                const resumen = [{
+                    'Indicador': 'Tipo de Cambio USD/MXN',
+                    'Valor': valoresActuales.tc,
+                    'Fecha': fechasActuales.tc || new Date().toISOString().split('T')[0]
+                }, {
+                    'Indicador': 'Inflación INPC',
+                    'Valor': valoresActuales.inflacion + '%',
+                    'Fecha': fechasActuales.inf || new Date().toISOString().split('T')[0]
+                }, {
+                    'Indicador': 'Tasa Banxico',
+                    'Valor': valoresActuales.tasa + '%',
+                    'Fecha': fechasActuales.tasa || new Date().toISOString().split('T')[0]
+                }, {
+                    'Indicador': 'CETES 28D',
+                    'Valor': valoresActuales.cetes + '%',
+                    'Fecha': fechasActuales.cetes || new Date().toISOString().split('T')[0]
+                }, {
+                    'Indicador': 'Reservas Internacionales',
+                    'Valor': valoresActuales.reservas + ' MMD',
+                    'Fecha': fechasActuales.reservas || new Date().toISOString().split('T')[0]
+                }];
+                const ws2 = XLSX.utils.json_to_sheet(resumen);
+                XLSX.utils.book_append_sheet(wb, ws2, 'Resumen_Actual');
+
+                // Hoja 3: Metadata
+                const metadata = [{
+                    'Propiedad': 'Exportado',
+                    'Valor': new Date().toISOString()
+                }, {
+                    'Propiedad': 'Fuente',
+                    'Valor': 'Banco de México (Banxico)'
+                }, {
+                    'Propiedad': 'Dashboard',
+                    'Valor': 'MEXDASH Economic Intelligence'
+                }, {
+                    'Propiedad': 'Desarrollador',
+                    'Valor': 'Jerónimo Ricardo Ramírez Torres'
+                }, {
+                    'Propiedad': 'API Key',
+                    'Valor': apiKeyBanxico ? 'Conectada' : 'No conectada (Demo)'
+                }, {
+                    'Propiedad': 'Total de registros',
+                    'Valor': datosExport.length
+                }];
+                const ws3 = XLSX.utils.json_to_sheet(metadata);
+                XLSX.utils.book_append_sheet(wb, ws3, 'Metadata');
+
+                // Exportar
+                XLSX.writeFile(wb, `MEXDASH_export_${Date.now()}.xlsx`);
+                console.log('✅ Exportación completada con', datosExport.length, 'registros');
+            } catch (error) {
+                console.error('Error en exportación:', error);
+                alert('⚠️ Error al exportar datos. Intenta de nuevo.');
+            }
         }
 
         // ============================================================
@@ -1665,23 +1847,17 @@
                         consultarBanxico(SERIES.cetes, apiKeyBanxico),
                         consultarBanxico(SERIES.reservas, apiKeyBanxico)
                     ]);
-                } catch (e) {console.warn('API error:', e);}
+                } catch (e) { console.warn('API error:', e); }
             }
 
-            const tc = (tcAPI && tcAPI.valor) ? tcAPI : {valor: FALLBACK.tc[FALLBACK.tc.length - 1], fecha: hoy};
-            const inf = (infAPI && infAPI.valor) ? infAPI : {valor: FALLBACK.inf[FALLBACK.inf.length - 1], fecha: hoy};
-            const tasa = (tasaAPI && tasaAPI.valor) ? tasaAPI : {
-                valor: FALLBACK.tasa[FALLBACK.tasa.length - 1],
-                fecha: hoy
-            };
-            const cetes = (cetesAPI && cetesAPI.valor) ? cetesAPI : {
-                valor: FALLBACK.cetes[FALLBACK.cetes.length - 1],
-                fecha: hoy
-            };
-            const reservas = (resAPI && resAPI.valor) ? resAPI : {
-                valor: FALLBACK.reservas[FALLBACK.reservas.length - 1],
-                fecha: hoy
-            };
+            const tc = (tcAPI && tcAPI.valor) ? tcAPI : { valor: FALLBACK.tc[FALLBACK.tc.length - 1], fecha: hoy };
+            const inf = (infAPI && infAPI.valor) ? infAPI : { valor: FALLBACK.inf[FALLBACK.inf.length - 1], fecha: hoy };
+            const tasa = (tasaAPI && tasaAPI.valor) ? tasaAPI : { valor: FALLBACK.tasa[FALLBACK.tasa.length - 1],
+                fecha: hoy };
+            const cetes = (cetesAPI && cetesAPI.valor) ? cetesAPI : { valor: FALLBACK.cetes[FALLBACK.cetes.length - 1],
+                fecha: hoy };
+            const reservas = (resAPI && resAPI.valor) ? resAPI : { valor: FALLBACK.reservas[FALLBACK.reservas.length - 1],
+                fecha: hoy };
 
             valoresActuales.tc = tc.valor;
             valoresActuales.inflacion = inf.valor;
@@ -1726,29 +1902,45 @@
             let histTC = [],
                 histInf = [],
                 histTasa = [],
-                histCetes = [];
+                histCetes = [],
+                histReservas = [];
             if (usarAPI) {
                 try {
-                    [histTC, histInf, histTasa, histCetes] = await Promise.all([
-                        consultarHistorico(SERIES.tc, apiKeyBanxico, 30),
-                        consultarHistorico(SERIES.inf, apiKeyBanxico, 20),
-                        consultarHistorico(SERIES.tasa, apiKeyBanxico, 20),
-                        consultarHistorico(SERIES.cetes, apiKeyBanxico, 20)
+                    [histTC, histInf, histTasa, histCetes, histReservas] = await Promise.all([
+                        consultarHistorico(SERIES.tc, apiKeyBanxico, 60),
+                        consultarHistorico(SERIES.inf, apiKeyBanxico, 40),
+                        consultarHistorico(SERIES.tasa, apiKeyBanxico, 40),
+                        consultarHistorico(SERIES.cetes, apiKeyBanxico, 40),
+                        consultarHistorico(SERIES.reservas, apiKeyBanxico, 40)
                     ]);
-                } catch (e) { }
+                } catch (e) {}
             }
 
+            // Guardar históricos para exportación
+            historicoCompleto.tc = histTC.length > 0 ? histTC : FALLBACK.tc.map((v, i) => ({ valor: v, fecha: fechasTC[
+                    i] || hoy }));
+            historicoCompleto.inf = histInf.length > 0 ? histInf : FALLBACK.inf.map((v, i) => ({ valor: v, fecha: fechasInf[
+                    i] || hoy }));
+            historicoCompleto.tasa = histTasa.length > 0 ? histTasa : FALLBACK.tasa.map((v, i) => ({ valor: v,
+                fecha: fechasTasa[i] || hoy }));
+            historicoCompleto.cetes = histCetes.length > 0 ? histCetes : FALLBACK.cetes.map((v, i) => ({ valor: v,
+                fecha: fechasCetes[i] || hoy }));
+            historicoCompleto.reservas = histReservas.length > 0 ? histReservas : FALLBACK.reservas.map((v, i) => ({
+                valor: v,
+                fecha: fechasReservas[i] || hoy
+            }));
+
             if (!histTC || histTC.length < 5) {
-                histTC = FALLBACK.tc.map((v, i) => ({valor: v, fecha: fechasTC[i] || hoy}));
+                histTC = FALLBACK.tc.map((v, i) => ({ valor: v, fecha: fechasTC[i] || hoy }));
             }
             if (!histInf || histInf.length < 5) {
-                histInf = FALLBACK.inf.map((v, i) => ({valor: v, fecha: fechasInf[i] || hoy}));
+                histInf = FALLBACK.inf.map((v, i) => ({ valor: v, fecha: fechasInf[i] || hoy }));
             }
             if (!histTasa || histTasa.length < 5) {
-                histTasa = FALLBACK.tasa.map((v, i) => ({valor: v, fecha: fechasTasa[i] || hoy}));
+                histTasa = FALLBACK.tasa.map((v, i) => ({ valor: v, fecha: fechasTasa[i] || hoy }));
             }
             if (!histCetes || histCetes.length < 5) {
-                histCetes = FALLBACK.cetes.map((v, i) => ({valor: v, fecha: fechasCetes[i] || hoy}));
+                histCetes = FALLBACK.cetes.map((v, i) => ({ valor: v, fecha: fechasCetes[i] || hoy }));
             }
 
             actualizarGraficaTC(histTC);
@@ -1770,9 +1962,9 @@
         // ============================================================
         function getChartContext(id) {
             const canvas = document.getElementById(id);
-            if (!canvas) {console.warn(`Canvas #${id} no encontrado`); return null;}
+            if (!canvas) { console.warn(`Canvas #${id} no encontrado`); return null; }
             const ctx = canvas.getContext('2d');
-            if (!ctx) {console.warn(`Contexto 2D no disponible para #${id}`); return null;}
+            if (!ctx) { console.warn(`Contexto 2D no disponible para #${id}`); return null; }
             return ctx;
         }
 
@@ -1783,14 +1975,12 @@
             const opts = {
                 responsive: true,
                 plugins: {
-                    legend: {labels: {color: color, font: {size: 9}}}
+                    legend: { labels: { color: color, font: { size: 9 } } }
                 },
                 scales: {
-                    x: {
-                        ticks: {color: '#4a5a7a', font: {size: 7}, maxTicksLimit: 10},
-                        grid: {color: gridColor}
-                    },
-                    y: {ticks: {color: '#4a5a7a', font: {size: 7}}, grid: {color: gridColor}}
+                    x: { ticks: { color: '#4a5a7a', font: { size: 7 }, maxTicksLimit: 10 },
+                    grid: { color: gridColor } },
+                    y: { ticks: { color: '#4a5a7a', font: { size: 7 } }, grid: { color: gridColor } }
                 }
             };
 
@@ -1805,13 +1995,9 @@
             if (ctxTC) {
                 charts.tc = new Chart(ctxTC, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'USD/MXN', borderColor: '#4a9eff',
+                    data: { labels: [], datasets: [{ label: 'USD/MXN', borderColor: '#4a9eff',
                             backgroundColor: 'rgba(74,158,255,0.08)', fill: true, tension: 0.3, data: [],
-                            pointRadius: 1.5
-                        }]
-                    },
+                            pointRadius: 1.5 }] },
                     options: opts
                 });
             }
@@ -1819,15 +2005,9 @@
             if (ctxRange) {
                 charts.range = new Chart(ctxRange, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Máximo', borderColor: '#00d4aa', data: [],
-                            pointRadius: 0.5
-                        }, {
-                            label: 'Mínimo', borderColor: '#ff4757', data: [],
-                            pointRadius: 0.5
-                        }]
-                    },
+                    data: { labels: [], datasets: [{ label: 'Máximo', borderColor: '#00d4aa', data: [],
+                            pointRadius: 0.5 }, { label: 'Mínimo', borderColor: '#ff4757', data: [],
+                            pointRadius: 0.5 }] },
                     options: opts
                 });
             }
@@ -1835,30 +2015,18 @@
             if (ctxCandle) {
                 charts.candle = new Chart(ctxCandle, {
                     type: 'bar',
-                    data: {labels: [], datasets: [{label: 'Cambio diario', data: []}]},
-                    options: {
-                        ...opts, plugins: {
-                            ...opts.plugins, legend: {
-                                ...opts.plugins.legend,
-                                display: false
-                            }
-                        }
-                    }
+                    data: { labels: [], datasets: [{ label: 'Cambio diario', data: [] }] },
+                    options: { ...opts, plugins: { ...opts.plugins, legend: { ...opts.plugins.legend,
+                            display: false } } }
                 });
             }
 
             if (ctxTasas) {
                 charts.tasas = new Chart(ctxTasas, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Tasa Banxico', borderColor: '#ff8c42', tension: 0.3,
-                            data: [], pointRadius: 1
-                        }, {
-                            label: 'CETES 28d', borderColor: '#00d4aa',
-                            tension: 0.3, data: [], pointRadius: 1
-                        }]
-                    },
+                    data: { labels: [], datasets: [{ label: 'Tasa Banxico', borderColor: '#ff8c42', tension: 0.3,
+                            data: [], pointRadius: 1 }, { label: 'CETES 28d', borderColor: '#00d4aa',
+                            tension: 0.3, data: [], pointRadius: 1 }] },
                     options: opts
                 });
             }
@@ -1866,13 +2034,9 @@
             if (ctxInf) {
                 charts.inf = new Chart(ctxInf, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'INPC (%)', borderColor: '#ff4757',
+                    data: { labels: [], datasets: [{ label: 'INPC (%)', borderColor: '#ff4757',
                             backgroundColor: 'rgba(255,71,87,0.08)', fill: true, tension: 0.3, data: [],
-                            pointRadius: 1
-                        }]
-                    },
+                            pointRadius: 1 }] },
                     options: opts
                 });
             }
@@ -1880,12 +2044,8 @@
             if (ctxPetroleo) {
                 charts.petroleo = new Chart(ctxPetroleo, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Brent (USD)', borderColor: '#a855f7', tension: 0.3,
-                            data: [], pointRadius: 1
-                        }]
-                    },
+                    data: { labels: [], datasets: [{ label: 'Brent (USD)', borderColor: '#a855f7', tension: 0.3,
+                            data: [], pointRadius: 1 }] },
                     options: opts
                 });
             }
@@ -1893,13 +2053,9 @@
             if (ctxReservas) {
                 charts.reservas = new Chart(ctxReservas, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Reservas (MMD)', borderColor: '#ffd700',
+                    data: { labels: [], datasets: [{ label: 'Reservas (MMD)', borderColor: '#ffd700',
                             backgroundColor: 'rgba(255,215,0,0.08)', fill: true, tension: 0.3, data: [],
-                            pointRadius: 1
-                        }]
-                    },
+                            pointRadius: 1 }] },
                     options: opts
                 });
             }
@@ -1993,70 +2149,48 @@
         //  RECOMENDACIONES
         // ============================================================
         function actualizarRecomendaciones() {
-            const {tc, inflacion, tasa, cetes} = valoresActuales;
+            const { tc, inflacion, tasa, cetes } = valoresActuales;
             const recs = [];
             const analysts = [
-                {name: 'Análisis Técnico', emoji: '📊'},
-                {name: 'Estrategia Macro', emoji: '🌐'},
-                {name: 'Risk Management', emoji: '🛡️'},
-                {name: 'Value Investing', emoji: '💎'}
+                { name: 'Análisis Técnico', emoji: '📊' },
+                { name: 'Estrategia Macro', emoji: '🌐' },
+                { name: 'Risk Management', emoji: '🛡️' },
+                { name: 'Value Investing', emoji: '💎' }
             ];
             let idx = 0;
 
             if (tc !== null && !isNaN(tc)) {
-                if (tc > 19) recs.push({
-                    icon: '💵', title: 'Dólar sobrecomprado',
-                    desc: 'Evita exposición en dólares. Considera coberturas cambiarias.', analyst: analysts[idx++ % 4]
-                });
-                else if (tc < 17.5) recs.push({
-                    icon: '🛒', title: 'Oportunidad de compra',
-                    desc: 'Dólar barato. Momento de adquirir activos en USD.', analyst: analysts[idx++ % 4]
-                });
-                else recs.push({
-                    icon: '⚖️', title: 'Mercado estable', desc: 'Mantén tu estrategia actual. Sin cambios significativos.',
-                    analyst: analysts[idx++ % 4]
-                });
+                if (tc > 19) recs.push({ icon: '💵', title: 'Dólar sobrecomprado',
+                    desc: 'Evita exposición en dólares. Considera coberturas cambiarias.', analyst: analysts[idx++ % 4] });
+                else if (tc < 17.5) recs.push({ icon: '🛒', title: 'Oportunidad de compra',
+                    desc: 'Dólar barato. Momento de adquirir activos en USD.', analyst: analysts[idx++ % 4] });
+                else recs.push({ icon: '⚖️', title: 'Mercado estable', desc: 'Mantén tu estrategia actual. Sin cambios significativos.',
+                    analyst: analysts[idx++ % 4] });
             }
 
             if (inflacion !== null && !isNaN(inflacion)) {
-                if (inflacion > 4.5) recs.push({
-                    icon: '📈', title: 'Inflación persistente',
-                    desc: 'Protege tu capital con instrumentos indexados a inflación.', analyst: analysts[idx++ % 4]
-                });
-                else if (inflacion < 3) recs.push({
-                    icon: '📉', title: 'Presión inflacionaria baja',
-                    desc: 'Entorno favorable para activos de largo plazo.', analyst: analysts[idx++ % 4]
-                });
-                else recs.push({
-                    icon: '📊', title: 'Inflación controlada', desc: 'Escenario neutral. Sigue tu plan de inversión.',
-                    analyst: analysts[idx++ % 4]
-                });
+                if (inflacion > 4.5) recs.push({ icon: '📈', title: 'Inflación persistente',
+                    desc: 'Protege tu capital con instrumentos indexados a inflación.', analyst: analysts[idx++ % 4] });
+                else if (inflacion < 3) recs.push({ icon: '📉', title: 'Presión inflacionaria baja',
+                    desc: 'Entorno favorable para activos de largo plazo.', analyst: analysts[idx++ % 4] });
+                else recs.push({ icon: '📊', title: 'Inflación controlada', desc: 'Escenario neutral. Sigue tu plan de inversión.',
+                    analyst: analysts[idx++ % 4] });
             }
 
             if (tasa !== null && cetes !== null && !isNaN(tasa) && !isNaN(cetes)) {
-                if (tasa > 10) recs.push({
-                    icon: '🏦', title: 'Rendimiento atractivo',
-                    desc: `CETES al ${cetes.toFixed(1)}%. Asigna capital a renta fija.`, analyst: analysts[idx++ % 4]
-                });
-                else if (tasa < 7) recs.push({
-                    icon: '💳', title: 'Financiamiento barato',
-                    desc: 'Tasas bajas. Buen momento para apalancamiento.', analyst: analysts[idx++ % 4]
-                });
-                else recs.push({
-                    icon: '⚡', title: 'Tasas neutrales', desc: 'Diversifica entre renta fija y variable.',
-                    analyst: analysts[idx++ % 4]
-                });
+                if (tasa > 10) recs.push({ icon: '🏦', title: 'Rendimiento atractivo',
+                    desc: `CETES al ${cetes.toFixed(1)}%. Asigna capital a renta fija.`, analyst: analysts[idx++ % 4] });
+                else if (tasa < 7) recs.push({ icon: '💳', title: 'Financiamiento barato',
+                    desc: 'Tasas bajas. Buen momento para apalancamiento.', analyst: analysts[idx++ % 4] });
+                else recs.push({ icon: '⚡', title: 'Tasas neutrales', desc: 'Diversifica entre renta fija y variable.',
+                    analyst: analysts[idx++ % 4] });
             }
 
             const extras = [
-                {
-                    icon: '🧠', title: 'Fondo de emergencia', desc: 'Mantén 3-6 meses de gastos en CETES o cuentas de alta liquidez.',
-                    analyst: analysts[idx++ % 4]
-                },
-                {
-                    icon: '📱', title: 'Fintech', desc: 'GBM+, Nu, Klar ofrecen rendimientos competitivos. Compara opciones.',
-                    analyst: analysts[idx++ % 4]
-                }
+                { icon: '🧠', title: 'Fondo de emergencia', desc: 'Mantén 3-6 meses de gastos en CETES o cuentas de alta liquidez.',
+                    analyst: analysts[idx++ % 4] },
+                { icon: '📱', title: 'Fintech', desc: 'GBM+, Nu, Klar ofrecen rendimientos competitivos. Compara opciones.',
+                    analyst: analysts[idx++ % 4] }
             ];
             recs.push(extras[Math.floor(Math.random() * extras.length)]);
             recs.push(extras[Math.floor(Math.random() * extras.length)]);
@@ -2085,25 +2219,13 @@
 
             let valor = null,
                 label = '---';
-            if (tipo === 'tc') {
-                valor = valoresActuales.tc;
-                label = '$' + (valor?.toFixed(4) || '---');
-            } else if (tipo === 'inf') {
-                valor = valoresActuales.inflacion;
-                label = (valor?.toFixed(2) || '---') + '%';
-            } else if (tipo === 'tasa') {
-                valor = valoresActuales.tasa;
-                label = (valor?.toFixed(2) || '---') + '%';
-            } else if (tipo === 'cetes') {
-                valor = valoresActuales.cetes;
-                label = (valor?.toFixed(2) || '---') + '%';
-            } else if (tipo === 'reservas') {
-                valor = valoresActuales.reservas;
-                label = '$' + (valor?.toFixed(0) || '---') + ' MMD';
-            } else if (tipo === 'volatilidad') {
-                label =
-                document.getElementById('kpiVolatilidad').textContent;
-            }
+            if (tipo === 'tc') { valor = valoresActuales.tc;
+                label = '$' + (valor?.toFixed(4) || '---'); } else if (tipo === 'inf') { valor = valoresActuales.inflacion;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'tasa') { valor = valoresActuales.tasa;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'cetes') { valor = valoresActuales.cetes;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'reservas') { valor = valoresActuales.reservas;
+                label = '$' + (valor?.toFixed(0) || '---') + ' MMD'; } else if (tipo === 'volatilidad') { label =
+                    document.getElementById('kpiVolatilidad').textContent; }
 
             document.getElementById('modalDato').innerHTML = `
                 <strong>📊 Valor actual:</strong> ${label}
@@ -2125,7 +2247,7 @@
         }
 
         // Tabs
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             if (e.target.classList.contains('tab')) {
                 const tab = e.target.dataset.tab;
                 document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
@@ -2167,10 +2289,8 @@
                         if (match) enlace = decodeURIComponent(match[1]);
                         return {
                             titulo: item.title.replace(' - Google News', '').trim(),
-                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', {
-                                day: 'numeric',
-                                month: 'short', year: 'numeric'
-                            }),
+                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', { day: 'numeric',
+                                month: 'short', year: 'numeric' }),
                             fuente: item.author || 'Google News',
                             imagen: item.thumbnail || `https://picsum.photos/400/200?random=${i}`,
                             enlace: enlace,
@@ -2195,51 +2315,57 @@
         }
 
         // ============================================================
+        //  TEMA DIURNO/NOCTURNO
+        // ============================================================
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('mexdash_theme', newTheme);
+
+            const btn = document.getElementById('darkModeToggle');
+            btn.textContent = newTheme === 'light' ? '🌙' : '☀️';
+
+            // Actualizar gráficas con nuevos colores
+            Object.values(charts).forEach(c => {
+                try {
+                    const color = getComputedStyle(document.body).getPropertyValue('--text-primary') || '#e8edf5';
+                    const gridColor = getComputedStyle(document.body).getPropertyValue('--border-color') || '#1e2d42';
+                    c.options.plugins.legend.labels.color = color;
+                    c.options.scales.x.grid.color = gridColor;
+                    c.options.scales.y.grid.color = gridColor;
+                    c.update();
+                } catch (e) {}
+            });
+        }
+
+        function initTheme() {
+            const saved = localStorage.getItem('mexdash_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+            const btn = document.getElementById('darkModeToggle');
+            btn.textContent = saved === 'light' ? '🌙' : '☀️';
+            btn.onclick = toggleTheme;
+        }
+
+        // ============================================================
         //  OTRAS FUNCIONES
         // ============================================================
-        function exportarExcel() {
-            const datos = [{
-                timestamp: new Date().toISOString(),
-                tipo_cambio: valoresActuales.tc,
-                inflacion: valoresActuales.inflacion,
-                tasa_banxico: valoresActuales.tasa,
-                cetes_28d: valoresActuales.cetes,
-                reservas: valoresActuales.reservas
-            }];
-            const ws = XLSX.utils.json_to_sheet(datos);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Datos");
-            XLSX.writeFile(wb, `JERONIMORICARDO_export_${Date.now()}.xlsx`);
-        }
-
-        function initDarkMode() {
-            const toggle = document.getElementById('darkModeToggle');
-            let dark = localStorage.getItem('darkMode') !== 'false';
-            toggle.textContent = dark ? '☀️' : '🌙';
-            toggle.onclick = () => {
-                const newDark = !(localStorage.getItem('darkMode') !== 'false');
-                localStorage.setItem('darkMode', newDark);
-                toggle.textContent = newDark ? '☀️' : '🌙';
-                // No cambiar temas en esta versión (siempre dark)
-            };
-        }
-
         function cerrarBienvenida() {
             document.getElementById('welcomeModal').style.display = 'none';
         }
 
         function mostrarBienvenida() {
-            if (!localStorage.getItem('JERONIMORICARDO_welcome')) {
+            if (!localStorage.getItem('mexdash_welcome')) {
                 document.getElementById('welcomeModal').style.display = 'flex';
-                localStorage.setItem('JERONIMORICARDO_welcome', 'true');
+                localStorage.setItem('mexdash_welcome', 'true');
             }
         }
 
         function actualizarContador() {
-            let visitas = localStorage.getItem('JERONIMORICARDO_visitas');
+            let visitas = localStorage.getItem('mexdash_visitas');
             if (visitas === null) visitas = 1;
             else visitas = parseInt(visitas) + 1;
-            localStorage.setItem('JERONIMORICARDO_visitas', visitas);
+            localStorage.setItem('mexdash_visitas', visitas);
             document.getElementById('contadorNumero').innerText = visitas;
         }
 
@@ -2247,24 +2373,24 @@
         //  INICIO
         // ============================================================
         async function init() {
-            console.log('🚀 JERONIMORICARDO iniciando...');
+            console.log('🚀 MEXDASH iniciando...');
 
-            if (!sessionStorage.getItem('JERONIMORICARDO_visit')) {
+            if (!sessionStorage.getItem('mexdash_visit')) {
                 actualizarContador();
-                sessionStorage.setItem('JERONIMORICARDO_visit', 'true');
+                sessionStorage.setItem('mexdash_visit', 'true');
             } else {
-                document.getElementById('contadorNumero').innerText = localStorage.getItem('JERONIMORICARDO_visitas') || '0';
+                document.getElementById('contadorNumero').innerText = localStorage.getItem('mexdash_visitas') || '0';
             }
 
             const url = encodeURIComponent(window.location.href);
-            const titulo = encodeURIComponent("JERONIMORICARDO | Economic Intelligence");
+            const titulo = encodeURIComponent("MEXDASH | Economic Intelligence");
             document.getElementById('shareWhatsApp')?.setAttribute('href', `https://wa.me/?text=${titulo}%20-%20${url}`);
             document.getElementById('shareFacebook')?.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${url}`);
             document.getElementById('shareTwitter')?.setAttribute('href', `https://twitter.com/intent/tweet?text=${titulo}&url=${url}`);
             document.getElementById('shareLinkedIn')?.setAttribute('href', `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${titulo}`);
             document.getElementById('year').innerText = new Date().getFullYear();
 
-            initDarkMode();
+            initTheme();
             initCharts();
             await cargarNoticias();
             mostrarBienvenida();
@@ -2301,9 +2427,11 @@
             };
 
             document.getElementById('refreshNoticiasBtn').onclick = cargarNoticias;
-            document.getElementById('exportBtn').onclick = exportarExcel;
 
-            console.log('✅ JERONIMORICARDO listo');
+            // Botón de exportación mejorado
+            document.getElementById('exportBtn').onclick = exportarDatosCompletos;
+
+            console.log('✅ MEXDASH listo');
         }
 
         if (document.readyState === 'loading') {
