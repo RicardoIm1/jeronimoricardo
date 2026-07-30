@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
     <style>
-        /* ===== ESTILO PRINCIPAL ===== */
+        /* ===== ESTILOS ===== */
         * {
             margin: 0;
             padding: 0;
@@ -41,7 +41,7 @@
             padding-top: 80px;
         }
 
-        /* ===== HEADER DIVERTIDO ===== */
+        /* ===== HEADER ===== */
         header {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             padding: 0.8rem 1.5rem;
@@ -214,7 +214,7 @@
             padding: 15px 20px;
         }
 
-        /* ===== PANEL DE BIENVENIDA ===== */
+        /* ===== BIENVENIDA ===== */
         .bienvenida-panel {
             background: linear-gradient(135deg, #ffd93d, #ff9a56, #ff6b9d);
             border-radius: var(--border-radius);
@@ -253,7 +253,7 @@
             }
         }
 
-        /* ===== EXPLICACIÓN DE INDICADORES ===== */
+        /* ===== EXPLICACIÓN DESTACADA ===== */
         .explicacion-destacada {
             background: var(--card);
             border-radius: var(--border-radius);
@@ -313,6 +313,7 @@
             transition: all 0.3s;
             border: 2px solid transparent;
             text-align: center;
+            cursor: pointer;
         }
 
         .kpi-card:hover {
@@ -361,7 +362,6 @@
             color: var(--texto-claro);
         }
 
-        /* Colores por KPI */
         .kpi-card:nth-child(1) {
             border-top: 4px solid var(--azul);
         }
@@ -381,7 +381,7 @@
             border-top: 4px solid var(--rosa);
         }
 
-        /* ===== DASHBOARD GRÁFICOS ===== */
+        /* ===== GRÁFICOS ===== */
         .dashboard-graficos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -429,7 +429,7 @@
             width: 100%;
         }
 
-        /* ===== RECOMENDACIONES DINÁMICAS ===== */
+        /* ===== RECOMENDACIONES ===== */
         .recomendaciones-panel {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: var(--border-radius);
@@ -844,7 +844,66 @@
             margin-bottom: 0.3rem;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== UTILIDADES ===== */
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+        .status-online {
+            background: #6bcb77;
+        }
+        .status-offline {
+            background: #ff6b6b;
+        }
+        .status-warning {
+            background: #ffd93d;
+        }
+
+        .cargando {
+            text-align: center;
+            padding: 30px;
+            color: var(--texto-claro);
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .share-btn {
+            background: var(--card);
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            text-decoration: none;
+            color: var(--texto);
+            box-shadow: var(--sombra);
+            transition: all 0.2s;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            background: var(--azul);
+            color: white;
+        }
+
+        .mensaje-error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid var(--rojo);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: var(--rojo);
+            display: none;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding-top: 120px;
@@ -912,55 +971,6 @@
                 padding: 0.2rem 0.6rem;
             }
         }
-
-        /* ===== UTILIDADES ===== */
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 4px;
-        }
-        .status-online {
-            background: #6bcb77;
-        }
-        .status-offline {
-            background: #ff6b6b;
-        }
-        .status-warning {
-            background: #ffd93d;
-        }
-
-        .cargando {
-            text-align: center;
-            padding: 30px;
-            color: var(--texto-claro);
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .share-btn {
-            background: var(--card);
-            padding: 0.3rem 0.8rem;
-            border-radius: 40px;
-            font-size: 0.6rem;
-            text-decoration: none;
-            color: var(--texto);
-            box-shadow: var(--sombra);
-            transition: all 0.2s;
-        }
-
-        .share-btn:hover {
-            transform: translateY(-2px);
-            background: var(--azul);
-            color: white;
-        }
     </style>
 </head>
 
@@ -972,7 +982,7 @@
             <div class="logo">
                 <span class="logo-icono">💰</span>
                 <div>
-                    <span class="logo-text">Mi Dinero MX</span>
+                    <span class="logo-texto">Mi Dinero MX</span>
                     <span class="logo-sub">Economía para todos</span>
                 </div>
             </div>
@@ -1003,6 +1013,12 @@
                     <p>Datos de México explicados como si tuvieras 12 años. Sin rollos, sin números raros.</p>
                 </div>
                 <div class="bienvenida-emoji">🚀</div>
+            </div>
+
+            <!-- ===== MENSAJE DE ERROR ===== -->
+            <div class="mensaje-error" id="mensajeError">
+                ⚠️ <span id="errorTexto">No se pudo conectar con Banxico. Usando datos de demostración.</span>
+                <button class="btn btn-azul" onclick="intentarReconectar()" style="margin-left:10px;padding:0.2rem 0.6rem;font-size:0.6rem;">🔄 Reintentar</button>
             </div>
 
             <!-- ===== EXPLICACIÓN DESTACADA ===== -->
@@ -1066,7 +1082,7 @@
                 </div>
             </div>
 
-            <!-- ===== RECOMENDACIONES DINÁMICAS ===== -->
+            <!-- ===== RECOMENDACIONES ===== -->
             <div class="recomendaciones-panel">
                 <h3>💡 <span style="flex:1;">Consejos para hoy (según los datos)</span> <span style="font-size:1.2rem;">⬇️</span></h3>
                 <div class="rec-grid" id="recomendacionesLista">
@@ -1228,7 +1244,7 @@
 
     <script>
         // ============================================================
-        //  DATOS DE RESPALDO (FALLBACK)
+        //  DATOS DE RESPALDO (FALLBACK) - SIEMPRE VISIBLES
         // ============================================================
         const FALLBACK_DATA = {
             tipoCambio: {
@@ -1262,6 +1278,7 @@
             }
         };
 
+        // Generar fechas para los últimos 60 días hábiles
         function generarFechasFallback(cantidad) {
             const fechas = [];
             const hoy = new Date();
@@ -1282,18 +1299,6 @@
         FALLBACK_DATA.tasaBanxico.fechas = generarFechasFallback(FALLBACK_DATA.tasaBanxico.valores.length);
         FALLBACK_DATA.cetes.fechas = generarFechasFallback(FALLBACK_DATA.cetes.valores.length);
         FALLBACK_DATA.reservas.fechas = generarFechasFallback(FALLBACK_DATA.reservas.valores.length);
-
-        // ============================================================
-        //  VARIABLES GLOBALES
-        // ============================================================
-        let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
-        let charts = {};
-        let valoresActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
-        let fechasActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
-        let intervalActualizacion;
-
-        const SERIES = { tipoCambio: "SF60653", inflacion: "SP1", tasaReferencia: "SF43783", cetes28: "SF339621",
-            reservas: "SF10146" };
 
         // ============================================================
         //  EXPLICACIONES PEDAGÓGICAS
@@ -1350,68 +1355,55 @@
         };
 
         // ============================================================
-        //  FUNCIONES DE EXPLICACIÓN (MODAL)
+        //  VARIABLES GLOBALES
         // ============================================================
-        let explicacionActual = 'tc';
+        let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
+        let charts = {};
+        let valoresActuales = { tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232 };
+        let fechasActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
+        let intervalActualizacion;
+        let datosFallbackActivos = true;
 
-        function abrirExplicacion(tipo) {
-            explicacionActual = tipo;
-            const exp = EXPLICACIONES[tipo];
-            if (!exp) return;
+        const SERIES = { tipoCambio: "SF60653", inflacion: "SP1", tasaReferencia: "SF43783", cetes28: "SF339621",
+            reservas: "SF10146" };
 
-            document.getElementById('modalTitulo').textContent = exp.titulo;
-            document.getElementById('modalSubtitulo').textContent = exp.subtitulo;
-            document.getElementById('modalQueEs').innerHTML = exp.queEs;
-            document.getElementById('modalParaTi').innerHTML = exp.paraTi;
-            document.getElementById('modalEjemplo').innerHTML = exp.ejemplo;
-
-            // Dato actual
-            let valor = null;
-            let label = '---';
-            if (tipo === 'tc') { valor = valoresActuales.tc;
-                label = '$' + (valor?.toFixed(4) || '---'); } else if (tipo === 'inf') { valor = valoresActuales.inflacion;
-                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'tasa') { valor = valoresActuales.tasa;
-                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'cetes') { valor = valoresActuales.cetes;
-                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'reservas') { valor = valoresActuales.reservas;
-                label = '$' + (valor?.toFixed(0) || '---') + ' MMD'; } else if (tipo === 'volatilidad') { label =
-                    document.getElementById('kpiVolatilidad').textContent; }
-
-            document.getElementById('modalDato').innerHTML = `
-                <strong>📊 Valor actual:</strong> ${label}
-                <br><br>
-                <span style="font-size:0.8rem;color:var(--texto-claro);">${exp.obtenerDato(valor) || ''}</span>
-                <br><br>
-                <span style="font-size:0.7rem;color:var(--texto-claro);">📅 Actualizado: ${new Date().toLocaleDateString('es-MX')}</span>
-            `;
-
-            // Resetear tabs
-            document.querySelectorAll('.modal-tabs .tab').forEach(t => t.classList.remove('activo'));
-            document.querySelectorAll('.modal-contenido-tab').forEach(t => t.classList.remove('activo'));
-            document.querySelector('.modal-tabs .tab[data-tab="que-es"]')?.classList.add('activo');
-            document.getElementById('tabQueEs')?.classList.add('activo');
-
-            document.getElementById('modalExplicacion').style.display = 'flex';
+        // ============================================================
+        //  FUNCIONES DE CONEXIÓN
+        // ============================================================
+        function mostrarError(mensaje) {
+            const el = document.getElementById('mensajeError');
+            document.getElementById('errorTexto').textContent = mensaje;
+            el.style.display = 'block';
         }
 
-        function cerrarModalExplicacion() {
-            document.getElementById('modalExplicacion').style.display = 'none';
+        function ocultarError() {
+            document.getElementById('mensajeError').style.display = 'none';
         }
 
-        // Tabs en el modal
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('tab')) {
-                const tab = e.target.dataset.tab;
-                document.querySelectorAll('.modal-tabs .tab').forEach(t => t.classList.remove('activo'));
-                e.target.classList.add('activo');
-                document.querySelectorAll('.modal-contenido-tab').forEach(t => t.classList.remove('activo'));
-                const targetId = 'tab' + tab.charAt(0).toUpperCase() + tab.slice(1).replace('-', '');
-                const el = document.getElementById(targetId);
-                if (el) el.classList.add('activo');
+        function intentarReconectar() {
+            ocultarError();
+            actualizarDatosBanxico();
+        }
+        window.intentarReconectar = intentarReconectar;
+
+        function actualizarEstadoConexion(conectado) {
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            if (conectado) {
+                dot.className = 'status-indicator status-online';
+                text.textContent = 'Online';
+                ocultarError();
+            } else if (apiKeyBanxico) {
+                dot.className = 'status-indicator status-warning';
+                text.textContent = 'Fallback';
+                mostrarError('No se pudo conectar con Banxico. Usando datos de demostración.');
+            } else {
+                dot.className = 'status-indicator status-offline';
+                text.textContent = 'Demo';
+                // No mostramos error en modo demo, es normal
+                ocultarError();
             }
-        });
-
-        window.abrirExplicacion = abrirExplicacion;
-        window.cerrarModalExplicacion = cerrarModalExplicacion;
+        }
 
         // ============================================================
         //  CONSULTAS A BANXICO
@@ -1422,6 +1414,7 @@
                 const url =
                     `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos/oportuno?token=${token}`;
                 const response = await fetch(url);
+                if (!response.ok) return null;
                 const data = await response.json();
                 if (data?.bmx?.series?.[0]?.datos?.[0]) {
                     const valor = parseFloat(data.bmx.series[0].datos[0].dato);
@@ -1431,6 +1424,7 @@
                 }
                 return null;
             } catch (error) {
+                console.warn('Error consultando Banxico:', error);
                 return null;
             }
         }
@@ -1440,168 +1434,171 @@
             try {
                 const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos?token=${token}`;
                 const response = await fetch(url);
+                if (!response.ok) return [];
                 const data = await response.json();
                 if (data?.bmx?.series?.[0]?.datos) {
                     const datos = data.bmx.series[0].datos
                         .slice(0, dias)
                         .map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha }))
-                        .filter(v => !isNaN(v.valor));
+                        .filter(v => !isNaN(v.valor) && v.valor > 0);
                     if (datos.length > 0) {
                         return datos.reverse();
                     }
                 }
                 return [];
             } catch (error) {
+                console.warn('Error consultando histórico:', error);
                 return [];
             }
         }
 
-        function obtenerDatosCombinados(apiData, fallbackData, fallbackFechas) {
-            if (apiData && apiData.length > 0) {
-                const fechasAPI = new Set(apiData.map(d => d.fecha));
-                const fallbackFiltrado = fallbackData
-                    .map((v, i) => ({ valor: v, fecha: fallbackFechas[i] }))
-                    .filter(d => !fechasAPI.has(d.fecha));
-                const combinados = [...apiData, ...fallbackFiltrado];
-                return combinados.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
-            }
-            return fallbackData.map((v, i) => ({ valor: v, fecha: fallbackFechas[i] }));
-        }
-
-        function obtenerUltimoValor(apiResult, fallbackValor, fallbackFecha) {
-            if (apiResult && apiResult.valor !== null && !isNaN(apiResult.valor)) {
-                return { valor: apiResult.valor, fecha: apiResult.fecha || fallbackFecha };
-            }
-            return { valor: fallbackValor, fecha: fallbackFecha };
-        }
-
         // ============================================================
-        //  ESTADO DE CONEXIÓN
-        // ============================================================
-        function actualizarEstadoConexion(conectado) {
-            const dot = document.getElementById('statusDot');
-            const text = document.getElementById('statusText');
-            if (conectado) {
-                dot.className = 'status-indicator status-online';
-                text.textContent = 'Online';
-            } else if (apiKeyBanxico) {
-                dot.className = 'status-indicator status-warning';
-                text.textContent = 'Fallback';
-            } else {
-                dot.className = 'status-indicator status-offline';
-                text.textContent = 'Demo';
-            }
-        }
-
-        // ============================================================
-        //  ACTUALIZAR DASHBOARD
+        //  ACTUALIZAR DASHBOARD - SIEMPRE CON DATOS VISIBLES
         // ============================================================
         async function actualizarDatosBanxico() {
             const usarAPI = !!apiKeyBanxico;
 
-            const [tcResult, infResult, tasaResult, cetesResult, reservasResult] = await Promise.all([
-                usarAPI ? consultarBanxicoConFecha(SERIES.tipoCambio, apiKeyBanxico) : null,
-                usarAPI ? consultarBanxicoConFecha(SERIES.inflacion, apiKeyBanxico) : null,
-                usarAPI ? consultarBanxicoConFecha(SERIES.tasaReferencia, apiKeyBanxico) : null,
-                usarAPI ? consultarBanxicoConFecha(SERIES.cetes28, apiKeyBanxico) : null,
-                usarAPI ? consultarBanxicoConFecha(SERIES.reservas, apiKeyBanxico) : null
-            ]);
+            // Intentar obtener datos de la API
+            let tcResult = null,
+                infResult = null,
+                tasaResult = null,
+                cetesResult = null,
+                reservasResult = null;
 
-            const tc = obtenerUltimoValor(tcResult, 18.52, new Date().toISOString().split('T')[0]);
-            const inf = obtenerUltimoValor(infResult, 4.35, new Date().toISOString().split('T')[0]);
-            const tasa = obtenerUltimoValor(tasaResult, 10.00, new Date().toISOString().split('T')[0]);
-            const cetes = obtenerUltimoValor(cetesResult, 9.82, new Date().toISOString().split('T')[0]);
-            const reservas = obtenerUltimoValor(reservasResult, 232, new Date().toISOString().split('T')[0]);
+            if (usarAPI) {
+                try {
+                    [tcResult, infResult, tasaResult, cetesResult, reservasResult] = await Promise.all([
+                        consultarBanxicoConFecha(SERIES.tipoCambio, apiKeyBanxico),
+                        consultarBanxicoConFecha(SERIES.inflacion, apiKeyBanxico),
+                        consultarBanxicoConFecha(SERIES.tasaReferencia, apiKeyBanxico),
+                        consultarBanxicoConFecha(SERIES.cetes28, apiKeyBanxico),
+                        consultarBanxicoConFecha(SERIES.reservas, apiKeyBanxico)
+                    ]);
+                } catch (e) {
+                    console.warn('Error en consultas API:', e);
+                }
+            }
 
+            // Usar fallback si no hay datos de API
+            const hoy = new Date().toISOString().split('T')[0];
+            const tc = (tcResult && tcResult.valor) ? tcResult : { valor: FALLBACK_DATA.tipoCambio.valores[FALLBACK_DATA
+                    .tipoCambio.valores.length - 1] || 18.52, fecha: hoy };
+            const inf = (infResult && infResult.valor) ? infResult : { valor: FALLBACK_DATA.inflacion.valores[FALLBACK_DATA
+                    .inflacion.valores.length - 1] || 4.35, fecha: hoy };
+            const tasa = (tasaResult && tasaResult.valor) ? tasaResult : { valor: FALLBACK_DATA.tasaBanxico.valores[
+                    FALLBACK_DATA.tasaBanxico.valores.length - 1] || 10.00, fecha: hoy };
+            const cetes = (cetesResult && cetesResult.valor) ? cetesResult : { valor: FALLBACK_DATA.cetes.valores[
+                    FALLBACK_DATA.cetes.valores.length - 1] || 9.82, fecha: hoy };
+            const reservas = (reservasResult && reservasResult.valor) ? reservasResult : { valor: FALLBACK_DATA.reservas
+                    .valores[FALLBACK_DATA.reservas.valores.length - 1] || 232, fecha: hoy };
+
+            // Guardar valores
             valoresActuales.tc = tc.valor;
             valoresActuales.inflacion = inf.valor;
             valoresActuales.tasa = tasa.valor;
             valoresActuales.cetes = cetes.valor;
             valoresActuales.reservas = reservas.valor;
-            fechasActuales.tc = tc.fecha;
-            fechasActuales.inflacion = inf.fecha;
-            fechasActuales.tasa = tasa.fecha;
-            fechasActuales.cetes = cetes.fecha;
-            fechasActuales.reservas = reservas.fecha;
+            fechasActuales.tc = tc.fecha || hoy;
+            fechasActuales.inflacion = inf.fecha || hoy;
+            fechasActuales.tasa = tasa.fecha || hoy;
+            fechasActuales.cetes = cetes.fecha || hoy;
+            fechasActuales.reservas = reservas.fecha || hoy;
 
-            // Actualizar UI
+            // ===== ACTUALIZAR UI =====
+            // Dólar
             document.getElementById('usdmxn').innerText = tc.valor.toFixed(4);
             document.getElementById('kpiTC').innerHTML = `$${tc.valor.toFixed(4)}`;
-            document.getElementById('kpiFechTC').innerHTML = `📅 ${tc.fecha}`;
+            document.getElementById('kpiFechTC').innerHTML = `📅 ${tc.fecha || hoy}`;
             document.getElementById('kpiInterTC').textContent = tc.valor > 19 ? '⚠️ Dólar caro, evita importados' :
                 tc.valor < 17.5 ? '✅ Dólar barato, buen momento para comprar' :
                 '⚖️ Dólar estable, todo normal';
 
+            // Inflación
             document.getElementById('inflacion').innerText = `${inf.valor.toFixed(2)}%`;
             document.getElementById('kpiInf').innerHTML = `${inf.valor.toFixed(2)}%`;
             document.getElementById('kpiInterInf').textContent = inf.valor > 4.5 ? '⚠️ Inflación alta, tu dinero pierde valor' :
                 inf.valor < 3 ? '✅ Inflación baja, precios estables' :
                 '⚖️ Inflación controlada';
 
+            // Tasa
             document.getElementById('tasa').innerText = `${tasa.valor.toFixed(2)}%`;
             document.getElementById('kpiTasa').innerHTML = `${tasa.valor.toFixed(2)}%`;
             document.getElementById('kpiInterTasa').textContent = tasa.valor > 10 ? '✅ Buen momento para ahorrar' :
                 tasa.valor < 7 ? '✅ Buen momento para pedir préstamos' :
                 '⚖️ Tasa neutral';
 
+            // CETES
             document.getElementById('cetes').innerText = `${cetes.valor.toFixed(2)}%`;
             document.getElementById('kpiCetes').innerHTML = `${cetes.valor.toFixed(2)}%`;
             document.getElementById('kpiInterCetes').textContent = cetes.valor > 10 ? '✅ CETES pagan bien, ¡ahorra!' :
                 cetes.valor < 8 ? '⚠️ CETES bajos, busca otras opciones' :
                 '⚖️ CETES normales';
 
+            // Reservas
             document.getElementById('kpiReservas').innerHTML = `$${(reservas.valor).toFixed(0)} MMD`;
             document.getElementById('kpiInterReservas').textContent = reservas.valor > 200 ? '✅ México con buen colchón' :
                 '⚠️ Reservas bajas, ojo';
 
-            // Históricos
-            const [histTC, histInf, histTasa, histCetes] = await Promise.all([
-                usarAPI ? consultarHistorico(SERIES.tipoCambio, apiKeyBanxico, 60) : [],
-                usarAPI ? consultarHistorico(SERIES.inflacion, apiKeyBanxico, 40) : [],
-                usarAPI ? consultarHistorico(SERIES.tasaReferencia, apiKeyBanxico, 40) : [],
-                usarAPI ? consultarHistorico(SERIES.cetes28, apiKeyBanxico, 40) : []
-            ]);
+            // Volatilidad (siempre con datos)
+            const tcFallback = FALLBACK_DATA.tipoCambio.valores;
+            const maxMin = Math.max(...tcFallback) - Math.min(...tcFallback);
+            document.getElementById('kpiVolatilidad').innerHTML = `$${maxMin.toFixed(4)}`;
 
-            const tcCombinado = obtenerDatosCombinados(histTC, FALLBACK_DATA.tipoCambio.valores, FALLBACK_DATA.tipoCambio
-                .fechas);
-            const infCombinado = obtenerDatosCombinados(histInf, FALLBACK_DATA.inflacion.valores, FALLBACK_DATA.inflacion
-                .fechas);
-            const tasaCombinado = obtenerDatosCombinados(histTasa, FALLBACK_DATA.tasaBanxico.valores, FALLBACK_DATA
-                .tasaBanxico.fechas);
-            const cetesCombinado = obtenerDatosCombinados(histCetes, FALLBACK_DATA.cetes.valores, FALLBACK_DATA.cetes
-                .fechas);
+            // ===== OBTENER HISTÓRICOS PARA GRÁFICAS =====
+            let histTC = [],
+                histInf = [],
+                histTasa = [],
+                histCetes = [];
 
-            const fechaLimite = new Date('2024-01-01');
-            const tcFiltrado = tcCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
-            const infFiltrado = infCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
-            const tasaFiltrado = tasaCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
-            const cetesFiltrado = cetesCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
-
-            if (tcFiltrado.length > 0) {
-                const valores = tcFiltrado.map(h => h.valor);
-                const maxMin = Math.max(...valores) - Math.min(...valores);
-                document.getElementById('kpiVolatilidad').innerHTML = `$${maxMin.toFixed(4)}`;
-                actualizarGraficaTC(tcFiltrado);
-                actualizarGraficaRange(tcFiltrado);
-                actualizarGraficaCandle(tcFiltrado);
+            if (usarAPI) {
+                try {
+                    [histTC, histInf, histTasa, histCetes] = await Promise.all([
+                        consultarHistorico(SERIES.tipoCambio, apiKeyBanxico, 60),
+                        consultarHistorico(SERIES.inflacion, apiKeyBanxico, 40),
+                        consultarHistorico(SERIES.tasaReferencia, apiKeyBanxico, 40),
+                        consultarHistorico(SERIES.cetes28, apiKeyBanxico, 40)
+                    ]);
+                } catch (e) {
+                    console.warn('Error en históricos:', e);
+                }
             }
 
-            if (tasaFiltrado.length > 0 && cetesFiltrado.length > 0) {
-                actualizarGraficaTasas(tasaFiltrado, cetesFiltrado);
+            // Siempre usar fallback si no hay datos históricos
+            if (!histTC || histTC.length === 0) {
+                histTC = FALLBACK_DATA.tipoCambio.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA.tipoCambio
+                        .fechas[i] || hoy }));
+            }
+            if (!histInf || histInf.length === 0) {
+                histInf = FALLBACK_DATA.inflacion.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA.inflacion
+                        .fechas[i] || hoy }));
+            }
+            if (!histTasa || histTasa.length === 0) {
+                histTasa = FALLBACK_DATA.tasaBanxico.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA
+                        .tasaBanxico.fechas[i] || hoy }));
+            }
+            if (!histCetes || histCetes.length === 0) {
+                histCetes = FALLBACK_DATA.cetes.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA.cetes.fechas[
+                        i] || hoy }));
             }
 
-            if (infFiltrado.length > 0) {
-                actualizarGraficaInflacion(infFiltrado);
-            }
-
+            // Actualizar gráficas
+            actualizarGraficaTC(histTC);
+            actualizarGraficaRange(histTC);
+            actualizarGraficaCandle(histTC);
+            actualizarGraficaTasas(histTasa, histCetes);
+            actualizarGraficaInflacion(histInf);
             actualizarGraficaPetroleo();
             actualizarGraficaReservas(reservas.valor);
+
+            // Recomendaciones
             actualizarRecomendaciones();
 
-            const conectado = usarAPI && tcResult !== null;
+            // Estado
+            const conectado = usarAPI && tcResult !== null && tcResult.valor !== undefined;
             actualizarEstadoConexion(conectado);
+            datosFallbackActivos = !conectado;
 
-            // Actualizar explicación dinámica
+            // Explicación dinámica
             actualizarExplicacionDinamica();
         }
 
@@ -1641,8 +1638,10 @@
         // ============================================================
         function actualizarGraficaTC(hist) {
             if (charts.tc) {
-                charts.tc.data.labels = hist.map(h => h.fecha);
-                charts.tc.data.datasets[0].data = hist.map(h => h.valor);
+                const labels = hist.map(h => h.fecha || '');
+                const data = hist.map(h => h.valor);
+                charts.tc.data.labels = labels;
+                charts.tc.data.datasets[0].data = data;
                 charts.tc.update();
             }
         }
@@ -1653,7 +1652,7 @@
             const ventana = 5;
             const maxs = v.map((_, i) => Math.max(...v.slice(Math.max(0, i - ventana), Math.min(i + 1, v.length))));
             const mins = v.map((_, i) => Math.min(...v.slice(Math.max(0, i - ventana), Math.min(i + 1, v.length))));
-            charts.range.data.labels = hist.map(h => h.fecha);
+            charts.range.data.labels = hist.map(h => h.fecha || '');
             charts.range.data.datasets[0].data = maxs;
             charts.range.data.datasets[1].data = mins;
             charts.range.update();
@@ -1664,7 +1663,7 @@
                 const v = hist.map(h => h.valor);
                 const cambios = v.map((x, i) => i > 0 ? x - v[i - 1] : 0);
                 const colores = cambios.map(c => c >= 0 ? '#6bcb77' : '#ff6b6b');
-                charts.candle.data.labels = hist.map(h => h.fecha);
+                charts.candle.data.labels = hist.map(h => h.fecha || '');
                 charts.candle.data.datasets[0].data = cambios.map(c => Math.abs(c));
                 charts.candle.data.datasets[0].backgroundColor = colores;
                 charts.candle.update();
@@ -1673,10 +1672,20 @@
 
         function actualizarGraficaTasas(tasa, cetes) {
             if (charts.tasas) {
-                const fechas = tasa.map(h => h.fecha);
-                const tasaData = tasa.map(h => h.valor);
-                const cetesMap = new Map(cetes.map(h => [h.fecha, h.valor]));
-                const cetesData = fechas.map(f => cetesMap.get(f) || cetesMap.get(fechas[0]) || 9.5);
+                // Asegurar que ambas series tengan la misma longitud
+                const maxLen = Math.max(tasa.length, cetes.length);
+                const fechas = [];
+                const tasaData = [];
+                const cetesData = [];
+
+                for (let i = 0; i < maxLen; i++) {
+                    const idxTasa = Math.min(i, tasa.length - 1);
+                    const idxCetes = Math.min(i, cetes.length - 1);
+                    fechas.push(tasa[idxTasa]?.fecha || cetes[idxCetes]?.fecha || `D-${maxLen - i}`);
+                    tasaData.push(tasa[idxTasa]?.valor || tasa[tasa.length - 1]?.valor || 10);
+                    cetesData.push(cetes[idxCetes]?.valor || cetes[cetes.length - 1]?.valor || 9.5);
+                }
+
                 charts.tasas.data.labels = fechas;
                 charts.tasas.data.datasets[0].data = tasaData;
                 charts.tasas.data.datasets[1].data = cetesData;
@@ -1686,7 +1695,7 @@
 
         function actualizarGraficaInflacion(hist) {
             if (charts.inf) {
-                charts.inf.data.labels = hist.map(h => h.fecha);
+                charts.inf.data.labels = hist.map(h => h.fecha || '');
                 charts.inf.data.datasets[0].data = hist.map(h => h.valor);
                 charts.inf.update();
             }
@@ -1714,7 +1723,7 @@
         }
 
         // ============================================================
-        //  RECOMENDACIONES DINÁMICAS
+        //  RECOMENDACIONES
         // ============================================================
         function actualizarRecomendaciones() {
             const { tc, inflacion, tasa, cetes } = valoresActuales;
@@ -1768,10 +1777,10 @@
                 }
             }
 
-            // Consejos variados (siempre cambian)
+            // Consejos variados
             const consejosVariados = [
                 { icono: '🧠', titulo: 'Fondo de emergencia', desc: 'Guarda 3 meses de gastos en CETES.',
-                personaje: personajes[idx++ % personajes.length] },
+                    personaje: personajes[idx++ % personajes.length] },
                 { icono: '📱', titulo: 'Apps para ahorrar', desc: 'GBM+, Nu, Klar. Algunas pagan hasta 15%.',
                     personaje: personajes[idx++ % personajes.length] },
                 { icono: '🏠', titulo: 'Casa propia', desc: 'Las hipotecas están en 9-12%. Espera si puedes.',
@@ -1782,7 +1791,6 @@
                     personaje: personajes[idx++ % personajes.length] }
             ];
 
-            // Agregar 2 consejos variados aleatorios
             const shuffled = consejosVariados.sort(() => Math.random() - 0.5);
             recs.push(shuffled[0]);
             recs.push(shuffled[1]);
@@ -1798,7 +1806,69 @@
         }
 
         // ============================================================
-        //  NOTICIAS CON ANÁLISIS
+        //  MODAL EXPLICACIÓN
+        // ============================================================
+        let explicacionActual = 'tc';
+
+        function abrirExplicacion(tipo) {
+            explicacionActual = tipo;
+            const exp = EXPLICACIONES[tipo];
+            if (!exp) return;
+
+            document.getElementById('modalTitulo').textContent = exp.titulo;
+            document.getElementById('modalSubtitulo').textContent = exp.subtitulo;
+            document.getElementById('modalQueEs').innerHTML = exp.queEs;
+            document.getElementById('modalParaTi').innerHTML = exp.paraTi;
+            document.getElementById('modalEjemplo').innerHTML = exp.ejemplo;
+
+            let valor = null;
+            let label = '---';
+            if (tipo === 'tc') { valor = valoresActuales.tc;
+                label = '$' + (valor?.toFixed(4) || '---'); } else if (tipo === 'inf') { valor = valoresActuales.inflacion;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'tasa') { valor = valoresActuales.tasa;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'cetes') { valor = valoresActuales.cetes;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'reservas') { valor = valoresActuales.reservas;
+                label = '$' + (valor?.toFixed(0) || '---') + ' MMD'; } else if (tipo === 'volatilidad') { label =
+                    document.getElementById('kpiVolatilidad').textContent; }
+
+            document.getElementById('modalDato').innerHTML = `
+                <strong>📊 Valor actual:</strong> ${label}
+                <br><br>
+                <span style="font-size:0.8rem;color:var(--texto-claro);">${exp.obtenerDato(valor) || ''}</span>
+                <br><br>
+                <span style="font-size:0.7rem;color:var(--texto-claro);">📅 Actualizado: ${new Date().toLocaleDateString('es-MX')}</span>
+            `;
+
+            document.querySelectorAll('.modal-tabs .tab').forEach(t => t.classList.remove('activo'));
+            document.querySelectorAll('.modal-contenido-tab').forEach(t => t.classList.remove('activo'));
+            document.querySelector('.modal-tabs .tab[data-tab="que-es"]')?.classList.add('activo');
+            document.getElementById('tabQueEs')?.classList.add('activo');
+
+            document.getElementById('modalExplicacion').style.display = 'flex';
+        }
+
+        function cerrarModalExplicacion() {
+            document.getElementById('modalExplicacion').style.display = 'none';
+        }
+
+        // Tabs
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('tab')) {
+                const tab = e.target.dataset.tab;
+                document.querySelectorAll('.modal-tabs .tab').forEach(t => t.classList.remove('activo'));
+                e.target.classList.add('activo');
+                document.querySelectorAll('.modal-contenido-tab').forEach(t => t.classList.remove('activo'));
+                const targetId = 'tab' + tab.charAt(0).toUpperCase() + tab.slice(1).replace('-', '');
+                const el = document.getElementById(targetId);
+                if (el) el.classList.add('activo');
+            }
+        });
+
+        window.abrirExplicacion = abrirExplicacion;
+        window.cerrarModalExplicacion = cerrarModalExplicacion;
+
+        // ============================================================
+        //  NOTICIAS
         // ============================================================
         async function cargarNoticias() {
             const grid = document.getElementById('noticiasGrid');
@@ -1925,15 +1995,6 @@
         // ============================================================
         //  OTRAS FUNCIONES
         // ============================================================
-        async function descargarPNG(id) {
-            const canvas = document.getElementById(id);
-            if (!canvas) return;
-            const link = document.createElement('a');
-            link.download = `${id}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        }
-
         function exportarExcel() {
             const datos = [{
                 timestamp: new Date().toISOString(),
@@ -1954,43 +2015,33 @@
         }
 
         function initDarkMode() {
-            // No hay dark mode en esta versión, pero mantenemos el botón para toggle de tema claro/oscuro simple
             const toggle = document.getElementById('darkModeToggle');
             let dark = localStorage.getItem('darkMode') !== 'false';
-            if (!dark) {
-                document.body.style.setProperty('--bg', '#f0f4ff');
-                document.body.style.setProperty('--card', '#ffffff');
-                document.body.style.setProperty('--texto', '#1a1a2e');
-                document.body.style.setProperty('--texto-claro', '#4a4a6a');
-                toggle.textContent = '🌙';
-            } else {
-                document.body.style.setProperty('--bg', '#0a0e27');
-                document.body.style.setProperty('--card', '#111c3a');
-                document.body.style.setProperty('--texto', '#e2e8f0');
-                document.body.style.setProperty('--texto-claro', '#94a3b8');
-                toggle.textContent = '☀️';
-            }
+            aplicarTema(dark);
+            toggle.textContent = dark ? '☀️' : '🌙';
 
             toggle.onclick = () => {
                 const isDark = localStorage.getItem('darkMode') !== 'false';
                 const newDark = !isDark;
                 localStorage.setItem('darkMode', newDark);
-                if (newDark) {
-                    document.body.style.setProperty('--bg', '#0a0e27');
-                    document.body.style.setProperty('--card', '#111c3a');
-                    document.body.style.setProperty('--texto', '#e2e8f0');
-                    document.body.style.setProperty('--texto-claro', '#94a3b8');
-                    toggle.textContent = '☀️';
-                } else {
-                    document.body.style.setProperty('--bg', '#f0f4ff');
-                    document.body.style.setProperty('--card', '#ffffff');
-                    document.body.style.setProperty('--texto', '#1a1a2e');
-                    document.body.style.setProperty('--texto-claro', '#4a4a6a');
-                    toggle.textContent = '🌙';
-                }
-                // Recargar gráficas para cambiar colores
+                aplicarTema(newDark);
+                toggle.textContent = newDark ? '☀️' : '🌙';
                 Object.values(charts).forEach(c => c.update());
             };
+        }
+
+        function aplicarTema(dark) {
+            if (dark) {
+                document.body.style.setProperty('--bg', '#0a0e27');
+                document.body.style.setProperty('--card', '#111c3a');
+                document.body.style.setProperty('--texto', '#e2e8f0');
+                document.body.style.setProperty('--texto-claro', '#94a3b8');
+            } else {
+                document.body.style.setProperty('--bg', '#f0f4ff');
+                document.body.style.setProperty('--card', '#ffffff');
+                document.body.style.setProperty('--texto', '#1a1a2e');
+                document.body.style.setProperty('--texto-claro', '#4a4a6a');
+            }
         }
 
         function cerrarBienvenida() {
@@ -2044,12 +2095,27 @@
                 document.getElementById('apiKeyInput').value = apiKeyBanxico;
             }
 
+            // Cargar datos (siempre con fallback)
             await actualizarDatosBanxico();
 
+            // Configurar actualización automática
             if (apiKeyBanxico) {
                 intervalActualizacion = setInterval(actualizarDatosBanxico, 300000);
+            } else {
+                // Si no hay API, actualizar cada 2 minutos con los datos de fallback (para simular movimiento)
+                intervalActualizacion = setInterval(() => {
+                    // Rotar ligeramente los datos de fallback para que parezca que se mueven
+                    const tc = FALLBACK_DATA.tipoCambio.valores;
+                    const nuevoTc = tc[tc.length - 1] + (Math.random() - 0.5) * 0.05;
+                    tc.push(Math.max(17.5, Math.min(19.5, nuevoTc)));
+                    tc.shift();
+                    FALLBACK_DATA.tipoCambio.fechas.push(new Date().toISOString().split('T')[0]);
+                    FALLBACK_DATA.tipoCambio.fechas.shift();
+                    actualizarDatosBanxico();
+                }, 120000);
             }
 
+            // Botón conectar
             document.getElementById('conectarBtn').onclick = async () => {
                 const k = document.getElementById('apiKeyInput').value.trim();
                 if (k) {
@@ -2066,7 +2132,6 @@
             document.getElementById('refreshNoticiasBtn').onclick = cargarNoticias;
             document.getElementById('exportBtn').onclick = exportarExcel;
 
-            window.descargarPNG = descargarPNG;
             window.cerrarBienvenida = cerrarBienvenida;
         }
 
