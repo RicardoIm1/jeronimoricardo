@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>💰 Mi Dinero MX | Dashboard Económico para Todos</title>
-    <meta name="description" content="Aprende economía de forma fácil y divertida. Datos de México explicados como si tuvieras 12 años.">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 Mi Dinero MX | Dashboard Económico</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js">
+    </script>
     <style>
-        /* ===== ESTILOS ===== */
+        /* ===== ESTILOS COMPLETOS ===== */
         * {
             margin: 0;
             padding: 0;
@@ -27,21 +28,19 @@
             --verde: #6bcb77;
             --azul: #4d96ff;
             --morado: #9b59b6;
-            --celeste: #74b9ff;
             --rojo: #ff6b6b;
             --border-radius: 20px;
             --sombra: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
         body {
-            font-family: 'Segoe UI', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            font-family: 'Segoe UI', 'Comic Sans MS', cursive, sans-serif;
             background: var(--bg);
             color: var(--texto);
             min-height: 100vh;
             padding-top: 80px;
         }
 
-        /* ===== HEADER ===== */
         header {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             padding: 0.8rem 1.5rem;
@@ -75,10 +74,12 @@
         }
 
         @keyframes saltar {
+
             0%,
             100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-5px);
             }
@@ -163,29 +164,24 @@
             transform: translateY(-2px) scale(1.02);
         }
 
-        .btn-rosa {
-            background: var(--rosa);
-            color: white;
-        }
         .btn-azul {
             background: var(--azul);
             color: white;
         }
-        .btn-morado {
-            background: var(--morado);
-            color: white;
-        }
+
         .btn-verde {
             background: var(--verde);
             color: white;
         }
+
+        .btn-morado {
+            background: var(--morado);
+            color: white;
+        }
+
         .btn-naranja {
             background: var(--naranja);
             color: white;
-        }
-        .btn-amarillo {
-            background: var(--amarillo);
-            color: #1a1a2e;
         }
 
         .contador-visitas {
@@ -207,14 +203,12 @@
             font-size: 0.75rem;
         }
 
-        /* ===== CONTENEDOR ===== */
         .contenedor {
             max-width: 1600px;
             margin: 0 auto;
             padding: 15px 20px;
         }
 
-        /* ===== BIENVENIDA ===== */
         .bienvenida-panel {
             background: linear-gradient(135deg, #ffd93d, #ff9a56, #ff6b9d);
             border-radius: var(--border-radius);
@@ -248,12 +242,12 @@
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
         }
 
-        /* ===== EXPLICACIÓN DESTACADA ===== */
         .explicacion-destacada {
             background: var(--card);
             border-radius: var(--border-radius);
@@ -297,7 +291,6 @@
             display: inline-block;
         }
 
-        /* ===== KPI GRID ===== */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -365,23 +358,27 @@
         .kpi-card:nth-child(1) {
             border-top: 4px solid var(--azul);
         }
+
         .kpi-card:nth-child(2) {
             border-top: 4px solid var(--rojo);
         }
+
         .kpi-card:nth-child(3) {
             border-top: 4px solid var(--naranja);
         }
+
         .kpi-card:nth-child(4) {
             border-top: 4px solid var(--verde);
         }
+
         .kpi-card:nth-child(5) {
             border-top: 4px solid var(--morado);
         }
+
         .kpi-card:nth-child(6) {
             border-top: 4px solid var(--rosa);
         }
 
-        /* ===== GRÁFICOS ===== */
         .dashboard-graficos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -416,7 +413,7 @@
         }
 
         .grafico-card .para-ti {
-            /* background: linear-gradient(90deg, #f0f4ff, #e8f0fe); */
+            background: linear-gradient(90deg, #f0f4ff, #e8f0fe);
             border-radius: 12px;
             padding: 0.5rem 0.8rem;
             font-size: 0.7rem;
@@ -427,9 +424,9 @@
         canvas {
             max-height: 200px;
             width: 100%;
+            display: block;
         }
 
-        /* ===== RECOMENDACIONES ===== */
         .recomendaciones-panel {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: var(--border-radius);
@@ -492,7 +489,6 @@
             font-weight: 600;
         }
 
-        /* ===== TIPS ===== */
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -531,7 +527,6 @@
             line-height: 1.4;
         }
 
-        /* ===== NOTICIAS ===== */
         .noticias-header {
             display: flex;
             justify-content: space-between;
@@ -610,7 +605,6 @@
             font-weight: 600;
         }
 
-        /* ===== MODAL PEDAGÓGICO ===== */
         .modal {
             display: none;
             position: fixed;
@@ -686,10 +680,6 @@
             margin-bottom: 1rem;
         }
 
-        .modal .modal-ejemplo strong {
-            font-size: 1rem;
-        }
-
         .modal .modal-tabs {
             display: flex;
             gap: 8px;
@@ -731,13 +721,13 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* ===== BIENVENIDA ===== */
         .modal-bienvenida {
             display: none;
             position: fixed;
@@ -823,7 +813,6 @@
             box-shadow: 0 8px 30px rgba(255, 217, 61, 0.3);
         }
 
-        /* ===== FOOTER ===== */
         footer {
             background: #1a1a2e;
             padding: 2rem;
@@ -844,7 +833,6 @@
             margin-bottom: 0.3rem;
         }
 
-        /* ===== UTILIDADES ===== */
         .status-indicator {
             display: inline-block;
             width: 8px;
@@ -852,12 +840,15 @@
             border-radius: 50%;
             margin-right: 4px;
         }
+
         .status-online {
             background: #6bcb77;
         }
+
         .status-offline {
             background: #ff6b6b;
         }
+
         .status-warning {
             background: #ffd93d;
         }
@@ -908,72 +899,63 @@
             body {
                 padding-top: 120px;
             }
+
             .dashboard-graficos {
                 grid-template-columns: 1fr;
             }
+
             .kpi-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .grid-noticias {
                 grid-template-columns: 1fr;
             }
+
             .bienvenida-panel {
                 flex-direction: column;
                 text-align: center;
             }
+
             .bienvenida-panel h1 {
                 font-size: 1.2rem;
             }
+
             .header-contenido {
                 flex-direction: column;
                 gap: 0.5rem;
             }
+
             .ticker {
                 width: 100%;
                 justify-content: center;
                 font-size: 0.55rem;
                 padding: 0.3rem 0.6rem;
             }
+
             .header-buttons {
                 justify-content: center;
             }
+
             .modal-contenido {
                 padding: 1rem;
             }
+
             .modal-bienvenida-contenido {
                 padding: 1.2rem;
             }
+
             .modal-bienvenida-contenido h1 {
                 font-size: 1.4rem;
             }
+
             .rec-grid {
                 grid-template-columns: 1fr;
             }
+
             .explicacion-destacada {
                 flex-direction: column;
             }
-        }
-
-        @media (max-width: 480px) {
-            .kpi-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .kpi-card .valor {
-                font-size: 1.2rem;
-            }
-            .header-buttons input {
-                width: 100px;
-                font-size: 0.55rem;
-            }
-            .btn {
-                font-size: 0.55rem;
-                padding: 0.2rem 0.6rem;
-            }
-        }
-
-        #ejemploDinamico{
-            background-color: #4a4a6a;
         }
     </style>
 </head>
@@ -995,7 +977,8 @@
                 <div class="ticker-item">📈 <span id="inflacion" class="valor">---</span></div>
                 <div class="ticker-item">🏦 <span id="tasa" class="valor">---</span></div>
                 <div class="ticker-item">📊 <span id="cetes" class="valor">---</span></div>
-                <div class="ticker-item"><span class="status-indicator status-warning" id="statusDot"></span><span id="statusText" style="color:rgba(255,255,255,0.6);font-size:0.55rem;">Demo</span></div>
+                <div class="ticker-item"><span class="status-indicator status-warning" id="statusDot"></span><span
+                        id="statusText" style="color:rgba(255,255,255,0.6);font-size:0.55rem;">Demo</span></div>
             </div>
             <div class="header-buttons">
                 <input type="text" id="apiKeyInput" placeholder="API Key Banxico">
@@ -1022,7 +1005,8 @@
             <!-- ===== MENSAJE DE ERROR ===== -->
             <div class="mensaje-error" id="mensajeError">
                 ⚠️ <span id="errorTexto">No se pudo conectar con Banxico. Usando datos de demostración.</span>
-                <button class="btn btn-azul" onclick="intentarReconectar()" style="margin-left:10px;padding:0.2rem 0.6rem;font-size:0.6rem;">🔄 Reintentar</button>
+                <button class="btn btn-azul" onclick="intentarReconectar()"
+                    style="margin-left:10px;padding:0.2rem 0.6rem;font-size:0.6rem;">🔄 Reintentar</button>
             </div>
 
             <!-- ===== EXPLICACIÓN DESTACADA ===== -->
@@ -1030,7 +1014,8 @@
                 <div class="emoji-grande">🤔</div>
                 <div class="texto">
                     <h3>📖 ¿Qué significan estos números?</h3>
-                    <p id="explicacionTexto">Cada número que ves aquí tiene una historia. Te contamos qué significa para <strong>ti</strong> y tu bolsillo.</p>
+                    <p id="explicacionTexto">Cada número que ves aquí tiene una historia. Te contamos qué significa para
+                        <strong>ti</strong> y tu bolsillo.</p>
                     <div class="ejemplo" id="ejemploDinamico">💡 Haz clic en cualquier indicador para saber más</div>
                 </div>
             </div>
@@ -1088,7 +1073,8 @@
 
             <!-- ===== RECOMENDACIONES ===== -->
             <div class="recomendaciones-panel">
-                <h3>💡 <span style="flex:1;">Consejos para hoy (según los datos)</span> <span style="font-size:1.2rem;">⬇️</span></h3>
+                <h3>💡 <span style="flex:1;">Consejos para hoy (según los datos)</span> <span
+                        style="font-size:1.2rem;">⬇️</span></h3>
                 <div class="rec-grid" id="recomendacionesLista">
                     <div class="rec-item">
                         <span class="rec-icono">🔌</span>
@@ -1104,99 +1090,116 @@
                 <div class="grafico-card">
                     <h3>💱 El dólar en los últimos días</h3>
                     <div class="sub">📌 Si la línea sube, el peso se debilita</div>
-                    <div class="para-ti">🫵 <strong>Para ti:</strong> Si el dólar está caro (>$19), evita comprar en Amazon USA. Si está barato (<$18), ¡aprovecha!</div>
-                    <canvas id="chartTC"></canvas>
+                    <div class="para-ti">🫵 <strong>Para ti:</strong> Si el dólar está caro (>$19), evita comprar en
+                        Amazon USA. Si está barato (<$18), ¡aprovecha!</div>
+                            <canvas id="chartTC"></canvas>
+                    </div>
+                    <div class="grafico-card">
+                        <h3>📈 ¿Qué tanto sube y baja?</h3>
+                        <div class="sub">📌 El área muestra el rango de precios</div>
+                        <div class="para-ti">🫵 <strong>Para ti:</strong> Rango amplio = más riesgo. Rango pequeño =
+                            estabilidad.</div>
+                        <canvas id="chartRange"></canvas>
+                    </div>
+                    <div class="grafico-card">
+                        <h3>📊 ¿Subió o bajó hoy?</h3>
+                        <div class="sub">📌 Barras verdes = subió, rojas = bajó</div>
+                        <div class="para-ti">🫵 <strong>Para ti:</strong> Si ves muchas barras verdes, ¡buena señal para
+                            el peso!</div>
+                        <canvas id="chartCandle"></canvas>
+                    </div>
+                    <div class="grafico-card">
+                        <h3>🏦 Tasas: Banxico vs CETES</h3>
+                        <div class="sub">📌 Naranja = Banxico, Verde = CETES</div>
+                        <div class="para-ti">🫵 <strong>Para ti:</strong> Si CETES paga más del 10%, ¡es buen momento
+                            para ahorrar!</div>
+                        <canvas id="chartTasas"></canvas>
+                    </div>
+                    <div class="grafico-card">
+                        <h3>📉 Inflación (precios)</h3>
+                        <div class="sub">📌 Sobre 4% = tu dinero pierde valor</div>
+                        <div class="para-ti">🫵 <strong>Para ti:</strong> Si la inflación está alta, compra hoy lo que
+                            necesites. Si está baja, espera ofertas.</div>
+                        <canvas id="chartInf"></canvas>
+                    </div>
+                    <div class="grafico-card">
+                        <h3>🛢️ Petróleo Brent</h3>
+                        <div class="sub">📌 Afecta el precio de la gasolina</div>
+                        <div class="para-ti">🫵 <strong>Para ti:</strong> Petróleo arriba de $80 = gasolina más cara.
+                            Abajo de $70 = gasolina más barata.</div>
+                        <canvas id="chartPetroleo"></canvas>
+                    </div>
+                    <div class="grafico-card">
+                        <h3>💵 Reservas Internacionales</h3>
+                        <div class="sub">📌 El colchón de dólares de México</div>
+                        <div class="para-ti">🫵 <strong>Para ti:</strong> Sobre $200 mil millones = México fuerte. Si
+                            baja, puede haber problemas.</div>
+                        <canvas id="chartReservas"></canvas>
+                    </div>
                 </div>
-                <div class="grafico-card">
-                    <h3>📈 ¿Qué tanto sube y baja?</h3>
-                    <div class="sub">📌 El área muestra el rango de precios</div>
-                    <div class="para-ti">🫵 <strong>Para ti:</strong> Rango amplio = más riesgo. Rango pequeño = estabilidad.</div>
-                    <canvas id="chartRange"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>📊 ¿Subió o bajó hoy?</h3>
-                    <div class="sub">📌 Barras verdes = subió, rojas = bajó</div>
-                    <div class="para-ti">🫵 <strong>Para ti:</strong> Si ves muchas barras verdes, ¡buena señal para el peso!</div>
-                    <canvas id="chartCandle"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>🏦 Tasas: Banxico vs CETES</h3>
-                    <div class="sub">📌 Naranja = Banxico, Verde = CETES</div>
-                    <div class="para-ti">🫵 <strong>Para ti:</strong> Si CETES paga más del 10%, ¡es buen momento para ahorrar!</div>
-                    <canvas id="chartTasas"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>📉 Inflación (precios)</h3>
-                    <div class="sub">📌 Sobre 4% = tu dinero pierde valor</div>
-                    <div class="para-ti">🫵 <strong>Para ti:</strong> Si la inflación está alta, compra hoy lo que necesites. Si está baja, espera ofertas.</div>
-                    <canvas id="chartInf"></canvas>
-                </div>
-                <div class="grafico-card">
-                    <h3>🛢️ Petróleo Brent</h3>
-                    <div class="sub">📌 Afecta el precio de la gasolina</div>
-                    <div class="para-ti">🫵 <strong>Para ti:</strong> Petróleo arriba de $80 = gasolina más cara. Abajo de $70 = gasolina más barata.</div>
-                    <canvas id="chartPetroleo"></canvas>
-                </div>
-            </div>
 
-            <!-- ===== TIPS ===== -->
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <span class="tip-icono">🏦</span>
-                    <div class="tip-titulo">CETES para principiantes</div>
-                    <div class="tip-desc">Desde $100 pesos. Es el ahorro más seguro de México. Dan hasta 11% anual. Solo necesitas tu CURP.</div>
+                <!-- ===== TIPS ===== -->
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <span class="tip-icono">🏦</span>
+                        <div class="tip-titulo">CETES para principiantes</div>
+                        <div class="tip-desc">Desde $100 pesos. Es el ahorro más seguro de México. Dan hasta 11% anual.
+                            Solo necesitas tu CURP.</div>
+                    </div>
+                    <div class="tip-card" style="border-bottom-color:var(--rosa);">
+                        <span class="tip-icono">💳</span>
+                        <div class="tip-titulo">Tarjetas de crédito</div>
+                        <div class="tip-desc">Nunca pagues el mínimo. Siempre pago total. Las tasas de interés están en
+                            30-80% anual. ¡Es mucho!</div>
+                    </div>
+                    <div class="tip-card" style="border-bottom-color:var(--naranja);">
+                        <span class="tip-icono">🏠</span>
+                        <div class="tip-titulo">Comprar casa</div>
+                        <div class="tip-desc">Las hipotecas están entre 9-12%. Si la tasa Banxico baja, las hipotecas se
+                            abaratan. Espera si puedes.</div>
+                    </div>
+                    <div class="tip-card" style="border-bottom-color:var(--morado);">
+                        <span class="tip-icono">💰</span>
+                        <div class="tip-titulo">Fondo de emergencia</div>
+                        <div class="tip-desc">Guarda 3-6 meses de gastos en CETES o cuenta de ahorro. Te salvará de
+                            imprevistos.</div>
+                    </div>
                 </div>
-                <div class="tip-card" style="border-bottom-color:var(--rosa);">
-                    <span class="tip-icono">💳</span>
-                    <div class="tip-titulo">Tarjetas de crédito</div>
-                    <div class="tip-desc">Nunca pagues el mínimo. Siempre pago total. Las tasas de interés están en 30-80% anual. ¡Es mucho!</div>
-                </div>
-                <div class="tip-card" style="border-bottom-color:var(--naranja);">
-                    <span class="tip-icono">🏠</span>
-                    <div class="tip-titulo">Comprar casa</div>
-                    <div class="tip-desc">Las hipotecas están entre 9-12%. Si la tasa Banxico baja, las hipotecas se abaratan. Espera si puedes.</div>
-                </div>
-                <div class="tip-card" style="border-bottom-color:var(--morado);">
-                    <span class="tip-icono">💰</span>
-                    <div class="tip-titulo">Fondo de emergencia</div>
-                    <div class="tip-desc">Guarda 3-6 meses de gastos en CETES o cuenta de ahorro. Te salvará de imprevistos.</div>
-                </div>
-            </div>
 
-            <!-- ===== NOTICIAS ===== -->
-            <div class="noticias-header">
-                <h3>📰 Noticias de hoy <span style="font-size:0.6rem;color:var(--texto-claro);font-weight:400;">(explicadas fácil)</span></h3>
-                <button id="refreshNoticiasBtn" class="btn btn-morado">🔄 Actualizar</button>
-            </div>
-            <div class="grid-noticias" id="noticiasGrid">
-                <div class="cargando">📡 Cargando noticias...</div>
-            </div>
+                <!-- ===== NOTICIAS ===== -->
+                <div class="noticias-header">
+                    <h3>📰 Noticias de hoy <span
+                            style="font-size:0.6rem;color:var(--texto-claro);font-weight:400;">(explicadas fácil)</span>
+                    </h3>
+                    <button id="refreshNoticiasBtn" class="btn btn-morado">🔄 Actualizar</button>
+                </div>
+                <div class="grid-noticias" id="noticiasGrid">
+                    <div class="cargando">📡 Cargando noticias...</div>
+                </div>
 
-            <!-- ===== COMPARTIR ===== -->
-            <div class="share-buttons">
-                <a href="#" id="shareWhatsApp" class="share-btn">📱 WhatsApp</a>
-                <a href="#" id="shareFacebook" class="share-btn">📘 Facebook</a>
-                <a href="#" id="shareTwitter" class="share-btn">🐦 X</a>
-                <a href="#" id="shareLinkedIn" class="share-btn">🔗 LinkedIn</a>
-            </div>
+                <!-- ===== COMPARTIR ===== -->
+                <div class="share-buttons">
+                    <a href="#" id="shareWhatsApp" class="share-btn">📱 WhatsApp</a>
+                    <a href="#" id="shareFacebook" class="share-btn">📘 Facebook</a>
+                    <a href="#" id="shareTwitter" class="share-btn">🐦 X</a>
+                    <a href="#" id="shareLinkedIn" class="share-btn">🔗 LinkedIn</a>
+                </div>
 
-        </div>
+            </div>
     </main>
 
-    <!-- ===== MODAL PEDAGÓGICO ===== -->
+    <!-- ===== MODALES ===== -->
     <div id="modalExplicacion" class="modal">
         <div class="modal-contenido">
             <button class="modal-cerrar" onclick="cerrarModalExplicacion()">&times;</button>
             <h2 id="modalTitulo">📊 Indicador</h2>
             <div class="modal-sub" id="modalSubtitulo">Explicado fácil para todos</div>
-
-            <div class="modal-tabs" id="modalTabs">
+            <div class="modal-tabs">
                 <button class="tab activo" data-tab="que-es">🤔 ¿Qué es?</button>
                 <button class="tab" data-tab="para-ti">🫵 ¿Y a mí qué?</button>
                 <button class="tab" data-tab="ejemplo">💡 Ejemplo</button>
                 <button class="tab" data-tab="dato">📊 Dato actual</button>
             </div>
-
             <div id="tabQueEs" class="modal-contenido-tab activo">
                 <div class="modal-explicacion" id="modalQueEs"></div>
             </div>
@@ -1212,12 +1215,10 @@
         </div>
     </div>
 
-    <!-- ===== MODAL BIENVENIDA ===== -->
     <div id="modalBienvenida" class="modal-bienvenida">
         <div class="modal-bienvenida-contenido">
             <h1>💰 ¡Bienvenido a Mi Dinero MX!</h1>
             <p class="sub">Economía mexicana explicada <strong>como si tuvieras 12 años</strong></p>
-
             <div class="caracteristicas">
                 <div class="item"><span class="emoji">🇲🇽</span><span class="label">Dólar hoy</span></div>
                 <div class="item"><span class="emoji">📈</span><span class="label">Inflación</span></div>
@@ -1226,12 +1227,10 @@
                 <div class="item"><span class="emoji">🎢</span><span class="label">Volatilidad</span></div>
                 <div class="item"><span class="emoji">📰</span><span class="label">Noticias fáciles</span></div>
             </div>
-
             <p style="font-size:0.8rem;color:var(--texto-claro);margin-bottom:1.5rem;">
                 📌 Los datos son de Banco de México. Si tienes API Key, conéctala para datos en vivo.
                 <br>Sin API Key, usamos datos de ejemplo para que aprendas.
             </p>
-
             <button class="btn-grande" onclick="cerrarBienvenida()">🚀 ¡Vamos a aprender!</button>
             <div style="margin-top:1rem;font-size:0.6rem;color:var(--texto-claro);">
                 Hecho con 💛 por Jerónimo Ricardo Ramírez Torres
@@ -1239,7 +1238,6 @@
         </div>
     </div>
 
-    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="footer-logo">💰 Mi Dinero MX</div>
         <p style="margin-bottom:0.3rem;">Economía para todos · Datos de Banxico explicados fácil</p>
@@ -1248,112 +1246,98 @@
 
     <script>
         // ============================================================
-        //  DATOS DE RESPALDO (FALLBACK) - SIEMPRE VISIBLES
+        //  DATOS DE RESPALDO
         // ============================================================
-        const FALLBACK_DATA = {
-            tipoCambio: {
-                valores: [17.85, 17.92, 17.88, 17.95, 18.02, 17.98, 18.05, 18.12, 18.08, 18.15,
-                    18.22, 18.18, 18.25, 18.32, 18.28, 18.35, 18.42, 18.38, 18.45, 18.52,
-                    18.48, 18.55, 18.62, 18.58, 18.65, 18.72, 18.68, 18.75, 18.82, 18.78
-                ],
-                fechas: []
-            },
-            inflacion: {
-                valores: [4.88, 4.85, 4.82, 4.78, 4.75, 4.72, 4.68, 4.65, 4.62, 4.58,
-                    4.55, 4.52, 4.48, 4.45, 4.42, 4.38, 4.35, 4.32, 4.28, 4.25
-                ],
-                fechas: []
-            },
-            tasaBanxico: {
-                valores: [11.25, 11.25, 11.25, 11.00, 11.00, 11.00, 10.75, 10.75, 10.75, 10.50,
-                    10.50, 10.50, 10.25, 10.25, 10.25, 10.00, 10.00, 10.00, 9.75, 9.75
-                ],
-                fechas: []
-            },
-            cetes: {
-                valores: [11.12, 11.08, 11.05, 10.85, 10.82, 10.78, 10.55, 10.52, 10.48, 10.32,
-                    10.28, 10.25, 10.08, 10.05, 10.02, 9.85, 9.82, 9.78, 9.65, 9.62
-                ],
-                fechas: []
-            },
-            reservas: {
-                valores: [210, 212, 215, 218, 220, 222, 225, 223, 226, 228, 230, 232, 235, 233, 236, 238, 240, 242, 245, 243],
-                fechas: []
-            }
-        };
-
-        // Generar fechas para los últimos 60 días hábiles
-        function generarFechasFallback(cantidad) {
+        function generarFechas(cantidad) {
             const fechas = [];
             const hoy = new Date();
-            let contador = 0;
-            let dia = new Date(hoy);
-            while (contador < cantidad) {
-                dia.setDate(dia.getDate() - 1);
-                if (dia.getDay() !== 0 && dia.getDay() !== 6) {
-                    fechas.unshift(dia.toISOString().split('T')[0]);
-                    contador++;
+            for (let i = 0; i < cantidad; i++) {
+                const d = new Date(hoy);
+                d.setDate(d.getDate() - (cantidad - i));
+                if (d.getDay() !== 0 && d.getDay() !== 6) {
+                    fechas.push(d.toISOString().split('T')[0]);
+                } else {
+                    // Ajustar para evitar fines de semana
+                    d.setDate(d.getDate() - 1);
+                    fechas.push(d.toISOString().split('T')[0]);
                 }
             }
             return fechas;
         }
 
-        FALLBACK_DATA.tipoCambio.fechas = generarFechasFallback(FALLBACK_DATA.tipoCambio.valores.length);
-        FALLBACK_DATA.inflacion.fechas = generarFechasFallback(FALLBACK_DATA.inflacion.valores.length);
-        FALLBACK_DATA.tasaBanxico.fechas = generarFechasFallback(FALLBACK_DATA.tasaBanxico.valores.length);
-        FALLBACK_DATA.cetes.fechas = generarFechasFallback(FALLBACK_DATA.cetes.valores.length);
-        FALLBACK_DATA.reservas.fechas = generarFechasFallback(FALLBACK_DATA.reservas.valores.length);
+        const FALLBACK = {
+            tc: [17.85, 17.92, 17.88, 17.95, 18.02, 17.98, 18.05, 18.12, 18.08, 18.15,
+                18.22, 18.18, 18.25, 18.32, 18.28, 18.35, 18.42, 18.38, 18.45, 18.52,
+                18.48, 18.55, 18.62, 18.58, 18.65, 18.72, 18.68, 18.75, 18.82, 18.78
+            ],
+            inf: [4.88, 4.85, 4.82, 4.78, 4.75, 4.72, 4.68, 4.65, 4.62, 4.58,
+                4.55, 4.52, 4.48, 4.45, 4.42, 4.38, 4.35, 4.32, 4.28, 4.25
+            ],
+            tasa: [11.25, 11.25, 11.25, 11.00, 11.00, 11.00, 10.75, 10.75, 10.75, 10.50,
+                10.50, 10.50, 10.25, 10.25, 10.25, 10.00, 10.00, 10.00, 9.75, 9.75
+            ],
+            cetes: [11.12, 11.08, 11.05, 10.85, 10.82, 10.78, 10.55, 10.52, 10.48, 10.32,
+                10.28, 10.25, 10.08, 10.05, 10.02, 9.85, 9.82, 9.78, 9.65, 9.62
+            ],
+            reservas: [210, 212, 215, 218, 220, 222, 225, 223, 226, 228, 230, 232, 235, 233, 236, 238, 240, 242, 245, 243]
+        };
+
+        const fechasTC = generarFechas(FALLBACK.tc.length);
+        const fechasInf = generarFechas(FALLBACK.inf.length);
+        const fechasTasa = generarFechas(FALLBACK.tasa.length);
+        const fechasCetes = generarFechas(FALLBACK.cetes.length);
+        const fechasReservas = generarFechas(FALLBACK.reservas.length);
 
         // ============================================================
-        //  EXPLICACIONES PEDAGÓGICAS
+        //  EXPLICACIONES
         // ============================================================
         const EXPLICACIONES = {
             tc: {
                 titulo: "🇲🇽 Tipo de Cambio (Dólar)",
                 subtitulo: "¿Cuántos pesos necesitas para comprar 1 dólar?",
-                queEs: "El tipo de cambio es el precio del dólar en pesos. Si está a $18, necesitas $18 pesos para comprar 1 dólar. Si sube a $19, el peso se debilita y todo lo que viene de USA (tecnología, ropa, etc.) se vuelve más caro.",
-                paraTi: "Si el dólar está caro (>$19), evita comprar en Amazon USA o viajar. Si está barato (<$18), es buen momento para comprar tecnología, ropa importada o viajar.",
-                ejemplo: "Imagina que quieres comprar unos tenis que cuestan $100 dólares. Si el dólar está a $18, te cuestan $1,800 pesos. Si sube a $20, te cuestan $2,000 pesos. ¡Son $200 pesos más caros!",
+                queEs: "El tipo de cambio es el precio del dólar en pesos. Si está a $18, necesitas $18 pesos para comprar 1 dólar. Si sube a $19, el peso se debilita y todo lo que viene de USA se vuelve más caro.",
+                paraTi: "Si el dólar está caro (>$19), evita comprar en Amazon USA o viajar. Si está barato (<$18), es buen momento para comprar tecnología o viajar.",
+                ejemplo: "Quieres comprar unos tenis de $100 dólares. Si el dólar está a $18, cuestan $1,800 pesos. Si sube a $20, cuestan $2,000 pesos. ¡$200 más caros!",
                 obtenerDato: (v) => `💰 Dólar hoy: $${v?.toFixed(4) || '---'} MXN`
             },
             inf: {
                 titulo: "📈 Inflación",
                 subtitulo: "¿Qué tan caro está todo comparado con hace un año?",
-                queEs: "La inflación mide qué tanto subieron los precios en un año. Si la inflación es 4%, significa que lo que costaba $100 hace un año, ahora cuesta $104. Es como si tu dinero valiera un poquito menos cada año.",
-                paraTi: "Si la inflación está alta (>4.5%), tu dinero pierde valor rápido. Es mejor gastar hoy lo que necesites. Si está baja (<3%), puedes esperar para comprar cosas caras.",
-                ejemplo: "El año pasado tu despensa costaba $1,000 pesos. Con inflación del 4%, ahora cuesta $1,040 pesos. ¡Son $40 pesos más por las mismas cosas!",
+                queEs: "La inflación mide qué tanto subieron los precios en un año. Si la inflación es 4%, lo que costaba $100 hace un año, ahora cuesta $104. Tu dinero vale un poquito menos cada año.",
+                paraTi: "Si la inflación está alta (>4.5%), tu dinero pierde valor rápido. Mejor gasta hoy lo que necesites. Si está baja (<3%), puedes esperar para compras grandes.",
+                ejemplo: "El año pasado tu despensa costaba $1,000. Con inflación del 4%, ahora cuesta $1,040. ¡$40 pesos más por lo mismo!",
                 obtenerDato: (v) => `📈 Inflación: ${v?.toFixed(2) || '---'}% anual`
             },
             tasa: {
                 titulo: "🏦 Tasa de Banxico",
                 subtitulo: "La tasa de interés que pone el banco central",
-                queEs: "Banxico es el banco de los bancos. La tasa de interés es como el 'precio del dinero'. Cuando está alta, los bancos cobran más por prestar dinero (tarjetas, hipotecas) pero también pagan más por tus ahorros.",
-                paraTi: "Si la tasa está alta (>10%), es buen momento para ahorrar en CETES o cuentas de ahorro. Si está baja (<7%), es mejor momento para pedir un préstamo o hipoteca.",
-                ejemplo: "Con una tasa del 11%, si ahorras $10,000 en CETES, en un año ganas $1,100 pesos. ¡Sin hacer nada!",
+                queEs: "Banxico es el banco de los bancos. La tasa de interés es como el 'precio del dinero'. Cuando está alta, los bancos cobran más por prestar dinero pero también pagan más por tus ahorros.",
+                paraTi: "Si la tasa está alta (>10%), es buen momento para ahorrar en CETES. Si está baja (<7%), es mejor momento para pedir un préstamo o hipoteca.",
+                ejemplo: "Con tasa del 11%, si ahorras $10,000 en CETES, en un año ganas $1,100. ¡Sin hacer nada!",
                 obtenerDato: (v) => `🏦 Tasa Banxico: ${v?.toFixed(2) || '---'}%`
             },
             cetes: {
                 titulo: "📊 CETES 28 Días",
                 subtitulo: "El ahorro más seguro de México",
-                queEs: "Los CETES son como un 'certificado de ahorro' que te da el gobierno. Le prestas tu dinero al gobierno por 28 días y te paga intereses. Es el ahorro más seguro porque el gobierno siempre paga.",
-                paraTi: "Si CETES pagan más del 10%, es mejor que tener tu dinero en el colchón. Si pagan menos del 7%, busca otras opciones como cuentas de ahorro digitales.",
-                ejemplo: "Inviertes $5,000 en CETES al 10%. En 28 días, ganas aproximadamente $38 pesos. No es mucho, pero es seguro y mejor que nada.",
+                queEs: "Los CETES son como un 'certificado de ahorro' del gobierno. Le prestas tu dinero por 28 días y te paga intereses. Es el ahorro más seguro porque el gobierno siempre paga.",
+                paraTi: "Si CETES pagan más del 10%, es mejor que tener tu dinero en el colchón. Si pagan menos del 7%, busca otras opciones.",
+                ejemplo: "Inviertes $5,000 en CETES al 10%. En 28 días, ganas $38 pesos. No es mucho, pero es seguro.",
                 obtenerDato: (v) => `📊 CETES 28D: ${v?.toFixed(2) || '---'}%`
             },
             reservas: {
                 titulo: "💵 Reservas Internacionales",
                 subtitulo: "El colchón de dólares de México",
-                queEs: "Son los dólares que tiene guardados el Banco de México. Es como el 'fondo de emergencia' del país. Si hay una crisis, México puede usar estos dólares para protegerse.",
-                paraTi: "Si las reservas son altas (>$200 mil millones), México tiene un buen colchón. Si bajan mucho, puede haber problemas económicos. Por ahora, ¡estamos bien!",
+                queEs: "Son los dólares que tiene guardados el Banco de México. Es el 'fondo de emergencia' del país. Si hay una crisis, México usa estos dólares para protegerse.",
+                paraTi: "Si las reservas son altas (>$200 mil millones), México tiene un buen colchón. Si bajan mucho, puede haber problemas económicos.",
                 ejemplo: "México tiene más de $200 mil millones de dólares guardados. Es como tener un colchón gigante por si algo sale mal.",
                 obtenerDato: (v) => `💵 Reservas: $${v?.toFixed(0) || '---'} mil millones USD`
             },
             volatilidad: {
                 titulo: "🎢 Volatilidad",
                 subtitulo: "¿Qué tanto se mueve el dólar?",
-                queEs: "La volatilidad mide qué tanto sube y baja el dólar en poco tiempo. Si es alta, el dólar da 'brincos' y es más difícil saber lo que pasará mañana.",
-                paraTi: "Volatilidad alta = más riesgo. Si ves que el dólar se mueve mucho, es mejor esperar para hacer compras grandes en dólares.",
-                ejemplo: "Imagina que un día el dólar está a $18 y al otro día a $19. Esa es alta volatilidad. Es como una montaña rusa.",
+                queEs: "La volatilidad mide qué tanto sube y baja el dólar en poco tiempo. Si es alta, el dólar da 'brincos' y es difícil saber qué pasará mañana.",
+                paraTi: "Volatilidad alta = más riesgo. Si ves que el dólar se mueve mucho, espera para hacer compras grandes en dólares.",
+                ejemplo: "Un día el dólar está a $18 y al otro a $19. Esa es alta volatilidad. Como una montaña rusa.",
                 obtenerDato: (v) => `🎢 Volatilidad: $${v?.toFixed(4) || '---'}`
             }
         };
@@ -1363,13 +1347,11 @@
         // ============================================================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
         let charts = {};
-        let valoresActuales = { tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232 };
-        let fechasActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
+        let valoresActuales = {tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232};
+        let fechasActuales = {tc: null, inf: null, tasa: null, cetes: null, reservas: null};
         let intervalActualizacion;
-        let datosFallbackActivos = true;
 
-        const SERIES = { tipoCambio: "SF60653", inflacion: "SP1", tasaReferencia: "SF43783", cetes28: "SF339621",
-            reservas: "SF10146" };
+        const SERIES = {tc: "SF60653", inf: "SP1", tasa: "SF43783", cetes: "SF339621", reservas: "SF10146"};
 
         // ============================================================
         //  FUNCIONES DE CONEXIÓN
@@ -1404,7 +1386,6 @@
             } else {
                 dot.className = 'status-indicator status-offline';
                 text.textContent = 'Demo';
-                // No mostramos error en modo demo, es normal
                 ocultarError();
             }
         }
@@ -1412,177 +1393,154 @@
         // ============================================================
         //  CONSULTAS A BANXICO
         // ============================================================
-        async function consultarBanxicoConFecha(serieId, token) {
+        async function consultarBanxico(serieId, token) {
             if (!token) return null;
             try {
                 const url =
                     `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos/oportuno?token=${token}`;
-                const response = await fetch(url);
-                if (!response.ok) return null;
-                const data = await response.json();
+                const resp = await fetch(url);
+                if (!resp.ok) return null;
+                const data = await resp.json();
                 if (data?.bmx?.series?.[0]?.datos?.[0]) {
                     const valor = parseFloat(data.bmx.series[0].datos[0].dato);
                     if (!isNaN(valor)) {
-                        return { valor, fecha: data.bmx.series[0].datos[0].fecha };
+                        return {valor, fecha: data.bmx.series[0].datos[0].fecha};
                     }
                 }
                 return null;
-            } catch (error) {
-                console.warn('Error consultando Banxico:', error);
-                return null;
-            }
+            } catch (e) {return null;}
         }
 
-        async function consultarHistorico(serieId, token, dias = 60) {
+        async function consultarHistorico(serieId, token, dias = 30) {
             if (!token) return [];
             try {
-                const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos?token=${token}`;
-                const response = await fetch(url);
-                if (!response.ok) return [];
-                const data = await response.json();
+                const url =
+                    `https://www.banxico.org.mx/SieAPIRest/service/v1/series/${serieId}/datos?token=${token}`;
+                const resp = await fetch(url);
+                if (!resp.ok) return [];
+                const data = await resp.json();
                 if (data?.bmx?.series?.[0]?.datos) {
-                    const datos = data.bmx.series[0].datos
+                    return data.bmx.series[0].datos
                         .slice(0, dias)
-                        .map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha }))
-                        .filter(v => !isNaN(v.valor) && v.valor > 0);
-                    if (datos.length > 0) {
-                        return datos.reverse();
-                    }
+                        .map(d => ({valor: parseFloat(d.dato), fecha: d.fecha}))
+                        .filter(v => !isNaN(v.valor) && v.valor > 0)
+                        .reverse();
                 }
                 return [];
-            } catch (error) {
-                console.warn('Error consultando histórico:', error);
-                return [];
-            }
+            } catch (e) {return [];}
         }
 
         // ============================================================
-        //  ACTUALIZAR DASHBOARD - SIEMPRE CON DATOS VISIBLES
+        //  ACTUALIZAR DASHBOARD
         // ============================================================
         async function actualizarDatosBanxico() {
             const usarAPI = !!apiKeyBanxico;
+            const hoy = new Date().toISOString().split('T')[0];
 
-            // Intentar obtener datos de la API
-            let tcResult = null,
-                infResult = null,
-                tasaResult = null,
-                cetesResult = null,
-                reservasResult = null;
-
+            // Intentar obtener datos de API
+            let tcAPI = null,
+                infAPI = null,
+                tasaAPI = null,
+                cetesAPI = null,
+                resAPI = null;
             if (usarAPI) {
                 try {
-                    [tcResult, infResult, tasaResult, cetesResult, reservasResult] = await Promise.all([
-                        consultarBanxicoConFecha(SERIES.tipoCambio, apiKeyBanxico),
-                        consultarBanxicoConFecha(SERIES.inflacion, apiKeyBanxico),
-                        consultarBanxicoConFecha(SERIES.tasaReferencia, apiKeyBanxico),
-                        consultarBanxicoConFecha(SERIES.cetes28, apiKeyBanxico),
-                        consultarBanxicoConFecha(SERIES.reservas, apiKeyBanxico)
+                    [tcAPI, infAPI, tasaAPI, cetesAPI, resAPI] = await Promise.all([
+                        consultarBanxico(SERIES.tc, apiKeyBanxico),
+                        consultarBanxico(SERIES.inf, apiKeyBanxico),
+                        consultarBanxico(SERIES.tasa, apiKeyBanxico),
+                        consultarBanxico(SERIES.cetes, apiKeyBanxico),
+                        consultarBanxico(SERIES.reservas, apiKeyBanxico)
                     ]);
-                } catch (e) {
-                    console.warn('Error en consultas API:', e);
-                }
+                } catch (e) {console.warn('API error:', e);}
             }
 
-            // Usar fallback si no hay datos de API
-            const hoy = new Date().toISOString().split('T')[0];
-            const tc = (tcResult && tcResult.valor) ? tcResult : { valor: FALLBACK_DATA.tipoCambio.valores[FALLBACK_DATA
-                    .tipoCambio.valores.length - 1] || 18.52, fecha: hoy };
-            const inf = (infResult && infResult.valor) ? infResult : { valor: FALLBACK_DATA.inflacion.valores[FALLBACK_DATA
-                    .inflacion.valores.length - 1] || 4.35, fecha: hoy };
-            const tasa = (tasaResult && tasaResult.valor) ? tasaResult : { valor: FALLBACK_DATA.tasaBanxico.valores[
-                    FALLBACK_DATA.tasaBanxico.valores.length - 1] || 10.00, fecha: hoy };
-            const cetes = (cetesResult && cetesResult.valor) ? cetesResult : { valor: FALLBACK_DATA.cetes.valores[
-                    FALLBACK_DATA.cetes.valores.length - 1] || 9.82, fecha: hoy };
-            const reservas = (reservasResult && reservasResult.valor) ? reservasResult : { valor: FALLBACK_DATA.reservas
-                    .valores[FALLBACK_DATA.reservas.valores.length - 1] || 232, fecha: hoy };
+            // Usar fallback si no hay datos
+            const tc = (tcAPI && tcAPI.valor) ? tcAPI : {valor: FALLBACK.tc[FALLBACK.tc.length - 1], fecha: hoy};
+            const inf = (infAPI && infAPI.valor) ? infAPI : {valor: FALLBACK.inf[FALLBACK.inf.length - 1], fecha: hoy};
+            const tasa = (tasaAPI && tasaAPI.valor) ? tasaAPI : {
+                valor: FALLBACK.tasa[FALLBACK.tasa.length - 1],
+                fecha: hoy
+            };
+            const cetes = (cetesAPI && cetesAPI.valor) ? cetesAPI : {
+                valor: FALLBACK.cetes[FALLBACK.cetes.length - 1],
+                fecha: hoy
+            };
+            const reservas = (resAPI && resAPI.valor) ? resAPI : {
+                valor: FALLBACK.reservas[FALLBACK.reservas.length - 1],
+                fecha: hoy
+            };
 
-            // Guardar valores
             valoresActuales.tc = tc.valor;
             valoresActuales.inflacion = inf.valor;
             valoresActuales.tasa = tasa.valor;
             valoresActuales.cetes = cetes.valor;
             valoresActuales.reservas = reservas.valor;
             fechasActuales.tc = tc.fecha || hoy;
-            fechasActuales.inflacion = inf.fecha || hoy;
+            fechasActuales.inf = inf.fecha || hoy;
             fechasActuales.tasa = tasa.fecha || hoy;
             fechasActuales.cetes = cetes.fecha || hoy;
             fechasActuales.reservas = reservas.fecha || hoy;
 
             // ===== ACTUALIZAR UI =====
-            // Dólar
             document.getElementById('usdmxn').innerText = tc.valor.toFixed(4);
             document.getElementById('kpiTC').innerHTML = `$${tc.valor.toFixed(4)}`;
             document.getElementById('kpiFechTC').innerHTML = `📅 ${tc.fecha || hoy}`;
             document.getElementById('kpiInterTC').textContent = tc.valor > 19 ? '⚠️ Dólar caro, evita importados' :
-                tc.valor < 17.5 ? '✅ Dólar barato, buen momento para comprar' :
-                '⚖️ Dólar estable, todo normal';
+                tc.valor < 17.5 ? '✅ Dólar barato, buen momento para comprar' : '⚖️ Dólar estable, todo normal';
 
-            // Inflación
             document.getElementById('inflacion').innerText = `${inf.valor.toFixed(2)}%`;
             document.getElementById('kpiInf').innerHTML = `${inf.valor.toFixed(2)}%`;
             document.getElementById('kpiInterInf').textContent = inf.valor > 4.5 ? '⚠️ Inflación alta, tu dinero pierde valor' :
-                inf.valor < 3 ? '✅ Inflación baja, precios estables' :
-                '⚖️ Inflación controlada';
+                inf.valor < 3 ? '✅ Inflación baja, precios estables' : '⚖️ Inflación controlada';
 
-            // Tasa
             document.getElementById('tasa').innerText = `${tasa.valor.toFixed(2)}%`;
             document.getElementById('kpiTasa').innerHTML = `${tasa.valor.toFixed(2)}%`;
             document.getElementById('kpiInterTasa').textContent = tasa.valor > 10 ? '✅ Buen momento para ahorrar' :
-                tasa.valor < 7 ? '✅ Buen momento para pedir préstamos' :
-                '⚖️ Tasa neutral';
+                tasa.valor < 7 ? '✅ Buen momento para pedir préstamos' : '⚖️ Tasa neutral';
 
-            // CETES
             document.getElementById('cetes').innerText = `${cetes.valor.toFixed(2)}%`;
             document.getElementById('kpiCetes').innerHTML = `${cetes.valor.toFixed(2)}%`;
             document.getElementById('kpiInterCetes').textContent = cetes.valor > 10 ? '✅ CETES pagan bien, ¡ahorra!' :
-                cetes.valor < 8 ? '⚠️ CETES bajos, busca otras opciones' :
-                '⚖️ CETES normales';
+                cetes.valor < 8 ? '⚠️ CETES bajos, busca otras opciones' : '⚖️ CETES normales';
 
-            // Reservas
             document.getElementById('kpiReservas').innerHTML = `$${(reservas.valor).toFixed(0)} MMD`;
             document.getElementById('kpiInterReservas').textContent = reservas.valor > 200 ? '✅ México con buen colchón' :
                 '⚠️ Reservas bajas, ojo';
 
-            // Volatilidad (siempre con datos)
-            const tcFallback = FALLBACK_DATA.tipoCambio.valores;
-            const maxMin = Math.max(...tcFallback) - Math.min(...tcFallback);
+            // Volatilidad
+            const tcData = FALLBACK.tc;
+            const maxMin = Math.max(...tcData) - Math.min(...tcData);
             document.getElementById('kpiVolatilidad').innerHTML = `$${maxMin.toFixed(4)}`;
 
-            // ===== OBTENER HISTÓRICOS PARA GRÁFICAS =====
+            // ===== HISTÓRICOS PARA GRÁFICAS =====
             let histTC = [],
                 histInf = [],
                 histTasa = [],
                 histCetes = [];
-
             if (usarAPI) {
                 try {
                     [histTC, histInf, histTasa, histCetes] = await Promise.all([
-                        consultarHistorico(SERIES.tipoCambio, apiKeyBanxico, 60),
-                        consultarHistorico(SERIES.inflacion, apiKeyBanxico, 40),
-                        consultarHistorico(SERIES.tasaReferencia, apiKeyBanxico, 40),
-                        consultarHistorico(SERIES.cetes28, apiKeyBanxico, 40)
+                        consultarHistorico(SERIES.tc, apiKeyBanxico, 30),
+                        consultarHistorico(SERIES.inf, apiKeyBanxico, 20),
+                        consultarHistorico(SERIES.tasa, apiKeyBanxico, 20),
+                        consultarHistorico(SERIES.cetes, apiKeyBanxico, 20)
                     ]);
-                } catch (e) {
-                    console.warn('Error en históricos:', e);
-                }
+                } catch (e) { }
             }
 
-            // Siempre usar fallback si no hay datos históricos
-            if (!histTC || histTC.length === 0) {
-                histTC = FALLBACK_DATA.tipoCambio.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA.tipoCambio
-                        .fechas[i] || hoy }));
+            // Usar fallback si no hay datos
+            if (!histTC || histTC.length < 5) {
+                histTC = FALLBACK.tc.map((v, i) => ({valor: v, fecha: fechasTC[i] || hoy}));
             }
-            if (!histInf || histInf.length === 0) {
-                histInf = FALLBACK_DATA.inflacion.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA.inflacion
-                        .fechas[i] || hoy }));
+            if (!histInf || histInf.length < 5) {
+                histInf = FALLBACK.inf.map((v, i) => ({valor: v, fecha: fechasInf[i] || hoy}));
             }
-            if (!histTasa || histTasa.length === 0) {
-                histTasa = FALLBACK_DATA.tasaBanxico.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA
-                        .tasaBanxico.fechas[i] || hoy }));
+            if (!histTasa || histTasa.length < 5) {
+                histTasa = FALLBACK.tasa.map((v, i) => ({valor: v, fecha: fechasTasa[i] || hoy}));
             }
-            if (!histCetes || histCetes.length === 0) {
-                histCetes = FALLBACK_DATA.cetes.valores.map((v, i) => ({ valor: v, fecha: FALLBACK_DATA.cetes.fechas[
-                        i] || hoy }));
+            if (!histCetes || histCetes.length < 5) {
+                histCetes = FALLBACK.cetes.map((v, i) => ({valor: v, fecha: fechasCetes[i] || hoy}));
             }
 
             // Actualizar gráficas
@@ -1592,74 +1550,157 @@
             actualizarGraficaTasas(histTasa, histCetes);
             actualizarGraficaInflacion(histInf);
             actualizarGraficaPetroleo();
-            actualizarGraficaReservas(reservas.valor);
+            actualizarGraficaReservas(FALLBACK.reservas);
 
             // Recomendaciones
             actualizarRecomendaciones();
 
             // Estado
-            const conectado = usarAPI && tcResult !== null && tcResult.valor !== undefined;
+            const conectado = usarAPI && tcAPI !== null && tcAPI.valor !== undefined;
             actualizarEstadoConexion(conectado);
-            datosFallbackActivos = !conectado;
-
-            // Explicación dinámica
             actualizarExplicacionDinamica();
         }
 
         // ============================================================
-        //  EXPLICACIÓN DINÁMICA
+        //  GRÁFICAS - con verificación de canvas
         // ============================================================
-        function actualizarExplicacionDinamica() {
-            const tc = valoresActuales.tc;
-            let texto = '';
-            let ejemplo = '';
+        function getChartContext(id) {
+            const canvas = document.getElementById(id);
+            if (!canvas) {
+                console.warn(`Canvas #${id} no encontrado`);
+                return null;
+            }
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                console.warn(`Contexto 2D no disponible para #${id}`);
+                return null;
+            }
+            return ctx;
+        }
 
-            if (tc !== null && !isNaN(tc)) {
-                if (tc > 19) {
-                    texto =
-                    '⚠️ El dólar está caro. Evita comprar cosas importadas. Si puedes esperar, mejor. 💡 Consejo: compra en pesos.';
-                    ejemplo = '💡 Haz clic en 🇲🇽 Dólar para saber más';
-                } else if (tc < 17.5) {
-                    texto =
-                    '✅ ¡El dólar está barato! Buen momento para comprar tecnología, ropa importada o viajar. Aprovecha las ofertas.';
-                    ejemplo = '💡 Haz clic en 🇲🇽 Dólar para saber más';
-                } else {
-                    texto =
-                    '⚖️ El dólar está normal. Todo tranquilo. Puedes hacer tus compras sin preocuparte demasiado.';
-                    ejemplo = '💡 Haz clic en cualquier indicador para aprender más';
-                }
-            } else {
-                texto = '📊 Los datos se actualizan automáticamente. Conecta tu API Key para datos en vivo.';
-                ejemplo = '💡 Usa tu API Key de Banxico para datos reales';
+        function initCharts() {
+            const ctxTC = getChartContext('chartTC');
+            const ctxRange = getChartContext('chartRange');
+            const ctxCandle = getChartContext('chartCandle');
+            const ctxTasas = getChartContext('chartTasas');
+            const ctxInf = getChartContext('chartInf');
+            const ctxPetroleo = getChartContext('chartPetroleo');
+            const ctxReservas = getChartContext('chartReservas');
+
+            const color = getComputedStyle(document.body).getPropertyValue('--texto') || '#1a1a2e';
+
+            if (ctxTC) {
+                charts.tc = new Chart(ctxTC, {
+                    type: 'line',
+                    data: {
+                        labels: [], datasets: [{
+                            label: 'USD/MXN', borderColor: '#4d96ff',
+                            backgroundColor: 'rgba(77,150,255,0.1)', fill: true, tension: 0.3, data: []
+                        }]
+                    },
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
             }
 
-            document.getElementById('explicacionTexto').textContent = texto;
-            document.getElementById('ejemploDinamico').textContent = ejemplo;
+            if (ctxRange) {
+                charts.range = new Chart(ctxRange, {
+                    type: 'line',
+                    data: {
+                        labels: [], datasets: [{label: 'Máximo', borderColor: '#6bcb77', data: []},
+                        {label: 'Mínimo', borderColor: '#ff6b6b', data: []}]
+                    },
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
+            }
+
+            if (ctxCandle) {
+                charts.candle = new Chart(ctxCandle, {
+                    type: 'bar',
+                    data: {labels: [], datasets: [{label: 'Cambio diario', data: []}]},
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
+            }
+
+            if (ctxTasas) {
+                charts.tasas = new Chart(ctxTasas, {
+                    type: 'line',
+                    data: {
+                        labels: [], datasets: [{
+                            label: 'Tasa Banxico', borderColor: '#ff9a56', tension: 0.3,
+                            data: []
+                        }, {
+                            label: 'CETES 28d', borderColor: '#6bcb77', tension: 0.3,
+                            data: []
+                        }]
+                    },
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
+            }
+
+            if (ctxInf) {
+                charts.inf = new Chart(ctxInf, {
+                    type: 'line',
+                    data: {
+                        labels: [], datasets: [{
+                            label: 'INPC (%)', borderColor: '#ff6b6b',
+                            backgroundColor: 'rgba(255,107,107,0.1)', fill: true, tension: 0.3, data: []
+                        }]
+                    },
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
+            }
+
+            if (ctxPetroleo) {
+                charts.petroleo = new Chart(ctxPetroleo, {
+                    type: 'line',
+                    data: {
+                        labels: [], datasets: [{
+                            label: 'Brent (USD)', borderColor: '#9b59b6', tension: 0.3,
+                            data: []
+                        }]
+                    },
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
+            }
+
+            if (ctxReservas) {
+                charts.reservas = new Chart(ctxReservas, {
+                    type: 'line',
+                    data: {
+                        labels: [], datasets: [{
+                            label: 'Reservas (MMD)', borderColor: '#ff6b9d',
+                            backgroundColor: 'rgba(255,107,157,0.1)', fill: true, tension: 0.3, data: []
+                        }]
+                    },
+                    options: {responsive: true, plugins: {legend: {labels: {color}}}}
+                });
+            }
+
+            console.log('✅ Gráficas inicializadas:', Object.keys(charts).length);
         }
 
         // ============================================================
-        //  GRÁFICAS
+        //  ACTUALIZAR GRÁFICAS
         // ============================================================
         function actualizarGraficaTC(hist) {
             if (charts.tc) {
-                const labels = hist.map(h => h.fecha || '');
-                const data = hist.map(h => h.valor);
-                charts.tc.data.labels = labels;
-                charts.tc.data.datasets[0].data = data;
+                charts.tc.data.labels = hist.map(h => h.fecha || '');
+                charts.tc.data.datasets[0].data = hist.map(h => h.valor);
                 charts.tc.update();
             }
         }
 
         function actualizarGraficaRange(hist) {
-            if (!charts.range) return;
-            const v = hist.map(h => h.valor);
-            const ventana = 5;
-            const maxs = v.map((_, i) => Math.max(...v.slice(Math.max(0, i - ventana), Math.min(i + 1, v.length))));
-            const mins = v.map((_, i) => Math.min(...v.slice(Math.max(0, i - ventana), Math.min(i + 1, v.length))));
-            charts.range.data.labels = hist.map(h => h.fecha || '');
-            charts.range.data.datasets[0].data = maxs;
-            charts.range.data.datasets[1].data = mins;
-            charts.range.update();
+            if (charts.range) {
+                const v = hist.map(h => h.valor);
+                const ventana = 5;
+                const maxs = v.map((_, i) => Math.max(...v.slice(Math.max(0, i - ventana), Math.min(i + 1, v.length))));
+                const mins = v.map((_, i) => Math.min(...v.slice(Math.max(0, i - ventana), Math.min(i + 1, v.length))));
+                charts.range.data.labels = hist.map(h => h.fecha || '');
+                charts.range.data.datasets[0].data = maxs;
+                charts.range.data.datasets[1].data = mins;
+                charts.range.update();
+            }
         }
 
         function actualizarGraficaCandle(hist) {
@@ -1676,21 +1717,18 @@
 
         function actualizarGraficaTasas(tasa, cetes) {
             if (charts.tasas) {
-                // Asegurar que ambas series tengan la misma longitud
                 const maxLen = Math.max(tasa.length, cetes.length);
-                const fechas = [];
+                const labels = [];
                 const tasaData = [];
                 const cetesData = [];
-
                 for (let i = 0; i < maxLen; i++) {
-                    const idxTasa = Math.min(i, tasa.length - 1);
-                    const idxCetes = Math.min(i, cetes.length - 1);
-                    fechas.push(tasa[idxTasa]?.fecha || cetes[idxCetes]?.fecha || `D-${maxLen - i}`);
-                    tasaData.push(tasa[idxTasa]?.valor || tasa[tasa.length - 1]?.valor || 10);
-                    cetesData.push(cetes[idxCetes]?.valor || cetes[cetes.length - 1]?.valor || 9.5);
+                    const idxT = Math.min(i, tasa.length - 1);
+                    const idxC = Math.min(i, cetes.length - 1);
+                    labels.push(tasa[idxT]?.fecha || cetes[idxC]?.fecha || `D-${maxLen - i}`);
+                    tasaData.push(tasa[idxT]?.valor || tasa[tasa.length - 1]?.valor || 10);
+                    cetesData.push(cetes[idxC]?.valor || cetes[cetes.length - 1]?.valor || 9.5);
                 }
-
-                charts.tasas.data.labels = fechas;
+                charts.tasas.data.labels = labels;
                 charts.tasas.data.datasets[0].data = tasaData;
                 charts.tasas.data.datasets[1].data = cetesData;
                 charts.tasas.update();
@@ -1714,90 +1752,121 @@
             }
         }
 
-        function actualizarGraficaReservas(r) {
+        function actualizarGraficaReservas(data) {
             if (charts.reservas) {
-                const data = [210, 212, 215, 218, 220, 222, 225, 223, 226, 228, 230, 232, 235, 233, 236, 238, 240, 242, 245,
-                    243
-                ];
-                if (r && !isNaN(r)) data.push(r);
-                charts.reservas.data.labels = data.map((_, i) => `E${i + 1}`);
-                charts.reservas.data.datasets[0].data = data;
+                const d = data || FALLBACK.reservas;
+                charts.reservas.data.labels = d.map((_, i) => `E${i + 1}`);
+                charts.reservas.data.datasets[0].data = d;
                 charts.reservas.update();
             }
+        }
+
+        // ============================================================
+        //  EXPLICACIÓN DINÁMICA
+        // ============================================================
+        function actualizarExplicacionDinamica() {
+            const tc = valoresActuales.tc;
+            let texto = '',
+                ejemplo = '';
+            if (tc !== null && !isNaN(tc)) {
+                if (tc > 19) {
+                    texto = '⚠️ El dólar está caro. Evita comprar cosas importadas. Si puedes esperar, mejor.';
+                    ejemplo = '💡 Haz clic en 🇲🇽 Dólar para saber más';
+                } else if (tc < 17.5) {
+                    texto = '✅ ¡El dólar está barato! Buen momento para comprar tecnología, ropa importada o viajar.';
+                    ejemplo = '💡 Haz clic en 🇲🇽 Dólar para saber más';
+                } else {
+                    texto = '⚖️ El dólar está normal. Todo tranquilo. Puedes hacer tus compras sin preocuparte.';
+                    ejemplo = '💡 Haz clic en cualquier indicador para aprender más';
+                }
+            } else {
+                texto = '📊 Los datos se actualizan automáticamente. Conecta tu API Key para datos en vivo.';
+                ejemplo = '💡 Usa tu API Key de Banxico para datos reales';
+            }
+            document.getElementById('explicacionTexto').textContent = texto;
+            document.getElementById('ejemploDinamico').textContent = ejemplo;
         }
 
         // ============================================================
         //  RECOMENDACIONES
         // ============================================================
         function actualizarRecomendaciones() {
-            const { tc, inflacion, tasa, cetes } = valoresActuales;
+            const {tc, inflacion, tasa, cetes} = valoresActuales;
             const recs = [];
             const personajes = [
-                { nombre: 'Don Peso', emoji: '🧑‍🏫' },
-                { nombre: 'La Tía Inflación', emoji: '👩‍🏫' },
-                { nombre: 'El Lic. Ahorro', emoji: '👨‍💼' },
-                { nombre: 'La Sra. Reserva', emoji: '👩‍💼' },
-                { nombre: 'El Sr. Dólar', emoji: '🧔' }
+                {nombre: 'Don Peso', emoji: '🧑‍🏫'},
+                {nombre: 'La Tía Inflación', emoji: '👩‍🏫'},
+                {nombre: 'El Lic. Ahorro', emoji: '👨‍💼'},
+                {nombre: 'La Sra. Reserva', emoji: '👩‍💼'},
+                {nombre: 'El Sr. Dólar', emoji: '🧔'}
             ];
-
             let idx = 0;
 
             if (tc !== null && !isNaN(tc)) {
-                if (tc > 19) {
-                    recs.push({ icono: '💵', titulo: 'Dólar caro', desc: 'Evita comprar importados. Espera a que baje.',
-                        personaje: personajes[idx++ % personajes.length] });
-                } else if (tc < 17.5) {
-                    recs.push({ icono: '🛒', titulo: 'Dólar barato', desc: '¡Aprovecha para comprar tecnología o viajar!',
-                        personaje: personajes[idx++ % personajes.length] });
-                } else {
-                    recs.push({ icono: '⚖️', titulo: 'Dólar estable', desc: 'Todo normal. Sigue con tu vida.',
-                        personaje: personajes[idx++ % personajes.length] });
-                }
+                if (tc > 19) recs.push({
+                    icono: '💵', titulo: 'Dólar caro', desc: 'Evita comprar importados. Espera a que baje.',
+                    personaje: personajes[idx++ % personajes.length]
+                });
+                else if (tc < 17.5) recs.push({
+                    icono: '🛒', titulo: 'Dólar barato',
+                    desc: '¡Aprovecha para comprar tecnología o viajar!', personaje: personajes[idx++ % personajes
+                        .length]
+                });
+                else recs.push({
+                    icono: '⚖️', titulo: 'Dólar estable', desc: 'Todo normal. Sigue con tu vida.',
+                    personaje: personajes[idx++ % personajes.length]
+                });
             }
 
             if (inflacion !== null && !isNaN(inflacion)) {
-                if (inflacion > 4.5) {
-                    recs.push({ icono: '🛡️', titulo: 'Inflación alta', desc: 'Compra hoy lo que necesites. Mañana costará más.',
-                        personaje: personajes[idx++ % personajes.length] });
-                } else if (inflacion < 3) {
-                    recs.push({ icono: '📉', titulo: 'Inflación baja', desc: 'Puedes esperar para comprar cosas caras. Habrá ofertas.',
-                        personaje: personajes[idx++ % personajes.length] });
-                } else {
-                    recs.push({ icono: '📊', titulo: 'Precios estables', desc: 'Sigue comparando precios para ahorrar.',
-                        personaje: personajes[idx++ % personajes.length] });
-                }
+                if (inflacion > 4.5) recs.push({
+                    icono: '🛡️', titulo: 'Inflación alta',
+                    desc: 'Compra hoy lo que necesites. Mañana costará más.', personaje: personajes[idx++ %
+                        personajes.length]
+                });
+                else if (inflacion < 3) recs.push({
+                    icono: '📉', titulo: 'Inflación baja',
+                    desc: 'Puedes esperar para comprar cosas caras. Habrá ofertas.', personaje: personajes[idx++ %
+                        personajes.length]
+                });
+                else recs.push({
+                    icono: '📊', titulo: 'Precios estables', desc: 'Sigue comparando precios para ahorrar.',
+                    personaje: personajes[idx++ % personajes.length]
+                });
             }
 
             if (tasa !== null && cetes !== null && !isNaN(tasa) && !isNaN(cetes)) {
-                if (tasa > 10) {
-                    recs.push({ icono: '🏦', titulo: '¡Ahorra!', desc: `CETES pagan ${cetes.toFixed(1)}%. Mete tu dinero ahí.`,
-                        personaje: personajes[idx++ % personajes.length] });
-                } else if (tasa < 7) {
-                    recs.push({ icono: '💳', titulo: '¡Pide préstamo!', desc: 'Las tasas están bajas. Buen momento para créditos.',
-                        personaje: personajes[idx++ % personajes.length] });
-                } else {
-                    recs.push({ icono: '⚡', titulo: 'Tasas neutrales', desc: 'Compara opciones de ahorro e inversión.',
-                        personaje: personajes[idx++ % personajes.length] });
-                }
+                if (tasa > 10) recs.push({
+                    icono: '🏦', titulo: '¡Ahorra!', desc: `CETES pagan ${cetes.toFixed(1)}%. Mete tu dinero ahí.`,
+                    personaje: personajes[idx++ % personajes.length]
+                });
+                else if (tasa < 7) recs.push({
+                    icono: '💳', titulo: '¡Pide préstamo!',
+                    desc: 'Las tasas están bajas. Buen momento para créditos.', personaje: personajes[idx++ %
+                        personajes.length]
+                });
+                else recs.push({
+                    icono: '⚡', titulo: 'Tasas neutrales', desc: 'Compara opciones de ahorro e inversión.',
+                    personaje: personajes[idx++ % personajes.length]
+                });
             }
 
-            // Consejos variados
-            const consejosVariados = [
-                { icono: '🧠', titulo: 'Fondo de emergencia', desc: 'Guarda 3 meses de gastos en CETES.',
-                    personaje: personajes[idx++ % personajes.length] },
-                { icono: '📱', titulo: 'Apps para ahorrar', desc: 'GBM+, Nu, Klar. Algunas pagan hasta 15%.',
-                    personaje: personajes[idx++ % personajes.length] },
-                { icono: '🏠', titulo: 'Casa propia', desc: 'Las hipotecas están en 9-12%. Espera si puedes.',
-                    personaje: personajes[idx++ % personajes.length] },
-                { icono: '💳', titulo: 'Tarjetas', desc: 'Nunca pagues el mínimo. Siempre pago total.',
-                    personaje: personajes[idx++ % personajes.length] },
-                { icono: '🎯', titulo: 'Metas financieras', desc: 'Define qué quieres lograr este año con tu dinero.',
-                    personaje: personajes[idx++ % personajes.length] }
+            const extras = [
+                {
+                    icono: '🧠', titulo: 'Fondo de emergencia', desc: 'Guarda 3 meses de gastos en CETES.',
+                    personaje: personajes[idx++ % personajes.length]
+                },
+                {
+                    icono: '📱', titulo: 'Apps para ahorrar', desc: 'GBM+, Nu, Klar. Algunas pagan hasta 15%.',
+                    personaje: personajes[idx++ % personajes.length]
+                },
+                {
+                    icono: '💳', titulo: 'Tarjetas', desc: 'Nunca pagues el mínimo. Siempre pago total.',
+                    personaje: personajes[idx++ % personajes.length]
+                }
             ];
-
-            const shuffled = consejosVariados.sort(() => Math.random() - 0.5);
-            recs.push(shuffled[0]);
-            recs.push(shuffled[1]);
+            recs.push(extras[Math.floor(Math.random() * extras.length)]);
+            recs.push(extras[Math.floor(Math.random() * extras.length)]);
 
             document.getElementById('recomendacionesLista').innerHTML = recs.map(r =>
                 `<div class="rec-item">
@@ -1812,28 +1881,36 @@
         // ============================================================
         //  MODAL EXPLICACIÓN
         // ============================================================
-        let explicacionActual = 'tc';
-
         function abrirExplicacion(tipo) {
-            explicacionActual = tipo;
             const exp = EXPLICACIONES[tipo];
             if (!exp) return;
-
             document.getElementById('modalTitulo').textContent = exp.titulo;
             document.getElementById('modalSubtitulo').textContent = exp.subtitulo;
             document.getElementById('modalQueEs').innerHTML = exp.queEs;
             document.getElementById('modalParaTi').innerHTML = exp.paraTi;
             document.getElementById('modalEjemplo').innerHTML = exp.ejemplo;
 
-            let valor = null;
-            let label = '---';
-            if (tipo === 'tc') { valor = valoresActuales.tc;
-                label = '$' + (valor?.toFixed(4) || '---'); } else if (tipo === 'inf') { valor = valoresActuales.inflacion;
-                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'tasa') { valor = valoresActuales.tasa;
-                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'cetes') { valor = valoresActuales.cetes;
-                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'reservas') { valor = valoresActuales.reservas;
-                label = '$' + (valor?.toFixed(0) || '---') + ' MMD'; } else if (tipo === 'volatilidad') { label =
-                    document.getElementById('kpiVolatilidad').textContent; }
+            let valor = null,
+                label = '---';
+            if (tipo === 'tc') {
+                valor = valoresActuales.tc;
+                label = '$' + (valor?.toFixed(4) || '---');
+            } else if (tipo === 'inf') {
+                valor = valoresActuales.inflacion;
+                label = (valor?.toFixed(2) || '---') + '%';
+            } else if (tipo === 'tasa') {
+                valor = valoresActuales.tasa;
+                label = (valor?.toFixed(2) || '---') + '%';
+            } else if (tipo === 'cetes') {
+                valor = valoresActuales.cetes;
+                label = (valor?.toFixed(2) || '---') + '%';
+            } else if (tipo === 'reservas') {
+                valor = valoresActuales.reservas;
+                label = '$' + (valor?.toFixed(0) || '---') + ' MMD';
+            } else if (tipo === 'volatilidad') {
+                label =
+                document.getElementById('kpiVolatilidad').textContent;
+            }
 
             document.getElementById('modalDato').innerHTML = `
                 <strong>📊 Valor actual:</strong> ${label}
@@ -1847,7 +1924,6 @@
             document.querySelectorAll('.modal-contenido-tab').forEach(t => t.classList.remove('activo'));
             document.querySelector('.modal-tabs .tab[data-tab="que-es"]')?.classList.add('activo');
             document.getElementById('tabQueEs')?.classList.add('activo');
-
             document.getElementById('modalExplicacion').style.display = 'flex';
         }
 
@@ -1856,7 +1932,7 @@
         }
 
         // Tabs
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.classList.contains('tab')) {
                 const tab = e.target.dataset.tab;
                 document.querySelectorAll('.modal-tabs .tab').forEach(t => t.classList.remove('activo'));
@@ -1877,14 +1953,12 @@
         async function cargarNoticias() {
             const grid = document.getElementById('noticiasGrid');
             grid.innerHTML = `<div class="cargando">🔄 Cargando noticias...</div>`;
-
             try {
                 const rssUrl =
                     'https://news.google.com/rss/search?q=economía+méxico+OR+banxico+OR+peso+mexicano&hl=es-419&gl=MX&ceid=MX:es-419';
                 const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-
+                const resp = await fetch(proxyUrl);
+                const data = await resp.json();
                 if (data.status === 'ok' && data.items?.length) {
                     const analisis = [
                         '📌 Esto puede afectar el precio del dólar.',
@@ -1892,108 +1966,39 @@
                         '📌 Esto puede cambiar las tasas de interés.',
                         '📌 Esto afecta a los ahorradores e inversionistas.',
                         '📌 Esto puede impactar el precio de la gasolina.',
-                        '📌 Esto puede afectar tu bolsillo en los próximos días.',
-                        '📌 Esto es importante para la economía de México.'
+                        '📌 Esto puede afectar tu bolsillo en los próximos días.'
                     ];
-
                     const noticias = data.items.slice(0, 12).map((item, i) => {
-                        let enlaceOriginal = item.link || '';
-                        const match = enlaceOriginal.match(/url=([^&]+)/);
-                        if (match) {
-                            enlaceOriginal = decodeURIComponent(match[1]);
-                        }
-
+                        let enlace = item.link || '';
+                        const match = enlace.match(/url=([^&]+)/);
+                        if (match) enlace = decodeURIComponent(match[1]);
                         return {
                             titulo: item.title.replace(' - Google News', '').trim(),
-                            descripcion: item.description?.replace(/<[^>]*>/g, '').trim() || '',
-                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', { day: 'numeric', month: 'short',
-                                year: 'numeric' }),
+                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', {
+                                day: 'numeric',
+                                month: 'short', year: 'numeric'
+                            }),
                             fuente: item.author || 'Google News',
-                            imagen: item.thumbnail || `https://picsum.photos/400/200?random=${Date.now() + i}`,
-                            enlace: enlaceOriginal,
+                            imagen: item.thumbnail || `https://picsum.photos/400/200?random=${i}`,
+                            enlace: enlace,
                             analisis: analisis[i % analisis.length]
                         };
                     });
-
                     grid.innerHTML = noticias.map((n) => `
                         <div class="noticia-card" onclick="window.open('${n.enlace}','_blank')">
                             <img class="noticia-imagen" src="${n.imagen}" 
                                  onerror="this.src='https://picsum.photos/400/200?random=${Math.random()}'">
                             <div class="noticia-titulo">${n.titulo.substring(0, 100)}${n.titulo.length > 100 ? '...' : ''}</div>
-                            <div class="noticia-meta">
-                                <span>${n.fuente}</span>
-                                <span>${n.fecha}</span>
-                            </div>
+                            <div class="noticia-meta"><span>${n.fuente}</span><span>${n.fecha}</span></div>
                             <div class="noticia-analisis">${n.analisis}</div>
                             <div class="noticia-leer">📖 Abrir noticia →</div>
                         </div>
                     `).join('');
-                } else {
-                    throw new Error('No hay noticias');
-                }
-            } catch (error) {
-                grid.innerHTML = `
-                    <div class="cargando" style="grid-column:1/-1;">
-                        ⚠️ No se pudieron cargar noticias. 
-                        <button class="btn btn-azul" onclick="cargarNoticias()" style="margin-top:10px;">🔄 Reintentar</button>
-                    </div>
-                `;
+                } else throw new Error('Sin noticias');
+            } catch (e) {
+                grid.innerHTML =
+                    `<div class="cargando" style="grid-column:1/-1;">⚠️ No se pudieron cargar noticias. <button class="btn btn-azul" onclick="cargarNoticias()" style="margin-top:10px;">🔄 Reintentar</button></div>`;
             }
-        }
-
-        // ============================================================
-        //  INICIALIZAR GRÁFICAS
-        // ============================================================
-        function initCharts() {
-            const textoColor = getComputedStyle(document.body).getPropertyValue('--texto') || '#1a1a2e';
-
-            charts.tc = new Chart(document.getElementById('chartTC'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'USD/MXN', borderColor: '#4d96ff', backgroundColor: 'rgba(77,150,255,0.1)',
-                        fill: true, tension: 0.3, data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
-
-            charts.range = new Chart(document.getElementById('chartRange'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'Máximo', borderColor: '#6bcb77', data: [] }, { label: 'Mínimo',
-                        borderColor: '#ff6b6b', data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
-
-            charts.candle = new Chart(document.getElementById('chartCandle'), {
-                type: 'bar',
-                data: { labels: [], datasets: [{ label: 'Cambio diario', data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
-
-            charts.tasas = new Chart(document.getElementById('chartTasas'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'Tasa Banxico', borderColor: '#ff9a56', tension: 0.3,
-                        data: [] }, { label: 'CETES 28d', borderColor: '#6bcb77', tension: 0.3, data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
-
-            charts.inf = new Chart(document.getElementById('chartInf'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'INPC (%)', borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,0.1)',
-                        fill: true, tension: 0.3, data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
-
-            charts.petroleo = new Chart(document.getElementById('chartPetroleo'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'Brent (USD)', borderColor: '#9b59b6', tension: 0.3,
-                        data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
-
-            charts.reservas = new Chart(document.getElementById('chartReservas'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ label: 'Reservas (MMD)', borderColor: '#ff6b9d', backgroundColor: 'rgba(255,107,157,0.1)',
-                        fill: true, tension: 0.3, data: [] }] },
-                options: { responsive: true, plugins: { legend: { labels: { color: textoColor } } } }
-            });
         }
 
         // ============================================================
@@ -2006,11 +2011,7 @@
                 inflacion: valoresActuales.inflacion,
                 tasa_banxico: valoresActuales.tasa,
                 cetes_28d: valoresActuales.cetes,
-                reservas: valoresActuales.reservas,
-                fecha_tc: fechasActuales.tc,
-                fecha_inflacion: fechasActuales.inflacion,
-                fecha_tasa: fechasActuales.tasa,
-                fecha_cetes: fechasActuales.cetes
+                reservas: valoresActuales.reservas
             }];
             const ws = XLSX.utils.json_to_sheet(datos);
             const wb = XLSX.utils.book_new();
@@ -2023,14 +2024,12 @@
             let dark = localStorage.getItem('darkMode') !== 'false';
             aplicarTema(dark);
             toggle.textContent = dark ? '☀️' : '🌙';
-
             toggle.onclick = () => {
-                const isDark = localStorage.getItem('darkMode') !== 'false';
-                const newDark = !isDark;
+                const newDark = localStorage.getItem('darkMode') === 'false';
                 localStorage.setItem('darkMode', newDark);
                 aplicarTema(newDark);
                 toggle.textContent = newDark ? '☀️' : '🌙';
-                Object.values(charts).forEach(c => c.update());
+                Object.values(charts).forEach(c => {try {c.update();} catch (e) { } });
             };
         }
 
@@ -2071,6 +2070,9 @@
         //  INICIO
         // ============================================================
         async function init() {
+            console.log('🚀 Iniciando dashboard...');
+
+            // Contador
             if (!sessionStorage.getItem('visita_contada')) {
                 actualizarContador();
                 sessionStorage.setItem('visita_contada', 'true');
@@ -2078,20 +2080,18 @@
                 document.getElementById('contadorNumero').innerText = localStorage.getItem('dashboard_visitas') || '0';
             }
 
-            const urlActual = encodeURIComponent(window.location.href);
+            // Compartir
+            const url = encodeURIComponent(window.location.href);
             const titulo = encodeURIComponent("💰 Mi Dinero MX - Economía para todos");
-            document.getElementById('shareWhatsApp')?.setAttribute('href',
-                `https://wa.me/?text=${titulo}%20-%20${urlActual}`);
-            document.getElementById('shareFacebook')?.setAttribute('href',
-                `https://www.facebook.com/sharer/sharer.php?u=${urlActual}`);
-            document.getElementById('shareTwitter')?.setAttribute('href',
-                `https://twitter.com/intent/tweet?text=${titulo}&url=${urlActual}`);
-            document.getElementById('shareLinkedIn')?.setAttribute('href',
-                `https://www.linkedin.com/shareArticle?mini=true&url=${urlActual}&title=${titulo}`);
+            document.getElementById('shareWhatsApp')?.setAttribute('href', `https://wa.me/?text=${titulo}%20-%20${url}`);
+            document.getElementById('shareFacebook')?.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${url}`);
+            document.getElementById('shareTwitter')?.setAttribute('href', `https://twitter.com/intent/tweet?text=${titulo}&url=${url}`);
+            document.getElementById('shareLinkedIn')?.setAttribute('href', `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${titulo}`);
             document.getElementById('year').innerText = new Date().getFullYear();
 
-            initCharts();
+            // Inicializar
             initDarkMode();
+            initCharts();
             await cargarNoticias();
             mostrarBienvenida();
 
@@ -2099,24 +2099,21 @@
                 document.getElementById('apiKeyInput').value = apiKeyBanxico;
             }
 
-            // Cargar datos (siempre con fallback)
+            // Cargar datos
             await actualizarDatosBanxico();
 
-            // Configurar actualización automática
+            // Actualización automática
             if (apiKeyBanxico) {
                 intervalActualizacion = setInterval(actualizarDatosBanxico, 300000);
             } else {
-                // Si no hay API, actualizar cada 2 minutos con los datos de fallback (para simular movimiento)
+                // Simular movimiento en demo
                 intervalActualizacion = setInterval(() => {
-                    // Rotar ligeramente los datos de fallback para que parezca que se mueven
-                    const tc = FALLBACK_DATA.tipoCambio.valores;
-                    const nuevoTc = tc[tc.length - 1] + (Math.random() - 0.5) * 0.05;
-                    tc.push(Math.max(17.5, Math.min(19.5, nuevoTc)));
-                    tc.shift();
-                    FALLBACK_DATA.tipoCambio.fechas.push(new Date().toISOString().split('T')[0]);
-                    FALLBACK_DATA.tipoCambio.fechas.shift();
+                    const ultimo = FALLBACK.tc[FALLBACK.tc.length - 1];
+                    const nuevo = ultimo + (Math.random() - 0.5) * 0.03;
+                    FALLBACK.tc.push(Math.max(17.3, Math.min(19.7, nuevo)));
+                    FALLBACK.tc.shift();
                     actualizarDatosBanxico();
-                }, 120000);
+                }, 60000);
             }
 
             // Botón conectar
@@ -2136,9 +2133,10 @@
             document.getElementById('refreshNoticiasBtn').onclick = cargarNoticias;
             document.getElementById('exportBtn').onclick = exportarExcel;
 
-            window.cerrarBienvenida = cerrarBienvenida;
+            console.log('✅ Dashboard listo');
         }
 
+        // Esperar a que el DOM esté listo
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
