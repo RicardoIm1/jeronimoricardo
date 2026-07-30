@@ -2209,7 +2209,7 @@
             const ws = XLSX.utils.json_to_sheet(datos);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "Datos");
-            XLSX.writeFile(wb, `MEXDASH_export_${Date.now()}.xlsx`);
+            XLSX.writeFile(wb, `JERONIMORICARDO_export_${Date.now()}.xlsx`);
         }
 
         function initDarkMode() {
@@ -2229,17 +2229,17 @@
         }
 
         function mostrarBienvenida() {
-            if (!localStorage.getItem('mexdash_welcome')) {
+            if (!localStorage.getItem('JERONIMORICARDO_welcome')) {
                 document.getElementById('welcomeModal').style.display = 'flex';
-                localStorage.setItem('mexdash_welcome', 'true');
+                localStorage.setItem('JERONIMORICARDO_welcome', 'true');
             }
         }
 
         function actualizarContador() {
-            let visitas = localStorage.getItem('mexdash_visitas');
+            let visitas = localStorage.getItem('JERONIMORICARDO_visitas');
             if (visitas === null) visitas = 1;
             else visitas = parseInt(visitas) + 1;
-            localStorage.setItem('mexdash_visitas', visitas);
+            localStorage.setItem('JERONIMORICARDO_visitas', visitas);
             document.getElementById('contadorNumero').innerText = visitas;
         }
 
@@ -2247,17 +2247,17 @@
         //  INICIO
         // ============================================================
         async function init() {
-            console.log('🚀 MEXDASH iniciando...');
+            console.log('🚀 JERONIMORICARDO iniciando...');
 
-            if (!sessionStorage.getItem('mexdash_visit')) {
+            if (!sessionStorage.getItem('JERONIMORICARDO_visit')) {
                 actualizarContador();
-                sessionStorage.setItem('mexdash_visit', 'true');
+                sessionStorage.setItem('JERONIMORICARDO_visit', 'true');
             } else {
-                document.getElementById('contadorNumero').innerText = localStorage.getItem('mexdash_visitas') || '0';
+                document.getElementById('contadorNumero').innerText = localStorage.getItem('JERONIMORICARDO_visitas') || '0';
             }
 
             const url = encodeURIComponent(window.location.href);
-            const titulo = encodeURIComponent("MEXDASH | Economic Intelligence");
+            const titulo = encodeURIComponent("JERONIMORICARDO | Economic Intelligence");
             document.getElementById('shareWhatsApp')?.setAttribute('href', `https://wa.me/?text=${titulo}%20-%20${url}`);
             document.getElementById('shareFacebook')?.setAttribute('href', `https://www.facebook.com/sharer/sharer.php?u=${url}`);
             document.getElementById('shareTwitter')?.setAttribute('href', `https://twitter.com/intent/tweet?text=${titulo}&url=${url}`);
@@ -2303,7 +2303,7 @@
             document.getElementById('refreshNoticiasBtn').onclick = cargarNoticias;
             document.getElementById('exportBtn').onclick = exportarExcel;
 
-            console.log('✅ MEXDASH listo');
+            console.log('✅ JERONIMORICARDO listo');
         }
 
         if (document.readyState === 'loading') {
