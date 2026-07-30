@@ -417,8 +417,9 @@
         }
 
         .noticia-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             border-color: var(--azul);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
         }
 
         .noticia-imagen {
@@ -433,6 +434,7 @@
             font-weight: bold;
             font-size: 0.9rem;
             color: var(--naranja);
+            line-height: 1.3;
         }
 
         .noticia-fuente {
@@ -440,14 +442,29 @@
             color: var(--texto-muted);
             display: flex;
             justify-content: space-between;
+            align-items: center;
+        }
+
+        .noticia-fuente .fuente-nombre {
+            background: rgba(59, 130, 246, 0.15);
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
         }
 
         .noticia-resumen {
             font-size: 0.75rem;
             color: var(--texto-muted);
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
+        .noticia-leer-mas {
+            font-size: 0.7rem;
+            color: var(--azul);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* MODAL MEJORADO PARA NOTICIAS COMPLETAS */
         .modal,
         .modal-bienvenida {
             display: none;
@@ -456,38 +473,137 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.92);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            padding: 20px;
         }
+
         .modal-contenido,
         .modal-bienvenida-contenido {
             background: var(--bg-card);
             border-radius: 24px;
-            max-width: 700px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 2rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
             position: relative;
+            overflow: hidden;
         }
-        .modal-cerrar,
-        .modal-bienvenida-cerrar {
-            position: sticky;
-            top: 0;
-            right: 0;
-            float: right;
+
+        .modal-header {
+            padding: 1.2rem 1.5rem 0.5rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-header-titulo {
+            flex: 1;
+        }
+
+        .modal-header-titulo h2 {
+            font-size: 1.1rem;
+            color: var(--naranja);
+            line-height: 1.4;
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-header-titulo .modal-meta {
+            font-size: 0.7rem;
+            color: var(--texto-muted);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .modal-actions .btn {
+            font-size: 0.65rem;
+            padding: 0.3rem 0.7rem;
+        }
+
+        .modal-cerrar {
             font-size: 1.8rem;
             cursor: pointer;
             color: var(--texto-muted);
-            background: var(--bg-card);
-            padding: 0 0.5rem;
-            border-radius: 50%;
-            margin-top: -1rem;
-            margin-right: -0.5rem;
+            background: none;
+            border: none;
+            padding: 0 0.3rem;
+            line-height: 1;
+            transition: color 0.2s;
         }
+
+        .modal-cerrar:hover {
+            color: var(--rojo);
+        }
+
+        .modal-body {
+            padding: 0;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            border: none;
+            background: white;
+        }
+
+        .modal-body .cargando-noticia {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            color: var(--texto-muted);
+            gap: 1rem;
+        }
+
+        .modal-body .cargando-noticia .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--azul);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal-body .error-iframe {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            color: var(--texto-muted);
+            gap: 1rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .modal-body .error-iframe .btn {
+            background: var(--azul);
+        }
+
         .badge-modal {
             display: inline-block;
             background: var(--morado);
@@ -498,6 +614,7 @@
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
+
         .modal-bienvenida h1 {
             color: var(--naranja);
             margin-bottom: 1rem;
@@ -515,6 +632,7 @@
         .modal-bienvenida ul {
             margin: 1rem 0 1rem 2rem;
         }
+
         .footer-nota {
             background: rgba(16, 185, 129, 0.1);
             border-radius: 16px;
@@ -523,6 +641,7 @@
             text-align: center;
             border-left: 3px solid var(--verde);
         }
+
         .share-buttons {
             display: flex;
             justify-content: center;
@@ -543,6 +662,7 @@
             background: var(--azul);
             transform: translateY(-2px);
         }
+
         footer {
             background: var(--bg-card);
             padding: 2rem;
@@ -570,15 +690,7 @@
             padding: 40px;
             color: var(--texto-muted);
         }
-        .mensaje-error-temporal {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef4444;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        /* Indicador de estado de conexión */
+
         .status-indicator {
             display: inline-block;
             width: 10px;
@@ -605,6 +717,21 @@
             }
             .grid-noticias {
                 grid-template-columns: 1fr;
+            }
+            .modal-contenido {
+                max-height: 95vh;
+                border-radius: 16px;
+            }
+            .modal-header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .modal-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            .modal-body iframe {
+                min-height: 400px;
             }
             .modal-bienvenida-contenido {
                 padding: 1.2rem;
@@ -702,13 +829,35 @@
         </div>
     </main>
 
-    <div id="modalNoticia" class="modal" style="display: none;">
+    <!-- MODAL MEJORADO CON IFRAME PARA NOTICIA COMPLETA -->
+    <div id="modalNoticia" class="modal">
         <div class="modal-contenido">
-            <span class="modal-cerrar" onclick="cerrarModal()">&times;</span>
-            <img id="modalImagen" class="modal-imagen" alt="Imagen noticia" style="width:100%; max-height:300px; object-fit:cover; border-radius:12px; margin-bottom:1rem;">
-            <div id="modalTitulo" style="font-size:1.3rem; font-weight:bold; margin-bottom:0.5rem;"></div>
-            <div id="modalFecha" style="font-size:0.8rem; color:var(--texto-muted); margin-bottom:1rem;"></div>
-            <div id="modalDescripcion" style="font-size:0.95rem; line-height:1.6;"></div>
+            <div class="modal-header">
+                <div class="modal-header-titulo">
+                    <h2 id="modalTitulo">Cargando noticia...</h2>
+                    <div class="modal-meta">
+                        <span id="modalFecha">📅 --</span>
+                        <span id="modalFuente">📰 --</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn" id="modalAbrirEnlace" style="background:var(--azul);" onclick="abrirNoticiaEnNuevaPestana()">🔗 Abrir en nueva pestaña</button>
+                    <button class="modal-cerrar" onclick="cerrarModal()">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="cargando-noticia" id="cargandoNoticia">
+                    <div class="spinner"></div>
+                    <span>Cargando la noticia completa...</span>
+                </div>
+                <div class="error-iframe" id="errorIframe">
+                    <span style="font-size:3rem;">⚠️</span>
+                    <p>No se pudo cargar la noticia completa dentro del dashboard.</p>
+                    <p style="font-size:0.8rem;">Algunos sitios bloquean que su contenido se muestre en iframes.</p>
+                    <button class="btn" onclick="abrirNoticiaEnNuevaPestana()" style="background:var(--azul);">📖 Leer en la fuente original</button>
+                </div>
+                <iframe id="modalIframe" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" loading="lazy"></iframe>
+            </div>
         </div>
     </div>
 
@@ -752,7 +901,6 @@
 
     <script>
         // ==================== DATOS DE RESPALDO (FALLBACK) ====================
-        // Estos datos simulan valores reales para que las gráficas SIEMPRE muestren información
         const FALLBACK_DATA = {
             tipoCambio: {
                 valores: [17.85, 17.92, 17.88, 17.95, 18.02, 17.98, 18.05, 18.12, 18.08, 18.15,
@@ -785,7 +933,6 @@
             }
         };
 
-        // Generar fechas para los datos de respaldo (últimos N días hábiles)
         function generarFechasFallback(cantidad) {
             const fechas = [];
             const hoy = new Date();
@@ -801,18 +948,11 @@
             return fechas;
         }
 
-        // Asignar fechas a los datos de respaldo
-        const fechasTC = generarFechasFallback(FALLBACK_DATA.tipoCambio.valores.length);
-        const fechasInf = generarFechasFallback(FALLBACK_DATA.inflacion.valores.length);
-        const fechasTasa = generarFechasFallback(FALLBACK_DATA.tasaBanxico.valores.length);
-        const fechasCetes = generarFechasFallback(FALLBACK_DATA.cetes.valores.length);
-        const fechasReservas = generarFechasFallback(FALLBACK_DATA.reservas.valores.length);
-
-        FALLBACK_DATA.tipoCambio.fechas = fechasTC;
-        FALLBACK_DATA.inflacion.fechas = fechasInf;
-        FALLBACK_DATA.tasaBanxico.fechas = fechasTasa;
-        FALLBACK_DATA.cetes.fechas = fechasCetes;
-        FALLBACK_DATA.reservas.fechas = fechasReservas;
+        FALLBACK_DATA.tipoCambio.fechas = generarFechasFallback(FALLBACK_DATA.tipoCambio.valores.length);
+        FALLBACK_DATA.inflacion.fechas = generarFechasFallback(FALLBACK_DATA.inflacion.valores.length);
+        FALLBACK_DATA.tasaBanxico.fechas = generarFechasFallback(FALLBACK_DATA.tasaBanxico.valores.length);
+        FALLBACK_DATA.cetes.fechas = generarFechasFallback(FALLBACK_DATA.cetes.valores.length);
+        FALLBACK_DATA.reservas.fechas = generarFechasFallback(FALLBACK_DATA.reservas.valores.length);
 
         // ==================== VARIABLES GLOBALES ====================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
@@ -820,7 +960,7 @@
         let valoresActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
         let fechasActuales = { tc: null, inflacion: null, tasa: null, cetes: null, reservas: null };
         let intervalActualizacion;
-        let usandoFallback = true;
+        let noticiaActual = null;
 
         const SERIES = { tipoCambio: "SF60653", inflacion: "SP1", tasaReferencia: "SF43783", cetes28: "SF339621",
             reservas: "SF10146" };
@@ -841,7 +981,7 @@
             }
         }
 
-        // ==================== CONSULTAS A BANXICO CON FALLBACK ====================
+        // ==================== CONSULTAS A BANXICO ====================
         async function consultarBanxicoConFecha(serieId, token) {
             if (!token) return null;
             try {
@@ -857,7 +997,6 @@
                 }
                 return null;
             } catch (error) {
-                console.warn('Error consultando Banxico:', error);
                 return null;
             }
         }
@@ -874,31 +1013,24 @@
                         .map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha }))
                         .filter(v => !isNaN(v.valor));
                     if (datos.length > 0) {
-                        // Invertir para tener orden cronológico
                         return datos.reverse();
                     }
                 }
                 return [];
             } catch (error) {
-                console.warn('Error consultando histórico Banxico:', error);
                 return [];
             }
         }
 
-        // ==================== OBTENER DATOS COMBINADOS (API + FALLBACK) ====================
         function obtenerDatosCombinados(apiData, fallbackData, fallbackFechas) {
             if (apiData && apiData.length > 0) {
-                // Si hay datos de API, usarlos y añadir fallback solo si faltan fechas
                 const fechasAPI = new Set(apiData.map(d => d.fecha));
                 const fallbackFiltrado = fallbackData
                     .map((v, i) => ({ valor: v, fecha: fallbackFechas[i] }))
                     .filter(d => !fechasAPI.has(d.fecha));
-                // Combinar: API primero (más reciente), luego fallback
                 const combinados = [...apiData, ...fallbackFiltrado];
-                // Ordenar por fecha
                 return combinados.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
             }
-            // Si no hay datos de API, usar fallback completo
             return fallbackData.map((v, i) => ({ valor: v, fecha: fallbackFechas[i] }));
         }
 
@@ -913,7 +1045,6 @@
         async function actualizarDatosBanxico() {
             const usarAPI = !!apiKeyBanxico;
 
-            // Consultar valores actuales
             const [tcResult, infResult, tasaResult, cetesResult, reservasResult] = await Promise.all([
                 usarAPI ? consultarBanxicoConFecha(SERIES.tipoCambio, apiKeyBanxico) : null,
                 usarAPI ? consultarBanxicoConFecha(SERIES.inflacion, apiKeyBanxico) : null,
@@ -922,14 +1053,12 @@
                 usarAPI ? consultarBanxicoConFecha(SERIES.reservas, apiKeyBanxico) : null
             ]);
 
-            // Datos actuales con fallback
             const tc = obtenerUltimoValor(tcResult, 18.52, new Date().toISOString().split('T')[0]);
             const inf = obtenerUltimoValor(infResult, 4.35, new Date().toISOString().split('T')[0]);
             const tasa = obtenerUltimoValor(tasaResult, 10.00, new Date().toISOString().split('T')[0]);
             const cetes = obtenerUltimoValor(cetesResult, 9.82, new Date().toISOString().split('T')[0]);
             const reservas = obtenerUltimoValor(reservasResult, 232, new Date().toISOString().split('T')[0]);
 
-            // Guardar valores actuales
             valoresActuales.tc = tc.valor;
             valoresActuales.inflacion = inf.valor;
             valoresActuales.tasa = tasa.valor;
@@ -941,7 +1070,6 @@
             fechasActuales.cetes = cetes.fecha;
             fechasActuales.reservas = reservas.fecha;
 
-            // Actualizar UI
             document.getElementById('usdmxn').innerText = tc.valor.toFixed(4);
             document.getElementById('kpiTC').innerHTML = `$${tc.valor.toFixed(4)}`;
             document.getElementById('kpiFechTC').innerHTML = `📅 ${tc.fecha}`;
@@ -957,7 +1085,6 @@
 
             document.getElementById('kpiReservas').innerHTML = `$${(reservas.valor).toFixed(0)} MMD`;
 
-            // Históricos con fallback
             const [histTC, histInf, histTasa, histCetes] = await Promise.all([
                 usarAPI ? consultarHistorico(SERIES.tipoCambio, apiKeyBanxico, 60) : [],
                 usarAPI ? consultarHistorico(SERIES.inflacion, apiKeyBanxico, 40) : [],
@@ -965,7 +1092,6 @@
                 usarAPI ? consultarHistorico(SERIES.cetes28, apiKeyBanxico, 40) : []
             ]);
 
-            // Combinar con fallback
             const tcCombinado = obtenerDatosCombinados(histTC, FALLBACK_DATA.tipoCambio.valores, FALLBACK_DATA.tipoCambio
                 .fechas);
             const infCombinado = obtenerDatosCombinados(histInf, FALLBACK_DATA.inflacion.valores, FALLBACK_DATA.inflacion
@@ -975,14 +1101,12 @@
             const cetesCombinado = obtenerDatosCombinados(histCetes, FALLBACK_DATA.cetes.valores, FALLBACK_DATA.cetes
                 .fechas);
 
-            // Filtrar solo datos de 2024 en adelante
             const fechaLimite = new Date('2024-01-01');
             const tcFiltrado = tcCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
             const infFiltrado = infCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
             const tasaFiltrado = tasaCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
             const cetesFiltrado = cetesCombinado.filter(d => new Date(d.fecha) >= fechaLimite);
 
-            // Actualizar gráficas
             if (tcFiltrado.length > 0) {
                 const valores = tcFiltrado.map(h => h.valor);
                 const maxMin = Math.max(...valores) - Math.min(...valores);
@@ -990,7 +1114,6 @@
                 actualizarGraficaTC(tcFiltrado);
                 actualizarGraficaRange(tcFiltrado);
                 actualizarGraficaCandle(tcFiltrado);
-                // Volumen simulado
                 if (charts.volumen) {
                     charts.volumen.data.labels = tcFiltrado.map(h => h.fecha);
                     charts.volumen.data.datasets[0].data = tcFiltrado.map(() => Math.random() * 80 + 20);
@@ -1006,17 +1129,12 @@
                 actualizarGraficaInflacion(infFiltrado);
             }
 
-            // Petróleo y Reservas con datos de respaldo
             actualizarGraficaPetroleo();
             actualizarGraficaReservas(reservas.valor);
-
-            // Recomendaciones
             actualizarRecomendaciones();
 
-            // Estado de conexión
             const conectado = usarAPI && tcResult !== null;
             actualizarEstadoConexion(conectado);
-            usandoFallback = !conectado || (tcFiltrado.length === 0);
         }
 
         // ==================== FUNCIONES DE GRÁFICAS ====================
@@ -1054,13 +1172,10 @@
 
         function actualizarGraficaTasas(tasa, cetes) {
             if (charts.tasas) {
-                // Usar las fechas de tasa (asumimos que ambas series tienen fechas similares)
                 const fechas = tasa.map(h => h.fecha);
                 const tasaData = tasa.map(h => h.valor);
-                // Interpolar CETES para que coincidan las fechas
                 const cetesMap = new Map(cetes.map(h => [h.fecha, h.valor]));
                 const cetesData = fechas.map(f => cetesMap.get(f) || cetesMap.get(fechas[0]) || 9.5);
-
                 charts.tasas.data.labels = fechas;
                 charts.tasas.data.datasets[0].data = tasaData;
                 charts.tasas.data.datasets[1].data = cetesData;
@@ -1125,6 +1240,143 @@
             document.getElementById('recomendacionesLista').innerHTML = recs.map(r =>
                 `<div class="recomendacion-item"><div class="recomendacion-icono">${r.icono}</div><div class="recomendacion-texto"><div class="recomendacion-titulo">✨ ${r.titulo}</div><div class="recomendacion-descripcion">${r.texto}</div></div></div>`
             ).join('');
+        }
+
+        // ==================== NOTICIAS COMPLETAS EN MODAL ====================
+        let noticiaEnlaceActual = '';
+
+        function abrirNoticia(noticia) {
+            noticiaActual = noticia;
+            noticiaEnlaceActual = noticia.enlace || '';
+
+            // Mostrar el modal
+            const modal = document.getElementById('modalNoticia');
+            const iframe = document.getElementById('modalIframe');
+            const cargando = document.getElementById('cargandoNoticia');
+            const errorDiv = document.getElementById('errorIframe');
+
+            // Actualizar header
+            document.getElementById('modalTitulo').textContent = noticia.titulo || 'Noticia';
+            document.getElementById('modalFecha').textContent = `📅 ${noticia.fecha || ''}`;
+            document.getElementById('modalFuente').textContent = `📰 ${noticia.fuente || 'Fuente desconocida'}`;
+
+            // Resetear estados
+            iframe.style.display = 'none';
+            iframe.src = '';
+            cargando.style.display = 'flex';
+            errorDiv.style.display = 'none';
+
+            modal.style.display = 'flex';
+
+            // Si hay enlace, cargar en iframe
+            if (noticia.enlace) {
+                // Intentar cargar en iframe
+                iframe.onload = function() {
+                    cargando.style.display = 'none';
+                    iframe.style.display = 'block';
+                };
+
+                iframe.onerror = function() {
+                    cargando.style.display = 'none';
+                    errorDiv.style.display = 'flex';
+                };
+
+                // Timeout por si el iframe tarda demasiado
+                setTimeout(() => {
+                    if (cargando.style.display !== 'none') {
+                        cargando.style.display = 'none';
+                        errorDiv.style.display = 'flex';
+                    }
+                }, 10000);
+
+                // Cargar el iframe con el enlace
+                iframe.src = noticia.enlace;
+            } else {
+                cargando.style.display = 'none';
+                errorDiv.style.display = 'flex';
+                errorDiv.querySelector('p').textContent = 'No hay enlace disponible para esta noticia.';
+            }
+        }
+
+        function abrirNoticiaEnNuevaPestana() {
+            if (noticiaEnlaceActual) {
+                window.open(noticiaEnlaceActual, '_blank');
+            } else if (noticiaActual && noticiaActual.enlace) {
+                window.open(noticiaActual.enlace, '_blank');
+            } else {
+                alert('No hay enlace disponible para esta noticia.');
+            }
+        }
+
+        function cerrarModal() {
+            const modal = document.getElementById('modalNoticia');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+
+        // ==================== CARGAR NOTICIAS DESDE RSS ====================
+        async function cargarNoticias() {
+            const grid = document.getElementById('noticiasGrid');
+            grid.innerHTML = `<div class="cargando">🔄 Cargando noticias económicas...</div>`;
+
+            try {
+                const rssUrl =
+                    'https://news.google.com/rss/search?q=economía+méxico+OR+banxico+OR+peso+mexicano&hl=es-419&gl=MX&ceid=MX:es-419';
+                const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+                const response = await fetch(proxyUrl);
+                const data = await response.json();
+
+                if (data.status === 'ok' && data.items?.length) {
+                    // Extraer el enlace real de Google News
+                    const noticias = data.items.slice(0, 15).map(item => {
+                        // Extraer el enlace original de la noticia
+                        let enlaceOriginal = item.link || '';
+                        // Intentar extraer la URL real del enlace de Google News
+                        const match = enlaceOriginal.match(/url=([^&]+)/);
+                        if (match) {
+                            enlaceOriginal = decodeURIComponent(match[1]);
+                        }
+
+                        return {
+                            titulo: item.title.replace(' - Google News', '').trim(),
+                            descripcion: item.description?.replace(/<[^>]*>/g, '').trim() || '',
+                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                            }),
+                            fuente: item.author || 'Google News',
+                            imagen: item.thumbnail || `https://picsum.photos/400/200?random=${Date.now() + Math.random()}`,
+                            enlace: enlaceOriginal,
+                            enlaceOriginal: item.link
+                        };
+                    });
+
+                    grid.innerHTML = noticias.map((n, idx) => `
+                        <div class="noticia-card" onclick='abrirNoticia(${JSON.stringify(n)})'>
+                            <img class="noticia-imagen" src="${n.imagen}" 
+                                 onerror="this.src='https://picsum.photos/400/200?random=${idx}'">
+                            <div class="noticia-titulo">${n.titulo.substring(0, 100)}${n.titulo.length > 100 ? '...' : ''}</div>
+                            <div class="noticia-fuente">
+                                <span class="fuente-nombre">${n.fuente}</span>
+                                <span>${n.fecha}</span>
+                            </div>
+                            <div class="noticia-resumen">${n.descripcion.substring(0, 120)}${n.descripcion.length > 120 ? '...' : ''}</div>
+                            <div class="noticia-leer-mas">📖 Leer noticia completa →</div>
+                        </div>
+                    `).join('');
+                } else {
+                    throw new Error('No hay noticias');
+                }
+            } catch (error) {
+                grid.innerHTML = `
+                    <div class="cargando" style="grid-column:1/-1;">
+                        ⚠️ No se pudieron cargar noticias. 
+                        <button class="btn" onclick="cargarNoticias()" style="margin-top:10px;background:var(--azul);">🔄 Reintentar</button>
+                    </div>
+                `;
+            }
         }
 
         // ==================== INICIALIZAR GRÁFICAS ====================
@@ -1220,46 +1472,6 @@
             };
         }
 
-        // ==================== NOTICIAS ====================
-        async function cargarNoticias() {
-            const grid = document.getElementById('noticiasGrid');
-            grid.innerHTML = `<div class="cargando">🔄 Cargando noticias económicas...</div>`;
-            try {
-                const rssUrl =
-                    'https://news.google.com/rss/search?q=economía+méxico+OR+banxico+OR+peso+mexicano&hl=es-419&gl=MX&ceid=MX:es-419';
-                const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-                const response = await fetch(proxyUrl);
-                const data = await response.json();
-                if (data.status === 'ok' && data.items?.length) {
-                    grid.innerHTML = data.items.slice(0, 15).map((n, idx) => {
-                        const img = n.thumbnail || `https://picsum.photos/400/200?random=${idx}`;
-                        const titulo = n.title.replace(' - Google News', '');
-                        const descripcion = n.description?.replace(/<[^>]*>/g, '') || '';
-                        return `<div class="noticia-card" onclick='abrirModal(${JSON.stringify({ titulo, descripcion: descripcion.substring(0, 300), fecha: n.pubDate, imagen: img })})'>
-                            <img class="noticia-imagen" src="${img}" onerror="this.src='https://picsum.photos/400/200?random=${idx}'">
-                            <div class="noticia-titulo">📰 ${titulo.substring(0, 100)}</div>
-                            <div class="noticia-fuente">📅 ${new Date(n.pubDate).toLocaleDateString('es-MX')} · Google News</div>
-                            <div class="noticia-resumen">${descripcion.substring(0, 120)}...</div>
-                        </div>`;
-                    }).join('');
-                } else throw new Error('No hay noticias');
-            } catch (error) {
-                grid.innerHTML =
-                    `<div class="cargando">⚠️ No se pudieron cargar noticias. <button class="btn" onclick="cargarNoticias()" style="margin-top:10px;">🔄 Reintentar</button></div>`;
-            }
-        }
-
-        function abrirModal(n) {
-            document.getElementById('modalImagen').src = n.imagen || 'https://picsum.photos/400/200';
-            document.getElementById('modalImagen').onerror = function() { this.src = 'https://picsum.photos/400/200'; };
-            document.getElementById('modalTitulo').innerText = n.titulo;
-            document.getElementById('modalFecha').innerHTML = `📅 ${new Date(n.fecha).toLocaleDateString('es-MX')}`;
-            document.getElementById('modalDescripcion').innerText = n.descripcion || 'Sin descripción disponible.';
-            document.getElementById('modalNoticia').style.display = 'flex';
-        }
-
-        function cerrarModal() { document.getElementById('modalNoticia').style.display = 'none'; }
-
         function cerrarBienvenida() { document.getElementById('modalBienvenida').style.display = 'none'; }
 
         function mostrarBienvenida() {
@@ -1269,7 +1481,6 @@
             }
         }
 
-        // ==================== CONTADOR ====================
         function actualizarContador() {
             let visitas = localStorage.getItem('dashboard_visitas');
             if (visitas === null) visitas = 1;
@@ -1280,7 +1491,6 @@
 
         // ==================== INICIO ====================
         async function init() {
-            // Contador
             if (!sessionStorage.getItem('visita_contada')) {
                 actualizarContador();
                 sessionStorage.setItem('visita_contada', 'true');
@@ -1288,7 +1498,6 @@
                 document.getElementById('contadorNumero').innerText = localStorage.getItem('dashboard_visitas') || '0';
             }
 
-            // Compartir
             const urlActual = encodeURIComponent(window.location.href);
             const titulo = encodeURIComponent("Dashboard Económico México - Datos Banxico en Vivo");
             document.getElementById('shareWhatsApp')?.setAttribute('href',
@@ -1301,26 +1510,21 @@
                 `https://www.linkedin.com/shareArticle?mini=true&url=${urlActual}&title=${titulo}`);
             document.getElementById('year').innerText = new Date().getFullYear();
 
-            // Inicializar
             initCharts();
             initDarkMode();
             await cargarNoticias();
             mostrarBienvenida();
 
-            // Cargar API Key guardada
             if (apiKeyBanxico) {
                 document.getElementById('apiKeyInput').value = apiKeyBanxico;
             }
 
-            // Cargar datos iniciales (siempre con fallback)
             await actualizarDatosBanxico();
 
-            // Configurar actualización automática (cada 5 minutos si hay API)
             if (apiKeyBanxico) {
                 intervalActualizacion = setInterval(actualizarDatosBanxico, 300000);
             }
 
-            // Event listeners
             document.getElementById('conectarBtn').onclick = async () => {
                 const k = document.getElementById('apiKeyInput').value.trim();
                 if (k) {
@@ -1338,12 +1542,12 @@
             document.getElementById('exportBtn').onclick = exportarExcel;
 
             window.descargarPNG = descargarPNG;
-            window.abrirModal = abrirModal;
+            window.abrirNoticia = abrirNoticia;
+            window.abrirNoticiaEnNuevaPestana = abrirNoticiaEnNuevaPestana;
             window.cerrarModal = cerrarModal;
             window.cerrarBienvenida = cerrarBienvenida;
         }
 
-        // Ejecutar cuando el DOM esté listo
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
