@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEX Dashboard | Economic Intelligence</title>
+    <title>JERONIMORICARDO Dashboard | Economic Intelligence</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
     </script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js">
@@ -34,6 +34,7 @@
             --transition: all 0.25s ease;
         }
 
+        /* ===== LIGHT THEME ===== */
         [data-theme="light"] {
             --bg-primary: #f0f4f8;
             --bg-secondary: #ffffff;
@@ -46,149 +47,113 @@
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
         }
 
-        [data-theme="light"] .analysis-card {
-            background: #f8fafc;
-        }
-
-        [data-theme="light"] .analysis-card .insight {
-            color: #1a2332;
-        }
-
         [data-theme="light"] .market-card .interpretation.bullish {
             background: rgba(0, 212, 170, 0.15);
             color: #00a88a;
         }
-
         [data-theme="light"] .market-card .interpretation.bearish {
             background: rgba(255, 71, 87, 0.15);
             color: #d63031;
         }
-
         [data-theme="light"] .market-card .interpretation.neutral {
             background: rgba(74, 158, 255, 0.12);
             color: #2980b9;
         }
-
         [data-theme="light"] .news-card .news-analysis {
             background: #f0f4f8;
         }
-
         [data-theme="light"] .rec-panel {
             background: #f8fafc;
         }
-
         [data-theme="light"] .rec-item {
             background: #ffffff;
         }
-
         [data-theme="light"] .rec-item .rec-title {
             color: #1a2332;
         }
-
         [data-theme="light"] .rec-item .rec-desc {
             color: #4a5a7a;
         }
-
         [data-theme="light"] .status-bar {
             background: #ffffff;
         }
-
         [data-theme="light"] .ticker {
             background: #f0f4f8;
         }
-
         [data-theme="light"] .ticker-item {
             color: #4a5a7a;
         }
-
         [data-theme="light"] .ticker-item .valor {
             color: #1a2332;
         }
-
         [data-theme="light"] .contador-visitas {
             border-color: #dce4ed;
             color: #4a5a7a;
         }
-
         [data-theme="light"] .contador-visitas span {
             color: #1a2332;
         }
-
         [data-theme="light"] .modal-content {
             background: #ffffff;
         }
-
         [data-theme="light"] .modal .modal-body-text {
             background: #f0f4f8;
             color: #4a5a7a;
         }
-
         [data-theme="light"] .modal .modal-example {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 140, 66, 0.08));
         }
-
         [data-theme="light"] .modal .tabs .tab {
             background: #f0f4f8;
             color: #4a5a7a;
         }
-
         [data-theme="light"] .modal .tabs .tab.active {
             background: var(--blue);
             color: white;
         }
-
         [data-theme="light"] .welcome-content {
             background: #ffffff;
         }
-
         [data-theme="light"] .welcome-features .item {
             background: #f0f4f8;
         }
-
         [data-theme="light"] footer {
             background: #ffffff;
             border-color: #dce4ed;
         }
-
         [data-theme="light"] .header-buttons input {
             background: #f0f4f8;
             color: #1a2332;
         }
-
         [data-theme="light"] .header-buttons input::placeholder {
             color: #8899bb;
         }
-
         [data-theme="light"] .btn-outline {
             color: #4a5a7a;
             border-color: #dce4ed;
         }
-
         [data-theme="light"] .btn-outline:hover {
             background: #f0f4f8;
             color: #1a2332;
         }
-
         [data-theme="light"] .share-btn {
             background: #f0f4f8;
             color: #4a5a7a;
             border-color: #dce4ed;
         }
-
         [data-theme="light"] .share-btn:hover {
             background: var(--blue);
             color: white;
             border-color: var(--blue);
         }
-
         [data-theme="light"] .chart-card .insight {
             background: #f0f4f8;
         }
-
         [data-theme="light"] .tip-card {
             background: #ffffff;
         }
 
+        /* ===== BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -205,20 +170,18 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--border-color);
             border-radius: 4px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-muted);
         }
@@ -271,11 +234,9 @@
             letter-spacing: -0.5px;
             color: var(--text-primary);
         }
-
         .logo-text .highlight {
             color: var(--gold);
         }
-
         .logo-sub {
             font-size: 0.5rem;
             color: var(--text-muted);
@@ -285,6 +246,7 @@
             margin-top: -2px;
         }
 
+        /* ===== TICKER ===== */
         .ticker {
             background: var(--bg-card);
             border-radius: 40px;
@@ -331,31 +293,27 @@
             margin-right: 4px;
             animation: pulse-dot 2s infinite;
         }
-
         .status-dot.online {
             background: var(--green);
         }
-
         .status-dot.fallback {
             background: var(--gold);
         }
-
         .status-dot.offline {
             background: var(--red);
         }
 
         @keyframes pulse-dot {
-
             0%,
             100% {
                 opacity: 1;
             }
-
             50% {
                 opacity: 0.3;
             }
         }
 
+        /* ===== HEADER BUTTONS ===== */
         .header-buttons {
             display: flex;
             gap: 0.4rem;
@@ -374,11 +332,9 @@
             font-family: 'JetBrains Mono', monospace;
             transition: background 0.3s ease, color 0.3s ease;
         }
-
         .header-buttons input::placeholder {
             color: var(--text-muted);
         }
-
         .header-buttons input:focus {
             outline: none;
             border-color: var(--blue);
@@ -401,7 +357,6 @@
             background: var(--blue);
             color: white;
         }
-
         .btn-primary:hover {
             background: #3a8aee;
             transform: translateY(-1px);
@@ -412,7 +367,6 @@
             background: var(--green);
             color: var(--bg-primary);
         }
-
         .btn-success:hover {
             background: #00c49a;
             transform: translateY(-1px);
@@ -423,10 +377,18 @@
             color: var(--text-secondary);
             border: 1px solid var(--border-color);
         }
-
         .btn-outline:hover {
             background: var(--bg-card);
             color: var(--text-primary);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+        .btn-gold:hover {
+            background: #f0ca00;
+            transform: translateY(-1px);
         }
 
         .contador-visitas {
@@ -440,12 +402,12 @@
             border-radius: 40px;
             transition: border-color 0.3s ease;
         }
-
         .contador-visitas span {
             color: var(--text-primary);
             font-weight: 700;
         }
 
+        /* ===== CONTAINER ===== */
         .contenedor {
             max-width: 1600px;
             margin: 0 auto;
@@ -491,17 +453,14 @@
             font-size: 0.55rem;
             font-weight: 600;
         }
-
         .status-badge.live {
             background: var(--green-bg);
             color: var(--green);
         }
-
         .status-badge.demo {
             background: var(--blue-bg);
             color: var(--blue);
         }
-
         .status-badge.fallback {
             background: rgba(255, 215, 0, 0.12);
             color: var(--gold);
@@ -510,17 +469,6 @@
         .last-update {
             color: var(--text-muted);
             font-size: 0.55rem;
-        }
-
-        .error-msg {
-            background: var(--red-bg);
-            border: 1px solid var(--red);
-            border-radius: var(--radius);
-            padding: 0.6rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.7rem;
-            color: var(--red);
-            display: none;
         }
 
         /* ===== MARKET GRID ===== */
@@ -603,12 +551,10 @@
             background: var(--green-bg);
             color: var(--green);
         }
-
         .market-card .interpretation.bearish {
             background: var(--red-bg);
             color: var(--red);
         }
-
         .market-card .interpretation.neutral {
             background: var(--blue-bg);
             color: var(--blue);
@@ -617,102 +563,20 @@
         .market-card:nth-child(1)::before {
             background: var(--blue);
         }
-
         .market-card:nth-child(2)::before {
             background: var(--red);
         }
-
         .market-card:nth-child(3)::before {
             background: var(--orange);
         }
-
         .market-card:nth-child(4)::before {
             background: var(--green);
         }
-
         .market-card:nth-child(5)::before {
             background: var(--purple);
         }
-
         .market-card:nth-child(6)::before {
             background: var(--gold);
-        }
-
-        /* ===== ANÁLISIS PROFUNDO ===== */
-        .analysis-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .analysis-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 1.2rem 1.5rem;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .analysis-card:hover {
-            border-color: var(--text-muted);
-        }
-
-        .analysis-card .analysis-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 0.6rem;
-        }
-
-        .analysis-card .analysis-header .icon {
-            font-size: 1.4rem;
-        }
-
-        .analysis-card .analysis-header h3 {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .analysis-card .analysis-header .tag {
-            font-size: 0.45rem;
-            color: var(--text-muted);
-            background: var(--bg-primary);
-            padding: 0.1rem 0.5rem;
-            border-radius: 40px;
-            margin-left: auto;
-        }
-
-        .analysis-card .insight {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 0.5rem;
-        }
-
-        .analysis-card .causes {
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            padding: 0.5rem 0.7rem;
-            background: var(--bg-primary);
-            border-radius: 6px;
-            border-left: 3px solid var(--orange);
-            line-height: 1.5;
-        }
-
-        .analysis-card .causes strong {
-            color: var(--text-primary);
-        }
-
-        .analysis-card .recommendation {
-            font-size: 0.65rem;
-            color: var(--green);
-            padding: 0.4rem 0.7rem;
-            background: var(--green-bg);
-            border-radius: 6px;
-            margin-top: 0.5rem;
-            border-left: 3px solid var(--green);
         }
 
         /* ===== CHARTS ===== */
@@ -1026,7 +890,7 @@
         .modal-content {
             background: var(--bg-secondary);
             border-radius: 16px;
-            max-width: 800px;
+            max-width: 750px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
@@ -1048,7 +912,6 @@
             line-height: 1;
             transition: var(--transition);
         }
-
         .modal-close:hover {
             color: var(--red);
         }
@@ -1127,7 +990,6 @@
             display: none;
             animation: fadeIn 0.25s ease;
         }
-
         .modal .tab-content.active {
             display: block;
         }
@@ -1137,7 +999,6 @@
                 opacity: 0;
                 transform: translateY(6px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1180,7 +1041,6 @@
             margin-bottom: 0.3rem;
             color: var(--text-primary);
         }
-
         .welcome-content h1 .highlight {
             background: linear-gradient(135deg, var(--gold), var(--orange));
             -webkit-background-clip: text;
@@ -1238,6 +1098,7 @@
             box-shadow: 0 4px 30px rgba(255, 215, 0, 0.2);
         }
 
+        /* ===== FOOTER ===== */
         footer {
             background: var(--bg-secondary);
             padding: 1.5rem;
@@ -1260,38 +1121,43 @@
             color: var(--gold);
         }
 
+        /* ===== ERROR ===== */
+        .error-msg {
+            background: var(--red-bg);
+            border: 1px solid var(--red);
+            border-radius: var(--radius);
+            padding: 0.6rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.7rem;
+            color: var(--red);
+            display: none;
+        }
+
+        /* ===== LOADING ===== */
         .loading {
             text-align: center;
             padding: 30px;
             color: var(--text-muted);
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             body {
                 padding-top: 90px;
             }
-
-            .analysis-section {
-                grid-template-columns: 1fr;
-            }
-
             .charts-section {
                 grid-template-columns: 1fr;
             }
-
             .market-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
             .news-grid {
                 grid-template-columns: 1fr;
             }
-
             .header-contenido {
                 flex-direction: column;
                 gap: 0.4rem;
             }
-
             .ticker {
                 width: 100%;
                 justify-content: center;
@@ -1299,37 +1165,29 @@
                 padding: 0.3rem 0.8rem;
                 gap: 0.6rem;
             }
-
             .header-buttons {
                 justify-content: center;
             }
-
             .header-buttons input {
                 width: 120px;
             }
-
             .modal-content {
                 padding: 1rem;
             }
-
             .welcome-content {
                 padding: 1.2rem;
             }
-
             .welcome-content h1 {
                 font-size: 1.3rem;
             }
-
             .status-bar {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.3rem;
             }
-
             .rec-grid {
                 grid-template-columns: 1fr;
             }
-
             .tips-grid {
                 grid-template-columns: 1fr 1fr;
             }
@@ -1340,16 +1198,13 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
             }
-
             .market-card .value {
                 font-size: 1.1rem;
             }
-
             .btn {
                 font-size: 0.5rem;
                 padding: 0.2rem 0.6rem;
             }
-
             .header-buttons input {
                 width: 100px;
                 font-size: 0.5rem;
@@ -1360,27 +1215,40 @@
 
 <body>
 
+    <!-- ===== HEADER ===== -->
     <header>
         <div class="header-contenido">
             <div class="logo">
-                <div class="logo-icon">M</div>
+                <div class="logo-icon">JR</div>
                 <div>
-                    <div class="logo-text">MEX<span class="highlight">DASH</span></div>
+                    <div class="logo-text">JERONIMO<span class="highlight">RICARDO</span></div>
                     <span class="logo-sub">Economic Intelligence</span>
                 </div>
             </div>
+
             <div class="ticker" id="ticker">
-                <div class="ticker-item"><span class="label">USD/MXN</span><span id="usdmxn" class="valor">---</span>
+                <div class="ticker-item">
+                    <span class="label">USD/MXN</span>
+                    <span id="usdmxn" class="valor">---</span>
                 </div>
-                <div class="ticker-item"><span class="label">INPC</span><span id="inflacion" class="valor">---</span>
+                <div class="ticker-item">
+                    <span class="label">INPC</span>
+                    <span id="inflacion" class="valor">---</span>
                 </div>
-                <div class="ticker-item"><span class="label">TASA</span><span id="tasa" class="valor">---</span></div>
-                <div class="ticker-item"><span class="label">CETES</span><span id="cetes" class="valor">---</span></div>
+                <div class="ticker-item">
+                    <span class="label">TASA</span>
+                    <span id="tasa" class="valor">---</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="label">CETES</span>
+                    <span id="cetes" class="valor">---</span>
+                </div>
                 <div class="ticker-item">
                     <span class="status-dot status-warning" id="statusDot"></span>
                     <span id="statusText" style="color:var(--text-muted);font-size:0.5rem;">DEMO</span>
                 </div>
             </div>
+
             <div class="header-buttons">
                 <input type="text" id="apiKeyInput" placeholder="API Key Banxico">
                 <button id="conectarBtn" class="btn btn-primary">🔗 Conectar</button>
@@ -1407,10 +1275,10 @@
                 </div>
             </div>
 
+            <!-- ===== ERROR ===== -->
             <div class="error-msg" id="errorMsg">
                 ⚠️ <span id="errorText">No se pudo conectar con Banxico. Usando datos de demostración.</span>
-                <button class="btn btn-primary" onclick="intentarReconectar()"
-                    style="margin-left:10px;padding:0.15rem 0.6rem;font-size:0.55rem;">Reintentar</button>
+                <button class="btn btn-primary" onclick="intentarReconectar()" style="margin-left:10px;padding:0.15rem 0.6rem;font-size:0.55rem;">Reintentar</button>
             </div>
 
             <!-- ===== MARKET GRID ===== -->
@@ -1459,53 +1327,6 @@
                 </div>
             </div>
 
-            <!-- ===== ANÁLISIS PROFUNDO ===== -->
-            <div class="analysis-section" id="analysisSection">
-                <div class="analysis-card" id="analysisTC">
-                    <div class="analysis-header">
-                        <span class="icon">💱</span>
-                        <h3>Análisis del Tipo de Cambio</h3>
-                        <span class="tag">Actualizado</span>
-                    </div>
-                    <div class="insight" id="insightTC">Cargando análisis...</div>
-                    <div class="causes" id="causesTC">🔍 <strong>Causas:</strong> Cargando factores determinantes...
-                    </div>
-                    <div class="recommendation" id="recTC">💡 Cargando recomendación...</div>
-                </div>
-                <div class="analysis-card" id="analysisInf">
-                    <div class="analysis-header">
-                        <span class="icon">📈</span>
-                        <h3>Análisis de Inflación</h3>
-                        <span class="tag">Actualizado</span>
-                    </div>
-                    <div class="insight" id="insightInf">Cargando análisis...</div>
-                    <div class="causes" id="causesInf">🔍 <strong>Causas:</strong> Cargando factores determinantes...
-                    </div>
-                    <div class="recommendation" id="recInf">💡 Cargando recomendación...</div>
-                </div>
-                <div class="analysis-card" id="analysisTasa">
-                    <div class="analysis-header">
-                        <span class="icon">🏦</span>
-                        <h3>Análisis de Tasas</h3>
-                        <span class="tag">Actualizado</span>
-                    </div>
-                    <div class="insight" id="insightTasa">Cargando análisis...</div>
-                    <div class="causes" id="causesTasa">🔍 <strong>Causas:</strong> Cargando factores determinantes...
-                    </div>
-                    <div class="recommendation" id="recTasa">💡 Cargando recomendación...</div>
-                </div>
-                <div class="analysis-card" id="analysisMacro">
-                    <div class="analysis-header">
-                        <span class="icon">🌐</span>
-                        <h3>Panorama Macroeconómico</h3>
-                        <span class="tag">Perspectiva</span>
-                    </div>
-                    <div class="insight" id="insightMacro">Cargando análisis macro...</div>
-                    <div class="causes" id="causesMacro">🔍 <strong>Factores globales:</strong> Cargando...</div>
-                    <div class="recommendation" id="recMacro">💡 Cargando recomendación estratégica...</div>
-                </div>
-            </div>
-
             <!-- ===== RECOMMENDATIONS ===== -->
             <div class="rec-panel">
                 <div class="rec-header">
@@ -1526,78 +1347,81 @@
             <div class="charts-section">
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>💱 USD/MXN · Spot</h3><span class="badge">últimos 30 días</span>
+                        <h3>💱 USD/MXN · Spot</h3>
+                        <span class="badge">últimos 30 días</span>
                     </div>
-                    <div class="insight">📌 Si la línea sube, el peso se debilita. Niveles clave: $17.50 (soporte),
-                        $19.50 (resistencia).</div>
+                    <div class="insight">📌 Si la línea sube, el peso se debilita. Niveles clave: $17.50 (soporte), $19.50 (resistencia).</div>
                     <canvas id="chartTC"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>📈 Rango de precios</h3><span class="badge">volatilidad</span>
+                        <h3>📈 Rango de precios</h3>
+                        <span class="badge">volatilidad</span>
                     </div>
                     <div class="insight">📌 Área sombreada = rango de movimiento. Amplio = alta incertidumbre.</div>
                     <canvas id="chartRange"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>📊 Movimiento diario</h3><span class="badge">cambio %</span>
+                        <h3>📊 Movimiento diario</h3>
+                        <span class="badge">cambio %</span>
                     </div>
-                    <div class="insight">📌 Barras verdes = ganancia, rojas = pérdida. Muestra la dirección del mercado.
-                    </div>
+                    <div class="insight">📌 Barras verdes = ganancia, rojas = pérdida. Muestra la dirección del mercado.</div>
                     <canvas id="chartCandle"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>🏦 Tasas de interés</h3><span class="badge">Banxico vs CETES</span>
+                        <h3>🏦 Tasas de interés</h3>
+                        <span class="badge">Banxico vs CETES</span>
                     </div>
-                    <div class="insight">📌 Naranja = Tasa Banxico, Verde = CETES. Spread amplio = buen momento para
-                        ahorrar.</div>
+                    <div class="insight">📌 Naranja = Tasa Banxico, Verde = CETES. Spread amplio = buen momento para ahorrar.</div>
                     <canvas id="chartTasas"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>📉 Inflación (INPC)</h3><span class="badge">meta 3%</span>
+                        <h3>📉 Inflación (INPC)</h3>
+                        <span class="badge">meta 3%</span>
                     </div>
-                    <div class="insight">📌 Sobre 4% = pérdida de poder adquisitivo. Bajo 3% = estabilidad de precios.
-                    </div>
+                    <div class="insight">📌 Sobre 4% = pérdida de poder adquisitivo. Bajo 3% = estabilidad de precios.</div>
                     <canvas id="chartInf"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>🛢️ Petróleo Brent</h3><span class="badge">commodity</span>
+                        <h3>🛢️ Petróleo Brent</h3>
+                        <span class="badge">commodity</span>
                     </div>
                     <div class="insight">📌 Impacta gasolina e inflación. Sobre $80 = presiones inflacionarias.</div>
                     <canvas id="chartPetroleo"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-header">
-                        <h3>💵 Reservas Internacionales</h3><span class="badge">colchón de México</span>
+                        <h3>💵 Reservas Internacionales</h3>
+                        <span class="badge">colchón de México</span>
                     </div>
-                    <div class="insight">📌 Sobre $200 mil millones = posición sólida. Indicador de fortaleza económica.
-                    </div>
+                    <div class="insight">📌 Sobre $200 mil millones = posición sólida. Indicador de fortaleza económica.</div>
                     <canvas id="chartReservas"></canvas>
                 </div>
             </div>
 
             <!-- ===== TIPS ===== -->
             <div class="tips-grid">
-                <div class="tip-card"><span class="tip-icon">🏦</span>
+                <div class="tip-card">
+                    <span class="tip-icon">🏦</span>
                     <div class="tip-title">CETES · El ahorro más seguro</div>
-                    <div class="tip-desc">Desde $100 pesos. Rendimientos de hasta 11% anual. Solo necesitas tu CURP y
-                        e.firma.</div>
+                    <div class="tip-desc">Desde $100 pesos. Rendimientos de hasta 11% anual. Solo necesitas tu CURP y e.firma.</div>
                 </div>
-                <div class="tip-card" style="border-color:var(--red);"><span class="tip-icon">💳</span>
+                <div class="tip-card" style="border-color:var(--red);">
+                    <span class="tip-icon">💳</span>
                     <div class="tip-title">Tarjetas de crédito · Alerta</div>
-                    <div class="tip-desc">Nunca pagues el mínimo. Las tasas están en 30-80% anual. Pago total siempre.
-                    </div>
+                    <div class="tip-desc">Nunca pagues el mínimo. Las tasas están en 30-80% anual. Pago total siempre.</div>
                 </div>
-                <div class="tip-card" style="border-color:var(--orange);"><span class="tip-icon">🏠</span>
+                <div class="tip-card" style="border-color:var(--orange);">
+                    <span class="tip-icon">🏠</span>
                     <div class="tip-title">Hipotecas · Timing</div>
-                    <div class="tip-desc">Tasas entre 9-12%. Si Banxico baja la tasa, las hipotecas se abaratan. Espera
-                        si puedes.</div>
+                    <div class="tip-desc">Tasas entre 9-12%. Si Banxico baja la tasa, las hipotecas se abaratan. Espera si puedes.</div>
                 </div>
-                <div class="tip-card" style="border-color:var(--purple);"><span class="tip-icon">💰</span>
+                <div class="tip-card" style="border-color:var(--purple);">
+                    <span class="tip-icon">💰</span>
                     <div class="tip-title">Fondo de emergencia</div>
                     <div class="tip-desc">Guarda 3-6 meses de gastos en CETES o cuenta de ahorro de alta liquidez.</div>
                 </div>
@@ -1612,6 +1436,7 @@
                 <div class="loading">📡 Cargando noticias...</div>
             </div>
 
+            <!-- ===== SHARE ===== -->
             <div class="share-bar">
                 <a href="#" id="shareWhatsApp" class="share-btn">📱 WhatsApp</a>
                 <a href="#" id="shareFacebook" class="share-btn">📘 Facebook</a>
@@ -1628,13 +1453,14 @@
             <button class="modal-close" onclick="cerrarModalExplicacion()">&times;</button>
             <h2 id="modalTitulo">📊 Indicador</h2>
             <div class="modal-sub" id="modalSubtitulo">Análisis detallado</div>
+
             <div class="tabs">
                 <button class="tab active" data-tab="que-es">📖 Definición</button>
                 <button class="tab" data-tab="para-ti">🎯 Relevancia</button>
                 <button class="tab" data-tab="ejemplo">💡 Ejemplo</button>
                 <button class="tab" data-tab="dato">📊 Dato actual</button>
-                <button class="tab" data-tab="analisis">🔍 Análisis</button>
             </div>
+
             <div id="tabQueEs" class="tab-content active">
                 <div class="modal-body-text" id="modalQueEs"></div>
             </div>
@@ -1647,29 +1473,29 @@
             <div id="tabDato" class="tab-content">
                 <div class="modal-body-text" id="modalDato"></div>
             </div>
-            <div id="tabAnalisis" class="tab-content">
-                <div class="modal-body-text" id="modalAnalisis"></div>
-            </div>
         </div>
     </div>
 
     <!-- ===== WELCOME ===== -->
     <div id="welcomeModal" class="welcome-modal">
         <div class="welcome-content">
-            <h1>MEX<span class="highlight">DASH</span></h1>
-            <p class="sub">Inteligencia económica con análisis profundo</p>
+            <h1>JERONIMO<span class="highlight">RICARDO</span></h1>
+            <p class="sub">Inteligencia económica para la próxima generación</p>
+
             <div class="welcome-features">
                 <div class="item"><span class="emoji">💱</span><span class="label">Dólar en vivo</span></div>
                 <div class="item"><span class="emoji">📈</span><span class="label">Inflación</span></div>
                 <div class="item"><span class="emoji">🏦</span><span class="label">Tasas</span></div>
                 <div class="item"><span class="emoji">📊</span><span class="label">CETES</span></div>
-                <div class="item"><span class="emoji">🔍</span><span class="label">Análisis profundo</span></div>
                 <div class="item"><span class="emoji">📰</span><span class="label">Market News</span></div>
+                <div class="item"><span class="emoji">⚡</span><span class="label">Estrategias</span></div>
             </div>
+
             <p style="font-size:0.7rem;color:var(--text-muted);margin-bottom:1.5rem;">
-                Datos oficiales del Banco de México · Análisis con causas y recomendaciones
+                Datos oficiales del Banco de México · Interfaz estilo Bloomberg
                 <br>Conecta tu API Key para datos en tiempo real
             </p>
+
             <button class="btn-enter" onclick="cerrarBienvenida()">🚀 Ingresar al Dashboard</button>
             <div style="margin-top:1rem;font-size:0.5rem;color:var(--text-muted);">
                 Jerónimo Ricardo Ramírez Torres · Financial Intelligence
@@ -1678,7 +1504,7 @@
     </div>
 
     <footer>
-        <div class="footer-brand">MEX<span class="highlight">DASH</span></div>
+        <div class="footer-brand">JERONIMO<span class="highlight">RICARDO</span></div>
         <p style="margin-bottom:0.2rem;">Economic Intelligence · Datos del Banco de México</p>
         <p>© <span id="year">2025</span> Jerónimo Ricardo Ramírez Torres</p>
     </footer>
@@ -1727,7 +1553,7 @@
         const fechasReservas = generarFechas(FALLBACK.reservas.length);
 
         // ============================================================
-        //  EXPLICACIONES CON ANÁLISIS
+        //  EXPLICACIONES
         // ============================================================
         const EXPLICACIONES = {
             tc: {
@@ -1736,12 +1562,7 @@
                 queEs: "El tipo de cambio refleja el valor del peso frente al dólar estadounidense. Un aumento indica debilitamiento del peso, lo que encarece las importaciones y los viajes al extranjero.",
                 paraTi: "Si el dólar supera los $19 MXN, es momento de evitar compras en dólares. Si baja de $17.50, es oportunidad para adquirir tecnología, ropa o viajar.",
                 ejemplo: "Un iPhone de $1,000 USD: a $18 MXN cuesta $18,000; a $20 MXN cuesta $20,000. La diferencia son $2,000 pesos.",
-                obtenerDato: (v) => `💰 Dólar hoy: $${v?.toFixed(4) || '---'} MXN`,
-                analisis: (v) => {
-                    if (v > 19) return `🔍 El dólar se encuentra en niveles elevados (${v.toFixed(4)} MXN). Esto se debe principalmente a: 1) Incertidumbre global por políticas monetarias restrictivas de la Fed, 2) Flujos de capital hacia activos refugio (dólar), 3) Presiones inflacionarias locales que mantienen al peso bajo presión. La tendencia sugiere que mientras la Fed mantenga tasas altas, el dólar podría seguir fuerte.`;
-                    if (v < 17.5) return `🔍 El dólar está en niveles bajos (${v.toFixed(4)} MXN), lo que refleja: 1) Confianza en la economía mexicana, 2) Flujos de inversión extranjera hacia México, 3) Diferencial de tasas atractivo (México paga más que EE.UU.). La tendencia podría continuar mientras Banxico mantenga tasas altas.`;
-                    return `🔍 El dólar se mantiene en niveles estables (${v.toFixed(4)} MXN), indicando un equilibrio entre: 1) Política monetaria de Banxico, 2) Flujos comerciales normales, 3) Estabilidad macroeconómica. El mercado está en pausa a la espera de nuevos datos económicos.`;
-                }
+                obtenerDato: (v) => `💰 Dólar hoy: $${v?.toFixed(4) || '---'} MXN`
             },
             inf: {
                 titulo: "📈 Inflación (INPC)",
@@ -1749,12 +1570,7 @@
                 queEs: "Mide el aumento generalizado de precios en la economía. Una inflación alta erosiona el poder adquisitivo de tu dinero.",
                 paraTi: "Con inflación >4.5%, tu dinero pierde valor rápidamente. Es mejor gastar hoy que mañana. Con inflación <3%, los precios están estables.",
                 ejemplo: "Tu despensa de $1,000 con inflación del 4% cuesta $1,040 un año después. Pierdes poder de compra.",
-                obtenerDato: (v) => `📈 Inflación: ${v?.toFixed(2) || '---'}% anual`,
-                analisis: (v) => {
-                    if (v > 4.5) return `🔍 La inflación se mantiene alta (${v.toFixed(2)}%), impulsada por: 1) Presiones en alimentos y energéticos, 2) Efectos de la depreciación del peso en bienes importados, 3) Demanda interna resiliente. Banxico mantendrá tasas restrictivas hasta ver una desaceleración sostenida. Se espera que la inflación comience a ceder en los próximos meses.`;
-                    if (v < 3) return `🔍 La inflación está controlada (${v.toFixed(2)}%), reflejando: 1) Efectividad de la política monetaria restrictiva, 2) Moderación en los precios de alimentos y energía, 3) Menor presión de demanda. Este escenario permite a Banxico considerar recortes graduales en la tasa de interés.`;
-                    return `🔍 La inflación se encuentra en niveles moderados (${v.toFixed(2)}%), con presiones: 1) En el componente subyacente (servicios), 2) En el componente no subyacente (energéticos). Banxico evaluará los datos con cautela antes de modificar la tasa.`;
-                }
+                obtenerDato: (v) => `📈 Inflación: ${v?.toFixed(2) || '---'}% anual`
             },
             tasa: {
                 titulo: "🏦 Tasa de Referencia Banxico",
@@ -1762,12 +1578,7 @@
                 queEs: "Es la tasa que Banxico fija para controlar la inflación. Afecta directamente el costo de créditos y el rendimiento de los ahorros.",
                 paraTi: "Tasa >10%: excelente momento para ahorrar en instrumentos de deuda. Tasa <7%: momento para financiarse o comprar activos.",
                 ejemplo: "Con tasa del 11%, $100,000 en CETES generan $11,000 al año sin riesgo.",
-                obtenerDato: (v) => `🏦 Tasa Banxico: ${v?.toFixed(2) || '---'}%`,
-                analisis: (v) => {
-                    if (v > 10) return `🔍 La tasa de Banxico se mantiene en niveles restrictivos (${v.toFixed(2)}%) para combatir la inflación. Esto implica: 1) Mayor costo del crédito para empresas y familias, 2) Mayor rendimiento para ahorradores e inversionistas, 3) Apoyo al peso mexicano vs otras monedas. El mercado espera que Banxico mantenga la tasa hasta ver una inflación consistentemente baja.`;
-                    if (v < 8) return `🔍 La tasa de Banxico está en niveles bajos (${v.toFixed(2)}%), lo que estimula: 1) El crédito y la inversión, 2) El consumo y la actividad económica, 3) Pero puede generar presiones inflacionarias si la demanda es muy fuerte. La decisión refleja confianza en que la inflación está bajo control.`;
-                    return `🔍 La tasa de Banxico se encuentra en un nivel neutral (${v.toFixed(2)}%), balanceando: 1) Control de inflación, 2) Estímulo a la actividad económica, 3) Estabilidad financiera. Banxico monitoreará la evolución de la inflación y el crecimiento.`;
-                }
+                obtenerDato: (v) => `🏦 Tasa Banxico: ${v?.toFixed(2) || '---'}%`
             },
             cetes: {
                 titulo: "📊 CETES 28 Días",
@@ -1775,12 +1586,7 @@
                 queEs: "Son títulos de deuda del gobierno mexicano, considerados el instrumento de inversión más seguro en México.",
                 paraTi: "Rendimiento >10%: supera a la inflación, buen lugar para tu dinero. Rendimiento <8%: busca alternativas como sofipos o cuentas de alto rendimiento.",
                 ejemplo: "$50,000 en CETES al 10% = $5,000 de ganancia anual, sin riesgo.",
-                obtenerDato: (v) => `📊 CETES 28D: ${v?.toFixed(2) || '---'}%`,
-                analisis: (v) => {
-                    if (v > 10) return `🔍 Los CETES ofrecen rendimientos atractivos (${v.toFixed(2)}%), superando ampliamente a la inflación. Esto se debe a: 1) La política monetaria restrictiva de Banxico, 2) Mayor demanda por activos seguros en México, 3) Expectativas de que las tasas se mantengan altas. Es un excelente momento para invertir en renta fija.`;
-                    if (v < 8) return `🔍 Los CETES están en niveles bajos (${v.toFixed(2)}%), lo que sugiere: 1) Expectativas de recortes en la tasa de Banxico, 2) Menor presión inflacionaria, 3) Mayor liquidez en el sistema. Es momento de diversificar hacia otros instrumentos con mayor rendimiento.`;
-                    return `🔍 Los CETES se mantienen en niveles moderados (${v.toFixed(2)}%), reflejando: 1) Un equilibrio entre inflación y crecimiento, 2) Expectativas de política monetaria estable, 3) Confianza en la economía mexicana. Sigue siendo una opción segura y rentable.`;
-                }
+                obtenerDato: (v) => `📊 CETES 28D: ${v?.toFixed(2) || '---'}%`
             },
             reservas: {
                 titulo: "💵 Reservas Internacionales",
@@ -1788,12 +1594,7 @@
                 queEs: "Son los activos en moneda extranjera (principalmente dólares) que Banxico tiene como respaldo. Indican la fortaleza económica del país.",
                 paraTi: "Reservas >$200,000 MMD: México está sólido. Si caen, podría haber depreciación del peso o crisis de confianza.",
                 ejemplo: "México tiene un fondo de emergencia de más de $200 mil millones de dólares para enfrentar crisis.",
-                obtenerDato: (v) => `💵 Reservas: $${v?.toFixed(0) || '---'} mil millones USD`,
-                analisis: (v) => {
-                    if (v > 200) return `🔍 Las reservas internacionales de México se mantienen en niveles sólidos (${v.toFixed(0)} MMD), proporcionando: 1) Un colchón ante choques externos, 2) Capacidad para intervenir en el mercado cambiario, 3) Confianza para inversionistas. Este nivel refleja una posición financiera externa fuerte y estable.`;
-                    if (v < 170) return `🔍 Las reservas internacionales están en niveles preocupantes (${v.toFixed(0)} MMD), lo que podría indicar: 1) Mayor vulnerabilidad a choques externos, 2) Posible presión sobre el tipo de cambio, 3) Necesidad de ajustes en la política económica. Es importante monitorear la evolución de este indicador.`;
-                    return `🔍 Las reservas internacionales se encuentran en niveles adecuados (${v.toFixed(0)} MMD), suficientes para: 1) Cubrir importaciones por varios meses, 2) Dar confianza a los inversionistas, 3) Mantener la estabilidad cambiaria. El nivel actual es consistente con una posición externa saludable.`;
-                }
+                obtenerDato: (v) => `💵 Reservas: $${v?.toFixed(0) || '---'} mil millones USD`
             },
             volatilidad: {
                 titulo: "🎢 Volatilidad del Tipo de Cambio",
@@ -1801,12 +1602,7 @@
                 queEs: "Indica qué tanto fluctúa el dólar en un período. Alta volatilidad = incertidumbre en el mercado cambiario.",
                 paraTi: "Volatilidad alta: evita compromisos en dólares. Volatilidad baja: estabilidad, puedes planificar mejor.",
                 ejemplo: "Si el dólar pasa de $18 a $19 en un día, hay alta volatilidad. Es como una montaña rusa financiera.",
-                obtenerDato: (v) => `🎢 Volatilidad: $${v?.toFixed(4) || '---'}`,
-                analisis: (v) => {
-                    if (v > 0.5) return `🔍 La volatilidad del tipo de cambio es alta (${v.toFixed(4)}), reflejando: 1) Incertidumbre en los mercados globales, 2) Expectativas cambiantes sobre política monetaria, 3) Posibles flujos de capital especulativo. Se recomienda cautela en operaciones cambiarias.`;
-                    if (v < 0.2) return `🔍 La volatilidad del tipo de cambio es baja (${v.toFixed(4)}), indicando: 1) Estabilidad en los mercados, 2) Confianza en la política económica, 3) Menor incertidumbre sobre el futuro. Es un entorno favorable para la planeación financiera.`;
-                    return `🔍 La volatilidad del tipo de cambio se mantiene en niveles normales (${v.toFixed(4)}), consistente con: 1) Un mercado cambiario ordenado, 2) Expectativas alineadas con los fundamentales, 3) Flujos comerciales y financieros equilibrados.`;
-                }
+                obtenerDato: (v) => `🎢 Volatilidad: $${v?.toFixed(4) || '---'}`
             }
         };
 
@@ -1815,12 +1611,12 @@
         // ============================================================
         let apiKeyBanxico = localStorage.getItem('banxico_api_key') || '';
         let charts = {};
-        let valoresActuales = {tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232};
-        let fechasActuales = {tc: null, inf: null, tasa: null, cetes: null, reservas: null};
+        let valoresActuales = { tc: 18.52, inflacion: 4.35, tasa: 10.00, cetes: 9.82, reservas: 232 };
+        let fechasActuales = { tc: null, inf: null, tasa: null, cetes: null, reservas: null };
         let intervalActualizacion;
-        let historicoCompleto = {tc: [], inf: [], tasa: [], cetes: [], reservas: []};
+        let historicoCompleto = { tc: [], inf: [], tasa: [], cetes: [], reservas: [] };
 
-        const SERIES = {tc: "SF60653", inf: "SP1", tasa: "SF43783", cetes: "SF339621", reservas: "SF10146"};
+        const SERIES = { tc: "SF60653", inf: "SP1", tasa: "SF43783", cetes: "SF339621", reservas: "SF10146" };
 
         // ============================================================
         //  FUNCIONES DE CONEXIÓN
@@ -1869,8 +1665,9 @@
                 statusEl.textContent = 'Modo demostración';
                 ocultarError();
             }
+
             document.getElementById('lastUpdate').textContent = 'Última actualización: ' + new Date().toLocaleTimeString(
-                'es-MX');
+            'es-MX');
         }
 
         // ============================================================
@@ -1887,11 +1684,11 @@
                 if (data?.bmx?.series?.[0]?.datos?.[0]) {
                     const valor = parseFloat(data.bmx.series[0].datos[0].dato);
                     if (!isNaN(valor)) {
-                        return {valor, fecha: data.bmx.series[0].datos[0].fecha};
+                        return { valor, fecha: data.bmx.series[0].datos[0].fecha };
                     }
                 }
                 return null;
-            } catch (e) {return null;}
+            } catch (e) { return null; }
         }
 
         async function consultarHistorico(serieId, token, dias = 60) {
@@ -1905,19 +1702,20 @@
                 if (data?.bmx?.series?.[0]?.datos) {
                     return data.bmx.series[0].datos
                         .slice(0, dias)
-                        .map(d => ({valor: parseFloat(d.dato), fecha: d.fecha}))
+                        .map(d => ({ valor: parseFloat(d.dato), fecha: d.fecha }))
                         .filter(v => !isNaN(v.valor) && v.valor > 0)
                         .reverse();
                 }
                 return [];
-            } catch (e) {return [];}
+            } catch (e) { return []; }
         }
 
         // ============================================================
-        //  EXPORTACIÓN MEJORADA
+        //  EXPORTACIÓN MEJORADA - MÚLTIPLES COLUMNAS
         // ============================================================
         function exportarDatosCompletos() {
             try {
+                // Obtener todos los datos históricos disponibles
                 const tcData = historicoCompleto.tc.length > 0 ? historicoCompleto.tc : FALLBACK.tc.map((v, i) => ({
                     valor: v,
                     fecha: fechasTC[i] || new Date().toISOString().split('T')[0]
@@ -1927,17 +1725,18 @@
                     fecha: fechasInf[i] || new Date().toISOString().split('T')[0]
                 }));
                 const tasaData = historicoCompleto.tasa.length > 0 ? historicoCompleto.tasa : FALLBACK.tasa.map((v,
-                    i) => ({valor: v, fecha: fechasTasa[i] || new Date().toISOString().split('T')[0]}));
+                i) => ({ valor: v, fecha: fechasTasa[i] || new Date().toISOString().split('T')[0] }));
                 const cetesData = historicoCompleto.cetes.length > 0 ? historicoCompleto.cetes : FALLBACK.cetes.map((
-                    v, i) => ({valor: v, fecha: fechasCetes[i] || new Date().toISOString().split('T')[0]}));
+                    v, i) => ({ valor: v, fecha: fechasCetes[i] || new Date().toISOString().split('T')[0] }));
                 const reservasData = historicoCompleto.reservas.length > 0 ? historicoCompleto.reservas : FALLBACK
-                    .reservas.map((v, i) => ({
-                        valor: v, fecha: fechasReservas[i] || new Date().toISOString().split(
-                            'T')[0]
-                    }));
+                    .reservas.map((v, i) => ({ valor: v, fecha: fechasReservas[i] || new Date().toISOString().split(
+                            'T')[0] }));
 
+                // Encontrar la fecha más larga para alinear
                 const maxLen = Math.max(tcData.length, infData.length, tasaData.length, cetesData.length, reservasData
                     .length);
+
+                // Construir array de datos con todas las columnas
                 const datosExport = [];
                 for (let i = 0; i < maxLen; i++) {
                     const row = {
@@ -1953,6 +1752,7 @@
                     datosExport.push(row);
                 }
 
+                // Agregar fila con valores actuales
                 datosExport.push({
                     'Fecha': new Date().toISOString().split('T')[0] + ' (ACTUAL)',
                     'Tipo_Cambio_USD_MXN': valoresActuales.tc,
@@ -1962,10 +1762,14 @@
                     'Reservas_Internacionales_MMD': valoresActuales.reservas
                 });
 
+                // Crear libro de Excel con múltiples hojas
                 const wb = XLSX.utils.book_new();
+
+                // Hoja 1: Datos históricos completos
                 const ws1 = XLSX.utils.json_to_sheet(datosExport);
                 XLSX.utils.book_append_sheet(wb, ws1, 'Datos_Historicos');
 
+                // Hoja 2: Resumen actual
                 const resumen = [{
                     'Indicador': 'Tipo de Cambio USD/MXN',
                     'Valor': valoresActuales.tc,
@@ -1990,149 +1794,35 @@
                 const ws2 = XLSX.utils.json_to_sheet(resumen);
                 XLSX.utils.book_append_sheet(wb, ws2, 'Resumen_Actual');
 
-                const metadata = [
-                    {'Propiedad': 'Exportado', 'Valor': new Date().toISOString()},
-                    {'Propiedad': 'Fuente', 'Valor': 'Banco de México (Banxico)'},
-                    {'Propiedad': 'Dashboard', 'Valor': 'MEXDASH Economic Intelligence'},
-                    {'Propiedad': 'Desarrollador', 'Valor': 'Jerónimo Ricardo Ramírez Torres'},
-                    {'Propiedad': 'API Key', 'Valor': apiKeyBanxico ? 'Conectada' : 'No conectada (Demo)'},
-                    {'Propiedad': 'Total de registros', 'Valor': datosExport.length}
-                ];
+                // Hoja 3: Metadata
+                const metadata = [{
+                    'Propiedad': 'Exportado',
+                    'Valor': new Date().toISOString()
+                }, {
+                    'Propiedad': 'Fuente',
+                    'Valor': 'Banco de México (Banxico)'
+                }, {
+                    'Propiedad': 'Dashboard',
+                    'Valor': 'MEXDASH Economic Intelligence'
+                }, {
+                    'Propiedad': 'Desarrollador',
+                    'Valor': 'Jerónimo Ricardo Ramírez Torres'
+                }, {
+                    'Propiedad': 'API Key',
+                    'Valor': apiKeyBanxico ? 'Conectada' : 'No conectada (Demo)'
+                }, {
+                    'Propiedad': 'Total de registros',
+                    'Valor': datosExport.length
+                }];
                 const ws3 = XLSX.utils.json_to_sheet(metadata);
                 XLSX.utils.book_append_sheet(wb, ws3, 'Metadata');
 
+                // Exportar
                 XLSX.writeFile(wb, `MEXDASH_export_${Date.now()}.xlsx`);
                 console.log('✅ Exportación completada con', datosExport.length, 'registros');
             } catch (error) {
                 console.error('Error en exportación:', error);
                 alert('⚠️ Error al exportar datos. Intenta de nuevo.');
-            }
-        }
-
-        // ============================================================
-        //  ACTUALIZAR ANÁLISIS
-        // ============================================================
-        function actualizarAnalisis() {
-            const tc = valoresActuales.tc;
-            const inf = valoresActuales.inflacion;
-            const tasa = valoresActuales.tasa;
-            const cetes = valoresActuales.cetes;
-            const reservas = valoresActuales.reservas;
-
-            // Análisis Tipo de Cambio
-            if (tc !== null && !isNaN(tc)) {
-                const insightTC = document.getElementById('insightTC');
-                const causesTC = document.getElementById('causesTC');
-                const recTC = document.getElementById('recTC');
-
-                if (tc > 19) {
-                    insightTC.textContent = `⚠️ El tipo de cambio se encuentra en niveles elevados (${tc.toFixed(4)} MXN), lo que indica una depreciación significativa del peso.`;
-                    causesTC.innerHTML =
-                        `🔍 <strong>Causas principales:</strong> 1) Diferencial de tasas con EE.UU. que favorece al dólar, 2) Incertidumbre global por conflictos geopolíticos, 3) Precios del petróleo volátiles que afectan la balanza comercial, 4) Flujos de capital hacia activos refugio. Adicionalmente, la expectativa de que la Fed mantenga tasas altas por más tiempo está presionando al peso.`;
-                    recTC.textContent =
-                        `💡 Recomendación: Evita compromisos en dólares. Si tienes deudas en USD, considera cubrirte. Aprovecha para comprar pesos si planeas viajar a México.`;
-                } else if (tc < 17.5) {
-                    insightTC.textContent = `✅ El tipo de cambio está en niveles bajos (${tc.toFixed(4)} MXN), reflejando fortaleza del peso.`;
-                    causesTC.innerHTML =
-                        `🔍 <strong>Factores que explican esta fortaleza:</strong> 1) Atractivo diferencial de tasas (México paga más que EE.UU.), 2) Flujos de inversión extranjera directa, 3) Remesas récord que fortalecen la balanza de pagos, 4) Expectativas de que Banxico mantenga tasas altas. El nearshoring también está atrayendo inversiones que fortalecen al peso.`;
-                    recTC.textContent =
-                        `💡 Recomendación: Aprovecha el dólar barato para comprar tecnología, viajar al extranjero o importar productos. Considera invertir en activos denominados en dólares.`;
-                } else {
-                    insightTC.textContent = `⚖️ El tipo de cambio se mantiene estable (${tc.toFixed(4)} MXN), en un rango de equilibrio.`;
-                    causesTC.innerHTML =
-                        `🔍 <strong>Factores de estabilidad:</strong> 1) Balance entre oferta y demanda de divisas, 2) Política monetaria adecuada de Banxico, 3) Flujos comerciales estables, 4) Confianza en la economía mexicana. El mercado está a la espera de nuevos datos económicos para definir tendencia.`;
-                    recTC.textContent =
-                        `💡 Recomendación: Mantén tu estrategia actual. No tomes posiciones extremas. Sigue monitoreando los indicadores económicos.`;
-                }
-            }
-
-            // Análisis Inflación
-            if (inf !== null && !isNaN(inf)) {
-                const insightInf = document.getElementById('insightInf');
-                const causesInf = document.getElementById('causesInf');
-                const recInf = document.getElementById('recInf');
-
-                if (inf > 4.5) {
-                    insightInf.textContent =
-                        `⚠️ La inflación se mantiene alta (${inf.toFixed(2)}%), por encima de la meta de Banxico (3%).`;
-                    causesInf.innerHTML =
-                        `🔍 <strong>Presiones inflacionarias:</strong> 1) Precios de alimentos y energéticos al alza, 2) Efectos de la depreciación del peso en bienes importados, 3) Demanda interna que se mantiene resiliente, 4) Presiones en el componente de servicios (vivienda, educación). La inflación subyacente (que excluye volátiles) también muestra persistencia.`;
-                    recInf.textContent =
-                        `💡 Recomendación: Protege tu poder adquisitivo. Compra hoy los bienes duraderos que necesites. Considera instrumentos indexados a inflación (UDIBONOS). Evita mantener efectivo ociosivo.`;
-                } else if (inf < 3) {
-                    insightInf.textContent = `✅ La inflación está controlada (${inf.toFixed(2)}%), dentro del rango meta de Banxico.`;
-                    causesInf.innerHTML =
-                        `🔍 <strong>Factores de desaceleración:</strong> 1) Efectividad de la política monetaria restrictiva, 2) Moderación en precios de energéticos, 3) Menor presión de demanda, 4) Tipo de cambio estable que abarata importaciones. La inflación subyacente también muestra una tendencia a la baja.`;
-                    recInf.textContent =
-                        `💡 Recomendación: Escenario favorable para el consumo. Aprovecha promociones y ofertas. Considera invertir en activos de largo plazo.`;
-                } else {
-                    insightInf.textContent = `⚖️ La inflación se encuentra en niveles moderados (${inf.toFixed(2)}%), cerca del objetivo.`;
-                    causesInf.innerHTML =
-                        `🔍 <strong>Factores actuales:</strong> 1) Equilibrio entre presiones de costos y demanda, 2) Política monetaria en el punto justo, 3) Estabilidad cambiaria que no transmite presiones, 4) Precios de commodities que se mantienen estables. Banxico evaluará los próximos datos con cautela.`;
-                    recInf.textContent =
-                        `💡 Recomendación: Mantén un portafolio diversificado. Compara precios antes de comprar. Aprovecha promociones en alimentos no perecederos.`;
-                }
-            }
-
-            // Análisis Tasas
-            if (tasa !== null && !isNaN(tasa) && cetes !== null && !isNaN(cetes)) {
-                const insightTasa = document.getElementById('insightTasa');
-                const causesTasa = document.getElementById('causesTasa');
-                const recTasa = document.getElementById('recTasa');
-                const spread = tasa - cetes;
-
-                insightTasa.textContent =
-                    `🏦 Tasa Banxico en ${tasa.toFixed(2)}%, CETES en ${cetes.toFixed(2)}%. Spread de ${spread.toFixed(2)} puntos.`;
-
-                if (tasa > 10) {
-                    causesTasa.innerHTML =
-                        `🔍 <strong>Contexto de tasas altas:</strong> 1) Banxico mantiene postura restrictiva para combatir inflación, 2) Diferencial atractivo vs tasas de EE.UU. (Fed en ~5.5%), 3) Riesgo país que requiere mayor premio, 4) Expectativas de que las tasas se mantengan altas por varios meses. El mercado descuenta que Banxico será de los últimos en recortar.`;
-                    recTasa.textContent =
-                        `💡 Recomendación: Aprovecha las altas tasas para ahorrar en CETES, bonos o cuentas de alto rendimiento. Evita deudas a tasa variable. Considera fijar tasas en créditos hipotecarios.`;
-                } else if (tasa < 7) {
-                    causesTasa.innerHTML =
-                        `🔍 <strong>Contexto de tasas bajas:</strong> 1) Banxico ha recortado para estimular la economía, 2) Inflación bajo control que lo permite, 3) Necesidad de reactivar el crédito y la inversión, 4) Presión para mantener competitividad. El entorno es favorable para el financiamiento.`;
-                    recTasa.textContent =
-                        `💡 Recomendación: Buen momento para financiarse. Considera créditos hipotecarios o empresariales. Si tienes deudas, busca consolidarlas a tasa fija.`;
-                } else {
-                    causesTasa.innerHTML =
-                        `🔍 <strong>Contexto de tasas neutrales:</strong> 1) Banxico en modo de espera, evaluando datos, 2) Balance entre control de inflación y crecimiento, 3) Monitoreo de la evolución del tipo de cambio, 4) Expectativas de que el siguiente movimiento sea un recorte.`;
-                    recTasa.textContent =
-                        `💡 Recomendación: Mantén un portafolio balanceado entre renta fija y variable. Evalúa tus opciones de financiamiento.`;
-                }
-            }
-
-            // Análisis Macro
-            if (tc !== null && !isNaN(tc) && inf !== null && !isNaN(inf) && tasa !== null && !isNaN(tasa)) {
-                const insightMacro = document.getElementById('insightMacro');
-                const causesMacro = document.getElementById('causesMacro');
-                const recMacro = document.getElementById('recMacro');
-
-                const escenario = tc > 19 && inf > 4.5 ? 'desafiante' :
-                    tc < 17.5 && inf < 3.5 ? 'favorable' : 'neutral';
-
-                if (escenario === 'desafiante') {
-                    insightMacro.textContent =
-                        `⚠️ Panorama macro: Economía enfrenta presiones cambiarias e inflacionarias simultáneas.`;
-                    causesMacro.innerHTML =
-                        `🔍 <strong>Factores globales:</strong> 1) Tensiones geopolíticas que afectan precios de commodities, 2) Política monetaria restrictiva en economías desarrolladas, 3) Flujos de capital hacia activos refugio, 4) Incertidumbre sobre el crecimiento global. El entorno externo es complejo y requiere cautela.`;
-                    recMacro.textContent =
-                        `💡 Estrategia: Prioriza la preservación de capital. Diversifica en monedas fuertes. Mantén liquidez para aprovechar oportunidades. Protege tu portafolio con coberturas.`;
-                } else if (escenario === 'favorable') {
-                    insightMacro.textContent =
-                        `✅ Panorama macro: Condiciones favorables con estabilidad cambiaria y precios controlados.`;
-                    causesMacro.innerHTML =
-                        `🔍 <strong>Vientos de cola:</strong> 1) Nearshoring atrayendo inversión extranjera, 2) Remesas récord, 3) Consumo interno resiliente, 4) Tasas de interés atractivas, 5) Estabilidad política y fiscal. México está bien posicionado en el contexto global.`;
-                    recMacro.textContent =
-                        `💡 Estrategia: Aprovecha el momento para invertir. Considera exposición a sectores beneficiados por el nearshoring (manufactura, logística, energía). Mantén posición en activos mexicanos.`;
-                } else {
-                    insightMacro.textContent =
-                        `⚖️ Panorama macro: Escenario neutral con variables económicas en equilibrio.`;
-                    causesMacro.innerHTML =
-                        `🔍 <strong>Factores mixtos:</strong> 1) Crecimiento moderado, 2) Inflación controlada, 3) Tipo de cambio estable, 4) Tasas en niveles adecuados. El entorno macro es de transición, con riesgos balanceados.`;
-                    recMacro.textContent =
-                        `💡 Estrategia: Mantén un portafolio diversificado. Sigue de cerca indicadores clave. Prepárate para ajustar tu estrategia según evolucionen los datos.`;
-                }
             }
         }
 
@@ -2157,23 +1847,17 @@
                         consultarBanxico(SERIES.cetes, apiKeyBanxico),
                         consultarBanxico(SERIES.reservas, apiKeyBanxico)
                     ]);
-                } catch (e) {console.warn('API error:', e);}
+                } catch (e) { console.warn('API error:', e); }
             }
 
-            const tc = (tcAPI && tcAPI.valor) ? tcAPI : {valor: FALLBACK.tc[FALLBACK.tc.length - 1], fecha: hoy};
-            const inf = (infAPI && infAPI.valor) ? infAPI : {valor: FALLBACK.inf[FALLBACK.inf.length - 1], fecha: hoy};
-            const tasa = (tasaAPI && tasaAPI.valor) ? tasaAPI : {
-                valor: FALLBACK.tasa[FALLBACK.tasa.length - 1],
-                fecha: hoy
-            };
-            const cetes = (cetesAPI && cetesAPI.valor) ? cetesAPI : {
-                valor: FALLBACK.cetes[FALLBACK.cetes.length - 1],
-                fecha: hoy
-            };
-            const reservas = (resAPI && resAPI.valor) ? resAPI : {
-                valor: FALLBACK.reservas[FALLBACK.reservas.length - 1],
-                fecha: hoy
-            };
+            const tc = (tcAPI && tcAPI.valor) ? tcAPI : { valor: FALLBACK.tc[FALLBACK.tc.length - 1], fecha: hoy };
+            const inf = (infAPI && infAPI.valor) ? infAPI : { valor: FALLBACK.inf[FALLBACK.inf.length - 1], fecha: hoy };
+            const tasa = (tasaAPI && tasaAPI.valor) ? tasaAPI : { valor: FALLBACK.tasa[FALLBACK.tasa.length - 1],
+                fecha: hoy };
+            const cetes = (cetesAPI && cetesAPI.valor) ? cetesAPI : { valor: FALLBACK.cetes[FALLBACK.cetes.length - 1],
+                fecha: hoy };
+            const reservas = (resAPI && resAPI.valor) ? resAPI : { valor: FALLBACK.reservas[FALLBACK.reservas.length - 1],
+                fecha: hoy };
 
             valoresActuales.tc = tc.valor;
             valoresActuales.inflacion = inf.valor;
@@ -2192,34 +1876,24 @@
             document.getElementById('kpiFechTC').innerHTML = `📅 ${tc.fecha || hoy}`;
             document.getElementById('kpiInterTC').textContent = tc.valor > 19 ? '🔴 Dólar caro' :
                 tc.valor < 17.5 ? '🟢 Dólar barato' : '🟡 Estable';
-            document.getElementById('kpiInterTC').className = 'interpretation ' + (tc.valor > 19 ? 'bearish' : tc.valor <
-                17.5 ? 'bullish' : 'neutral');
 
             document.getElementById('inflacion').innerText = `${inf.valor.toFixed(2)}%`;
             document.getElementById('kpiInf').innerHTML = `${inf.valor.toFixed(2)}%`;
             document.getElementById('kpiInterInf').textContent = inf.valor > 4.5 ? '🔴 Inflación alta' :
                 inf.valor < 3 ? '🟢 Inflación baja' : '🟡 Controlada';
-            document.getElementById('kpiInterInf').className = 'interpretation ' + (inf.valor > 4.5 ? 'bearish' : inf.valor <
-                3 ? 'bullish' : 'neutral');
 
             document.getElementById('tasa').innerText = `${tasa.valor.toFixed(2)}%`;
             document.getElementById('kpiTasa').innerHTML = `${tasa.valor.toFixed(2)}%`;
             document.getElementById('kpiInterTasa').textContent = tasa.valor > 10 ? '🟢 Alto rendimiento' :
                 tasa.valor < 7 ? '🟢 Crédito barato' : '🟡 Neutral';
-            document.getElementById('kpiInterTasa').className = 'interpretation ' + (tasa.valor > 10 || tasa.valor < 7 ?
-                'bullish' : 'neutral');
 
             document.getElementById('cetes').innerText = `${cetes.valor.toFixed(2)}%`;
             document.getElementById('kpiCetes').innerHTML = `${cetes.valor.toFixed(2)}%`;
             document.getElementById('kpiInterCetes').textContent = cetes.valor > 10 ? '🟢 Atractivo' :
                 cetes.valor < 8 ? '🟡 Regular' : '🟡 Normal';
-            document.getElementById('kpiInterCetes').className = 'interpretation ' + (cetes.valor > 10 ? 'bullish' :
-                'neutral');
 
             document.getElementById('kpiReservas').innerHTML = `$${(reservas.valor).toFixed(0)} MMD`;
             document.getElementById('kpiInterReservas').textContent = reservas.valor > 200 ? '🟢 Fuerte' : '🟡 Observar';
-            document.getElementById('kpiInterReservas').className = 'interpretation ' + (reservas.valor > 200 ? 'bullish' :
-                'neutral');
 
             const maxMin = Math.max(...FALLBACK.tc) - Math.min(...FALLBACK.tc);
             document.getElementById('kpiVolatilidad').innerHTML = `$${maxMin.toFixed(4)}`;
@@ -2239,41 +1913,34 @@
                         consultarHistorico(SERIES.cetes, apiKeyBanxico, 40),
                         consultarHistorico(SERIES.reservas, apiKeyBanxico, 40)
                     ]);
-                } catch (e) { }
+                } catch (e) {}
             }
 
-            historicoCompleto.tc = histTC.length > 0 ? histTC : FALLBACK.tc.map((v, i) => ({
-                valor: v, fecha: fechasTC[
-                    i] || hoy
-            }));
-            historicoCompleto.inf = histInf.length > 0 ? histInf : FALLBACK.inf.map((v, i) => ({
-                valor: v, fecha: fechasInf[
-                    i] || hoy
-            }));
-            historicoCompleto.tasa = histTasa.length > 0 ? histTasa : FALLBACK.tasa.map((v, i) => ({
-                valor: v,
-                fecha: fechasTasa[i] || hoy
-            }));
-            historicoCompleto.cetes = histCetes.length > 0 ? histCetes : FALLBACK.cetes.map((v, i) => ({
-                valor: v,
-                fecha: fechasCetes[i] || hoy
-            }));
+            // Guardar históricos para exportación
+            historicoCompleto.tc = histTC.length > 0 ? histTC : FALLBACK.tc.map((v, i) => ({ valor: v, fecha: fechasTC[
+                    i] || hoy }));
+            historicoCompleto.inf = histInf.length > 0 ? histInf : FALLBACK.inf.map((v, i) => ({ valor: v, fecha: fechasInf[
+                    i] || hoy }));
+            historicoCompleto.tasa = histTasa.length > 0 ? histTasa : FALLBACK.tasa.map((v, i) => ({ valor: v,
+                fecha: fechasTasa[i] || hoy }));
+            historicoCompleto.cetes = histCetes.length > 0 ? histCetes : FALLBACK.cetes.map((v, i) => ({ valor: v,
+                fecha: fechasCetes[i] || hoy }));
             historicoCompleto.reservas = histReservas.length > 0 ? histReservas : FALLBACK.reservas.map((v, i) => ({
                 valor: v,
                 fecha: fechasReservas[i] || hoy
             }));
 
             if (!histTC || histTC.length < 5) {
-                histTC = FALLBACK.tc.map((v, i) => ({valor: v, fecha: fechasTC[i] || hoy}));
+                histTC = FALLBACK.tc.map((v, i) => ({ valor: v, fecha: fechasTC[i] || hoy }));
             }
             if (!histInf || histInf.length < 5) {
-                histInf = FALLBACK.inf.map((v, i) => ({valor: v, fecha: fechasInf[i] || hoy}));
+                histInf = FALLBACK.inf.map((v, i) => ({ valor: v, fecha: fechasInf[i] || hoy }));
             }
             if (!histTasa || histTasa.length < 5) {
-                histTasa = FALLBACK.tasa.map((v, i) => ({valor: v, fecha: fechasTasa[i] || hoy}));
+                histTasa = FALLBACK.tasa.map((v, i) => ({ valor: v, fecha: fechasTasa[i] || hoy }));
             }
             if (!histCetes || histCetes.length < 5) {
-                histCetes = FALLBACK.cetes.map((v, i) => ({valor: v, fecha: fechasCetes[i] || hoy}));
+                histCetes = FALLBACK.cetes.map((v, i) => ({ valor: v, fecha: fechasCetes[i] || hoy }));
             }
 
             actualizarGraficaTC(histTC);
@@ -2285,7 +1952,6 @@
             actualizarGraficaReservas(FALLBACK.reservas);
 
             actualizarRecomendaciones();
-            actualizarAnalisis();
 
             const conectado = usarAPI && tcAPI !== null && tcAPI.valor !== undefined;
             actualizarEstadoConexion(conectado);
@@ -2296,9 +1962,9 @@
         // ============================================================
         function getChartContext(id) {
             const canvas = document.getElementById(id);
-            if (!canvas) {console.warn(`Canvas #${id} no encontrado`); return null;}
+            if (!canvas) { console.warn(`Canvas #${id} no encontrado`); return null; }
             const ctx = canvas.getContext('2d');
-            if (!ctx) {console.warn(`Contexto 2D no disponible para #${id}`); return null;}
+            if (!ctx) { console.warn(`Contexto 2D no disponible para #${id}`); return null; }
             return ctx;
         }
 
@@ -2309,14 +1975,12 @@
             const opts = {
                 responsive: true,
                 plugins: {
-                    legend: {labels: {color: color, font: {size: 9}}}
+                    legend: { labels: { color: color, font: { size: 9 } } }
                 },
                 scales: {
-                    x: {
-                        ticks: {color: '#4a5a7a', font: {size: 7}, maxTicksLimit: 10},
-                        grid: {color: gridColor}
-                    },
-                    y: {ticks: {color: '#4a5a7a', font: {size: 7}}, grid: {color: gridColor}}
+                    x: { ticks: { color: '#4a5a7a', font: { size: 7 }, maxTicksLimit: 10 },
+                    grid: { color: gridColor } },
+                    y: { ticks: { color: '#4a5a7a', font: { size: 7 } }, grid: { color: gridColor } }
                 }
             };
 
@@ -2331,98 +1995,71 @@
             if (ctxTC) {
                 charts.tc = new Chart(ctxTC, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'USD/MXN', borderColor: '#4a9eff',
+                    data: { labels: [], datasets: [{ label: 'USD/MXN', borderColor: '#4a9eff',
                             backgroundColor: 'rgba(74,158,255,0.08)', fill: true, tension: 0.3, data: [],
-                            pointRadius: 1.5
-                        }]
-                    },
+                            pointRadius: 1.5 }] },
                     options: opts
                 });
             }
+
             if (ctxRange) {
                 charts.range = new Chart(ctxRange, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Máximo', borderColor: '#00d4aa', data: [],
-                            pointRadius: 0.5
-                        }, {
-                            label: 'Mínimo', borderColor: '#ff4757', data: [],
-                            pointRadius: 0.5
-                        }]
-                    },
+                    data: { labels: [], datasets: [{ label: 'Máximo', borderColor: '#00d4aa', data: [],
+                            pointRadius: 0.5 }, { label: 'Mínimo', borderColor: '#ff4757', data: [],
+                            pointRadius: 0.5 }] },
                     options: opts
                 });
             }
+
             if (ctxCandle) {
                 charts.candle = new Chart(ctxCandle, {
                     type: 'bar',
-                    data: {labels: [], datasets: [{label: 'Cambio diario', data: []}]},
-                    options: {
-                        ...opts, plugins: {
-                            ...opts.plugins, legend: {
-                                ...opts.plugins.legend,
-                                display: false
-                            }
-                        }
-                    }
+                    data: { labels: [], datasets: [{ label: 'Cambio diario', data: [] }] },
+                    options: { ...opts, plugins: { ...opts.plugins, legend: { ...opts.plugins.legend,
+                            display: false } } }
                 });
             }
+
             if (ctxTasas) {
                 charts.tasas = new Chart(ctxTasas, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Tasa Banxico', borderColor: '#ff8c42', tension: 0.3,
-                            data: [], pointRadius: 1
-                        }, {
-                            label: 'CETES 28d', borderColor: '#00d4aa',
-                            tension: 0.3, data: [], pointRadius: 1
-                        }]
-                    },
+                    data: { labels: [], datasets: [{ label: 'Tasa Banxico', borderColor: '#ff8c42', tension: 0.3,
+                            data: [], pointRadius: 1 }, { label: 'CETES 28d', borderColor: '#00d4aa',
+                            tension: 0.3, data: [], pointRadius: 1 }] },
                     options: opts
                 });
             }
+
             if (ctxInf) {
                 charts.inf = new Chart(ctxInf, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'INPC (%)', borderColor: '#ff4757',
+                    data: { labels: [], datasets: [{ label: 'INPC (%)', borderColor: '#ff4757',
                             backgroundColor: 'rgba(255,71,87,0.08)', fill: true, tension: 0.3, data: [],
-                            pointRadius: 1
-                        }]
-                    },
+                            pointRadius: 1 }] },
                     options: opts
                 });
             }
+
             if (ctxPetroleo) {
                 charts.petroleo = new Chart(ctxPetroleo, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Brent (USD)', borderColor: '#a855f7', tension: 0.3,
-                            data: [], pointRadius: 1
-                        }]
-                    },
+                    data: { labels: [], datasets: [{ label: 'Brent (USD)', borderColor: '#a855f7', tension: 0.3,
+                            data: [], pointRadius: 1 }] },
                     options: opts
                 });
             }
+
             if (ctxReservas) {
                 charts.reservas = new Chart(ctxReservas, {
                     type: 'line',
-                    data: {
-                        labels: [], datasets: [{
-                            label: 'Reservas (MMD)', borderColor: '#ffd700',
+                    data: { labels: [], datasets: [{ label: 'Reservas (MMD)', borderColor: '#ffd700',
                             backgroundColor: 'rgba(255,215,0,0.08)', fill: true, tension: 0.3, data: [],
-                            pointRadius: 1
-                        }]
-                    },
+                            pointRadius: 1 }] },
                     options: opts
                 });
             }
+
             console.log('✅ Gráficas inicializadas:', Object.keys(charts).length);
         }
 
@@ -2512,80 +2149,48 @@
         //  RECOMENDACIONES
         // ============================================================
         function actualizarRecomendaciones() {
-            const {tc, inflacion, tasa, cetes} = valoresActuales;
+            const { tc, inflacion, tasa, cetes } = valoresActuales;
             const recs = [];
             const analysts = [
-                {name: 'Análisis Técnico', emoji: '📊'},
-                {name: 'Estrategia Macro', emoji: '🌐'},
-                {name: 'Risk Management', emoji: '🛡️'},
-                {name: 'Value Investing', emoji: '💎'}
+                { name: 'Análisis Técnico', emoji: '📊' },
+                { name: 'Estrategia Macro', emoji: '🌐' },
+                { name: 'Risk Management', emoji: '🛡️' },
+                { name: 'Value Investing', emoji: '💎' }
             ];
             let idx = 0;
 
             if (tc !== null && !isNaN(tc)) {
-                if (tc > 19) recs.push({
-                    icon: '💵', title: 'Dólar sobrecomprado',
-                    desc: 'Evita exposición en dólares. Considera coberturas cambiarias. El peso podría recuperarse si Banxico mantiene tasas altas.',
-                    analyst: analysts[idx++ % 4]
-                });
-                else if (tc < 17.5) recs.push({
-                    icon: '🛒', title: 'Oportunidad de compra',
-                    desc: 'Dólar barato. Momento de adquirir activos en USD o viajar al extranjero.', analyst: analysts[
-                        idx++ % 4]
-                });
-                else recs.push({
-                    icon: '⚖️', title: 'Mercado estable',
-                    desc: 'Mantén tu estrategia actual. Sin cambios significativos en el corto plazo.', analyst: analysts[
-                        idx++ % 4]
-                });
+                if (tc > 19) recs.push({ icon: '💵', title: 'Dólar sobrecomprado',
+                    desc: 'Evita exposición en dólares. Considera coberturas cambiarias.', analyst: analysts[idx++ % 4] });
+                else if (tc < 17.5) recs.push({ icon: '🛒', title: 'Oportunidad de compra',
+                    desc: 'Dólar barato. Momento de adquirir activos en USD.', analyst: analysts[idx++ % 4] });
+                else recs.push({ icon: '⚖️', title: 'Mercado estable', desc: 'Mantén tu estrategia actual. Sin cambios significativos.',
+                    analyst: analysts[idx++ % 4] });
             }
 
             if (inflacion !== null && !isNaN(inflacion)) {
-                if (inflacion > 4.5) recs.push({
-                    icon: '📈', title: 'Inflación persistente',
-                    desc: 'Protege tu capital con instrumentos indexados a inflación. Evita efectivo.', analyst: analysts[
-                        idx++ % 4]
-                });
-                else if (inflacion < 3) recs.push({
-                    icon: '📉', title: 'Presión inflacionaria baja',
-                    desc: 'Entorno favorable para activos de largo plazo. Buen momento para invertir.', analyst: analysts[
-                        idx++ % 4]
-                });
-                else recs.push({
-                    icon: '📊', title: 'Inflación controlada',
-                    desc: 'Escenario neutral. Sigue tu plan de inversión con ajustes menores.', analyst: analysts[idx++
-                        % 4]
-                });
+                if (inflacion > 4.5) recs.push({ icon: '📈', title: 'Inflación persistente',
+                    desc: 'Protege tu capital con instrumentos indexados a inflación.', analyst: analysts[idx++ % 4] });
+                else if (inflacion < 3) recs.push({ icon: '📉', title: 'Presión inflacionaria baja',
+                    desc: 'Entorno favorable para activos de largo plazo.', analyst: analysts[idx++ % 4] });
+                else recs.push({ icon: '📊', title: 'Inflación controlada', desc: 'Escenario neutral. Sigue tu plan de inversión.',
+                    analyst: analysts[idx++ % 4] });
             }
 
             if (tasa !== null && cetes !== null && !isNaN(tasa) && !isNaN(cetes)) {
-                if (tasa > 10) recs.push({
-                    icon: '🏦', title: 'Rendimiento atractivo',
-                    desc: `CETES al ${cetes.toFixed(1)}%. Asigna capital a renta fija. Aprovecha las altas tasas.`,
-                    analyst: analysts[idx++ % 4]
-                });
-                else if (tasa < 7) recs.push({
-                    icon: '💳', title: 'Financiamiento barato',
-                    desc: 'Tasas bajas. Buen momento para apalancamiento en proyectos productivos.', analyst: analysts[
-                        idx++ % 4]
-                });
-                else recs.push({
-                    icon: '⚡', title: 'Tasas neutrales',
-                    desc: 'Diversifica entre renta fija y variable. Mantén un portafolio balanceado.', analyst: analysts[
-                        idx++ % 4]
-                });
+                if (tasa > 10) recs.push({ icon: '🏦', title: 'Rendimiento atractivo',
+                    desc: `CETES al ${cetes.toFixed(1)}%. Asigna capital a renta fija.`, analyst: analysts[idx++ % 4] });
+                else if (tasa < 7) recs.push({ icon: '💳', title: 'Financiamiento barato',
+                    desc: 'Tasas bajas. Buen momento para apalancamiento.', analyst: analysts[idx++ % 4] });
+                else recs.push({ icon: '⚡', title: 'Tasas neutrales', desc: 'Diversifica entre renta fija y variable.',
+                    analyst: analysts[idx++ % 4] });
             }
 
             const extras = [
-                {
-                    icon: '🧠', title: 'Fondo de emergencia',
-                    desc: 'Mantén 3-6 meses de gastos en CETES o cuentas de alta liquidez. La seguridad es prioridad.',
-                    analyst: analysts[idx++ % 4]
-                },
-                {
-                    icon: '📱', title: 'Fintech', desc: 'GBM+, Nu, Klar ofrecen rendimientos competitivos. Compara opciones.',
-                    analyst: analysts[idx++ % 4]
-                }
+                { icon: '🧠', title: 'Fondo de emergencia', desc: 'Mantén 3-6 meses de gastos en CETES o cuentas de alta liquidez.',
+                    analyst: analysts[idx++ % 4] },
+                { icon: '📱', title: 'Fintech', desc: 'GBM+, Nu, Klar ofrecen rendimientos competitivos. Compara opciones.',
+                    analyst: analysts[idx++ % 4] }
             ];
             recs.push(extras[Math.floor(Math.random() * extras.length)]);
             recs.push(extras[Math.floor(Math.random() * extras.length)]);
@@ -2601,7 +2206,7 @@
         }
 
         // ============================================================
-        //  MODAL EXPLICACIÓN CON ANÁLISIS
+        //  MODAL EXPLICACIÓN
         // ============================================================
         function abrirExplicacion(tipo) {
             const exp = EXPLICACIONES[tipo];
@@ -2614,25 +2219,13 @@
 
             let valor = null,
                 label = '---';
-            if (tipo === 'tc') {
-                valor = valoresActuales.tc;
-                label = '$' + (valor?.toFixed(4) || '---');
-            } else if (tipo === 'inf') {
-                valor = valoresActuales.inflacion;
-                label = (valor?.toFixed(2) || '---') + '%';
-            } else if (tipo === 'tasa') {
-                valor = valoresActuales.tasa;
-                label = (valor?.toFixed(2) || '---') + '%';
-            } else if (tipo === 'cetes') {
-                valor = valoresActuales.cetes;
-                label = (valor?.toFixed(2) || '---') + '%';
-            } else if (tipo === 'reservas') {
-                valor = valoresActuales.reservas;
-                label = '$' + (valor?.toFixed(0) || '---') + ' MMD';
-            } else if (tipo === 'volatilidad') {
-                label =
-                document.getElementById('kpiVolatilidad').textContent;
-            }
+            if (tipo === 'tc') { valor = valoresActuales.tc;
+                label = '$' + (valor?.toFixed(4) || '---'); } else if (tipo === 'inf') { valor = valoresActuales.inflacion;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'tasa') { valor = valoresActuales.tasa;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'cetes') { valor = valoresActuales.cetes;
+                label = (valor?.toFixed(2) || '---') + '%'; } else if (tipo === 'reservas') { valor = valoresActuales.reservas;
+                label = '$' + (valor?.toFixed(0) || '---') + ' MMD'; } else if (tipo === 'volatilidad') { label =
+                    document.getElementById('kpiVolatilidad').textContent; }
 
             document.getElementById('modalDato').innerHTML = `
                 <strong>📊 Valor actual:</strong> ${label}
@@ -2641,24 +2234,6 @@
                 <br><br>
                 <span style="font-size:0.6rem;color:var(--text-muted);">📅 Actualizado: ${new Date().toLocaleDateString('es-MX')} ${new Date().toLocaleTimeString('es-MX')}</span>
             `;
-
-            // Análisis adicional en el modal
-            let analisisText = '';
-            if (tipo === 'tc' && valor !== null) {
-                analisisText = EXPLICACIONES.tc.analisis(valor);
-            } else if (tipo === 'inf' && valor !== null) {
-                analisisText = EXPLICACIONES.inf.analisis(valor);
-            } else if (tipo === 'tasa' && valor !== null) {
-                analisisText = EXPLICACIONES.tasa.analisis(valor);
-            } else if (tipo === 'cetes' && valor !== null) {
-                analisisText = EXPLICACIONES.cetes.analisis(valor);
-            } else if (tipo === 'reservas' && valor !== null) {
-                analisisText = EXPLICACIONES.reservas.analisis(valor);
-            } else if (tipo === 'volatilidad') {
-                const v = parseFloat(document.getElementById('kpiVolatilidad').textContent.replace('$', ''));
-                if (!isNaN(v)) analisisText = EXPLICACIONES.volatilidad.analisis(v);
-            }
-            document.getElementById('modalAnalisis').innerHTML = analisisText || 'No hay análisis disponible para este indicador.';
 
             document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -2671,7 +2246,8 @@
             document.getElementById('modalExplicacion').style.display = 'none';
         }
 
-        document.addEventListener('click', function (e) {
+        // Tabs
+        document.addEventListener('click', function(e) {
             if (e.target.classList.contains('tab')) {
                 const tab = e.target.dataset.tab;
                 document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
@@ -2713,10 +2289,8 @@
                         if (match) enlace = decodeURIComponent(match[1]);
                         return {
                             titulo: item.title.replace(' - Google News', '').trim(),
-                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', {
-                                day: 'numeric',
-                                month: 'short', year: 'numeric'
-                            }),
+                            fecha: new Date(item.pubDate).toLocaleDateString('es-MX', { day: 'numeric',
+                                month: 'short', year: 'numeric' }),
                             fuente: item.author || 'Google News',
                             imagen: item.thumbnail || `https://picsum.photos/400/200?random=${i}`,
                             enlace: enlace,
@@ -2748,18 +2322,20 @@
             const newTheme = current === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('mexdash_theme', newTheme);
+
             const btn = document.getElementById('darkModeToggle');
             btn.textContent = newTheme === 'light' ? '🌙' : '☀️';
+
+            // Actualizar gráficas con nuevos colores
             Object.values(charts).forEach(c => {
                 try {
                     const color = getComputedStyle(document.body).getPropertyValue('--text-primary') || '#e8edf5';
-                    const gridColor = getComputedStyle(document.body).getPropertyValue('--border-color') ||
-                        '#1e2d42';
+                    const gridColor = getComputedStyle(document.body).getPropertyValue('--border-color') || '#1e2d42';
                     c.options.plugins.legend.labels.color = color;
                     c.options.scales.x.grid.color = gridColor;
                     c.options.scales.y.grid.color = gridColor;
                     c.update();
-                } catch (e) { }
+                } catch (e) {}
             });
         }
 
@@ -2851,6 +2427,8 @@
             };
 
             document.getElementById('refreshNoticiasBtn').onclick = cargarNoticias;
+
+            // Botón de exportación mejorado
             document.getElementById('exportBtn').onclick = exportarDatosCompletos;
 
             console.log('✅ MEXDASH listo');
